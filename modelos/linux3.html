@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LINUX</title>
+        <link rel="stylesheet" href="estilo.css">
+    </head>
+    <body>
+        <p class="titulo_exterior">byAd12 - Prueba Dialog personalizado en HTML</p>
+
+        <div class="linux_base_div">
+            <div class="contenido">
+                <p class="titulo_contenido">Lorem ipsum</p>
+                <button class="submenu_contenido">X</button>
+
+                <div class="contenido_interior">
+                    <div class="form_div">
+                        <form>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A, aliquam. Aperiam, eius? 
+                                Nobis accusamus rem officiis <a href="#">eveniet fugit</a>, excepturi quam minima quos pariatur, voluptas optio aut quasi, 
+                                sint officia consequatur?</p>
+
+                            <div class="botones">
+                                <button type="submit" class="primario">&lt;Ok&gt;</button>
+                                <button type="button">&lt;Cancel&gt;</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+
+@font-face {font-family: "Falling_sky"; src: url("../fuentes/FallingSkyCondensed-9qm2.otf");}
+
+*{margin: 0; padding: 0; font-size: 14px; font-family: "Falling_sky";}
+html, body {min-height: 100vh;}
+body{background-color: #3466a5;}
+button{cursor: pointer;}
+
+.titulo_exterior{color: white;}
+.linux_base_div{min-height: calc(100vh - 20px); display: flex; justify-content: center; align-items: center;}
+.linux_base_div .contenido{width: 500px; background-color: #d6d7d2; display: flex; padding: 8px; justify-content: center; box-shadow: 7px 7px black !important; align-items: center; position: relative;}
+.linux_base_div .contenido .titulo_contenido{white-space: nowrap; margin: 0 auto; border-bottom: 1px solid; border-right: 1px solid; position: absolute; top: 0; left: 0; width: min-content; background-color: #d6d7d2; padding-left: 5px; padding-right: 5px;}
+.linux_base_div .contenido .submenu_contenido{white-space: nowrap; margin: 0 auto; border: none; border-bottom: 1px solid; border-left: 1px solid; position: absolute; top: 0; right: 0; width: min-content; background-color: #d6d7d2; padding-left: 5px; padding-right: 5px;}
+.linux_base_div .contenido_interior{width: 100%; height: 100%; margin: 0 auto; border: 1px solid; padding: 10px;}
+.linux_base_div .contenido_interior .form_div{display: flex; align-items: center; justify-content: center; margin-top: 20px;}
+.linux_base_div .contenido_interior .form_div form{display: flex; flex-direction: column; width: 100%;}
+.linux_base_div .contenido_interior .form_div form tr{display: flex; flex-direction: row;}
+.linux_base_div .contenido_interior .form_div form td{display: flex; align-items: center;}
+.linux_base_div .contenido_interior .form_div form tr:hover{background-color: #c80401; color: white;}
+.linux_base_div .contenido_interior .form_div form input{display: none;}
+.linux_base_div .contenido_interior .form_div form label{width: 100%;}
+.linux_base_div .contenido_interior .form_div form p a{color: #3466a5;}
+.linux_base_div .contenido_interior .form_div form td.no_marcado{background-color: rgba(0,0,0,0);}
+.linux_base_div .contenido_interior .form_div form .botones{display: flex; justify-content: center; gap: 10px; margin-top: 20px;}
+.linux_base_div .contenido_interior .form_div form .botones button{background-color: black; color: white; border: none;}
+.linux_base_div .contenido_interior .form_div form .botones button.primario{background-color: rgb(226, 226, 89); color: black; border: none;}
+.linux_base_div .contenido_interior .form_div form .botones button:hover{background-color: #c80401; color: white; border: none;}
+        
+        </style>
+    </body>
+</html>

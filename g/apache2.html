@@ -1,0 +1,465 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, APACHE, APACHE2, HTTP, WEB, byAd12">
+        <title>Apache2 - Linux</title>
+        
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">Apache2</h1>
+        <h2 class="TituloSecundario">Servidor HTTP y HTTPS en Linux</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install apache2 apache2-utils</code></pre>
+                <p>Habilitar un puerto:</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow [Puerto]:(Protocolo)</code></pre>
+            </div>
+
+            <div class="vacío"></div>
+
+            <div>
+                <h2>Rutas Importantes</h2>
+                <p>Directorio raíz:</p>
+                <p><span class="ruta" translate="no">/var/www/html</span></p>
+
+                <p>Fichero con todas las zonas del servidor:</p>
+                <p><span class="ruta" translate="no">/etc/apache2/apache2.conf</span></p>
+
+                <p>Fichero con los puertos a usar:</p>
+                <p><span class="ruta" translate="no">/etc/apache2/ports.conf</span></p>
+
+                <p>Mods disponibles y habilitados:</p>
+                <p><span class="ruta" translate="no">/etc/apache2/mods-available</span>, <span class="ruta" translate="no">/etc/apache2/mods-enabled</span></p>
+
+                <p><b>Sitios Virtuales</b> disponibles y habilitados:</p>
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available</span>, <span class="ruta" translate="no">/etc/apache2/sites-enabled</span></p>
+
+                <p>Fichero de configuración por defecto:</p>
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span></p>
+            </div>
+
+            <div>
+                <h2>Directivas de Configuración</h2>
+
+                <p><span class="ruta" translate="no">000-default.conf</span>:</p>
+                <p><b>DocumentRoot</b>:</p>
+                <p class="Expl">Directorio raíz del sitio web, donde deben colocarse las páginas webs que servirá nuestro servidor.</p>
+
+                <p><b>ServerName</b>:</p>
+                <pre class="codigo" translate="no"><code class="apache">ServerName www.asir.edu:80</code></pre>
+                <p class="Expl">Da un nombre al sitio y el puerto que se utiliza.</p>
+
+                <p><b>ErrorDocument</b>:</p>
+                <pre class="codigo" translate="no"><code class="apache">ErrorDocument 404 /PagError.html</code></pre>
+                <p class="Expl">Página en caso de un código de error (404, ..)</p>
+
+                <p><b>Alias</b>:</p>
+                <pre class="codigo" translate="no"><code class="apache">Alias /Fuera /usr/share/otra</code></pre>
+                <p class="Expl">Permite el acceso a páginas que estén fuera del árbol de directorios.</p>
+
+                <p><span class="ruta" translate="no">/etc/apache2/mods-enabled/dir.conf</span> <span class="ruta" translate="no">/etc/apache2/apache2.conf</span></p>
+                <p><b>DirectoryIndex</b>:</p>
+                <pre class="codigo" translate="no"><code class="apache">DirectoryIndex indice.html index.htm indice.html</code></pre>
+                <p class="Expl">Indica qué página debe enviarse cuando el cliente sólo escribe el dominio y la carpeta.</p>
+
+            </div>
+
+            <div>
+                <h2>Etiqueta &lt;Directory&gt;<br><span class="ruta" translate="no">/etc/apache2/apache2.conf</span></h2>
+                <p>Sirve para dar permisos a un directoio concreto del disco duro del servidor.<br>Da igual si hay tabuladores o espacios, las mayúsculas importan.</p>
+                <p>Se puede poner dentro de un <span class="ruta2" translate="no">VirtualHost</span> y tendrá más prioridad que en <span class="ruta" translate="no">apache2.conf</span>.</p>
+                
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /ruta/absoluta/directorio&gt;
+    Options Indexes
+    DirectoryIndex index.html inicio.html inicio.htm
+&lt;/Directory&gt;</code></pre>
+                <p>Etiquetas:</p>
+                <p class="Expl"><b>Options Indexes</b>: Dar permisos para mostrar el contenido de la carpeta en caso de no haber localizado el recurso solicitado. Si no tiene permiso con indexes dará un error si no localiza el recurso.</p>
+                <p class="Expl"><b>Options FollowSymLinks</b>: Si no se pone, los alias no funcionan.</p>
+                <p class="Expl"><b>DirectoryIndex [File]</b>: Se definen los ficheros por defecto que abrirá el servidor en caso de no haberse especificado en la URL. Se intentarán abrir en el orden en que aparecen. Si no se puede abrir ninguno y si la opción Indexes está definida mostrará el directorio principal, si no enseñará un error.</p>
+
+            </div>
+
+            <div>
+                <h2>Etiqueta &lt;VirtualHost&gt;<br><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span></h2>
+                <p>Sirve para crear crear sitios web en el servidor.<br>Mínimo hay que tener 1.</p>
+                
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
+    ...
+&lt;/VirtualHost&gt;</code></pre>
+                <p class="Expl"><b>*:80</b>: IP:Puerto.</p>
+
+                <p>Etiquetas:</p>
+                <p class="Expl"><b>ServerName</b>: Nombre de Dominio. Si no se define, localhost.</p>
+                <p class="Expl"><b>ServerAdmin</b>: Administrador del dominio.</p>
+                <p class="Expl"><b>DocumentRoot</b>: Carpeta raíz del sitio web.</p>
+                <p class="Expl"><b>LogLevel</b>: <span class="ruta2" translate="no">debug</span>, <span class="ruta2" translate="no">info</span>, <span class="ruta2" translate="no">notice</span>, <span class="ruta2" translate="no">warn</span>, <span class="ruta2" translate="no">error</span>, <span class="ruta2" translate="no">crit</span>, <span class="ruta2" translate="no">alert</span>, <span class="ruta2" translate="no">emerg</span>.</p>
+                <p class="Expl"><b>ErrorLog</b>: Fichero donde se definen los logs, <span class="ruta2" translate="no">${APACHE_LOG_DIR}/error.log</span>.</p>
+
+
+            </div>
+            <div>
+                <h2>Directory Privado</h2>
+
+                <p>1. Directory <span class="ruta" translate="no">/etc/apache2/apache2.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/html/privado&gt;
+    AuthName "Acceso Privado"
+    AuthType Basic
+    AuthUserFile /etc/apache2/ClaveAcceso
+    Require user NombreUsuario
+&lt;/Directory&gt;</code></pre>
+                <p class="Expl"><b>AuthName</b>: Texto identificativo.</p>
+                <p class="Expl"><b>AuthUserFile</b>: Fichero donde se meterán los usuarios con sus claves.</p>
+
+                <p>2. Comando para crear <b>AuthUserFile</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">htpasswd -c /etc/apache2/ClaveAcceso NombreUsuario</code></pre>
+                <p class="Expl"><b>-c</b>: Crea el archivo. Si se vuelve a añadir a otro usuario se quita.</p>
+
+                <p>3. Crear la carpeta definida en < Directory >.<br>4. Reiniciar el servicio y acceder a <span class="ruta" translate="no">http://localhost/privado</span>.</p>
+            </div>
+
+            <div>
+                <h2>Habilitar un Sitio Nuevo</h2>
+
+                <p>CMD:</p>
+                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/001-default.conf /etc/apache2/sites-enabled</code></pre>
+
+                <br><br>
+
+                <h2>Habilitar un Puerto</h2>
+
+                <p><span class="ruta" translate="no">/etc/ports.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">Listen 8080</span></code></pre>
+
+            </div>
+
+            <div>
+                <h2>Página de Error</h2>
+
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
+    ErrorDocument 404 "Mensaje"
+    ErrorDocument 404 /404.html
+&lt;/VirtualHost&gt;</code></pre>
+                <p class="Expl"><b>404</b>: Código HTTP de error.</p>
+                <p class="Expl"><b>"Mensaje"</b>: El mensaje que se enseñará en un nuevo fichero.</p>
+                <p class="Expl"><b>/404.html</b>: El fichero personalizado que se enseñará. Se busca desde <span class="ruta2" translate="no">DocumentRoot</span>.</p>
+            </div>
+
+            <div>
+                <h2>Ficheros .htaccess</h2>
+
+                <p>Sirve para poder dar directivas desde un fichero ubicado en el directorio donde se de permisos, por defecto el fichero que va a buscar con las directivas será ".htaccess".</p>
+
+                <p><span class="ruta" translate="no">/etc/apache2/apache2.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/html/marcos&gt;
+    AllowOverride all
+&lt;/Directory&gt;</code></pre>
+                <p class="Expl"><b>AllowOverride all</b>: Permitir el uso de ficheros .htaccess.</p>
+                <p><span class="ruta" translate="no">/var/www/html/marcos/.htaccess</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">AuthName "Mensaje"
+AuthType Basic
+AuthUserFile /etc/apache2/claveacceso
+Require user mortadelo filemon</code></pre>
+                ...
+            </div>
+
+            <div>
+                <h2>Usar HTTPS con SSL</h2>
+
+                <p>1. CMD:</p>
+                <pre class="codigo" translate="no"><code class="apache">openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certificate.crt -days 1024 -nodes</code></pre>
+                <p>2. <span class="ruta" translate="no">/etc/apache2/ports.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">Listen 443</code></pre>
+                <p>3. Activar módulo <span class="ruta2" translate="no">SSLEngine</span> (Una vez):</p>
+                <pre class="codigo" translate="no"><code class="apache">sudo a2enmod ssl</code></pre>
+                <p>4. <span class="ruta" translate="no">/etc/apache2/sites-available/aili-ss.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:443&gt;
+        ServerName aili-ss.abc
+        DocumentRoot /var/www/html
+        
+        SSLEngine on
+        SSLCertificateFile /var/www/html/certificate.crt
+        SSLCertificateKeyFile /var/www/html/certificate.key
+&lt;/VirtualHost&gt;</code></pre>
+                <p class="Expl"><b>Archivos (.crt, .key)</b>: Generados por <span class="ruta2" translate="no">openssl</span>.</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo a2ensite aili-ss.conf</code></pre>
+            </div>
+
+            <div>
+                <h2>Redireccionar</h2>
+
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
+    Redirect / https://ali-ss.abc
+&lt;/VirtualHost&gt;</code></pre>
+                <br><br>
+                <h2>Alias</h2>
+
+                <p>1. Crear una carpeta para el alias (/var/www/todos) y un index.html.</p>
+                <p>2. <span class="ruta" translate="no">/etc/apache2/apache2.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/todos&gt;
+    Options Indexes
+    Require all granted
+    DirectoryIndex index.html
+&lt;/Directory&gt;
+
+Alias /aliastodos /var/www/todos</code></pre>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2>Práctica 1 <span class="spanblanco">(ejemplo)</span></h2>
+                <p>~ Crear varias carpetas con archivos, restringir una con acceso. Crear un VirtualHost para asignarles subdominios.</p>
+
+                <p>Crear estructura de archivos:</p>
+                <pre class="codigo" translate="no"><code>.
+├── elfran
+│   └── index.html
+├── index.html
+├── luis
+│   └── indice.html
+├── marcos
+│   ├── hola2.txt
+│   ├── hola3.txt
+│   ├── hola4.txt
+│   ├── hola5.txt
+│   └── hola.txt
+├── privado
+│   └── indice.html
+└── sebas
+    ├── index.html
+    └── indice.html</code></pre>
+                <p class="Expl"><b>./index.html</b>: Hacer un .html con enlaces a todos los directorios → <span class="ruta" translate="no">http://localhost/sebas</span>.</p>
+
+                <p><span class="ruta" translate="no">/etc/apache2/apache2.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/html/luis&gt;
+    DirectoryIndex indice.html
+&lt;/Directory&gt;
+
+&lt;Directory /var/www/html/marcos&gt;
+    Options Indexes
+&lt;/Directory&gt;</code></pre>
+                <p class="Expl">Quitar 'Indexes' de Options en <span class="ruta2" translate="no">/var/www/html</span>.</p>
+
+                <p>Añadir en <span class="ruta" translate="no">/etc/hosts</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+127.0.0.1       luis.aili-ss.xyz
+127.0.0.1       elfran.aili-ss.xyz
+127.0.0.1       marcos.aili-ss.xyz
+127.0.0.1       sebas.aili-ss.xyz</code></pre>
+
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+&lt;VirtualHost *:80&gt;
+    ServerName luis.aili-ss.xyz
+    DocumentRoot /var/www/html/luis
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName elfran.aili-ss.xyz
+    DocumentRoot /var/www/html/elfran
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName sebas.aili-ss.xyz
+    DocumentRoot /var/www/html/sebas
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName marcos.aili-ss.xyz
+    DocumentRoot /var/www/html/marcos
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName privado.aili-ss.xyz
+    DocumentRoot /var/www/html/privado
+&lt;/VirtualHost&gt;</code></pre>
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Práctica 2 <span class="spanblanco">(ejemplo)</span></h2>
+
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+&lt;VirtualHost *:80&gt;
+    ServerName aili-ss.abc
+    ServerAdmin webmaster@aili-ss.abc
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/001-default.conf:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+&lt;VirtualHost *:80&gt;
+    ServerName elfran.aili-ss.abc
+    DocumentRoot /var/www/html/elfran
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName sebas.aili-ss.abc
+    DocumentRoot /var/www/html/sebas
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName marcos.aili-ss.abc
+    DocumentRoot /var/www/html/marcos
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName privado.aili-ss.abc
+    DocumentRoot /var/www/html/privado
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    ServerName luis.aili-ss.abc
+    DocumentRoot /var/www/html/luis
+&lt;/VirtualHost&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/001-default.conf /etc/apache2/sites-enabled</code></pre>      
+
+                <p><span class="ruta" translate="no">/etc/hosts</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+127.0.0.1       aili-ss.abc
+127.0.0.1       luis.aili-ss.abc
+127.0.0.1       elfran.aili-ss.abc
+127.0.0.1       marcos.aili-ss.abc
+127.0.0.1       sebas.aili-ss.abc
+127.0.0.1       privado.aili-ss.abc</code></pre>
+
+                <p><span class="ruta" translate="no">/etc/apache2/apache2.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">
+&lt;Directory /var/www/&gt;
+    Options FollowSymLinks
+    AllowOverride None
+    Require all granted
+&lt;/Directory&gt;
+
+&lt;Directory /var/www/html/privado/&gt;
+    Options Indexes
+    Directoryindex index.html
+    AuthName "Acceso Privado"
+    AuthType Basic
+    AuthUserFIle /etc/apache2/ClaveAcceso
+    Require user USUARIO1
+&lt;/Directory&gt;
+
+&lt;Directory /var/www/html/luis&gt;
+    Options Indexes
+    Require all denied
+    DirectoryIndex indice.html
+&lt;/Directory&gt;
+
+&lt;Directory /var/www/html/marcos&gt;
+    Options Indexes
+&lt;/Directory&gt;</code></pre> 
+
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Práctica 3 <span class="spanblanco">(ejemplo)</span></h2>
+
+                <p>~ Bloquear solicitudes por el :8080 en todos los dominios menos en luis.</p>
+                <p><span class="ruta" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
+        ServerName aili-ss.abc
+        ServerAdmin webmaster@aili-ss.abc
+        DocumentRoot /var/www/html
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        ErrorDocument 404 /404.html
+        ErrorDocument 403 /403.html
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:8080&gt;
+        DocumentRoot /var/www/html
+        ServerName aili-ss.abc
+        &lt;Directory /var/www/html&gt;
+                Require all denied
+        &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+                <p>Dejar el puerto :8080 en luis <span class="ruta" translate="no">/etc/apache2/sites-available/001-default.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
+        ServerName luis.aili-ss.abc
+        DocumentRoot /var/www/html/luis
+        ErrorDocument 403 "No puedes acceder a Luis"
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:8080&gt;
+        ServerName luis.aili-ss.abc
+        DocumentRoot /var/www/html/luis
+        ErrorDocument 403 "No puedes acceder a Luis"
+        &lt;Directory /var/www/html/luis&gt;
+                Require all granted
+        &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+
+
+            </div>
+
+            <div class="vacío"></div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>
