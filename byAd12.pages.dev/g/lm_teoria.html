@@ -1,0 +1,119 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, XML, byAd12">
+        <title>XML - Extensible Markup Language</title>
+
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">LM</h1>
+        <h2 class="TituloSecundario">Lenguaje de Marcas</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>¿Qué es lenguaje de marcas?</h2>
+                <p>
+                    Un <b>lenguaje de marcas</b> es un sistema que permite añadir anotaciones en un documento mediante <b>etiquetas</b> diferenciadas del texto, las cuales definen su estructura, contenido semántico u otra información adicional.
+                    <br><br>Estas etiquetas indican qué se puede usar, dónde colocarlas y qué significado tienen, de modo que junto al contenido se aporta información extra que facilita organizar, interpretar y aprovechar los datos almacenados.
+                </p>
+
+                <h2>Historia</h2>
+                
+                <p><span class="ruta3">PASADO</span></p>
+                <p class="Expl">
+                    En 1986 se estandarizó grracias a ISO. el primer lenguaje de marcas <span class="ruta">SGML</span> (Standard Generalized Markup Language) creado por IBM.
+                    Este lenguaje nunca llegó al público general ya que solo se usaba en ciertos ámbitos específicos.
+                    <br><br>
+                    En 1991 se popularizaron los lenguajes de marca gracias a <span class="ruta">HTML</span> (HyperText Markup Language) y su papel en la World Wide Web. 
+                </p>
+                <p><span class="ruta3">PRESENTE</span></p>
+                <p class="Expl">
+                    <span class="ruta">HTML</span> cambió mucho estructuralmente desde su creación (última versión - <span class="ruta">HTML5</span>).
+                    <br><br>
+                    Todos los fundamentos de Internet y las tecnologías asociadas fueron estandarizados por estándares abiertos e independientes regulados por <span class="ruta">W3C</span> (World Wide Web Consortium).
+                </p>
+                <p><span class="ruta3">FUTURO</span></p>
+                <p class="Expl">
+                    Se prevée que todo siga en sistemas abiertos en beneficio del usuario.
+                    Además el tráfico web se debe en gran medida a dispositivos móviles, que generaron mayores problemas de diseño de las páginas web.
+                </p>
+            </div>
+
+            <div>
+                <h2>Sistema de Gestión de la Información (SGI)</h2>
+                <p>
+                    Un <span class="ruta">SGI</span> son programas que se pueden adaptar a las necesidades de la empresa y a veces requieren importar/exportar datos e información. 
+                    El uso de un formato unificado como un lenguajes de marcas, facilita considerablemente este intercambio de datos. <b>NO</b> tiene por qué estar informatizado.
+                    <u>Términos</u>:
+                </p>
+
+                <p class="Expl"><span class="ruta">Sistema</span>: Conjunto de elementos interrelacionales que colaboran en la secuenciación de un objetivo.</p>
+                <p class="Expl"><span class="ruta">Gestión</span>: Conjunto de operaciones relevantes para una persona o empresa.</p>
+                <p class="Expl"><span class="ruta">Información</span>: Conjunto de datos útiles a las funciones de las empresas.</p>
+
+                <h2>Tipos de lenguaje de marcas</h2>
+                <p><span class="ruta3">ORIENTADOS A PRESENTACIÓN</span></p>
+                <p class="Expl">
+                    Definen el formato del documento para su presentación, ocultando las etiquetas para enseñar su centenido en un formato definido.
+                    <br><br>
+                    Ejemplo: <span class="ruta">RTF</span> (Rich Text Format), que permite a un texto añadir color, subrayado, etc.
+                </p>
+
+                <p><span class="ruta3">PROCEDURALES</span></p>
+                <p class="Expl">
+                    Las etiquetas son como el de orientado a presentación, pero constituyen instrucciones a los programas que van a procesar el texto.
+                    <br><br>
+                    Ejemplo: <span class="ruta">Postscript</span>, que sirve para generar documentos y gráficos que se ven iguales en todos los dispositivos.
+                </p>
+
+                <p><span class="ruta3">DESCRIPTIVOS</span></p>
+                <p class="Expl">
+                    Se utiliza para indicar que es la información a transmitir, su significado semántico y describir lo que se está representando.
+                    <br><br>
+                    Ejemplos: <span class="ruta">HTML</span> que estructura el significado semántico del documento para su interpretación en nevagadores y 
+                    <span class="ruta">XML</span>, que etiqueta y organiza los datos siendo útil para transmitir información entre sistemas.
+
+                </p>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>

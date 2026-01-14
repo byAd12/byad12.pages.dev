@@ -1,0 +1,184 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, NFS, byAd12">
+        <title>NFS - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+        
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">NFS</h1>
+        <h2 class="TituloSecundario">Network File System</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <p>En los clientes hay que instalar el siguiente paquete para poder acceder a carpetas compartidas por NFS:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install nfs-common</code></pre>
+                <p>En el servidor hay que instalar el siguiente paquete para poder compartir una carpeta por NFS:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install nfs-kernel-server</code></pre>
+                <p class="Expl">Al instalarlo informará que se creó el archivo <span class="ruta">/etc/exports</span>.</p>
+            </div>
+
+            <div class="vacío"></div>
+            
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2>Configuración en el <span class="spanblanco">servidor</span></h2>
+
+                <p>1. Editar el archivo de configuración:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
+
+                <p>2. Añadir una línea para compartir la carpeta:</p>
+                <pre class="codigo" translate="no"><code class="bash">/carpeta_a_compartir  hostname_permitido(permisos)  hostname_permitido_2(permisos)  ...</code></pre>
+                <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
+                <p class="Expl"><b>/carpeta_a_compartir</b>: La carpeta local del servidor que desea compartirse a otros equipos.</p>
+                <p class="Expl"><b>/hostname_permitido(permisos)</b>: Definimos los equipos que puedan acceder al recurso. Entre paréntesis seleccionamos los permisos <span class="ruta">rw</span> (<b>read and write</b>) o <span class="ruta">ro</span> (<b>read only</b>). <u>Definición de hostnames</u>:
+                    <br><br>
+                    <span class="ruta">*</span> - Se permite a cualquier equipo.
+                    <br><br>
+                    <span class="ruta">hostname</span> - Se permite a un equipo específico mediante su nombre de equipo.
+                    Hay que especificar en el archivo <b>/etc/hosts</b> una línea para definir su dirección IP.
+                    <br><br>
+                    <span class="ruta">IP</span> - Se permite a un equipo específico mediante su dirección IP.
+                    <br><br>
+                    <span class="ruta">dirección_red/mascara</span> - Se permite el acceso a los equipos de una subred mediante la dirección de red. 
+                    Se define la máscara en formato CIDR (ej. /24).
+                </p>
+
+                <p>3. Guardar y salirse del editor y aplicar los cambios con el comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">exportfs -ra</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Configuración en el <span class="spanblanco">cliente</span></h2>
+
+                <p>1. En el cliente se puede mirar que carpetas se puede montar del servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">showmount -e IP_servidor</code></pre>
+                <p class="Expl"><b>IP_servidor</b>: La IPv4 del servidor que aloja el recurso compartido.</p>
+                <p class="Expl">Dará error si no se instaló el paquete <span class="ruta">nfs-common</span>.</p>
+
+                <p>2. Una vez podamos ver el recurso hay que montar la carpeta del servidor en una carpeta del cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /mnt/carpeta_local</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">mount -t nfs IP_servidor:/carpeta_remota /mnt/carpeta_local</code></pre>
+                <p class="Expl"><b>/mnt/carpeta_local</b>: Una ruta local del cliente en la que montar el recurso compartido.</p>
+                <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
+
+                <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <span class="ruta">otros</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod 755 /carpeta_remota</code></pre>
+
+                <p>El comando <span class="ruta">ls -ld /mnt/carpeta_local</span> no da la información correcta en el cliente al dar un usuario y grupo propietario diferente al real en el servidor.
+                    Esto sucede ya que Linux utiliza los UID y GID del servidor y que en el cliente normalmente tiene usuarios diferentes creados en esos IDs.
+                </p>
+                <p>
+                    Se puede ver los IDs del servidor sin traducirlos al nombre usuario local del cliente con el comando <span class="ruta">ls -ldn /mnt/carpeta_local</span>.
+                </p>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2><span class="spanblanco">Permisos</span>: "Solución" para ver los nombres correctos</h2>
+
+                <p>1. Asegurarse de que los UID y GID coincidan entre cliente y servidor. Luego crear en el cliente los mismos usuarios y grupos que en el servidor usando el mismo UID y GID:</p>
+                <pre class="codigo" translate="no"><code class="bash">groupadd -g gid_grupo nombre_grupo</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">useradd -m -u uid_usuario -g gid_grupo nombre_usuario</code></pre>
+
+                <p>2. Forzar el montaje de NFS con versión 3:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -t nfs -o nfsvers=3 IP_servidor:/carpeta_remota /mnt/carpeta_local</code></pre>
+
+                <p><b>A TENER EN CUENTA</b>:</p>
+
+                <p>
+                    Si la carpeta se comparte con permisos <span class="ruta">ro</span> y se entra de forma remota tendrá esos permisos aunque de forma local en el servidor tenga los permisos <span class="ruta">rwx</span>.
+                    Los permisos que se aplican son <span class="ruta">ro</span> al ser de forma remota. Si entra en local tendrá los permisos <span class="ruta">rwx</span>.
+                    <br><br>
+                    Si es al revés (remota - <span class="ruta">rw</span>, local - <span class="ruta">rx</span>) dará error ya que no tiene el local el permiso <span class="ruta">w</span>.
+                </p>
+                <p><b>IMPORTANTE</b>:</p>
+                <p>Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="ruta">ro</span> / <span class="ruta">rw</span>).</p>
+            
+                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
+                <p>Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
+
+                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">GESTIÓN</span></b>:</p>
+                <p>Por cada usuario y grupo del servidor se deben duplicar en todos los clientes, lo que provoca exceso de usuarios y grupos, mala escalabilidad y mayor complejidad administrativa.</p>
+
+                <p><b>MEJOR <span style="color: rgb(147, 147, 206) !important;">SOLUCIÓN</span></b>:</p>
+                <p>Centralizar la gestión de usuarios y grupos mediante un sistema como LDAP.</p>
+            </div>
+
+            <div>
+                <h2>Montaje <span class="spanblanco">automático</span> en los clientes</h2>
+
+                <p>1. Hay que editar el siguiente archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
+                <p>2. Añadimos la siguiente línea:</p>
+                <pre class="codigo" translate="no"><code class="bash">IP_servidor:/carpeta_remota  /mnt/carpeta_local  nfs  defaults,nfsvers=3  0  0</code></pre>
+                <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
+                <p class="Expl"><b>IP_servidor</b>: La dirección IP que tiene el servidor que aloja el recurso compartido.</p>
+                <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
+                <p class="Expl"><b>/mnt/carpeta_local</b>: La ruta local en la que vamos a montar la carpeta.</p>
+                <p class="Expl"><b>nfs</b>: Tipo de sistema de ficheros.</p>
+                <p class="Expl"><b>defaults</b>: Opciones predefinidas.</p>
+                <p class="Expl"><b>nfsvers=3</b>: Se indica que se debe usar NFSv3.</p>
+                <p class="Expl"><b>0</b>: No realizar una copia de seguridad.</p>
+                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheiros con los programas <span class="ruta">dump</span> y <span class="ruta">fsck</span>.</p>
+            </div>
+
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>

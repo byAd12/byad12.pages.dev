@@ -1,0 +1,538 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, DTD, byAd12">
+        <title>DTD - Document Type Definition</title>
+
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">DTD</h1>
+        <h2 class="TituloSecundario">Document Type Definition</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2>Ejemplo</h2>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT svg (rect*, circle*, path, line, polyline, polygon, ellipse)&gt;
+
+&lt;!ATTLIST svg 
+    version (1.1 | 1.2 | 2) #REQUIRED
+    width CDATA #REQUIRED
+    height CDATA #REQUIRED
+&gt;
+
+&lt;!ELEMENT rect EMPTY&gt;
+&lt;!ELEMENT line EMPTY&gt;
+
+&lt;!ATTLIST rect 
+    x CDATA #REQUIRED
+    y CDATA #REQUIRED
+    width CDATA #REQUIRED
+    height CDATA #REQUIRED
+    fill (blue | pink | red | green | black | white | orange) #REQUIRED
+    stroke (blue | pink | red | green | black | white | orange) #REQUIRED
+    stroke-width CDATA #REQUIRED
+&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Definición</h2>
+
+                <p>
+                    DTD (<b>Document Type Declaration</b>) es un documento de texto plano que sirve para verificar la validez de la estructura del documento XML y de su contenido mediante unas reglas.
+                    Estas reglas definen el jerarquía y orden, tipo de contenido, atributos asociados y la integridad de los elementos.
+                </p>
+
+                <p>
+                    <b style="color: rgb(147, 147, 206) !important;">LIMITACIONES</b>:
+                    <br>- No soportan espacios de nombres.
+                    <br>- No definen tipos para los datos.
+                    <br>- No permite las secuencias no ordenadas.
+                    <br>- No es posible formar claves a partir de varios atributos o elementos.
+                    <br>- Una vez que se define DTD, no es posible añadir nuevos vocabularios.
+                </p>
+
+                <p><b>SINTAXIS DE <span style="color: rgb(147, 147, 206) !important;">COMENTARIOS</span> EN EL CÓDIGO</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- MENSAJE --&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2>Elementos &gt; Declaración</h2>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">SINTAXIS</span></b>:</p>
+
+                <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (opciones)&gt;</code></pre>
+                <p class="Expl"><b>elemento</b>: Nombre del elemento a declarar.</p>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Elementos &gt; Opciones</h2>
+
+                <p>1. Podemos decir que el contenido de una etiqueta puedea no tener nada o tener una <u>cadena de texto</u> - <span class="ruta">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA)&gt;</code></pre>
+                <p class="Expl">Solo daría error si se ponen sub-etiquetas dentro.</p>
+
+                <p>2. El contenido de la etiqueta debe estar obligatoriamente <u>vacío</u> sin ninguna cadena de texto ni sub-etiquetas dentro, sin contar los atributos.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento EMPTY&gt;</code></pre>
+
+                <p>3. El contenido de la etiqueta pueda ser una cadena de texto, puede tener sub-etiquetas dentro, puede tener ambos o no tener nada (<u>todo está permitido</u>).</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ANY&gt;</code></pre>
+
+                <p>4. En el contenido de la etiqueta padre debe tener ciertas <u>sub-etiquetas hijo</u> dentro en el orden especificado.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1, etiqueta2, ...)&gt;</code></pre>
+                <p class="Expl">Si están todas las etiquetas dentro pero en un orden diferente al especificado dará un error al validar el documento XML.</p>
+
+                <p>5. En el contenido de la etiqueta padre debe tener en una posición solo una <u>sub-etiqueta y no todas</u>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1 | etiqueta2 | ...)&gt;</code></pre>
+                <p class="Expl">En ese caso se debe tener dentro de la etiqueta &lt;elemento&gt; la sub-etiqueta &lt;etiqueta1&gt; o &lt;etiqueta2&gt; pero nunca ambas.</p>
+
+                <p>6. En el contenido de la etiqueta padre debe tener una <u>sub-etiqueta o una cadena de texto</u> pero no ambos.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA | etiqueta1 | ...)&gt;</code></pre>
+                <p class="Expl">#PCDATA siempre tiene que estar en primer lugar o se producirá un error.</p>
+            </div>
+
+            <div>
+                <h2>Elementos &gt; Elección en una secuencia de elementos</h2>
+
+                <p>Podemos definir que se pueda elegir entre una &lt;etiqueta1&gt; o una &lt;etiqueta2&gt; y que luego se ponga la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2), etiqueta3, ...)&gt;</code></pre>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Elementos &gt; Elección entre una secuencia de elementos</h2>
+
+                <p>Podemos definir que se pueda elegir una &lt;etiqueta1&gt; seguido de la &lt;etiqueta2&gt; o solo la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2) | etiqueta3, ...)&gt;</code></pre>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Elementos &gt; Cardinalidades</h2>
+
+                <p>Con el símbolo <span class="ruta">?</span> podemos definir una cardinalidad de <span class="ruta2">0-1</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1+)&gt;</code></pre>
+                <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o solo una.</p>
+
+                <p>Con el símbolo <span class="ruta">+</span> podemos definir una cardinalidad de <span class="ruta2">1-n</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1+)&gt;</code></pre>
+                <p class="Expl">Sería válido poner mínimo una etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
+
+                <p>Con el símbolo <span class="ruta">*</span> podemos definir una cardinalidad de <span class="ruta2">0-n</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1*)&gt;</code></pre>
+                <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Elementos &gt; Cardinalidad en un grupo de objetos</h2>
+
+                <p>En el siguiente caso se elige entre &lt;etiqueta1&gt; o &lt;etiqueta2&gt; y de la elección se puede poner ninguna o solo una vez:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2)?, ...)&gt;</code></pre>
+                <p class="Expl">En vez de <span class="ruta">?</span> se puede poner las otras 2 cardinalidades posibles como <span class="ruta">+</span> o <span class="ruta">*</span> y lo que cambiaría sería la cantidad de veces que se pueda poner la etiqueta elegida.</p>
+
+                <p>En el siguiente caso se puede poner &lt;etiqueta1&gt; y &lt;etiqueta2&gt; (en ese orden) la cantidad de veces que la cardinalidad lo permita. Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2)+, ...)&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Atributos &gt; Declaración</h2>
+
+                <p><b style="color: rgb(147, 147, 206) !important;">SINTAXIS</b>:</p>
+
+                <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo predefinido&gt;</code></pre>
+                <p class="Expl">
+                    <b>elemento</b>: Nombre del elemento que contenga el atributo a declarar.
+                    <br>
+                    <b>atributo</b>: Nombre del atributo a declarar.
+                    <br>
+                    <b>tipo</b>: Tipo de contenido que puede tener el atributo.
+                    <br>
+                    <b>valor</b>: Define si el atributo es obligatorio y si tiene un valor fijo.
+                </p>
+
+                <p>Se puede definir varios atributos de un elementos en un mismo &lt;!ATTLIST&gt; como:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST 
+    elemento1 atributo1 tipo1 predefinido1
+    elemento2 atributo2 tipo2 predefinido2
+    ...
+&gt;</code></pre>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Atributos &gt; Modificadores</h2>
+
+                <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="ruta">#IMPLIED</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
+
+                <p>O requerido / obligatorio - <span class="ruta">#REQUIRED</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #REQUIRED&gt;</code></pre>
+
+                <p>Además se puede definir un valor fijo  - <span class="ruta">#FIXED "valor"</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #FIXED "valor_fijo"&gt;</code></pre>
+                <p class="Expl">El valor es sensible a mayúsculas y, si no coincide exactamente con lo definido, dará un error en la validación.</p>
+
+                <p>Por último, se puede poner solo un valor predefinido en caso de que no se asigne <u>solo</u> de las siguientes formas:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA "valor_predefinido"&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2) "valor1"&gt;</code></pre>
+                <p class="Expl">
+                    En cualquier caso, si se especifica otro valor distinto, se omitirá el valor predefinido. 
+                    Se aplica automaticamente el valor predefinido en caso de no asignárselo al momento de validación. 
+                </p>
+
+
+            </div>
+
+            <div>
+                <h2>Atributos &gt; Tipos</h2>
+
+                <p>1. Que tenga unos valores predefinidos válidos.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2|...) predefinido&gt;</code></pre>
+                <p class="Expl">En el ejemplo se define que un &lt;elemento&gt; tenga solo ciertos valores válidos.</p>
+
+                <p>2. Que tenga una <u>cadena de caracteres</u> o ningún valor - <span class="ruta">CDATA</span> (Parsed Character Data).</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA predefinido&gt;</code></pre>
+                <p class="Expl">Dentro del atributo sí se permite el uso de caracteres reservados de XML.</p>
+
+                <p>3. Que tenga una <u>cadena de caracteres</u> que cumpla con las reglas de nombres de XML - <span class="ruta">NMTOKEN</span> (Name Token).</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo NMTOKEN predefinido&gt;</code></pre>
+                <p class="Expl">Dentro del atributo <b>no</b> se permite el uso de espacios ni de ningún símbolo reservado.</p>
+
+                <p>4. Que tenga una <u>lista</u> de varios <span class="ruta">NMTOKEN</span> separados por espacios - <span class="ruta">NMTOKENS</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo NMTOKENS predefinido&gt;</code></pre>
+
+                <p>5. Que sea un <u>identificador único</u> para cada elemento - <span class="ruta">ID</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo ID predefinido&gt;</code></pre>
+                <p class="Expl">
+                    <b>REGLAS</b>:
+                    <br>
+                    1. Cada elemento solo puede tener un atributo de tipo ID. 
+                    <br>
+                    2. El valor predefinido solo puede ser <span class="ruta">#IMPLIED</span> o <span class="ruta">#REQUIRED</span>.
+                    <br>
+                    3. La primera letra del valor debe ser una letra o un <span class="ruta">_</span>.
+                    <br>
+                    4. El valor del ID no debe repetirse en otros IDs.
+                </p>
+
+                <p>6. Que sea una <u>referencia a identificador</u> único existente - <span class="ruta">IDREF</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREF predefinido&gt;</code></pre>
+                <p class="Expl">
+                    <b>REGLAS</b>:
+                    <br>
+                    1. Dará error de validación si no hay un atributo ID con ese valor. 
+                    <br>
+                    2. El valor predefinido solo puede ser <span class="ruta">#IMPLIED</span> o <span class="ruta">#REQUIRED</span>.
+                </p>
+
+                <p>7. Es una lista de varios IDREF separados por espacios - <span class="ruta">IDREFS</span>.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREFS predefinido&gt;</code></pre>
+                <p class="Expl">Los valores que contengan tienen que existir en otros atributos ID del documento XML.</p>
+                <p class="Expl">
+                    <b>REGLAS</b>:
+                    <br>
+                    1. Dará error de validación si no hay un atributo ID uno de los valores de la lista. 
+                    <br>
+                    2. El valor predefinido solo puede ser <span class="ruta">#IMPLIED</span> o <span class="ruta">#REQUIRED</span>.
+                    <br><br>
+                    Puede referenciar por ejemplo a varios elementos &lt;pais&gt; donde cada uno tenga un ID con una abreviatura de su nombre.
+                    En IDREFS se podría poner "es fr gl" haciendo referencia a varios paises en un solo elemento.
+                </p>
+                <p>8. Que sea la <u>representación de una entidad externa</u> - <span class="ruta">ENTITY</span>.</p>
+                <p>9. Que sea una <u>lista de varias representaciones de una entidad externa</u> - <span class="ruta">ENTITIES</span>.</p>
+                <p>10. Que sea el <u>nombre de una notación</u> - <span class="ruta">NOTATION</span>.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Entidades predefinidas y generales internas</h2>
+
+                <p>
+                    Una entidad puede almacenar cualquier tipo de contenido e insertarlo en el documento XML. 
+                    Se almacena en el documento DTD o en un fichero externo.
+                    Es útil ya que el valor asociado a un nombre puede ser fácilmente editado desde un solo lugar en vez de en todos los lugares a los que se le quiera asignar ese valor.
+                </p>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES <span style="color: rgb(147, 147, 206) !important;">PREDEFINIDAS</span> POR XML</b>:</p>
+
+                <p>En la guía sobre XML se trata el uso de entidades predefinidas como por ejemplo <span class="ruta"><span>&<b></b>lt;</span></span> que tiene como valor <span class="ruta">&lt;</span>.</p>
+
+                <div class="XML-scroll">
+                    <table class="XML">
+                        <thead>
+                            <tr>
+                                <th>SÍMBOLO</th>
+                                <td>&lt;</td>
+                                <td>&gt;</td>
+                                <td>&amp;</td>
+                                <td>&apos;</td>
+                                <td>&quot;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>REFERENCIA</th>
+                                <td><span>&<b></b>lt;</span></td>
+                                <td><span>&<b></b>gt;</span></td>
+                                <td><span>&<b></b>amp;</span></td>
+                                <td><span>&<b></b>apos;</span></td>
+                                <td><span>&<b></b>quot;</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES <span style="color: rgb(147, 147, 206) !important;">GENERALES INTERNAS</span></b>:</p>
+
+                <p>Podemos crear nuestras propias entidades con la siguiente sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre "valor"&gt;</code></pre>
+                <p class="Expl">
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>valor</b>: Contenido que se insertará en el documento XML cuando se llame.
+                </p>
+
+                <p>Ejemplo de una entidad personalizada:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd "Document Type Definition"&gt;</code></pre>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="ruta2"><span>&<b></b>dtd;</span></span> y este devolverá el valor <span class="ruta2">Document Type Definition</span>.</p>
+                <p class="Expl">En el editor no aparecerá el valor, sino cuando se procese el documento como por ejemplo en un navegador.</p>
+            </div>
+
+            <div>
+                <h2>Entidades generales externas</h2>
+
+                <p>Una entidad <b>general externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES GENERALES EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PRIVADAS</span></b>:</p>
+
+                <p>Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre SYSTEM "URI"&gt;</code></pre>
+                <p class="Expl">
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>SYSTEM</b>: Se indica que es un recurso privado.
+                    <br>
+                    <b>"URI"</b>: Ruta al fichero cuyo contenido es el valor a asignar como entidad.
+                </p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd SYSTEM "descripcion.txt"&gt;</code></pre>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="ruta2"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo <span class="ruta2">descripcion.txt</span>.</p>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES GENERALES EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PÚBLICAS</span></b>:</p>
+
+                <p>Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre PUBLIC "ID" "URI"&gt;</code></pre>
+                <p class="Expl">
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>PUBLIC</b>: Se indica que es un recurso público.
+                    <br>
+                    <b>"ID"</b>: Identificador público que permiten localizar recursos DTD. Normalmente tiene formato <u>FPI</u> (Formal Public Identifier).
+                    <br>
+                    <b>"URI"</b>: Ruta al fichero cuyo contenido es el valor a asignar como entidad.
+                </p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd PUBLIC "-//W3C//TEXT dtd//EN" "https://byad12.pages.dev/robots.txt"&gt;</code></pre>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="ruta2"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo alojado en la URI asignada.</p>
+
+            </div>
+
+            <div>
+                <h2>Entidades paramétricas internas</h2>
+
+                <p>
+                    Una entidad <b>paramétrica</b> solo pueden definirse en un DTD interno pero solo se pueden usar en un documento DTD a parte del documento XML.
+                    Tampoco pueden llamarse a estas entidades en el XML, solo es de uso interno en el documento DTD.
+                </p>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES PARAMÉTRICAS <span style="color: rgb(147, 147, 206) !important;">INTERNAS</span></b>:</p>
+
+                <p>Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre "valor"&gt;</code></pre>
+                <p class="Expl">
+                    <b>%</b>: Se indica que es una entidad paramétrica.
+                    <br>
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>"valor"</b>: Contenido que se insertará en el documento XML cuando se llame.
+                </p>
+
+                <p>Ejemplo:</p>
+                <p class="Expl">Podemos llamar a una entidad mediante <span class="ruta2"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % str "(#PCDATA)"&gt;
+&lt;!ELEMENT nombre_elemento %str;&gt;</code></pre>
+                <p class="Expl">También podemos evitar escribir nombres de elementos largos y reemplazarlos por una entidad:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % uk "reino-unido-de-gran-bretana-e-irlanda-del-norte"&gt;
+&lt;!ELEMENT %uk; EMPTY&gt;
+&lt;!ATTLIST %uk; capital CDATA #REQUIRED&gt;</code></pre>
+
+                <!-- ......................................................... -->
+                <div class="CompensarTamano"></div>
+                <h2>Referencias a entidades</h2>
+
+                <p>Se pueden llamar a entidades desde otras entidades como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE etiqueta [
+    &lt;!ELEMENT etiqueta (#PCDATA)&gt;
+                        
+    &lt;!ENTITY saludo "Hola"&gt;
+    &lt;!ENTITY nombre "Ruth"&gt;
+    &lt;!ENTITY frase "&amp;saludo;, soy &amp;nombre;."&gt;
+]>
+&lt;etiqueta&gt;&amp;frase;&lt;/etiqueta&gt;</code></pre>
+                <p class="Expl">Resultado final:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta&gt;Hola, soy Ruth.&lt;/etiqueta&gt;</code></pre>
+
+                <p>
+                    <b style="color: rgb(147, 147, 206) !important;">LIMITACIONES</b>: 
+                    <br>
+                    - Una entidad no puede llamarse a si misma.
+                    <br>
+                    - 2 entidades no se pueden llamar entre sí - de manera circular.
+                </p>
+
+            </div>
+
+            <div>
+                <h2>Entidades paramétricas externas</h2>
+
+                <p>Una entidad <b>paramétrica externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES PARAMÉTRICAS EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PRIVADAS</span></b>:</p>
+
+                <p>Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre SYSTEM "URI"&gt;</code></pre>
+                <p class="Expl">
+                    <b>%</b>: Se indica que es una entidad paramétrica.
+                    <br>
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>SYSTEM</b>: Se indica que es un recurso privado.
+                    <br>
+                    <b>"URI"</b>: Ruta al fichero cuyo contenido es el valor a asignar como entidad.
+                </p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
+%entidad_nueva;</code></pre>
+                <p class="Expl">El archivo <span class="ruta">descripcion.dtd</span> contiene:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
+                <p class="Expl">Así que en el DTD se reemplazará <span class="ruta">%etiqueta_nueva;</span> por el contenido del archivo, quedando el siguiente resultado:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
+&lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
+
+                <!-- ......................................................... -->
+                <p><b>ENTIDADES PARAMÉTRICAS EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PÚBLICAS</span></b>:</p>
+
+                <p>Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre PUBLIC "ID" "URI"&gt;</code></pre>
+                <p class="Expl">
+                    <b>%</b>: Se indica que es una entidad paramétrica.
+                    <br>
+                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <br>
+                    <b>PUBLIC</b>: Se indica que es un recurso público.
+                    <br>
+                    <b>"ID"</b>: Identificador público que permiten localizar recursos DTD. Normalmente tiene formato <u>FPI</u> (Formal Public Identifier).
+                    <br>
+                    <b>"URI"</b>: Ruta al fichero cuyo contenido es el valor a asignar como entidad.
+                </p>
+
+                <p>Ejemplo (El funcionamiento es igual que la entidad paramétrica externa privada):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva PUBLIC "-//W3C//TEXT texto//EN" "https://byad12.pages.dev/descripcion.dtd"&gt;
+%entidad_nueva;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>

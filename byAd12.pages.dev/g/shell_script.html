@@ -1,0 +1,242 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, Shell, Bash, sh, script, byAd12">
+        <title>Scripting - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;"><span style="font-family: Arial;"></span>SHELL</h1>
+        <h2 class="TituloSecundario">.sh scripts for Linux</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>Creación del archivo</h2>
+
+                <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">chmod +x script.sh</code></pre>
+                <p>Necesario para crear un script (ponerlo al principio del archivo):</p>
+                <pre class="codigo" translate="no"><code class="bash">#!/bin/bash</code></pre>
+            </div>
+
+            <div>
+                <h2>Parámetros</h2>
+
+                <p>Al ejecutar un archivo se le puede pasar argumentos:</p>
+                <pre class="codigo" translate="no"><code class="bash">script.sh arg1 arg2 ...</code></pre>
+                
+                <p>Dentro de un archivo, para hacer referencia a estos argumentos:</p>
+                <p class="Expl"><span class="ruta">$num</span>: Llamar un argumento en "num" del órgen 1 al máximo de 9.</p>
+                <p class="Expl"><span class="ruta">$0</span>: Devuelve el nombre del script / función.</p>
+                <p class="Expl"><span class="ruta">$*</span>: Devuelve a todos los argumentos separados por espacio.</p>
+                <p class="Expl"><span class="ruta">$#</span>: Devuelve el n. total de parámetros que se pasaron.</p>
+            </div>
+
+            <div>
+                <h2>Básico</h2>
+
+                <p>Imprimir un texto en pantalla:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo 'texto'</code></pre>
+                <p>Pedir un texto y guardarlo en la variable <span class="ruta">nombre_var</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">read -p 'texto' nombre_var</code></pre>
+                <p>Esperar cierto tiempo antes de hacer una acción:</p>
+                <pre class="codigo" translate="no"><code class="bash">sleep &lt;Segundos&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Llamar una variable</h2>
+
+                <p>Todo lo que esté dentro de <span class="ruta-">" "</span> se interpreta como variables y texto. En cambio en <span class="ruta-">' '</span> se interpresa todo como texto.</p>
+                <pre class="codigo" translate="no"><code class="bash">echo "$nombre_var"</code></pre>
+            </div>
+
+            <div>
+                <h2>Comparadores</h2>
+
+                <p><b>Para texto</b>:</p>
+                <table>
+                    <td>
+                        <pre class="codigo" translate="no"><code class="bash">valor = valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor != valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor < valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor > valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">-n valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">-z valor</code></pre>
+                    </td>
+                    <td>
+                        <p>← Igual a | <span class="ruta-">==</span> hace lo mismo pero permititiendo comodines</p>
+                        <p>← No igual a</p>
+                        <p>← Menor que</p>
+                        <p>← Mayor que</p>
+                        <p>← No es nulo</p>
+                        <p>← Es nulo</p>
+                    </td>
+                </table>
+
+                <p><b>Para números</b>:</p>
+                <table>
+                    <td>
+                        <pre class="codigo" translate="no"><code class="bash">valor -eq valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor -ne valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor -lt valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor -gt valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor -le valor</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">valor -ge valor</code></pre>
+                    </td>
+                    <td>
+                        <p>← Igual a</p>
+                        <p>← No igual a</p><br>
+                        <p>← Menor que</p>
+                        <p>← Mayor que</p><br>
+                        <p>← Menor o igual que</p><br>
+                        <p>← Mayor o igual que</p>
+                    </td>
+                </table>
+
+                <p><b>Para archivos y carpetas</b>:</p>
+                <table>
+                    <td>
+                        <pre class="codigo" translate="no"><code class="bash">-e ruta</code></pre>
+                        <pre class="codigo" translate="no"><code class="bash">-r ruta</code></pre>
+                    </td>
+                    <td style="transform: translateY(-8px);">
+                        <p>← Si existe un archivo o carpeta | O se puede hacer con el comando <span class="ruta">test</span></p>
+                        <p>← Si tiene permisos de lectura | Puede ser <span class="ruta-">-w</span>, <span class="ruta-">-x</span></p>
+                    </td>
+                </table>
+            </div>
+
+            <div>
+                <h2>Condicionales</h2>
+
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ]; then
+    // Qué hacer si se cumple la condición 1
+
+elif [ condición2 ]; then
+    // Qué hacer si se cumple la condición 2
+
+else
+    // Qué hacer si no se cumple ninguna condición
+
+fi</code></pre>
+                <p class="Expl"> Siempre acaba en <span class="ruta-">fi para así indicar el final de la condicional.</p>
+
+                <p>Si se cumplen ambas condiciones:</p>
+                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] && [ condición2 ]; then
+    // Contenido
+fi</code></pre>
+
+                <p>Una condición u la otra:</p>
+                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] || [ condición2 ]; then
+    // Contenido
+fi</code></pre>
+
+                <p>Si no se cumple la condición:</p>
+                <pre class="codigo" translate="no"><code class="bash">if ! [ condición1 ]; then
+    // Contenido
+fi</code></pre>
+            </div>
+
+            <div>
+                <h2>Función <span class="ruta">CASE</span></h2>
+
+                <p>Para ejecutar varias acciones, dependiendo del valor de una variable:</p>
+                <pre class="codigo" translate="no"><code class="bash">read -p 'texto' var
+case $var in
+1)
+echo 'El valor es 1'
+;;
+rojo)
+echo 'El valor es rojo'
+;;
+*)
+echo 'Este valor no estaba en nigún _)'
+;;
+esac
+</code></pre>
+            </div>
+
+            <div>
+                <h2>Bucle <span class="ruta">FOR</span></h2>
+
+                <p>Formato para recorrer un conjunto de valores hasta llegar al final:</p>
+                <pre class="codigo" translate="no"><code class="bash">for nombre_var in conjunto; do
+    // Contenido
+done</code></pre>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">for i in 1 2 3 4 5; do
+    echo "$i"
+done</code></pre>
+            </div>
+
+            <div>
+                <h2>Función <span class="ruta">WHILE</span></h2>
+
+                <p>Ejecuta su contenido si la condición es verdadero in definidamente hasta que se pare:</p>
+                <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
+    // Contenido
+done</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Función <span class="ruta">UNTIL</span></h2>
+
+                <p>Lo mismo que <span class="ruta">WHILE:</p>
+                <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do
+    // Contenido
+done</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>

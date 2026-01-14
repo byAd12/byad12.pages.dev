@@ -1,0 +1,300 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, FTP, VSFTPD, byAd12">
+        <title>VSFTPD - Linux y FileZilla</title>
+        
+        <link rel="stylesheet" type="text/css" href="../recursos/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">VSFTPD</h1>
+        <h2 class="TituloSecundario">Servidor FTP en Linux</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install vsftpd</code></pre>
+                <p class="Expl">Al instalarlo se crea un usuario <span class="ruta2" translate="no">ftp</span> automáticamente, que se incluye en el grupo <span class="ruta2" translate="no">ftp</span>.<br>
+                    También crea el directorio <span class="ruta" translate="no">/srv/ftp</span>, que su propietario es <span class="ruta2" translate="no">root</span> y su grupo <span class="ruta2" translate="no">ftp</span>.<br>
+                    Este directorio es el directorio de los usuarios anónimos.</p>
+            </div>
+
+            <div>
+                <h2>Comprobación</h2>
+                <p>Comprobar que tenemos el usuario y grupo <span class="ruta2" translate="no">ftp</span> y que su directorio home es <span class="ruta" translate="no">/srv/ftp</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep ftp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/group | grep ftp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ls /srv/ftp</code></pre>
+            </div>
+
+
+            <div>
+                <h2>Rutas Importantes</h2>
+                <p>Fichero de configuración:</p>
+                <p class="Expl"><span class="ruta" translate="no">/etc/vsftpd.conf</span></p>
+
+                <p>Lista de usuarios del sistema <b>excluidos</b> paras iniciar sesión:</p>
+                <p class="Expl"><span class="ruta" translate="no">/etc/ftpusers</span></p>
+
+                <p>Como el anterior pero también se puede permitir si en la configuración hay <span class="ruta2" translate="no">userlist_deny=NO</span> [No está creado por defecto]:</p>
+                <p class="Expl"><span class="ruta" translate="no">/etc/vsftpd.user_list</span></p>
+
+                <p>Usuarios que no están enjaulados si está en la configuración → <span class="ruta2" translate="no">chroot_local_user=YES</span>, <span class="ruta2" translate="no">chroot_list_enable=YES</span>, <span class="ruta2" translate="no">chroot_list_file=[RUTA]</span> [No está creado por defecto]:</p>
+                <p class="Expl"><span class="ruta" translate="no">/etc/vsftpd.chroot_list</span></p>
+
+                <p>Para ver los registros de accesos al servidor:</p>
+                <p class="Expl"><span class="ruta" translate="no">/var/log/vsftpd.log</span></p>
+            </div>
+
+            <div>
+                <h2>Servicio</h2>
+                <p>Iniciar el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">service vsftpd start</code></pre>
+                
+                <p>Comprobar el estado del servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">service vsftpd status</code></pre>
+            </div>
+
+            <div>
+                <h2>Directivas de <span class="ruta" translate="no">/etc/vsftpd.conf</span></h2>
+
+                <p>Activar los <b>usuario anónimos</b>: "ftp" o "anonymous". Su carpeta home será "/srv/ftp", de solo lectura:</p>
+                <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
+
+                <p>Permite la <b>conexión con usuarios del sistema</b>. SU directorio será el que tenga como home en el sistema operativo. Pero por defecto no está enjaulado:</p>
+                <pre class="codigo" translate="no"><code class="bash">local_enable=YES</code></pre>
+
+                <p>Permitir <b>escritura</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">write_enable=YES</code></pre>
+
+                <p>Mensaje de <b>bienvenida</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ftpd_banner=Mensaje con espacios</code></pre>
+
+            </div>
+            
+            <div>
+                <h2>Enjaular Usuarios</h2>
+
+                <p>Enjaular a todos los usuarios locales (<span class="ruta" translate="no">/etc/vsftpd.conf</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">chroot_local_user=YES</code></pre>
+
+                <p>Enjaular a un usuario local específico (<span class="ruta" translate="no">/etc/vsftpd.conf</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">chroot_local_user=NO
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd.chroot_list</code></pre>
+                <p class="Expl"><span class="ruta" translate="no">/etc/vsftpd.chroot_list</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">NombreUsuario1
+NombreUsuario2
+..</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+
+        <div class="parte1">
+            <div>
+                <h2>Práctica 1 <span class="spanblanco">(ejemplo)</span></h2>
+                <p>Meter 3 ficheros en "/srv/ftp".</p>
+                <p>1. Conectar con el usuario "ftp" y descargar un fichero al <b>escritorio</b>.</p>
+                <pre class="codigo" translate="no"><code class="bash">ftp [ip]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">get [nombre_archivo] /home/[usuario]/Escritorio</code></pre>
+                <p>2. Conectarme con un usuario creado "mortadelo" [comando: <span class="ruta2" translate="no">adduser (user)</span>] y comprobar:</p>
+                <ul class="ULFTPCamb1">
+                    <li>Que me está dejando.</li>
+                    <br>
+                    <li>Subir un archivo a /home/mortadelo.
+                        <pre class="codigo" translate="no"><code class="bash">put [nombre_archivo]</code></pre>
+                    </li>
+                    <br>
+                    <li>Subir un fichero al escritorio del compañero.
+                        <pre class="codigo" translate="no"><code class="bash">put [nombre_archivo] /home/[usuario_compañero]/Escritorio</code></pre>
+                        <p class="Expl">El usuario <span class="ruta2" translate="no">mortadelo</span> debe tener permisos en la carpeta de destino.</p>
+                    </li>
+                </ul>
+                
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Práctica 2 <span class="spanblanco">(ejemplo)</span></h2>
+                <p>Hacer un servidor con:</p>
+
+                <p>1. El mensaje de bienvenida sea "<b>Bienvenido chema</b>" (<span class="ruta" translate="no">/etc/vsftpd.conf</span>).</p>
+                <pre class="codigo" translate="no"><code class="bash">ftpd_banner=Bienvenido chema</code></pre>
+
+                <p>2. Posibilidad de acceso con el usuario anónimo (<span class="ruta" translate="no">/etc/vsftpd.conf</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
+
+                <p>3. Permiso de lectura y escritura para 3 usuarios de Sistema:</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod -R 777 /home/[USUARIO]</code></pre>
+                
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+
+        <div class="parte1">
+            <div>
+                <h2>Comandos más importantes para ftp</h2>
+
+                <table class="TablaFTPCamb1">
+                    <tr>
+                        <td><span class="ruta2" translate="no">ls</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">cd</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">!cd</span></td>
+                        <td>Cambiar de directorio del sistema local (no el servidor)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">get</span></td>
+                        <td>Descargar un archivo del servidor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">put</span></td>
+                        <td>Enviar un archivo al servidor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">pwd</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">rm</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">!ls</span></td>
+                        <td>Listar archivos del sistema local (no el servidor)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">mkdir</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">!mkdir</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">bye</span></td>
+                        <td>Cerrar una conexión FTP</td>
+                    </tr>
+                    <tr>
+                        <td><span class="ruta2" translate="no">?</span></td>
+                        <td>Todos los comandos disponibles</td>
+                    </tr>
+                </table>
+                
+            </div>
+
+            <div>
+                <h2>Conectarse con ftp</h2>
+
+                <p>Comando (Bash):</p>
+                <pre class="codigo" translate="no"><code class="bash">ftp [ip_servidor]:(puerto)</code></pre>
+                <p class="Expl">Pedirá usuario y contraseña.</p>
+                
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">FILEZILLA</h1>
+        <h2 class="TituloSecundario">Servidor FTP en Windows</h2>
+        <hr class="SeparadorConTitulo">
+        <!-- ......................................................... -->
+        <div class="FileziilaFixz">
+            <h2>Descargar</h2>
+            <a class="EnlacesFTPDescarga" href="https://filezilla-project.org/download.php?platform=win64&type=server" target="_blank">Filezilla Server</a>
+            <a class="EnlacesFTPDescarga" href="https://filezilla-project.org/download.php?platform=win64" target="_blank">Filezilla Client</a>
+        </div>
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <!-- ......................................................... -->
+            <div class="carrusel">
+                <h2>Configuración (Server)</h2>
+                <div class="carrusel_imagenes" id="carrusel_imagenes-server">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_1/cap1.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_1/cap2.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_1/cap3.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_1/cap4.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_1/cap5.png" onclick="agrandarImagen(this)">
+                </div>
+                <button class="carrusel_boton carrusel_izquierda" onclick="moverImagenes(-1, 'server')">&#10094;</button>
+                <button class="carrusel_boton carrusel_derecha" onclick="moverImagenes(1, 'server')">&#10095;</button>
+            </div>
+            <!-- ......................................................... -->
+            <div class="carrusel">
+                <h2>Configuración (Cliente)</h2>
+                <div class="carrusel_imagenes" id="carrusel_imagenes-cliente">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap1.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap2.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap3.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap4.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap5.png" onclick="agrandarImagen(this)">
+                    <img class="carrusel_imagen" src="img/Capturas_Windows_FTP_2/cap6.png" onclick="agrandarImagen(this)">
+                </div>
+                <button class="carrusel_boton carrusel_izquierda" onclick="moverImagenes(-1, 'cliente')">&#10094;</button>
+                <button class="carrusel_boton carrusel_derecha" onclick="moverImagenes(1, 'cliente')">&#10095;</button>
+            </div>
+
+            
+            <div id="fondo-agrandado" class="carrusel_fondo-agrandado" onclick="cerrarImagen()"></div>
+            <!-- ......................................................... -->
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../recursos/blog.js"></script>
+    </body>
+</html>
