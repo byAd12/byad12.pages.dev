@@ -39,7 +39,7 @@ h2 span{color: white !important;}
 
 h2.TituloSecundario{color: rgb(147, 147, 206); text-align: center !important; font-size: 20px; font-family: "Doto";}
 
-h2.TituloCreditosSuperior, h2.TituloCreditosInferior{color: rgb(196, 196, 255); text-align: center !important; font-size: 15px; font-family: "Doto"; margin-bottom: 0; padding-bottom: 20px;}
+h2.TituloCreditosSuperior, h2.TituloCreditosInferior{color: rgb(228, 196, 196); text-align: center !important; font-size: 15px; font-family: "Doto"; margin-bottom: 0; padding-bottom: 20px;}
 h2.TituloCreditosInferior{padding-top: 20px; margin-top: 0;}
 h2.TituloCreditosInferior a{color: rgb(147, 147, 206) !important; text-decoration: none;}
 h2.TituloCreditosInferior a:hover{color: #7cfb2d; text-decoration: underline;}
