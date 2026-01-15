@@ -123,6 +123,7 @@ p a::selection{text-decoration: underline;}
 @media screen and (max-width: 600px) {
   .ProyectosInfoAvanzada .ImgA{justify-content: center;}
   .ProyectosInfoAvanzada .ImgA a{margin-top: 10px;}
+  .FlexBotonesPrincipales{flex-direction: column;}
 }
 
 @media screen and (max-width: 1000px) {
@@ -232,6 +233,20 @@ div.BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3
 
 div.BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
 div.BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+
+@media screen and (max-width: 1000px) {
+  div.BotonPersonalizadoCode{max-width: max-content; width: max-content;}
+  div.BotonPersonalizadoCode pre.MuestraDeCodigo{width: 400px; user-select: text;}
+  ::-webkit-scrollbar{height: 0px;}
+}
+
+@media screen and (max-width: 600px) {
+  div.BotonPersonalizadoCode pre.MuestraDeCodigo{width: 200px;}
+}
+
+@media screen and (max-width: 350px) {
+  div.BotonPersonalizadoCode pre.MuestraDeCodigo{width: 125px;}
+}
 
 /* PARA TEXTO */
 
