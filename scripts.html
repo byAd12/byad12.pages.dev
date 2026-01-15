@@ -19,6 +19,11 @@
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
         <!-- ============================== -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ============================== -->
     </head>
     <body>
         <div class="menu_bar">
@@ -36,36 +41,35 @@
             </ul>
         </div>
 
-        <div class="DivPrincipal ContactoDivPrincipal Hacer100vh">
-            <h2 class="projects-title primero" id="donar">Scripts</h2>
-            <p class="ContactoP">
-                A continuación podrás ver mis scripts públicos.
-                <br><br>
-                '<b>parrot.sh</b>' es mi archivo de configuración esencial para Parrot Security OS (basado en Linux).
+        <div class="DivPrincipal ContactoDivPrincipal ScriptsAjustarVH">
+            <h2 class="projects-title primero">Scripts</h2>
+            <p class="GuiasP">A continuación podrás ver mis scripts públicos.</p>
+
+            <!-- === -->
+
+            <h3 class="projects-title-h3 QuitarPaddingTop">parrot.sh</h3>
+            <p class="GuiasP">Este script es mi archivo de configuración esencial para Parrot Security OS (basado en Linux).</p>
+
+            <div class="BotonPersonalizadoCode">
+                <pre class="MuestraDeCodigo"><code translate="no" class="bash">wget https://byad12.pages.dev/parrot.sh -O parrot.sh; chmod +x ./parrot.sh; ./parrot.sh</code></pre>
+                <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/parrot.sh" target="_blank" class="BotonFlecha"><span>↗</span></a>
+            </div>
+            <!-- === -->
+
+            <h3 class="projects-title-h3 QuitarPaddingTop">proxmox.sh</h3>
+            <p class="GuiasP">
+                Con este script se genera un menú de administración completo para Proxmox y varios paquetes más.
                 <br>
-                '<b>proxmox.sh</b>' sirve como menú de administración completo para mi clúster de Proxmox (<a href="https://www.chemahosting.es" target="_blank">Chema Hosting</a>).
-                <br><br>
-                Comandos para instalar y ejecutar los scripts de forma rápida:
-                <br><br>
-                parrot.sh: <span translate="no">wget https://byad12.pages.dev/parrot.sh -O parrot.sh; chmod +x ./parrot.sh; ./parrot.sh</span>.
-                <br>
-                proxmox.sh: <span translate="no">wget https://byad12.pages.dev/proxmox.sh -O proxmox.sh; chmod +x ./proxmox.sh; ./proxmox.sh</span>.
-                <br><br>
-                Los siguientes botones redirigen al código fuente de cada script:
+                Se basa en las necesidades de gestión en mi clúster de Proxmox (<a href="https://www.chemahosting.es" target="_blank">Chema Hosting</a>).
             </p>
-
-            <div class="MasBotones">
-                <a href="parrot.sh" target="_blank">
-                    <span class="izq">parrot.sh</span>
-                    <span class="der">↗</span>
-                </a>
-
-                <a href="proxmox.sh" target="_blank">
-                    <span class="izq">proxmox.sh</span>
-                    <span class="der">↗</span>
-                </a>
+            
+            <div class="BotonPersonalizadoCode">
+                <pre class="MuestraDeCodigo" class="EnlaceScript"><code translate="no" class="bash">wget https://byad12.pages.dev/proxmox.sh -O proxmox.sh; chmod +x ./proxmox.sh; ./proxmox.sh</code></pre>
+                <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/proxmox.sh" target="_blank" class="BotonFlecha"><span>↗</span></a>
             </div>
 
+            <!-- === -->
+            <div style="height: 20px;"></div>
             <!-- === -->
         </div>
         

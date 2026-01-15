@@ -16,8 +16,6 @@ p a::selection{text-decoration: underline;}
 ::-webkit-scrollbar-thumb{background-color: #555; transition: all 0.4s;}
 ::-webkit-scrollbar-thumb:hover{background-color: #666;}
 
-.Hacer100vh{min-height: 69vh;}
-
 /* ========================================================= */
 /* FUENTES */
 
@@ -71,6 +69,8 @@ p a::selection{text-decoration: underline;}
 .fondo .flecha a{color: rgba(167, 255, 112, 0.5); font-size: 20px; transition: all .5s;}
 .fondo .flecha a:hover{color: #7cfb2d; transform: scale(0.9);}
 
+.FlexBotonesPrincipales{display: flex; width: min-content; gap: 20px; margin: 0 auto; padding: 20px;}
+
 @media screen and (min-height: 800px) {
   .fondo{height: min-content;}
   .fondo .flecha{display: none;}
@@ -86,6 +86,7 @@ p a::selection{text-decoration: underline;}
 /* INDEX - PROYECTOS */
 
 .projects-title{font-size: 36px; user-select: text; margin-bottom: 20px; padding-top: 20px; color: white; position: relative; display: inline-block; scroll-margin-top: 50px;} 
+.projects-title-h3{font-size: 20px; user-select: text; margin-bottom: 20px; padding-top: 20px; color: rgba(167, 255, 112, 0.5); position: relative; display: inline-block; scroll-margin-top: 50px;} 
 
 .ProyectosInfoAvanzada{margin: 0 auto; max-width: 1500px; margin-bottom: 50px;}
 
@@ -131,22 +132,6 @@ p a::selection{text-decoration: underline;}
 }
 
 /* ========================================================= */
-/* INDEX - BOTONES */
-
-.Models .MasBotones, .ContactoP{margin-bottom: 25px !important;}
-.MasBotones{max-width: 1500px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; margin: 0 auto; gap: 40px; margin-bottom: 50px;}
-
-.MasBotones a{user-select: none; display: flex; border: 3px solid rgba(167, 255, 112, 0.5); border-radius: 5px; transition: all .3s;}
-
-.MasBotones a span{padding: 12px 20px;}
-.MasBotones a span.izq{background-color: #222523; color: white;}
-.MasBotones a span.der{position: relative; color: black; font-weight: bold; padding: 10px 20px; transform: rotate(0deg); transition: transform .3s, color .3s;}
-
-.MasBotones a span.der::before{content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(167, 255, 112, 0.5); z-index: -1; transition: opacity 1s; opacity: 1;}
-.MasBotones a:hover span.der::before{opacity: 0; transition: opacity 0s;}
-.MasBotones a:hover span.der{color: rgba(167, 255, 112, 0.5); transform: rotate(45deg);}
-
-/* ========================================================= */
 /* TRADUCTOR */
 
 .gt_white_content{background-color: black !important; border-radius: 20px; border: 2px solid #7cfb2d; height: fit-content !important;}
@@ -172,8 +157,8 @@ p a::selection{text-decoration: underline;}
 
 .ContactoP{user-select: text; color: rgb(228, 196, 196); margin-bottom: 50px; margin-left: 20px; margin-right: 20px;}
 .ContactoP span{color: #7cfb2d; user-select: all;}
-.ContactoP a{color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
-.ContactoP a:hover{border-bottom: 1px solid #7cfb2d;}
+.ContactoP a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
+.ContactoP a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
 
 .DivPrincipal .objectDIV{margin-bottom: 50px;}
 .DivPrincipal object{display: block; justify-content: center !important; color: white !important; border: .5px solid gray; border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 500px; height: 400px; margin: 0 auto;}
@@ -222,6 +207,43 @@ p a::selection{text-decoration: underline;}
 .LinkEntrada:hover::before{animation: bordeAnim 0.8s forwards;}
 
 @keyframes bordeAnim{0%{left:-100%;} 50%{left:0;} 100%{left:100%;}}
+
+/* ========================================================= */
+/* SCRIPTS */
+
+.ScriptsAjustarVH{min-height: 69vh;}
+h3.QuitarPaddingTop{padding-top: 0 !important;}
+.GuiasP{user-select: text; color: rgb(228, 196, 196); margin: 20px; margin-top: 0;}
+.GuiasP span{color: #7cfb2d; user-select: all;}
+.GuiasP a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
+.GuiasP a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
+/* ========================================================= */
+/* BOTÓN PERSONALIZADO */
+
+/* PARA CÓDIGOS */
+
+div.BotonPersonalizadoCode{display: flex; margin: 0 auto; max-width: 805px; align-items: center; justify-content: center; gap: 0; margin-bottom: 20px;}
+
+div.BotonPersonalizadoCode pre.MuestraDeCodigo{max-width: 750px; width: min-content; user-select: text; }
+div.BotonPersonalizadoCode pre.MuestraDeCodigo code{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none;}
+
+div.BotonPersonalizadoCode a.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; height: 55.5px; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+div.BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3s;}
+
+div.BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
+div.BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+
+/* PARA TEXTO */
+
+a.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0;}
+
+a.BotonPersonalizadoTexto p.TextoRelacionado{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; background-color: #22272e; color: #adbac7; padding: 1em; user-select: text;}
+
+a.BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; height: 55.5px; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+a.BotonPersonalizadoTexto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
+
+a.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
+a.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
 
 /* ========================================================= */
 /* FOOTER */
