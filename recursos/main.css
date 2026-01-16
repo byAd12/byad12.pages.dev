@@ -255,7 +255,7 @@ a.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; ju
 
 a.BotonPersonalizadoTexto p.TextoRelacionado{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; background-color: #22272e; color: #adbac7; padding: 1em; user-select: text;}
 
-a.BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; height: 55.5px; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+a.BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
 a.BotonPersonalizadoTexto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 
 a.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
@@ -331,3 +331,4 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
 
 
 /* ========================================================= */
+
