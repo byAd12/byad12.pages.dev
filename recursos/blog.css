@@ -55,8 +55,8 @@ p a:hover{color: #7cfb2d; text-decoration: underline;}
 .EnlaceExterno{border: 2px solid #7cfb2d; padding: 3px 10px; background-color: #7cfb2d; color: black; text-decoration: none !important; transition: all .5s; border-radius: 5px;}
 .EnlaceExterno:hover{color: white; background-color: transparent;}
 
-.EnlaceInterno{border: 2px solid rgb(196, 196, 255); padding: 3px 10px; background-color: rgb(196, 196, 255); color: black; text-decoration: none !important; transition: all .5s; border-radius: 5px;}
-.EnlaceInterno:hover{color: white; background-color: transparent;}
+.EnlaceInterno{border: 2px solid transparent; padding: 3px 10px; background-color: rgb(196, 196, 255); color: black; text-decoration: none !important; transition: all .5s; border-radius: 5px;}
+.EnlaceInterno:hover{color: white; background-color: transparent; border-color: rgb(196, 196, 255);}
 
 /* Página de enlaces a sub-guías */
 
@@ -292,5 +292,6 @@ img.SoporteComandoRemoto{width: 20px; padding: 0 0 0 10px;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
 }
+
 
 /* =================================================== */
