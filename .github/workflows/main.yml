@@ -1,3 +1,0 @@
-- uses: anishathalye/proof-html@v2
-  with:
-    directory: ../..
