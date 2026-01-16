@@ -218,6 +218,7 @@ h3.QuitarPaddingTop{padding-top: 0 !important;}
 .GuiasP span{color: #7cfb2d; user-select: all;}
 .GuiasP a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
 .GuiasP a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
+
 /* ========================================================= */
 /* BOTÓN PERSONALIZADO */
 
@@ -225,10 +226,10 @@ h3.QuitarPaddingTop{padding-top: 0 !important;}
 
 div.BotonPersonalizadoCode{display: flex; margin: 0 auto; max-width: 805px; align-items: center; justify-content: center; gap: 0; margin-bottom: 20px;}
 
-div.BotonPersonalizadoCode pre.MuestraDeCodigo{max-width: 750px; width: min-content; user-select: text; }
-div.BotonPersonalizadoCode pre.MuestraDeCodigo code{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none;}
+div.BotonPersonalizadoCode pre.MuestraDeCodigo{max-width: 750px; width: min-content; user-select: text; margin: 0;}
+div.BotonPersonalizadoCode pre.MuestraDeCodigo code{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; display: block; height: 100%;}
 
-div.BotonPersonalizadoCode a.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; height: 55.5px; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+div.BotonPersonalizadoCode a.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
 div.BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 
 div.BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
@@ -327,5 +328,6 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
   .BlogEntradas a .Entrada p{word-break: break-all;}
   .ocultarMOVIL{display: none;}
 }
+
 
 /* ========================================================= */
