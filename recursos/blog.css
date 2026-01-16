@@ -15,7 +15,7 @@
 
 *{padding: 0; margin: 0;}
 html{scroll-behavior: smooth;}
-body{padding: 20px; font-family: Arial; background-color: black; max-width: 1500px; margin: 0 auto;}
+body{padding: 20px; font-family: Arial; background-color: #222523; max-width: 1500px; margin: 0 auto;}
 
 br{user-select: none;}
 
@@ -26,7 +26,7 @@ p{line-height: 25px;}
 p, li{color: rgb(228, 196, 196) !important;}
 p.Expl b, span.Expl{color: rgb(147, 147, 206); user-select: all;}
 
-p::selection, h1::selection, h2::selection, h3::selection, li::selection{background-color: rgb(31, 31, 31);}
+p::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection{background-color: rgba(196, 196, 255, 0.1);}
 
 .CompensarTamano{padding: 0 !important; margin: 0 !important; height: 40px;}
 
@@ -52,18 +52,20 @@ h2.TituloCreditosInferior a:hover{color: #7cfb2d; text-decoration: underline;}
 p a{color: rgb(192, 192, 255); text-decoration: none;}
 p a:hover{color: #7cfb2d; text-decoration: underline;}
 
-.EnlaceExterno{border: 2px solid transparent; padding: 3px 10px; background-color: #7cfb2d; color: black; text-decoration: none !important; transition: all .5s; border-radius: 5px; background-clip: padding-box}
-.EnlaceExterno:hover{color: white; background-color: transparent; border-color: #7cfb2d;}
+/* BOTÓN PERSONALIZADO - PARA TEXTO */
 
-.EnlaceInterno{border: 2px solid transparent; padding: 3px 10px; background-color: rgb(196, 196, 255); color: black; text-decoration: none !important; transition: all .5s; border-radius: 5px; background-clip: padding-box}
-.EnlaceInterno:hover{color: white; background-color: transparent; border-color: rgb(196, 196, 255);}
+.BotonPersonalizadoDIV{display: flex; flex-direction: column; gap: 15px; width: 100% !important; justify-content: center; align-items: center;}
 
-/* Página de enlaces a sub-guías */
+a.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0; text-decoration: none; width: min-content;}
+a.BotonPersonalizadoTexto p{margin: 0 !important;}
 
-.PaginaIndice div{text-align: center; width: 30% !important;}
-@media screen and (max-width: 1040px){
-    .PaginaIndice div{margin: 0 auto; width: 100% !important;}
-}
+a.BotonPersonalizadoTexto p.TextoRelacionado{border-bottom-left-radius: 5px; white-space: nowrap; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; background-color: #22272e; color: #adbac7; padding: 1em; user-select: text;}
+
+a.BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+a.BotonPersonalizadoTexto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
+
+a.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
+a.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
 
 /* =================================================== */
 /* Listas */
@@ -74,7 +76,7 @@ ol{margin-left: 3%;}
 /* =================================================== */
 /* Listas */
 
-p, .codigo, p.Expl{margin: 15px 0 15px 0;}
+.codigo, p.Expl, p{margin: 15px 0 15px 0;}
 p.Expl, .codigo{margin-left: 30px;}
 
 .codigo{transition: all .5s; font-size: 14px; color: white; padding: 0; overflow-x: auto; border: 1px solid black;}
@@ -84,8 +86,15 @@ p.Expl, .codigo{margin-left: 30px;}
 /* Div principales para separar el contenido */
 
 .parte1{display: flex; flex-wrap: wrap; justify-content: center;}
-.parte1 div:not(.CompensarTamano){width: calc(50% - 40px); padding: 20px; position: relative; border-radius: 10px;}
-.parte1 div:not(.vacío, .CompensarTamano)::before{content: ""; position: absolute; top: 0; left: -10px; width: 20px; height: 20px; border-top-left-radius: 10px; border: none;}
+.parte1 div:not(.CompensarTamano, .BotonPersonalizadoDIV){width: calc(50% - 40px); padding: 20px; position: relative; border-radius: 10px;}
+.parte1 div:not(.vacío, .CompensarTamano, .BotonPersonalizadoDIV)::before{content: ""; position: absolute; top: 0; left: -10px; width: 20px; height: 20px; border-top-left-radius: 10px; border: none;}
+
+/* Página de enlaces a sub-guías */
+
+.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 20% !important;}
+@media screen and (max-width: 1040px){
+    .PaginaIndice div:not(.BotonPersonalizadoDIV){margin: 0 auto; width: 100% !important;}
+}
 
 /* =================================================== */
 /* Span para resaltar contenido */
@@ -122,7 +131,7 @@ span.ruta4::selection{color: red;}
 
 @font-face{font-family: "Smoch"; src: url("../fuentes/SmoochSans-VariableFont_wght.ttf");}
 
-.menu_bar{background-color: rgb(29, 30, 30); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; top: 0; position: sticky; z-index: 9999; border-radius: 10px; width: min-content; margin: 0 auto;}
+.menu_bar{background-color: rgb(29, 30, 30); height: 50px; user-select: none; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; top: 0; position: sticky; z-index: 9999; border-radius: 10px; width: min-content; margin: 0 auto;}
 .menu_bar h1{padding-right: 20px !important;}
 .logo a, .logo a span{font-family: "Smoch" !important; font-size: 22px;}
 .menu_bar ul{list-style: none; display: flex;}
@@ -295,4 +304,3 @@ img.SoporteComandoRemoto{width: 20px; padding: 0 0 0 10px;}
 
 
 /* =================================================== */
-
