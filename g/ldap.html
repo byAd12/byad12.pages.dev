@@ -1,0 +1,280 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, Servicio, LDAP, Directorio, byAd12">
+        <title>LDAP - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">LDAP</h1>
+        <h2 class="TituloSecundario">Servicio de Directorio</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install slapd ldap-utils -y</code></pre>
+                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio slapd.</p>
+            </div>
+
+            <div>
+                <h2>Comprobación</h2>
+                <p>Debe de poner "active":</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status slapd</code></pre>
+                <p>Debe de poner "LISTEN":</p>
+                <pre class="codigo" translate="no"><code class="bash">ss -pltu | grep slapd</code></pre>
+                <p>Nos pone como dominio "nodomain":</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+                <p>El usuario es "anonymous":</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x</code></pre>
+            </div>
+
+
+            <div>
+                <h2>Formatos</h2>
+
+                <p>Archivos <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <pre class="codigo" translate="no"><code class="yaml"># Elemento 1
+dn: &lt;nombre&gt;
+    &lt;atributos&gt;: &lt;valor&gt;
+    ...
+
+[Salto de línea obligatorio antes de añadir otro elemento]
+# Elemento 2
+dn: &lt;nombre&gt;
+    &lt;atributos&gt;: &lt;valor&gt;
+    ...</code></pre>
+                <p class="Expl"><b>dn</b> (Distingushed Name): Diferencia a todos los objetos de la BBDD.</p>
+            </div>
+
+            <div>
+                <h2>Re-configurar el Servicio</h2>
+
+                <p>Ejecutamos este comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
+                <p class="Expl"><b>Respuestas</b>: No; [DOMINIO]; [NOMBRE_EMPRESA]; Meter la contraseña; No; Si.</p>
+
+                <p>Comprobar el estado del servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+
+                <p>Ejecutamos este comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W</code></pre>
+                <p class="Expl">Luego ponemos la contraseña y si devuelve lo que escribimos está bien configurado.</p>
+            </div>
+
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+
+        <div class="parte1">
+            <div>
+                <h2>Crear una <span>Unidad Organizativa</span></h2>
+                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>2. Poner en su interior:</p>
+                <pre class="codigo" translate="no"><code class="yaml">dn: ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
+objectClass: top
+objectClass: organizationalUnit
+ou: [UO]</code></pre>
+                <p class="Expl"><b>UO</b>: Nombre personalizado que tendrá la unidad organizativa.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                </p>
+                <p>3. Añadir el archivo a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO] -W -f [ARCHIVO].ldif</code></pre>
+                <p class="Expl"><b>ARCHIVO</b>: Nombre del archivo creado en el paso 1.</p>
+                <p>4. Comprobar si en la base de datos está la nueva unidad organizativa:</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Crear un <span>Grupo</span></h2>
+                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>2. Poner en su interior:</p>
+                <pre class="codigo" translate="no"><code class="yaml">dn: cn=[NOMBRE_GRUPO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
+objectClass: top
+objectClass: posixGroup
+gidNumber: [N_GID]
+cn: [NOMBRE_GRUPO]</code></pre>
+                <p class="Expl"><b>NOMBRE_GRUPO</b>: Nombre personalizado que tendrá el grupo.
+                    <BR><b>UO</b>: Unidad organizativa a la que pertenecerá.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                </p>
+                <p class="Expl"><b>N_GID</b>: Número entero identificador del grupo.</p>
+
+                <p>3. Añadir el archivo a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO] -W -f [ARCHIVO].ldif</code></pre>
+
+                <p>4. Comprobar si en la base de datos está el nuevo grupo:</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Crear un <span>Usuario</span></h2>
+
+                <p>0. Crear el hash de la contraseña (Pej.: <span class="span_contenido" translate="no">{SSHA}jJ/Sl2m---5HeZJP</span>) con el comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">slappasswd</code></pre>
+
+                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>2. Poner en su interior:</p>
+                <pre class="codigo" translate="no"><code class="yaml">dn: uid=[NOMBRE_USUARIO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+uid: [NOMBRE_USUARIO]
+cn: [NOMBRE_COMÚN]
+userPassword: [CONTRASEÑA]
+gecos: [NOMBRE_COMPLETO]
+uidNumber: [N_UID]
+gidNumber: [N_GID]
+homeDirectory: /home/[NOMBRE_USUARIO]
+loginShell: [SHELL]</code></pre>
+                <p class="Expl"><b>UO</b>: Unidad organizativa a la que pertenecerá.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                </p>
+                <p class="Expl"><b>NOMBRE_USUARIO</b>: Nombre personalizado que tendrá el usuario.
+                    <br><b>NOMBRE_COMÚN</b>: Nombre común personalizado que tendrá el usuario).
+                    <br><b>NOMBRE_COMPLETO</b>: Nombre completo personalizado que tendrá el usuario).
+                    <br><b>CONTRASEÑA</b>: La contraseña en <b>hash</b> del usuario.</p>
+                <p class="Expl"><b>N_UID</b>: Número entero identificador del usuario. Los siguientes usuarios creados, recibirán un valor +1 alto que este.
+                    <br><b>N_GID</b>: Número entero identificador del grupo. 0 = Ninguno.</p>
+                <p class="Expl"><b>SHELL</b>: <span class="span_contenido" translate="no">/bin/bash</span>, <span class="span_contenido" translate="no">/bin/sh</span>.</p>
+
+                <p>3. Añadir el archivo a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO] -W -f [ARCHIVO].ldif</code></pre>
+
+                <p>4. Comprobar si en la base de datos está el nuevo usuario:</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Crear un <span>Usuario</span> - <span>Perfil Móvil</span></h2>
+
+                <p>Lo mismo que en "Crear un Usuario" pero cambiando la span_contenido de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenen estos perfiles:</p>
+                <pre class="codigo" translate="no"><code class="yaml">homeDirectory: /[CARPETA_MÓVIL]/[NOMBRE_USUARIO]</code></pre>
+            </div>
+
+            <!-- ================== -->
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+
+        <div class="parte1">
+            <div>
+                <h2>Modificar un <span>objeto</span></h2>
+
+                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <p>2. Poner en su interior:</p>
+                <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
+changetype: modify
+replace: [PROPIEDAD_CAMBIAR]
+[PROPIEDAD_CAMBIAR]: [VALOR_CAMBIAR]</code></pre>
+                <p class="Expl">* Para hacer 2 cambios se pone uno debajo del otro separado por una línea en blanco.</p>
+                <p class="Expl"><b>DN_COMPLETO</b>: Identificador del objeto dentro de la base de datos.</p>
+                <p class="Expl"><b>PROPIEDAD_CAMBIAR</b>: Nombre de la propiedad. Pej.: "uid", "gid".
+                    <br><b>VALOR_CAMBIAR</b>: El valor que se le va a dar a esa propiedad.
+                </p>
+
+                <p>3. Modificar el registro de la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W -f [ARCHIVO].ldif</code></pre>
+
+                <p>4. Comprobar si se hizo el cambio en la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
+
+
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Eliminar un <span>objeto</span></h2>
+
+                <p>Hay 2 formas:</p>
+
+                <p>1. Con el comando <span class="span_contenido" translate="no">ldapdelete</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapdelete -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W "[DN_COMPLETO]"</code></pre>
+                <p class="Expl"><b>DN_COMPLETO</b>: Identificador del objeto dentro de la base de datos.</p>
+
+                <p>2. Creando un archivo <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
+changetype: delete</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W -f [ARCHIVO].ldif</code></pre>
+
+
+            </div>
+
+            <!-- ================== -->
+
+            <div>
+                <h2>Buscar un <span>objeto</span></h2>
+
+                <p>1. Con el comando <span class="span_contenido" translate="no">ldapsearch</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapsearch -xLLL -b "dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" [BÚSQUEDA] [ENSEÑAR]</code></pre>
+                <p class="Expl"><b>BÚSQUEDA</b>: El objeto que vamos a buscar según un valor. Pej.: "uid=xx", "gid=xx".</p>
+                <p class="Expl"><b>ENSEÑAR</b>: No Obligatorio. Son los valores del objeto ya buscado que se va a enseñar. Pej.: "cn", "uid", "gid".</p>
+
+            </div>
+
+            <!-- ================== -->
+            
+            <div class="vacío"></div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

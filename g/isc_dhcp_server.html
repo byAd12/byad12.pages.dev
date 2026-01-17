@@ -1,0 +1,143 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, SERVER, ISC, DHCP, byAd12">
+        <title>ISC DHCP - Linux</title>
+        
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">isc-dhcp-server</h1>
+        <h2 class="TituloSecundario">Servidor DHCP en Linux</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install isc-dhcp-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
+            </div>
+
+            <div>
+                <h2>Probar si funciona</h2>
+                <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server start</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server status</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ps -ef | grep dhcp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">netstat -ltun | grep 67</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /var/log/syslog</code></pre>
+            </div>
+           
+            <div>
+                <h2>span_contenidos Importantes</h2>
+                
+                <p>Fichero para indicar la interfaz:</p>
+                <p><span class="span_contenido" translate="no">/etc/default/isc-dhcp-server</span></p>
+
+                <p>Fichero de Configuración del servidor:</p>
+                <p><span class="span_contenido" translate="no">/etc/dhcp/dhcpd.conf</span></p>
+
+                <p>Fichero de registro de errores del sistema:</p>
+                <p><span class="span_contenido" translate="no">/var/log/syslog</span></p>
+            </div>
+
+
+            <div>
+                <h2>Comandos para DHCP</h2>
+
+                <p>Hacer un DHCP-DISCOVER en el cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
+                <p>Hacer un DHCP-RELEASE en el cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">dhclient -v -r</code></pre>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2>Archivo de configuración</h2>
+                <p><span class="span_contenido" translate="no">/etc/default/isc-dhcp-server</span></p>
+                <p>Todos los bloques en el mismo archivo:</p>
+                <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
+option domain-name-servers [VALOR];</code></pre>
+                <p class="Expl"><b>routers</b>: La IPv4 del enspan_contenidodor.
+                <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por espacios.
+                </p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];
+max-lease-time [TIEMPO_SEGUNDOS];
+min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
+                <p class="Expl"><b>default-lease-time</b>: Tiempo base de la concesión de una configuración IP dada.
+                <br><b>max-lease-time</b>: Tiempo máximo de la concesión.
+                <br><b>min-lease-time</b>: Tiempo mínimo de la concesión.
+                </p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
+    range [IP_INICIAL] [IP_FINAL];
+    range [IP_INICIAL_2] [IP_FINAL_2];
+    ...
+}</code></pre>
+                <p class="Expl"><b>subnet</b>: La dirección de red IPv4.
+                <br><b>netmask</b>: Máscara punteada de la red.
+                <br><b>range</b>: Se pueden definir varios rangos DHCP podiendo así excluir ciertas IPs reservadas.
+                </p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">host [NOMBRE] {
+    hardware ethernet [MAC];
+    fixed-address [IP_ESTÁTICA];
+}</code></pre>
+                <p class="Expl">Aquí definimos una IP estática mediante una MAC.
+                <br><b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
+                <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_url" translate="no">ethernet</span> puede ser cambiado.
+                <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
+                </p>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

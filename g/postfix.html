@@ -1,0 +1,135 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, Servicio, postfix, byAd12">
+        <title>Servidor de Correo - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">POSTFIX</h1>
+        <h2 class="TituloSecundario">Servidor SMTP</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación y configuración</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 25</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install postfix</code></pre>
+                <p class="Expl"><u>Preguntas</u>: "Sitio de Internet"; Poner un dominio (real o ficticio).</p>
+            </div>
+
+            <div>
+                <h2>Comprobación</h2>
+                <pre class="codigo" translate="no"><code class="bash">ps -ef | grep postfix</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">netstat -ltn | grep 25</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">telnet localhost 25</code></pre>
+                <p class="Expl">Dentro usar el comando <span class="span_url">HELO</span> y debe devolver el código 250.</p>
+            </div>
+
+            <div>
+                <h2>Archivos Importantes</h2>
+
+                <p><span class="span_contenido">/etc/postfix/main.cf</span>: Archivo de configuración principal. <u>Formato</u>: </p>
+                <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continua a la línea anterior.</p>
+                <p class="Expl"><b>$parámetro</b>: Asignar un valor de un parámetro a otro.</p>
+
+                <p><span class="span_contenido">/etc/postfix/master.cf</span>: Archivo de configuración del demonio maestro de postfix (se encarga de interactuar con los procesos para enviar correos).</p>
+                <p><span class="span_contenido">/etc/aliases</span>: Archivo para definir alias de correos.</p>
+            </div>
+
+            <div>
+                <h2>Archivos de Registros</h2>
+
+                <p><span class="span_contenido">/var/log/mail.log</span>: Registros sobre el envío de correos.</p>
+                <p><span class="span_contenido">/var/log/mail.info</span>: Registros sobre las acciones del servidor.</p>
+                <p><span class="span_contenido">/var/log/mail.err</span>: Registros sobre errores.</p>
+                <p><span class="span_contenido">/var/log/mail.warn</span>: Registros sobre avisos.</p>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">ENVIAR CORREOS</h1>
+        <h2 class="TituloSecundario">Telnet y comando <span class="span_url">mail</span></h2>
+        <br><br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>Envío de email por telnet</h2>
+
+                <p>Para conectarse a un servidor SMTP, como postfix:</p>
+                <pre class="codigo" translate="no"><code class="bash">telnet [IP/DNS/localhost] [PUERTO:25]</code></pre>
+                <p>Dentro de la conexión telnet:</p>
+                <pre class="codigo" translate="no"><code class="bash">MAIL FROM:[CORREO_REMITENTE]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">RCPT TO:[CORREO_DESTINATARIO]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">DATA</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">SUBJECT:[ASUNTO]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">[MENSAJE_A_ENVIAR]</code></pre>
+                <p class="Expl">Se para de escribir al poner línea vacía con un "."</p>
+                <pre class="codigo" translate="no"><code class="bash">QUIT</code></pre>
+            </div>
+
+            <div>
+                <h2>Envío de email por comando <span class="span_url">mail</span></h2>
+
+                <p>Instalar el paquete:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install mailutils</code></pre>
+                <p>Usar el comando [Solo funciona con cuentas reales del sistema]:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [ARCHIVO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
+                <p class="Expl"><span class="span_contenido">CTRL + D</span>: Enviar el mensaje.</p>
+                <p>Si se envió a otro usuario del sistema se puede ver su correo en:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /var/mail/[NOMBRE_USUARIO]</code></pre>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>
