@@ -56,8 +56,7 @@ p a:hover{color: #7cfb2d; text-decoration: underline;}
 
 /* Botón personalizado - Para texto */
 
-.BotonPersonalizadoDIV{display: flex; flex-direction: column; gap: 15px; width: 100% !important; justify-content: center; align-items: center;}
-.BotonPersonalizadoDIVrow{display: flex; width: min-content; gap: 20px; margin: 0 auto; padding: 20px; width: min-content !important;}
+.BotonPersonalizadoDIVrow{display: flex; width: min-content; gap: 20px; margin: 0 auto; width: min-content !important;}
 
 a.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0; text-decoration: none; width: min-content;}
 a.BotonPersonalizadoTexto p{margin: 0 !important;}
