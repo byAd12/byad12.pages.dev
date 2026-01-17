@@ -101,11 +101,11 @@ table.TablaComandos td{border: 1px solid rgba(228, 196, 196, 0.3); height: 30px;
 /* =================================================== */
 /* Página de enlaces a sub-guías */
 
-.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 20% !important;}
+.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
+
 @media screen and (max-width: 1040px){
     .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll){width: calc(100% - 40px);}
-    .PaginaIndice div:not(.BotonPersonalizadoDIV){margin: 0 auto; width: 100% !important;}
 }
 
 /* =================================================== */
