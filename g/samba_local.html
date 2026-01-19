@@ -1,0 +1,298 @@
+<!--
+
+Código por Adrián L. G. P.
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Blog, SAMBA, LOCAL, byAd12">
+        <title>SAMBA</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+            </ul>
+        </div>
+        
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">SAMBA</h1>
+        <h2 class="TituloSecundario">Compartir carpetas entre Linux y Windows</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Alojar una carpeta en un servidor <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                
+                <!-- ......................................................... -->
+                <p>1. <b>CREACIÓN DE <span style="color: rgb(147, 147, 206) !important;">CARPETA</span></b>:</p>
+
+                <p class="Expl">En cualquier ruta crearemos una carpeta, le asignaremos un usuario o grupo propietario y sus permisos locales.</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /carpeta_a_compartir
+groupadd nombre_grupo
+useradd -g nombre_grupo nombre_usuario
+passwd nombre_usuario
+chown nombre_usuario:nombre_grupo /carpeta_a_compartir
+chmod permisos /carpeta_a_compartir</code></pre>
+                <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
+                <p class="Expl">La contraseña que se asigne a ese usuario no tiene que ser la misma que la del usuario de Windows (ver siguiente apartado).</p>
+
+                <!-- ......................................................... -->
+                <p>2. <b>RECONOCER <span style="color: rgb(147, 147, 206) !important;">USUARIO</span></b>:</p>
+                
+                <p class="Expl">Al usuario <span class="span_contenido">nombre_usuario</span> que creamos hay que hacer que sea reconocible como un usuario para Windows:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
+                <p class="Expl">La contraseña que se asigna con <span class="span_contenido">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
+                <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
+                <pre class="codigo" translate="no"><code class="bash">pbedit -L</code></pre>
+                
+                <!-- ......................................................... -->
+                <p>3. <b>INSTALAR <span style="color: rgb(147, 147, 206) !important;">PAQUETES</span></b>:</p>
+                
+                <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
+                <p class="Expl">Una vez instalado se crean 3 servicios: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmdb</span> y <span class="span_contenido">smdb</span>; además de una carpeta esencial: <span class="span_url">/etc/samba</span>.</p>
+
+                <!-- ......................................................... -->
+                <p>4. <b>EDITAR LA <span style="color: rgb(147, 147, 206) !important;">CONFIGURACIÓN</span></b>:</p>
+                
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
+                <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura <b>obligatoria</b>:</p>
+                <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
+    path = /carpeta_a_compartir
+    read only = no</code></pre>
+                <p class="Expl">
+                    <b>[nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
+                    <br>
+                    <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
+                    <br>
+                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido">no</span>, o solo-lectura: <span class="span_contenido">yes</span>.
+                </p>
+
+                <!-- ......................................................... -->
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+
+            <div>
+                <h2>Acceder a una carpeta de Linux desde <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                
+                <!-- ......................................................... -->
+                
+                <p>1. <b>CREACIÓN DEL <span style="color: rgb(147, 147, 206) !important;">USUARIO</span> Y <span style="color: rgb(147, 147, 206) !important;">GRUPO</span></b>:</p>
+
+                <p class="Expl">
+                    Administrador de equipos &gt; Usuarios y grupos locales &gt; [Usuarios y Grupos] &gt; Click derecho &gt; Nuevo.
+                    <br>
+                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido">smbpasswd</span>.
+
+                </p>
+                <p class="Expl">
+                    Desde la misma pestaña de Grupos hay que asignar al usuario dentro del grupo creado:
+                    <br>
+                    Grupo &gt; Click derecho &gt; Propiedades &gt; Agregar.
+                </p>
+
+                <!-- ......................................................... -->
+                <p>3. <b>INICIAR <span style="color: rgb(147, 147, 206) !important;">SESIÓN</span></b>:</p>
+                <p class="Expl">Iniciaremos sesión con el usuario creado.</p>
+
+                <!-- ......................................................... -->
+                
+                <p>3. <b>LISTAR <span style="color: rgb(147, 147, 206) !important;">RECURSOS COMPARTIDOS</span></b>:</p>
+
+                <p class="Expl">Iremos al Explorador de archivos y en la barra de búsqueda buscaremos:</p>
+                <pre class="codigo" translate="no"><code class="bash">\\IP_servidor_Linux</code></pre>
+                <p class="Expl">
+                    Aparecerá el recurso <span class="span_contenido">carpeta_a_compartir</span> y otra llamada <span class="span_contenido">nombre_usuario</span>, que es la carpeta personal del usuario de Linux.
+                </p>
+
+                <p class="Expl">
+                    <b>Nota</b>: Si en vez de poner una carpeta con el nombre del usuario hay una que pone <span class="span_contenido">nobody</span> significa que no se puede acceder al sistema con el usuario creado y por ello usa un usuario invitado que se llama <span class="span_contenido">nobody</span> en el sistema Linux.
+                    <br>
+                    Si no deja acceder al recurso compartido con un usuario invitado hay que habilitar el parámetro <span class="span_contenido">guest ok = yes</span> en el archivo <span class="span_url">/etc/samba/smb.conf</span>.
+                </p>
+
+                <p class="Expl">
+                    <b>Problema</b>: Los usuarios se duplican en la máquina Linux y Windows.
+                    <br>
+                    <b>Solución</b>: Tener un servicio de usuarios en red como LDAP o Active Directory.
+                </p>
+
+            </div>
+
+
+            <div>
+                <h2>Acceder a una carpeta de Windows desde <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                
+                <!-- ......................................................... -->
+                <p>1. <b>CREACIÓN DE UNA <span style="color: rgb(147, 147, 206) !important;">CARPETA LOCAL</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
+
+                <!-- ......................................................... -->
+                <p>2. <b>MONTAR LA CARPETA <span style="color: rgb(147, 147, 206) !important;">REMOTA</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -t smbfs -o username=usuario_remoto,passwd=contraseña_usuario,workgroup=WORKGROUP //IP_servidor_Windows/nombre_recurso /directorio_local_a_montar</code></pre>
+                <p class="Expl">
+                    <b>usuario_remoto</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
+                    <br>
+                    <b>contraseña_usuario</b>: Contraseña del usuario de la máquina Windows.
+                    <br>
+                    <b>//IP_servidor_Windows/nombre_recurso</b>: Ruta del recurso compartido en Windows.
+                    <br>
+                    <b>/directorio_local_a_montar</b>: Carpeta local donde se montará el recurso compartido.
+                </p>
+                <p class="Expl">⚠️ <span class="span_contenido">smbfs</span> está obsoleto, es mejor usar  <span class="span_contenido">cifs</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -t cifs -o username=usuario_remoto,password=contraseña_usuario,workgroup=WORKGROUP,vers=3.0 //IP_servidor_Windows/nombre_recurso /directorio_local_a_montar</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Más parámetros en <span>SAMBA</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                
+                <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
+    comment = Comentario del recurso compartido.
+    path = /carpeta_a_compartir
+    browseable = no
+    valid users = user1,user2,%S
+    force user = user1
+    force group = group1
+    read only = no
+    read list = user1,user2
+    write list = user1,user2
+    create mask = 0700
+    directory mask = 0700
+    guest ok = no
+    guest only = no
+    guest account = user1
+    hide files = *.tmp
+    hide dot files = yes
+    follow symlinks = yes
+    wide links = no
+    hosts allow = pc1
+    hosts deny = pc2
+</code></pre>
+
+                <p>Parámetros básicos:</p>
+                <p class="Expl">
+                    <b>[nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
+                    <br>
+                    <b>comment</b>: Comentario opcional que no afecta en la configuración.
+                    <br>
+                    <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
+                    <br>
+                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url">\\IP_servidor_Linux\Recurso</span>.
+                </p>
+
+                <p>Lista de control de acceso:</p>
+                <p class="Expl">
+                    <b>valid users</b>: Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).
+                    <br>
+                    <b>force user</b>: Obliga a que todos los accesos se hagan con un usuario específico.
+                    <br>
+                    <b>force group</b>: Obliga a que todos los accesos se hagan con un grupo específico.
+                </p>
+
+                <p>Parámetros de permisos básicos:</p>
+                <p class="Expl">
+                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido">no</span>, o solo-lectura: <span class="span_contenido">yes</span>.
+                    <br>
+                    <b>read list</b>: Lista de usuarios que solo pueden leer aunque <span class="span_contenido">read only = no</span>.
+                    <br>
+                    <b>write list</b>: Lista de usuarios que pueden escribir aunque <span class="span_contenido">read only = yes</span>.
+                </p>
+
+                <p>Parámetros de permisos avanzados:</p>
+                <p class="Expl">
+                    <b>create mask</b>: Define los permisos por defecto para los archivos nuevos que se creen en el recurso compartido.
+                    <br>
+                    <b>directory mask</b>: Define los permisos por defecto para los directorios nuevos que se creen dentro del recurso compartido.
+                </p>
+
+                <p>Parámetros del usuario anónimo:</p>
+                <p class="Expl">
+                    <b>guest ok</b>: Para permisos que usuarios anónimos accedan: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <br>
+                    <b>guest only</b>: Para permisos que <u>solo</u> usuarios anónimos accedan: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <br>
+                    <b>guest account</b>: Se puede definir un usuario anónimo diferente al de por defecto.
+                </p>
+
+                <p>Parámetros de archivos:</p>
+                <p class="Expl">
+                    <b>hide files</b>: No enseña archivos por coincidencias como por ejemplo <span class="span_contenido">*.tmp</span>.
+                    <br>
+                    <b>hide dot files</b>: No enseña archivos que empiezen por un punto (ocultos).
+                </p>
+
+                <p>Parámetros de enlaces simbólicos:</p>
+                <p class="Expl">
+                    <b>follow symlinks</b>: Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <br>
+                    <b>wide links</b>: Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                </p>
+
+                <p>Parámetros de hostnames:</p>
+                <p class="Expl">
+                    <b>hosts allow</b>: Lista de hostnames al que permitir acceder al recurso.
+                    <br>
+                    <b>hosts deny</b>: Lista de hostnames al que denegar acceder al recurso.
+                </p>
+
+                <p>Por la mitad del archivo de configuraciones hay un bloque para las carpetas personales al cual se le pueden configurar los parámetros enseñados anteriormente:</p>
+                <pre class="codigo" translate="no"><code class="ini">[homes]</code></pre>
+                <!-- ......................................................... -->
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

@@ -184,6 +184,7 @@ span.span_error::selection{color: red; background-color: transparent;}
     *{user-select: text !important;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll){width: 92%;}
 }
 
 /* =================================================== */

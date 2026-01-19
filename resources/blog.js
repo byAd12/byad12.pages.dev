@@ -37,7 +37,7 @@ function esconder() {
 // ==========================================================
 // COPIAR CONTENIDO DE .codigo
 
-const elementosCodigo = document.querySelectorAll('.codigo');
+const elementosCodigo = document.querySelectorAll('pre');
 
 elementosCodigo.forEach(elemento => {
   // Guardar SOLO el texto del código
