@@ -36,7 +36,7 @@ Código por Adrián L. G. P.
         <!-- ......................................................... -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -85,7 +85,7 @@ Código por Adrián L. G. P.
                 </p>
 
                 <p>
-                    <b style="color: rgb(147, 147, 206) !important;">LIMITACIONES</b>:
+                    <b style="color: rgb(147, 147, 206) !important;">Limitaciones</b>:
                     <br>- No soportan espacios de nombres.
                     <br>- No definen tipos para los datos.
                     <br>- No permite las secuencias no ordenadas.
@@ -94,7 +94,7 @@ Código por Adrián L. G. P.
                 </p>
 
                 <p>
-                    <b><span style="color: rgb(147, 147, 206) !important;">COMENTARIOS</span></b>:
+                    <b><span style="color: rgb(147, 147, 206) !important;">Comentarios</span></b>:
                     <br>DTD permite poner comentarios en todo el código menos dentro de declaraciones de elementos o atributos, sintaxis:
                 </p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- MENSAJE --&gt;</code></pre>
@@ -113,7 +113,7 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Elementos &gt; Declaración</h2>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">SINTAXIS</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Sintaxis</span></b>:</p>
 
                 <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
 
@@ -211,7 +211,7 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Atributos &gt; Declaración</h2>
 
-                <p><b style="color: rgb(147, 147, 206) !important;">SINTAXIS</b>:</p>
+                <p><b style="color: rgb(147, 147, 206) !important;">Sintaxis</b>:</p>
 
                 <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
 
@@ -281,7 +281,7 @@ Código por Adrián L. G. P.
                 <p>5. Que sea un <u>identificador único</u> para cada elemento - <span class="span_contenido">ID</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo ID predefinido&gt;</code></pre>
                 <p class="Expl">
-                    <b>REGLAS</b>:
+                    <b>Reglas</b>:
                     <br>
                     1. Cada elemento solo puede tener un atributo de tipo ID. 
                     <br>
@@ -295,7 +295,7 @@ Código por Adrián L. G. P.
                 <p>6. Que sea una <u>referencia a identificador</u> único existente - <span class="span_contenido">IDREF</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREF predefinido&gt;</code></pre>
                 <p class="Expl">
-                    <b>REGLAS</b>:
+                    <b>Reglas</b>:
                     <br>
                     1. Dará error de validación si no hay un atributo ID con ese valor. 
                     <br>
@@ -306,7 +306,7 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREFS predefinido&gt;</code></pre>
                 <p class="Expl">Los valores que contengan tienen que existir en otros atributos ID del documento XML.</p>
                 <p class="Expl">
-                    <b>REGLAS</b>:
+                    <b>Reglas</b>:
                     <br>
                     1. Dará error de validación si no hay un atributo ID uno de los valores de la lista. 
                     <br>
@@ -342,7 +342,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES <span style="color: rgb(147, 147, 206) !important;">PREDEFINIDAS</span> POR XML</b>:</p>
+                <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">predefinidas</span> por xml</b>:</p>
 
                 <p>En la guía sobre XML se trata el uso de entidades predefinidas como por ejemplo <span class="span_contenido"><span>&<b></b>lt;</span></span> que tiene como valor <span class="span_contenido">&lt;</span>.</p>
 
@@ -381,7 +381,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES <span style="color: rgb(147, 147, 206) !important;">GENERALES INTERNAS</span></b>:</p>
+                <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">generales internas</span></b>:</p>
 
                 <p>Podemos crear nuestras propias entidades con la siguiente sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre "valor"&gt;</code></pre>
@@ -404,7 +404,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES GENERALES EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PRIVADAS</span></b>:</p>
+                <p><b>Entidades generales externas <span style="color: rgb(147, 147, 206) !important;">privadas</span></b>:</p>
 
                 <p>Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre SYSTEM "URI"&gt;</code></pre>
@@ -422,7 +422,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES GENERALES EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PÚBLICAS</span></b>:</p>
+                <p><b>Entidades generales externas <span style="color: rgb(147, 147, 206) !important;">públicas</span></b>:</p>
 
                 <p>Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre PUBLIC "ID" "URI"&gt;</code></pre>
@@ -489,7 +489,7 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta&gt;Hola, soy Ruth.&lt;/etiqueta&gt;</code></pre>
 
                 <p>
-                    <b style="color: rgb(147, 147, 206) !important;">LIMITACIONES</b>: 
+                    <b style="color: rgb(147, 147, 206) !important;">Limitaciones</b>: 
                     <br>
                     - Una entidad no puede llamarse a si misma.
                     <br>
@@ -505,7 +505,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES PARAMÉTRICAS EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PRIVADAS</span></b>:</p>
+                <p><b>Entidades paramétricas externas <span style="color: rgb(147, 147, 206) !important;">privadas</span></b>:</p>
 
                 <p>Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre SYSTEM "URI"&gt;</code></pre>
@@ -530,7 +530,7 @@ Código por Adrián L. G. P.
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>ENTIDADES PARAMÉTRICAS EXTERNAS <span style="color: rgb(147, 147, 206) !important;">PÚBLICAS</span></b>:</p>
+                <p><b>Entidades paramétricas externas <span style="color: rgb(147, 147, 206) !important;">públicas</span></b>:</p>
 
                 <p>Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre PUBLIC "ID" "URI"&gt;</code></pre>

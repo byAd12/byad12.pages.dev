@@ -1,16 +1,8 @@
-19/01/2026 - Contenido y mejoras
+20/01/2026 - Arreglos y mejoras
 
-# guides.html
-Modificado los enlaces correspondientes
-
-# g/samba.html
-Página no enlazable de momento
+# g/*
+Se eliminó una referencia a un script no usado.
+Se cambió párrafos de mayúsculas a minúsculas. 
 
 # g/samba_local.html
-Nueva guía
-
-# resources/blog.css
-Se hizo un poco más ancho las páginas del blog en impresión
-
-# resources/blog.js
-Se solucionó un problema que no dejaba copiar el contenido de bloques de código
+Mejora del contenido

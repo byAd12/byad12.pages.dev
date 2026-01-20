@@ -36,7 +36,7 @@ Código por Adrián L. G. P.
         <!-- ......................................................... -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -52,9 +52,8 @@ Código por Adrián L. G. P.
                 <h2>Alojar una carpeta en un servidor <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 
                 <!-- ......................................................... -->
-                <p>1. <b>CREACIÓN DE <span style="color: rgb(147, 147, 206) !important;">CARPETA</span></b>:</p>
+                <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span></b>:</p>
 
-                <p class="Expl">En cualquier ruta crearemos una carpeta, le asignaremos un usuario o grupo propietario y sus permisos locales.</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir /carpeta_a_compartir
 groupadd nombre_grupo
 useradd -g nombre_grupo nombre_usuario
@@ -62,10 +61,10 @@ passwd nombre_usuario
 chown nombre_usuario:nombre_grupo /carpeta_a_compartir
 chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
-                <p class="Expl">La contraseña que se asigne a ese usuario no tiene que ser la misma que la del usuario de Windows (ver siguiente apartado).</p>
+                <p class="Expl"><b>Importante</b>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span>.</p>
 
                 <!-- ......................................................... -->
-                <p>2. <b>RECONOCER <span style="color: rgb(147, 147, 206) !important;">USUARIO</span></b>:</p>
+                <p>2. <b>Reconocer <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
                 
                 <p class="Expl">Al usuario <span class="span_contenido">nombre_usuario</span> que creamos hay que hacer que sea reconocible como un usuario para Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
@@ -74,13 +73,13 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">pbedit -L</code></pre>
                 
                 <!-- ......................................................... -->
-                <p>3. <b>INSTALAR <span style="color: rgb(147, 147, 206) !important;">PAQUETES</span></b>:</p>
+                <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
                 <p class="Expl">Una vez instalado se crean 3 servicios: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmdb</span> y <span class="span_contenido">smdb</span>; además de una carpeta esencial: <span class="span_url">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
-                <p>4. <b>EDITAR LA <span style="color: rgb(147, 147, 206) !important;">CONFIGURACIÓN</span></b>:</p>
+                <p>4. <b>Editar la <span style="color: rgb(147, 147, 206) !important;">configuración</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura <b>obligatoria</b>:</p>
@@ -98,6 +97,44 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <!-- ......................................................... -->
             </div>
 
+            <div>
+                <h2>Alojar una carpeta en un servidor <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                
+                <!-- ......................................................... -->
+                
+                <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">usuarios</span> y <span style="color: rgb(147, 147, 206) !important;">grupos</span></b>:</p>
+
+                <p class="Expl">Antes de asignar permisos, hay que crear los usuarios y grupos que sean necesarios.</p>
+
+                <p class="Expl">
+                    Administrador de equipos &gt; Usuarios y grupos locales &gt; [Usuarios y Grupos] &gt; Click derecho &gt; Nuevo.
+                    <br>
+                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido">smbpasswd</span>.
+
+                </p>
+                <p class="Expl">
+                    Desde la misma pestaña de Grupos hay que asignar a los usuarios creados dentro de su grupo correspondiente:
+                    <br>
+                    Grupo &gt; Click derecho &gt; Propiedades &gt; Miembros &gt; Agregar.
+                </p>
+
+                <!-- ......................................................... -->
+                <p>2. <b>Asignar <span style="color: rgb(147, 147, 206) !important;">permisos</span></b>:</p>
+                <p class="Expl">
+                    Se puede asignar de forma que los permisos en red también se apliquen en los permisos locales (esto además quita la herencia de la carpeta):
+                    <br>
+                    Carpeta &gt; Click derecho &gt; Propiedades &gt; Compartir &gt; <b>Botón "Compartir"</b> &gt; Añadir usuario/grupo &gt; Asignar permisos.
+                </p>
+                
+                <p class="Expl">
+                    También hay otra forma para asignar solo permisos de red:
+                    <br>
+                    Carpeta &gt; Click derecho &gt; Propiedades &gt; <b>Uso compartido avanzado</b> &gt; Botón "Permisos" &gt; Agregar &gt; Definir el usuario/grupo y asignar permisos.
+                </p>
+
+            </div>
+
+
         </div>
 
         <!-- ......................................................... -->
@@ -108,31 +145,48 @@ chmod permisos /carpeta_a_compartir</code></pre>
         <div class="parte1">
 
             <div>
+                <h2>Acceder a una carpeta de Windows desde <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                
+                <!-- ......................................................... -->
+                <p>1. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
+
+                <!-- ......................................................... -->
+                <p>2. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install cifs-utils</code></pre>
+
+                <!-- ......................................................... -->
+                <p>3. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username=usuario_Windows,password=contraseña //IP_servidor/recurso /directorio_local</code></pre>
+                <p class="Expl">
+                    <b>usuario_Windows</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
+                    <br>
+                    <b>contraseña</b>: Contraseña del usuario de la máquina Windows.
+                </p>
+                <p class="Expl">
+                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido en Windows. <u>Nota</u>: Linux utiliza solo las barras <span class="span_contenido">/</span>.
+                    <br>
+                    <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
+                </p>
+
+                <!-- ......................................................... -->
+                <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con el usuario que montó la carpeta</b>.</p>
+
+                <!-- ......................................................... -->
+                <p>5. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que se puede acceder al recurso compartido</b>.</p>
+
+            </div>
+
+            <div>
                 <h2>Acceder a una carpeta de Linux desde <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
-                
-                <p>1. <b>CREACIÓN DEL <span style="color: rgb(147, 147, 206) !important;">USUARIO</span> Y <span style="color: rgb(147, 147, 206) !important;">GRUPO</span></b>:</p>
-
-                <p class="Expl">
-                    Administrador de equipos &gt; Usuarios y grupos locales &gt; [Usuarios y Grupos] &gt; Click derecho &gt; Nuevo.
-                    <br>
-                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido">smbpasswd</span>.
-
-                </p>
-                <p class="Expl">
-                    Desde la misma pestaña de Grupos hay que asignar al usuario dentro del grupo creado:
-                    <br>
-                    Grupo &gt; Click derecho &gt; Propiedades &gt; Agregar.
-                </p>
-
-                <!-- ......................................................... -->
-                <p>3. <b>INICIAR <span style="color: rgb(147, 147, 206) !important;">SESIÓN</span></b>:</p>
-                <p class="Expl">Iniciaremos sesión con el usuario creado.</p>
+                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido">smbpasswd</span></b>.</p>
+                <p class="Expl"></p>
 
                 <!-- ......................................................... -->
                 
-                <p>3. <b>LISTAR <span style="color: rgb(147, 147, 206) !important;">RECURSOS COMPARTIDOS</span></b>:</p>
+                <p>2. <b>Listar <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
 
                 <p class="Expl">Iremos al Explorador de archivos y en la barra de búsqueda buscaremos:</p>
                 <pre class="codigo" translate="no"><code class="bash">\\IP_servidor_Linux</code></pre>
@@ -154,28 +208,59 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
 
             <div>
-                <h2>Acceder a una carpeta de Windows desde <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
-                
-                <!-- ......................................................... -->
-                <p>1. <b>CREACIÓN DE UNA <span style="color: rgb(147, 147, 206) !important;">CARPETA LOCAL</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
+                <h2>Montar una carpeta CIFS automáticamente en <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
 
                 <!-- ......................................................... -->
-                <p>2. <b>MONTAR LA CARPETA <span style="color: rgb(147, 147, 206) !important;">REMOTA</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mount -t smbfs -o username=usuario_remoto,passwd=contraseña_usuario,workgroup=WORKGROUP //IP_servidor_Windows/nombre_recurso /directorio_local_a_montar</code></pre>
+                <p>1. <b>Editar el archivo <span style="color: rgb(147, 147, 206) !important;">/etc/fstab</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
+
+                <!-- ......................................................... -->
+                <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña,uid=0000,gid=0000</code></pre>
                 <p class="Expl">
-                    <b>usuario_remoto</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
+                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_contenido">/</span>.
                     <br>
-                    <b>contraseña_usuario</b>: Contraseña del usuario de la máquina Windows.
-                    <br>
-                    <b>//IP_servidor_Windows/nombre_recurso</b>: Ruta del recurso compartido en Windows.
-                    <br>
-                    <b>/directorio_local_a_montar</b>: Carpeta local donde se montará el recurso compartido.
+                    <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
                 </p>
-                <p class="Expl">⚠️ <span class="span_contenido">smbfs</span> está obsoleto, es mejor usar  <span class="span_contenido">cifs</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mount -t cifs -o username=usuario_remoto,password=contraseña_usuario,workgroup=WORKGROUP,vers=3.0 //IP_servidor_Windows/nombre_recurso /directorio_local_a_montar</code></pre>
+                <p class="Expl">
+                    <b>usuario</b>: Usuario asignado por el servidor que tenga permiso de acceder al recurso compartido.
+                    <br>
+                    <b>contraseña</b>: Contraseña del usuario con permisos.
+                    <br>
+                    <b>uid</b>: El ID del usuario que tendrá permisos como propietario sobre el recurso compartido, por defecto asigna a root.
+                    <br>
+                    <b>gid</b>: El ID del grupo que tendrá permisos como propietario sobre el recurso compartido.
+                </p>
+
+                <!-- ......................................................... -->
+                <p>3. <b>Reiniciar el <span style="color: rgb(147, 147, 206) !important;">sistema</span> y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> si se monta la carpeta sin errores</b>.</p>
+
+            </div>
+
+            <div>
+                <h2>Montar una carpeta SAMBA automáticamente en <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                
+                <!-- ......................................................... -->
+                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario autorizado para acceder al recurso compartido</b>.</p>
+
+                <!-- ......................................................... -->
+                <p>2. <b>Agregar una <span style="color: rgb(147, 147, 206) !important;">unidad de red</span></b>:</p>
+                <p class="Expl">
+                    Para que se persistente hay que crear un punto de montaje en la siguiente ventana:
+                    <br>
+                    Explorador de archivos &gt; Este equipo &gt; Pestaña "Equipo" &gt; Conectar a unidad de red
+                </p>
+                <p  class="Expl">En la ventana asignaremos la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_contenido">\\IP_servidor\Recurso</span>.</p>
 
             </div>
 

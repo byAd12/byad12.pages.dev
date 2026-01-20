@@ -36,7 +36,7 @@ Código por Adrián L. G. P.
         <!-- ......................................................... -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -92,7 +92,7 @@ Código por Adrián L. G. P.
 &lt;/clase></code></pre>
 
                 <p>
-                    <b><span style="color: rgb(147, 147, 206) !important;">COMENTARIOS</span></b>:
+                    <b><span style="color: rgb(147, 147, 206) !important;">Comentarios</span></b>:
                     <br>XML permite poner comentarios en todo el código menos dentro de etiquetas y atributos, sintaxis:
                 </p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- MENSAJE --&gt;</code></pre>
@@ -112,22 +112,22 @@ Código por Adrián L. G. P.
                 <h2>Reglas &gt; Básico</h2>
 
                 <p>
-                    <b>SOLO UN ELEMENTO <span style="color: rgb(147, 147, 206) !important;">RAÍZ</span></b>: 
+                    <b>Solo un elemento <span style="color: rgb(147, 147, 206) !important;">raíz</span></b>: 
                     <br>
                     Solo se puede tener un elemento raíz y en este se puede englobar el resto de las etiquetas.
                 </p>
                 <p>
-                    <b><span style="color: rgb(147, 147, 206) !important;">CERRAR</span> CADA ETIQUETA</b>: 
+                    <b><span style="color: rgb(147, 147, 206) !important;">Cerrar</span> cada etiqueta</b>: 
                     <br>
                     Cada etiqueta, aunque no tenga contenido, debe ser cerrada.
                 </p>
                 <p>
-                    <b>RESPETAR EL <span style="color: rgb(147, 147, 206) !important;">ÓRDEN</span></b>: 
+                    <b>Respetar el <span style="color: rgb(147, 147, 206) !important;">órden</span></b>: 
                     <br>
                     Para cerrar una etiqueta que anide a otras, las anidades deben ser cerradas antes.
                 </p>
                 <p>
-                    <b>RESPETAR <span style="color: rgb(147, 147, 206) !important;">MAYÚSCULAS</span></b>: 
+                    <b>Respetar <span style="color: rgb(147, 147, 206) !important;">mayúsculas</span></b>: 
                     <br>
                     Las etiquetas de apertura y cierre deben contener el mismo nombre incluyendo mayúsculas.
                 </p>
@@ -221,35 +221,35 @@ Código por Adrián L. G. P.
 
                 <p>Siempre se empieza con un <b>único</b> tag raíz, donde se engloban los diferentes tags. Puede estar anidado por varios tags (uno dentro de otro).</p>
                 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">CONTENIDO Y CIERRE</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Contenido y cierre</span></b>:</p>
 
                 <p><b>TAGs</b>: Van entre los símbolos <span class="span_contenido" translate="no">&lt;tag&gt;</span> y necesitan un cierre <span class="span_contenido" translate="no">&lt;/tag&gt;</span> ("tag" puede ser un nombre personalizado. Es sensible a mayúsculas).
                     <br><br>Entre los 2 tags va en <b>CONTENIDO</b>.
                     <br><br>Si un tag no va a tener contenido se puede poner simplemente <span class="span_contenido" translate="no">&lt;tag/&gt;</span>.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">ESPACIOS EN EL NOMBRE DE UN TAG</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Espacios en el nombre de un tag</span></b>:</p>
 
                 <p>
                     Dentro de un <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;</span> los espacios son insignificantes (excepto antes de crear y cerrar el tag como: <span class="span_error" translate="no">&lt; tag</span> o <span class="span_error" translate="no">&lt;/ tag</span>). 
                     En el contenido del tag los espacios no importan.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">REGLAS EN EL NOMBRE DE UN TAG</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Reglas en el nombre de un tag</span></b>:</p>
 
                 <p>
-                    <b>COMIENZO</b>: 
+                    <b>Comienzo</b>: 
                         Se permite empezar el nombre de un tag solo con <span class="span_contenido" translate="no">_</span> o una letra. 
                     <br><br>
-                    <b>CONTENER</b>: 
+                    <b>Contener</b>: 
                         El nombre del tag puede contener: <span class="span_contenido" translate="no">_</span>, <span class="span_url" translate="no">-</span>, <span class="span_url" translate="no">.</span> y números, aunque no se recomienda usar los marcados en verde ni carácteres no ingleses.
                     <br><br>
-                    <b>PROHIBIDO</b>: 
+                    <b>Prohibido</b>: 
                         Un nombre de una tag no puede contener <span class="span_error" translate="no">:</span> ya que se utiliza para definir espacio de nombres.
                         Tampoco se permite empezar el nombre de un tag con la cadena <span class="span_error" translate="no">xml</span> ni sus variantes como <span class="span_error" translate="no">xML</span>, <span class="span_error" translate="no">xMl</span>, etc.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">REGLAS DEL CONTENIDO DE UN TAG</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Reglas del contenido de un tag</span></b>:</p>
 
                 <p>
                     Entre el tag de comienzo y cierre no se pueden usar los siguientes carácteres: <span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> ni <span class="span_error" translate="no">&quot;</span> 
@@ -282,7 +282,7 @@ Código por Adrián L. G. P.
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
-                            <td colspan="4"><b>REFERENCIAS</b></td>
+                            <td colspan="4"><b>Referencias</b></td>
                         </tr>
                         <tr>
                             <td>SÍMBOLO</td>
