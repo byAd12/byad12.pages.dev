@@ -65,14 +65,15 @@ while true; do
         " | ${Az}VPN - NETBIRD ${Bl}" \
             " | ============================" \
             "${Ne}15${Bl} | Instalar y entrar en Netbird" \
+            "${Ne}16${Bl} | Desinstalar Netbird y purgar configuración" \
             " | " \
         " | ${Az}NFS ${Bl}" \
             " | ====================" \
-            "${Ne}16${Bl} | Compartir un recurso" \
+            "${Ne}17${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
             " | ==================" \
-            "${Ne}17${Bl} | Cambiar de versión" \
+            "${Ne}18${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
             " | ======" \
@@ -502,9 +503,32 @@ EOF
         ;;
 
     ##############################################################
-    # NFS - COMPARTIR UN RECURSO 
+    # DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
     16)
+        clear
+
+        echo -e "\n${Az}Parando servicios...${Bl}"
+        systemctl stop netbird
+        systemctl disable netbird
+
+        echo -e "\n${Az}Desinstalar Netbird...${Bl}"
+        apt remove --purge netbird -y
+
+        echo -e "\n${Az}Borrando archivos y carpetas de configuración...${Bl}"
+        rm -rf /etc/netbird
+        rm -rf /var/lib/netbird
+        rm -rf /var/log/netbird
+        rm -rf ~/.config/netbird
+        rm -rf ~/.netbird
+
+        echo -e "\n${Ve}¡Netbird desinstalado correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # NFS - COMPARTIR UN RECURSO 
+    ##############################################################
+    17)
         clear
         read -p 'Carpeta local a compartir: ' carpeta_local
         read -p 'Permisos (rw,ro): ' permisos        
@@ -530,7 +554,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    17)
+    18)
         clear
         read -p 'Versión de GitHub a actualizar: ' version_github
 

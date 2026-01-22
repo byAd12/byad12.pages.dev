@@ -56,7 +56,7 @@ p a:hover{color: #7cfb2d; text-decoration: underline;}
 
 /* Botón personalizado - Para texto */
 
-.BotonPersonalizadoDIVrow{display: flex; width: min-content; gap: 20px; margin: 0 auto; width: min-content !important;}
+.BotonPersonalizadoDIV{display: flex; flex-direction: column; width: min-content; gap: 20px; margin: 0 auto; width: min-content !important;}
 
 a.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0; text-decoration: none; width: min-content;}
 a.BotonPersonalizadoTexto p{margin: 0 !important;}
@@ -100,7 +100,8 @@ table.TablaComandos td{border: 1px solid rgba(228, 196, 196, 0.3); height: 30px;
 /* =================================================== */
 /* Página de enlaces a sub-guías */
 
-.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center;}
+.PaginaIndice{flex-direction: row; justify-content: center; gap: 0;}
+.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 30%; margin: 0;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
@@ -255,7 +256,6 @@ img.SQLImagenJoin:hover{filter: invert(1);}
     .tabla_cmd td{width: 100% !important; margin: 0; display: block; text-align: center; box-sizing: border-box;}
     .tabla_cmd tr td:first-child{border-top: 3px solid rgb(56, 56, 56);}
     .tabla_cmd td ul{text-align: left; margin: 10px 0 10px 10px;}
-    .BotonPersonalizadoDIVrow{flex-direction: column;}
 }
 
 @media screen and (max-width: 1040px){

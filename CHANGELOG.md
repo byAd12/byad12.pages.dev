@@ -1,8 +1,14 @@
-20/01/2026 - Arreglos y mejoras
+22/01/2026 - Arreglo gráfico y mejoras
 
-# g/*
-Se eliminó una referencia a un script no usado.
-Se cambió párrafos de mayúsculas a minúsculas. 
+# resources/blog.css
+En las páginas del blog que redirigen a otras guías se les cambió el tamaño de cada bloque
 
-# g/samba_local.html
-Mejora del contenido
+# g/markup_language.html
+Se cambió el nombre de un botón
+Se añadió un botón para una guía futura
+
+# g/xsd.html
+Se añadió el archivo - sin contenido
+
+# proxmox.sh
+Se añadió una nueva opción
