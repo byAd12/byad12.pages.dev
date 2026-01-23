@@ -99,7 +99,7 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Redireccionar HTTP por un socket al servidor <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
 
-                <p>1. Editar el archivo <span class="span_contenido">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
+                <p>1. Editar el archivo <span class="span_url">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
                 <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
 GatewayPorts yes</code></pre>
                 <p>2. En el servidor reiniciar el servicio SSH:</p>
@@ -112,7 +112,7 @@ GatewayPorts yes</code></pre>
             <div>
                 <h2>Abrir la GUI de un programa del servidor en el cliente <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
 
-                <p>1. Editar el archivo <span class="span_contenido">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
+                <p>1. Editar el archivo <span class="span_url">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
                 <pre class="codigo" translate="no"><code class="bash">X11Forwarding yes</code></pre>
                 <p>2. En el servidor reiniciar el servicio SSH:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
@@ -130,4 +130,5 @@ GatewayPorts yes</code></pre>
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
     </body>
+
 </html>
