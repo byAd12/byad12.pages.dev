@@ -50,14 +50,13 @@ Código por Adrián L. G. P.
         <div class="parte1">
             <div>
                 <h2>Consulta <span class="span_url_espaciado">SELECT</span></h2>
-                <p>Nos situamos en la BBDD y:</p>
+                <p>Primero hay que entrar en la BB.DD. para realizar todas las consultas.</p>
 
                 <p>Seleccionar todas las columnas:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla;</code></pre>
                 
-                <p>Seleccionar columnas específicas:</p>
+                <p>Seleccionar columnas específicas en el orden seleccionado:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1, col2 FROM tabla;</code></pre>
-                <p class="Expl">Se van a mostrar en el orden seleccionado.</p>
 
             </div>
 
@@ -172,7 +171,7 @@ Código por Adrián L. G. P.
                 <p><span class="span_contenido">SUM</span>: Devuelve el valor total de la suma de la columna en la tabla.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT SUM(col1) FROM tabla;</code></pre>
 
-                <p>Y más...</p>
+                <p>Hay mas funciones escalares que se pueden ver en <a href="https://learnsql.com/blog/standard-sql-functions-cheat-sheet/" target="_blank">learnsql.com</a>.</p>
             </div>
 
             <div>
@@ -195,7 +194,7 @@ Código por Adrián L. G. P.
 
                 <p>Para hacer consultas en más de una tabla a la vez:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT columna1, columna2 FROM tabla1 x, tabla2 y WHERE x.columna1 = y.columna1;</code></pre>
-                <p class="Expl">Ese "x" e "y" son un alias "AS" a cada tabla para poder coger columnas de cada una.</p>
+                <p class="Expl">"x" es un alias <span class="span_contenido">AS</span> que apunta a la tabla "tabla1" e "y" también es un alias pero apunta a otra tabla llamada "tabla2".</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT columna1, x.columna2, y.columna3 FROM tabla1 x, tabla2 y WHERE x.columna1 = y.columna1;</code></pre>
                 <p class="Expl">Columna1 debería estar en ambas tablas.</p>
             </div>
@@ -219,3 +218,4 @@ Código por Adrián L. G. P.
     </body>
 
 </html>
+
