@@ -25,7 +25,7 @@ Código por Adrián L. G. P.
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
-                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" onchange="CambiarNavColorCodigo2()"></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
             </ul>
         </div>
 
@@ -58,17 +58,13 @@ Código por Adrián L. G. P.
             </div>
 
             <div>
-                <h2>Formulario Log-in [1]</h2>
+                <h2>Formulario Log-in</h2>
                 <p>En una página web que utilice SQL como BB.DD. podemos probar a entrar como administrador (root, admin, ...) añadiendo un comentario de una de estas 2 maneras:</p>
 
                 <pre class="codigo" translate="no"><code class="sql">admin'#</code></pre>
                 
                 <p class="Expl">Y como contraseña podremos poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe carácteres en los formularios o si usa Prepared Statements.</p>
 
-            </div>
-
-            <div>
-                <h2>Formulario Log-in [2]</h2>
                 <p>Además se podría añadir a la consulta como usuario y contraseña (podemos probar con las comillas dobles: <span class="span_url">"</span>). Opciones:</p>
 
                 <pre class="codigo" translate="no"><code class="sql">' OR ''='</code></pre>
