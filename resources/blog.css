@@ -95,7 +95,7 @@ table.TablaComandos td{border: 1px solid rgba(228, 196, 196, 0.3); height: 30px;
 /* Div principales para separar el contenido */
 
 .parte1{display: flex; flex-direction: column; justify-content: center;}
-.parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll){width: 80%; padding: 20px; border-radius: 10px; margin: 0 auto;}
+.parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div){width: 80%; padding: 20px; border-radius: 10px; margin: 0 auto;}
 
 /* =================================================== */
 /* Página de enlaces a sub-guías */
@@ -294,5 +294,6 @@ img.SQLImagenJoin:hover{filter: invert(1);}
 .tabla_cmd_html tr td:not(.opcion){padding: 10px 0 50px 10px;}
 
 .tabla_cmd_html pre{width: 100% !important; height: min-content !important;}
+
 
 /* =================================================== */
