@@ -62,7 +62,7 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="bash">ansible-playbook -i [HOST_FILE] -f [NUM] [TASK].yml</code></pre>
                 <p class="Expl"><b>TASK.yml</b>: Archivo que crearemos para especificar una tarea.</p>
                 <p class="Expl"><b>-f NUM</b>: Especificamos cuantas tareas ejecutará simultáneamente.</p>
-                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la span_contenido de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea:</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[class1]
 10.200.0.1
 10.200.0.2
@@ -77,7 +77,7 @@ nodo.dominio.tld
 
                 <pre class="codigo" translate="no"><code class="bash">ansible [HOST] -i [HOST_FILE] -f -m ping</code></pre>
                 <p class="Expl"><b>HOST</b>: Especificamos a que hosts del archivo verificar. Puede ser simplemente <b>all</b> ejecutándolo en todos los nodos o, si hay varios <b>[ ]</b>, podemos excluir grupos con <b>all:!nombre_grupo_excluir</b>. Además podemos poner el nombre del grupo solamente.</p>
-                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la span_contenido de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea.</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea.</p>
                 <p class="Expl"><b>-m ping</b>: Hace un ping.</p>
             </div>
 
@@ -97,8 +97,8 @@ nodo.dominio.tld
 
     - name: Nombre de la tarea
       copy:
-        src: span_contenido
-        dest: span_contenido
+        src: ruta
+        dest: ruta
         owner: usuario
         group: grupo
         mode: 'permisos'
@@ -160,7 +160,7 @@ nodo.dominio.tld
                 <p class="Expl">
                     <b>FILE_SRC</b>: Archivo local a copiar en los hosts.
                     <br>
-                    <b>FILE_DST</b>: span_contenido de cada equipo destino en la que se copiará el archivo.
+                    <b>FILE_DST</b>: Ruta de cada equipo destino en la que se copiará el archivo.
                     <br>
                     <b>-h HOST_FILE</b>: Archivo donde se especificarán mediante saltos de líneas a qué dispositivos copiar el archivo. Formato de ejemplo:
                 </p>
@@ -198,7 +198,7 @@ nodo.dominio.tld
                     <br>
                     <b>FILE_SRC</b>: Archivo o carpeta local a copiar en los hosts.
                     <br>
-                    <b>FILE_DST</b>: span_contenido remota en cada host donde se copiará el archivo.
+                    <b>FILE_DST</b>: Ruta remota en cada host donde se copiará el archivo.
                     <br>
                     <b>-h HOST_FILE</b>: Archivo que contiene la lista de hosts (uno por línea), ejemplo:
                 </p>

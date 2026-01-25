@@ -64,20 +64,29 @@ Código por Adrián L. G. P.
             </div>
            
             <div>
-                <h2>span_contenidos Importantes</h2>
-                <p>Fichero de Configuración del servidor:</p>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf</span></p>
+                <h2>Archivos importantes</h2>            
 
-                <p>Fichero de zonas:</p>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span></p>
-
-                <p>Fichero de zonas por defecto - root:</p>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.default-zones</span></p>
-
-                <p>Fichero de Configuración del DNS:</p>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.options</span></p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td>Fichero de Configuración del servidor</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de zonas</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.local</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de zonas por defecto - root</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.default-zones</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de Configuración del DNS</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.options</span></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-
 
             <div>
                 <h2>Si hay problemas en el DNS</h2>
@@ -92,7 +101,7 @@ Código por Adrián L. G. P.
         <hr>
         <div class="parte1">
             <div>
-                <h2>Nslookup (Windows y Linux)</h2>
+                <h2>Nslookup: <span>Windows y Linux</span><img class="SoporteComandoRemoto" src="../img/windows.png"><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 <p>Sirve para comprobar la configuración DNS de un dominio o IP según un registro específico.</p>
                 <p>Servidores DNS del dominio:</p>
                 <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
@@ -108,8 +117,7 @@ Código por Adrián L. G. P.
 > asml.com</code></pre>
             </div>
             <div>
-                <h2>Configurar DNS como Reenviador</h2>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <h2>Configurar DNS como Reenviador:<br><span translate="no">/etc/bind/named.conf.local</span></h2>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
 
@@ -123,6 +131,7 @@ auth-nxdomain no;    # conform to RFC1035
 listen-on { any; };
 // listen-on-v6 { any; };
 };</code></pre>
+                <p class="Expl"><b>192.168.8.1</b>: IPv4 del dispositivo al que reenviar las peticiones.</p>
             </div>
         </div>
         <hr>
@@ -130,13 +139,13 @@ listen-on { any; };
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Crear una zona <span class="spanblanco">(ej.1)</span></h2>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <h2><span>Ejemplo 1:</span> Crear una zona</h2>
+                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
 type master;
 file "/etc/bind/db.adr.es";
 };</code></pre>
-                <p><span class="span_contenido" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <p><span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
 adr.es. IN      SOA     dns1.adr.es.    administrador.adr.es    (
     1               ; N* de serie
@@ -158,13 +167,13 @@ otra    IN      CNAME   iesjorgeguillen.es</code></pre>
             </div>
             <!-- ......................................................... -->
             <div>
-                <h2>Crear una zona inversa <span class="spanblanco">(ej.2)</span></h2>
-                <p><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <h2><span>Ejemplo 2:</span> Crear una zona inversa</h2>
+                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
                 <pre class="codigo" translate="no"><code class="nginx">zone "0.168.192.in-addr.arpa"{
 type master;
 file "/etc/bind/db.192.168.0";
 };</code></pre>
-                <p><span class="span_contenido" translate="no">/etc/bind/db.192.168.0</span>:</p>
+                <p><span class="span_url" translate="no">/etc/bind/db.192.168.0</span>:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
 0.168.192.in-addr.arpa. IN      SOA     dns1.adr.es.    administrador.adr.es.   (
         1
@@ -189,14 +198,14 @@ file "/etc/bind/db.192.168.0";
         <div class="parte1">
             <!-- ......................................................... -->
             <div>
-                <h2>Crear DNS secundario <span class="spanblanco">(ej.3)</span></h2>
-                <p>En el servidor <b>DNS1</b>:<br><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <h2><span>Ejemplo 3:</span> Crear DNS secundario</h2>
+                <p>En el servidor <b>DNS1</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">listen-on {192.168.0.226;}; // La IP de dns2
 allow-transfer {192.168.0.226;}; // La IP de dns2
 allow-query {192.168.0.226;}; // La IP de dns2</code></pre>
-                <p><span class="span_contenido" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <p>Ahora añadiremos lo siguiente en el fichero <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dns2	IN	A	192.168.0.226</code></pre>
-                <p><br>En el servidor <b>DNS2</b>:<br><span class="span_contenido" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <p>En el servidor <b>DNS2</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
 type slave;
 masters{192.168.0.226;}; // IP de DNS1
@@ -207,7 +216,8 @@ file "/etc/bind/db.jonis.net";
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>DNS - WINDOWS SERVER</h1>
+        <h1>DNS</h1>
+        <h2 class="TituloSecundario">Configuración en <b>Windows</b></h2>
         <hr class="SeparadorConTitulo">
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -220,14 +230,15 @@ file "/etc/bind/db.jonis.net";
                 <ol>
                     <li>Poner IP Estática</li>
                     <li>Administrador del Servidor > Agregar rol servidor DNS > Instalar</li>
-                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP de un servidor DNS el cual será reenviador (ej: 192.168.8.1)</li>
+                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP de un servidor DNS el cual será reenviador (ej: <span class="span_url" translate="no">192.168.8.1</span>)</li>
                 </ol>
-                <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro NS.</p>
-                <p>Para configurar registros A:</p>
-                <p class="Expl">Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Zonas de Búsqueda directa > Click derecho > Registro A</p>
+                <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro <b>NS</b>.</p>
+                
+                <p>Para configurar registros <b>A</b>:</p>
+                <p class="Expl">Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Zonas de Búsqueda directa > Click derecho > Registro <b>A</b></p>
 
-                <p>Para configurar registros MX:</p>
-                <p class="Expl">" Pero no se pone nombre al registro</p>
+                <p>Para configurar registros <b>MX</b>:</p>
+                <p class="Expl">Lo mismo que al crear registros <b>A</b> pero no se debe poner nombre al registro.</p>
 
             </div>
         </div>

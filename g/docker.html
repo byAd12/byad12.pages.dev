@@ -55,7 +55,7 @@ Código por Adrián L. G. P.
 
                 <p>Instalar una imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker pull [imagen]:(tag)</code></pre>
-                <p class="Expl"><b>Tag</b>: Versión, si no se especifica, latest.</p>
+                <p class="Expl"><b>Tag</b>: La versión del docker a ejecutar, si no se especifica será <span class="span_contenido" translate="no">latest</span>.</p>
                 
                 <p>Crear un docker si iniciar el docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker create [imagen]:(tag)</code></pre>
@@ -96,7 +96,7 @@ Código por Adrián L. G. P.
 
                 <p>Mirar el contenido de un docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker inspect --format=(formato) [docker]</code></pre>
-                <p class="Expl"><b>--format=(formato)</b>: Opcional. Ejemplo de formato: "{{.Id}}"</p>
+                <p class="Expl"><b>--format=(formato)</b>: Es opcional. Este es un ejemplo de formato: <span class="span_contenido">{{.Id}}</span>.</p>
 
             </div>
         </div>
@@ -114,10 +114,10 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="bash">docker run -d [imagen]</code></pre>
                 
                 <p><b>Persistencia</b> de archivos:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -v [span_contenido_local]:[span_contenido_docker]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker run -v [ruta_en_docker]:[ruta_en_sistema_local]</code></pre>
                 <p class="Expl">Así se enlaza una carpeta del docker con una carpeta local para que los archivos no se eliminen al parar el docker.</p>
                 
-                <p>Modificar una variable de entorno (pej. PUID):</p>
+                <p>Modificar una variable de entorno (ej. <span class="span_contenido">PUID</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -e [variable_entorno]=[valor]</code></pre>
 
                 <p>Especificar el hostname:</p>
@@ -154,10 +154,10 @@ Código por Adrián L. G. P.
                 <h2>Más opciones</h2>
                 
                 <p>Copiar archivos del host al interior de un docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker cp [docker]:[span_contenido_docker] [span_contenido_local]</code></pre>
-                <p class="Expl"><b>[docker]:_____________</b>: Nombre del docker específico.</p>
-                <p class="Expl"><b>________:[span_contenido_docker]</b>: Donde se copiará dentro del docker.</p>
-                <p class="Expl"><b>[span_contenido_local]</b>: span_contenido del/los archivo/s en la máquina virtual.</p>
+                <pre class="codigo" translate="no"><code class="bash">docker cp [docker]:[ruta_en_docker] [ruta_en_sistema_local]</code></pre>
+                <p class="Expl"><b>[docker]:____</b>: Nombre del docker específico.</p>
+                <p class="Expl"><b>____:[ruta_en_docker]</b>: Donde se copiará dentro del docker.</p>
+                <p class="Expl"><b>[ruta_en_sistema_local]</b>: Ruta del/los archivo/s en la máquina virtual.</p>
             </div>
 
             <div>
@@ -189,7 +189,7 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="bash">docker run --cpus [Cantidad_CPU] [docker]</code></pre>
                 <p class="Expl"><b>[CANTIDAD_CPU]</b>: Número (que puede ser decimal) que indica los núcleos máximos para el docker.</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --memory [Cantidad_RAM] [docker]</code></pre>
-                <p class="Expl"><b>[CANTIDAD_RAM]</b>: Número que indica la cantidad máxima de RAM para el docker. <u>Ej</u>: "512M" (MiB), "1G" (GiB).</p>
+                <p class="Expl"><b>[CANTIDAD_RAM]</b>: Número que indica la cantidad máxima de RAM para el docker. <u>Ejemplo</u>: "512M" (MiB), "1G" (GiB).</p>
             
                 <p>Cualquiera de estas opciones se puede modificar más tarde con:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker update [Parámetros] [docker]</code></pre>
@@ -209,8 +209,8 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="bash">docker volume rm [nombre_volumen]</code></pre>
 
                 <p>Crear una volumen en el host donde se guardarán los datos del docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --mount type=volume,src=[nombre_volumen],dst=[span_contenido_en_docker] [docker]</code></pre>
-                <p class="Expl">Todo lo que se haya en "src" se cargarán en "dst".</p>
+                <pre class="codigo" translate="no"><code class="bash">docker run --mount type=volume,src=[nombre_volumen],dst=[ruta_en_docker] [docker]</code></pre>
+                <p class="Expl">Todo lo que se haya en <span class="span_contenido" translate="no">src</span> se cargarán en <span class="span_contenido" translate="no">dst</span>.</p>
 
             </div>
         </div>
@@ -233,11 +233,11 @@ Código por Adrián L. G. P.
 
                 <p>Puertos:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 8089:80 [docker]</code></pre>
-                <p class="Expl">Pueden redireccionarse varios puertos a la vez, pero repitiendo "-p".</p>
-                <p class="Expl"><b>-p 8089:80</b>: Redirecciona el puerto 8089 del host al 80 del docker.</p>
+                <p class="Expl">Pueden redireccionarse varios puertos a la vez, para ello hay que repetir la opción <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar.</p>
+                <p class="Expl"><b>-p 8089:80</b>: Redirecciona el puerto <span class="span_contenido" translate="no">8089</span> del host al <span class="span_contenido" translate="no">80</span> del docker.</p>
                 <p class="Expl"><b>[docker]</b>: Seleccionar el docker a ejecutar.</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 127.0.0.2:8089:80 [docker]</code></pre>
-                <p class="Expl"><b>-p 127.0.0.2:8089:80</b>: Redirecciona el puerto 8089 de la IP 127.0.0.2 al puerto 80 del docker.</p>
+                <p class="Expl">En este caso se redirecciona el puerto <span class="span_contenido" translate="no">8089</span> de la IP <span class="span_contenido" translate="no">127.0.0.2</span> al puerto <span class="span_contenido" translate="no">80</span> del docker.</p>
             </div>
 
             <div>
@@ -255,15 +255,15 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Modificar redes</h2>
 
-                <p>Crear una red (tipo bridge u otro):</p>
+                <p>Crear una red:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network create --driver (tipo_red) --subnet (ip_red/máscara) --gateway (gateway) [nombre_red]</code></pre>
-                <p class="Expl">Driver, Subnet y Gateway son opcionales. Creará una interfaz en el host.</p>
-                <p class="Expl"><b>--driver</b>: Puede ser bridge, none, Host, ..</p>
+                <p class="Expl"><span class="span_contenido" translate="no">--driver</span>, <span class="span_contenido" translate="no">--subnet</span> y <span class="span_contenido" translate="no">--gateway</span> son opcionales. Creará una interfaz en el host.</p>
+                <p class="Expl"><b>--driver</b>: Es el modo de red a seleccionar como <span class="span_contenido" translate="no">bridge</span>, <span class="span_contenido" translate="no">none</span>, <span class="span_contenido" translate="no">host</span>, ..</p>
                 
-                <p>Eliminar una red bridge:</p>
+                <p>Eliminar una red tipo <span class="span_contenido" translate="no">bridge</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network rm [nombre_red]</code></pre>
 
-                <p>Cambiar un docker a la nueva red:</p>
+                <p>Cambiar un docker existente a la nueva red:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --network [nombre_red] [docker]</code></pre>
             </div>
 
@@ -277,21 +277,20 @@ Código por Adrián L. G. P.
 
         <div class="parte1">
             <div>
-                <h2>Docker "httpd"</h2>
-                <p>Añadir una página html:</p>
+                <h2>Docker "<span>httpd</span>"</h2>
+                <p>Añadir una página .html:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 80:80 -p 443:443 -d httpd</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">docker exec -it [id] sh</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install nano</code></pre>
                 <p class="Expl"><b>./htdocs/index.html</b>: Editar el archivo para cambiar la página default.</p>
                 
-                <p>Acceder a <span class="span_contenido" translate="no">http://{Tu_IP}:{puerto}</p>
-                <p class="Expl"><b>Puerto</b>: El que redirige al docker (Especificado al hacer docker run).</p>
+                <p>Hay que acceder a la siguiente URL <span class="span_url" translate="no">http://{Tu_IP}:{puerto}</span>, siendo el puerto el que redirige al docker (especificado al hacer <span class="span_contenido" translate="no">docker run</span>).</p>
             </div>
             
             <div>
-                <h2>Docker "heimdall"</h2>
-                <p>Sirve para organizar aplicaciones web en un solo lugar ( <i>localhost:[puerto]</i> ):</p>
+                <h2>Docker "<span>heimdall</span>"</h2>
+                <p>Sirve para organizar aplicaciones web en un solo lugar. Se accede mediante la URL <span class="span_url" translate="no">http://localhost:[puerto]</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name heimdall -e PUID=1000 -e PGID=1000 -e TZ=america/new_york -p 9998:80 -p 9997:443 -v /home/usuario/Descargas/docker_adr:/config --restart unless-stopped linuxserver/heimdall</code></pre>
             </div>
         </div>

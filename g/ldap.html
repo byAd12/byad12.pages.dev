@@ -57,13 +57,13 @@ Código por Adrián L. G. P.
 
             <div>
                 <h2>Comprobación</h2>
-                <p>Debe de poner "active":</p>
+                <p>Debe de poner <span class="span_contenido" translate="no">active</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status slapd</code></pre>
-                <p>Debe de poner "LISTEN":</p>
+                <p>Debe de poner <span class="span_contenido" translate="no">LISTEN</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ss -pltu | grep slapd</code></pre>
-                <p>Nos pone como dominio "nodomain":</p>
+                <p>Nos pone como dominio <span class="span_contenido" translate="no">NODOMAIN</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
-                <p>El usuario es "anonymous":</p>
+                <p>El usuario es <span class="span_contenido" translate="no">anonymous</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x</code></pre>
             </div>
 
@@ -71,7 +71,7 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Formatos</h2>
 
-                <p>Archivos <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <p>Archivos <span class="span_url" translate="no">.ldif</span>:</p>
                 <pre class="codigo" translate="no"><code class="yaml"># Elemento 1
 dn: &lt;nombre&gt;
     &lt;atributos&gt;: &lt;valor&gt;
@@ -82,7 +82,7 @@ dn: &lt;nombre&gt;
 dn: &lt;nombre&gt;
     &lt;atributos&gt;: &lt;valor&gt;
     ...</code></pre>
-                <p class="Expl"><b>dn</b> (Distingushed Name): Diferencia a todos los objetos de la BBDD.</p>
+                <p class="Expl"><b>dn</b> (Distingushed Name): Diferencia a todos los objetos de la BB.DD.</p>
             </div>
 
             <div>
@@ -90,7 +90,7 @@ dn: &lt;nombre&gt;
 
                 <p>Ejecutamos este comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
-                <p class="Expl"><b>Respuestas</b>: No; [DOMINIO]; [NOMBRE_EMPRESA]; Meter la contraseña; No; Si.</p>
+                <p class="Expl"><b>Respuestas</b> que va a pedir: No; [DOMINIO]; [NOMBRE_EMPRESA]; Meter la contraseña; No; Si.</p>
 
                 <p>Comprobar el estado del servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
@@ -109,7 +109,7 @@ dn: &lt;nombre&gt;
         <div class="parte1">
             <div>
                 <h2>Crear una <span>Unidad Organizativa</span></h2>
-                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>1. Crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
                 <p>2. Poner en su interior:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
 objectClass: top
@@ -117,7 +117,7 @@ objectClass: organizationalUnit
 ou: [UO]</code></pre>
                 <p class="Expl"><b>UO</b>: Nombre personalizado que tendrá la unidad organizativa.
                     <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
                 </p>
                 <p>3. Añadir el archivo a la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO] -W -f [ARCHIVO].ldif</code></pre>
@@ -130,7 +130,7 @@ ou: [UO]</code></pre>
 
             <div>
                 <h2>Crear un <span>Grupo</span></h2>
-                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>1. Crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
                 <p>2. Poner en su interior:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: cn=[NOMBRE_GRUPO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
 objectClass: top
@@ -140,7 +140,7 @@ cn: [NOMBRE_GRUPO]</code></pre>
                 <p class="Expl"><b>NOMBRE_GRUPO</b>: Nombre personalizado que tendrá el grupo.
                     <BR><b>UO</b>: Unidad organizativa a la que pertenecerá.
                     <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
                 </p>
                 <p class="Expl"><b>N_GID</b>: Número entero identificador del grupo.</p>
 
@@ -156,10 +156,10 @@ cn: [NOMBRE_GRUPO]</code></pre>
             <div>
                 <h2>Crear un <span>Usuario</span></h2>
 
-                <p>0. Crear el hash de la contraseña (Pej.: <span class="span_contenido" translate="no">{SSHA}jJ/Sl2m---5HeZJP</span>) con el comando:</p>
+                <p>0. Crear el hash de la contraseña (Ej.: <span class="span_contenido" translate="no">{SSHA}jJ/Sl2m---5HeZJP</span>) con el comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">slappasswd</code></pre>
 
-                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span> y abrirlo.</p>
+                <p>1. Crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
                 <p>2. Poner en su interior:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: uid=[NOMBRE_USUARIO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]
 objectClass: top
@@ -175,15 +175,15 @@ homeDirectory: /home/[NOMBRE_USUARIO]
 loginShell: [SHELL]</code></pre>
                 <p class="Expl"><b>UO</b>: Unidad organizativa a la que pertenecerá.
                     <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) [Sin el punto].
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
                 </p>
                 <p class="Expl"><b>NOMBRE_USUARIO</b>: Nombre personalizado que tendrá el usuario.
-                    <br><b>NOMBRE_COMÚN</b>: Nombre común personalizado que tendrá el usuario).
-                    <br><b>NOMBRE_COMPLETO</b>: Nombre completo personalizado que tendrá el usuario).
+                    <br><b>NOMBRE_COMÚN</b>: Nombre común personalizado que tendrá el usuario.
+                    <br><b>NOMBRE_COMPLETO</b>: Nombre completo personalizado que tendrá el usuario.
                     <br><b>CONTRASEÑA</b>: La contraseña en <b>hash</b> del usuario.</p>
                 <p class="Expl"><b>N_UID</b>: Número entero identificador del usuario. Los siguientes usuarios creados, recibirán un valor +1 alto que este.
                     <br><b>N_GID</b>: Número entero identificador del grupo. 0 = Ninguno.</p>
-                <p class="Expl"><b>SHELL</b>: <span class="span_contenido" translate="no">/bin/bash</span>, <span class="span_contenido" translate="no">/bin/sh</span>.</p>
+                <p class="Expl"><b>SHELL</b>: <span class="span_url" translate="no">/bin/bash</span>, <span class="span_url" translate="no">/bin/sh</span>.</p>
 
                 <p>3. Añadir el archivo a la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO] -W -f [ARCHIVO].ldif</code></pre>
@@ -197,7 +197,7 @@ loginShell: [SHELL]</code></pre>
             <div>
                 <h2>Crear un <span>Usuario</span> - <span>Perfil Móvil</span></h2>
 
-                <p>Lo mismo que en "Crear un Usuario" pero cambiando la span_contenido de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenen estos perfiles:</p>
+                <p>Lo mismo que en "Crear un Usuario" pero cambiando la ruta de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenen estos perfiles:</p>
                 <pre class="codigo" translate="no"><code class="yaml">homeDirectory: /[CARPETA_MÓVIL]/[NOMBRE_USUARIO]</code></pre>
             </div>
 
@@ -212,7 +212,7 @@ loginShell: [SHELL]</code></pre>
             <div>
                 <h2>Modificar un <span>objeto</span></h2>
 
-                <p>1. Crear un archivo <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <p>1. Crear un archivo <span class="span_url" translate="no">.ldif</span>:</p>
                 <p>2. Poner en su interior:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
 changetype: modify
@@ -244,7 +244,7 @@ replace: [PROPIEDAD_CAMBIAR]
                 <pre class="codigo" translate="no"><code class="bash">ldapdelete -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W "[DN_COMPLETO]"</code></pre>
                 <p class="Expl"><b>DN_COMPLETO</b>: Identificador del objeto dentro de la base de datos.</p>
 
-                <p>2. Creando un archivo <span class="span_contenido" translate="no">.ldif</span>:</p>
+                <p>2. Creando un archivo <span class="span_url" translate="no">.ldif</span>:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
 changetype: delete</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]" -W -f [ARCHIVO].ldif</code></pre>

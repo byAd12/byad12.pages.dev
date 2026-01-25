@@ -55,31 +55,30 @@ Código por Adrián L. G. P.
             </div>
 
             <div>
-                <h2>Cifrar archivo con clave <span class="spanblanco">simétrica</span></h2>
+                <h2>Cifrar archivo con clave <span>simétrica</span></h2>
 
-                <p>En formato <span class="span_contenido" translate="no">.gpg</span>:</p>
+                <p>En formato <span class="span_url" translate="no">.gpg</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -c [ARCHIVO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_contenido" translate="no">[NOMBRE].gpg</span>.</p>
+                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_url" translate="no">[NOMBRE].gpg</span>.</p>
 
-                <p>En formato <span class="span_contenido" translate="no">.asc</span>:</p>
+                <p>En formato <span class="span_url" translate="no">.asc</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -c -a [ARCHIVO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_contenido" translate="no">[NOMBRE].asc</span>.</p>
+                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_url" translate="no">[NOMBRE].asc</span>.</p>
             </div>
 
             <div>
-                <h2>Descifrar archivo con clave <span class="spanblanco">[a]simétrica</span></h2>
+                <h2>Descifrar archivo con clave <span>[a]simétrica</span></h2>
 
                 <pre class="codigo" translate="no"><code class="bash">gpg [ARCHIVO_A_DESCIFRAR]</code></pre>
-                <p class="Expl">Si es con:</p>
-                <p class="Expl"><b>Clave Simétrica</b>: Pide la clave simétrica y descifra el archivo.</p>
-                <p class="Expl"><b>Clave Asimétrica</b>: Si fué cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
+                <p class="Expl">Si el archivo tiene una <b>clave simétrica</b> va a pedir la clave simétrica y descifra el archivo.</p>
+                <p class="Expl">Si el archivo tiene una <b>clave asimétrica</b> y si fué cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
             </div>
 
             <div>
                 <h2>Crear una clave pública</h2>
 
                 <pre class="codigo" translate="no"><code class="bash">gpg --full-generate-key</code></pre>
-                <p class="Expl"><b>Respuestas</b>: 2; 2048; 0; s.</p>
+                <p class="Expl"><b>Respuestas</b> que va a pedir: 2; 2048; 0; s.</p>
             </div>
 
             <div>
@@ -108,7 +107,7 @@ Código por Adrián L. G. P.
             </div>
 
             <div>
-                <h2>Cifrar archivo con clave <span class="spanblanco">asimétrica</span></h2>
+                <h2>Cifrar archivo con clave <span>asimétrica</span></h2>
 
                 <pre class="codigo" translate="no"><code class="bash">gpg --a -r [NOMBRE_OTRA_CLAVE] [ARCHIVO_A_CIFRAR]</code></pre>
                 <p class="Expl"><b>-r</b>: Puede usarse más de 1 vez.</p>
@@ -119,10 +118,10 @@ Código por Adrián L. G. P.
                 <h2>Firmar un archivo</h2>
 
                 <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [ARCHIVO_A_FIRMAR]</code></pre>
-                <p class="Expl">Generará un archivo <span class="span_contenido" translate="no">.gpg</span> que servirá como firma.</p>
+                <p class="Expl">Generará un archivo <span class="span_url" translate="no">.gpg</span> que servirá como firma.</p>
                 <p class="Expl">Éste se enviará junto al archivo original para verificar si se ha modificado o no. Para verificarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg [ARCHIVO_FIRMADO]</code></pre>
-                <p class="Expl">EL comando te pedirá la span_contenido del archivo original y comparará la firma.</p>
+                <p class="Expl">EL comando te pedirá la ruta del archivo original y comparará la firma.</p>
             </div>
 
         </div>

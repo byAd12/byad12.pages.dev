@@ -49,7 +49,7 @@ Código por Adrián L. G. P.
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
-                <h2>Alojar una carpeta en un servidor <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <h2>Alojar una carpeta en un servidor <span>Linux</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span></b>:</p>
@@ -64,7 +64,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl"><b>Importante</b>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span>.</p>
 
                 <!-- ......................................................... -->
-                <p>2. <b>Reconocer <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
+                <p>2. <b>Reconocer al <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
                 
                 <p class="Expl">Al usuario <span class="span_contenido">nombre_usuario</span> que creamos hay que hacer que sea reconocible como un usuario para Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
@@ -98,7 +98,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
             </div>
 
             <div>
-                <h2>Alojar una carpeta en un servidor <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                <h2>Alojar una carpeta en un servidor <span>Windows</span><img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
                 
@@ -145,7 +145,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Acceder a una carpeta de Windows desde <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <h2>Acceder a una carpeta de Windows desde <span>Linux</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
@@ -178,7 +178,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
             </div>
 
             <div>
-                <h2>Acceder a una carpeta de Linux desde <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                <h2>Acceder a una carpeta de Linux desde <span>Windows</span><img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido">smbpasswd</span></b>.</p>
@@ -186,7 +186,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <!-- ......................................................... -->
                 
-                <p>2. <b>Listar <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
+                <p>2. <b>Listar los <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
 
                 <p class="Expl">Iremos al Explorador de archivos y en la barra de búsqueda buscaremos:</p>
                 <pre class="codigo" translate="no"><code class="bash">\\IP_servidor_Linux</code></pre>
@@ -218,7 +218,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Montar una carpeta CIFS automáticamente en <span>Linux</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <h2>Montar una carpeta CIFS automáticamente en <span>Linux</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
 
                 <!-- ......................................................... -->
                 <p>1. <b>Editar el archivo <span style="color: rgb(147, 147, 206) !important;">/etc/fstab</span></b>:</p>
@@ -248,7 +248,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
             </div>
 
             <div>
-                <h2>Montar una carpeta SAMBA automáticamente en <span>Windows</span> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                <h2>Montar una carpeta SAMBA automáticamente en <span>Windows</span><img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario autorizado para acceder al recurso compartido</b>.</p>
@@ -273,7 +273,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Más parámetros en <span>SAMBA</span> <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <h2>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 
                 <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]

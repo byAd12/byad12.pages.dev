@@ -64,9 +64,16 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Hostnames válidos</h2>
 
-                <p><u>Reglas</u>: Comenzar con una letra. No contener espacios. Finalizar con letra o dígito. Utilizar únicamente letras, dígitos y guiones. Tener menos de 64 caracteres de longitud. <u>Ejemplo</u>:</p>
+                <p>
+                    <u>Reglas</u>: 
+                    Comenzar con una letra. No contener espacios. 
+                    Finalizar con letra o dígito. 
+                    Utilizar únicamente letras, dígitos y guiones. 
+                    Tener menos de 64 caracteres de longitud. 
+                    <u>Ejemplo válido</u>:
+                </p>
                 <pre class="codigo" translate="no"><code class="cisco">Sw-Floor-1</code></pre>
-                <p>Para poder cambiar el hostname de un equipo Cisco se usa:</p>
+                <p>Para poder cambiar el hostname de un equipo Cisco se usa el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># hostname &lt;Nombre&gt;</code></pre>
             </div>
 
@@ -198,7 +205,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco">show ip interfaces</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">show ipv6 interfaces</code></pre>
 
-                <p>Para ver la tabla de span_contenidos IPv4 o IPv6:</p>
+                <p>Para ver la tabla de rutas IPv4 o IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip route</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">show ipv6 route</code></pre>
 
@@ -247,11 +254,11 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2>Router - Enspan_contenidomiento estático</h2>
+                <h2>Router - Enrutamiento estático</h2>
 
-                <p>Para añadir una span_contenido a la que un router pueda acceder de manera manual:</p>
+                <p>Para añadir una ruta a la que un router pueda acceder de manera manual:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt;</code></pre>
-                <p class="Expl"><u>Nota</u>: Si la dirección de red o una IP cambia, debe modificarse la span_contenido manualmente.</p>
+                <p class="Expl"><u>Nota</u>: Si la dirección de red o una IP cambia, debe modificarse la ruta manualmente.</p>
             </div>
             
             <div>
@@ -326,7 +333,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <p>Pasos:</p>
                 <p>1. Poner un hostname único y diferente al de por defecto.</p>
                 
-                <p>2. Asignar un nombre de dominio (ej. pargapondal.inf):</p>
+                <p>2. Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
                 
                 <p>3. Generar una clave de 4096 Bytes u otro tamaño con el algoritmo RSA:</p>
@@ -342,7 +349,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2>DNS</h2>
 
-                <p>Asignar un nombre de dominio (ej. pargapondal.inf):</p>
+                <p>Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
                 
                 <p>Desactivar la búsqueda de DNS:</p>

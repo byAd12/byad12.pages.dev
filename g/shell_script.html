@@ -98,7 +98,11 @@ Código por Adrián L. G. P.
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">valor = valor</code></pre></td>
-                            <td>Igual a /// <span class="span_contenido">==</span> hace lo mismo pero permitiendo comodines</td>
+                            <td>Igual a</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">valor === valor</code></pre></td>
+                            <td>Igual a. Permite usar comodines</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">valor != valor</code></pre></td>
@@ -159,12 +163,20 @@ Código por Adrián L. G. P.
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
-                            <td><pre translate="no"><code class="bash">-e span_contenido</code></pre></td>
-                            <td>Si existe un archivo o carpeta /// O se puede hacer con el comando <span class="span_contenido">test</span></td>
+                            <td><pre translate="no"><code class="bash">-e ruta</code></pre></td>
+                            <td>Si existe un archivo o carpeta</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">-r span_contenido</code></pre></td>
-                            <td>Si tiene permisos de lectura /// Puede ser <span class="span_contenido">-w</span>, <span class="span_contenido">-x</span></td>
+                            <td><pre translate="no"><code class="bash">-r ruta</code></pre></td>
+                            <td>Si tiene permisos de lectura</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-w ruta</code></pre></td>
+                            <td>Si tiene permisos de escritura</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-x ruta</code></pre></td>
+                            <td>Si tiene permisos de ejecución</td>
                         </tr>
                     </table>
                 </div>
@@ -203,7 +215,7 @@ fi</code></pre>
             </div>
 
             <div>
-                <h2>Función <span class="span_contenido">CASE</span></h2>
+                <h2>Función <span>CASE</span></h2>
 
                 <p>Para ejecutar varias acciones, dependiendo del valor de una variable:</p>
                 <pre class="codigo" translate="no"><code class="bash">read -p 'texto' var
@@ -222,7 +234,7 @@ esac
             </div>
 
             <div>
-                <h2>Bucle <span class="span_contenido">FOR</span></h2>
+                <h2>Bucle <span>FOR</span></h2>
 
                 <p>Formato para recorrer un conjunto de valores hasta llegar al final:</p>
                 <pre class="codigo" translate="no"><code class="bash">for nombre_var in conjunto; do
@@ -236,7 +248,7 @@ done</code></pre>
             </div>
 
             <div>
-                <h2>Función <span class="span_contenido">WHILE</span></h2>
+                <h2>Función <span>WHILE</span></h2>
 
                 <p>Ejecuta su contenido si la condición es verdadero in definidamente hasta que se pare:</p>
                 <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
@@ -246,7 +258,7 @@ done</code></pre>
             </div>
 
             <div>
-                <h2>Función <span class="span_contenido">UNTIL</span></h2>
+                <h2>Función <span>UNTIL</span></h2>
 
                 <p>Lo mismo que <span class="span_contenido">WHILE</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do

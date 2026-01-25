@@ -63,7 +63,7 @@ Código por Adrián L. G. P.
         <hr>
         <div class="parte1">
             <div>
-                <h2>Configuración en el <span class="spanblanco">servidor</span></h2>
+                <h2>Configuración en el <span>servidor</span></h2>
 
                 <p>1. Editar el archivo de configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
@@ -91,7 +91,7 @@ Código por Adrián L. G. P.
             </div>
 
             <div>
-                <h2>Configuración en el <span class="spanblanco">cliente</span></h2>
+                <h2>Configuración en el <span>cliente</span></h2>
 
                 <p>1. En el cliente se puede mirar que carpetas se puede montar del servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">showmount -e IP_servidor</code></pre>
@@ -101,8 +101,8 @@ Código por Adrián L. G. P.
                 <p>2. Una vez podamos ver el recurso hay que montar la carpeta del servidor en una carpeta del cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir /mnt/carpeta_local</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">mount -t nfs IP_servidor:/carpeta_remota /mnt/carpeta_local</code></pre>
-                <p class="Expl"><b>/mnt/carpeta_local</b>: Una span_contenido local del cliente en la que montar el recurso compartido.</p>
-                <p class="Expl"><b>/carpeta_remota</b>: La span_contenido en el servidor del recurso compartido.</p>
+                <p class="Expl"><b>/mnt/carpeta_local</b>: Una ruta local del cliente en la que montar el recurso compartido.</p>
+                <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
 
                 <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <span class="span_contenido">otros</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod 755 /carpeta_remota</code></pre>
@@ -121,7 +121,7 @@ Código por Adrián L. G. P.
         <hr>
         <div class="parte1">
             <div>
-                <h2><span class="spanblanco">Permisos</span>: "Solución" para ver los nombres correctos</h2>
+                <h2><span>Permisos</span>: "Solución" para ver los nombres correctos</h2>
 
                 <p>1. Asegurarse de que los UID y GID coincidan entre cliente y servidor. Luego crear en el cliente los mismos usuarios y grupos que en el servidor usando el mismo UID y GID:</p>
                 <pre class="codigo" translate="no"><code class="bash">groupadd -g gid_grupo nombre_grupo</code></pre>
@@ -152,7 +152,7 @@ Código por Adrián L. G. P.
             </div>
 
             <div>
-                <h2>Montaje <span class="spanblanco">automático</span> en los clientes</h2>
+                <h2>Montaje <span>automático</span> en los clientes</h2>
 
                 <p>1. Hay que editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
@@ -160,7 +160,7 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="bash">IP_servidor:/carpeta_remota  /mnt/carpeta_local  nfs  defaults,nfsvers=3  0  0</code></pre>
                 <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
                 <p class="Expl"><b>IP_servidor</b>: La dirección IP que tiene el servidor que aloja el recurso compartido.</p>
-                <p class="Expl"><b>/carpeta_remota</b>: La span_contenido en el servidor del recurso compartido.</p>
+                <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
                 <p class="Expl"><b>/mnt/carpeta_local</b>: La span_contenido local en la que vamos a montar la carpeta.</p>
                 <p class="Expl"><b>nfs</b>: Tipo de sistema de ficheros.</p>
                 <p class="Expl"><b>defaults</b>: Opciones predefinidas.</p>

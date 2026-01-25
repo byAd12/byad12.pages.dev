@@ -65,25 +65,33 @@ Código por Adrián L. G. P.
             </div>
            
             <div>
-                <h2>span_contenidos Importantes</h2>
+                <h2>Archivos importantes</h2>
                 
-                <p>Fichero para indicar la interfaz:</p>
-                <p><span class="span_contenido" translate="no">/etc/default/isc-dhcp-server</span></p>
-
-                <p>Fichero de Configuración del servidor:</p>
-                <p><span class="span_contenido" translate="no">/etc/dhcp/dhcpd.conf</span></p>
-
-                <p>Fichero de registro de errores del sistema:</p>
-                <p><span class="span_contenido" translate="no">/var/log/syslog</span></p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td>Fichero para indicar la interfaz</td>
+                            <td><span class="span_url" translate="no">/etc/default/isc-dhcp-server</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de Configuración del servidor</td>
+                            <td><span class="span_url" translate="no">/etc/dhcp/dhcpd.conf</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de registro de errores del sistema</td>
+                            <td><span class="span_url" translate="no">/var/log/syslog</span></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
 
             <div>
                 <h2>Comandos para DHCP</h2>
 
-                <p>Hacer un DHCP-DISCOVER en el cliente:</p>
+                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
-                <p>Hacer un DHCP-RELEASE en el cliente:</p>
+                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-RELEASE</span> en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v -r</code></pre>
             </div>
         </div>
@@ -92,12 +100,12 @@ Código por Adrián L. G. P.
         <hr>
         <div class="parte1">
             <div>
-                <h2>Archivo de configuración</h2>
-                <p><span class="span_contenido" translate="no">/etc/default/isc-dhcp-server</span></p>
+                <h2>Archivo de configuración:<br><span translate="no">/etc/default/isc-dhcp-server</span></h2>
+
                 <p>Todos los bloques en el mismo archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
 option domain-name-servers [VALOR];</code></pre>
-                <p class="Expl"><b>routers</b>: La IPv4 del enspan_contenidodor.
+                <p class="Expl"><b>routers</b>: La IPv4 del enrutador.
                 <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por espacios.
                 </p>
 
@@ -125,7 +133,7 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
 }</code></pre>
                 <p class="Expl">Aquí definimos una IP estática mediante una MAC.
                 <br><b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
-                <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_url" translate="no">ethernet</span> puede ser cambiado.
+                <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
                 <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
                 </p>
 
