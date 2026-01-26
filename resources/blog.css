@@ -39,7 +39,7 @@ hr.SeparadorConTitulo{margin-top: 30px;}
 
 p, td, li{line-height: 1.7em;}
 p, li{color: #d0d0d0 !important;}
-p.Expl b, span.Expl{color: #8b9dc3;}
+p.Expl b, span.Expl, td b{color: #8b9dc3;}
 
 p::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection, table td::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
 
@@ -66,8 +66,8 @@ img.SoporteComandoRemoto{height: 1em; padding: 0; vertical-align: middle; margin
 /* =================================================== */
 /* Enlaces */
 
-p a{color: #7b92de; text-decoration: none; transition: color 0.3s;}
-p a:hover{color: #7cfb2d; text-underline-offset: 5px; text-decoration: underline;}
+p a, td a{color: #7b92de; text-decoration: none; transition: color 0.3s;}
+p a:hover, td a:hover{color: #7cfb2d; text-underline-offset: 5px; text-decoration: underline;}
 
 /* Botón personalizado - Para texto */
 
@@ -104,7 +104,7 @@ ol{margin-left: 3%;}
 /* Tablas */
 
 .TablaDivScroll{width: 100% !important; margin: none !important; padding: none !important; position: inherit !important; border-radius: none !important; border: none !important; overflow-x: auto; -webkit-overflow-scrolling: touch;}
-table.TablaComandos{color: #c0c0c0; margin-top: 20px; border-collapse: collapse;}
+table.TablaComandos{color: #c0c0c0; margin: 10px 0 10px 0; border-collapse: collapse;}
 table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
 
 /* =================================================== */

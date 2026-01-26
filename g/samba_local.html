@@ -226,7 +226,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <!-- ......................................................... -->
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña,uid=0000,gid=0000</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña,uid=1000,gid=1000   0   0</code></pre>
                 <p class="Expl">
                     <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url">/</span>.
                     <br>
@@ -237,13 +237,18 @@ chmod permisos /carpeta_a_compartir</code></pre>
                     <br>
                     <b>contraseña</b>: Contraseña del usuario con permisos.
                     <br>
-                    <b>uid</b>: El ID del usuario que tendrá permisos como propietario sobre el recurso compartido, por defecto asigna a root.
+                    <b>uid</b>: El ID del usuario que será propietario del recurso compartido, si no se especifica se asigna a root.
                     <br>
-                    <b>gid</b>: El ID del grupo que tendrá permisos como propietario sobre el recurso compartido.
+                    <b>gid</b>: El ID del grupo será propietario sobre el recurso compartido.
                 </p>
+                <p class="Expl">⚠️ <b>uid</b> y <b>gid</b> <u>no</u> conceden permisos nuevos ni omite los permisos configurados, sino que solo cambian el propietario “visible” en Linux.</p>
+
+                <p class="Expl">Si no se especifican credenciales, el sistema intentará montar el recurso como acceso invitado <span class="span_contenido">guest</span>, siempre que el servidor lo permita:</p>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    defaults   0   0</code></pre>
 
                 <!-- ......................................................... -->
-                <p>3. <b>Reiniciar el <span style="color: rgb(147, 147, 206) !important;">sistema</span> y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> si se monta la carpeta sin errores</b>.</p>
+                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> que se monte sin errores</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
 
             </div>
 

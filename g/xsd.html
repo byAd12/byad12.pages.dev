@@ -57,17 +57,718 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
             </div>
 
+            <!-- ......................................................... -->
+
             <div>
-                <h2>...</h2>
+                <h2>¿Para qué sirve XSD?</h2>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">...</span></b>:</p>
+                <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para <u>validar documentos XML</u>, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
 
-                <p>...</p>
+                <p>
+                    <b>XSD <span style="color: rgb(147, 147, 206) !important;">permite validar</span></b>:
+                    <br>- La jerarquía de los elementos y los atributos permitidos.
+                    <br>- Las restricciones y las reglas de validación para el contenido de los elementos y atributos.
+                    <br>- La descripción de estructuras y tipos de datos complejos.
+                    <br>- La definición de relaciones entre elementos.
+                </p>
 
-                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
-                <p class="Expl"><b>opc</b>: ...</p>
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Ventajas</span> sobre DTD</b>:
+                    <br>- La sintaxis es más avanzada y proporciona un mayor nivel de detalle.
+                    <br>- Permite restringir con mucha precisión los valores que puede tener un elemento o atributo.
+                    <br>- Los mismos procesadores que permiten interpretar ficheros XML permitirían procesar ficheros XSD ya que este está escrito sobre XML.
+                    <br>- Permite la definición de namespaces.
+                </p>
 
-                <!-- ......................................................... -->
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Pasos</span> de validación</b>:
+                    <br>1. Creamos el documento XSD, también llamado esquema.
+                    <br>2. Vinculamos el documento XSD con el documento XML.
+                </p>
+
+                <p>
+                    Es <b style="color: rgb(147, 147, 206) !important;">importante</b> que las URLs como <span class="span_url">http://www.w3.org/2001/XMLSchema</span> o <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span> deban usar el protocolo <span class="span_url">http</span> ya que
+                    algunas aplicaciones no validan correctamente los documentos XML si indicamos las URLs en su versión <span class="span_url">https</span>. 
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            
+            <div>
+                <h2>Tipos de elementos XML</h2>
+                <p>Hay que tener en cuenta que tipos de elementos existen en XML.</p>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">simples</span></b>:</p>
+                <p>
+                    Son aquellos elementos que no contienen sub-elementos, aunque pueden tener atributos si se definen mediante <span class="span_contenido">simpleContent</span>. 
+                    Este puede contener <u>solo texto</u> o estar vacío. A continuación se muestra un ejemplo de un elemento simple:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta&gt;Valor de la etiqueta&lt;/etiqueta&gt;</code></pre>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">complejos</span></b>:</p>
+                <p>
+                    Son aquellos elementos que contienen algún atributo <b>y / o</b> otro elemento dentro de él.
+                    Cualquier combinación de uno o varios elementos y sub-elementos es válido si el esquema lo permite.
+                    A continuación se muestra un ejemplo de un elemento complejo:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta atributo="valor"&gt;
+    &lt;subetiqueta id="1" num="0011"&gt;Valor de la sub-etiqueta&lt;/subetiqueta&gt;
+&lt;/etiqueta&gt;</code></pre>
+                <p class="Expl">Se considera como elemento complejo cualquier elemento vacío pero que tenga al menos un atributo, lo mismo si solo tiene un sub-elemento dentro.</p>
+
+            </div>
+
+            <div>
+                <h2>Estructura XSD</h2>
+
+                <p>Los elementos XML que se utilizan para generar un esquema han de pertenecer al namespace <span class="span_contenido">XML Schema</span>, el que habitualmente se le asigna el prefijo <span class="span_contenido">xs:</span> aunque podría usarse cualquier otro.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+    &lt;!-- El resto de elementos --&gt;
+&lt;/xs:schema&gt;</code></pre>
+
+                <p class="Expl">
+                    La declaración XML es opcional pero recomendable añadirla al inicio del documento.
+                    <br>La etiqueta <b>schema</b> siempre será el elemento raíz.
+                    <br>El namespace <b>xmlns:xs</b> siempre apuntará a la misma URL <span class="span_url">http://www.w3.org/2001/XMLSchema</span>.
+                </p>
+            </div>
+
+            <div>
+                <h2>Vincular un documento XSD a uno XML</h2>
+                <p>En el elemento raíz del documento XML se añadirán los siguientes atributos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;elemento_raiz 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="ruta_documento.xsd"
+&gt;
+    ...
+&lt;/elemento_raiz&gt;</code></pre>
+                <p class="Expl">
+                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                </p>
+                <p class="Expl">
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                </p>
+
+            </div>
+
+            <div>
+                <h2>Tipos de valores en XSD</h2>
+
+                <p>Los valores se dividen en 2 grupos principales:</p>
+                <p>
+                    <b>Valores <span style="color: rgb(147, 147, 206) !important;">primitivos</span></b>: No se definen a partir de otros tipos de datos.
+                    <br><b>Valores <span style="color: rgb(147, 147, 206) !important;">derivados</span></b>: Se definen a partir de otros tipos de datos.
+                </p>
+
+                <p>Cada valor puede ser de 2 formas:</p>
+                <p>
+                    <b>Valor <span style="color: rgb(147, 147, 206) !important;">predefinido</span></b>: Valores ya creados por el estándar XML.
+                    <br><b>Valor <span style="color: rgb(147, 147, 206) !important;">personalizado</span></b>: Valores que podemos crear a partir de uno predefinido.
+                </p>
+
+                <p>Imágen con todos los valores existentes en: <a href="https://axis.apache.org/axis/cpp/images/c/XSD_Objects_Heirarchy.JPG" target="_blank">apache.org</a></p>
+
+                <p>A continuación se muestra una agrupación de valores <b>predefinidos</b> separados por tipos:</p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td colspan="3">Valores de tipo <b>texto</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:string</b></td>
+                            <td>Representa cualquier cadena de carácteres</td>
+                            <td>hola</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:anyURI</b></td>
+                            <td>
+                                Representa un Uniform Resource Identifier (URI):
+                                <br>
+                                Cadena de carácteres que identifica un recurso sin ambigüedades
+                            </td>
+                            <td>
+                                <b>URL</b>: http://by.ad/12
+                                <br>
+                                <b>Ruta</b>: /img/logo.svg
+                                <br>
+                                <b>Teléfono</b>: tel:+34666777888
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:language</b></td>
+                            <td>Representa un lenguaje por su identificador, definido en <a href="https://www.ietf.org/rfc/rfc3066.txt" target="_blank">RFC 3066</a></td>
+                            <td>
+                                <b>Español</b>: es
+                                <br>
+                                <b>Gallego</b>: gl
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td colspan="3">Valores de tipo <b>númerico</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:integer</b></td>
+                            <td>Valores numéricos sin decimal, puede ser positivo o negativo</td>
+                            <td>12, +12, -12</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:positiveInteger</b></td>
+                            <td>Valores numéricos sin decimal y positivos<br>El valor mínimo es 1</td>
+                            <td>12, +12</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:negativeInteger</b></td>
+                            <td>Valores numéricos sin decimal y negativo<br>El 0 no cuenta como entero negativo</td>
+                            <td>-12</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:boolean</b></td>
+                            <td>Valores verdadero o falso</td>
+                            <td>true, 1, false, 0</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:decimal</b></td>
+                            <td>Valores numéricos con decimal usando el <span class="span_contenido">.</span></td>
+                            <td>0, 12, +12, 1.2, 12.000</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td colspan="3">Valores de tipo <b>tiempo</b>  en formato <a href="https://es.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:dateTime</b></td>
+                            <td>Representa la fecha y hora</td>
+                            <td>
+                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                <br>
+                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:date</b></td>
+                            <td>Representa la fecha</td>
+                            <td>
+                                año-mes-dia<b>+hora:minuto</b>
+                                <br>
+                                año-mes-dia<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:time</b></td>
+                            <td>Representa la hora</td>
+                            <td>
+                                hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                <br>
+                                hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:duration</b></td>
+                            <td>
+                                Representa una duración de tiempo
+                                <br>
+                                <u>Formato</u>: P<span class="span_contenido">año</span>Y<span class="span_contenido">mes</span>M<span class="span_contenido">dia</span>DT<span class="span_contenido">hora</span>H<span class="span_contenido">minuto</span>M<span class="span_contenido">segundo</span>S
+                                <br>
+                                Cada año, mes... se reemplaza por la duración necesaria
+                            </td>
+                            <td>
+                                <b>2 años, 4 meses, 3 dias, 5 h, 6 min, 7 seg</b>: P2Y4M3DT5H6M7S
+                                <br>
+                                <b>2 años</b>: P2Y
+                                <br>
+                                <b>1min y 30.5 seg</b>: PT1M30.5S
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gYearMonth</b></td>
+                            <td>Representa una fecha sin día</td>
+                            <td>
+                                <b>Inicio de un periodo</b>: año-mes</b>
+                                <br>
+                                <b>Finalización de un periodo</b>: -año-mes</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gMonthDay</b></td>
+                            <td>Representa una fecha sin año</td>
+                            <td>--mes-dia</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gYear</b></td>
+                            <td>Representa un año entre 0001 y 9999</td>
+                            <td>año, -año</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gMonth</b></td>
+                            <td>Representa un mes en concreto entre 01 y 12</td>
+                            <td>--mes</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gDay</b></td>
+                            <td>Representa un día en concreto entre 01 y 31</td>
+                            <td>---día</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td colspan="3">Valores de tipo <b>identificador</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:ID</b></td>
+                            <td>
+                                Solo se puede definir en atributos. Su valor debe ser único en todo el documento XML
+                                <br>
+                                Debe empezar con una letra o <span class="span_contenido">_</span> y puede contener los símbolos <span class="span_contenido">-</span>, <span class="span_contenido">_</span>, <span class="span_contenido">.</span>, <span class="span_contenido">:</span>
+                            </td>
+                            <td>gal_coruna</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:IDREF</b></td>
+                            <td>
+                                Es una referencia a un identificador que ya ha sido definido en el documento XML
+                                <br>
+                                Dará error de validación si no existe. Solo se puede definir en atributos
+                                <br>
+                                Tiene las mismas restricciones que <b>xs:ID</b>
+                            </td>
+                            <td>gal_coruna</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:IDREFS</b></td>
+                            <td>
+                                Es una lista de varios <b>ID</b> ya definidos en el documento XML y separados por espacios
+                            </td>
+                            <td>gal_coruna and_malaga</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Validación de un <span>elemento simple</span></h2>
+                <p>A continuación se muestra la <u>estructura</u> para validar un elemento que no contenga ningún atributo ni sub-elementos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" minOccurs="0" maxOccurs="unbounded"/&gt;</code></pre>
+                <p class="Expl">
+                    <b>name</b>: Nombre del elemento a validar.
+                    <br><b>type</b>: Tipo de valor que se permite.
+                    <br><b>default</b>: Valor por defecto que tendrá si no se especifica uno. No puede usarse a la vez que <b>fixed</b>.
+                    <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento. No puede usarse a la vez que <b>default</b>.
+                    <br><b>minOccurs</b>: Cardinalidad que indica el número mínimo de veces que debe aparecer.
+                    <br><b>maxOccurs</b>: Cardinalidad que indica el número máximo de veces que debe aparecer (<span class="span_contenido">unbounded</span> es sin límite).
+                </p>
+
+                <p><u>Ejemplo</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idioma&gt;Inglés&lt;/idioma&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma" type="xs:string" default="Español"/&gt;</code></pre>
+            </div>
+
+            <!-- ......................................................... -->
+            <div>
+                <h2>Validación de un <span>elemento complejo</span></h2>
+                <p>A continuación se muestra la <u>estructura</u> para validar un elemento que puede contener atributos y/o sub-elementos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Aquí se definirá su contenido y atributos --&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>   
+                <p class="Expl">
+                    No se puede usar <span class="span_contenido">default</span> en <b>element</b> si se usa <b>complexType</b>.
+                    <br>Con <b>complexType</b> definimos que es un elemento complejo.
+                </p>
+
+                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">secuencia de sub-elementos</span> en el <u>orden especificado</u></b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+
+                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">elección de sub-elementos</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:choice&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+        &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+
+                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">secuencia de sub-elementos</span> que deben aparecer en <u>cualquier orden</u></b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:all&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+            &lt;!-- Cada sub-elemento puede aparecer como máximo una vez (maxOccurs="1"). minOccurs solo puede ser 0 o 1. --&gt;
+        &lt;/xs:all&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+
+                <p><b>Definir que aunque sea complejo su <span style="color: rgb(147, 147, 206) !important;">contenido no tenga sub-etiquetas</span> pero si atributos</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:tipo_valor"&gt;
+                &lt;!-- Aquí se definirán los atributos --&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+                <p class="Expl">
+                    Se usa <b>simpleContent</b> para que el elemento no contenga sub-elementos en el contenido.
+                    <br>
+                    Con <b>extension</b> se define que tipo de valor va a ser el contenido de la etiqueta.
+                </p>
+
+            </div>
+
+            <!-- ......................................................... -->
+            <div>
+                <h2>Validación de un <span>atributo</span></h2>
+                <p>A continuación se muestra la <u>estructura</u> para validar un atributo de una etiqueta:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attribute name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" use="required/optional/prohibited"/&gt;</code></pre>
+                <p class="Expl">
+                    <b>name</b>: Nombre del atributo a validar.
+                    <br><b>type</b>: Tipo de valor que se permite.
+                    <br><b>default</b>: Valor por defecto que tendrá si no se especifica uno.
+                    <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento.
+                    <br><b>use</b>: Define la obligatoriedad del atributo: obligatorio (<span class="span_contenido">required</span>),
+                    opcional (<span class="span_contenido">optional</span>) 
+                    o que no pueda aparecer (<span class="span_contenido">prohibited</span>).
+                </p>
+                <p class="Expl">
+                    ⚠️ Una vez especificado <span class="span_contenido">use="required"</span> no se puede usar la opción <span class="span_contenido">default=""</span>.
+                </p>
+
+                <p>A continuación se muestra un <u>ejemplo</u> de la validación de un elemento y su atributo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idioma&gt;Español&lt;/idioma&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:string"&gt;
+                &lt;xs:attribute name="pais" type="xs:string" default="España"/&gt;
+                &lt;!-- El valor default solo se aplica si el atributo no aparece en el XML --&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Restricciones > <span>Estructura</span></h2>
+                <p>
+                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
+                    Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
+                    <u>Estructura</u>:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:restriction base="xs:integer"&gt;
+    &lt;!-- restricciones --&gt;
+&lt;/xs:restriction&gt;</code></pre>
+                <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
+                </p>
+
+            </div>
+
+            <div>
+                <h2>Restricciones de <span>longitud</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:length</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo). <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:length value="longitud"/&gt;</code></pre>
+                <p class="Expl">Si el valor supera o no llega al valor especificado dará un error al validar el documento.</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:minLength</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud mínima debe ser x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minLength value="longitud_minima"/&gt;</code></pre>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxLength</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud máxima debe ser x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxLength value="longitud_maxima"/&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Restricciones <span>numéricas</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:minInclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minInclusive value="numero_mínimo"/&gt;</code></pre>
+                <p class="Expl"><u>Valores válidos</u>: 12, +12, 1.2, +1.2</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxInclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo es x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxInclusive value="numero_máximo"/&gt;</code></pre>
+
+                <p>Se puede usar las restricciones <span class="span_contenido">xs:minInclusive</span> y <span class="span_contenido">xs:maxInclusive</span> acortando las posibilidades a un rango de números.</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:minExclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo permitido es mayor que x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minExclusive value="numero_antes_del_mínimo"/&gt;</code></pre>
+                <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor mínimo permitido es 11</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxExclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo permitido es menos que x. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxExclusive value="numero_despues_del_máximo"/&gt;</code></pre>
+                <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor máximo permitido es 9</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:totalDigits</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que el número puede tener hasta x dígitos, siendo x un número positivo. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:totalDigits value="digitos_máximos"/&gt;</code></pre>
+
+                <p><b>Restricción <span class="span_contenido">xs:fractionDigits</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:decimal</b> se le aplica la restricción de que el número puede tener hasta x dígitos después del punto decimal. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:fractionDigits value="digitos_decimales_máximos"/&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Restricciones con <span>opciones válidas</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:enumeration</span></b>:</p>
+                <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:enumeration value="valor_permitido_1"/&gt;
+&lt;xs:enumeration value="valor_permitido_2"/&gt;
+...</code></pre>
+                <p class="Expl">Si un valor no coincide con los permitidos se producirá un error al validar el documento XML.</p>
+                <p class="Expl">Se recomienda tener una lista breve para tener un documento lo más eficiente posible.</p>
+
+            </div>
+
+            <div>
+                <h2>Restricciones sobre <span>espacios en blanco</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
+                <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor. <u>Sintaxis</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:whiteSpace value="preserve/replace/collapse"/&gt;</code></pre>
+                <p class="Expl">El valor <b>preserve</b> mantiene espacios en blanco, tabulaciones, saltos de línea y retornos de carro.</p>
+                <p class="Expl">El valor <b>replace</b> substituye todas las tabulaciones, los saltos de línea y los retornos de carro por <u>espacios en blanco</u>.</p>
+                <p class="Expl">El valor <b>collapse</b> reemplaza todas las tabulaciones, saltos de línea, retornos de carro y espacios en blanco únicos
+                (no son espacios consecutivos) por espacios en blanco. Después, sustituye los espacios en blanco consecutivos por un <u>único espacio en blanco</u>.</p>
+
+            </div>
+
+            <div>
+                <h2>Restricciones con <span>Expresiones regulares</span></h2>
+
+                <p>
+                    Una expresión regular es una secuencia de caracteres que se utiliza para definir un patrón. 
+                    También se conocen como <b>regex</b> (regular expression).
+                </p>
+
+                <p>A continuación se muestra la <u>sintaxis</u> de como aplicar un patrón a un elemento o atributo para filtrar so contenido o valor:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:pattern value="patrón"/&gt;</code></pre>
+
+                <br>
+
+                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">encontrar</span> una cadena de carácteres en un valor:</b></p>
+                <p class="Expl">
+                    Simplemente se indica la cadena de carácteres a buscar como por ejemplo <span class="span_contenido">ola</span>, 
+                    que dará como válido los valores <span class="span_contenido">ola</span>, <span class="span_contenido">hola</span>, <span class="span_contenido">volar</span>, etc.
+                </p>
+
+                <br>
+
+                <p><b>Patrón para que el valor <span style="color: rgb(147, 147, 206) !important;">empieze</span> con una cadena de carácteres:</b></p>
+                <p class="Expl">
+                    Se pone primero el símbolo <span class="span_contenido">^</span> seguido de la cadena de carácteres con la que debe empezar, por ejemplo <span class="span_contenido">^X</span>
+                    que dará como válido los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XSD</span>, <span class="span_contenido">XOGAR</span>, etc.
+                </p>
+
+                <p><b>Patrón para que el valor <span style="color: rgb(147, 147, 206) !important;">acabe</span> con una cadena de carácteres:</b></p>
+                <p class="Expl">
+                    Se pone primero el símbolo <span class="span_contenido">$</span> seguido de la cadena de carácteres con la que debe de acabar, por ejemplo <span class="span_contenido">$r</span>
+                    que dará como válido los valores <span class="span_contenido">Dormir</span>, <span class="span_contenido">Buscar</span>, <span class="span_contenido">Encontrar</span>, etc.
+                </p>
+
+                <br>
+
+                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida de 0-n veces</span> en una cadena de carácteres:</b></p>
+                <p class="Expl">
+                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">*</span>, por ejemplo <span class="span_contenido">x*</span>
+                    que dará como válido todos los valores posibles ya que acepta a todos los que contengan o no el carácter <b>x</b>.
+                </p>
+
+                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida de 1-n veces</span> en una cadena de carácteres:</b></p>
+                <p class="Expl">
+                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">+</span>, por ejemplo <span class="span_contenido">X+</span>
+                    que dará como válido todos los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XXZ</span>, etc.
+                </p>
+
+                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida 0 o 1 vez</span> en una cadena de carácteres:</b></p>
+                <p class="Expl">
+                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">?</span>, por ejemplo <span class="span_contenido">X?</span>
+                    que dará como válido todos los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XSD</span>, etc.
+                </p>
+
+                <br>
+
+                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">permitir cualquier carácter</span>:</b></p>
+                <p class="Expl">
+                    Se pone el símbolo <span class="span_contenido">.</span>, por ejemplo <span class="span_contenido">.</span>
+                    que dará como válido todos los valores <span class="span_contenido">A</span>, <span class="span_contenido">B</span>, etc (excepto un salto de línea).
+                </p>
+                <p class="Expl">Una buena implementación sería <span class="span_contenido">.*</span>, que permite cualquier carácter sin límites.</p>
+
+                <br>
+
+                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">buscar un carácter literal</span>:</b></p>
+                <p class="Expl">
+                    Si queremos poner un punto o cualquier carácter que indica otro patrón pero que sea literal podemos ponerlo después del símbolo <span class="span_contenido">\</span>, por ejemplo <span class="span_contenido">\.</span>
+                    que dará como válido el valor <span class="span_contenido">.</span>.
+                </p>
+
+                <br>
+
+                <p><b>Patrón con una <span style="color: rgb(147, 147, 206) !important;">lista de carácteres que coincidan</span>:</b></p>
+                <p class="Expl">
+                    Para que en una posición solo sea válido una lista de carácteres pero no todos juntos se ponen entre <span class="span_contenido">[]</span>, por ejemplo <span class="span_contenido">[aeiou]</span>
+                    que dará como válido los valores <span class="span_contenido">a</span>, <span class="span_contenido">e</span>, <span class="span_contenido">i</span>, <span class="span_contenido">o</span>, <span class="span_contenido">u</span>.
+                </p>
+
+                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">lista de carácteres que no coincidan</span>:</b></p>
+                <p class="Expl">
+                    Para excluir una lista de carácteres en una posición se ponen dentro de <span class="span_contenido">[^]</span>, por ejemplo <span class="span_contenido">[^aei]</span>
+                    que dará como válido los valores que no sean <span class="span_error">a</span>, <span class="span_error">e</span>, <span class="span_error">i</span>.
+                </p>
+
+                <br>
+
+                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">rango de carácteres que coincidan</span>:</b></p>
+                <p class="Expl">
+                    Para permitir cualquier carácter dentro de un rango se pueden poner dentro de <span class="span_contenido">[]</span>, por ejemplo <span class="span_contenido">[a-z]</span>
+                    que dará como válido los valores que sean de la <span class="span_contenido">a</span> a la <span class="span_contenido">z</span>.
+                </p>
+
+                <br>
+
+                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">rango de carácteres que coincidan</span>:</b></p>
+                <p class="Expl">
+                    Para permitir la cantidad de veces que un carácter puede estar se usa <span class="span_contenido">carácter{min,max}</span>, por ejemplo <span class="span_contenido">c{1,3}</span>
+                    que dará como válido los valores que sean <span class="span_contenido">c</span>, <span class="span_contenido">cc</span> o <span class="span_contenido">ccc</span>.
+                </p>
+
+                <br>
+
+                <p><b>Patrón que coincida una <span style="color: rgb(147, 147, 206) !important;">palabra exacta</span>:</b></p>
+                <p class="Expl">
+                    Para filtrar una palabra se rodea esta ente <span class="span_contenido">\b</span>, por ejemplo <span class="span_contenido">\bhola\b</span>
+                    que dará como válido los valores que contengan la palabra <span class="span_contenido">hola</span> exacta.
+                </p>
+
+                <br>
+
+                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">números del 0 al 9</span>:</b></p>
+                <p class="Expl">
+                    Se usa simplemente el filtro <span class="span_contenido">\d</span>, por ejemplo <span class="span_contenido">\d\d</span>
+                    que dará como válido los valores como <span class="span_contenido">12</span>, <span class="span_contenido">65</span>, etc.
+                </p>
+
+                <br>
+
+                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">cualquier carácter de palabra</span>:</b></p>
+                <p class="Expl">
+                    Se usa simplemente el filtro <span class="span_contenido">\w</span>, por ejemplo <span class="span_contenido">\w</span>
+                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
+                </p>
+
+                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">cualquier carácter que no sea de una palabra</span>:</b></p>
+                <p class="Expl">
+                    Se usa simplemente el filtro <span class="span_contenido">\W</span>, por ejemplo <span class="span_contenido">\W</span>
+                    que dará como válido cualquier carácter que <b>no</b> contenga una letra, número o un guión bajo.
+                </p>
+
+                <br>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Elegir entre 2 patrones</span>:</b></p>
+                <p class="Expl">
+                    Se usa simplemente el filtro <span class="span_contenido">patrón1 | patrón2</span>, por ejemplo <span class="span_contenido">\w+ | \W?</span>
+                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Busca un patrón 1 solo si le sigue un patrón 2</span>:</b></p>
+                <p class="Expl">
+                    Se usa simplemente el filtro <span class="span_contenido">patrón1 (?=patrón2)</span>, por ejemplo <span class="span_contenido">\w+ (?=\W?)</span>
+                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
+                </p>
+
+            </div>
+
+            <div>
+                <h2>Expresiones regulares > <span>Herramientas</span></h2>
+                
+                <p>La web <a href="https://regexr.com/" target="_blank">regexr.com</a> sirve para practicar patrones.</p>
             </div>
 
         </div>
