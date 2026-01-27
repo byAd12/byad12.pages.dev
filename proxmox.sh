@@ -33,47 +33,51 @@ while true; do
     echo -e "Script hecho por ${Az}Adrián L. G. P.${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.es\n${Bl}"
 
     printf "%b\n" \
+        " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
+            " |  ===============================" \
+            "${Ne}1${Bl} | BIOS: Arreglo de la zona horaria" \
+            " | " \
         " | ${Az}CLÚSTER ${Bl}" \
             " | ===================" \
-            "${Ne}1${Bl} | Crear un clúster" \
-            "${Ne}2${Bl} | Unirse a un clúster" \
-            "${Ne}3${Bl} | Eliminar un clúster" \
+            "${Ne}2${Bl} | Crear un clúster" \
+            "${Ne}3${Bl} | Unirse a un clúster" \
+            "${Ne}4${Bl} | Eliminar un clúster" \
             " | " \
         " | ${Az}CLOUDFLARED ${Bl}" \
             " | =============================" \
-            "${Ne}4${Bl} | Instalar e iniciar sesión" \
-            "${Ne}5${Bl} | Crear un túnel - HTTP(S)" \
-            "${Ne}6${Bl} | Crear un túnel - Servicio TCP" \
-            "${Ne}7${Bl} | Purgar cloudflared" \
+            "${Ne}5${Bl} | Instalar e iniciar sesión" \
+            "${Ne}6${Bl} | Crear un túnel - HTTP(S)" \
+            "${Ne}7${Bl} | Crear un túnel - Servicio TCP" \
+            "${Ne}8${Bl} | Purgar cloudflared" \
             " | " \
-        " | ${Az}AUTOMATIZAR ${Bl}" \
+        " | ${Az}AUTOMATIZACIÓN ${Bl}" \
             " | =============================" \
-            "${Ne}8${Bl} | Configurar apagado automático" \
+            "${Ne}9${Bl} | Configurar apagado automático" \
             " | " \
         " | ${Az}DOCKER ${Bl}" \
             " | ========================" \
-            "${Ne}9${Bl} | Instalar docker - Debian" \
-            "${Ne}10${Bl} | favonia/cloudflare-ddns" \
+            "${Ne}10${Bl} | Instalar docker - Debian" \
+            "${Ne}11${Bl} | favonia/cloudflare-ddns" \
             " | " \
         " | ${Az}PROXMOX ${Bl}" \
             " | =====================" \
-            "${Ne}11${Bl} | CT - Crear backup" \
-            "${Ne}12${Bl} | CT - Restaurar backup" \
-            "${Ne}13${Bl} | Restaurar local-lvm" \
-            "${Ne}14${Bl} | Instalar temas" \
+            "${Ne}12${Bl} | CT - Crear backup" \
+            "${Ne}13${Bl} | CT - Restaurar backup" \
+            "${Ne}14${Bl} | Restaurar local-lvm" \
+            "${Ne}15${Bl} | Instalar temas" \
             " | " \
         " | ${Az}VPN - NETBIRD ${Bl}" \
             " | ============================" \
-            "${Ne}15${Bl} | Instalar y entrar en Netbird" \
-            "${Ne}16${Bl} | Desinstalar Netbird y purgar configuración" \
+            "${Ne}16${Bl} | Instalar y entrar en Netbird" \
+            "${Ne}17${Bl} | Desinstalar y purgar Netbird" \
             " | " \
         " | ${Az}NFS ${Bl}" \
             " | ====================" \
-            "${Ne}17${Bl} | Compartir un recurso" \
+            "${Ne}18${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
             " | ==================" \
-            "${Ne}18${Bl} | Cambiar de versión" \
+            "${Ne}19${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
             " | ======" \
@@ -94,9 +98,27 @@ while true; do
     exit) break ;;
 
     ##############################################################
-    # CREAR CLUSTER
+    # CONFIGURAR RTC - BIOD
     ##############################################################
     1)
+        clear
+
+        echo -e "\n${Az}Configuración actual...${Bl}"
+        timedatectl
+
+        echo -e "\n${Az}Ajustando la hora de la BIOS a RTC + 1...${Bl}"
+        timedatectl set-local-rtc 1 --adjust-system-clock
+
+        echo -e "\n${Az}Verificando cambios...${Bl}"
+        timedatectl
+
+        echo -e "\n${Ve}¡Se ha creado el clúster correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # CREAR CLUSTER
+    ##############################################################
+    2)
         clear
         read -p 'Nombre del clúster a crear: ' nombre_cluster
 
@@ -112,7 +134,7 @@ while true; do
     ##############################################################
     # UNIRSE A CLUSTER
     ##############################################################
-    2)
+    3)
         clear
         echo -e "${Ro}!!! INSTALE ANTES NETBIRD !!!${Bl}"
         read -p 'Nodo máster (coruna1): ' nodo_nombre
@@ -129,7 +151,7 @@ while true; do
     ##############################################################
     # ELIMINAR CLUSTER
     ##############################################################
-    3)
+    4)
         clear
         echo -e "${Az}Parando servicios...${Bl}"
         systemctl stop pve-cluster corosync
@@ -162,7 +184,7 @@ while true; do
     ##############################################################
     # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
     ##############################################################
-    4)
+    5)
         clear
 
         echo -e "${Az}Instalando Cloudflared...${Bl}"
@@ -187,7 +209,7 @@ while true; do
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - HTTP(S)
     ##############################################################
-    5)
+    6)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -245,7 +267,7 @@ EOF
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - SERVICIO TCP
     ##############################################################
-    6)
+    7)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -302,7 +324,7 @@ EOF
     ##############################################################
     # PURGAR CLOUDFLARED
     ##############################################################
-    7)
+    8)
         clear
 
         echo -e "\n${Az}Parando el servicio 'cloudflared'...${Bl}"
@@ -325,7 +347,7 @@ EOF
     ##############################################################
     # APAGADO AUTOMÁTICO - CRONTAB
     ##############################################################
-    8)
+    9)
         clear
         read -p 'Hora a apagar: ' hora
         read -p 'Minutos a apagar: ' minuto
@@ -352,7 +374,7 @@ EOF
     ##############################################################
     # INSTALAR DOCKER
     ##############################################################
-    9)
+    10)
         clear
 
         echo -e "${Az}Instalando...${Bl}"
@@ -383,7 +405,7 @@ EOF
     # CLOUDFLARE DDNS
     # GitHub: https://github.com/favonia/cloudflare-ddns
     ##############################################################
-    10)
+    11)
         clear
         read -p 'Nombre del subdominio (solo subdominio): ' subdominio
         read -p 'CLOUDFLARE_API_TOKEN: ' api_token
@@ -400,7 +422,7 @@ EOF
     ##############################################################
     # CT - CREAR BACKUP
     ##############################################################
-    11)
+    12)
         clear
         read -p 'ID del contenedor a hacer una backup: ' id_ct
         read -p 'Almacenamiento (local): ' almacenamiento
@@ -414,7 +436,7 @@ EOF
     ##############################################################
     # CT - RESTAURAR BACKUP
     ##############################################################
-    12)
+    13)
         clear
         read -p 'ID del contenedor a restaurar una backup: ' id_ct
         read -p 'Ruta al backup (.tar.lzo): ' ruta
@@ -429,7 +451,7 @@ EOF
     ##############################################################
     # RESTAURAR LOCAL-LVM
     ##############################################################
-    13)
+    14)
         clear
 
         host=$(hostname)
@@ -455,7 +477,7 @@ EOF
     ##############################################################
     # INSTALAR TEMAS
     ##############################################################
-    14)
+    15)
         clear
 
         echo -e "\n${Az}Descargando la carpeta...${Bl}"
@@ -478,7 +500,7 @@ EOF
     ##############################################################
     # INSTALAR Y ENTRAR A NETBIRD
     ##############################################################
-    15)
+    16)
         clear
         read -p 'Set-up key de Netbird: ' llave_netbird
 
@@ -505,7 +527,7 @@ EOF
     ##############################################################
     # DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
-    16)
+    17)
         clear
 
         echo -e "\n${Az}Parando servicios...${Bl}"
@@ -528,7 +550,7 @@ EOF
     ##############################################################
     # NFS - COMPARTIR UN RECURSO 
     ##############################################################
-    17)
+    18)
         clear
         read -p 'Carpeta local a compartir: ' carpeta_local
         read -p 'Permisos (rw,ro): ' permisos        
@@ -554,7 +576,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    18)
+    19)
         clear
         read -p 'Versión de GitHub a actualizar: ' version_github
 
