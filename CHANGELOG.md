@@ -1,14 +1,8 @@
-26/01/2026 - Mejoras de contenido
+27/01/2026 - Mejoras de contenido
 
 # g/samba_local.html
-Se mejoró el contenido.
-
-# g/nfs.html
-Mejoras de ortografía.
+Se definieron valores por defecto a cada opción.
+Se añadió una nueva opción.
 
 # g/xsd.html
-Nueva guía con contenido actualizado.
-
-# recursos/blog.css
-Mejoras de color.
-Ajuste de márgenes.
+Mejora del contenido.

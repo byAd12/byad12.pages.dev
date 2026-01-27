@@ -285,23 +285,24 @@ password=contraseña</code></pre>
                 <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
     comment = Comentario del recurso compartido.
     path = /carpeta_a_compartir
-    browseable = no
+    browseable = no              # Por defecto: yes
     valid users = user1,user2,%S
-    force user = user1
-    force group = group1
-    read only = no
+    force user = user1           # Por defecto: El usuario que inicia la conexión
+    force group = group1         # Por defecto: El grupo primario del usuario que inicia la conexión
+    read only = no               # Por defecto: yes
     read list = user1,user2
     write list = user1,user2
     create mask = 0700
     directory mask = 0700
-    guest ok = no
-    guest only = no
-    guest account = user1
+    guest ok = no                # Por defecto: no
+    guest only = no              # Por defecto: no
+    guest account = user1        # Por defecto: nobody
     hide files = *.tmp
     hide dot files = yes
-    follow symlinks = yes
+    follow symlinks = yes        # Por defecto: yes
+    inherit permissions = no     # Por defecto: no
     wide links = no
-    hosts allow = pc1
+    hosts allow = pc1            # Por defecto: (todos)
     hosts deny = pc2
 </code></pre>
 
@@ -360,6 +361,8 @@ password=contraseña</code></pre>
                 <p>Parámetros de enlaces simbólicos:</p>
                 <p class="Expl">
                     <b>follow symlinks</b>: Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <br>
+                    <b>inherit permissions</b>: Permite heredar permisos de la carpeta padre en nuevos archivos o sub-carpetas: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
                     <br>
                     <b>wide links</b>: Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
                 </p>

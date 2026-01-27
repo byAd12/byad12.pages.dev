@@ -533,11 +533,25 @@ Código por Adrián L. G. P.
                     Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
                     <u>Estructura</u>:
                 </p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:restriction base="xs:integer"&gt;
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:restriction base="xs:tipo_valor"&gt;
     &lt;!-- restricciones --&gt;
 &lt;/xs:restriction&gt;</code></pre>
                 <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
+
+                <p>Si varios elementos o atributos van a tener las mismas restricciones se puede evitar duplicarlo definiéndolo solo una vez y asignándole un nombre personalizable.
+                    Este nombre se utilizará para definirlo como <span class="span_contenido">type=""</span> en la etiqueta o atributo.
                 </p>
+                <p class="Expl"><u>Ejemplo</u> donde se definen varios elementos simples con el mismo valor personalizado "NombreRestriccionPersonalizada":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:element name="etiqueta2" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
+
+&lt;!-- Puede declararse el valor personalizado antes o después de los elementos/atributos --&gt;
+&lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
+    &lt;xs:restriction base="xs:tipo_valor"&gt;
+        &lt;!-- restricciones --&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;</code></pre>
 
             </div>
 
