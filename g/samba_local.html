@@ -235,7 +235,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 </p>
                 <p class="Expl">Pero también podemos asignar las credenciales del usuario que tendrá acceso a este recurso compartido con:</p>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña   0   0</code></pre>
-                <p class="Expl"><b>Problema de seguridad</b>: <span class="span_url">/etc/fstab</span> tiene el permiso <span class="span_contenido">o=r--</span>,, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
+                <p class="Expl"><b>Problema de seguridad</b>: <span class="span_url">/etc/fstab</span> tiene el permiso <span class="span_contenido">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
 
                 <!-- ......................................................... -->
                 <p>2.1. 🔨 <b>Solución al <span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span></b>:</p>
@@ -388,3 +388,4 @@ password=contraseña</code></pre>
     </body>
 
 </html>
+
