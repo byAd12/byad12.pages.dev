@@ -34,7 +34,7 @@ while true; do
 
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
-            " |  ===============================" \
+            " | ================================" \
             "${Ne}1${Bl} | BIOS: Arreglo de la zona horaria" \
             " | " \
         " | ${Az}CLÚSTER ${Bl}" \
