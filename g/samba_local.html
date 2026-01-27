@@ -226,28 +226,29 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <!-- ......................................................... -->
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña,uid=1000,gid=1000   0   0</code></pre>
+                <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido">guest ok = yes</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    defaults   0   0</code></pre>
                 <p class="Expl">
                     <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url">/</span>.
                     <br>
                     <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
                 </p>
-                <p class="Expl">
-                    <b>usuario</b>: Usuario asignado por el servidor que tenga permiso de acceder al recurso compartido.
-                    <br>
-                    <b>contraseña</b>: Contraseña del usuario con permisos.
-                    <br>
-                    <b>uid</b>: El ID del usuario que será propietario del recurso compartido, si no se especifica se asigna a root.
-                    <br>
-                    <b>gid</b>: El ID del grupo será propietario sobre el recurso compartido.
-                </p>
-                <p class="Expl">⚠️ <b>uid</b> y <b>gid</b> <u>no</u> conceden permisos nuevos ni omite los permisos configurados, sino que solo cambian el propietario “visible” en Linux.</p>
-
-                <p class="Expl">Si no se especifican credenciales, el sistema intentará montar el recurso como acceso invitado <span class="span_contenido">guest</span>, siempre que el servidor lo permita:</p>
-                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    defaults   0   0</code></pre>
+                <p class="Expl">Pero también podemos asignar las credenciales del usuario que tendrá acceso a este recurso compartido con:</p>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    username=usuario,password=contraseña   0   0</code></pre>
+                <p class="Expl"><b>Problema de seguridad</b>: <span class="span_url">/etc/fstab</span> tiene el permiso <span class="span_contenido">o=r--</span>,, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
 
                 <!-- ......................................................... -->
-                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> que se monte sin errores</b>:</p>
+                <p>2.1. 🔨 <b>Solución al <span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span></b>:</p>
+                <p class="Expl">Primero crearemos en cualquier ruta un archivo oculto de credenciales con el siguiente formato:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /ruta/a/archivo/.credenciales</code></pre>
+                <p class="Expl">Dentro de este fichero indicaremos el usuario y contraseña:</p>
+                <pre class="codigo" translate="no"><code class="bash">username=usuario
+password=contraseña</code></pre>
+                <p class="Expl">Y por último añadiremos en <span class="span_url">/etc/fstab</span> la siguiente línea:</p>
+                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
+
+                <!-- ......................................................... -->
+                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> que no haya errores</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
 
             </div>
@@ -385,4 +386,5 @@ chmod permisos /carpeta_a_compartir</code></pre>
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
     </body>
+
 </html>
