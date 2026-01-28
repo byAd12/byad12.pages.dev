@@ -103,9 +103,12 @@ ol{margin-left: 3%;}
 /* =================================================== */
 /* Tablas */
 
-.TablaDivScroll{width: 100% !important; margin: none !important; padding: none !important; position: inherit !important; border-radius: none !important; border: none !important; overflow-x: auto; -webkit-overflow-scrolling: touch;}
+div.Expl table{margin-left: 30px; width: calc(100% - 30px);}
+.TablaDivScroll{width: 100% !important; margin: none; padding: none !important; position: inherit !important; border-radius: none !important; border: none !important; overflow-x: auto; -webkit-overflow-scrolling: touch;}
 table.TablaComandos{color: #c0c0c0; margin: 10px 0 10px 0; border-collapse: collapse;}
 table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
+table.TablaComandos tr.Titulo{background-color: rgba(123, 146, 222, 0.2);}
+table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 
 /* =================================================== */
 /* Div principales para separar el contenido */

@@ -54,7 +54,37 @@ Código por Adrián L. G. P.
             <div>
                 <h2>Ejemplo</h2>
 
-                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;xs:schema
+    version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+&gt;
+    &lt;!-- VEHICULOS --&gt;
+    &lt;xs:element name="vehiculos"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;!-- VEHICULO --&gt;
+                &lt;xs:element name="vehiculo" minOccurs="1" maxOccurs="unbounded"&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:sequence&gt;
+                            &lt;xs:element name="nombre" minOccurs="1" maxOccurs="unbounded" type="empezar_mayuscula" /&gt;
+                            &lt;xs:element name="modelo" type="empezar_mayuscula" /&gt;
+                        &lt;/xs:sequence&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;!-- VALOR PERSONALIZADO --&gt;
+    &lt;xs:simpleType name="empezar_mayuscula"&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:pattern value="[A-Z].*" /&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+&lt;/xs:schema&gt;</code></pre>
             </div>
 
             <!-- ......................................................... -->
@@ -184,7 +214,7 @@ Código por Adrián L. G. P.
                 <p>A continuación se muestra una agrupación de valores <b>predefinidos</b> separados por tipos:</p>
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
-                        <tr>
+                        <tr class="Titulo">
                             <td colspan="3">Valores de tipo <b>texto</b></td>
                         </tr>
                         <tr>
@@ -226,7 +256,7 @@ Código por Adrián L. G. P.
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
-                        <tr>
+                        <tr class="Titulo">
                             <td colspan="3">Valores de tipo <b>númerico</b></td>
                         </tr>
                         <tr>
@@ -264,7 +294,7 @@ Código por Adrián L. G. P.
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
-                        <tr>
+                        <tr class="Titulo">
                             <td colspan="3">Valores de tipo <b>tiempo</b>  en formato <a href="https://es.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></td>
                         </tr>
                         <tr>
@@ -350,7 +380,7 @@ Código por Adrián L. G. P.
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
-                        <tr>
+                        <tr class="Titulo">
                             <td colspan="3">Valores de tipo <b>identificador</b></td>
                         </tr>
                         <tr>
@@ -559,16 +589,16 @@ Código por Adrián L. G. P.
                 <h2>Restricciones de <span>longitud</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:length</span></b>:</p>
-                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo). <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo):</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:length value="longitud"/&gt;</code></pre>
                 <p class="Expl">Si el valor supera o no llega al valor especificado dará un error al validar el documento.</p>
 
                 <p><b>Restricción <span class="span_contenido">xs:minLength</span></b>:</p>
-                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud mínima debe ser x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud mínima debe ser x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minLength value="longitud_minima"/&gt;</code></pre>
 
                 <p><b>Restricción <span class="span_contenido">xs:maxLength</span></b>:</p>
-                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud máxima debe ser x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud máxima debe ser x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxLength value="longitud_maxima"/&gt;</code></pre>
 
             </div>
@@ -577,32 +607,32 @@ Código por Adrián L. G. P.
                 <h2>Restricciones <span>numéricas</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:minInclusive</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minInclusive value="numero_mínimo"/&gt;</code></pre>
                 <p class="Expl"><u>Valores válidos</u>: 12, +12, 1.2, +1.2</p>
 
                 <p><b>Restricción <span class="span_contenido">xs:maxInclusive</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo es x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo es x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxInclusive value="numero_máximo"/&gt;</code></pre>
 
                 <p>Se puede usar las restricciones <span class="span_contenido">xs:minInclusive</span> y <span class="span_contenido">xs:maxInclusive</span> acortando las posibilidades a un rango de números.</p>
 
                 <p><b>Restricción <span class="span_contenido">xs:minExclusive</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo permitido es mayor que x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo permitido es mayor que x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minExclusive value="numero_antes_del_mínimo"/&gt;</code></pre>
                 <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor mínimo permitido es 11</p>
 
                 <p><b>Restricción <span class="span_contenido">xs:maxExclusive</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo permitido es menos que x. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo permitido es menos que x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxExclusive value="numero_despues_del_máximo"/&gt;</code></pre>
                 <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor máximo permitido es 9</p>
 
                 <p><b>Restricción <span class="span_contenido">xs:totalDigits</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que el número puede tener hasta x dígitos, siendo x un número positivo. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que el número puede tener hasta x dígitos, siendo x un número positivo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:totalDigits value="digitos_máximos"/&gt;</code></pre>
 
                 <p><b>Restricción <span class="span_contenido">xs:fractionDigits</span></b>:</p>
-                <p class="Expl">Partiendo de un tipo <b>xs:decimal</b> se le aplica la restricción de que el número puede tener hasta x dígitos después del punto decimal. <u>Sintaxis</u>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:decimal</b> se le aplica la restricción de que el número puede tener hasta x dígitos después del punto decimal:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:fractionDigits value="digitos_decimales_máximos"/&gt;</code></pre>
             </div>
 
@@ -610,7 +640,7 @@ Código por Adrián L. G. P.
                 <h2>Restricciones con <span>opciones válidas</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:enumeration</span></b>:</p>
-                <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida. <u>Sintaxis</u>:</p>
+                <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:enumeration value="valor_permitido_1"/&gt;
 &lt;xs:enumeration value="valor_permitido_2"/&gt;
 ...</code></pre>
@@ -623,7 +653,7 @@ Código por Adrián L. G. P.
                 <h2>Restricciones sobre <span>espacios en blanco</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
-                <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor. <u>Sintaxis</u>:</p>
+                <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:whiteSpace value="preserve/replace/collapse"/&gt;</code></pre>
                 <p class="Expl">El valor <b>preserve</b> mantiene espacios en blanco, tabulaciones, saltos de línea y retornos de carro.</p>
                 <p class="Expl">El valor <b>replace</b> substituye todas las tabulaciones, los saltos de línea y los retornos de carro por <u>espacios en blanco</u>.</p>
@@ -646,143 +676,134 @@ Código por Adrián L. G. P.
 
                 <br>
 
-                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">encontrar</span> una cadena de carácteres en un valor:</b></p>
-                <p class="Expl">
-                    Simplemente se indica la cadena de carácteres a buscar como por ejemplo <span class="span_contenido">ola</span>, 
-                    que dará como válido los valores <span class="span_contenido">ola</span>, <span class="span_contenido">hola</span>, <span class="span_contenido">volar</span>, etc.
-                </p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3"><b>Sintaxis</b> para crear expresiones regulares</td>
+                        </tr>
+                        <tr>
+                            <td>PATRÓN</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>VALORES VÁLIDOS</b></td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ola</code></pre></td>
+                            <td>Buscar una cadena de caracteres en un valor.</td>
+                            <td>ola, hola, volar, etc.</td>
+                        </tr>
 
-                <p><b>Patrón para que el valor <span style="color: rgb(147, 147, 206) !important;">empieze</span> con una cadena de carácteres:</b></p>
-                <p class="Expl">
-                    Se pone primero el símbolo <span class="span_contenido">^</span> seguido de la cadena de carácteres con la que debe empezar, por ejemplo <span class="span_contenido">^X</span>
-                    que dará como válido los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XSD</span>, <span class="span_contenido">XOGAR</span>, etc.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">^X</code></pre></td>
+                            <td>El valor debe empezar con la cadena indicada.</td>
+                            <td>XML, XSD, XOGAR, etc.</td>
+                        </tr>
 
-                <p><b>Patrón para que el valor <span style="color: rgb(147, 147, 206) !important;">acabe</span> con una cadena de carácteres:</b></p>
-                <p class="Expl">
-                    Se pone primero el símbolo <span class="span_contenido">$</span> seguido de la cadena de carácteres con la que debe de acabar, por ejemplo <span class="span_contenido">$r</span>
-                    que dará como válido los valores <span class="span_contenido">Dormir</span>, <span class="span_contenido">Buscar</span>, <span class="span_contenido">Encontrar</span>, etc.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">$r</code></pre></td>
+                            <td>El valor debe acabar con la cadena indicada.</td>
+                            <td>Dormir, Buscar, Encontrar, etc.</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">x*</code></pre></td>
+                            <td>Un carácter coincide de 0 a n veces.</td>
+                            <td>Todos los valores que contengan o no la "x".</td>
+                        </tr>
 
-                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida de 0-n veces</span> en una cadena de carácteres:</b></p>
-                <p class="Expl">
-                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">*</span>, por ejemplo <span class="span_contenido">x*</span>
-                    que dará como válido todos los valores posibles ya que acepta a todos los que contengan o no el carácter <b>x</b>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">X+</code></pre></td>
+                            <td>Un carácter coincide de 1 a n veces.</td>
+                            <td>XML, XXZ, etc.</td>
+                        </tr>
 
-                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida de 1-n veces</span> en una cadena de carácteres:</b></p>
-                <p class="Expl">
-                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">+</span>, por ejemplo <span class="span_contenido">X+</span>
-                    que dará como válido todos los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XXZ</span>, etc.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">X?</code></pre></td>
+                            <td>Un carácter coincide 0 o 1 vez.</td>
+                            <td>XML, XSD, etc.</td>
+                        </tr>
 
-                <p><b>Patrón para que un carácter <span style="color: rgb(147, 147, 206) !important;">coincida 0 o 1 vez</span> en una cadena de carácteres:</b></p>
-                <p class="Expl">
-                    Se pone primero el carácter a buscar seguido del símbolo <span class="span_contenido">?</span>, por ejemplo <span class="span_contenido">X?</span>
-                    que dará como válido todos los valores <span class="span_contenido">XML</span>, <span class="span_contenido">XSD</span>, etc.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">.</code></pre></td>
+                            <td>Permite cualquier carácter (excepto salto de línea).</td>
+                            <td>A, B, etc. <br>O usar <code>.*</code> para cualquier carácter sin límite.</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\.</code></pre></td>
+                            <td>Buscar un carácter literal, ignorando su significado especial.</td>
+                            <td>.</td>
+                        </tr>
 
-                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">permitir cualquier carácter</span>:</b></p>
-                <p class="Expl">
-                    Se pone el símbolo <span class="span_contenido">.</span>, por ejemplo <span class="span_contenido">.</span>
-                    que dará como válido todos los valores <span class="span_contenido">A</span>, <span class="span_contenido">B</span>, etc (excepto un salto de línea).
-                </p>
-                <p class="Expl">Una buena implementación sería <span class="span_contenido">.*</span>, que permite cualquier carácter sin límites.</p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[aeiou]</code></pre></td>
+                            <td>Lista de caracteres que coincidan (solo uno de ellos).</td>
+                            <td>a, e, i, o, u</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[^aei]</code></pre></td>
+                            <td>Lista de caracteres que no coincidan.</td>
+                            <td>Todos los valores excepto a, e, i</td>
+                        </tr>
 
-                <p><b>Patrón para <span style="color: rgb(147, 147, 206) !important;">buscar un carácter literal</span>:</b></p>
-                <p class="Expl">
-                    Si queremos poner un punto o cualquier carácter que indica otro patrón pero que sea literal podemos ponerlo después del símbolo <span class="span_contenido">\</span>, por ejemplo <span class="span_contenido">\.</span>
-                    que dará como válido el valor <span class="span_contenido">.</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[a-z]</code></pre></td>
+                            <td>Rango de caracteres que coincidan.</td>
+                            <td>Todos los caracteres de la a a la z</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">c{1,3}</code></pre></td>
+                            <td>Un carácter puede repetirse entre min y max veces.</td>
+                            <td>c, cc, ccc</td>
+                        </tr>
 
-                <p><b>Patrón con una <span style="color: rgb(147, 147, 206) !important;">lista de carácteres que coincidan</span>:</b></p>
-                <p class="Expl">
-                    Para que en una posición solo sea válido una lista de carácteres pero no todos juntos se ponen entre <span class="span_contenido">[]</span>, por ejemplo <span class="span_contenido">[aeiou]</span>
-                    que dará como válido los valores <span class="span_contenido">a</span>, <span class="span_contenido">e</span>, <span class="span_contenido">i</span>, <span class="span_contenido">o</span>, <span class="span_contenido">u</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\bhola\b</code></pre></td>
+                            <td>Coincidir palabra exacta.</td>
+                            <td>hola</td>
+                        </tr>
 
-                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">lista de carácteres que no coincidan</span>:</b></p>
-                <p class="Expl">
-                    Para excluir una lista de carácteres en una posición se ponen dentro de <span class="span_contenido">[^]</span>, por ejemplo <span class="span_contenido">[^aei]</span>
-                    que dará como válido los valores que no sean <span class="span_error">a</span>, <span class="span_error">e</span>, <span class="span_error">i</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\d</code></pre></td>
+                            <td>Filtrar números del 0 al 9.</td>
+                            <td>0-9 (ej: 12, 65, etc.)</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\w</code></pre></td>
+                            <td>Filtrar cualquier carácter de palabra (letra, número, guion bajo).</td>
+                            <td>A, b, 1, _, etc.</td>
+                        </tr>
 
-                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">rango de carácteres que coincidan</span>:</b></p>
-                <p class="Expl">
-                    Para permitir cualquier carácter dentro de un rango se pueden poner dentro de <span class="span_contenido">[]</span>, por ejemplo <span class="span_contenido">[a-z]</span>
-                    que dará como válido los valores que sean de la <span class="span_contenido">a</span> a la <span class="span_contenido">z</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\W</code></pre></td>
+                            <td>Filtrar cualquier carácter que no sea de palabra.</td>
+                            <td>!, @, espacio, etc.</td>
+                        </tr>
 
-                <br>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">patrón1 | patrón2</code></pre></td>
+                            <td>Elegir entre 2 patrones.</td>
+                            <td>Valores que coincidan con patrón1 o patrón2</td>
+                        </tr>
 
-                <p><b>Patrón con un <span style="color: rgb(147, 147, 206) !important;">rango de carácteres que coincidan</span>:</b></p>
-                <p class="Expl">
-                    Para permitir la cantidad de veces que un carácter puede estar se usa <span class="span_contenido">carácter{min,max}</span>, por ejemplo <span class="span_contenido">c{1,3}</span>
-                    que dará como válido los valores que sean <span class="span_contenido">c</span>, <span class="span_contenido">cc</span> o <span class="span_contenido">ccc</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">patrón1 (?=patrón2)</code></pre></td>
+                            <td>Busca patrón1 solo si le sigue patrón2.</td>
+                            <td>Valores que cumplan patrón1 seguido de patrón2</td>
+                        </tr>
 
-                <br>
-
-                <p><b>Patrón que coincida una <span style="color: rgb(147, 147, 206) !important;">palabra exacta</span>:</b></p>
-                <p class="Expl">
-                    Para filtrar una palabra se rodea esta ente <span class="span_contenido">\b</span>, por ejemplo <span class="span_contenido">\bhola\b</span>
-                    que dará como válido los valores que contengan la palabra <span class="span_contenido">hola</span> exacta.
-                </p>
-
-                <br>
-
-                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">números del 0 al 9</span>:</b></p>
-                <p class="Expl">
-                    Se usa simplemente el filtro <span class="span_contenido">\d</span>, por ejemplo <span class="span_contenido">\d\d</span>
-                    que dará como válido los valores como <span class="span_contenido">12</span>, <span class="span_contenido">65</span>, etc.
-                </p>
-
-                <br>
-
-                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">cualquier carácter de palabra</span>:</b></p>
-                <p class="Expl">
-                    Se usa simplemente el filtro <span class="span_contenido">\w</span>, por ejemplo <span class="span_contenido">\w</span>
-                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
-                </p>
-
-                <p><b>Patrón para filtrar <span style="color: rgb(147, 147, 206) !important;">cualquier carácter que no sea de una palabra</span>:</b></p>
-                <p class="Expl">
-                    Se usa simplemente el filtro <span class="span_contenido">\W</span>, por ejemplo <span class="span_contenido">\W</span>
-                    que dará como válido cualquier carácter que <b>no</b> contenga una letra, número o un guión bajo.
-                </p>
-
-                <br>
-
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Elegir entre 2 patrones</span>:</b></p>
-                <p class="Expl">
-                    Se usa simplemente el filtro <span class="span_contenido">patrón1 | patrón2</span>, por ejemplo <span class="span_contenido">\w+ | \W?</span>
-                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
-                </p>
-
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Busca un patrón 1 solo si le sigue un patrón 2</span>:</b></p>
-                <p class="Expl">
-                    Se usa simplemente el filtro <span class="span_contenido">patrón1 (?=patrón2)</span>, por ejemplo <span class="span_contenido">\w+ (?=\W?)</span>
-                    que dará como válido cualquier carácter que contenga una letra, número o un guión bajo.
-                </p>
+                    </table>
+                </div>
 
             </div>
 
             <div>
                 <h2>Expresiones regulares > <span>Herramientas</span></h2>
                 
-                <p>La web <a href="https://regexr.com/" target="_blank">regexr.com</a> sirve para practicar patrones.</p>
+                <p>La web <a href="https://regexr.com/" target="_blank">regexr.com</a> sirve para practicar la creación de estos patrones.</p>
             </div>
 
         </div>

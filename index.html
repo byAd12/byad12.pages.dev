@@ -321,12 +321,12 @@
                     <h3 translate="no">by<span>Ad</span>12</h3>
                     <p translate="no">
                         <span class="copyright">© 2023 - 2025 • Adrián L. G. P.</span>
-                        <br><br><img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fbyad12.pages.dev%2F&label=VISITAS&icon=github&color=%237cfb2d&message=&style=flat-square&tz=UTC" alt="API contador de visitas"> • <span class="gtranslate_wrapper" id="Traductor"></span>
+                        <br><br>
+                        <span id="contador-container"></span> • <span class="gtranslate_wrapper" id="Traductor"></span>
                     </p>
                 </div>
                 <!-- LINKS FOOTER -->
                 <div class="footer-links">
-                    <span></span> <span></span> <!-- 2 Espacios simulando <ul> -->
                     <ul>
                         <li class="NoHover"></li>
 
@@ -338,6 +338,20 @@
                 </div>
             </div>
         </footer>
+
+<script>
+if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'localhost') {
+    const img = document.createElement('img');
+    img.src = "https://hitscounter.dev/api/hit?url=https%3A%2F%2Fbyad12.pages.dev%2F&label=VISITAS&icon=github&color=%237cfb2d&message=&style=flat-square&tz=UTC";
+    img.alt = "API contador de visitas";
+    document.getElementById('contador-container').appendChild(img);
+} else {
+    const texto = document.createElement('span');
+    texto.textContent = "Versión no publicada";
+    document.getElementById('contador-container').appendChild(texto);
+}
+</script>
+
 
     </body>
 </html>
