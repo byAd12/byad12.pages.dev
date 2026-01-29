@@ -431,7 +431,7 @@ Código por Adrián L. G. P.
         <div class="parte1">
 
             <div>
-                <h2>Validación de un <span>elemento simple</span></h2>
+                <h2>Elemento simple &gt; <span>Validación</span></h2>
                 <p>A continuación se muestra la <u>estructura</u> para validar un elemento que no contenga ningún atributo ni sub-elementos:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" minOccurs="0" maxOccurs="unbounded"/&gt;</code></pre>
                 <p class="Expl">
@@ -448,80 +448,305 @@ Código por Adrián L. G. P.
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma" type="xs:string" default="Español"/&gt;</code></pre>
             </div>
 
+            <div>
+                <h2>Elemento simple &gt; <span>Validación de un dato</span></h2>
+                <p>Con la siguiente etiqueta se permite definir un tipo de dato simple personalizado a partir de un tipo de dato primitivo o uno personalizado ya definido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;</code></pre>
+                <p>
+                    Si varios elementos o atributos van a tener las mismas restricciones se puede evitar duplicarlo definiéndolo solo una vez y asignándole un nombre personalizable.
+                    Este nombre se utilizará para definirlo como <span class="span_contenido">type=""</span> en la etiqueta o atributo:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:element name="etiqueta2" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
+
+&lt;!-- Puede declararse el valor personalizado antes o después de los elementos/atributos --&gt;
+&lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
+    &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+                <p class="Expl">Si se hubiera declarado a cada elemento tendríamos mucho más código siendo ineficiente y teniendo duplicidades:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="etiqueta2"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
+    &lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:attribute&gt;
+</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Elemento simple &gt; <span>Lista de elementos del mismo tipo</span></h2>
+
+                <p> Con las siguientes 2 maneras se puede definir una lista de elementos del mismo tipo - <span class="span_contenido">&lt;xs:list itemType="" /&gt;</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;xs:list itemType="xs:tipo_valor" /&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="lista-enteros" /&gt;
+&lt;xs:simpleType name="lista-enteros"&gt;
+    &lt;xs:list itemType="xs:tipo_valor" /&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+                <p class="Expl">Por ejemplo, si se indica <span class="span_contenido">itemType="xs:integer"</span>, el siguiente contenido de la etiqueta sería válido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;1 2 3 4 5 6&lt;/nombre_elemento&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Elemento simple &gt; <span>Restricciones</span></h2>
+                <p>
+                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
+                    Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
+                    <u>Estructura</u>:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType/attibute&gt; &lt;!-- Este es el elemento simple o atributo a restringir --&gt;
+    &lt;xs:restriction base="xs:tipo_valor"&gt;
+        &lt;!-- Restricciones --&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType/attibute&gt;</code></pre>
+                <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
+                <p>ℹ️ Las restricciones se explican en apartados posteriores a este.</p>
+
+            </div>
+
+            
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
             <!-- ......................................................... -->
             <div>
-                <h2>Validación de un <span>elemento complejo</span></h2>
-                <p>A continuación se muestra la <u>estructura</u> para validar un elemento que puede contener atributos y/o sub-elementos:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+                <h2>Elemento complejo &gt; <span>Validación</span></h2>
+                <p>A continuación se muestran 2 formas con la misma <u>estructura</u> para validar un elemento complejo, que puede contener atributos y/o sub-elementos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType&gt;
         &lt;!-- Aquí se definirá su contenido y atributos --&gt;
     &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-</code></pre>   
+&lt;/xs:element&gt;</code></pre>   
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="elemento-complejo-1" /&gt;
+&lt;xs:complexType name="elemento-complejo-1"&gt;
+    &lt;!-- Aquí se definirá su contenido y atributos --&gt;
+&lt;/xs:complexType&gt;</code></pre>   
                 <p class="Expl">
                     No se puede usar <span class="span_contenido">default</span> en <b>element</b> si se usa <b>complexType</b>.
                     <br>Con <b>complexType</b> definimos que es un elemento complejo.
                 </p>
 
-                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">secuencia de sub-elementos</span> en el <u>orden especificado</u></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+            </div>
+
+            <div>
+                <h2>Elemento complejo &gt; <span>Secuencia de sub-elementos en un orden específico</span></h2>
+
+                <p>Para definir una secuencia de sub-elemento en el <u>orden especificado</u> se utiliza lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:sequence&gt;
             &lt;!-- Aquí se definirá cada sub-elemento --&gt;
         &lt;/xs:sequence&gt;
     &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-</code></pre>
+&lt;/xs:element&gt;</code></pre>
 
-                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">elección de sub-elementos</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
-    &lt;xs:complexType&gt;
-        &lt;xs:choice&gt;
-            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
-        &lt;/xs:choice&gt;
-    &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-</code></pre>
+            </div>
 
-                <p><b>Definir una <span style="color: rgb(147, 147, 206) !important;">secuencia de sub-elementos</span> que deben aparecer en <u>cualquier orden</u></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+            <div>
+                <h2>Elemento complejo &gt; <span>Secuencia de sub-elementos en cualquier orden</span></h2>
+
+                <p>Podemos definir una secuencia de sub-elementos en la que deban aparecer en <u>cualquier orden</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:all&gt;
             &lt;!-- Aquí se definirá cada sub-elemento --&gt;
             &lt;!-- Cada sub-elemento puede aparecer como máximo una vez (maxOccurs="1"). minOccurs solo puede ser 0 o 1. --&gt;
         &lt;/xs:all&gt;
     &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-</code></pre>
+&lt;/xs:element&gt;</code></pre>
 
-                <p><b>Definir que aunque sea complejo su <span style="color: rgb(147, 147, 206) !important;">contenido no tenga sub-etiquetas</span> pero si atributos</b>:</p>
+            </div>
+
+            <div>
+                <h2>Elemento complejo &gt; <span>Elección de sub-elementos</span></h2>
+
+                <p>Para definir una lista que valide que <u>solo 1</u> de los sub-elementos aparezcan y no todo se hace con:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
     &lt;xs:complexType&gt;
-        &lt;xs:simpleContent&gt;
-            &lt;xs:extension base="xs:tipo_valor"&gt;
-                &lt;!-- Aquí se definirán los atributos --&gt;
-            &lt;/xs:extension&gt;
-        &lt;/xs:simpleContent&gt;
+        &lt;xs:choice&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+        &lt;/xs:choice&gt;
     &lt;/xs:complexType&gt;
-&lt;/xs:element&gt;
-</code></pre>
+&lt;/xs:element&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Elemento complejo &gt; <span>Elemento con contenido simple</span></h2>
+
+                <p>Se utiliza cuando un elemento es de tipo complejo pero su contenido <u>no contiene sub-elementos</u>, aunque <b>sí puede tener atributos</b>:</p>
+                
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:simpleContent&gt;
+                        &lt;xs:extension base="xs:tipo_valor"&gt;
+                            &lt;!-- Definición de atributos --&gt;
+                            &lt;xs:attribute name="atributo1" type="xs:string" /&gt;
+                            &lt;xs:attribute name="atributo2" type="xs:int" /&gt;
+                        &lt;/xs:extension&gt;
+                    &lt;/xs:simpleContent&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;</code></pre>
+
                 <p class="Expl">
-                    Se usa <b>simpleContent</b> para que el elemento no contenga sub-elementos en el contenido.
+                    <b>simpleContent</b> indica que el elemento <u>no tiene sub-elementos</u> en su contenido, aunque sí puede contener atributos.  
                     <br>
-                    Con <b>extension</b> se define que tipo de valor va a ser el contenido de la etiqueta.
+                    <b>extension</b> permite partir de un tipo simple existente (<span class="span_contenido">xs:tipo_valor</span>) y agregar atributos o restricciones adicionales.
+                </p>
+
+                <p>
+                    Aunque el elemento sea de tipo complejo por tener atributos, su contenido se considera de tipo simple si <u>no tiene sub-elementos</u>.
+                    Esto evita confusiones entre la naturaleza del elemento (complejo por atributos) y la naturaleza de su contenido (simple por ausencia de sub-elementos).
+                </p>
+            </div>
+
+            <div>
+                <h2>Elemento complejo &gt; <span>Elemento con contenido complejo</span></h2>
+
+                <p>Para definir un elemento cuyo contenido <u>incluye otros sub-elementos</u> y, además, queremos aplicar restricciones o extensiones:</p>
+                
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="colores" type="lista-colores"/&gt;
+
+&lt;xs:complexType name="lista-colores"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;</code></pre>
+
+                <p class="Expl">Se usa <b>complexContent</b> cuando el elemento contiene <u>otros elementos</u> en su interior.</p>
+
+                <p>
+                    En este ejemplo, el elemento <span class="span_contenido">colores</span> contiene múltiples elementos <span class="span_contenido">color</span>.
+                    El tipo <span class="span_contenido">lista-colores</span> es complejo porque tiene sub-elementos, y se usa <span class="span_contenido">restriction</span> para definir que solo puede contener la secuencia de elementos <span class="span_contenido">color</span>.
                 </p>
 
             </div>
 
-            <!-- ......................................................... -->
             <div>
-                <h2>Validación de un <span>atributo</span></h2>
+                <h2>Elemento complejo &gt; <span>Extensión de tipos complejos</span></h2>
+
+                <p>Se utiliza cuando queremos <u>reutilizar un tipo complejo existente</u> y agregar nuevos elementos o atributos:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="fichero" type="tipoInformacion" /&gt;
+
+&lt;xs:complexType name="tipoInformacion"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="nombre" type="xs:string" /&gt;
+    &lt;/xs:sequence&gt;
+    &lt;xs:attribute name="formato" type="xs:string" /&gt;
+&lt;/xs:complexType&gt;
+
+&lt;xs:element name="archivo" type="tipoMasdatos" /&gt;
+
+&lt;xs:complexType name="tipoMasdatos"&gt;
+    &lt;xs:complexContent&gt;
+        &lt;xs:extension base="tipoInformacion"&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="creacion" type="xs:dateTime" /&gt;
+                &lt;xs:element name="edicion" type="xs:dateTime" /&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+&lt;/xs:complexType&gt;</code></pre>
+
+                <p class="Expl">
+                    Aquí se crea un nuevo tipo complejo <span class="span_contenido">tipoMasdatos</span> que extiende <span class="span_contenido">tipoInformacion</span>.
+                    <br>
+                    Esto significa que <span class="span_contenido">archivo</span> hereda todo lo definido en <span class="span_contenido">tipoInformacion</span> (<span class="span_contenido">nombre</span> y <span class="span_contenido">formato</span>) y añade dos nuevos elementos: <span class="span_contenido">creacion</span> y <span class="span_contenido">edicion</span>.
+                </p>
+
+                <p>
+                    La extensión permite <u>reutilizar y ampliar definiciones existentes</u> de manera estructurada, evitando duplicar la información y manteniendo consistencia en el esquema.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Elemento vacío</h2>
+
+                <p>Un elemento vacío, aunque no tenga contenido, sí puede tener atributos como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento atributos="" /&gt;</code></pre>
+
+                <p>Para validar un elemento vacío simplemente se hace lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" /&gt;</code></pre>
+
+                <p>En el caso que el elemento sí tenga un atributo pero esté vacío se hace lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Aquí se definirán los atributos --&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Elemento mixto &gt; <span>Cadena de carácteres con sub-elementos</span></h2>
+
+                <p>Un elemento mixto es aquel que combina carácteres con sub-elementos como en el siguiente ejemplo:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;texto &lt;elemento2&gt;texto&lt;/elemento2&gt;&lt;/nombre_elemento&gt;</code></pre>
+
+                <p>Para validarlo, simplemente hay que añadir un atributo <span class="span_contenido">mixed</span> al &lt;complexType&gt; como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+        &lt;xs:sequence&gt;
+            &lt;!-- Aquí se definirán los sub-elementos --&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2>Atributo &gt; <span>Validación</span></h2>
                 <p>A continuación se muestra la <u>estructura</u> para validar un atributo de una etiqueta:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attribute name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" use="required/optional/prohibited"/&gt;</code></pre>
                 <p class="Expl">
                     <b>name</b>: Nombre del atributo a validar.
                     <br><b>type</b>: Tipo de valor que se permite.
-                    <br><b>default</b>: Valor por defecto que tendrá si no se especifica uno.
+                    <br><b>default</b>: Valor por defecto que solo se aplica si el atributo no aparece en el XML.
                     <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento.
                     <br><b>use</b>: Define la obligatoriedad del atributo: obligatorio (<span class="span_contenido">required</span>),
                     opcional (<span class="span_contenido">optional</span>) 
@@ -538,7 +763,6 @@ Código por Adrián L. G. P.
         &lt;xs:simpleContent&gt;
             &lt;xs:extension base="xs:string"&gt;
                 &lt;xs:attribute name="pais" type="xs:string" default="España"/&gt;
-                &lt;!-- El valor default solo se aplica si el atributo no aparece en el XML --&gt;
             &lt;/xs:extension&gt;
         &lt;/xs:simpleContent&gt;
     &lt;/xs:complexType&gt;
@@ -555,35 +779,6 @@ Código por Adrián L. G. P.
         <!-- ......................................................... -->
 
         <div class="parte1">
-
-            <div>
-                <h2>Restricciones > <span>Estructura</span></h2>
-                <p>
-                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
-                    Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
-                    <u>Estructura</u>:
-                </p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:restriction base="xs:tipo_valor"&gt;
-    &lt;!-- restricciones --&gt;
-&lt;/xs:restriction&gt;</code></pre>
-                <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
-
-                <p>Si varios elementos o atributos van a tener las mismas restricciones se puede evitar duplicarlo definiéndolo solo una vez y asignándole un nombre personalizable.
-                    Este nombre se utilizará para definirlo como <span class="span_contenido">type=""</span> en la etiqueta o atributo.
-                </p>
-                <p class="Expl"><u>Ejemplo</u> donde se definen varios elementos simples con el mismo valor personalizado "NombreRestriccionPersonalizada":</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1" type="NombreRestriccionPersonalizada"/&gt;
-&lt;xs:element name="etiqueta2" type="NombreRestriccionPersonalizada"/&gt;
-&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
-
-&lt;!-- Puede declararse el valor personalizado antes o después de los elementos/atributos --&gt;
-&lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
-    &lt;xs:restriction base="xs:tipo_valor"&gt;
-        &lt;!-- restricciones --&gt;
-    &lt;/xs:restriction&gt;
-&lt;/xs:simpleType&gt;</code></pre>
-
-            </div>
 
             <div>
                 <h2>Restricciones de <span>longitud</span></h2>

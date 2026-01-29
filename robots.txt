@@ -25,4 +25,4 @@
 #             %*****# %####%                       
 
 User-agent: *
-Allow: /
+Disallow: /

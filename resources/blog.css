@@ -124,7 +124,7 @@ table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
-    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll){width: calc(100% - 40px);}
+   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
 }
 
 /* =================================================== */
@@ -202,7 +202,8 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
     *{user-select: text !important;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
-    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll){width: 92%;}
+   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: 95% !important;}
+
 }
 
 /* =================================================== */
