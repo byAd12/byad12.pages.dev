@@ -1,8 +1,10 @@
 29/01/2026 - Añadir y mejorar de contenido
 
-# g/xsd.html
-Mejora del contenido existente.
-Nuevo contenido.
+# _redirects, 404.html
+Se añadieron redirecciones a una página de error 404 en vez de redirigir a index.html.
+
+# *.html
+Reemplazo de nombres.
 
 # resources/blog.css
-En el @media de print se agrandaron los elementos para que no queden con tanto márgen de los bordes del .pdf.
+Se arreglaron que las tablas se sobresalian al imprimirlo.
