@@ -269,11 +269,11 @@ footer::before{content: ""; position: absolute; top: 0; left: 50px; right: 50px;
 .footer-content{max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;}
 .footer-content p span.copyright{user-select: text;}
 
-.footer-left{text-align: left;}
-.footer-left h3{margin-bottom: 10px; font-size: 30px; color: white; font-family: "Smoch";}
+.footer-left{text-align: left; display: flex; flex-direction: column; gap: 10px;}
+.footer-left h3{font-size: 30px; color: white; font-family: "Smoch";}
 .footer-left h3 span{color: #7cfb2d; font-family: "Smoch";}
-.footer-links ul{list-style: none; margin: 0; padding: 0;}
-.footer-links li{margin-bottom: 10px;}
+.footer-links ul{list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;}
+
 
 .footer-left p *{vertical-align: middle;}
 

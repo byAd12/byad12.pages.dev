@@ -1,10 +1,11 @@
-29/01/2026 - Añadir y mejorar de contenido
-
-# _redirects, 404.html
-Se añadieron redirecciones a una página de error 404 en vez de redirigir a index.html.
+30/01/2026 - Añadir y mejorar de contenido
 
 # *.html
-Reemplazo de nombres.
+Modificación del footer con fechas correctas y quitando el nombre
+Se modificaron los metadatos de algunas páginas
 
-# resources/blog.css
-Se arreglaron que las tablas se sobresalian al imprimirlo.
+# 404.html
+Se centró en contenido
+
+# resources/main.css
+Se mejoró cada footer con un gap y display: flex; en vez de un margin-bottom
