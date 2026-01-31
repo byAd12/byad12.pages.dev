@@ -598,54 +598,69 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Elemento con contenido simple</span></h2>
+                <h2>Elemento complejo &gt; <span>Contenido simple (Texto + Atributos + Restricciones)</span></h2>
 
-                <p>Se utiliza cuando un elemento es de tipo complejo pero su contenido <u>no contiene sub-elementos</u>, aunque <b>sí puede tener atributos</b>:</p>
+                <p>Se utiliza cuando un elemento es complejo porque tiene atributos, pero su contenido es solo texto (sin sub-elementos).
+                Para validar el valor del texto (ej: que sea un número positivo) y añadir atributos, debemos extender un <b>tipo simple personalizado</b>.</p>
                 
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
-                &lt;xs:complexType&gt;
-                    &lt;xs:simpleContent&gt;
-                        &lt;xs:extension base="xs:tipo_valor"&gt;
-                            &lt;!-- Definición de atributos --&gt;
-                            &lt;xs:attribute name="atributo1" type="xs:string" /&gt;
-                            &lt;xs:attribute name="atributo2" type="xs:int" /&gt;
-                        &lt;/xs:extension&gt;
-                    &lt;/xs:simpleContent&gt;
-                &lt;/xs:complexType&gt;
-            &lt;/xs:element&gt;</code></pre>
+                <p><u>Ejemplo</u>: Un precio que debe ser mayor o igual a 0 y tener un atributo de divisa.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- XML OBJETIVO: &lt;precio divisa="EUR"&gt;59.65&lt;/precio&gt; --&gt;
+
+&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;!-- 2. Extendemos la base personalizada para añadirle atributos --&gt;
+            &lt;xs:extension base="tipo-precio"&gt;
+                &lt;xs:attribute name="divisa" type="xs:string" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+
+&lt;!-- 1. Primero definimos la restricción del valor (texto/número) --&gt;
+&lt;xs:simpleType name="tipo-precio"&gt;
+    &lt;xs:restriction base="xs:decimal"&gt;
+        &lt;xs:minInclusive value="0" /&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;</code></pre>
 
                 <p class="Expl">
-                    <b>simpleContent</b> indica que el elemento <u>no tiene sub-elementos</u> en su contenido, aunque sí puede contener atributos.  
+                    <b>simpleContent</b>: Indica que el elemento solo contiene texto/números, no etiquetas hijas.
                     <br>
-                    <b>extension</b> permite partir de un tipo simple existente (<span class="span_contenido">xs:tipo_valor</span>) y agregar atributos o restricciones adicionales.
-                </p>
-
-                <p>
-                    Aunque el elemento sea de tipo complejo por tener atributos, su contenido se considera de tipo simple si <u>no tiene sub-elementos</u>.
-                    Esto evita confusiones entre la naturaleza del elemento (complejo por atributos) y la naturaleza de su contenido (simple por ausencia de sub-elementos).
+                    <b>extension</b>: Permite tomar un tipo existente (en este caso <span class="span_contenido">tipo-precio</span>) y "extenderlo" agregándole atributos.
+                    <br>
+                    <b>Nota</b>: No se pueden poner restricciones (<span class="span_contenido">xs:minInclusive</span>) directamente dentro de una <span class="span_contenido">xs:extension</span>. Por eso se crea el <span class="span_contenido">simpleType</span> separado primero.
                 </p>
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Elemento con contenido complejo</span></h2>
+                <h2>Elemento complejo &gt; <span>Contenido complejo (Explícito vs Abreviado)</span></h2>
 
-                <p>Para definir un elemento cuyo contenido <u>incluye otros sub-elementos</u> y, además, queremos aplicar restricciones o extensiones:</p>
-                
+                <p>Se utiliza <b>complexContent</b> cuando el elemento contiene otros elementos (hijos). 
+                Formalmente, todo tipo complejo es una restricción de <span class="span_contenido">xs:anyType</span>.</p>
+
+                <p><u>Forma Formal (Explícita)</u>:</p>
+                <p class="Expl">Así es como XSD entiende internamente la estructura. Se define explícitamente la restricción:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="colores" type="lista-colores"/&gt;
 
 &lt;xs:complexType name="lista-colores"&gt;
+    &lt;xs:complexContent&gt;
+        &lt;xs:restriction base="xs:anyType"&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:complexContent&gt;
+&lt;/xs:complexType&gt;</code></pre>
+
+                <p><u>Forma Abreviada (Común)</u>:</p>
+                <p class="Expl">XSD permite omitir <span class="span_contenido">complexContent</span> y <span class="span_contenido">restriction</span> si simplemente estamos definiendo una secuencia de hijos estándar. El resultado es idéntico:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="lista-colores"&gt;
     &lt;xs:sequence&gt;
         &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
     &lt;/xs:sequence&gt;
 &lt;/xs:complexType&gt;</code></pre>
-
-                <p class="Expl">Se usa <b>complexContent</b> cuando el elemento contiene <u>otros elementos</u> en su interior.</p>
-
-                <p>
-                    En este ejemplo, el elemento <span class="span_contenido">colores</span> contiene múltiples elementos <span class="span_contenido">color</span>.
-                    El tipo <span class="span_contenido">lista-colores</span> es complejo porque tiene sub-elementos, y se usa <span class="span_contenido">restriction</span> para definir que solo puede contener la secuencia de elementos <span class="span_contenido">color</span>.
-                </p>
-
             </div>
 
             <div>
@@ -702,8 +717,18 @@ Código por byAd12
                 <p>Un elemento vacío, aunque no tenga contenido, sí puede tener atributos como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento atributos="" /&gt;</code></pre>
 
-                <p>Para validar un elemento vacío simplemente se hace lo siguiente:</p>
+                <p>Para validar un elemento vacío simplemente hay varias maneras:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" /&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType /&gt;
+&lt;xs:element&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:maxLength value="0"/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;</code></pre>
 
                 <p>En el caso que el elemento sí tenga un atributo pero esté vacío se hace lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
@@ -726,6 +751,41 @@ Código por byAd12
         &lt;xs:sequence&gt;
             &lt;!-- Aquí se definirán los sub-elementos --&gt;
         &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Guía Rápida &gt; <span>Combinaciones de Estructura</span></h2>
+                <p>Resumen visual de las 4 combinaciones posibles de contenido y atributos.</p>
+
+                <p>No tiene contenido de texto ni hijos, pero sí atributos. <span class="span_contenido">&lt;precio divisa="EUR" /&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Al no declarar 'sequence' ni 'simpleContent', se asume vacío --&gt;
+        &lt;xs:attribute name="divisa" type="xs:string"/&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+                <p>Estructura clásica de anidación. <span class="span_contenido">&lt;precio&gt;&lt;cantidad&gt;...&lt;/divisa&gt;...&lt;/precio&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="cantidad" type="xs:decimal" /&gt;
+            &lt;xs:element name="divisa" type="xs:string" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+                <p>Combina secuencia y atributos. <span class="span_contenido">&lt;precio available="yes"&gt;&lt;cantidad&gt;...&lt;/precio&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="cantidad" type="xs:decimal" /&gt;
+            &lt;xs:element name="divisa" type="xs:string" /&gt;
+        &lt;/xs:sequence&gt;
+        &lt;!-- IMPORTANTE: Los atributos siempre van DESPUÉS de la secuencia --&gt;
+        &lt;xs:attribute name="available" type="xs:string" /&gt;
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
             </div>

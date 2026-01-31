@@ -1,11 +1,8 @@
-30/01/2026 - Añadir y mejorar de contenido
+31/01/2026 - Arreglos y mejoras de contenido
 
-# *.html
-Modificación del footer con fechas correctas y quitando el nombre
-Se modificaron los metadatos de algunas páginas
+# models.html
+Se arregló que la ruta a main.css era inválida
 
-# 404.html
-Se centró en contenido
-
-# resources/main.css
-Se mejoró cada footer con un gap y display: flex; en vez de un margin-bottom
+# g/xsd.html
+Arreglo de formato en ciertos bloques
+Mejora de contenido
