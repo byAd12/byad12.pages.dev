@@ -66,8 +66,8 @@ img.SoporteComandoRemoto{height: 1em; padding: 0; vertical-align: middle; margin
 /* =================================================== */
 /* Enlaces */
 
-p a, td a{color: #7b92de; text-decoration: none; transition: color 0.3s;}
-p a:hover, td a:hover{color: #7cfb2d; text-underline-offset: 5px; text-decoration: underline;}
+p a, td a, li a{color: #7b92de; text-decoration: none; transition: color 0.3s;}
+p a:hover, td a:hover, li a:hover{color: #7cfb2d; text-underline-offset: 5px; text-decoration: underline;}
 
 /* Botón personalizado - Para texto */
 

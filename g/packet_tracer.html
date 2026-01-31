@@ -1,11 +1,3 @@
-<!--
-
-Código por byAd12
-
-~ Dedicatoria a: Ruth
-
--->
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -20,7 +12,6 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="menu_bar" id="menu_bar">
-            <!-- BARRA DE MENÚ -->
             <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
@@ -29,11 +20,11 @@ Código por byAd12
             </ul>
         </div>
 
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
         <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
@@ -47,22 +38,79 @@ Código por byAd12
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Índice</h2>
+                <ul>
+                    <li>Comandos: <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a></li>
+                    <li>Historial de comandos: <a href="#Verificacion_Historial_Comandos">Ver</a> • <a href="#Cambiar_Historial_Comandos">Cambiar el límite</a></li>
+                    <li>Reglas: <a href="#Nomenclatura">Hostnames</a> • <a href="#PassRules">Contraseñas</a></li>
+                    
+                    <br>
+                    <li><a href="#Basico">Configuración Inicial y Ayuda</a></li>
+                    <li><a href="#Memoria">Gestión de Archivos de Configuración</a></li>
+                    <li><a href="#Conectividad">Herramientas de Conectividad (Ping/SSH/Telnet)</a></li>
+
+                    <br>
+                    <li>Sistema: <a href="#SistemaOperativo">Sistema Operativo IOS</a> • <a href="#RecuperacionSistema">Recuperarse de un bloqueo</a></li>
+
+                    <br>
+                    <li>Comandos de Verificación: <a href="#Verificacion_Interfaces">Interfaces</a> • <a href="#Verificacion_Tabla_ARP">Tabla ARP y MAC</a> • <a href="#Verificacion_Tabla_Rutas">Tabla de Rutas</a> • <a href="#Verificacion_Sistema">Sistema</a> • <a href="#Verificacion_Archivos">Archivos</a></li>
+
+                    <br>
+                    <li><a href="#NavInterfaces">Navegación y Configuración de Interfaces</a></li>
+                    <li><a href="#Direccionamiento">Direccionamiento IPv4 e IPv6</a></li>
+                    <li><a href="#Gateway">Default Gateway (Switch)</a></li>
+                    <li><a href="#Enrutamiento">Enrutamiento Estático</a></li>
+                    <li><a href="#DNS">Servicios DNS</a></li>
+
+                    <br>
+                    <li><a href="#FiltroAcceso">Filtro de Protocolos (Transport Input)</a></li>
+                    <li><a href="#SeguridadBasica">Seguridad Básica y Banners</a></li>
+                    <li><a href="#Usuarios">Gestión de Usuarios y Privilegios</a></li>
+                    <li><a href="#Politicas">Políticas de Seguridad (Bloqueos)</a></li>
+                    <li><a href="#ServidorSSH">Configuración Servidor SSH</a></li>
+
+                    <br>
+                    <li>Full-duplex: <a href="#Full_Duplex_Interfaz">Configuración</a></li>
+                    <li>Velocidad máxima: <a href="#Velocidad_Interfaz">Configuración</a></li>
+                    <li>Auto-MDIX: <a href="#Auto_MDIX">Configuración</a></li>
+                    <li>Interfaz loopback: <a href="#Interfaz_Loopback">Creación</a></li>
+
+                    <br>
+                    <li>VLAN: <a href="#VLAN_Creacion">Creación</a> • <a href="#VLAN_Eliminar_Archivo">Eliminar todas las VLANs</a> • <a href="#VLAN_Puertos_Asignados">Visualización de puertos asignados</a> • <a href="#VLAN_Configuracion">Visualización de la configuración</a> • <a href="#VLAN_Asignar_IP">Asignación de una IP</a></li>
+                    <li>VLAN &gt; Modo Acceso: <a href="#VLAN_Modo_Acceso">Configuración de una interfaz</a> • <a href="#VLAN_Reestablecer_Modo_Acceso">Reestablecer</a></li>
+                    <li>VLAN &gt; Modo Troncal: <a href="#VLAN_Modo_Troncal">Configuración de una interfaz</a> • <a href="#VLAN_Reestablecer_Modo_Troncal">Reestablecer</a></li>
+                    <li>VLAN de Voz &gt; <a href="#VLAN_Voz">Redirigir el tráfico</a></li>
+
+                    <br>
+                    <li><a href="#Modos_Switchport">Modos de interfaz negociados (Switchport)</a></li>
+                    <li><a href="#VerificacionDTP">Verificación del modo de DTP</a></li>
+                    <li>Negociación de modos entre puertos: <a href="#Negociacion_Activar">Habilitar</a> • <a href="#Negociacion_Desactivar">Desactivar</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h2>Formato</h2>
+                <h2 id="Sintaxis">Sintaxis de Comandos</h2>
 
                 <pre class="codigo" translate="no"><code class="cisco">prompt&gt;comando argumentos</code></pre>
                 <p class="Expl"><b>prompt&gt;</b>: Indica el hostname del equipo que estamos configurando, a parte de si tenemos permisos: <span class="span_contenido">#</span>, o no: <span class="span_contenido">&gt;</span>.</p>
                 <p class="Expl"><b>comando</b>: Comando a ejecutar.</p>
                 <p class="Expl"><b>argumentos</b>: Antes de especificarlos una palabra clave o argumentos, se añade un espacio despúes del comando.</p>
             </div>
-        </div>
-
-        <div class="parte1">
+            
             <div>
-                <h2>Hostnames válidos</h2>
+                <h2 id="Nomenclatura">Reglas de Nomenclatura (Hostnames)</h2>
 
                 <p>
                     <u>Reglas</u>: 
@@ -78,18 +126,22 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Contraseñas válidas</h2>
+                <h2 id="PassRules">Reglas de Contraseñas</h2>
 
                 <p><u>Reglas</u>: Tener más de 8 caracteres de longitud. Combinaciones de letras, números y símbolos. Evitar el uso de la misma en varios dispositivos. No usar palabras comunes.</p>
                 <p><u>Generador de contraseñas</u>: <a href="https://www.lastpass.com/es/features/password-generator" target="_blank">letpass.com</a></p>
             </div>
         </div>
 
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h2>Básico</h2>
+                <h2 id="Basico">Configuración Inicial y Ayuda</h2>
 
                 <p>Si escribimos un comando no válido intentará resolver ese texto como DNS. Este proceso lleva tiempo y se puede saltar mediante las teclas:</p>
                 <pre class="codigo" translate="no"><code class="cisco">CTRL + BLOQ MAYUS + 6</code></pre>
@@ -109,7 +161,73 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>ICMP y acceso remoto</h2>
+                <h2 id="Memoria">Gestión de Archivos de Configuración</h2>
+
+                <p>Para ver las configuraciones del dispositivo debemos estar en la raíz del dispositivo y en modo EXEC privilegiado.</p>
+                <br>
+                <p>El siguiente comando nos permite ver configuraciones (interfaces, login y contraseñas) que están guardadas temporalmente y se eliminan al reiniciar el equipo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config</code></pre>
+                <p class="Expl">Para ver la configuración que persiste en NVRAM incluso al reiniciar el equipo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show startup-config</code></pre>
+                <p>Para guardar la memoria temporal en NVRAM se utiliza <span class="span_contenido">wr</span> o:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># copy running-config startup-config</code></pre>
+                <p>Para eliminar la memoria temporal se utiliza:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># reload</code></pre>
+                <p>Por último, para eliminar la memoria NVRAM se utiliza:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="SistemaOperativo">Sistema Operativo IOS</h2>
+
+                <p>Para cambiar de la variable de entorno BOOT la ruta al archivo de imagen se utiliza el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# boot system flash:/&lt;SistemaArchivos&gt;/&lt;NombreArchivoIOS&gt;.bin</code></pre>
+            
+            </div>
+            
+            <div id="RecuperacionSistema">
+                <h2>Recuperarse de un bloqueo del sistema</h2>
+
+                <p>El cargador de arranque proporciona acceso al switch si no se puede usar el sistema operativo debido a la falta de archivos de sistema o al daño de estos. Permite acceso a los archivos almacenados en la memoria flash.
+                    Dentro de este aparecerá el prompt <span class="span_contenido">switch:</span>.</p>
+
+                <p>Puede escribir <span class="span_contenido">help</span> o <span class="span_contenido">?</span> para ver los comandos disponibles.</p>
+                
+                <p>Para ver la ruta actual de arranque use <span class="span_contenido">set</span> y para inicializar el sistema de archivos flash use <span class="span_contenido">flash_init</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">switch: set
+BOOT=flash:/c2960-lanbasek9-mz.122-55.SE7/c2960-lanbasek9-mz.122-55.SE7.bin
+(output omitted)
+
+switch: flash_init
+Initializing Flash...
+flashfs[0]: 2 files, 1 directories
+flashfs[0]: 0 orphaned files, 0 orphaned directories
+flashfs[0]: Total bytes: 32514048
+flashfs[0]: Bytes used: 11838464
+flashfs[0]: Bytes available: 20675584
+flashfs[0]: flashfs fsck took 10 seconds.
+...done Initializing Flash.</code></pre>
+
+                <p>Después de inicializar, puede ver los archivos disponibles con <span class="span_contenido">dir flash:</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">switch: dir flash:
+Directory of flash:/
+    2  -rwx  11834846  &lt;date&gt;               c2960-lanbasek9-mz.150-2.SE8.bin
+    3  -rwx  2072      &lt;date&gt;               multiple-fs</code></pre>
+
+                <p>Para cambiar la variable de arranque al nuevo IOS y reiniciar el sistema:</p>
+                <pre class="codigo" translate="no"><code class="cisco">switch: BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
+switch: set
+BOOT=flash:c2960-lanbasek9-mz.150-2.SE8.bin
+(output omitted)
+switch: boot</code></pre>
+
+                <p class="Expl">Los comandos del gestor de arranque admiten la inicialización de flash, el formateo, la instalación de un nuevo IOS y la recuperación de contraseñas perdidas.</p>
+            </div>
+
+
+            <div id="AccesoRemoto">
+                <h2 id="Conectividad">Herramientas de Conectividad (Ping/SSH/Telnet)</h2>
 
                 <p>Enviar un paquete ICMP a un host de destino para verificar si responde:</p>
                 <pre class="codigo" translate="no"><code class="cisco">ping &lt;IpDestino&gt;</code></pre>
@@ -132,26 +250,172 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="cisco">TELNET DATA:C</code></pre>
             </div>
 
-            <div>
-                <h2>Gestionar la memoria</h2>
+        </div>
 
-                <p>Para ver las configuraciones del dispositivo debemos estar en la raíz del dispositivo y en modo EXEC privilegiado.</p>
-                <br>
-                <p>El siguiente comando nos permite ver configuraciones (interfaces, login y contraseñas) que están guardadas temporalmente y se eliminan al reiniciar el equipo:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show running-config</code></pre>
-                <p class="Expl">Para ver la configuración que persiste en NVRAM incluso al reiniciar el equipo:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show startup-config</code></pre>
-                <p>Para guardar la memoria temporal en NVRAM se utiliza <span class="span_contenido">wr</span> o:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># copy running-config startup-config</code></pre>
-                <p>Para eliminar la memoria temporal se utiliza:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># reload</code></pre>
-                <p>Por último, para eliminar la memoria NVRAM se utiliza:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Filtrar_Salida_Comando">Filtrar la salida de un comando</h2>
+
+                <p>Sintaxis para filtrar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">&lt;Comando&gt; | &lt;Filtro&gt; &lt;Palabra(s) a filtrar&gt;</code></pre>
+
+                <p><b>FILTROS</b>:</p>
+
+                <p>Para filtrar <u>una sección entera</u> mediante un nombre como <span class="span_contenido">vty</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show running-config | section line vty</code></pre>
+                <p class="Expl">Esto devolvería toda la sección <span class="span_contenido">vty</span> incluyendo su configuración como:</p>
+                <pre class="codigo" translate="no"><code class="cisco">line vty 0 4
+ password 7 110A1016141D
+ login
+ transport input all</code></pre>
+
+                <p>Para filtrar solo <u>las líneas que contengan una palabra</u> como <span class="span_contenido">up</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip interface brief | include up</code></pre>
+                <p class="Expl">Esto devolvería toda las líneas que contengan la palabra <span class="span_contenido">up</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">GigabitEthernet0 / 0/0 192.168.10.1 yes manual up
+GigabiteThernet0/0/1 192.168.11.1 yes manual up
+Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
+
+                <p>Para filtrar que las líneas que contengan una palabra como <span class="span_contenido">unassigned</span> <u>no aparezcan</u>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip interface brief | exclude unassigned</code></pre>
+                <p class="Expl">Esto devolvería toda las líneas que no contengan la palabra <span class="span_contenido">unassigned</span> como:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Interface IP-Address OK? Method Status Protocol
+GigabitEthernet0 / 0/0 192.168.10.1 yes manual up
+GigabiteThernet0/0/1 192.168.11.1 yes manual up
+Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
+
+                <p>Para filtrar <u>desde qué línea mostrar</u> como desde "Gateway":</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip route | begin Gateway</code></pre>
+                <p class="Expl">Esto devolvería todas las líneas después de <span class="span_contenido">Gateway</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Gateway of last resort is not set
+      192.168.10.0/24 is variably subnetted, 2 subnets, 2 masks
+...</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Verificacion_Historial_Comandos">Ver el Historial de comandos</h2>
+
+                <p>Los comandos que se ejecutaron en una sesión de terminal se puede ver con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show history</code></pre>
 
             </div>
 
             <div>
-                <h2>Configuraciones</h2>
+                <h2 id="Cambiar_Historial_Comandos">Cambiar el límite del historial de comandos</h2>
+
+                <p>Para asignar cuantos comandos se van a guardar en el historial de comandos se usa el siguiente comando definiendo su cantidad:</p>
+                <pre class="codigo" translate="no"><code class="cisco">terminal history size &lt;Cantidad&gt;</code></pre>
+
+            </div>
+
+        </body>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="Verificacion_Interfaces">Comandos de Verificación &gt; <span>Interfaces</span></h2>
+
+                <p>Para ver todas las configuraciones de las interfaces del dispositivo en IPv4:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip interface brief</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">show ipv6 interface brief</code></pre>
+                <p class="Expl">Enseña de cada interfaz el nombre, IP, Si está reconocida por el sistema (OK?), estado y protocolo. <u>Ejemplo</u>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Router# show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+FastEthernet0/0        192.168.1.1     YES manual up                    up
+FastEthernet0/1        unassigned      YES unset  administratively down down
+Vlan1                  unassigned      YES unset  administratively down down</code></pre>
+
+                <p>Para ver todas las estadísticas y estado de todas las interfaces del equipo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show interfaces</code></pre>
+                <p class="Expl">
+                    Este comando es útil para detectar problemas comunes de medios. 
+                    Una de las partes más importantes de esta salida es la visualización de la línea y el estado del protocolo de enlace de datos.
+                </p>
+
+                <p>También se puede ver las estadísticas y estado de una interfaz en específico:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show interfaces &lt;Interfaz&gt;</code></pre>
+
+                <p>Los siguientes comandos muestran información de IPv4 o IPv6:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip interfaces</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">show ipv6 interfaces</code></pre>
+
+                <p>Se puede ver los comandos aplicados a una interfaz específica que se están aplicando actualmente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show running-config interface &lt;Interfaz&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="Verificacion_Tabla_ARP">Comandos de Verificación &gt; <span>Tabla ARP y MAC</span></h2>
+
+                <p>Para ver la tabla ARP IPv4:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip arp</code></pre>
+
+                <p>Para ver la tabla de vecinos IPv6:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ipv6 neighbors</code></pre>
+
+                <p>Para ver la tabla MAC se puede usar las 2 siguientes formas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show mac address-table</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">show mac-address-table</code></pre>
+            </div>
+
+            <div>
+                <h2 id="Verificacion_Tabla_Rutas">Comandos de Verificación &gt; <span>Tabla de Rutas</span></h2>
+
+                <p>Para ver la tabla de enrutamiento en IPv4:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip route</code></pre>
+
+                <p>Para ver la tabla de enrutamiento en IPv6:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ipv6 route</code></pre>
+            </div>
+
+            <div>
+                <h2 id="Verificacion_Sistema">Comandos de Verificación &gt; <span>Sistema</span></h2>
+
+                <p>Se puede ver el estado del hardware e infromación del sistema con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show version</code></pre>
+            </div>
+
+            <div>
+                <h2 id="Verificacion_Archivos">Comandos de Verificación &gt; <span>Archivos</span></h2>
+
+                <p>Para ver el contenido de la memoria flash <span class="span_url">flash:</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show flash:</code></pre>
+
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="NavInterfaces">Navegación y Configuración de Interfaces</h2>
 
                 <p>Podemos entrar en modo de configuración global del dispositivo de 2 formas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># configure terminal</code></pre>
@@ -187,36 +451,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Ver información</h2>
-
-                <p>Para ver todas las configuraciones de las interfaces del dispositivo en IPv4:</p>
-                <pre class="codigo" translate="no"><code class="cisco">show ip interface brief</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">show ipv6 interface brief</code></pre>
-                <p class="Expl">Enseña de cada interfaz el nombre, IP, Si está reconocida por el sistema (OK?), estado y protocolo. <u>Ejemplo</u>:</p>
-                <pre class="codigo" translate="no"><code class="cisco">Router# show ip interface brief
-Interface              IP-Address      OK? Method Status                Protocol
-FastEthernet0/0        192.168.1.1     YES manual up                    up
-FastEthernet0/1        unassigned      YES unset  administratively down down
-Vlan1                  unassigned      YES unset  administratively down down</code></pre>
-
-                <p>Para ver todas las estadísticas de todas las interfaces del equipo:</p>
-                <pre class="codigo" translate="no"><code class="cisco">show interfaces</code></pre>
-                <p class="Expl">Los siguientes muestran información de IPv4 o IPv6:</p>
-                <pre class="codigo" translate="no"><code class="cisco">show ip interfaces</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">show ipv6 interfaces</code></pre>
-
-                <p>Para ver la tabla de rutas IPv4 o IPv6:</p>
-                <pre class="codigo" translate="no"><code class="cisco">show ip route</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">show ipv6 route</code></pre>
-
-                <p>Para ver la tabla ARP IPv4 o de vecinos IPv6:</p>
-                <pre class="codigo" translate="no"><code class="cisco">show ip arp</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">show ipv6 neighbors</code></pre>
-
-            </div>
-
-            <div>
-                <h2>Asignación de IP</h2>
+                <h2 id="Direccionamiento">Direccionamiento IPv4 e IPv6</h2>
 
                 <p>Si es un <b>switch</b> hay que configurar IPs mediante VLANs se usa: (la VLAN por defecto es 1)</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan NumVlan</code></pre>
@@ -235,7 +470,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2>Asignación del Default Gateway</h2>
+                <h2 id="Gateway">Default Gateway (Switch)</h2>
 
                 <p>Poner la IP de la puerta de enlace predeterminada a una interfaz:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
@@ -244,17 +479,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2>Permitir métodos de acceso remoto</h2>
-
-                <p>Podemos permitir ciertos protocolos de acceso remoto con:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15
-(config-line)# transport input &lt;ssh telnet&gt;</code></pre>
-                <p class="Expl">Podemos permitir tanto ssh y telnet o solo uno de los dos. Se separan mediante espacios.</p>
-
-            </div>
-
-            <div>
-                <h2>Router - Enrutamiento estático</h2>
+                <h2 id="Enrutamiento">Enrutamiento Estático</h2>
 
                 <p>Para añadir una ruta a la que un router pueda acceder de manera manual:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt;</code></pre>
@@ -262,7 +487,36 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2>Seguridad</h2>
+                <h2 id="DNS">Servicios DNS</h2>
+
+                <p>Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
+                
+                <p>Desactivar la búsqueda de DNS:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# no ip domain-lookup</code></pre>
+            
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="FiltroAcceso">Filtro de Protocolos (Transport Input)</h2>
+
+                <p>Podemos permitir ciertos protocolos de acceso remoto con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15
+(config-line)# transport input &lt;ssh telnet&gt;</code></pre>
+                <p class="Expl">Podemos permitir tanto ssh y telnet o solo uno de los dos. Se separan mediante espacios.</p>
+
+            </div>
+            
+            <div>
+                <h2 id="SeguridadBasica">Seguridad Básica y Banners</h2>
 
                 <p>Poner una contraseña en líneas de acceso:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line &lt;console/vty&gt; &lt;NumPuerto/Rango&gt;</code></pre>
@@ -293,7 +547,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2>Creación y gestión de usuarios</h2>
+                <h2 id="Usuarios">Gestión de Usuarios y Privilegios</h2>
 
                 <p>Para crear un usuario <b>sin privilegios</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# username &lt;Nombre_Usuario&gt; secret &lt;Contraseña&gt;</code></pre>
@@ -314,7 +568,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2>Directivas de seguridad</h2>
+                <h2 id="Politicas">Políticas de Seguridad (Bloqueos)</h2>
 
                 <p>Para aplicar una longitud mínima a cada contraseña que se cree desde este momento (no se aplica a contraseñas ya creadas):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# security passwords min-length &lt;NúmeroMínimo&gt;</code></pre>
@@ -328,15 +582,21 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2>Permitir SSH</h2>
+                <h2 id="ServidorSSH">Configuración Servidor SSH</h2>
 
                 <p>Pasos:</p>
-                <p>1. Poner un hostname único y diferente al de por defecto.</p>
+                <p>1. 
+                    Antes de nada hay que verificar si el switch soporta realizar funciones criptográficas. 
+                    Para ello debe de ejecutar este comando sin errores:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ssh</code></pre>
+
+                <p>2. Poner un hostname único y diferente al de por defecto.</p>
                 
-                <p>2. Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
+                <p>3. Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
                 
-                <p>3. Generar una clave de 4096 Bytes u otro tamaño con el algoritmo RSA:</p>
+                <p>4. Generar una clave de 4096 Bytes u otro tamaño con el algoritmo RSA:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# crypto key generate rsa general-keys modulus 4096</code></pre>
                 
                 <p>Permitir solo el tráfico SSH en las líneas de acceso remoto:</p>
@@ -344,26 +604,313 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# transport input ssh</code></pre>
                 <p class="Expl">Desde el momento de poner el comando se denegará conexiones telnet, solo admitirá SSH. Si se tenía alguna conexión telnet existente no la cierra.</p>
             
-            </div>
-            
-            <div>
-                <h2>DNS</h2>
+                <p>🛡️ Para reforzar la seguridad, se puede forzar al switch a realizar únicamente conexiones por SSH v2.0:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip ssh version 2</code></pre>
 
-                <p>Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
-                
-                <p>Desactivar la búsqueda de DNS:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# no ip domain-lookup</code></pre>
-            
             </div>
             
         </div>
+        
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Full_Duplex_Interfaz">Configuración de full-duplex en una interfaz</h2>
+
+                <p>Primero entraremos a la interfaz deaseada y asignaremos el modo full-duplex:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# duplex full</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Velocidad_Interfaz">Configuración de velocidad en una interfaz</h2>
+
+                <p>Primero entraremos a la interfaz deaseada y asignaremos la velocidad en <b>Mbps</b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# speed &lt;VelocidadEnMbps&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Auto_MDIX">Configuración de Auto-MDIX en una interfaz</h2>
+
+                <p>Primero entraremos a la interfaz deaseada y asignaremos que funcione como Auto-MDIX:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# mdix auto</code></pre>
+
+                <p>Podemos comprobar que se haya aplicado Auto-MDIX en la interfaz especificada con el comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show controllers ethernet-controller &lt;Interfaz&gt; phy | include MDIX</code></pre>
+                <p class="Expl">Si es correcto debería de devolver la siguiente línea:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Auto-MDIX    :  On    [AdminState=1    Flags=0x00052248]</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Interfaz_Loopback">Creación de una interfaz loopback</h2>
+
+                <p>
+                    Una interfaz de loopback en un <u>router</u> no permite conectar otros dispositivos y sirve para que una interfaz siempre esté encendida (siempre que el router esté en funcionamiento).
+                    Por ejemplo, se puede usar con fines de prueba, como la prueba de procesos de routing interno, mediante la emulación de redes detrás del router.
+                </p>
+
+                <p>Para crear una, simplemente se ejecuta el siguiente comando seguido de la asignación de una IP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface loopback &lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="VLAN_Creacion">VLAN &gt; Creación</h2>
+
+                <p>Primero crearemos la VLAN con el siguiente comando, indicando su número de VLAN:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
+            
+                <p>Luego podremos asignarle un nombre personalizado con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name &lt;NombreVLAN&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Eliminar_Archivo">VLAN &gt; Eliminar la configuración de todas las VLANs</h2>
+
+                <p>Con el comando <span class="span_contenido">delete</span> se eliminará el fichero de configuración de las VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# delete flash:vlan.dat</code></pre>
+                <p>Otra forma abreviada es quitando el dispositivo flash de la ruta:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# delete vlan.dat</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Puertos_Asignados">VLAN &gt; Visualización de puertos asignados</h2>
+
+                <p>Con el siguiente comando se puede ver qué VLANs se asignaron a ciertos puertos:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show vlan brief</code></pre>
+                <p class="Expl">Por defecto se puede ver que todas las interfaces del switch se asignaron a la VLAN 1 (predeterminada).</p>
+
+                <p>Con el siguiente comando se muestra la información de una VLAN específica:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show vlan id &lt;VLAN_ID&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Configuracion">VLAN &gt; Visualización de la configuración</h2>
+                <p>Hay un comando muy útil que indica de una interfaz su modo de funcionamiento, VLANs asignadas, permitidas, etc.:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces &lt;Interfaz&gt; switchport</code></pre>
+                <p class="Expl">Esto devolverá algo parecido a:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Switchport: Enabled
+Administrative Mode: trunk
+Operational Mode: trunk
+Administrative Trunking Encapsulation: dot1q
+Operational Trunking Encapsulation: dot1q
+Access Mode VLAN: 1 (default)
+Trunking Native Mode VLAN: 99 (VLAN0099)
+Voice VLAN: none
+Trunking VLANs Enabled: 10,20,30,99</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Asignar_IP">VLAN &gt; Asignación de una IP</h2>
+
+                <p>Simplemente entraremos a la interfaz con <span class="span_contenido">interface</span> y le asignaremos la configuración necesaria:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;MáscaraPunteada&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Modo_Acceso">VLAN &gt; Modo Acceso &gt; Configuración de una interfaz</h2>
+
+                <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">Con <span class="span_contenido">interface range</span> se puede configurar múltiples puertos a la vez.</p>
+
+                <p>Si se quiere eliminar el modo acceso directamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport mode access</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Reestablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Reestablecer</span></h2>
+
+                <p>Entraremos a la interfaz, y le quitaremos de switchport la vlan:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport access vlan</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Modo_Troncal">VLAN &gt; Modo Troncal &gt; Configuración de una interfaz</h2>
+
+                <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <p class="Expl">Hay que asignar qué VLAN va a ser la nativa.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk native vlan &lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">Se puede añadir qué VLANs tienen permitido el paso por el enlace troncal.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan &lt;Lista_de_VLAN_ID&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VLAN_Reestablecer_Modo_Troncal">VLAN &gt; Modo Troncal &gt; <span>Reestablecer</span></h2>
+
+                <p>Entraremos a la interfaz, y le quitaremos las interfaces permitidas y nativa:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport trunk allowed vlan</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport trunk native vlan</code></pre>
+
+                <p>Si se quiere eliminar el modo troncal directamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport mode trunk</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="VLAN_Voz">VLAN de Voz &gt; Redirigir el tráfico</h2>
+
+                <p>Primero crearemos las VLANs correspondientes:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
+(config-vlan)# name &lt;NombreInterfaz&gt;
+(config-vlan)# vlan &lt;VLAN_ID_VOZ&gt;
+(config-vlan)# name Voz
+(config-vlan)# exit</code></pre>
+
+                <p>Ahora podremos entrar a la interfaz y asignarle el puerto de acceso (como en el apartado anterior) y luego asignar el tráfico de voz para ese puerto:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# mls qos trust cos</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport voice vlan &lt;VLAN_ID_VOZ&gt;</code></pre>
+
+                <p class="Expl">El comando <span class="span_contenido">mls</span> sirve para establecer el estado confiable de una interfaz, y para indicar qué campos del paquete se usan para clasificar el tráfico.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Modos_Switchport">Modos de interfaz negociados (Switchport)</h2>
+
+                <p>El comando <span class="span_contenido">switchport mode</span> tiene opciones adicionales para negociar el modo de interfaz. <u>Sintaxis del comando</u>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">Switch(config)# switchport mode {  access | dynamic {  auto | desirable } |  trunk }</code></pre>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">Modos de switcport</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">access</code></pre></td>
+                            <td>
+                                Pone la interfaz (puerto de acceso) en modo permanente de no trunking y negocia para convertir el enlace en un enlace no troncal.
+                                La interfaz se convierte en una interfaz no troncal, independientemente de si la interfaz vecina es una interfaz troncal.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">dynamic auto</code></pre></td>
+                            <td>
+                                La interfaz se convierte en una interfaz de enlace troncal, si la interfaz vecina está configurado en modo troncal o deseable.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">dynamic desirable</code></pre></td>
+                            <td>
+                                La interfaz se convierte en una interfaz de enlace troncal, si la interfaz vecina está configurado en modo automático troncal, deseable o dinámico.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">trunk</code></pre></td>
+                            <td>
+                                El puerto queda configurado en modo troncal de forma permanente y negocia para que el enlace se convierta en una conexión troncal.
+                                La interfaz se convierte en una interfaz de enlace troncal, incluso si la interfaz vecina  no es una interfaz troncal.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div>
+                <h2 id="VerificacionDTP">Verificación del modo de DTP</h2>
+
+                <pre class="codigo" translate="no"><code class="cisco"># show dtp interface &lt;Interfaz&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Negociacion_Activar"><span>Habilitar la negociación</span> de modos entre puertos</h2>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport nonegotiate</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Negociacion_Desactivar"><span>Desactivar la negociación</span> de modos entre puertos</h2>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode dynamic auto</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
     </body>
 </html>

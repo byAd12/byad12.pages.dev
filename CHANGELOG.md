@@ -1,8 +1,9 @@
 31/01/2026 - Arreglos y mejoras de contenido
 
-# models.html
-Se arregló que la ruta a main.css era inválida
-
-# g/xsd.html
-Arreglo de formato en ciertos bloques
+# resources/blog.css
+Ahora los enlaces dentro de listas se le aplica el estilo correspondiente correctamente
+ 
+# g/packet_tracer.html
 Mejora de contenido
+Nuevo contenido
+Se añadió un índice
