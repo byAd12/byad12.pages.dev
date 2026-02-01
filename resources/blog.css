@@ -198,7 +198,7 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 /* Estilos aplicado en la impresión (CTRL - P) */
 
 @media print{
-    .menu_bar, .TituloCreditosSuperior{display: none;}
+    .menu_bar{display: none;}
     *{user-select: text !important;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}

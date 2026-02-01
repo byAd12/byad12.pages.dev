@@ -1,9 +1,8 @@
-31/01/2026 - Arreglos y mejoras de contenido
+01/02/2026 - mejoras de contenido
 
-# resources/blog.css
-Ahora los enlaces dentro de listas se le aplica el estilo correspondiente correctamente
- 
 # g/packet_tracer.html
 Mejora de contenido
 Nuevo contenido
-Se añadió un índice
+
+# g/*.html
+Se volvió a poner el nombre original como créditos

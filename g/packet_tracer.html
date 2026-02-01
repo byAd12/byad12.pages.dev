@@ -34,66 +34,68 @@
         <div id="Principio"></div>
         <h1>Packet Tracer</h1>
         <h2 class="TituloSecundario">Command Line Interface</h2>
-        <h2 class="TituloCreditosSuperior">byAd12</h2>
+        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Índice</h2>
+                <h2>Índice de Contenidos</h2>
+
+                <h3 style="margin: 20px; color: #66aaff;">1. Básico</h3>
                 <ul>
-                    <li>Comandos: <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a></li>
-                    <li>Historial de comandos: <a href="#Verificacion_Historial_Comandos">Ver</a> • <a href="#Cambiar_Historial_Comandos">Cambiar el límite</a></li>
-                    <li>Reglas: <a href="#Nomenclatura">Hostnames</a> • <a href="#PassRules">Contraseñas</a></li>
-                    
-                    <br>
-                    <li><a href="#Basico">Configuración Inicial y Ayuda</a></li>
-                    <li><a href="#Memoria">Gestión de Archivos de Configuración</a></li>
-                    <li><a href="#Conectividad">Herramientas de Conectividad (Ping/SSH/Telnet)</a></li>
+                    <li><b>Comandos:</b> <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a> • <a href="#Basico">Ayuda y Reloj</a></li>
+                    <li><b>Historial:</b> <a href="#Verificacion_Historial_Comandos">Ver historial</a> • <a href="#Cambiar_Historial_Comandos">Cambiar límite</a></li>
+                    <li><b>Gestión de Archivos:</b> <a href="#Memoria">Guardar/Borrar Config (NVRAM)</a> • <a href="#PurgarConfiguracion">Restablecer de fábrica</a></li>
+                    <li><b>Sistema IOS:</b> <a href="#SistemaOperativo">Boot System</a> • <a href="#RecuperacionSistema">Modo recuperación (ROMMON)</a></li>
+                </ul>
 
-                    <br>
-                    <li>Sistema: <a href="#SistemaOperativo">Sistema Operativo IOS</a> • <a href="#RecuperacionSistema">Recuperarse de un bloqueo</a></li>
+                <h3 style="margin: 20px; color: #66aaff;">2. Diagnóstico y Verificación</h3>
+                <ul class="margin-left: 15px;">
+                    <li><b>Herramientas:</b> <a href="#Conectividad">Ping, SSH y Telnet</a></li>
+                    <li><b>Comandos Show:</b> <a href="#Comando_Show_Do">Uso de 'Do'</a> • <a href="#Verificacion_Sistema">Versión y Hardware</a></li>
+                    <li><b>Tablas y Estado:</b> 
+                        <a href="#Verificacion_Interfaces">Interfaces (IPs/Estado)</a> • 
+                        <a href="#Verificacion_Tabla_ARP">Tabla ARP/Vecinos</a> • 
+                        <a href="#Verificacion_Tabla_Rutas">Tabla de Rutas</a>
+                    </li>
+                </ul>
 
-                    <br>
-                    <li>Comandos de Verificación: <a href="#Verificacion_Interfaces">Interfaces</a> • <a href="#Verificacion_Tabla_ARP">Tabla ARP y MAC</a> • <a href="#Verificacion_Tabla_Rutas">Tabla de Rutas</a> • <a href="#Verificacion_Sistema">Sistema</a> • <a href="#Verificacion_Archivos">Archivos</a></li>
+                <h3 style="margin: 20px; color: #66aaff;">3. Configuración de Red e Interfaces</h3>
+                <ul>
+                    <li><b>General:</b> <a href="#Nomenclatura">Hostnames</a> • <a href="#DNS">Dominio y DNS</a> • <a href="#Gateway">Default Gateway</a></li>
+                    <li><b>Direccionamiento:</b> <a href="#Direccionamiento">IPv4 e IPv6</a> • <a href="#Enrutamiento">Rutas Estáticas</a></li>
+                    <li><b>Ajustes Físicos:</b> <a href="#NavInterfaces">Navegación básica</a> • <a href="#Full_Duplex_Interfaz">Duplex</a> • <a href="#Velocidad_Interfaz">Velocidad</a> • <a href="#Auto_MDIX">Auto-MDIX</a></li>
+                    <li><b>Lógicas:</b> <a href="#Interfaz_Loopback">Interfaz Loopback</a></li>
+                </ul>
 
-                    <br>
-                    <li><a href="#NavInterfaces">Navegación y Configuración de Interfaces</a></li>
-                    <li><a href="#Direccionamiento">Direccionamiento IPv4 e IPv6</a></li>
-                    <li><a href="#Gateway">Default Gateway (Switch)</a></li>
-                    <li><a href="#Enrutamiento">Enrutamiento Estático</a></li>
-                    <li><a href="#DNS">Servicios DNS</a></li>
+                <h3 style="margin: 20px; color: #66aaff;">4. Seguridad y Acceso</h3>
+                <ul>
+                    <li><b>Usuarios:</b> <a href="#Usuarios">Crear usuarios y privilegios</a> • <a href="#PassRules">Reglas de contraseñas</a></li>
+                    <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#ServidorSSH">Configurar Servidor SSH</a></li>
+                    <li><b>Políticas:</b> <a href="#Politicas">Bloqueos por intentos y Timeout</a> • <a href="#FiltroAcceso">Filtro Transport Input</a></li>
+                    <li><b>Avisos:</b> <a href="#SeguridadBasica">Banners (MOTD)</a></li>
+                </ul>
 
-                    <br>
-                    <li><a href="#FiltroAcceso">Filtro de Protocolos (Transport Input)</a></li>
-                    <li><a href="#SeguridadBasica">Seguridad Básica y Banners</a></li>
-                    <li><a href="#Usuarios">Gestión de Usuarios y Privilegios</a></li>
-                    <li><a href="#Politicas">Políticas de Seguridad (Bloqueos)</a></li>
-                    <li><a href="#ServidorSSH">Configuración Servidor SSH</a></li>
+                <h3 style="margin: 20px; color: #66aaff;">5. VLANs y Troncales (Switching)</h3>
+                <ul>
+                    <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Archivo">Borrar vlan.dat</a></li>
+                    <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Reestablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
+                    <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Reestablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
+                    <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a></li>
+                </ul>
 
-                    <br>
-                    <li>Full-duplex: <a href="#Full_Duplex_Interfaz">Configuración</a></li>
-                    <li>Velocidad máxima: <a href="#Velocidad_Interfaz">Configuración</a></li>
-                    <li>Auto-MDIX: <a href="#Auto_MDIX">Configuración</a></li>
-                    <li>Interfaz loopback: <a href="#Interfaz_Loopback">Creación</a></li>
-
-                    <br>
-                    <li>VLAN: <a href="#VLAN_Creacion">Creación</a> • <a href="#VLAN_Eliminar_Archivo">Eliminar todas las VLANs</a> • <a href="#VLAN_Puertos_Asignados">Visualización de puertos asignados</a> • <a href="#VLAN_Configuracion">Visualización de la configuración</a> • <a href="#VLAN_Asignar_IP">Asignación de una IP</a></li>
-                    <li>VLAN &gt; Modo Acceso: <a href="#VLAN_Modo_Acceso">Configuración de una interfaz</a> • <a href="#VLAN_Reestablecer_Modo_Acceso">Reestablecer</a></li>
-                    <li>VLAN &gt; Modo Troncal: <a href="#VLAN_Modo_Troncal">Configuración de una interfaz</a> • <a href="#VLAN_Reestablecer_Modo_Troncal">Reestablecer</a></li>
-                    <li>VLAN de Voz &gt; <a href="#VLAN_Voz">Redirigir el tráfico</a></li>
-
-                    <br>
-                    <li><a href="#Modos_Switchport">Modos de interfaz negociados (Switchport)</a></li>
-                    <li><a href="#VerificacionDTP">Verificación del modo de DTP</a></li>
-                    <li>Negociación de modos entre puertos: <a href="#Negociacion_Activar">Habilitar</a> • <a href="#Negociacion_Desactivar">Desactivar</a></li>
-
-
+                <h3 style="margin: 20px; color: #66aaff;">6. Protocolos Avanzados</h3>
+                <ul>
+                    <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
+                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz/Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
+                    <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
                 </ul>
             </div>
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Básico</h1>
         <hr>
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <!-- ......................................................... -->
@@ -135,6 +137,7 @@
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Gestión de la configuración</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -177,6 +180,17 @@
                 <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
 
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Sistema Operativo</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        
+        <div class="parte1">
 
             <div>
                 <h2 id="SistemaOperativo">Sistema Operativo IOS</h2>
@@ -225,6 +239,28 @@ switch: boot</code></pre>
                 <p class="Expl">Los comandos del gestor de arranque admiten la inicialización de flash, el formateo, la instalación de un nuevo IOS y la recuperación de contraseñas perdidas.</p>
             </div>
 
+            <div>
+                <h2 id="PurgarConfiguracion">Eliminar toda la configuración del sistema</h2>
+
+                <p>Eliminaremos la configuración de arranque y el fichero de la configuración de VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># erase startup-conf</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># delete vlan.dat</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># write erase</code></pre>
+                <p class="Expl">Cuando pregunte si estamos seguros debemos responder con <span class="span_contenido">y</span> seguido de <span class="span_contenido">ENTER</span>.</p>
+            
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Herramientas de Conectividad</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        
+        <div class="parte1">
+
 
             <div id="AccesoRemoto">
                 <h2 id="Conectividad">Herramientas de Conectividad (Ping/SSH/Telnet)</h2>
@@ -256,6 +292,7 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Uso de filtros</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -305,6 +342,7 @@ Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Historial de comandos</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -331,11 +369,24 @@ Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Comandos de Verificación</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
+            <div>
+                <h2 id="Comando_Show_Do">Comandos de Verificación &gt; <span>Importante</span></h2>
+
+                <p>El comando <span class="span_contenido">show</span> solo funciona si se ejecuta fuera de (config)# como el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief</code></pre>
+
+                <p>Si se desea ver el comando dentro de la configuración hay que añadir la palabra <span class="span_contenido">do</span> al principio del comando como el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# do show ip interface brief</code></pre>
+                <p class="Expl">Tenga en cuenta que al usar <span class="span_contenido">do</span> no se podrá usar el autocompletado de opciones del comando.</p>
+
+            </div>
+
             <div>
                 <h2 id="Verificacion_Interfaces">Comandos de Verificación &gt; <span>Interfaces</span></h2>
 
@@ -409,6 +460,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Configuración básica</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -500,6 +552,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Seguridad</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -613,6 +666,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
         
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Configuración específica</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -669,6 +723,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>VLANs</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -769,6 +824,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">Se puede añadir qué VLANs tienen permitido el paso por el enlace troncal.</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan &lt;Lista_de_VLAN_ID&gt;</code></pre>
 
+                <p><u>Nota</u>: Si posteriormente se desea añadir otra VLAN como permitida se puede añadir individualmente sin necesidad de especificar todas las VLANs de nuevo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan add &lt;Nueva_VLAN_ID_Permitida&gt;</code></pre>
+
             </div>
 
             <div>
@@ -784,10 +842,19 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+            <div>
+                <h2 id="VLAN_Ver_Interfaces_Modo_Troncal">VLAN &gt; Modo Troncal &gt; Ver configuración troncal</h2>
+
+                <p>El siguiente comando es muy importante y permite ver que interfaz actúa en modo troncal, la VLAN nativa y las VLANs permitidas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>VLAN - Voz</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -820,6 +887,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Switchport</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -880,6 +948,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Negociación</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -904,6 +973,341 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
         </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Router-on-a-Stick</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Router_Stick_Configuracion">Router-on-a-Stick &gt; <span>Configuración</span></h2>
+
+                <p>Los siguientes pasos se realizarán suponiendo que un Switch2 esté conectado a un Switch1 y este a un Router.</p>
+
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en Switch1 y Switch2</span></b>:</p>
+
+
+                <p>Paso 1. Crear y nombrar las VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
+(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
+                <p class="Expl">
+                    Este paso se realizará con cada vlan necesaria para la segmentación de la red.
+                    También se realizará para crear una VLAN que una a los switches y se puedan comunicar entre ellos (VLAN de administración).
+                </p>
+                
+
+                <p>Paso 2. Crear la interfaz de administración:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;
+(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;
+(config-if)# no shutdown
+(config-if)# exit
+(config)# ip default-gateway &lt;IP_Gateway&gt;</code></pre>
+                <p class="Expl">Este paso es para asignarle al switch, dentro de la VLAN de administración, una IP y así se pueda comunicar con otros switches.</p>
+
+
+                <p>Paso 3. Configurar puertos de acceso:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# switchport mode access
+(config-if)# switchport access vlan &lt;VLAN_ID&gt;
+(config-if)# no shutdown</code></pre>
+                <p class="Expl">Este paso se realizará con cada interfaz de cada switch en la que se tenga conectado un PC.</p>
+
+
+                <p>Paso 4. Configurar puertos de enlace troncal:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# switchport mode trunk
+(config-if)# no shutdown</code></pre>
+                <p class="Expl">Este paso se realizará con el enlace que una Switch1 y Switch2 y el enlace entre Switch1 y el Router.</p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en el Router</span></b>:</p>
+
+                <p>Paso 1. Por cada VLAN se creará una sub-interfaz lógica sobre la interfaz física con la que se conecta el Router con el Switch1:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;.&lt;VLAN_ID&gt;
+(config-if)# encapsulation dot1Q &lt;VLAN_ID&gt;
+(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <p class="Expl"><b>interface</b>: Crea una subinterfaz lógica que identifica a la VLAN mediante el número &lt;VLAN_ID&gt;.
+                    <br>
+                    <b>encapsulation dot1Q</b>: Indica que esta subinterfaz solo procesará tramas etiquetadas con la VLAN especificada.
+                    <br>
+                    <b>ip address</b>: Asigna a la subinterfaz la IP del gateway que usarán los dispositivos de esa VLAN para comunicarse con otras redes o VLANs.
+                </p>
+
+                <p>Paso 2. Hay que indicar que la interfaz física con la que se conecta el Router con el Switch1 nunca se apague con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;
+(config-if)# no shutdown</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Router_Stick_Verificacion">Router-on-a-Stick &gt; <span>Verificación de la configuración</span></h2>
+
+                <p>En el router ejecutaremos los siguientes comandos:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route | begin Gateway</code></pre>
+                <p class="Expl">Esto debería devolver por cada sub-interfaz lógica creada su IP asignada.</p>
+
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief | include up</code></pre>
+                <p class="Expl">Esto comando confirma que las subinterfaces tienen configurada la dirección IPv4 correcta y que están operativas.</p>
+
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces &lt;Interfaz_Física&gt;.&lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">Con este comando se puede ver la IP asignada a la sub-interfaz lógica y más configuraciones.</p>
+
+                <p>En el switch se puede verificar los enlaces troncales activos:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Inter-VLAN</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Inter_VLAN_Configuracion">Inter-VLAN &gt; <span>Configuración</span></h2>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en el switch de Capa 3 / Distribución</span></b>:</p>
+
+                <p>Paso 1. Crear y nombrar las VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
+(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
+                <p class="Expl">Este paso se realizará con cada vlan necesaria para la segmentación de la red.</p>
+
+                <p>Paso 2. Crear las interfaces VLAN SVI:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;
+(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;
+(config-if)# no shutdown</code></pre>
+                <p class="Expl">Por cada VLAN entraremos para asignarle su puerta de enlace correspondiente.</p>
+
+                <p>Paso 3. Configurar puertos entre switches o PCs:</p>
+                <p class="Expl">Si este switch de capa 3 tiene en ciertas interfaces a otros switches de capa 2 conectado, configuraremos estas interfaces de la siguiente manera:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# switchport mode trunk
+(config-if)# switchport trunk native vlan &lt;VLAN_ID_Nativa&gt;
+(config-if)# switchport trunk allowed vlan &lt;Lista_VLAN_ID_Permitidas&gt;</code></pre>
+                <p class="Expl">Si este switch de capa 3 tiene equipos finales (PCs o servidores) conectados directamente se les asignará a una VLAN:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# switchport mode access
+(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
+
+                <p>Paso 4. Habilitar el enrutado entre VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip routing</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Inter_VLAN_Solucionar_Problemas">Inter-VLAN &gt; <span>Solucionar problemas</span></h2>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de VLAN faltantes</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show vlan brief</code></pre>
+                <p class="Expl"><u>Cómo arreglar</u>: Cree (o vuelva a crear) la VLAN si no existe en el switch. Verifique que el puerto del host esté correctamente asignado a la VLAN correspondiente.</p>
+                <p class="Expl">Otra forma de detectar este problema es comprobar si alguna interfaz en modo acceso o troncal aparece como "(Inactive)", lo que indica que la VLAN no existe o no está activa:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interface &lt;Interfaz&gt; switchport | include Access Mode VLAN
+            Access Mode VLAN: &lt;VLAN_ID&gt; (Inactive)</code></pre>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de los enlaces troncales</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
+                <p class="Expl">
+                    <u>Cómo arreglar</u>: 
+                    Verifique que los enlaces troncales estén configurados correctamente.
+                    Confirme que el puerto esté en modo troncal y que se encuentre activo.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de que las interfaces están encendidas</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include interface &lt;Interfaz&gt;</code></pre>
+                <p class="Expl">
+                    <u>Cómo arreglar</u>: 
+                    Ingrese a la interfaz correspondiente y ejecute el comando <span class="span_contenido">no shutdown</span> para habilitarla.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de interfaces de acceso</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces switchport</code></pre>
+                <p class="Expl">
+                    <u>Cómo arreglar</u>: 
+                    Asigne el puerto a la VLAN correcta.
+                    Asegúrese de que el puerto esté configurado en modo acceso y habilitado.
+                    Verifique que el host pertenezca a la VLAN o subred correcta.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de asignación de direcciones IPs</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief</code></pre>
+                <p class="Expl">
+                    <u>Cómo arreglar</u>: 
+                    Verifique que la dirección IPv4 configurada en la subinterfaz del router sea correcta.
+                    Confirme que la subinterfaz del router esté asociada al ID de VLAN correspondiente.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de que cada sub-interfaz lógica está en la VLAN correcta</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces | include Gig|802.1Q</code></pre>
+                <p class="Expl">
+                    <u>Cómo arreglar</u>: 
+                    Verifique que el VLAN_ID configurado en cada sub-interfaz lógica coincida con la VLAN correspondiente.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Spanning-tree</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="STP_Switch_Raiz">Spanning-tree &gt; Asignar un switch como <span>raíz</span></h2>
+
+                <p>Dentro del switch que queramos definir como raíz ejecutaremos lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree vlan &lt;VLAN_ID&gt; root primary</code></pre>
+                <p class="Expl"><b>VLAN_ID</b>: La VLAN en la que este switch será raíz.</p>
+
+                <p>Para verificarlo ejecutaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# do show spanning-tree vlan &lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">En el apartado <span class="span_contenido">Root ID</span> &gt; <span class="span_contenido">Priority</span> se puede observar que el valor es 4096 menor que la prioridad del switch que anteriormente actuaba como raíz, lo que confirma que el nuevo switch ha sido elegido como raíz.</p>
+
+                <p class="Expl">Si posteriormente se conecta a la red un switch con una prioridad inferior a la del switch que acabamos de definir como raíz, este pasará automáticamente a convertirse en el nuevo Root Bridge. Esto provocará un recalculo de la topología STP y hará necesario reconfigurar la prioridad del switch que deseamos que actúe como raíz.</p>
+
+            </div>
+
+            <div>
+                <h2 id="STP_Switch_Secundario">Spanning-tree &gt; Asignar un switch como <span>secundario</span></h2>
+
+                <p>Dentro del switch que queramos definir como raíz ejecutaremos lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree vlan &lt;VLAN_ID&gt; root secondary</code></pre>
+                <p class="Expl"><b>VLAN_ID</b>: La VLAN en la que este switch será secundario.</p>
+
+                <p>Para verificarlo ejecutaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# do show spanning-tree vlan &lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">En el apartado <span class="span_contenido">Bridge ID</span> &gt; <span class="span_contenido">Priority</span> se puede observar que el valor no es menor que el de <span class="span_contenido">Root ID</span> &gt; <span class="span_contenido">Priority</span> pero si es menor que el de otros switches en esa VLAN.</p>
+
+            </div>
+
+            <div>
+                <h2 id="PortFast_Activar">Spanning-tree &gt; Activar <span>Port-Fast</span></h2>
+
+                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo portfast:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree portfast</code></pre>
+                <p class="Expl">Esto evitará que la interfaz espere al rededor de 50 segundos para empezar a aceptar tramas.</p>
+
+            </div>
+
+            <div>
+                <h2 id="BPDUGuard_Activar">Spanning-tree &gt; Activar <span>BPDU-Guard</span></h2>
+
+                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo bpduguard:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree bpduguard enable</code></pre>
+                <p class="Expl">
+                    Esto bloqueará la interfaz si le llega un mensaje STP.
+                    Es <u>importante</u> ponerlo solo en interfaces donde solo haya un PC o servidor conectado.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>EtherChannel - LCP</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="EtherChannel_Configuracion">EtherChannel &gt; LCP &gt; <span>Configuración</span></h2>
+
+                <p>Antes de realizar los siguientes pasos, asegúrese de que las VLANs ya estén creadas y que las demás interfaces necesarias estén correctamente configuradas en ambos switches.</p>
+
+                <p>Paso 1. Configurar el EtherChannel:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;
+(config-if)# switchport mode trunk
+(config-if)# ...</code></pre>
+                <p class="Expl">En esta interfaz lógica se debe aplicar exactamente la misma configuración que se usaría en las interfaces físicas que formarán el EtherChannel.</p>
+                <p class="Expl">El <b>número</b> es un identificador que representa al EtherChannel y debe coincidir con el que se usará en los pasos posteriores.</p>
+
+                <p>Paso 2. Aplicar la misma configuración del paso anterior en las interfaces físicas que se agruparán en el EtherChannel:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
+(config-if)# switchport mode trunk
+(config-if)# ...</code></pre>
+                <p class="Expl">Todas las interfaces deben tener configuraciones idénticas para que el EtherChannel funcione correctamente.</p>
+
+                <p>Paso 3. Apagar las interfaces:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
+(config-if)# shutdown</code></pre>
+                <p class="Expl">Este paso evita inconsistencias o errores durante la creación del EtherChannel.</p>
+                
+                <p>Paso 4. Agregar las interfaces al EtherChannel:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
+(config-if)# channel-group &lt;Número&gt; mode active</code></pre>
+                <p class="Expl">El <b>número</b> debe coincidir con el identificador del EtherChannel configurado en el paso 1.</p>
+                <p class="Expl">El modo <b>active</b> indica que se utilizará LACP para la negociación del enlace.</p>
+
+                <p><b><span style="color: orange;">Importante</span>: Antes de continuar, asegúrese de haber ejecutado correctamente todos los pasos anteriores en ambos switches.</b></p>
+
+                <p>Paso 5. Encender las interfaces:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
+(config-if)# no shutdown</code></pre>
+                <p class="Expl">Una vez habilitadas, las interfaces deberían formar el EtherChannel correctamente.</p>
+
+                <p><u>Nota</u>: Una vez creado el EtherChannel, cualquier cambio que se vaya a hacer a las interfaces se debe hacer solo al grupo <span class="span_contenido">Po&lt;Número&gt;</span> mediante el comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;
+(config-if)# ...</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="EtherChannel_Verificacion">EtherChannel &gt; LCP &gt; <span>Verificación</span></h2>
+
+                <p>Para verificar si el EtherChannel se creó correctamente hay que ejecutar el siguiente comando en ambos switches:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show etherchannel summary</code></pre>
+                <p class="Expl"><span style="color: orange;">Importante</span>: En el apartado "Ports" debe aparecer una <span class="span_contenido">P</span> como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show etherchannel summary
+    Number of channel-groups in use: 1
+    Number of aggregators:           1
+
+    Group  Port-channel  Protocol    Ports
+    ------+-------------+-----------+------------------
+    1      Po1(SU)           LACP   Gig0/1(P) Gig0/2(P)</code></pre>
+
+                <p>Otra manera de verificarlo es mirar si la interfaz port-channel está encendida:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interfaces port-channel &lt;Número&gt;</code></pre>
+                <p class="Expl">El <b>número</b> es un identificador que representa al EtherChannel.</p>
+
+
+            </div>
+
+            <div>
+                <h2 id="EtherChannel_Eliminar">EtherChannel &gt; LCP &gt; <span>Eliminación de un EtherChannel existente</span></h2>
+
+                <p>Paso 1. Entrar a las interfaces y eliminar el channel-group:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
+(config-if)# no channel-group &lt;Número&gt;</code></pre>
+
+                <p>Paso 2. Eliminar el port-channel:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# no interface port-channel &lt;Número&gt;</code></pre>
+                <p class="Expl">El número del <b>port-channel</b> es el mismo que se le asignó a la interfaz EtherChannel <b>Po&lt;Número&gt;</b>.</p>
+            </div>
+
+
+        </div>
+
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
