@@ -58,6 +58,7 @@ h2.TituloCreditosInferior a:hover{color: #2ecc71; text-decoration: underline;}
 
 .parte1 div h2{color: #7b92de; line-height: 40px; font-weight: 500; text-decoration: underline; text-underline-offset: 10px;}
 .parte1 div h2 span{color: white;}
+.parte1 div h2.IndiceH2{color: #d0d0d0; text-decoration: none;}
 
 /* Imágen del logo de Linux / Windows en el título */
 

@@ -1,8 +1,8 @@
-01/02/2026 - mejoras de contenido
+02/02/2026 - Nuevo contenido
 
 # g/packet_tracer.html
 Mejora de contenido
 Nuevo contenido
 
-# g/*.html
-Se volvió a poner el nombre original como créditos
+# resources/blog.css
+Se mejoraron los títulos para alternar el color del índice de la guía de packet tracer

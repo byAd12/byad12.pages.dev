@@ -42,7 +42,7 @@
             <div>
                 <h2>Índice de Contenidos</h2>
 
-                <h3 style="margin: 20px; color: #66aaff;">1. Básico</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">1. Básico</h2>
                 <ul>
                     <li><b>Comandos:</b> <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a> • <a href="#Basico">Ayuda y Reloj</a></li>
                     <li><b>Historial:</b> <a href="#Verificacion_Historial_Comandos">Ver historial</a> • <a href="#Cambiar_Historial_Comandos">Cambiar límite</a></li>
@@ -50,7 +50,7 @@
                     <li><b>Sistema IOS:</b> <a href="#SistemaOperativo">Boot System</a> • <a href="#RecuperacionSistema">Modo recuperación (ROMMON)</a></li>
                 </ul>
 
-                <h3 style="margin: 20px; color: #66aaff;">2. Diagnóstico y Verificación</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">2. Diagnóstico y Verificación</h2>
                 <ul class="margin-left: 15px;">
                     <li><b>Herramientas:</b> <a href="#Conectividad">Ping, SSH y Telnet</a></li>
                     <li><b>Comandos Show:</b> <a href="#Comando_Show_Do">Uso de 'Do'</a> • <a href="#Verificacion_Sistema">Versión y Hardware</a></li>
@@ -61,7 +61,7 @@
                     </li>
                 </ul>
 
-                <h3 style="margin: 20px; color: #66aaff;">3. Configuración de Red e Interfaces</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">3. Configuración de Red e Interfaces</h2>
                 <ul>
                     <li><b>General:</b> <a href="#Nomenclatura">Hostnames</a> • <a href="#DNS">Dominio y DNS</a> • <a href="#Gateway">Default Gateway</a></li>
                     <li><b>Direccionamiento:</b> <a href="#Direccionamiento">IPv4 e IPv6</a> • <a href="#Enrutamiento">Rutas Estáticas</a></li>
@@ -69,7 +69,7 @@
                     <li><b>Lógicas:</b> <a href="#Interfaz_Loopback">Interfaz Loopback</a></li>
                 </ul>
 
-                <h3 style="margin: 20px; color: #66aaff;">4. Seguridad y Acceso</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">4. Seguridad y Acceso</h2>
                 <ul>
                     <li><b>Usuarios:</b> <a href="#Usuarios">Crear usuarios y privilegios</a> • <a href="#PassRules">Reglas de contraseñas</a></li>
                     <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#ServidorSSH">Configurar Servidor SSH</a></li>
@@ -77,18 +77,20 @@
                     <li><b>Avisos:</b> <a href="#SeguridadBasica">Banners (MOTD)</a></li>
                 </ul>
 
-                <h3 style="margin: 20px; color: #66aaff;">5. VLANs y Troncales (Switching)</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">5. VLANs y Troncales (Switching)</h2>
                 <ul>
                     <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Archivo">Borrar vlan.dat</a></li>
                     <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Reestablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
                     <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Reestablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
-                    <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a></li>
+                    <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a> • <a href="#Enrutado_IPv6">Enrutado con IPv6</a></li>
+                    <li><b>Switch SVI:</b> <a href="#Switch_SVI_Configuracion">Configuración</a></li>
+                    <li><b>Router:</b> <a href="#Router_Configuracion_Gateway">Configuración como gateway</a> • <a href="#Router_Ruta_Interfaz">Ruta con destino una interfaz</a> • <a href="#Router_Ruta_IP">Ruta con destino una IP</a></li>
                 </ul>
 
-                <h3 style="margin: 20px; color: #66aaff;">6. Protocolos Avanzados</h3>
+                <h2 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h2>
                 <ul>
                     <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
-                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz/Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
+                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
                 </ul>
             </div>
@@ -409,10 +411,16 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
                 <p>También se puede ver las estadísticas y estado de una interfaz en específico:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show interfaces &lt;Interfaz&gt;</code></pre>
+                <p class="Expl">Esto puede darnos información sobre errores de tramas gigantes, colisiones, runts, desbordamiento, etc.</p>
 
-                <p>Los siguientes comandos muestran información de IPv4 o IPv6:</p>
+                <p>Los siguientes comandos muestran información de IPv4 o IPv6 de todas las interfaces:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip interfaces</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">show ipv6 interfaces</code></pre>
+
+                <p>Los siguientes comandos muestran información de IPv4 o IPv6 de una interfaz en específico:</p>
+                <pre class="codigo" translate="no"><code class="cisco">show ip interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">show ipv6 interface &lt;Interfaz&gt;</code></pre>
+                <p class="Expl">En ipv6 se muestra todas las direcciones IPv6 que pertenecen a la interfaz (Joined group address(es)).</p>
 
                 <p>Se puede ver los comandos aplicados a una interfaz específica que se están aplicando actualmente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show running-config interface &lt;Interfaz&gt;</code></pre>
@@ -1109,51 +1117,137 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Inter_VLAN_Solucionar_Problemas">Inter-VLAN &gt; <span>Solucionar problemas</span></h2>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de VLAN faltantes</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">1. Verificación de existencia y estado de VLANs</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vlan brief</code></pre>
-                <p class="Expl"><u>Cómo arreglar</u>: Cree (o vuelva a crear) la VLAN si no existe en el switch. Verifique que el puerto del host esté correctamente asignado a la VLAN correspondiente.</p>
-                <p class="Expl">Otra forma de detectar este problema es comprobar si alguna interfaz en modo acceso o troncal aparece como "(Inactive)", lo que indica que la VLAN no existe o no está activa:</p>
+                <p class="Expl">
+                    <u>Diagnóstico y solución</u>: Si la VLAN no aparece, debe crearla. Si un puerto asignado no funciona, verifique que pertenezca a la VLAN correcta en esta lista.
+                </p>
+                <p class="Expl">También puede verificar si una VLAN específica está inactiva (creada pero no activa) filtrando la configuración de la interfaz:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interface &lt;Interfaz&gt; switchport | include Access Mode VLAN
             Access Mode VLAN: &lt;VLAN_ID&gt; (Inactive)</code></pre>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de los enlaces troncales</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">2. Estado de la Interfaz Virtual (SVI)</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show interface vlan &lt;VLAN_ID&gt;</code></pre>
+                <p class="Expl">
+                    <u>Posibles problemas</u>:<br>
+                    Si la interfaz está administrativamente apagada (<i>administratively down</i>), use el comando <span class="span_contenido">no shutdown</span>.<br>
+                    Si el <i>line protocol</i> está caído (down), generalmente indica que no hay ningún puerto físico activo (Access o Trunk) asociado a esa VLAN en el switch.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">3. Verificación de enlaces troncales</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
                 <p class="Expl">
-                    <u>Cómo arreglar</u>: 
-                    Verifique que los enlaces troncales estén configurados correctamente.
-                    Confirme que el puerto esté en modo troncal y que se encuentre activo.
+                    <u>Diagnóstico</u>: Asegúrese de que el puerto troncal aparezca en la lista, que el modo sea correcto (on/auto/desirable) y que la VLAN necesaria esté permitida (<i>Vlans allowed on trunk</i>) y no filtrada.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de que las interfaces están encendidas</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">4. Verificación de configuración de interfaces</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | include interface &lt;Interfaz&gt;</code></pre>
                 <p class="Expl">
-                    <u>Cómo arreglar</u>: 
-                    Ingrese a la interfaz correspondiente y ejecute el comando <span class="span_contenido">no shutdown</span> para habilitarla.
+                    <u>Diagnóstico</u>: Revise la configuración actual para descartar errores de sintaxis o asegurar que la interfaz no tenga aplicado un comando <span class="span_contenido">shutdown</span> explícito.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de interfaces de acceso</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">5. Verificación de interfaces de acceso</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces switchport</code></pre>
                 <p class="Expl">
-                    <u>Cómo arreglar</u>: 
-                    Asigne el puerto a la VLAN correcta.
-                    Asegúrese de que el puerto esté configurado en modo acceso y habilitado.
-                    Verifique que el host pertenezca a la VLAN o subred correcta.
+                    <u>Puntos clave</u>:<br>
+                    1. Confirme que el modo administrativo y operativo sea "static access".<br>
+                    2. Verifique que el campo "Access Mode VLAN" coincida con la subred del host conectado.<br>
+                    3. Asegúrese de que el host tenga una IP configurada en el rango correcto.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de asignación de direcciones IPs</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">6. Asignación de IPs (Router-on-a-Stick y SVIs)</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief</code></pre>
                 <p class="Expl">
-                    <u>Cómo arreglar</u>: 
-                    Verifique que la dirección IPv4 configurada en la subinterfaz del router sea correcta.
-                    Confirme que la subinterfaz del router esté asociada al ID de VLAN correspondiente.
+                    <u>Diagnóstico General</u>: Compruebe que las interfaces físicas, subinterfaces o SVIs tengan la dirección IP correcta y que su estado sea "Up/Up".
+                </p>
+                
+                <p><b><span style="color: rgb(147, 147, 206) !important;">7. Verificación específica de IPs en VLANs</span></b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief | include Vlan</code></pre>
+                <p class="Expl">
+                    <u>Diagnóstico SVI</u>: Este filtro permite ver rápidamente si las interfaces lógicas de VLAN (SVI) están levantadas y tienen la IP de puerta de enlace (Gateway) correcta asignada.
                 </p>
 
-                <p><b><span style="color: rgb(147, 147, 206) !important;">Verificación de que cada sub-interfaz lógica está en la VLAN correcta</span></b>:</p>
+                <p><b><span style="color: rgb(147, 147, 206) !important;">8. Verificación de encapsulación y etiquetado</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces | include Gig|802.1Q</code></pre>
                 <p class="Expl">
-                    <u>Cómo arreglar</u>: 
-                    Verifique que el VLAN_ID configurado en cada sub-interfaz lógica coincida con la VLAN correspondiente.
+                    <u>Diagnóstico de Subinterfaces</u>: Fundamental para <i>Router-on-a-Stick</i>. Verifique que el ID de encapsulación configurado en la subinterfaz (ej. <span class="span_contenido">encapsulation dot1Q 10</span>) coincida exactamente con el ID de la VLAN que se desea enrutar.
                 </p>
+            </div>
+
+
+            <div>
+                <h2 id="Enrutado_IPv6">Inter-VLAN &gt; <span>Enrutado con IPv6</span></h2>
+
+                <p>Si no se activa el siguiente comando en el switch de capa 3, no se podrá enrutar entre VLANs paquetes que utilizen IPv6:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Switch SVI</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Switch_SVI_Configuracion">Switch SVI &gt; Configuración</h2>
+
+                <p>Para asignarle una IP estática de una VLAN específica a un switch para que pueda comunicarse con otros switches de la misma VLAN seguiremos los siguientes pasos:</p>
+                
+                <p>1. Crearemos una VLAN específica de gestión para los switches:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name Gestion</code></pre>
+
+                <p>2. Entraremos a la interfaz de la VLAN y le asignaremos una IP además de indicarle que nunca se apague:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Router</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Router_Configuracion_Gateway">Router &gt; Configuración de una interfaz como gateway</h2>
+
+                <p>1. En la interfaz deseada deshabilitaremos switchport:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport</code></pre>
+                <p class="Expl"><b>no switchport</b> desactiva la función de switch del puerto (Capa 2) y lo convierte en una interfaz de Capa 3, que puede tener dirección IP propia y participar en enrutamiento.</p>
+
+                <p>2. Le asignaremos una IP y definiremos que no se apague:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Router_Ruta_Interfaz">Router &gt; Crear una ruta con destino una interfaz</h2>
+
+                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Router_Ruta_IP">Router &gt; Crear una ruta con destino una IP</h2>
+
+                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;IP&gt;</code></pre>
 
             </div>
 
