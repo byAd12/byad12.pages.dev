@@ -92,76 +92,77 @@ Código por byAd12
             <div>
                 <h2>Comparadores</h2>
 
-                <p><b>Para texto</b>:</p>
-
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
+                            <td></td>
+                            <td>
+                                Para <b>cadenas de texto</b>
+                            </td>
+                            <td>
+                                Para <b>números</b>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Igual a</td>
                             <td><pre translate="no"><code class="bash">valor = valor</code></pre></td>
-                            <td>Igual a</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">valor === valor</code></pre></td>
-                            <td>Igual a. Permite usar comodines</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">valor != valor</code></pre></td>
-                            <td>No igual a</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">valor < valor</code></pre></td>
-                            <td>Menor que</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">valor > valor</code></pre></td>
-                            <td>Mayor que</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">-n valor</code></pre></td>
-                            <td>No es nulo</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">-z valor</code></pre></td>
-                            <td>Es nulo</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <p><b>Para números</b>:</p>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
-                        <tr>
                             <td><pre translate="no"><code class="bash">valor -eq valor</code></pre></td>
-                            <td>Igual a</td>
                         </tr>
+
                         <tr>
-                            <td><pre translate="no"><code class="bash">valor -ne valor</code></pre></td>
+                            <td>Igual a (comodines)</td>
+                            <td><pre translate="no"><code class="bash">valor === valor</code></pre></td>
+                            <td></td>
+
+                        </tr>
+
+                        <tr>
                             <td>No igual a</td>
+                            <td><pre translate="no"><code class="bash">valor != valor</code></pre></td>
+                            <td><pre translate="no"><code class="bash">valor -ne valor</code></pre></td>
+
                         </tr>
+
                         <tr>
-                            <td><pre translate="no"><code class="bash">valor -lt valor</code></pre></td>
                             <td>Menor que</td>
+                            <td><pre translate="no"><code class="bash">valor < valor</code></pre></td>
+                            <td><pre translate="no"><code class="bash">valor -lt valor</code></pre></td>
+
                         </tr>
+
                         <tr>
-                            <td><pre translate="no"><code class="bash">valor -gt valor</code></pre></td>
                             <td>Mayor que</td>
+                            <td><pre translate="no"><code class="bash">valor > valor</code></pre></td>
+                            <td><pre translate="no"><code class="bash">valor -gt valor</code></pre></td>
                         </tr>
+
                         <tr>
-                            <td><pre translate="no"><code class="bash">valor -le valor</code></pre></td>
                             <td>Menor o igual que</td>
-                        </tr>
-                        <tr>
+                            <td><pre translate="no"><code class="bash">valor -le valor</code></pre></td>
                             <td><pre translate="no"><code class="bash">valor -ge valor</code></pre></td>
-                            <td>Mayor o igual que</td>
+                        </tr>
+
+                        <tr>
+                            <td>No es nulo</td>
+                            <td><pre translate="no"><code class="bash">-n valor</code></pre></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td>Es nulo</td>
+                            <td><pre translate="no"><code class="bash">-z valor</code></pre></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
 
-                <p><b>Para archivos y carpetas</b>:</p>
-
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
+                        <tr>
+                            <td colspan="2">
+                                Para <b>archivos</b> y <b>carpetas</b>
+                            </td>
                         <tr>
                             <td><pre translate="no"><code class="bash">-e ruta</code></pre></td>
                             <td>Si existe un archivo o carpeta</td>
