@@ -92,6 +92,7 @@
                     <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
                     <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
+                    <li><b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a></li>
                 </ul>
             </div>
         </div>
@@ -805,7 +806,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
-                <p class="Expl">Con <span class="span_contenido">interface range</span> se puede configurar múltiples puertos a la vez.</p>
 
                 <p>Si se quiere eliminar el modo acceso directamente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport mode access</code></pre>
@@ -1338,18 +1338,18 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Paso 2. Aplicar la misma configuración del paso anterior en las interfaces físicas que se agruparán en el EtherChannel:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if)# switchport mode trunk
-(config-if)# ...</code></pre>
+(config-if-range)# switchport mode trunk
+(config-if-range)# ...</code></pre>
                 <p class="Expl">Todas las interfaces deben tener configuraciones idénticas para que el EtherChannel funcione correctamente.</p>
 
                 <p>Paso 3. Apagar las interfaces:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if)# shutdown</code></pre>
+(config-if-range)# shutdown</code></pre>
                 <p class="Expl">Este paso evita inconsistencias o errores durante la creación del EtherChannel.</p>
                 
                 <p>Paso 4. Agregar las interfaces al EtherChannel:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if)# channel-group &lt;Número&gt; mode active</code></pre>
+(config-if-range)# channel-group &lt;Número&gt; mode active</code></pre>
                 <p class="Expl">El <b>número</b> debe coincidir con el identificador del EtherChannel configurado en el paso 1.</p>
                 <p class="Expl">El modo <b>active</b> indica que se utilizará LACP para la negociación del enlace.</p>
 
@@ -1357,7 +1357,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Paso 5. Encender las interfaces:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if)# no shutdown</code></pre>
+(config-if-range)# no shutdown</code></pre>
                 <p class="Expl">Una vez habilitadas, las interfaces deberían formar el EtherChannel correctamente.</p>
 
                 <p><u>Nota</u>: Una vez creado el EtherChannel, cualquier cambio que se vaya a hacer a las interfaces se debe hacer solo al grupo <span class="span_contenido">Po&lt;Número&gt;</span> mediante el comando:</p>
@@ -1392,11 +1392,73 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Paso 1. Entrar a las interfaces y eliminar el channel-group:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if)# no channel-group &lt;Número&gt;</code></pre>
+(config-if-range)# no channel-group &lt;Número&gt;</code></pre>
 
                 <p>Paso 2. Eliminar el port-channel:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# no interface port-channel &lt;Número&gt;</code></pre>
                 <p class="Expl">El número del <b>port-channel</b> es el mismo que se le asignó a la interfaz EtherChannel <b>Po&lt;Número&gt;</b>.</p>
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>VLAN Trunking Protocol</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="VTP_Configuracion_Servidor">VTP &gt; Configuración en el switch servidor</h2>
+
+                <p>1. Meteremos al switch en un dominio VTP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp domain &lt;Nombre_Dominio&gt;</code></pre>
+
+                <p>2. Asignaremos una contraseña necesaria para que otros switches tengan que introducirla para conectarse al dominio:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp password &lt;Contraseña&gt;</code></pre>
+
+                <p>3. Asignaremos al switch que actue en modo servidor:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode server</code></pre>
+
+                <p>4. Por seguridad, asignaremos que todo el switch use solo VTP versión 2:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp version 2</code></pre>
+
+                <p>5. Verificaremos los cambios:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp status</code></pre>
+                <p class="Expl">Esto mostrará todas las configuraciones anteriores menos la contraseña, además de un <span class="span_contenido">Configuration Revision</span> que es muy importante al indicar la cantidad de cambios que se realizaron en este switch.</p>
+                <p class="Expl">En cualquier otro switch que tenga un <span class="span_contenido">Configuration Revision</span> menor al switch servidor, tendrá que actualizar su lista de VLANs.</p>
+
+            </div>
+
+            <div>
+                <h2 id="VTP_Configuracion_Cliente">VTP &gt; Meter a un cliente en un dominio</h2>
+
+                <p>1. Meteremos al switch en el mismo dominio VTP que el servidor:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp domain &lt;Nombre_Dominio&gt;</code></pre>
+
+                <p>2. Asignaremos la contraseña que se definió en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp password &lt;Contraseña&gt;</code></pre>
+
+                <p>3. Por seguridad, asignaremos que todo el switch use solo VTP versión 2:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp version 2</code></pre>
+
+                <p>4. Definir en qué modo va a trabajar el switch:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode &lt;client/transparent&gt;</code></pre>
+                <p class="Expl"><b>client</b>: Solamente podrá cambiar la lista de VLANs cuando reciba comunicaciones de otros
+equipos.</p>
+                <p class="Expl"><b>transparent</b>: Actuará como un dispositivo aislado, sin compartir sus VLANs con el resto de dispositivos.</p>
+
+            </div>
+
+            <div>
+                <h2 id="VTP_Configuracion_Contraseña">VTP &gt; Ver la contraseña del dominio</h2>
+
+                <p>Cualquier switch de un mismo dominio debe tener la misma contraseña VTP que indique el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp password</code></pre>
+
             </div>
 
 
