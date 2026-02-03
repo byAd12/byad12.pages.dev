@@ -514,8 +514,8 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Direccionamiento">Direccionamiento IPv4 e IPv6</h2>
 
-                <p>Si es un <b>switch</b> hay que configurar IPs mediante VLANs se usa: (la VLAN por defecto es 1)</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan NumVlan</code></pre>
+                <p>Si es un <b>switch</b> hay que configurar IPs mediante VLANs se usa (la VLAN por defecto es 1):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
 
                 <p>Podemos asignar a una interfaz una IPv4 mediante:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
@@ -796,6 +796,15 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;MáscaraPunteada&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+                <p>Para verificarlo se puede ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show ip route</code></pre>
+                <p class="Expl">
+                    Tendría que aparecer una línea como la siguiente, que indica que si se quiere llegar a la subred <span class="span_contenido">&lt;Direccion_Red&gt;/&lt;Máscara&gt;</span>, 
+                    el dispositivo enrutará el paquete hacia la interfaz lógica <span class="span_contenido">Vlan&lt;VLAN_ID&gt;</span>. 
+                    Luego, internamente, el sistema enviará el paquete por el puerto físico correspondiente a la VLAN:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">C    &lt;Direccion_Red&gt;/&lt;Máscara&gt; is directly connected, Vlan&lt;VLAN_ID&gt;</code></pre>
 
             </div>
 
