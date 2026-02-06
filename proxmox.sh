@@ -14,7 +14,14 @@ export LC_ALL=C.UTF-8
 # INSTALAR DEPENDENCIAS
 ##############################################################
 apt update
-apt install -y cowsay curl
+apt install -y cowsay cmatrix curl
+clear
+cmatrix -b &
+PID=$!
+sleep 2
+kill $PID
+wait $PID 2>/dev/null
+clear
 
 ##############################################################
 # DEFINIR BUCLE
@@ -34,53 +41,54 @@ while true; do
 
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
-            " | ================================" \
+        " | ================================" \
             "${Ne}1${Bl} | BIOS: Arreglo de la zona horaria" \
-            " | " \
+        " | " \
         " | ${Az}CLÚSTER ${Bl}" \
-            " | ===================" \
+        " | =====================" \
             "${Ne}2${Bl} | Crear un clúster" \
             "${Ne}3${Bl} | Unirse a un clúster" \
             "${Ne}4${Bl} | Eliminar un clúster" \
+            "${Ne}5${Bl} | Corosync - Configurar" \
             " | " \
         " | ${Az}CLOUDFLARED ${Bl}" \
-            " | =============================" \
-            "${Ne}5${Bl} | Instalar e iniciar sesión" \
-            "${Ne}6${Bl} | Crear un túnel - HTTP(S)" \
-            "${Ne}7${Bl} | Crear un túnel - Servicio TCP" \
-            "${Ne}8${Bl} | Purgar cloudflared" \
+        " | =============================" \
+            "${Ne}6${Bl} | Instalar e iniciar sesión" \
+            "${Ne}7${Bl} | Crear un túnel - HTTP(S)" \
+            "${Ne}8${Bl} | Crear un túnel - Servicio TCP" \
+            "${Ne}9${Bl} | Purgar cloudflared" \
             " | " \
         " | ${Az}AUTOMATIZACIÓN ${Bl}" \
-            " | =============================" \
-            "${Ne}9${Bl} | Configurar apagado automático" \
+        " | =============================" \
+            "${Ne}10${Bl} | Configurar apagado automático" \
             " | " \
         " | ${Az}DOCKER ${Bl}" \
-            " | ========================" \
-            "${Ne}10${Bl} | Instalar docker - Debian" \
-            "${Ne}11${Bl} | favonia/cloudflare-ddns" \
+        " | ========================" \
+            "${Ne}11${Bl} | Instalar docker - Debian" \
+            "${Ne}12${Bl} | favonia/cloudflare-ddns" \
             " | " \
         " | ${Az}PROXMOX ${Bl}" \
-            " | =====================" \
-            "${Ne}12${Bl} | CT - Crear backup" \
-            "${Ne}13${Bl} | CT - Restaurar backup" \
-            "${Ne}14${Bl} | Restaurar local-lvm" \
-            "${Ne}15${Bl} | Instalar temas" \
+        " | =====================" \
+            "${Ne}13${Bl} | CT - Crear backup" \
+            "${Ne}14${Bl} | CT - Restaurar backup" \
+            "${Ne}15${Bl} | Restaurar local-lvm" \
+            "${Ne}16${Bl} | Instalar temas" \
             " | " \
         " | ${Az}VPN - NETBIRD ${Bl}" \
-            " | ============================" \
-            "${Ne}16${Bl} | Instalar y entrar en Netbird" \
-            "${Ne}17${Bl} | Desinstalar y purgar Netbird" \
+        " | ============================" \
+            "${Ne}17${Bl} | Instalar y entrar en Netbird" \
+            "${Ne}18${Bl} | Desinstalar y purgar Netbird" \
             " | " \
         " | ${Az}NFS ${Bl}" \
-            " | ====================" \
-            "${Ne}18${Bl} | Compartir un recurso" \
+        " | ====================" \
+            "${Ne}19${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
-            " | ==================" \
-            "${Ne}19${Bl} | Cambiar de versión" \
+        " | ==================" \
+            "${Ne}20${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
-            " | ======" \
+        " | ======" \
             "${Ne}0${Bl} | Cerrar" \
             | column --table --separator '|' --keep-empty-lines
     echo ""
@@ -182,9 +190,32 @@ while true; do
         ;;
 
     ##############################################################
-    # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
+    # EDITAR LA CONFIGURACIÓN DE COROSYNC
     ##############################################################
     5)
+        clear
+        echo -e "\n${Az}Parando servicio(s)...${Bl}"
+        systemctl stop pve-cluster
+
+        echo -e "\n${Az}Iniciando pmxcfs en local...${Bl}"
+        pmxcfs -l
+
+        echo -e "\n${Az}Abriendo el editor nano...${Bl}"
+        /usr/bin/nano /etc/pve/corosync.conf
+
+        echo -e "\n${Az}Cerrando pmxcfs...${Bl}"
+        killall pmxcfs
+
+        echo -e "\n${Az}Iniciando servicios...${Bl}"
+        systemctl start pve-cluster pvedaemon pvestatd
+
+        echo -e "\n${Ve}¡Se configuró corosync correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
+    ##############################################################
+    6)
         clear
 
         echo -e "${Az}Instalando Cloudflared...${Bl}"
@@ -209,7 +240,7 @@ while true; do
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - HTTP(S)
     ##############################################################
-    6)
+    7)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -267,7 +298,7 @@ EOF
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - SERVICIO TCP
     ##############################################################
-    7)
+    8)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -324,7 +355,7 @@ EOF
     ##############################################################
     # PURGAR CLOUDFLARED
     ##############################################################
-    8)
+    9)
         clear
 
         echo -e "\n${Az}Parando el servicio 'cloudflared'...${Bl}"
@@ -347,7 +378,7 @@ EOF
     ##############################################################
     # APAGADO AUTOMÁTICO - CRONTAB
     ##############################################################
-    9)
+    10)
         clear
         read -p 'Hora a apagar: ' hora
         read -p 'Minutos a apagar: ' minuto
@@ -374,7 +405,7 @@ EOF
     ##############################################################
     # INSTALAR DOCKER
     ##############################################################
-    10)
+    11)
         clear
 
         echo -e "${Az}Instalando...${Bl}"
@@ -405,7 +436,7 @@ EOF
     # CLOUDFLARE DDNS
     # GitHub: https://github.com/favonia/cloudflare-ddns
     ##############################################################
-    11)
+    12)
         clear
         read -p 'Nombre del subdominio (solo subdominio): ' subdominio
         read -p 'CLOUDFLARE_API_TOKEN: ' api_token
@@ -422,7 +453,7 @@ EOF
     ##############################################################
     # CT - CREAR BACKUP
     ##############################################################
-    12)
+    13)
         clear
         read -p 'ID del contenedor a hacer una backup: ' id_ct
         read -p 'Almacenamiento (local): ' almacenamiento
@@ -436,7 +467,7 @@ EOF
     ##############################################################
     # CT - RESTAURAR BACKUP
     ##############################################################
-    13)
+    14)
         clear
         read -p 'ID del contenedor a restaurar una backup: ' id_ct
         read -p 'Ruta al backup (.tar.lzo): ' ruta
@@ -451,7 +482,7 @@ EOF
     ##############################################################
     # RESTAURAR LOCAL-LVM
     ##############################################################
-    14)
+    15)
         clear
 
         host=$(hostname)
@@ -477,7 +508,7 @@ EOF
     ##############################################################
     # INSTALAR TEMAS
     ##############################################################
-    15)
+    16)
         clear
 
         echo -e "\n${Az}Descargando la carpeta...${Bl}"
@@ -500,7 +531,7 @@ EOF
     ##############################################################
     # INSTALAR Y ENTRAR A NETBIRD
     ##############################################################
-    16)
+    17)
         clear
         read -p 'Set-up key de Netbird: ' llave_netbird
 
@@ -527,7 +558,7 @@ EOF
     ##############################################################
     # DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
-    17)
+    18)
         clear
 
         echo -e "\n${Az}Parando servicios...${Bl}"
@@ -550,7 +581,7 @@ EOF
     ##############################################################
     # NFS - COMPARTIR UN RECURSO 
     ##############################################################
-    18)
+    19)
         clear
         read -p 'Carpeta local a compartir: ' carpeta_local
         read -p 'Permisos (rw,ro): ' permisos        
@@ -576,7 +607,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    19)
+    20)
         clear
         read -p 'Versión de GitHub a actualizar: ' version_github
 

@@ -1,5 +1,5 @@
-03/02/2026 - Nuevo contenido
+06/02/2026 - Mejora de script
 
-# g/packet_tracer.html
-Mejora de contenido
-Nuevo contenido
+# proxmox.sh
+Se añadió una nueva opción para configurar el archivo de corosync
+Se añadió una intro con el comando "cmatrix"
