@@ -162,15 +162,8 @@ while true; do
     4)
         clear
         echo -e "${Az}Parando servicios...${Bl}"
-        systemctl stop pve-cluster corosync
-        killall pmxcfs
-
-        echo -e "\n${Az}Eliminando configuraciones...${Bl}"
-        rm -rf /etc/corosync/*
-        rm -f /etc/pve/corosync.conf
-        rm -f /etc/pve/.members
-        rm -f /etc/pve/.cluster.*
-        rm -f /etc/pve/.corosync.*
+        systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
+        killall pmxcfs 2>/dev/null
 
         echo -e "\n${Az}Haciendo copia de seguridad de /etc/pve...${Bl}"
         mkdir -p /root/pve_backup
@@ -181,12 +174,22 @@ while true; do
         mkdir /etc/pve
 
         echo -e "\n${Az}Iniciando pmxcfs en modo local...${Bl}"
-        pmxcfs -l
+        pmxcfs -l &
+        sleep 5
 
-        echo -e "\n${Az}Iniciando servicios...${Bl}"
-        systemctl start pve-cluster
+        echo -e "\n${Az}Generando certificados locales...${Bl}"
+        pvecm updatecerts --force
+        systemctl restart pve-cluster
+
+        echo -e "\n${Az}Deshabilitando corosync...${Bl}"
+        systemctl stop corosync
+        systemctl disable corosync
+
+        echo -e "\n${Az}Reiniciando servicios básicos de Proxmox...${Bl}"
+        systemctl restart pvedaemon pveproxy pvestatd
 
         echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
+        echo -e "${Ve}Copia de seguridad de /etc/pve en /root/pve_backup${Bl}"
         ;;
 
     ##############################################################
