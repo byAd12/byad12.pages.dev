@@ -271,14 +271,21 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><b>xs:positiveInteger</b></td>
-                            <td>Valores numéricos sin decimal y positivos<br>El valor mínimo es 1</td>
-                            <td>12, +12</td>
+                            <td>
+                                Valores numéricos enteros estrictamente positivos.
+                                <br>⚠️ <b>El 0 NO se considera positivo</b>. El valor mínimo es 1.
+                            </td>
+                            <td>1, +12</td>
                         </tr>
                         <tr>
                             <td><b>xs:negativeInteger</b></td>
-                            <td>Valores numéricos sin decimal y negativo<br>El 0 no cuenta como entero negativo</td>
-                            <td>-12</td>
+                            <td>
+                                Valores numéricos enteros estrictamente negativos.
+                                <br>⚠️ <b>El 0 NO se considera negativo</b>. El valor máximo es -1.
+                            </td>
+                            <td>-1, -12</td>
                         </tr>
+
                         <tr>
                             <td><b>xs:boolean</b></td>
                             <td>Valores verdadero o falso</td>
@@ -411,9 +418,11 @@ Código por byAd12
                         <tr>
                             <td><b>xs:IDREFS</b></td>
                             <td>
-                                Es una lista de varios <b>ID</b> ya definidos en el documento XML y separados por espacios
+                                Especifica <b>varias referencias</b> a identificadores (ID) definidos en el documento.
+                                <br>
+                                Los valores deben estar separados por espacios en blanco.
                             </td>
-                            <td>gal_coruna and_malaga</td>
+                            <td>"gal_coruna and_malaga mad_madrid"</td>
                         </tr>
                     </table>
                 </div>
@@ -514,16 +523,36 @@ Código por byAd12
                     Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
                     <u>Estructura</u>:
                 </p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType/attibute&gt; &lt;!-- Este es el elemento simple o atributo a restringir --&gt;
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType/attribute&gt; &lt;!-- Este es el elemento simple o atributo a restringir --&gt;
     &lt;xs:restriction base="xs:tipo_valor"&gt;
         &lt;!-- Restricciones --&gt;
     &lt;/xs:restriction&gt;
-&lt;/xs:simpleType/attibute&gt;</code></pre>
+&lt;/xs:simpleType/attribute&gt;</code></pre>
                 <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
                 <p>ℹ️ Las restricciones se explican en apartados posteriores a este.</p>
 
             </div>
 
+            <div>
+                <h2>Elemento simple &gt; <span>Unión de Tipos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:union</span> permite definir un tipo simple que acepte valores de diferentes tipos de datos.
+                </p>
+                <p><u>Ejemplo</u>: Un campo "talla" que acepta un número entero (38, 40) O una talla en letra (S, M, L).</p>
+                
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType name="tipo-talla"&gt;
+    &lt;xs:union memberTypes="xs:integer talla-letra" /&gt;
+&lt;/xs:simpleType&gt;
+
+&lt;!-- Definimos el tipo personalizado para las letras --&gt;
+&lt;xs:simpleType name="talla-letra"&gt;
+    &lt;xs:restriction base="xs:string"&gt;
+        &lt;xs:enumeration value="S"/&gt;
+        &lt;xs:enumeration value="M"/&gt;
+        &lt;xs:enumeration value="L"/&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+            </div>
             
         </div>
 
@@ -721,7 +750,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" /&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType /&gt;
-&lt;xs:element&gt;</code></pre>
+&lt;/xs:element&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
     &lt;xs:simpleType&gt;
         &lt;xs:restriction base="xs:string"&gt;
@@ -789,6 +818,49 @@ Código por byAd12
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
             </div>
+
+            <div>
+                <h2>Reutilización &gt; <span>Grupos de Elementos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:group</span> permite definir un conjunto de elementos comunes para reutilizarlos en varias partes del esquema sin tener que reescribirlos.
+                </p>
+                
+                <p><b>1. Definición del grupo</b> (hijo directo de schema):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:group name="datos-basicos"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="nombre" type="xs:string" /&gt;
+        &lt;xs:element name="fecha-nacimiento" type="xs:date" /&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:group&gt;</code></pre>
+
+                <p><b>2. Uso del grupo</b> (dentro de un complexType):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="datos-personales"&gt;
+    &lt;xs:sequence&gt;
+        &lt;!-- Referencia al grupo definido anteriormente --&gt;
+        &lt;xs:group ref="datos-basicos"/&gt;
+        &lt;xs:element name="telefono" type="xs:string"/&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Reutilización &gt; <span>Grupos de Atributos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:attributeGroup</span> funciona igual que el anterior, pero para agrupar atributos que siempre van juntos.
+                </p>
+
+                <p><b>1. Definición del grupo</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attributeGroup name="info-archivo"&gt;
+    &lt;xs:attribute name="formato" type="xs:string"/&gt;
+    &lt;xs:attribute name="codificacion" type="xs:string"/&gt;
+&lt;/xs:attributeGroup&gt;</code></pre>
+
+                <p><b>2. Uso del grupo</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="tipo-documento"&gt;
+    &lt;xs:attributeGroup ref="info-archivo"/&gt;
+&lt;/xs:complexType&gt;</code></pre>
+            </div>
+
 
         </div>
 
@@ -910,11 +982,15 @@ Código por byAd12
                 <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
                 <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:whiteSpace value="preserve/replace/collapse"/&gt;</code></pre>
-                <p class="Expl">El valor <b>preserve</b> mantiene espacios en blanco, tabulaciones, saltos de línea y retornos de carro.</p>
-                <p class="Expl">El valor <b>replace</b> substituye todas las tabulaciones, los saltos de línea y los retornos de carro por <u>espacios en blanco</u>.</p>
-                <p class="Expl">El valor <b>collapse</b> reemplaza todas las tabulaciones, saltos de línea, retornos de carro y espacios en blanco únicos
-                (no son espacios consecutivos) por espacios en blanco. Después, sustituye los espacios en blanco consecutivos por un <u>único espacio en blanco</u>.</p>
-
+                <p class="Expl">
+                    <b>preserve</b>: No se realizan modificaciones (mantiene todo igual).
+                </p>
+                <p class="Expl">
+                    <b>replace</b>: Sustituye todas las tabulaciones, saltos de línea y retornos de carro por <u>espacios en blanco</u>.
+                </p>
+                <p class="Expl">
+                    <b>collapse</b>: Realiza un <i>replace</i> y además elimina espacios extremos y reduce varios espacios consecutivos a un <u>único espacio en blanco</u>.
+                </p>
             </div>
 
             <div>
@@ -1058,7 +1134,7 @@ Código por byAd12
             <div>
                 <h2>Expresiones regulares > <span>Herramientas</span></h2>
                 
-                <p>La web <a href="https://regexr.com/" target="_blank">regexr.com</a> sirve para practicar la creación de estos patrones.</p>
+                <p>Las web <a href="https://regexr.com/" target="_blank">regexr.com</a> o <a href="https://regex101.com/" target="_blank">regex101.com</a> sirven para practicar la creación de estos patrones.</p>
             </div>
 
         </div>

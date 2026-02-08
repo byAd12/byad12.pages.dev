@@ -1,5 +1,5 @@
-06/02/2026 - Mejora de script
+08/02/2026 - Mejora de contenido
 
-# proxmox.sh
-Se añadió una nueva opción para configurar el archivo de corosync
-Se añadió una intro con el comando "cmatrix"
+# g/xsd.html
+Mejora de contenido
+Nuevo contenido
