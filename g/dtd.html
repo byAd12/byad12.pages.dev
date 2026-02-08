@@ -115,7 +115,7 @@ Código por byAd12
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Sintaxis</span></b>:</p>
 
-                <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
+                <p>En las etiquetas se deben de respetar un espacio mínimo entre cada objeto.</p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (opciones)&gt;</code></pre>
                 <p class="Expl"><b>elemento</b>: Nombre del elemento a declarar.</p>
@@ -172,7 +172,7 @@ Código por byAd12
                 <h2>Elementos &gt; Cardinalidades</h2>
 
                 <p>Con el símbolo <span class="span_contenido">?</span> podemos definir una cardinalidad de <span class="span_url">0-1</span>.</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1+)&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1?)&gt;</code></pre>
                 <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o solo una.</p>
 
                 <p>Con el símbolo <span class="span_contenido">+</span> podemos definir una cardinalidad de <span class="span_url">1-n</span>.</p>
@@ -193,7 +193,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2)?, ...)&gt;</code></pre>
                 <p class="Expl">En vez de <span class="span_contenido">?</span> se puede poner las otras 2 cardinalidades posibles como <span class="span_contenido">+</span> o <span class="span_contenido">*</span> y lo que cambiaría sería la cantidad de veces que se pueda poner la etiqueta elegida.</p>
 
-                <p>En el siguiente caso se puede poner &lt;etiqueta1&gt; y &lt;etiqueta2&gt; (en ese orden) la cantidad de veces que la cardinalidad lo permita. Ejemplo:</p>
+                <p>En el siguiente caso se puede poner &lt;etiqueta1&gt; y &lt;etiqueta2&gt; (en ese orden) la cantidad de veces que la cardinalidad lo permita. <u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2)+, ...)&gt;</code></pre>
 
             </div>
@@ -215,7 +215,7 @@ Código por byAd12
 
                 <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
 
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo predefinido&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo valor&gt;</code></pre>
                 <p class="Expl">
                     <b>elemento</b>: Nombre del elemento que contenga el atributo a declarar.
                     <br>
@@ -226,10 +226,10 @@ Código por byAd12
                     <b>valor</b>: Define si el atributo es obligatorio y si tiene un valor fijo.
                 </p>
 
-                <p>Se puede definir varios atributos de un elementos en un mismo &lt;!ATTLIST&gt; como:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST 
-    elemento1 atributo1 tipo1 predefinido1
-    elemento2 atributo2 tipo2 predefinido2
+                <p>Se puede definir varios atributos de un solo elemento en un mismo &lt;!ATTLIST&gt; como:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento
+    atributo1 tipo1 valor1
+    atributo2 tipo2 valor2
     ...
 &gt;</code></pre>
 
@@ -237,35 +237,11 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Atributos &gt; Modificadores</h2>
-
-                <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido">#IMPLIED</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
-
-                <p>O requerido / obligatorio - <span class="span_contenido">#REQUIRED</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #REQUIRED&gt;</code></pre>
-
-                <p>Además se puede definir un valor fijo  - <span class="span_contenido">#FIXED "valor"</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #FIXED "valor_fijo"&gt;</code></pre>
-                <p class="Expl">El valor es sensible a mayúsculas y, si no coincide exactamente con lo definido, dará un error en la validación.</p>
-
-                <p>Por último, se puede poner solo un valor predefinido en caso de que no se asigne <u>solo</u> de las siguientes formas:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA "valor_predefinido"&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2) "valor1"&gt;</code></pre>
-                <p class="Expl">
-                    En cualquier caso, si se especifica otro valor distinto, se omitirá el valor predefinido. 
-                    Se aplica automaticamente el valor predefinido en caso de no asignárselo al momento de validación. 
-                </p>
-
-
-            </div>
-
-            <div>
                 <h2>Atributos &gt; Tipos</h2>
 
                 <p>1. Que tenga unos valores predefinidos válidos.</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2|...) predefinido&gt;</code></pre>
-                <p class="Expl">En el ejemplo se define que un &lt;elemento&gt; tenga solo ciertos valores válidos.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1 | valor2 | ...) predefinido&gt;</code></pre>
+                <p class="Expl">En el ejemplo se define que un &lt;elemento&gt; tenga solo como valores válidos "valor1" y "valor2".</p>
 
                 <p>2. Que tenga una <u>cadena de caracteres</u> o ningún valor - <span class="span_contenido">CDATA</span> (Parsed Character Data).</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA predefinido&gt;</code></pre>
@@ -321,6 +297,30 @@ Código por byAd12
 
             </div>
 
+            <div>
+                <h2>Atributos &gt; Valores / Modificadores</h2>
+
+                <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido">#IMPLIED</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
+
+                <p>O requerido / obligatorio - <span class="span_contenido">#REQUIRED</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #REQUIRED&gt;</code></pre>
+
+                <p>Además se puede definir un valor fijo  - <span class="span_contenido">#FIXED "valor"</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #FIXED "valor_fijo"&gt;</code></pre>
+                <p class="Expl">El valor es sensible a mayúsculas y, si no coincide exactamente con lo definido, dará un error en la validación.</p>
+
+                <p>Por último, se puede poner solo un valor predefinido en caso de que no se asigne <u>solo</u> de las siguientes formas:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA "valor_predefinido"&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2) "valor1"&gt;</code></pre>
+                <p class="Expl">
+                    En cualquier caso, si se especifica otro valor distinto, se omitirá el valor predefinido. 
+                    Se aplica automaticamente el valor predefinido en caso de no asignárselo al momento de validación. 
+                </p>
+
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
@@ -342,7 +342,7 @@ Código por byAd12
 
                 <!-- ......................................................... -->
                 <br>
-                <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">predefinidas</span> por xml</b>:</p>
+                <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">predefinidas</span> por XML</b>:</p>
 
                 <p>En la guía sobre XML se trata el uso de entidades predefinidas como por ejemplo <span class="span_contenido"><span>&<b></b>lt;</span></span> que tiene como valor <span class="span_contenido">&lt;</span>.</p>
 
@@ -406,7 +406,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades generales externas <span style="color: rgb(147, 147, 206) !important;">privadas</span></b>:</p>
 
-                <p>Sintaxis:</p>
+                <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre SYSTEM "URI"&gt;</code></pre>
                 <p class="Expl">
                     <b>nombre</b>: Nombre que asignaremos a la entidad.
@@ -416,7 +416,7 @@ Código por byAd12
                     <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
-                <p>Ejemplo:</p>
+                <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd SYSTEM "descripcion.txt"&gt;</code></pre>
                 <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo <span class="span_url">descripcion.txt</span>.</p>
 
@@ -424,7 +424,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades generales externas <span style="color: rgb(147, 147, 206) !important;">públicas</span></b>:</p>
 
-                <p>Sintaxis:</p>
+                <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre PUBLIC "ID" "URI"&gt;</code></pre>
                 <p class="Expl">
                     <b>nombre</b>: Nombre que asignaremos a la entidad.
@@ -436,7 +436,7 @@ Código por byAd12
                     <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
-                <p>Ejemplo:</p>
+                <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd PUBLIC "-//W3C//TEXT dtd//EN" "https://byad12.pages.dev/robots.txt"&gt;</code></pre>
                 <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo alojado en la URI asignada.</p>
 
@@ -450,7 +450,7 @@ Código por byAd12
                     Tampoco pueden llamarse a estas entidades en el XML, solo es de uso interno en el documento DTD.
                 </p>
 
-                <p>Sintaxis:</p>
+                <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre "valor"&gt;</code></pre>
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
@@ -460,7 +460,7 @@ Código por byAd12
                     <b>"valor"</b>: Contenido que se insertará en el documento XML cuando se llame.
                 </p>
 
-                <p>Ejemplo:</p>
+                <p><u>Ejemplo</u>:</p>
                 <p class="Expl">Podemos llamar a una entidad mediante <span class="span_url"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % str "(#PCDATA)"&gt;
 &lt;!ELEMENT nombre_elemento %str;&gt;</code></pre>
@@ -507,7 +507,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades paramétricas externas <span style="color: rgb(147, 147, 206) !important;">privadas</span></b>:</p>
 
-                <p>Sintaxis:</p>
+                <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre SYSTEM "URI"&gt;</code></pre>
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
@@ -519,7 +519,7 @@ Código por byAd12
                     <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
-                <p>Ejemplo:</p>
+                <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
 %entidad_nueva;</code></pre>
                 <p class="Expl">El archivo <span class="span_contenido">descripcion.dtd</span> contiene:</p>
@@ -532,7 +532,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades paramétricas externas <span style="color: rgb(147, 147, 206) !important;">públicas</span></b>:</p>
 
-                <p>Sintaxis:</p>
+                <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % nombre PUBLIC "ID" "URI"&gt;</code></pre>
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
@@ -546,7 +546,7 @@ Código por byAd12
                     <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
-                <p>Ejemplo (El funcionamiento es igual que la entidad paramétrica externa privada):</p>
+                <p><u>Ejemplo</u> (El funcionamiento es igual que la entidad paramétrica externa privada):</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva PUBLIC "-//W3C//TEXT texto//EN" "https://byad12.pages.dev/descripcion.dtd"&gt;
 %entidad_nueva;</code></pre>
 

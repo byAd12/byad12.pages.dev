@@ -125,7 +125,8 @@ table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
-   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
+    .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
 }
 
 /* =================================================== */

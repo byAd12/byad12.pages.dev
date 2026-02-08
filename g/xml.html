@@ -124,12 +124,12 @@ Código por byAd12
                 <p>
                     <b>Respetar el <span style="color: rgb(147, 147, 206) !important;">órden</span></b>: 
                     <br>
-                    Para cerrar una etiqueta que anide a otras, las anidades deben ser cerradas antes.
+                    Para cerrar una etiqueta que anide a otras, las etiquetas anidades deben ser cerradas antes.
                 </p>
                 <p>
                     <b>Respetar <span style="color: rgb(147, 147, 206) !important;">mayúsculas</span></b>: 
                     <br>
-                    Las etiquetas de apertura y cierre deben contener el mismo nombre incluyendo mayúsculas.
+                    Las etiquetas de apertura y cierre deben contener el mismo nombre respetando las mayúsculas y minúsculas.
                 </p>
             </div>
 
@@ -139,7 +139,7 @@ Código por byAd12
                 <p>Cada etiqueta de XML sirve para guardar un valor, no está pensado para agrupar varios valores en una sola etiqueta como una dirección de una casa o como el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt;Español, Gallego&lt;/idiomas&gt;</code></pre>
 
-                <p>En cambio, debería de separar cada valor en etiquetas diferentes como:</p>
+                <p>Para solucionar lo anterior se debería de separar cada valor en etiquetas diferentes:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt; 
     &lt;idioma&gt;Español&lt;/idioma&gt;
     &lt;idioma&gt;Gallego&lt;/idioma&gt;
@@ -149,14 +149,14 @@ Código por byAd12
             <div>
                 <h2>Reglas &gt; Uso de TAG o atributo</h2>
 
-                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">ATRIBUTO</b> cuando el contenido no es atómico y estructurado y además es simple. Ejemplos: ID, DNI, tipo, unidad.</p>
-                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">TAG</b> cuando el contenido es atómico y estructurado y además se puede dividir en sub-componentes. Ejemplo: La dirección de una casa.</p>
+                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">ATRIBUTO</b> cuando el contenido no es atómico y estructurado y además es simple. <u>Ejemplos</u>: ID, DNI, tipo, unidad.</p>
+                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">TAG</b> cuando el contenido es atómico y estructurado y además se puede dividir en sub-componentes. <u>Ejemplo</u>: La dirección de una casa.</p>
             </div>
 
             <div>
                 <h2>Reglas &gt; Espacios en blanco</h2>
 
-                <p>En el contenido de una etiqueta o un atributo cuando hay más de un espacio seguido o un salto de línea, todos se omiten y solo se interpreta uno como en el siguiente caso:</p>
+                <p>En el contenido de una etiqueta o un atributo, cuando hay más de un espacio seguido o un salto de línea, todos se omiten y solo se interpreta uno como en el siguiente caso:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;texto      atr="hello      world"&gt;Hello      World&lt;/texto&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;texto atr="hello world"&gt;Hello World&lt;/texto&gt;</code></pre>
 
@@ -198,7 +198,7 @@ Código por byAd12
             <div>
                 <h2>Instrucciones</h2>
 
-                <p>Se puede poner instrucciones para aplicaciones que procese el documento como por ejemplo un navegador. Formato:</p>
+                <p>Se pueden usar instrucciones para definir como las aplicaciones deben de procesar el documento. Formato:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?target instrucción?&gt;</code></pre>
 
                 <p>Ejemplo de instrucción para aplicar estilos en un navegador:</p>
@@ -223,15 +223,14 @@ Código por byAd12
                 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Contenido y cierre</span></b>:</p>
 
-                <p><b>TAGs</b>: Van entre los símbolos <span class="span_contenido" translate="no">&lt;tag&gt;</span> y necesitan un cierre <span class="span_contenido" translate="no">&lt;/tag&gt;</span> ("tag" puede ser un nombre personalizado. Es sensible a mayúsculas).
-                    <br><br>Entre los 2 tags va en <b>CONTENIDO</b>.
-                    <br><br>Si un tag no va a tener contenido se puede poner simplemente <span class="span_contenido" translate="no">&lt;tag/&gt;</span>.
-                </p>
+                <p><b>TAGs</b>: Cada etiqueta/tag se pone entre los símbolos <span class="span_contenido" translate="no">&lt;tag&gt;</span> y necesitan un cierre <span class="span_contenido" translate="no">&lt;/tag&gt;</span> ("tag" puede ser un nombre personalizado. Es sensible a mayúsculas).</p>
+                <p>Entre los 2 tags va en <b>CONTENIDO</b>.</p>
+                <p>Si un tag no va a tener contenido se puede poner simplemente <span class="span_contenido" translate="no">&lt;tag/&gt;</span>.</p>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Espacios en el nombre de un tag</span></b>:</p>
 
                 <p>
-                    Dentro de un <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;</span> los espacios son insignificantes (excepto antes de crear y cerrar el tag como: <span class="span_error" translate="no">&lt; tag</span> o <span class="span_error" translate="no">&lt;/ tag</span>). 
+                    Dentro de un <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;</span> los espacios son insignificantes (excepto antes de crear y cerrar el tag como <span class="span_error" translate="no">&lt; tag</span> o <span class="span_error" translate="no">&lt;/ tag</span>). 
                     En el contenido del tag los espacios no importan.
                 </p>
 
@@ -240,10 +239,12 @@ Código por byAd12
                 <p>
                     <b>Comienzo</b>: 
                         Se permite empezar el nombre de un tag solo con <span class="span_contenido" translate="no">_</span> o una letra. 
-                    <br><br>
+                </p>
+                <p>
                     <b>Contener</b>: 
                         El nombre del tag puede contener: <span class="span_contenido" translate="no">_</span>, <span class="span_url" translate="no">-</span>, <span class="span_url" translate="no">.</span> y números, aunque no se recomienda usar los marcados en verde ni carácteres <u>no</u> ingleses.
-                    <br><br>
+                </p>
+                <p>
                     <b>Prohibido</b>: 
                         Un nombre de una tag no puede contener <span class="span_error" translate="no">:</span> ya que se utiliza para definir espacio de nombres.
                         Tampoco se permite empezar el nombre de un tag con la cadena <span class="span_error" translate="no">xml</span> ni sus variantes como <span class="span_error" translate="no">xML</span>, <span class="span_error" translate="no">xMl</span>, etc.
@@ -263,9 +264,11 @@ Código por byAd12
 
                 <p>
                     Dentro del <b>contenido</b> se pueden usar referencias que sirve para poner texto adicional en el contenido de un tag.
-                    <br><br>
+                </p>
+                <p>
                     Siempre empiezan con <span class="span_contenido" translate="no">&amp;</span> y acaba con <span class="span_contenido" translate="no">;</span>.
-                    <br><br>
+                </p>
+                <p>
                     Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser carácteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
                 </p>
 
@@ -324,11 +327,13 @@ Código por byAd12
 
                 <p>
                     Otra manera para poder usar los caracteres (<span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> y <span class="span_error" translate="no">&quot;</span> )
-                    sin tener que usar referebcuas es usar una etiqueta específica llamada CDATA que permite usarlos explícitamente sin que el documento XML lo interprete como carácteres reservados.
-                    <br><br>
-                    Esta etiqueta CDATA no se puede anidar dentro de otra ni se puede poner como su contenido la siguiente cadena: <span class="span_contenido" translate="no">]]&gt;</span> ya que esto se usa para cerrarla.
-                    <br><br>
-                    Formato:
+                    sin tener que usar referencias es usar una etiqueta específica llamada CDATA que permite usarlos explícitamente sin que el documento XML lo interprete como carácteres reservados.
+                </p>
+                <p>
+                    Esta etiqueta CDATA no se puede anidar dentro de otra etiqueta CDATA. Tampoco se puede poner en su contenido la cadena <span class="span_contenido" translate="no">]]&gt;</span> ya que esto se usa solo para cerrar la etiqueta CDATA.
+                </p>
+                <p>
+                    <u>Formato</u>:
                 </p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;![CDATA[
@@ -342,7 +347,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
 
                 <p>Cumplen las mismas reglas que los TAGs en cuestión de como se puede nombrar.</p>
 
-                <p>Cada tag puede tener varios atributos con un valor siempre entre comillas. Formato:</p>
+                <p>Cada tag puede tener varios atributos con un valor siempre entre comillas. <u>Formato</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;tag Atributo1="Valor" Atributo2="Valor" /&gt;</code></pre>
 
                 <p class="Expl">Siempre debe estar dentro de la parte del tag que abre el contenido <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;&lt;/tag&gt;</span>. Es sensible a mayúsculas.</p>
@@ -398,6 +403,8 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
 
             <div>
                 <h2>Espacio de nombres &gt; Solución</h2>
+
+                <p>Para solucionar lo anterior seguiremos los siguientes pasos:</p>
 
                 <p>1. Declaramos en el elemento raíz o en la propia etiqueta "usuarios" un nombre personalizado (prefijo) para cada documento usando <span class="span_contenido">xmlns</span>:</p>
 
@@ -488,6 +495,49 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
     ...
 ]&gt;</code></pre>
 
+            </div>
+
+            <div>
+                <h2>DTD &gt; Guía</h2>
+
+                <p>Puedes ver como validar un documento XML usando DTD en la siguiente <a href="dtd.html">guía</a>.</p>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Vincular un documento XSD a uno XML</h2>
+                <p>En el elemento raíz del documento XML se añadirán los siguientes atributos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;elemento_raiz 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="ruta_documento.xsd"
+&gt;
+    ...
+&lt;/elemento_raiz&gt;</code></pre>
+                <p class="Expl">
+                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                </p>
+                <p class="Expl">
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                </p>
+
+            </div>
+
+
+            <div>
+                <h2>XSD &gt; Guía</h2>
+
+                <p>Puedes ver como validar un documento XML usando XSD en la siguiente <a href="xsd.html">guía</a>.</p>
             </div>
 
         </div>

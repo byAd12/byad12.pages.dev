@@ -55,35 +55,84 @@ Código por byAd12
                 <h2>Ejemplo</h2>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
-&lt;xs:schema
-    version="1.0"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    elementFormDefault="qualified"
-&gt;
-    &lt;!-- VEHICULOS --&gt;
-    &lt;xs:element name="vehiculos"&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence&gt;
-                &lt;!-- VEHICULO --&gt;
-                &lt;xs:element name="vehiculo" minOccurs="1" maxOccurs="unbounded"&gt;
-                    &lt;xs:complexType&gt;
-                        &lt;xs:sequence&gt;
-                            &lt;xs:element name="nombre" minOccurs="1" maxOccurs="unbounded" type="empezar_mayuscula" /&gt;
-                            &lt;xs:element name="modelo" type="empezar_mayuscula" /&gt;
-                        &lt;/xs:sequence&gt;
-                    &lt;/xs:complexType&gt;
-                &lt;/xs:element&gt;
-            &lt;/xs:sequence&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
+&lt;xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
+    &lt;!-- El elemento raíz es "cartelera" --&gt;
+    &lt;xs:element name="cartelera" type="tCartelera" /&gt;
+  
+    &lt;!-- Dentro de "cartelera" va a haber hasta varios elementos "pelicula" --&gt;
+    &lt;xs:complexType name="tCartelera"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="pelicula" type="tPelicula" maxOccurs="unbounded" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
 
-    &lt;!-- VALOR PERSONALIZADO --&gt;
-    &lt;xs:simpleType name="empezar_mayuscula"&gt;
-        &lt;xs:restriction base="xs:string"&gt;
-            &lt;xs:pattern value="[A-Z].*" /&gt;
+    &lt;!-- El elemento "pelicula" tendrá una secuencia de sub-elementos dentro --&gt;
+    &lt;xs:complexType name="tPelicula"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="titulo" type="xs:string"  /&gt;
+            &lt;xs:element name="titulo-original" type="xs:string" minOccurs="0" maxOccurs="1" /&gt;
+            &lt;xs:element name="pais" type="xs:string" /&gt;
+            &lt;xs:element name="generos" type="tGenero" /&gt;
+            &lt;!-- Se define con xs:choice que solo pueda haber un elemento u otro --&gt;
+            &lt;xs:choice&gt;
+                &lt;xs:element name="clasificacion" type="tClasificacion" /&gt;
+                &lt;xs:element name="sin-clasificar" type="tSinClasificar" /&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:element name="sinopsis" type="xs:string" /&gt;
+            &lt;xs:choice&gt;
+                &lt;xs:element name="director" type="xs:string" /&gt;
+                &lt;xs:element name="directora" type="xs:string" /&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:element name="reparto" type="tReparto"/&gt;
+            &lt;xs:element name="web" type="url" minOccurs="0" maxOccurs="1"/&gt;
+            &lt;xs:element name="imdb" type="url"/&gt;
+            &lt;xs:element name="cartel" type="xs:string"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;!-- Después de la secuencia se define qué atributos tendrá el elemento "pelicula" --&gt;
+        &lt;xs:attribute name="codigo" type="xs:ID" use="required" /&gt;
+        &lt;xs:attribute name="duracion" type="xs:positiveInteger" use="required" /&gt;
+        &lt;xs:attribute name="ano" type="xs:positiveInteger" use="required" /&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se define una secuencia de sub-elementos dentro de la etiqueta "generos" --&gt;
+    &lt;xs:complexType name="tGenero"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="genero" type="xs:string" maxOccurs="unbounded" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se define que "clasificacion" tenga un atributo "edad" --&gt;
+    &lt;xs:complexType name="tClasificacion"&gt;
+        &lt;xs:attribute name="edad" type="tEdad" use="required"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- En el atributo "edad" se define su tipo de valor y valor mínimo --&gt;
+    &lt;xs:simpleType name="tEdad"&gt;
+        &lt;xs:restriction base="xs:integer"&gt;
+            &lt;xs:minInclusive value="0" /&gt;
         &lt;/xs:restriction&gt;
     &lt;/xs:simpleType&gt;
 
+    &lt;!-- El elemento "sin-clasificar" se define como vacío --&gt;
+    &lt;xs:complexType name="tSinClasificar" /&gt;
+
+    &lt;!-- En el elemento "reparto" se indica una secuencia de sub-elementos --&gt;
+    &lt;xs:complexType name="tReparto"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:choice minOccurs="1" maxOccurs="unbounded"&gt;
+                &lt;xs:element name="actor" type="xs:string" /&gt;
+                &lt;xs:element name="actriz" type="xs:string" /&gt;
+            &lt;/xs:choice&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se restringe las URLs a un patrón específico en base a una cadena de carácteres --&gt;
+    &lt;xs:simpleType name="url"&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:pattern value="([Hh][Tt]{2}[Pp][Ss]?)://.*" /&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+   
 &lt;/xs:schema&gt;</code></pre>
             </div>
 
@@ -92,7 +141,7 @@ Código por byAd12
             <div>
                 <h2>¿Para qué sirve XSD?</h2>
 
-                <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para <u>validar documentos XML</u>, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
+                <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
 
                 <p>
                     <b>XSD <span style="color: rgb(147, 147, 206) !important;">permite validar</span></b>:
@@ -136,6 +185,12 @@ Código por byAd12
             <div>
                 <h2>Tipos de elementos XML</h2>
                 <p>Hay que tener en cuenta que tipos de elementos existen en XML.</p>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">vacíos</span></b>:</p>
+                <p>
+                    Son aquellos elementos que no contienen ni sub-elementos, contenido o atributos:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta /&gt;</code></pre>
 
                 <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">simples</span></b>:</p>
                 <p>
@@ -488,7 +543,7 @@ Código por byAd12
         &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
     &lt;/xs:simpleType&gt;
 &lt;/xs:element&gt;
-&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:attribute name="atributo1"&gt;
     &lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
         &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
     &lt;/xs:simpleType&gt;
@@ -529,7 +584,7 @@ Código por byAd12
     &lt;/xs:restriction&gt;
 &lt;/xs:simpleType/attribute&gt;</code></pre>
                 <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
-                <p>ℹ️ Las restricciones se explican en apartados posteriores a este.</p>
+                <p>ℹ️ Las restricciones se explican en apartados posteriores.</p>
 
             </div>
 
@@ -572,8 +627,9 @@ Código por byAd12
         &lt;!-- Aquí se definirá su contenido y atributos --&gt;
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>   
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="elemento-complejo-1" /&gt;
-&lt;xs:complexType name="elemento-complejo-1"&gt;
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="elemento_complejo_1" /&gt;
+
+&lt;xs:complexType name="elemento_complejo_1"&gt;
     &lt;!-- Aquí se definirá su contenido y atributos --&gt;
 &lt;/xs:complexType&gt;</code></pre>   
                 <p class="Expl">
