@@ -44,6 +44,43 @@ Código por byAd12
         <h2 class="TituloSecundario">XML Schema Definition</h2>
         <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
         <hr>
+        <div class="parte1">
+            <div>
+                <h2>Índice de Contenidos</h2>
+
+                <h2 style="margin: 20px;" class="IndiceH2">1. Introducción</h2>
+                <ul>
+                    <li><b>Conceptos:</b> <a href="#ejemplo">Ejemplo</a> • <a href="#para-que-sirve-xsd">¿Para qué sirve XSD?</a> • <a href="#tipos-de-elementos-xml">Tipos de elementos XML</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">2. Estructura y Vinculación</h2>
+                <ul>
+                    <li><b>Esquema:</b> <a href="#estructura-xsd">Estructura XSD</a> • <a href="#vincular-xsd-xml">Vincular XSD/XML</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">3. Tipos y Valores</h2>
+                <ul>
+                    <li><b>Tipos:</b> <a href="#tipos-de-valores-en-xsd">Tipos de valores en XSD</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">4. Elemento Simple</h2>
+                <ul>
+                    <li><b>Validación:</b> <a href="#elemento-simple-validacion">Validación</a> • <a href="#elemento-simple-validacion-dato">Validación de un dato</a> • <a href="#elemento-simple-lista">Listas</a> • <a href="#elemento-simple-restricciones">Restricciones</a> • <a href="#elemento-simple-union">Unión de tipos</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">5. Elemento Complejo</h2>
+                <ul>
+                    <li><b>Estructuras:</b> <a href="#elemento-complejo-validacion">Validación</a> • <a href="#elemento-complejo-secuencia-orden">Secuencia (orden)</a> • <a href="#elemento-complejo-secuencia-cualquier-orden">Secuencia (cualquier orden)</a> • <a href="#elemento-complejo-eleccion">Elección</a></li>
+                    <li><b>Contenido:</b> <a href="#elemento-complejo-contenido-simple">Contenido simple</a> • <a href="#elemento-complejo-contenido-complejo">Contenido complejo</a> • <a href="#elemento-complejo-extension">Extensión</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">6. Reutilización y Atributos</h2>
+                <ul>
+                    <li><b>Reutilizar:</b> <a href="#reutilizacion-grupos-elementos">Grupos de elementos</a> • <a href="#reutilizacion-grupos-atributos">Grupos de atributos</a> • <a href="#atributo-validacion">Atributos y validación</a></li>
+                    <li><b>Restricciones:</b> <a href="#restricciones-longitud">Longitud</a> • <a href="#restricciones-numericas">Numéricas</a> • <a href="#restricciones-opciones">Opciones</a> • <a href="#restricciones-espacios">Espacios</a> • <a href="#restricciones-regex">Regex</a></li>
+                </ul>
+            </div>
+        </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
@@ -52,7 +89,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Ejemplo</h2>
+                <h2 id="ejemplo">Ejemplo</h2>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
 &lt;xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
@@ -139,7 +176,7 @@ Código por byAd12
             <!-- ......................................................... -->
 
             <div>
-                <h2>¿Para qué sirve XSD?</h2>
+                <h2 id="para-que-sirve-xsd">¿Para qué sirve XSD?</h2>
 
                 <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
 
@@ -183,7 +220,7 @@ Código por byAd12
         <div class="parte1">
             
             <div>
-                <h2>Tipos de elementos XML</h2>
+                <h2 id="tipos-de-elementos-xml">Tipos de elementos XML</h2>
                 <p>Hay que tener en cuenta que tipos de elementos existen en XML.</p>
 
                 <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">vacíos</span></b>:</p>
@@ -213,7 +250,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Estructura XSD</h2>
+                <h2 id="estructura-xsd">Estructura XSD</h2>
 
                 <p>Los elementos XML que se utilizan para generar un esquema han de pertenecer al namespace <span class="span_contenido">XML Schema</span>, el que habitualmente se le asigna el prefijo <span class="span_contenido">xs:</span> aunque podría usarse cualquier otro.</p>
 
@@ -230,7 +267,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Vincular un documento XSD a uno XML</h2>
+                <h2 id="vincular-xsd-xml">Vincular un documento XSD a uno XML</h2>
                 <p>En el elemento raíz del documento XML se añadirán los siguientes atributos:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;elemento_raiz 
@@ -250,7 +287,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Tipos de valores en XSD</h2>
+                <h2 id="tipos-de-valores-en-xsd">Tipos de valores en XSD</h2>
 
                 <p>Los valores se dividen en 2 grupos principales:</p>
                 <p>
@@ -495,7 +532,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Elemento simple &gt; <span>Validación</span></h2>
+                <h2 id="elemento-simple-validacion">Elemento simple &gt; <span>Validación</span></h2>
                 <p>A continuación se muestra la <u>estructura</u> para validar un elemento que no contenga ningún atributo ni sub-elementos:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" minOccurs="0" maxOccurs="unbounded"/&gt;</code></pre>
                 <p class="Expl">
@@ -513,7 +550,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento simple &gt; <span>Validación de un dato</span></h2>
+                <h2 id="elemento-simple-validacion-dato">Elemento simple &gt; <span>Validación de un dato</span></h2>
                 <p>Con la siguiente etiqueta se permite definir un tipo de dato simple personalizado a partir de un tipo de dato primitivo o uno personalizado ya definido:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:simpleType&gt;
@@ -553,7 +590,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento simple &gt; <span>Lista de elementos del mismo tipo</span></h2>
+                <h2 id="elemento-simple-lista">Elemento simple &gt; <span>Lista de elementos del mismo tipo</span></h2>
 
                 <p> Con las siguientes 2 maneras se puede definir una lista de elementos del mismo tipo - <span class="span_contenido">&lt;xs:list itemType="" /&gt;</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
@@ -572,7 +609,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento simple &gt; <span>Restricciones</span></h2>
+                <h2 id="elemento-simple-restricciones">Elemento simple &gt; <span>Restricciones</span></h2>
                 <p>
                     Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
                     Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
@@ -589,7 +626,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento simple &gt; <span>Unión de Tipos</span></h2>
+                <h2 id="elemento-simple-union">Elemento simple &gt; <span>Unión de Tipos</span></h2>
                 <p>
                     El elemento <span class="span_contenido">xs:union</span> permite definir un tipo simple que acepte valores de diferentes tipos de datos.
                 </p>
@@ -620,7 +657,7 @@ Código por byAd12
         <div class="parte1">
             <!-- ......................................................... -->
             <div>
-                <h2>Elemento complejo &gt; <span>Validación</span></h2>
+                <h2 id="elemento-complejo-validacion">Elemento complejo &gt; <span>Validación</span></h2>
                 <p>A continuación se muestran 2 formas con la misma <u>estructura</u> para validar un elemento complejo, que puede contener atributos y/o sub-elementos:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType&gt;
@@ -640,7 +677,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Secuencia de sub-elementos en un orden específico</span></h2>
+                <h2 id="elemento-complejo-secuencia-orden">Elemento complejo &gt; <span>Secuencia de sub-elementos en un orden específico</span></h2>
 
                 <p>Para definir una secuencia de sub-elemento en el <u>orden especificado</u> se utiliza lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
@@ -654,7 +691,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Secuencia de sub-elementos en cualquier orden</span></h2>
+                <h2 id="elemento-complejo-secuencia-cualquier-orden">Elemento complejo &gt; <span>Secuencia de sub-elementos en cualquier orden</span></h2>
 
                 <p>Podemos definir una secuencia de sub-elementos en la que deban aparecer en <u>cualquier orden</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
@@ -669,7 +706,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Elección de sub-elementos</span></h2>
+                <h2 id="elemento-complejo-eleccion">Elemento complejo &gt; <span>Elección de sub-elementos</span></h2>
 
                 <p>Para definir una lista que valide que <u>solo 1</u> de los sub-elementos aparezcan y no todo se hace con:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
@@ -683,7 +720,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Contenido simple (Texto + Atributos + Restricciones)</span></h2>
+                <h2 id="elemento-complejo-contenido-simple">Elemento complejo &gt; <span>Contenido simple (Texto + Atributos + Restricciones)</span></h2>
 
                 <p>Se utiliza cuando un elemento es complejo porque tiene atributos, pero su contenido es solo texto (sin sub-elementos).
                 Para validar el valor del texto (ej: que sea un número positivo) y añadir atributos, debemos extender un <b>tipo simple personalizado</b>.</p>
@@ -720,7 +757,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Contenido complejo (Explícito vs Abreviado)</span></h2>
+                <h2 id="elemento-complejo-contenido-complejo">Elemento complejo &gt; <span>Contenido complejo (Explícito vs Abreviado)</span></h2>
 
                 <p>Se utiliza <b>complexContent</b> cuando el elemento contiene otros elementos (hijos). 
                 Formalmente, todo tipo complejo es una restricción de <span class="span_contenido">xs:anyType</span>.</p>
@@ -749,7 +786,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento complejo &gt; <span>Extensión de tipos complejos</span></h2>
+                <h2 id="elemento-complejo-extension">Elemento complejo &gt; <span>Extensión de tipos complejos</span></h2>
 
                 <p>Se utiliza cuando queremos <u>reutilizar un tipo complejo existente</u> y agregar nuevos elementos o atributos:</p>
 
@@ -797,7 +834,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Elemento vacío</h2>
+                <h2 id="elemento-vacio">Elemento vacío</h2>
 
                 <p>Un elemento vacío, aunque no tenga contenido, sí puede tener atributos como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento atributos="" /&gt;</code></pre>
@@ -824,7 +861,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elemento mixto &gt; <span>Cadena de carácteres con sub-elementos</span></h2>
+                <h2 id="elemento-mixto">Elemento mixto &gt; <span>Cadena de carácteres con sub-elementos</span></h2>
 
                 <p>Un elemento mixto es aquel que combina carácteres con sub-elementos como en el siguiente ejemplo:</p>
 
@@ -841,7 +878,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Guía Rápida &gt; <span>Combinaciones de Estructura</span></h2>
+                <h2 id="guia-rapida-combinaciones">Guía Rápida &gt; <span>Combinaciones de Estructura</span></h2>
                 <p>Resumen visual de las 4 combinaciones posibles de contenido y atributos.</p>
 
                 <p>No tiene contenido de texto ni hijos, pero sí atributos. <span class="span_contenido">&lt;precio divisa="EUR" /&gt;</span></p>
@@ -876,7 +913,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Reutilización &gt; <span>Grupos de Elementos</span></h2>
+                <h2 id="reutilizacion-grupos-elementos">Reutilización &gt; <span>Grupos de Elementos</span></h2>
                 <p>
                     El elemento <span class="span_contenido">xs:group</span> permite definir un conjunto de elementos comunes para reutilizarlos en varias partes del esquema sin tener que reescribirlos.
                 </p>
@@ -900,7 +937,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Reutilización &gt; <span>Grupos de Atributos</span></h2>
+                <h2 id="reutilizacion-grupos-atributos">Reutilización &gt; <span>Grupos de Atributos</span></h2>
                 <p>
                     El elemento <span class="span_contenido">xs:attributeGroup</span> funciona igual que el anterior, pero para agrupar atributos que siempre van juntos.
                 </p>
@@ -928,7 +965,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Atributo &gt; <span>Validación</span></h2>
+                <h2 id="atributo-validacion">Atributo &gt; <span>Validación</span></h2>
                 <p>A continuación se muestra la <u>estructura</u> para validar un atributo de una etiqueta:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attribute name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" use="required/optional/prohibited"/&gt;</code></pre>
                 <p class="Expl">
@@ -969,7 +1006,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Restricciones de <span>longitud</span></h2>
+                <h2 id="restricciones-longitud">Restricciones de <span>longitud</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:length</span></b>:</p>
                 <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo):</p>
@@ -987,7 +1024,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Restricciones <span>numéricas</span></h2>
+                <h2 id="restricciones-numericas">Restricciones <span>numéricas</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:minInclusive</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x:</p>
@@ -1020,7 +1057,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Restricciones con <span>opciones válidas</span></h2>
+                <h2 id="restricciones-opciones">Restricciones con <span>opciones válidas</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:enumeration</span></b>:</p>
                 <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida:</p>
@@ -1033,7 +1070,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Restricciones sobre <span>espacios en blanco</span></h2>
+                <h2 id="restricciones-espacios">Restricciones sobre <span>espacios en blanco</span></h2>
 
                 <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
                 <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor:</p>
@@ -1050,7 +1087,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Restricciones con <span>Expresiones regulares</span></h2>
+                <h2 id="restricciones-regex">Restricciones con <span>Expresiones regulares</span></h2>
 
                 <p>
                     Una expresión regular es una secuencia de caracteres que se utiliza para definir un patrón. 
@@ -1188,7 +1225,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Expresiones regulares > <span>Herramientas</span></h2>
+                <h2 id="regex-herramientas">Expresiones regulares > <span>Herramientas</span></h2>
                 
                 <p>Las web <a href="https://regexr.com/" target="_blank">regexr.com</a> o <a href="https://regex101.com/" target="_blank">regex101.com</a> sirven para practicar la creación de estos patrones.</p>
             </div>

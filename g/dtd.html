@@ -44,6 +44,34 @@ Código por byAd12
         <h2 class="TituloSecundario">Document Type Definition</h2>
         <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
         <hr>
+        <div class="parte1">
+            <div>
+                <h2>Índice de Contenidos</h2>
+
+                <h2 style="margin: 20px;" class="IndiceH2">1. Fundamentos</h2>
+                <ul>
+                    <li><b>Básico:</b> <a href="#ejemplo">Ejemplo</a> • <a href="#definicion">Definición</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">2. Elementos</h2>
+                <ul>
+                    <li><b>Declarar:</b> <a href="#elementos-declaracion">Declaración</a> • <a href="#elementos-opciones">Opciones</a></li>
+                    <li><b>Elección/Orden:</b> <a href="#elementos-eleccion-secuencia">Elección en secuencia</a> • <a href="#elementos-eleccion-entre-secuencias">Elección entre secuencias</a></li>
+                    <li><b>Cardinalidad:</b> <a href="#elementos-cardinalidades">Cardinalidades</a> • <a href="#elementos-cardinalidad-grupo">Cardinalidad en grupo</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">3. Atributos</h2>
+                <ul>
+                    <li><b>Definir:</b> <a href="#atributos-declaracion">Declaración</a> • <a href="#atributos-tipos">Tipos</a> • <a href="#atributos-valores-modificadores">Valores / Modificadores</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">4. Entidades</h2>
+                <ul>
+                    <li><b>Tipos:</b> <a href="#entidades-predefinidas-internas">Predefinidas internas</a> • <a href="#entidades-generales-externas">Generales externas</a></li>
+                    <li><b>Paramétricas:</b> <a href="#entidades-parametricas-internas">Internas</a> • <a href="#entidades-parametricas-externas">Externas</a> • <a href="#referencias-a-entidades">Referencias</a></li>
+                </ul>
+            </div>
+        </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
@@ -52,7 +80,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Ejemplo</h2>
+                <h2 id="ejemplo">Ejemplo</h2>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT svg (rect*, circle*, path, line, polyline, polygon, ellipse)&gt;
 
@@ -77,7 +105,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Definición</h2>
+                <h2 id="definicion">Definición</h2>
 
                 <p>
                     DTD (<b>Document Type Declaration</b>) es un documento de texto plano que sirve para verificar la validez de la estructura del documento XML y de su contenido mediante unas reglas.
@@ -111,7 +139,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Elementos &gt; Declaración</h2>
+                <h2 id="elementos-declaracion">Elementos &gt; Declaración</h2>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Sintaxis</span></b>:</p>
 
@@ -125,7 +153,7 @@ Código por byAd12
 
             <div>
 
-                <h2>Elementos &gt; Opciones</h2>
+                <h2 id="elementos-opciones">Elementos &gt; Opciones</h2>
 
                 <p>1. Podemos decir que el contenido de una etiqueta puedea no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA)&gt;</code></pre>
@@ -151,7 +179,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elementos &gt; Elección en una secuencia de elementos</h2>
+                <h2 id="elementos-eleccion-secuencia">Elementos &gt; Elección en una secuencia de elementos</h2>
 
                 <p>Podemos definir que se pueda elegir entre una &lt;etiqueta1&gt; o una &lt;etiqueta2&gt; y que luego se ponga la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2), etiqueta3, ...)&gt;</code></pre>
@@ -160,7 +188,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elementos &gt; Elección entre una secuencia de elementos</h2>
+                <h2 id="elementos-eleccion-entre-secuencias">Elementos &gt; Elección entre una secuencia de elementos</h2>
 
                 <p>Podemos definir que se pueda elegir una &lt;etiqueta1&gt; seguido de la &lt;etiqueta2&gt; o solo la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2) | etiqueta3, ...)&gt;</code></pre>
@@ -169,7 +197,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elementos &gt; Cardinalidades</h2>
+                <h2 id="elementos-cardinalidades">Elementos &gt; Cardinalidades</h2>
 
                 <p>Con el símbolo <span class="span_contenido">?</span> podemos definir una cardinalidad de <span class="span_url">0-1</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1?)&gt;</code></pre>
@@ -187,7 +215,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Elementos &gt; Cardinalidad en un grupo de objetos</h2>
+                <h2 id="elementos-cardinalidad-grupo">Elementos &gt; Cardinalidad en un grupo de objetos</h2>
 
                 <p>En el siguiente caso se elige entre &lt;etiqueta1&gt; o &lt;etiqueta2&gt; y de la elección se puede poner ninguna o solo una vez:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2)?, ...)&gt;</code></pre>
@@ -209,13 +237,13 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Atributos &gt; Declaración</h2>
+                <h2 id="atributos-declaracion">Atributos &gt; Declaración</h2>
 
                 <p><b style="color: rgb(147, 147, 206) !important;">Sintaxis</b>:</p>
 
                 <p>En la siguiente etiqueta se deben de respetar un espacio mínimo entre cada objeto.</p>
 
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo valor&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo predefinido&gt;</code></pre>
                 <p class="Expl">
                     <b>elemento</b>: Nombre del elemento que contenga el atributo a declarar.
                     <br>
@@ -223,13 +251,13 @@ Código por byAd12
                     <br>
                     <b>tipo</b>: Tipo de contenido que puede tener el atributo.
                     <br>
-                    <b>valor</b>: Define si el atributo es obligatorio y si tiene un valor fijo.
+                    <b>predefinido</b>: Define si el atributo es obligatorio y si tiene un valor fijo.
                 </p>
 
                 <p>Se puede definir varios atributos de un solo elemento en un mismo &lt;!ATTLIST&gt; como:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento
-    atributo1 tipo1 valor1
-    atributo2 tipo2 valor2
+    atributo1 tipo1 predefinido1
+    atributo2 tipo2 predefinido2
     ...
 &gt;</code></pre>
 
@@ -237,7 +265,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Atributos &gt; Tipos</h2>
+                <h2 id="atributos-tipos">Atributos &gt; Tipos</h2>
 
                 <p>1. Que tenga unos valores predefinidos válidos.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1 | valor2 | ...) predefinido&gt;</code></pre>
@@ -298,7 +326,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Atributos &gt; Valores / Modificadores</h2>
+                <h2 id="atributos-valores-modificadores">Atributos &gt; Valores / Modificadores</h2>
 
                 <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido">#IMPLIED</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
@@ -310,12 +338,12 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #FIXED "valor_fijo"&gt;</code></pre>
                 <p class="Expl">El valor es sensible a mayúsculas y, si no coincide exactamente con lo definido, dará un error en la validación.</p>
 
-                <p>Por último, se puede poner solo un valor predefinido en caso de que no se asigne <u>solo</u> de las siguientes formas:</p>
+                <p>Si se quiere que el atributo sea opcional pero tome un valor por defecto cuando no se especifique en el XML, se hace así:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA "valor_predefinido"&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1|valor2) "valor1"&gt;</code></pre>
                 <p class="Expl">
-                    En cualquier caso, si se especifica otro valor distinto, se omitirá el valor predefinido. 
-                    Se aplica automaticamente el valor predefinido en caso de no asignárselo al momento de validación. 
+                    Si el atributo no se asigna en el XML, se aplica automáticamente el valor predefinido.
+                    Si se asigna un valor distinto al predefinido, ese valor se usa en su lugar.
                 </p>
 
 
@@ -332,7 +360,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Entidades predefinidas y generales internas</h2>
+                <h2 id="entidades-predefinidas-internas">Entidades predefinidas y generales internas</h2>
 
                 <p>
                     Una entidad puede almacenar cualquier tipo de contenido e insertarlo en el documento XML. 
@@ -344,7 +372,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">predefinidas</span> por XML</b>:</p>
 
-                <p>En la guía sobre XML se trata el uso de entidades predefinidas como por ejemplo <span class="span_contenido"><span>&<b></b>lt;</span></span> que tiene como valor <span class="span_contenido">&lt;</span>.</p>
+                <p>En la guía sobre <a href="xml.html">XML</a> se trata el uso de entidades predefinidas, como por ejemplo <span class="span_contenido"><span>&<b></b>lt;</span></span>, que tiene como valor <span class="span_contenido">&lt;</span>.</p>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -398,7 +426,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Entidades generales externas</h2>
+                <h2 id="entidades-generales-externas">Entidades generales externas</h2>
 
                 <p>Una entidad <b>general externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
@@ -443,7 +471,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Entidades paramétricas internas</h2>
+                <h2 id="entidades-parametricas-internas">Entidades paramétricas internas</h2>
 
                 <p>
                     Una entidad <b>paramétrica</b> solo pueden definirse en un DTD interno pero solo se pueden usar en un documento DTD a parte del documento XML.
@@ -473,7 +501,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Referencias a entidades</h2>
+                <h2 id="referencias-a-entidades">Referencias a entidades</h2>
 
                 <p>Se pueden llamar a entidades desde otras entidades como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
@@ -499,7 +527,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Entidades paramétricas externas</h2>
+                <h2 id="entidades-parametricas-externas">Entidades paramétricas externas</h2>
 
                 <p>Una entidad <b>paramétrica externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
