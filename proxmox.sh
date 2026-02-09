@@ -43,24 +43,21 @@ while true; do
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
         " | ================================" \
             "${Ne}1${Bl} | BIOS: Arreglo de la zona horaria" \
-        " | " \
+            "${Ne}2${Bl} | Configurar apagado automático" \
+            " | " \
         " | ${Az}CLÚSTER ${Bl}" \
         " | =====================" \
-            "${Ne}2${Bl} | Crear un clúster" \
-            "${Ne}3${Bl} | Unirse a un clúster" \
-            "${Ne}4${Bl} | Eliminar un clúster" \
-            "${Ne}5${Bl} | Corosync - Configurar" \
+            "${Ne}3${Bl} | Crear un clúster" \
+            "${Ne}4${Bl} | Unirse a un clúster" \
+            "${Ne}5${Bl} | Eliminar un clúster" \
+            "${Ne}6${Bl} | Corosync - Configurar" \
             " | " \
         " | ${Az}CLOUDFLARED ${Bl}" \
         " | =============================" \
-            "${Ne}6${Bl} | Instalar e iniciar sesión" \
-            "${Ne}7${Bl} | Crear un túnel - HTTP(S)" \
-            "${Ne}8${Bl} | Crear un túnel - Servicio TCP" \
-            "${Ne}9${Bl} | Purgar cloudflared" \
-            " | " \
-        " | ${Az}AUTOMATIZACIÓN ${Bl}" \
-        " | =============================" \
-            "${Ne}10${Bl} | Configurar apagado automático" \
+            "${Ne}7${Bl} | Instalar e iniciar sesión" \
+            "${Ne}8${Bl} | Crear un túnel - HTTP(S)" \
+            "${Ne}9${Bl} | Crear un túnel - Servicio TCP" \
+            "${Ne}10${Bl} | Purgar cloudflared" \
             " | " \
         " | ${Az}DOCKER ${Bl}" \
         " | ========================" \
@@ -124,9 +121,36 @@ while true; do
         ;;
 
     ##############################################################
-    # CREAR CLUSTER
+    # APAGADO AUTOMÁTICO - CRONTAB
     ##############################################################
     2)
+        clear
+        read -p 'Hora a apagar: ' hora
+        read -p 'Minutos a apagar: ' minuto
+        read -p 'Segundos a apagar: ' segundos
+
+        echo -e "\n${Az}Verificando...${Bl}"
+        if ! [[ "$hora" =~ ^[0-9]+$ ]] || ! [[ "$minuto" =~ ^[0-9]+$ ]] || ! [[ "$segundos" =~ ^[0-9]+$ ]]; then
+            echo -e "${Ro}Error: Solo se permiten números.${Bl}"
+            exit 1
+        fi
+
+        if [ "$hora" -gt 23 ] || [ "$minuto" -gt 59 ] || [ "$segundos" -gt 59 ]; then
+            echo -e "${Ro}Error: Hora, minuto o segundos fuera de rango.${Bl}"
+            exit 1
+        fi
+
+        echo -e "\n${Az}Editando Crontab...${Bl}"
+        tarea="$minuto $hora * * * /sbin/shutdown -h now"
+        (crontab -l 2>/dev/null; echo "$tarea") | crontab -
+
+        echo -e "\n${Ve}¡Política creada correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # CREAR CLUSTER
+    ##############################################################
+    3)
         clear
         read -p 'Nombre del clúster a crear: ' nombre_cluster
 
@@ -142,7 +166,7 @@ while true; do
     ##############################################################
     # UNIRSE A CLUSTER
     ##############################################################
-    3)
+    4)
         clear
         echo -e "${Ro}!!! INSTALE ANTES NETBIRD !!!${Bl}"
         read -p 'Nodo máster (coruna1): ' nodo_nombre
@@ -159,7 +183,7 @@ while true; do
     ##############################################################
     # ELIMINAR CLUSTER
     ##############################################################
-    4)
+    5)
         clear
         echo -e "${Az}Parando servicios...${Bl}"
         systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
@@ -195,7 +219,7 @@ while true; do
     ##############################################################
     # EDITAR LA CONFIGURACIÓN DE COROSYNC
     ##############################################################
-    5)
+    6)
         clear
         echo -e "\n${Az}Parando servicio(s)...${Bl}"
         systemctl stop pve-cluster
@@ -218,7 +242,7 @@ while true; do
     ##############################################################
     # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
     ##############################################################
-    6)
+    7)
         clear
 
         echo -e "${Az}Instalando Cloudflared...${Bl}"
@@ -243,7 +267,7 @@ while true; do
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - HTTP(S)
     ##############################################################
-    7)
+    8)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -301,7 +325,7 @@ EOF
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - SERVICIO TCP
     ##############################################################
-    8)
+    9)
         clear
         echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
         echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
@@ -358,7 +382,7 @@ EOF
     ##############################################################
     # PURGAR CLOUDFLARED
     ##############################################################
-    9)
+    10)
         clear
 
         echo -e "\n${Az}Parando el servicio 'cloudflared'...${Bl}"
@@ -376,33 +400,6 @@ EOF
 
         echo -e "\n${Ve}¡Cloudflared purgado correctamente!${Bl}"
         echo -e "\n${Am}(Los registros DNS deben eliminarse manualmente)${Bl}"
-        ;;
-
-    ##############################################################
-    # APAGADO AUTOMÁTICO - CRONTAB
-    ##############################################################
-    10)
-        clear
-        read -p 'Hora a apagar: ' hora
-        read -p 'Minutos a apagar: ' minuto
-        read -p 'Segundos a apagar: ' segundos
-
-        echo -e "\n${Az}Verificando...${Bl}"
-        if ! [[ "$hora" =~ ^[0-9]+$ ]] || ! [[ "$minuto" =~ ^[0-9]+$ ]] || ! [[ "$segundos" =~ ^[0-9]+$ ]]; then
-            echo -e "${Ro}Error: Solo se permiten números.${Bl}"
-            exit 1
-        fi
-
-        if [ "$hora" -gt 23 ] || [ "$minuto" -gt 59 ] || [ "$segundos" -gt 59 ]; then
-            echo -e "${Ro}Error: Hora, minuto o segundos fuera de rango.${Bl}"
-            exit 1
-        fi
-
-        echo -e "\n${Az}Editando Crontab...${Bl}"
-        tarea="$minuto $hora * * * /sbin/shutdown -h now"
-        (crontab -l 2>/dev/null; echo "$tarea") | crontab -
-
-        echo -e "\n${Ve}¡Política creada correctamente!${Bl}"
         ;;
 
     ##############################################################
@@ -537,12 +534,13 @@ EOF
     17)
         clear
         read -p 'Set-up key de Netbird: ' llave_netbird
+        read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo
 
         echo -e "\n${Az}Descargando Netbird...${Bl}"
         curl -fsSL https://pkgs.netbird.io/install.sh | bash
 
         echo -e "\n${Az}Iniciando conexión en Netbird...${Bl}"
-        netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root
+        netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root --hostname "$nombre_equipo"
 
         echo -e "\n${Az}Habilitando el servicio de Netbird...${Bl}"
         systemctl enable --now netbird
@@ -555,6 +553,9 @@ EOF
 172.16.0.103 malaga2
 EOF
 
+        echo -e "\n${Az}Tu IPv4 de NetBird es:${Bl}"
+        netbird status --ipv4
+
         echo -e "\n${Ve}¡Netbird instalado correctamente!${Bl}"
         ;;
 
@@ -564,11 +565,17 @@ EOF
     18)
         clear
 
+        echo -e "\n${Az}Desconectando el peer de la red...${Bl}"
+        netbird down
+
+        echo -e "\n${Az}Quitando el peer de la red...${Bl}"
+        netbird deregister
+
         echo -e "\n${Az}Parando servicios...${Bl}"
         systemctl stop netbird
         systemctl disable netbird
 
-        echo -e "\n${Az}Desinstalar Netbird...${Bl}"
+        echo -e "\n${Az}Desinstalando Netbird...${Bl}"
         apt remove --purge netbird -y
 
         echo -e "\n${Az}Borrando archivos y carpetas de configuración...${Bl}"
@@ -612,6 +619,7 @@ EOF
     ##############################################################
     20)
         clear
+        echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
         read -p 'Versión de GitHub a actualizar: ' version_github
 
 
