@@ -438,7 +438,13 @@ password=contraseña</code></pre>
 
                 <p>Parámetros básicos:</p>
                 <p class="Expl">
-                    <b>server role</b>: Define el tipo de servidor Samba. Puede ser <span class="span_contenido">standalone server</span> (servidor independiente que autentica usuarios localmente), <span class="span_contenido">member server</span> (servidor integrado en un dominio existente) o <span class="span_contenido">active directory domain controller</span> (controlador de dominio).
+                    <b>server role</b>: Define el tipo de servidor Samba. Puede ser:
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">standalone server</span>: Servidor independiente que autentica usuarios localmente.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">member server</span>: Servidor integrado en un dominio existente.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">active directory domain controller</span>: Controlador de dominio.
                     <br>
                     <b>netbios name</b>: Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.
                     <br>
@@ -450,7 +456,15 @@ password=contraseña</code></pre>
                     <br>
                     <b>password server</b>: Servidor o lista de servidores encargados de autenticar a los usuarios. En modo <span class="span_contenido">domain</span>, suele especificarse el controlador o controladores de dominio.
                     <br>
-                    <b>map to guest</b>: Determina en qué situaciones un intento de acceso se convierte automáticamente en acceso como invitado, por ejemplo cuando la autenticación falla o el usuario no existe.
+                    <b>map to guest</b>: Determina en qué casos un intento de acceso se convierte automáticamente en acceso como usuario invitado.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">never</span>: Nunca se asigna acceso como invitado. Si la autenticación falla, el acceso se deniega.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">bad user</span>: El acceso se convierte en invitado solo cuando el nombre de usuario no existe en el sistema.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">bad password</span>: El acceso se convierte en invitado cuando la contraseña es incorrecta, incluso si el usuario existe.
+                    <br>
+                    &nbsp;&nbsp;• <span class="span_contenido">bad uid</span>: El acceso se convierte en invitado cuando el usuario autenticado no puede asociarse a un UID válido en el sistema.
                 </p>
                 
                 <p>Logs:</p>
@@ -474,3 +488,4 @@ password=contraseña</code></pre>
     </body>
 
 </html>
+
