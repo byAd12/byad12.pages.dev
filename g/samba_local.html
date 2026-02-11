@@ -425,6 +425,7 @@ password=contraseña</code></pre>
                 
                 <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[global]
+    server role = standalone server   # Por defecto: auto
     netbios name = hostname
     workgroup = nombre_dominio   # Por defecto: (nulo)
     security = nivel             # Por defecto: user
@@ -437,24 +438,26 @@ password=contraseña</code></pre>
 
                 <p>Parámetros básicos:</p>
                 <p class="Expl">
-                    <b>netbios name</b>: Nombre del ordenador SAMBA.
+                    <b>server role</b>: Define el tipo de servidor Samba. Puede ser <span class="span_contenido">standalone server</span> (servidor independiente que autentica usuarios localmente), <span class="span_contenido">member server</span> (servidor integrado en un dominio existente) o <span class="span_contenido">active directory domain controller</span> (controlador de dominio).
                     <br>
-                    <b>workgroup</b>: Nombre de dominio (o grupo de trabajo) al que pertence Samba.
+                    <b>netbios name</b>: Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.
                     <br>
-                    <b>security</b>: Nivel de seguridad (<span class="span_contenido">share</span>, <span class="span_contenido">user</span>, <span class="span_contenido">server</span>, <span class="span_contenido">domain</span>).
+                    <b>workgroup</b>: Nombre del grupo de trabajo o dominio al que pertenece el servidor Samba.
                     <br>
-                    <b>encrypt passwords</b>: Se usa "yes" para utilizar contraseñas cifradas de Windows (en modo domain, si deben utilizarse).
+                    <b>security</b>: Define el modo de autenticación que utilizará Samba (<span class="span_contenido">share</span>, <span class="span_contenido">user</span>, <span class="span_contenido">server</span>, <span class="span_contenido">domain</span>). Determina cómo se validan los usuarios al acceder a los recursos.
                     <br>
-                    <b>password server</b>: Ordenador Windows utilizado para la autenticación. En modo <span class="span_contenido">domain</span>, debe ser unha lista dos DCs do dominio.
+                    <b>encrypt passwords</b>: Indica si las contraseñas se envían cifradas. Normalmente se establece en "yes" para compatibilidad con sistemas Windows modernos.
                     <br>
-                    <b>map to guest</b>: Se establece en que condiciones un acceso a Samba debe considerarse en modo invitado (en el nivel domain, este parámetro afecta solo cuando el acceso non fué acreditado por el DC del dominio).
+                    <b>password server</b>: Servidor o lista de servidores encargados de autenticar a los usuarios. En modo <span class="span_contenido">domain</span>, suele especificarse el controlador o controladores de dominio.
+                    <br>
+                    <b>map to guest</b>: Determina en qué situaciones un intento de acceso se convierte automáticamente en acceso como invitado, por ejemplo cuando la autenticación falla o el usuario no existe.
                 </p>
                 
                 <p>Logs:</p>
                 <p class="Expl">
-                    <b>log level</b>: Es un número que indica a cantidade de información a auditar. A mayor valor, más cantidad de información.
+                    <b>log level</b>: Nivel de detalle de los registros de Samba. Cuanto mayor es el valor, más información se guarda en los logs.
                     <br>
-                    <b>log file</b>: Nome do fichero donde se almacenan mensajes de auditoría de Samba.
+                    <b>log file</b>: Ruta y nombre del archivo donde Samba almacena los mensajes de registro y auditoría.
                 </p>
                 <!-- ......................................................... -->
             </div>
@@ -471,6 +474,3 @@ password=contraseña</code></pre>
     </body>
 
 </html>
-
-
-
