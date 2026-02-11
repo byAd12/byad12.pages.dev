@@ -419,6 +419,46 @@ password=contraseña</code></pre>
                 <!-- ......................................................... -->
             </div>
 
+        <div class="parte1">
+            <div>
+                <h2>Parámetros de la sección [global] en <span>SAMBA</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                
+                <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
+                <pre class="codigo" translate="no"><code class="ini">[global]
+    netbios name = hostname
+    workgroup = nombre_dominio   # Por defecto: (nulo)
+    security = nivel             # Por defecto: user
+    encrypt passwords = no       # Por defecto: no
+    password server = ...        # Por defecto: (nulo)
+    map to guest = never         # Por defecto: never
+    log level = 1
+    log file = /ruta
+</code></pre>
+
+                <p>Parámetros básicos:</p>
+                <p class="Expl">
+                    <b>netbios name</b>: Nombre del ordenador SAMBA.
+                    <br>
+                    <b>workgroup</b>: Nombre de dominio (o grupo de trabajo) al que pertence Samba.
+                    <br>
+                    <b>security</b>: Nivel de seguridad (<span class="span_contenido">share</span>, <span class="span_contenido">user</span>, <span class="span_contenido">server</span>, <span class="span_contenido">domain</span>).
+                    <br>
+                    <b>encrypt passwords</b>: Se usa "yes" para utilizar contraseñas cifradas de Windows (en modo domain, si deben utilizarse).
+                    <br>
+                    <b>password server</b>: Ordenador Windows utilizado para la autenticación. En modo <span class="span_contenido">domain</span>, debe ser unha lista dos DCs do dominio.
+                    <br>
+                    <b>map to guest</b>: Se establece en que condiciones un acceso a Samba debe considerarse en modo invitado (en el nivel domain, este parámetro afecta solo cuando el acceso non fué acreditado por el DC del dominio).
+                </p>
+                
+                <p>Logs:</p>
+                <p class="Expl">
+                    <b>log level</b>: Es un número que indica a cantidade de información a auditar. A mayor valor, más cantidad de información.
+                    <br>
+                    <b>log file</b>: Nome do fichero donde se almacenan mensajes de auditoría de Samba.
+                </p>
+                <!-- ......................................................... -->
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
@@ -431,5 +471,6 @@ password=contraseña</code></pre>
     </body>
 
 </html>
+
 
 
