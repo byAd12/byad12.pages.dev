@@ -285,6 +285,8 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">Dentro de este fichero indicaremos el usuario y contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">username=usuario
 password=contraseña</code></pre>
+                <p class="Expl">Luego guardamos el fichero y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p class="Expl">Y por último añadiremos en <span class="span_url">/etc/fstab</span> la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
 
@@ -488,6 +490,7 @@ password=contraseña</code></pre>
     </body>
 
 </html>
+
 
 
 
