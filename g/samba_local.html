@@ -63,9 +63,12 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
                 <p class="Expl"><b>Importante</b>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span> (eXecute).</p>
                 <p class="Expl">⚠️ <b>Riesgo de seguridad</b>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
+                <p class="Expl"><b>Nota de seguridad</b>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
 
                 <!-- ......................................................... -->
                 <p>2. <b>Reconocer al <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
+
+                <p>Lo que haremos a continuación será meter al usuario en una base de datos independiente a /etc/shadow para que este usuario sea roconocido en sistemas Windows.</p>
                 
                 <p class="Expl">Al usuario <span class="span_contenido">nombre_usuario</span> que creamos hay que hacer que sea reconocible como un usuario para Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
@@ -77,7 +80,8 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
-                <p class="Expl">Una vez instalado se crean 3 servicios: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmdb</span> y <span class="span_contenido">smdb</span>; además de una carpeta esencial: <span class="span_url">/etc/samba</span>.</p>
+                <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmdb</span> y <span class="span_contenido">smdb</span>.</p>
+                <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
                 <p>4. <b>Editar la <span style="color: rgb(147, 147, 206) !important;">configuración</span></b>:</p>
@@ -149,15 +153,20 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <h2>Acceder a una carpeta Linux o Windows desde otro <span>Linux</span><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
                 
                 <!-- ......................................................... -->
-                <p>1. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
+                <p>1. <b>Explorar los recursos compartidos del servidor</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbclient -L //IP_servidor nombre_usuario</code></pre>
+                <p class="Expl"><b>nombre_usuario</b>: El usuario que podrá montar los recursos listados.</p>
+                
+                <!-- ......................................................... -->
+                <p>2. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
 
                 <!-- ......................................................... -->
-                <p>2. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
+                <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install cifs-utils</code></pre>
 
                 <!-- ......................................................... -->
-                <p>3. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
+                <p>4. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username=usuario_Windows,password=contraseña //IP_servidor/recurso /directorio_local</code></pre>
                 <p class="Expl">
                     <b>usuario_Windows</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
@@ -292,7 +301,11 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
 
                 <!-- ......................................................... -->
-                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta y <span style="color: rgb(147, 147, 206) !important;">comprobar</span> que no haya errores</b>:</p>
+                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
+
+                <!-- ......................................................... -->
+                <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
 
             </div>
@@ -365,9 +378,9 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p class="Expl">
                     <b>valid users</b>: Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).
                     <br>
-                    <b>force user</b>: Obliga a que todos los accesos se hagan con un usuario específico.
+                    <b>force user</b>: Asigna la propiedad de los archivos a un usuario para evitar conflictos de permisos.
                     <br>
-                    <b>force group</b>: Obliga a que todos los accesos se hagan con un grupo específico.
+                    <b>force group</b>: Asigna la propiedad de los archivos a un grupo para evitar conflictos de permisos.
                 </p>
 
                 <p>Parámetros de permisos básicos:</p>
@@ -443,11 +456,12 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p class="Expl">
                     <b>server role</b>: Define el tipo de servidor Samba. Puede ser:
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">standalone server</span>: Servidor independiente que autentica usuarios localmente.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">standalone server</span>: Servidor independiente que autentica usuarios localmente.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">member server</span>: Servidor integrado en un dominio existente.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">member server</span>: Servidor integrado en un dominio existente.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">active directory domain controller</span>: Controlador de dominio.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">active directory domain controller</span>: Controlador de dominio.
+                    <br>
                     <br>
                     <b>netbios name</b>: Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.
                     <br>
@@ -484,6 +498,38 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Monitorización</h2>
+
+                <p>Para monitorizar las conexiones y bloqueos a recursos compartidos de tu sistema en tiempo real se puede ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbstatus</code></pre>
+            </div>
+
+            <div>
+                <h2>Diagnóstico</h2>
+
+                <p><u>Fallo de conectividad</u> - Es importante comprobar el estado de los siguientes servicios:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status samba-ad-dc</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status nmbd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status smbd</code></pre>
+
+                <p><u>Fallo de autentificación</u> - Otro problema puede ser que el usuario con el que se intenta acceder no esté añadido en smbpasswd:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
+
+                <p><u>Acceso denegado</u> - Hay que comprobar que los permisos sean los correctos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ls -ld /recurso_montado</code></pre>
+
+                <p><u>Montaje de /etc/fstab</u> - Hay que comprobar que la configuración del fichero de montaje sea correcto:</p>
+                <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
         <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -491,6 +537,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
     </body>
 
 </html>
+
 
 
 
