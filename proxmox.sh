@@ -2,7 +2,7 @@
 
 # -- byad12.pages.dev/proxmox.sh
 # -- www.chemahosting.es
-# -- Script hecho por Adrián L. G. P.
+# -- Script hecho por byAd12.pages.dev
 
 ##############################################################
 # CODIFICACIÓN DEL ARCHIVO
@@ -37,7 +37,7 @@ while true; do
     Az=$'\033[34;1m'
     Bl=$'\033[0m'
 
-    echo -e "Script hecho por ${Az}Adrián L. G. P.${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.es\n${Bl}"
+    echo -e "Script hecho por ${Az}byAd12.pages.dev${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.es\n${Bl}"
 
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \

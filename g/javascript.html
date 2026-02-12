@@ -11,7 +11,8 @@ Código por byAd12
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="Blog, JS, byAd12">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
         <title>JavaScript - Linux</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
@@ -42,8 +43,8 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="Principio"></div>
         <h1>JavaScript</h1>
-        <h2 class="TituloSecundario">Términos básicos</h2>
-        <h2 class="TituloCreditosSuperior">Adrián L. G. P.</h2>
+        <h2 class="TituloSecundario" id="TituloSecundario">Términos básicos</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -82,7 +83,7 @@ Código por byAd12
                         <td>Valor infinito</td>
                     </tr>
                     <tr>
-                        <td><span class="span_contenido" translate="no">{nombre: "Adrián", edad: 99}</span></td>
+                        <td><span class="span_contenido" translate="no">{nombre: "Iván", edad: 99}</span></td>
                         <td>Object</td>
                     </tr>
                     <tr>
@@ -192,8 +193,8 @@ Código por byAd12
     console.log(`${key}: ${value}`);
 });</code></pre>
                 <p class="Expl">La lista puede ser de una de estas formas:</p>
-                <pre class="codigo" translate="no"><code class="js">Lista = new Map([['Adrián', '99'], ['Chema', '98'], ['Iván', '97']]);</code></pre>
-                <pre class="codigo" translate="no"><code class="js">Lista = ['Adrián', 'Chema', 'Iván'];</code></pre>
+                <pre class="codigo" translate="no"><code class="js">Lista = new Map([['Iván', '99'], ['Chema', '98'], ['Iván', '97']]);</code></pre>
+                <pre class="codigo" translate="no"><code class="js">Lista = ['David', 'Chema', 'Iván'];</code></pre>
                 <p class="Expl">La última imprimirá como <span class="span_contenido" translate="no">key</span> la posición que ocupa en el array.</p>
 
             </div>
@@ -215,7 +216,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="js">function nombre_funcion(nombre) {
     return `hola ${nombre}`;
 }
-console.log(nombre_funcion('Adrián'));
+console.log(nombre_funcion('Iván'));
 </code></pre>
 
 
@@ -242,7 +243,7 @@ console.log(nombre_funcion('Adrián'));
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>JavaScript</h1>
-        <h2 class="TituloSecundario">Implementación de JavaScript en HTML</h2>
+        <h2 class="TituloSecundario" id="TituloSecundario">Implementación de JavaScript en HTML</h2>
         <hr class="SeparadorConTitulo">
         <!-- ......................................................... -->
         <!-- ......................................................... -->

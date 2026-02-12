@@ -163,3 +163,33 @@ function moverImagenEnAgrandado(direccion) {
 
 // ==========================================================
 // ==========================================================
+// Insertar nombre en blog solo al imprimir
+
+window.addEventListener("beforeprint", (event) => {
+    const binaryString = atob('QWRyacOhbiBMLiBHLiBQLg==');
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    const decoder = new TextDecoder();
+    
+    document.getElementById("TituloSecundario").style = "padding-bottom: 0;";
+    document.getElementById("InsertarCreditos").style = "display: block;";
+    document.getElementById("InsertarCreditos").innerHTML = decoder.decode(bytes);
+});
+
+window.addEventListener("afterprint", (event) => {
+    document.getElementById("TituloSecundario").style = "padding-bottom: 20px;";
+    document.getElementById("InsertarCreditos").style = "display: none;";
+    document.getElementById("InsertarCreditos").innerHTML = "";
+});
+
+function aplicar_estilos_titulo() {
+    document.getElementById("TituloSecundario").style = "padding-bottom: 20px;";
+    document.getElementById("InsertarCreditos").style = "display: none;";
+}
+
+document.addEventListener('DOMContentLoaded', aplicar_estilos_titulo);
+
+// ==========================================================
+// ==========================================================
