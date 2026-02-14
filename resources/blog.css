@@ -32,6 +32,8 @@
 html{scroll-behavior: smooth;}
 body{padding: 20px; font-family: Arial; background-color: #222523; max-width: 1500px; margin: 0 auto;}
 
+[id]{scroll-margin-top: 50px;}
+
 br{user-select: none;}
 
 hr{height: 1px; background-color: rgba(94, 124, 226, 0.3); border: none; margin: 15px 0; display: block;}

@@ -99,9 +99,15 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h2>
                 <ul>
                     <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
-                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
+                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Conceptos">Conceptos</a></li>
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
-                    <li><b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a></li>
+                    <li><b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Ver_Configuracion">Verificación</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a> • <a href="#VTP_Reset_Revision">Resetear la versión</a></li>
+                    <li><b>Hot Standby Router Protocol (HRSP):</b> <a href="#HRSP_Configuracion_IP">Configuración de IP</a> • <a href="#HRSP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HRSP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HRSP_Verificacion">Verificación</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">7. Servidores</h2>
+                <ul>
+                    <li><b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración en servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Verificacion">Verificación</a> • <a href="#DHCP_Desactivar">Des/Activar el servicio</a></li>
                 </ul>
             </div>
         </div>
@@ -1291,7 +1297,12 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# do show spanning-tree vlan &lt;VLAN_ID&gt;</code></pre>
                 <p class="Expl">En el apartado <span class="span_contenido">Root ID</span> &gt; <span class="span_contenido">Priority</span> se puede observar que el valor es 4096 menor que la prioridad del switch que anteriormente actuaba como raíz, lo que confirma que el nuevo switch ha sido elegido como raíz.</p>
 
-                <p class="Expl">Si posteriormente se conecta a la red un switch con una prioridad inferior a la del switch que acabamos de definir como raíz, este pasará automáticamente a convertirse en el nuevo Root Bridge. Esto provocará un recalculo de la topología STP y hará necesario reconfigurar la prioridad del switch que deseamos que actúe como raíz.</p>
+                <p class="Expl">
+                    <u>Nota Teórica</u>: Este comando no fija una prioridad estática simple. 
+                    El switch verifica la prioridad del raíz actual y configura su propia prioridad para ser <b>4096</b> puntos menor (si es posible) para ganar la elección.
+                    Si el raíz actual tiene 24576, este switch bajará a 20480.
+                </p>
+
 
             </div>
 
@@ -1305,6 +1316,13 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para verificarlo ejecutaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# do show spanning-tree vlan &lt;VLAN_ID&gt;</code></pre>
                 <p class="Expl">En el apartado <span class="span_contenido">Bridge ID</span> &gt; <span class="span_contenido">Priority</span> se puede observar que el valor no es menor que el de <span class="span_contenido">Root ID</span> &gt; <span class="span_contenido">Priority</span> pero si es menor que el de otros switches en esa VLAN.</p>
+
+                <p class="Expl">
+                    <u>Nota Teórica</u>: Este comando fija la prioridad exactamente en <b>28672</b>.
+                    Si todos los demás switches tienen la prioridad por defecto (32768), este switch "secundario" se convertirá en el <b>Raíz</b> (porque 28672 < 32768).
+                    Solo actuará como secundario si existe otro switch con prioridad "Primary" (ej. 24576).
+                </p>
+
 
             </div>
 
@@ -1329,6 +1347,38 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     Es <u>importante</u> ponerlo solo en interfaces donde solo haya un PC o servidor conectado.
                 </p>
 
+            </div>
+
+            <div>
+                <h2 id="STP_Conceptos">Spanning-tree > Conceptos de Prioridad</h2>
+                <p>
+                    La prioridad del bridge se compone de:
+                    <br>
+                    <b>Prioridad Total = Prioridad Base + ID de VLAN</b>
+                </p>
+                <p>Los valores cambian en bloques de <b>4096</b>. Los valores típicos son:</p>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td>Por defecto</td>
+                            <td>32768 + VLAN</td>
+                        </tr>
+                        <tr>
+                            <td>Root Secondary</td>
+                            <td>28672 + VLAN</td>
+                        </tr>
+                        <tr>
+                            <td>Root Primary</td>
+                            <td>24576 + VLAN (o 4096 menos que el raíz actual)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+                    <u>Nota de Desempate</u>: Si dos switches tienen la misma prioridad (ej. ambos por defecto), 
+                    gana el que tenga la <b>dirección MAC más baja</b>.
+                </p>
             </div>
 
         </div>
@@ -1441,13 +1491,16 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>3. Asignaremos al switch que actue en modo servidor:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode server</code></pre>
 
-                <p>4. Por seguridad, asignaremos que todo el switch use solo VTP versión 2:</p>
+                <p>4. Por seguridad, asignaremos que el switch use solo VTP versión 2:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp version 2</code></pre>
 
-                <p>5. Verificaremos los cambios:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp status</code></pre>
-                <p class="Expl">Esto mostrará todas las configuraciones anteriores menos la contraseña, además de un <span class="span_contenido">Configuration Revision</span> que es muy importante al indicar la cantidad de cambios que se realizaron en este switch.</p>
-                <p class="Expl">En cualquier otro switch que tenga un <span class="span_contenido">Configuration Revision</span> menor al switch servidor, tendrá que actualizar su lista de VLANs.</p>
+                <p style="color: orange;"><b>⚠️ Advertencia de Seguridad (Dominio NULL):</b></p>
+                <p class="Expl">
+                    Por defecto, un switch no tiene nombre de dominio (es NULL). 
+                    Si conectas un switch nuevo a la red sin configurar el dominio primero, 
+                    este <b>adoptará automáticamente</b> el nombre del dominio del primer paquete VTP que reciba.
+                    Esto puede causar que el switch se una a la red equivocada y altere las VLANs.
+                </p>
 
             </div>
 
@@ -1465,9 +1518,22 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>4. Definir en qué modo va a trabajar el switch:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode &lt;client/transparent&gt;</code></pre>
-                <p class="Expl"><b>client</b>: Solamente podrá cambiar la lista de VLANs cuando reciba comunicaciones de otros
-equipos.</p>
-                <p class="Expl"><b>transparent</b>: Actuará como un dispositivo aislado, sin compartir sus VLANs con el resto de dispositivos.</p>
+                <p class="Expl">
+                    <b>client</b>: En este modo solo se podrá cambiar la lista de VLANs cuando se reciba comunicaciones de otros equipos.
+                    <br>
+                    <b>transparent</b>: En este modo el dispositivo actuará como un dispositivo aislado, sin compartir sus VLANs con el resto de dispositivos.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="VTP_Ver_Configuracion">VTP &gt; Ver la configuración</h2>
+
+                <p>Para verificar el estado de VTP y la configuración usaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp status</code></pre>
+                <p class="Expl">Esto mostrará todas las configuraciones anteriores menos la contraseña, además de un <span class="span_contenido">Configuration Revision</span> que es muy importante al indicar la cantidad de cambios que se realizaron en este switch (por defecto es <b>0</b>).</p>
+                <p class="Expl">En cualquier otro switch que tenga un <span class="span_contenido">Configuration Revision</span> menor al switch servidor, tendrá que actualizar su lista de VLANs.</p>
+
 
             </div>
 
@@ -1476,6 +1542,235 @@ equipos.</p>
 
                 <p>Cualquier switch de un mismo dominio debe tener la misma contraseña VTP que indique el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp password</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="VTP_Reset_Revision">VTP &gt; Resetear la Revisión (Seguridad)</h2>
+
+                <p style="color: red;"><b>Importante</b>: Antes de conectar un switch a la red, debes asegurar que su "Configuration Revision" sea 0.</p>
+                <p class="Expl">Si conectas un switch con una revisión mayor a la del servidor, este sobrescribirá y borrará las VLANs de toda la red.</p>
+
+                <p><b>Método 1</b> - Cambiar el modo a Transparente y volver:</p>
+                <p class="Expl">Al pasar a modo transparente, el contador de revisión se reinicia a 0.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode transparent
+(config)# vtp mode client</code></pre>
+
+                <p><b>Método 2</b> - Borrar la base de datos de VLANs:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># delete vlan.dat
+# reload</code></pre>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Hot Standby Router Protocol</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="HRSP_Configuracion_IP">HRSP &gt; Configuración de una IP</h2>
+
+                <p>En cada switch de capa 3 o router en el que se vaya a compartir una IP en caso de que un dispositivo caiga, realizaremos los siguientes pasos:</p>
+
+                <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la IP en HRSP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+
+                <p>2. Le asignaremus una IP <b>diferente a la que se va a configurar con HRSP</b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP_Secundaria&gt;</code></pre>
+
+                <p>3. Asignaremos que se use solo la versión 2 de HRSP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# standby version 2</code></pre>
+
+                <p>4. Ahora meteremos a la interfaz en un grupo y le asignaremos que IP compartirá con otro(s) dispositivo(s):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# standby &lt;Grupo&gt; ip &lt;IP_HRSP&gt;</code></pre>
+                <p class="Expl">
+                    <b>Grupo</b>: Número que vincula lógicamente a varios equipos para que funcionen como un único equipo virtual.
+                    <br>
+                    <b>IP_HRSP</b>: La dirección IPv4 que compartirá con otros dispositivos en el mismo grupo.
+                </p>
+
+                <p>5. Por último encenderemos la interfaz si no se ha hecho anteriormente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+
+            </div>
+
+            <div>
+                <h2 id="HRSP_Configuracion_Prioridad">HRSP &gt; Configuración de la prioridad</h2>
+
+                <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la prioridad:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+
+                <p>2. Le asignaremos una prioridad numérica con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# standby &lt;Grupo&gt; priority &lt;Prioridad&gt;</code></pre>
+                <p class="Expl">
+                    <b>Grupo</b>: Número que vincula lógicamente a varios equipos para que funcionen como un único equipo virtual.
+                    <br>
+                    <b>Prioridad</b>: Número de 0 a 255 que indicará qué prioridad tenga el dispositivo. Cuanto mayor sea, mayor preferencia tendrá para ser el dispositivo activo.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="HRSP_Configuracion_Preempt">HRSP &gt; Configuración de preempt</h2>
+
+                <p>Con preempt podemos forzar el cambio de cesión de IP de un dispositivo a otro si hay un cambio de prioridad.</p>
+
+                <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos el modo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+
+                <p>2. Le asignaremos que funcione en modo preempt:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# standby &lt;Grupo&gt; preempt</code></pre>
+                <p class="Expl">
+                    <b>Grupo</b>: Número que vincula lógicamente a varios equipos para que funcionen como un único equipo virtual.
+                </p>
+
+                <p>En el comando <span class="span_contenido">show standby brief</span> debería aparecer la interfaz que el modo preempt está activo (<span class="span_contenido">P</span>).</p>
+
+            </div>
+
+            <div>
+                <h2 id="HRSP_Verificacion">HRSP &gt; Verificación de la configuración</h2>
+
+                <p>Para verificar el estado de HRSP y la configuración de cada interfaz con IP compartida usaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show standby</code></pre>
+                <p class="Expl">
+                    Este comando muestra detalles que el comando con brief omite, como la MAC virtual activa,
+                    los temporizadores por defecto (Hello 3s, Hold 10s) y el contador de cambios de estado del router.
+                </p>
+
+                <p>También se puede ver en formato de resumen:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show standby brief</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Dynamic Host Configuration Protocol v4</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="DHCP_Configuracion_Servidor">DHCPv4 &gt; Servidor &gt; Configuración</h2>
+
+                <p>1. Excluir las IPs reservadas/estáticas de la conecesión:</p>
+                <p class="Expl">Para excluir una <b>única</b> IP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp excluded-address &lt;IP&gt;</code></pre>
+                <p class="Expl">Para excluir un <b>rango</b> de IPs:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp excluded-address &lt;IP_Inicio&gt; &lt;IP_Fin&gt;</code></pre>
+
+
+                <p>2. Hay que definir un nombre identificativo para el pool de DHCPv4 que crearemos:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp pool &lt;Nombre_Pool&gt;</code></pre>
+
+                <p>3. Definir configuraciones:</p>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td>Configuración</td>
+                            <td>Explicación</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">network network-number &lt;Máscara&gt;</code></pre></td>
+                            <td>Para definir la máscara de red en formato punteado o CIDR.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">default-router address &lt;IP&gt;</code></pre></td>
+                            <td>Importante, es la IP de la puerta de enlace.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">dns-server address &lt;IP&gt;</code></pre></td>
+                            <td>La IP del servidor DNS.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">domain-name &lt;Dominio&gt;</code></pre></td>
+                            <td>El nombre de dominio que tendrán los clientes DHCP.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">lease &lt;Tiempo&gt;</code></pre></td>
+                            <td>La duración de una conecesión de IP.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="cisco">netbios-name-server address &lt;IP&gt;</code></pre></td>
+                            <td
+                            >El servidor WINS que ejecute el servicio NetBIOS.
+                                <br>
+                                Se recomienda reemplazar WINS por DNS.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Modo de reenvío</h2>
+
+                <p>1. Primero entraremos a la interfaz donde se recibrán las solicitudes DHCP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interface&gt;</code></pre>
+
+                <p>2. Ahora configuraremos la IP del servidor DHCP al que se enviarán las solicitudes DHCP que vengan de la interfaz definida:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip helper-address &lt;IP_Servidor&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="DHCP_Desactivar">DHCPv4 &gt; Servidor &gt; Des/Activar el servicio</h2>
+
+                <p><u>Nota</u>: En Cisco IOS el servicio DHCPv4 está habilitado de manera predeterminada.</p>
+                <p><u>Importante</u>: Si se borra los enlaces DHCP o se detiene y reinicia el servicio DHCP, se pueden asignar temporalmente direcciones IP duplicadas en la red.</p>
+
+                <p>Para desactivar el servicio:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# no service dhcp</code></pre>
+
+                <p>Para activar el servicio:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# service dhcp</code></pre>
+
+
+            </div>
+
+            <div>
+                <h2 id="DHCP_Verificacion">DHCPv4 &gt; Verificación</h2>
+
+                <p><b>Servidor</b>:</p>
+
+                <p>Para ver toda la configuración activa de DHCP:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | section dhcp</code></pre>
+
+                <p>Si hay clientes activos, podemos ver registros de la MAC de cada cliente con su IP concedida:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip dhcp binding</code></pre>
+
+                <p>Para ver las estadísticas de los mensajes enviados y recibidos del servidor:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip dhcp server statistics</code></pre>
+
+                <p>Para verificar que esté en modo de reenvío:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface &lt;Interfaz&gt;</code></pre>
+
+                <p><b>Cliente</b>:</p>
+
+                <p>Con el siguiente comando en el Command Prompt del cliente DHCPv4 podemos ver la configuración cedida por el servidor:</p>
+                <pre class="codigo" translate="no"><code class="default">ipconfig /all</code></pre>
+                <p class="Expl">Mostrará el dominio, dirección IPv4, gateway, servidor DNS, etc.</p>
+
+                <p>Podemos liberar toda la configuración IP del equipo:</p>
+                <pre class="codigo" translate="no"><code class="default">ipconfig /release</code></pre>
+
+                <p>Para solicitar que se renueve la concesión de IP (DHCPDISCOVER):</p>
+                <pre class="codigo" translate="no"><code class="default">ipconfig /renew</code></pre>
 
             </div>
 
