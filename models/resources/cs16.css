@@ -1,0 +1,69 @@
+@font-face {font-family: "Jogan"; src: url("../../fonts/JoganSoft-rgwKy.otf");}
+
+*{margin: 0; padding: 0; color: #D0D6CB; font-family: "Jogan";}
+html{height: 100%;}
+.fuera_de_principal{display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 30px);}
+
+button{cursor: pointer; background-color: rgba(0,0,0,0); border: none; border: 1.5px solid #7D8775; border-right-color: #2D3426; border-bottom-color: #2D3426;}
+input, select{padding: 4px 0; background-color: #3E4637; border: none; border: 1.5px solid #7D8775; border-left-color: #2D3426; border-top-color: #2D3426; width: 100%;}
+label{padding-bottom: 7px; display: block;}
+
+.principal{width: 600px; height: min-content; background-color: #4C5844; padding: 10px;}
+
+.barra_superior{display: flex; justify-content: space-between; margin-bottom: 7px;}
+.barra_superior .izquierda{display: flex; gap: 10px; align-items: center;}
+.barra_superior .izquierda img{width: 16px; height: 16px; background-color: white;}
+.barra_superior button{width: 16px; height: 16px; font-family: "Arial";}
+
+.submenu{display: flex; gap: 0;}
+.submenu button{padding: 5px; width: 77px; text-align: left;}
+.submenu button.seleccionado{color: #96914B; border-bottom-color: #4C5844;}
+
+.opcion_contenido{padding: 40px; border: 1.5px solid #7D8775; border-right-color: #2D3426; border-bottom-color: #2D3426; height: 300px;}
+.opcion_div_flex{display: flex; margin-bottom: 30px; gap: 20px;}
+.opcion_div_flex .opcion_div{width: 50%;}
+.color_seleccionado{color: #96914B;}
+.color_secundario{color: #8C9782;}
+
+.flex_spraypaint{display: flex; margin-bottom: 10px;}
+.flex_spraypaint .izquierda_spraypaint{width: 75px; height: 75px;}
+.flex_spraypaint .izquierda_spraypaint img{width: 75px; height: 75px; background-color: black; border: none !important;}
+.flex_spraypaint .derecha_spraypaint{height: 75px; width: calc(100% - 75px); padding-left: 20px; display: flex; flex-direction: column; justify-content: space-between;}
+
+.check_crosshair_div{display: flex; flex-direction: row; justify-content: left; gap: 5px; align-items: center;}
+.check_crosshair_div input{width: 20px; height: 20px; accent-color: #4C5844 !important; border: 1px solid #7D8775;}
+.check_crosshair_div label{padding-bottom: 0;}
+
+.boton_esp{padding: 4px; width: 150px; text-align: left;}
+
+.botones_inferiores{display: flex; gap: 10px; justify-content: right; margin-top: 5px;}
+.botones_inferiores button{width: 75px; text-align: left; padding: 4px;}
+
+#opcion_contenido_audio, #opcion_contenido_video, #opcion_contenido_aim, #opcion_contenido_keyboard, #opcion_contenido_voice, #opcion_contenido_content{display: none;}
+
+#opcion_contenido_audio .flex_columna_audio{display: flex; flex-direction: column; justify-content: space-between; height: 100%;}
+#opcion_contenido_audio .flex_columna_audio #select2_1{width: 50%;}
+#opcion_contenido_audio .flex_columna_audio .margen_sup{margin-top: 10px;}
+
+#opcion_contenido_video table th{font-weight: normal; text-align: right; width: 100px; padding-right: 10px; white-space: nowrap;}
+#opcion_contenido_video table td{width: 100%; padding-bottom: 10px;}
+#opcion_contenido_video table td select{width: 50%;}
+
+#opcion_contenido_aim table .input, #opcion_contenido_content table .input{width: 200px; display: flex; flex-direction: row; flex-wrap: nowrap; white-space: nowrap; text-align: left !important;}
+#opcion_contenido_aim table .input input, #opcion_contenido_content table .input input{width: 20px; height: 20px;}
+#opcion_contenido_aim table .input label, #opcion_contenido_content table .input label{margin-left: 10px;}
+#opcion_contenido_aim .aim_sens_rango_label{margin-top: 30px;}
+#opcion_contenido_aim #aim_sens_rango{width: 50%;}
+
+#opcion_contenido_keyboard .botones_keyboard, #opcion_contenido_keyboard .botones_keyboard div{display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; gap: 10px;}
+#opcion_contenido_keyboard .botones_keyboard button{width: 100px; text-align: left; padding: 4px;}
+#opcion_contenido_keyboard .asignacion_teclas{height: 250px !important; width: 100%; background-color: #3E4637; font-size: 12px; text-align: left; overflow-y: scroll;}
+#opcion_contenido_keyboard .asignacion_teclas th{color: #C1B24F;}
+#opcion_contenido_keyboard .asignacion_teclas tr.seleccionado{background-color: #958831;}
+#opcion_contenido_keyboard .tabla_scroll{height: 250px; overflow-y: auto; margin-bottom: 30px;}
+
+#opcion_contenido_voice .primeras_opciones{display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;}
+#opcion_contenido_voice .primeras_opciones input{width: 20px; height: 20px; padding: 0; margin: 0;}
+#opcion_contenido_voice .primeras_opciones label{padding-left: 10px;}
+#opcion_contenido_voice button{padding: 5px; width: 150px; text-align: left; white-space: nowrap; margin-bottom: 10px;}
+#opcion_contenido_voice .simular{width: 150px; margin-bottom: 10px;}

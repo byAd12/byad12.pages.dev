@@ -1,0 +1,221 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>Automatización - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">ANSIBLE-PLAYBOOK</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Automatizar tareas mediante SSH</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install software-properties-common -y</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">add-apt-repository --yes --update ppa:ansible/ansible</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install ansible -y</code></pre>
+            </div>
+
+            <div>
+                <h2>Ejecutar una tarea</h2>
+
+                <pre class="codigo" translate="no"><code class="bash">ansible-playbook -i [HOST_FILE] -f [NUM] [TASK].yml</code></pre>
+                <p class="Expl"><b>TASK.yml</b>: Archivo que crearemos para especificar una tarea.</p>
+                <p class="Expl"><b>-f NUM</b>: Especificamos cuantas tareas ejecutará simultáneamente.</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea:</p>
+                <pre class="codigo" translate="no"><code class="bash">[class1]
+10.200.0.1
+10.200.0.2
+
+[class2]
+nodo.dominio.tld
+...</code></pre>
+            </div>
+
+            <div>
+                <h2>Verificar la conectividad en varios equipos</h2>
+
+                <pre class="codigo" translate="no"><code class="bash">ansible [HOST] -i [HOST_FILE] -f -m ping</code></pre>
+                <p class="Expl"><b>HOST</b>: Especificamos a que hosts del archivo verificar. Puede ser simplemente <b>all</b> ejecutándolo en todos los nodos o, si hay varios <b>[ ]</b>, podemos excluir grupos con <b>all:!nombre_grupo_excluir</b>. Además podemos poner el nombre del grupo solamente.</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea.</p>
+                <p class="Expl"><b>-m ping</b>: Hace un ping.</p>
+            </div>
+
+            <div>
+                <h2>Creación de un archivo .yml</h2>
+
+                <pre class="codigo" translate="no"><code class="bash">---
+- name: Descripción de la tarea
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Nombre de la tarea
+      apt:
+        name: nginx
+        state: present
+
+    - name: Nombre de la tarea
+      copy:
+        src: ruta
+        dest: ruta
+        owner: usuario
+        group: grupo
+        mode: 'permisos'
+</code></pre>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">PSSH</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Paralell-SSH</h2>
+        <br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install pssh -y</code></pre>
+            </div>
+
+            <div>
+                <h2>Ejecución de comandos simultáneamente</h2>
+                <p>Con esto podemos a parte verificar si una serie de equipos están disponibles ejecutando un comando como <b>"hostname; whoami"</b>.</p>
+                <pre class="codigo" translate="no"><code class="bash">parallel-ssh -h [HOST_FILE] -l [USER] [COMANDO]</code></pre>
+                <p class="Expl">
+                    <b>USER</b>: Usuario al que conectarse.
+                    <br>
+                    <b>COMANDO</b>: Comando a ejecutar remotamente.
+                    <br>
+                    <b>-h HOST_FILE</b>: Archivo donde se especificarán mediante saltos de líneas a qué dispositivos copiar el archivo. Formato de ejemplo:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">10.200.0.1
+10.200.0.2
+...</code></pre>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">PSCP</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Paralell-SCP</h2>
+        <br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install pssh -y</code></pre>
+            </div>
+
+            <div>
+                <h2>Enviar un archivo a varios hosts simultáneamente</h2>
+                <pre class="codigo" translate="no"><code class="bash">parallel-scp -h [HOST_FILE] [FILE_SRC] [FILE_DST]</code></pre>
+                <p class="Expl">
+                    <b>FILE_SRC</b>: Archivo local a copiar en los hosts.
+                    <br>
+                    <b>FILE_DST</b>: Ruta de cada equipo destino en la que se copiará el archivo.
+                    <br>
+                    <b>-h HOST_FILE</b>: Archivo donde se especificarán mediante saltos de líneas a qué dispositivos copiar el archivo. Formato de ejemplo:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">10.200.0.1
+10.200.0.2
+...</code></pre>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">PRSYNC</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Paralell-SCP</h2>
+        <br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install pssh -y</code></pre>
+            </div>
+
+            <div>
+                <h2>Sincronizar archivos a varios hosts simultáneamente</h2>
+                <p>Solo se copian los archivos nuevos o modificados, lo que hace más rápida que copiar todo cada vez.</p>
+                <pre class="codigo" translate="no"><code class="bash">parallel-rsync -r -p [NUM] -h [HOST_FILE] -l [USER] [FILE_SRC] [FILE_DST]</code></pre>
+                <p class="Expl">
+                    <b>-r</b>: Copiar recursivamente archivos y carpetas.
+                    <br>
+                    <b>-p NUM</b>: Número de nodos en los que se sincronizará simultáneamente.
+                    <br>
+                    <b>USER</b>: Usuario SSH para conectarse a los hosts.
+                    <br>
+                    <b>FILE_SRC</b>: Archivo o carpeta local a copiar en los hosts.
+                    <br>
+                    <b>FILE_DST</b>: Ruta remota en cada host donde se copiará el archivo.
+                    <br>
+                    <b>-h HOST_FILE</b>: Archivo que contiene la lista de hosts (uno por línea), ejemplo:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">10.200.0.1
+10.200.0.2
+...</code></pre>
+            </div>
+
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

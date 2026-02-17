@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title translate="no">byAd12 - Guías</title>
+        <meta name="description" content="Consulte la guia de servicios en red y otro tipo de herramientas.">
+        <meta name="keywords" content="Blog, Guías, Guía, LDAP, JS, BIND9, APACHE, APACHE2, FTP, VSFTPD, DOCKERS, GPG, byAd12, Nmap, XML, SQL">
+        <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- ============================== -->
+        <meta property="og:title" content="byAd12 - Guías">
+        <meta property="og:description" content="Consulte la guia de servicios en red y otro tipo de herramientas.">
+        <meta property="og:image" content="https://byAd12.pages.dev/img/logo.ico">
+        <meta property="og:url" content="https://byAd12.pages.dev/guides.html">
+        <!-- ============================== -->
+        <link rel="stylesheet" type="text/css" href="resources/main.css">
+        <!-- ============================== -->
+        <script type="text/javascript" src="resources/main.js"></script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
+        <!-- ============================== -->
+    </head>
+    <body>
+        <div class="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no">
+                <a href="index.html">by<span>Ad</span>12</a>
+                <span class="menu_toggle">&#9776;</span>
+            </h1>
+            <ul>
+                <li><a href="index.html">~</a></li>
+                <li><a href="guides.html" class="actual">~/Guías</a></li>
+                <li><a href="scripts.html">~/Scripts</a></li>
+                <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
+                <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
+            </ul>
+        </div>
+
+        <div class="DivPrincipal">
+            <h2 class="projects-title">Guías</h2>
+
+            <div class="GuiasBordeColores">
+                <button type="button" onclick="editar_ASIR()"> <span class="Color2" translate="no">•</span> A.S.I.R. </button>
+                <button type="button" onclick="editar_SMR()"> <span class="Color1" translate="no">•</span> S.M.R. </button>
+                <button type="button" onclick="editar_personal()"> <span class="Color0" translate="no">•</span> Otros </button>
+            </div>
+
+            <div class="BlogEntradas">
+                <!-- <a href="g/network_automation.html" class="LinkEntrada">
+                    <div class="Entrada Color0">
+                        <div>
+                            <h3>Automatizar en red</h3>
+                            <p>25/09/2025</p>
+                        </div>
+                        <p>Comandos como ansible, paralell-scp...</p>
+                    </div>
+                </a> -->
+
+                <!-- <a href="g/sql.html" class="LinkEntrada">
+                    <div class="Entrada Color2">
+                        <div>
+                            <h3>SQL</h3>
+                            <p>01/02/2025</p>
+                        </div>
+                        <p>Lo básico de SQL para hacer y analizar consultas y además de crear tablas.</p>
+                    </div>
+                </a> -->
+
+                <a href="g/samba_local.html" class="LinkEntrada">
+                    <div class="Entrada Color2">
+                        <div>
+                            <h3>SAMBA</h3>
+                            <p>19/01/2026</p>
+                        </div>
+                        <p>Instalación, configuración, montaje y compartir carpetas de Linux a Windows y viceversa.</p>
+                    </div>
+                </a>
+
+                <a href="g/markup_language.html" class="LinkEntrada">
+                    <div class="Entrada Color2">
+                        <div>
+                            <h3>Lenguaje de Marcas</h3>
+                            <p>11/01/2026</p>
+                        </div>
+                        <p>Lo básico de XML para crear documentos con sintáxis y más información.</p>
+                    </div>
+                </a>
+
+                <a href="g/nfs.html" class="LinkEntrada">
+                    <div class="Entrada Color2">
+                        <div>
+                            <h3>NFS: Linux</h3>
+                            <p>16/12/2025</p>
+                        </div>
+                        <p>Instalación, configuración y montaje de carpetas NFS tanto en el cliente como en el servidor.</p>
+                    </div>
+                </a>
+
+                <a href="g/packet_tracer.html" class="LinkEntrada">
+                    <div class="Entrada Color2">
+                        <div>
+                            <h3>Packet Tracer CLI</h3>
+                            <p>22/09/2025</p>
+                        </div>
+                        <p>Comandos de configuración, gestión y acceso remoto de equipos intermedios y finales en línea de comandos.</p>
+                    </div>
+                </a>
+            
+                <a href="g/nmap.html" class="LinkEntrada">
+                    <div class="Entrada Color0">
+                        <div>
+                            <h3>Nmap</h3>
+                            <p>12/08/2025</p>
+                        </div>
+                        <p>Escaneo de hosts, puertos, estados, versiones, S.O., scripts, evasión de IDS, netcat, etc.</p>
+                    </div>
+                </a>
+
+                <a href="g/shell_script.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Shell: Scripts</h3>
+                            <p>03/02/2025</p>
+                        </div>
+                        <p>Lo básico de creación de archivos sh en linux teniendo en cuenta condicionales, archivos, etc.</p>
+                    </div>
+                </a>
+
+                <a href="g/postfix.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Postfix, Mail</h3>
+                            <p>28/01/2025</p>
+                        </div>
+                        <p>Configuración de postfix en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"> y envío de correos por telnet y el comando "mail".</p>
+                    </div>
+                </a>
+
+                <a href="g/telnet_ssh.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Telnet, SSH</h3>
+                            <p>16/01/2025</p>
+                        </div>
+                        <p>Uso de herramientas de conexión remota como telnet y SSH en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"> y Windows <img class="SOBlog" src="img/windows.png" alt="Logo Windows"></p>
+                    </div>
+                </a>
+
+                <a href="g/gpg.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>GPG</h3>
+                            <p>16/01/2025</p>
+                        </div>
+                        <p>Cifrar ficheros con claves simétricas, asimétricas, realizar firmas y gestionar tu clave GPG en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"></p>
+                    </div>
+                </a>
+
+                <a href="g/ldap.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>LDAP</h3>
+                            <p>14/01/2025</p>
+                        </div>
+                        <p>Crear y modificar un servicio de directorio con usuarios, grupos y U.O. con LDAP en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"></p>
+                    </div>
+                </a>
+
+                <a href="g/javascript.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Guía JS: HTML</h3>
+                            <p>14/01/2025</p>
+                        </div>
+                        <p>Lo básico de JavaScript y como se implementa con HTML y estilos de CSS.</p>
+                    </div>
+                </a>
+
+                <a href="g/ftp.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>vsftpd, FileZilla</h3>
+                            <p>14/01/2025</p>
+                        </div>
+                        <p>Crear y modificar un servidor FTP con VSFTPD en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux">. También Filezilla Client y Server.</p>
+                    </div>
+                </a>
+
+                <a href="g/docker.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Docker CLI</h3>
+                            <p>13/01/2025</p>
+                        </div>
+                        <p>Comandos, configuraciones y ejemplos de dockers (<span style="color: rgb(128, 128, 255);">docker.com</span>) tanto en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"> como Windows <img class="SOBlog" src="img/windows.png" alt="Logo Windows"></p>
+                    </div>
+                </a>
+
+                <a href="g/apache2.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Apache2</h3>
+                            <p>9/12/2024</p>
+                        </div>
+                        <p>Crear y modificar un servidor web, certificados y permisos con Apache2 en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"></p>
+                    </div>
+                </a>
+
+                <a href="g/bind9.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>Bind9</h3>
+                            <p>5/11/2024</p>
+                        </div>
+                        <p>Crear y modificar un servidor DNS (Domain Name Server) con Bind9 en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"> y Windows <img class="SOBlog" src="img/windows.png" alt="Logo Windows"></p>
+                    </div>
+                </a>
+
+                <a href="g/isc_dhcp_server.html" class="LinkEntrada">
+                    <div class="Entrada Color1">
+                        <div>
+                            <h3>isc-dhcp-server</h3>
+                            <p>26/09/2024</p>
+                        </div>
+                        <p>Crear y modificar un servidor DHCP (Dynamic Host Configuration Protocol) con isc-dhcp-server en Linux <img class="SOBlog" src="img/linux.png" alt="Logo Linux"></p>
+                    </div>
+                </a>
+
+            </div>
+            
+            <!-- === -->
+            <div style="height: 20px;"></div>
+            <!-- === -->
+        </div>
+        
+        <!-- ========================= -->
+        <!-- ========================= -->
+        <!-- ========================= -->
+
+        <footer>
+            <div class="footer-content">
+                <!-- INFORMACIÓN FOOTER -->
+                <div class="footer-left">
+                    <h3 translate="no">by<span>Ad</span>12</h3>
+                    <p translate="no"><span class="copyright">© 2023 - 2026</span></p>
+                    <p><span class="gtranslate_wrapper" id="Traductor"></span></p>
+                </div>
+                <!-- LINKS FOOTER -->
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="privacy.html">Política de privacidad</a></li>
+                        <li><a href="contact.html#donar">Apoya mis proyectos</a></li>
+                        <li><a href="contact.html">Información de contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        
+    </body>
+</html>

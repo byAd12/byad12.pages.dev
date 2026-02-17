@@ -1,0 +1,372 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>JavaScript - Linux</title>
+        
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div id="Principio"></div>
+        <h1>JavaScript</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Términos básicos</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Tipos de datos</h2>
+
+                <table class="TablaComandos">
+                    <tr>
+                        <td><span class="span_contenido" translate="no">true</span>, <span class="span_contenido" translate="no">false</span></td>
+                        <td>Boolean</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">1</span>, <span class="span_contenido" translate="no">1.1</span></td>
+                        <td>Number</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">NaN</span></td>
+                        <td>Not A Number</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">"Texto"</span></td>
+                        <td>String</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">Undefined</span></td>
+                        <td>Valor no definido</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">null</span></td>
+                        <td>Valor vacío</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">Infinity</span></td>
+                        <td>Valor infinito</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">{nombre: "Iván", edad: 99}</span></td>
+                        <td>Object</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">[1, 2, 3, 4, 5]</span></td>
+                        <td>Array</td>
+                    </tr>
+                </table>
+                
+            </div>
+            <div>
+                <h2>Operaciones</h2>
+                
+                <table class="TablaComandos">
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a + b</span></td>
+                        <td>Suma</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a - b</span></td>
+                        <td>Resta</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a = b</span></td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a != b</span></td>
+                        <td>Distinto a</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a == b</span></td>
+                        <td>Igual a</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a === b</span></td>
+                        <td>Igualdad estricta - es igual si también el tipo de valor coincide</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a > b</span></td>
+                        <td>Mayor que</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a < b</span></td>
+                        <td>Menor que</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a >= b</span></td>
+                        <td>Mayor o igual que</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a <= b</span></td>
+                        <td>Menor o igual que</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a && b</span></td>
+                        <td>Una condición u la otra</td>
+                    </tr>
+                </table>
+                
+            </div>
+
+            <div>
+                <h2>Básico</h2>
+
+                <p>Cada línea, menos las vacías y al abrir o cerrar un "{}" se debe poner un <span class="span_contenido">;</span> al final:</p>
+                <pre class="codigo" translate="no"><code class="js">linea;</code></pre>
+
+                <p>Al especificar un string y si contiene un <span class="span_contenido">${}</span>, se debe poner este tipo de comillas <span class="span_contenido">`</span>:</p>
+                <pre class="codigo" translate="no"><code class="js">console.log(`${1 + 1}`);</code></pre>
+
+                <p>Imprimir texto en la consola:</p>
+                <pre class="codigo" translate="no"><code class="js">console.log("Texto");</code></pre>
+            </div>
+
+            <div>
+                <h2>Variables</h2>
+
+                <p>Para definir una variable se sigue este formato:</p>
+                <pre class="codigo" translate="no"><code class="js">nombre_variable = valor;</code></pre>
+
+                <p>Para tener una variable que puede cambiarse de valor después de definirla se añade <span class="span_contenido" translate="no">let</span>:</p>
+                <pre class="codigo" translate="no"><code class="js">let nombre_variable = valor;</code></pre>
+            </div>
+
+
+            <div>
+                <h2>Condicionales</h2>
+
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="js">if (condición1) {
+    // Qué hacer si se cumple condición1
+
+} else if (condición2) {
+    // Qué hacer si no se cumple pero sí cumple la condición2
+    
+} else {
+    // Qué hacer si no se cumple ninguna condición
+}</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Recorrer Listas</h2>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="js">Lista.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+});</code></pre>
+                <p class="Expl">La lista puede ser de una de estas formas:</p>
+                <pre class="codigo" translate="no"><code class="js">Lista = new Map([['Iván', '99'], ['Chema', '98'], ['Iván', '97']]);</code></pre>
+                <pre class="codigo" translate="no"><code class="js">Lista = ['David', 'Chema', 'Iván'];</code></pre>
+                <p class="Expl">La última imprimirá como <span class="span_contenido" translate="no">key</span> la posición que ocupa en el array.</p>
+
+            </div>
+
+            <div>
+                <h2>Funciones</h2>
+
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="js">function nombre_funcion (parámetros) {
+    // Dentro de la función
+}</code></pre>
+                <p>Para usar un parámetro pasado a la función se llama con su nombre o con <span class="span_contenido" translate="no">${nombre_funcion}</span> si está dentro de un string:</p>
+                <pre class="codigo" translate="no"><code class="js">function nombre_funcion(nombre) {
+    console.log(nombre);
+    console.log(`${nombre}`);
+}</code></pre>
+
+                <p>Se puede devolver un valor con <span class="span_contenido" translate="no">return [valor]</span>:</p>
+                <pre class="codigo" translate="no"><code class="js">function nombre_funcion(nombre) {
+    return `hola ${nombre}`;
+}
+console.log(nombre_funcion('Iván'));
+</code></pre>
+
+
+            </div>
+            
+            <div>
+                <h2>Bucle FOR</h2>
+
+                <p>Formato:</p>
+                <pre class="codigo" translate="no"><code class="js">function a(){
+    let cantidad = 5;
+    const contenedor = document.getElementById("contenedor");
+    for (let i = 1; i <= cantidad; i++) {
+        let nuevoElemento = document.createElement("div");
+        nuevoElemento.classList.add("elemento");
+        nuevoElemento.textContent = "Elemento " + i;
+        contenedor.appendChild(nuevoElemento);
+    }
+}</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>JavaScript</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Implementación de JavaScript en HTML</h2>
+        <hr class="SeparadorConTitulo">
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Cargar un archivo JS</h2>
+
+                <p>En un .html se puede poner de varias formas:</p>
+                <pre class="codigo" translate="no"><code class="js">&lt;script&gt;
+    CÓDIGO DE JS          
+&lt;/script&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="js">&lt;script src="archivo.js"&gt;&lt;/script&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="js">&lt;button onclick="funcion(parámetros)"&gt;BOTÓN&lt;/button&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="js">&lt;input onchange="funcion(parámetros)"&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Mensajes del navegador</h2>
+
+                <p>Poner una alerta del navegador:</p>
+                <pre class="codigo" translate="no"><code class="js">alert("Texto");</code></pre>
+
+                <p>El navegador abre una confirmación devolviendo en <span class="span_contenido" translate="no">var1</span> true o false:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = confirm("Texto");</code></pre>
+
+                <p>El navegador pregunta un valor al usuario y se guarda en <span class="span_contenido" translate="no">var2</span>:</p>
+                <pre class="codigo" translate="no"><code class="js">var2 = prompt("Edad");</code></pre>
+            </div>
+            
+            <div>
+                <h2>Seleccionar un Elemento: <span translate="no">getElementby?</span></h2>
+
+                <p>Seleccionar un elemento por ID:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>Seleccionar un elemento por su nombre de clase:</p>
+                <pre class="codigo" translate="no"><code class="js">var2 = document.getElementsByClassName("CLASE");</code></pre>
+
+                <p>Seleccionar todos los elementos que coincidan, Pej.: "h1", "p, div":</p>
+                <pre class="codigo" translate="no"><code class="js">const var1 = document.querySelectorAll("BLOQUE");
+var1.forEach(elemento => {
+    elemento.style.color = "blue";
+});</code></pre>
+            </div>
+
+            <div>
+                <h2>Cambiar un estilo de un objeto: <span translate="no">objeto.style.?</span></h2>
+
+                <p>1. Primero seleccionamos el objeto:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>2. Luego cambiamos de su estilo una propiedad (Pej.: color, backgroundColor..):</p>
+                <pre class="codigo" translate="no"><code class="js">var1.style.propiedad = "valor";</code></pre>
+            </div>
+
+            <div>
+                <h2>Coger un estilo de un bloque: <span translate="no">objeto.getComputedStyle.?</span></h2>
+
+                <p>1. Se cogen todos los estilos del elemento y se coge solo el valor "<span class="span_contenido" translate="no">propiedad</span>":</p>
+                <pre class="codigo" translate="no"><code class="js">var3 = window.getComputedStyle(document.getElementById("ID")).propiedad;</code></pre>
+            </div>
+
+            <div>
+                <h2>Insertar texto en un objeto tipo texto: <span translate="no">objeto.innerHTML.?</span></h2>
+
+                <p>1. Primero seleccionamos el objeto:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>2. Luego cambiamos de su estilo una propiedad (Pej.: color, backgroundColor..):</p>
+                <pre class="codigo" translate="no"><code class="js">var1.innerHTML = "Texto a insertar";</code></pre>
+            </div>
+
+            <div>
+                <h2>Cambiar el <span>src=""</span> de una imágen: <span translate="no">objeto.src</span></h2>
+
+                <p>1. Primero seleccionamos el objeto:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>2. Luego cambiamos su propiedad "src":</p>
+                <pre class="codigo" translate="no"><code class="js">var1.src = "ruta/imagen.png";</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Cambiar el valor de un input: <span translate="no">objeto.?</span></h2>
+
+                <p><b>Si es de tipo <u>texto</u></b>:</p>
+
+                <p>1. Primero seleccionamos el objeto:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>2. Luego cambiamos su propiedad "src":</p>
+                <pre class="codigo" translate="no"><code class="js">var1.value = "Nuevo valor";</code></pre>
+
+                <p><b>Si es de tipo <u>seleccionar</u></b>:</p>
+
+                <p>1. Primero seleccionamos el objeto:</p>
+                <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
+
+                <p>2. Luego cambiamos su propiedad "checked" a true o false:</p>
+                <pre class="codigo" translate="no"><code class="js">var1.checked = &lt;true / false&gt;;</code></pre>
+
+
+            </div>
+
+            <div>
+                <h2>Reemplazar lo que coincida: <span translate="no">texto.replace()</span></h2>
+
+                <p>Seleccionamos el objeto y reemplazamos todas las cadenas que coincidan por otras.:</p>
+                <pre class="codigo" translate="no"><code class="js">let texto = "palabra1__palabra2__palabra3";
+console.log(texto.replace(/__/g, "\n"));</code></pre>
+                <p class="Expl">En este caso se reemplza todos los <span class="span_contenido" translate="no">__</span> por <span class="span_contenido" translate="no">\n</span>.</p>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>
