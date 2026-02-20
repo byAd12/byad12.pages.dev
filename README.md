@@ -11,7 +11,7 @@
 <a href="https://deepwiki.com/byAd12/byad12.pages.dev"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
 <p>
-  Este repositorio contiene el código fuente entero de mi página personal incluyendo mis <a href="https://byad12.pages.dev/guides">guías</a>, <a href="https://byad12.pages.dev/models">recreaciones en HTML</a> y <a href="https://byad12.pages.dev/scripts">scripts de Linux</a>.
+  Este repositorio contiene el código fuente entero de mi página personal incluyendo mis <a href="https://byad12.pages.dev/guides">guías</a>, <a href="https://byad12.pages.dev/models">modelos en HTML</a> y <a href="https://byad12.pages.dev/scripts">scripts de Linux</a>.
 </p>
 
 ---
