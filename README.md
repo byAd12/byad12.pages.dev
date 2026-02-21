@@ -19,7 +19,7 @@
 <p>
   <a href="https://cloudflare.com/" target="_blank_">Protected and hosted by Cloudflare</a>
   <br>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=9D8YV9UW5LYKQ" target="_blank_">PayPal</a>  •  <a href="https://www.patreon.com/c/byAd12" target="_blank_">Patreon</a>  •  <a href="https://ko-fi.com/byad12" target="_blank_">Ko-Fi</a>
+  <a href="https://www.paypal.com/donate/?hosted_button_id=9D8YV9UW5LYKQ" target="_blank_">PayPal</a>  •  <a href="https://www.patreon.com/c/byAd12" target="_blank_">Patreon</a>
 </p>
 
 </div>
