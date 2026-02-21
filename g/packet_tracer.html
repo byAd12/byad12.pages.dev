@@ -103,7 +103,7 @@ Código por byAd12
                     <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Conceptos">Conceptos</a></li>
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
                     <li><b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Ver_Configuracion">Verificación</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a> • <a href="#VTP_Reset_Revision">Resetear la versión</a></li>
-                    <li><b>Hot Standby Router Protocol (HRSP):</b> <a href="#HRSP_Configuracion_IP">Configuración de IP</a> • <a href="#HRSP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HRSP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HRSP_Verificacion">Verificación</a></li>
+                    <li><b>Hot Standby Router Protocol (HSRP):</b> <a href="#HSRP_Configuracion_IP">Configuración de IP</a> • <a href="#HSRP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HSRP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HSRP_Verificacion">Verificación</a></li>
                 </ul>
 
                 <h2 style="margin: 20px;" class="IndiceH2">7. DHCP</h2>
@@ -112,7 +112,7 @@ Código por byAd12
                     <br>
                     <li><b>DHCPv6:</b> <a href="#SLAAC_Activar">SLAAC</a> • <a href="#DHCPv6_Stateful_Activar">DHCPv6 stateful</a> • <a href="#DHCPv6_Stateless_Activar">DHCPv6 stateless</a></li>
                     <li><b>DHCPv6 stateless:</b> <a href="#DHCPv6_Stateless_Servidor_Config">Servidor DHCPv6 stateless</a> • <a href="#DHCPv6_Stateless_Cliente_Config">Cliente DHCPv6 stateless</a></li>
-                    <li><b>DHCPv6 stateful:</b> <a href="#DHCPv6_Statelful_Servidor_Config">Servidor DHCPv6 stateful</a> • <a href="#DHCPv6_Statelful_Cliente_Config">Cliente DHCPv6 stateful</a></li>
+                    <li><b>DHCPv6 stateful:</b> <a href="#DHCPv6_Stateful_Servidor_Config">Servidor DHCPv6 stateful</a> • <a href="#DHCPv6_Stateful_Cliente_Config">Cliente DHCPv6 stateful</a></li>
                     <li><b>DHCPv6 importante:</b> <a href="#DHCPv6_Servidor_Verificacion">Verificación</a> • <a href="#DHCPv6_Relay">Relay</a></li>
                 </ul>
             </div>
@@ -129,9 +129,9 @@ Código por byAd12
                 <h2 id="Sintaxis">Sintaxis de Comandos</h2>
 
                 <pre class="codigo" translate="no"><code class="cisco">prompt&gt;comando argumentos</code></pre>
-                <p class="Expl"><b>prompt&gt;</b>: Indica el hostname del equipo que estamos configurando, a parte de si tenemos permisos: <span class="span_contenido">#</span>, o no: <span class="span_contenido">&gt;</span>.</p>
+                <p class="Expl"><b>prompt&gt;</b>: Indica el hostname del equipo que estamos configurando, aparte de si tenemos permisos: <span class="span_contenido">#</span>, o no: <span class="span_contenido">&gt;</span>.</p>
                 <p class="Expl"><b>comando</b>: Comando a ejecutar.</p>
-                <p class="Expl"><b>argumentos</b>: Antes de especificarlos una palabra clave o argumentos, se añade un espacio despúes del comando.</p>
+                <p class="Expl"><b>argumentos</b>: Antes de especificarlos una palabra clave o argumentos, se añade un espacio después del comando.</p>
             </div>
             
             <div>
@@ -291,10 +291,10 @@ switch: boot</code></pre>
                 <p>Enviar un paquete ICMP a un host de destino para verificar si responde:</p>
                 <pre class="codigo" translate="no"><code class="cisco">ping &lt;IpDestino&gt;</code></pre>
 
-                <p>Conectarmos mediante Secure Shell a un host remoto:</p>
+                <p>Conectarnos mediante Secure Shell a un host remoto:</p>
                 <pre class="codigo" translate="no"><code class="cisco">ssh -l &lt;Usuario&gt; &lt;IpDestino&gt;</code></pre>
 
-                <p>Conectarmos mediante Telnet a un host remoto:</p>
+                <p>Conectarnos mediante Telnet a un host remoto:</p>
                 <pre class="codigo" translate="no"><code class="cisco">telnet (-l &lt;Usuario&gt;) &lt;IpDestino&gt;</code></pre>
 
                 <p>Nota - <b>TELNET</b> y <b>SSH</b>:</p>
@@ -305,7 +305,7 @@ switch: boot</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">C:\> telnet (-l &lt;Usuario&gt;) &lt;IpDestino&gt;</code></pre>
                 <p class="Expl">2. Antes de ingresar la contraseña, cambia Packet Tracer de <span class="span_contenido">Realtime</span> a <span class="span_contenido">Simulation</span>.</p>
                 <p class="Expl">3. Se puede apreciar que por cada letra que tenga la contraseña se crea un paquete de parte del cliente. Abre a uno desde la sección <span class="span_contenido">Event List</span>.</p>
-                <p class="Expl">4. En la nueva ventana pasa al modo <span class="span_contenido">Outbund PDU Details</span> y baja hasta el apartado <span class="span_contenido">TELNET</span>. Se puede ver que en cada paquete se enseña la letra enviada:</p>
+                <p class="Expl">4. En la nueva ventana pasa al modo <span class="span_contenido">Outbound PDU Details</span> y baja hasta el apartado <span class="span_contenido">TELNET</span>. Se puede ver que en cada paquete se enseña la letra enviada:</p>
                 <pre class="codigo" translate="no"><code class="cisco">TELNET DATA:C</code></pre>
             </div>
 
@@ -474,7 +474,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Verificacion_Sistema">Comandos de Verificación &gt; <span>Sistema</span></h2>
 
-                <p>Se puede ver el estado del hardware e infromación del sistema con:</p>
+                <p>Se puede ver el estado del hardware e información del sistema con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show version</code></pre>
             </div>
 
@@ -620,7 +620,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <p>Aplicar una política de usuario y contraseña: <span class="span_contenido">authentication</span>, o solo contraseña: <span class="span_contenido">local</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-line)# login &lt;authentication/local&gt;</code></pre>
 
-                <p>Poner un banner que se enseñara en la página de login:</p>
+                <p>Poner un banner que se enseñará en la página de login:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# banner motd &lt;Carácter&gt;</code></pre>
                 <p class="Expl"><b>Carácter</b>: Indicamos un carácter que no se vaya a repetir en el texto. Después de ejecutarlo pondrá un diálogo para poner un texto personalizado que verán al iniciar sesión. Acabaremos el comando con el carácter especificado y luego <span class="span_url">ENTER</span>.</p>
             
@@ -708,7 +708,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Full_Duplex_Interfaz">Configuración de full-duplex en una interfaz</h2>
 
-                <p>Primero entraremos a la interfaz deaseada y asignaremos el modo full-duplex:</p>
+                <p>Primero entraremos a la interfaz deseada y asignaremos el modo full-duplex:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# duplex full</code></pre>
 
@@ -717,7 +717,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Velocidad_Interfaz">Configuración de velocidad en una interfaz</h2>
 
-                <p>Primero entraremos a la interfaz deaseada y asignaremos la velocidad en <b>Mbps</b>:</p>
+                <p>Primero entraremos a la interfaz deseada y asignaremos la velocidad en <b>Mbps</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# speed &lt;VelocidadEnMbps&gt;</code></pre>
 
@@ -726,7 +726,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Auto_MDIX">Configuración de Auto-MDIX en una interfaz</h2>
 
-                <p>Primero entraremos a la interfaz deaseada y asignaremos que funcione como Auto-MDIX:</p>
+                <p>Primero entraremos a la interfaz deseada y asignaremos que funcione como Auto-MDIX:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# mdix auto</code></pre>
 
@@ -845,7 +845,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Reestablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Reestablecer</span></h2>
+                <h2 id="VLAN_Reestablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Restablecer</span></h2>
 
                 <p>Entraremos a la interfaz, y le quitaremos de switchport la vlan:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -943,7 +943,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2">Modos de switcport</td>
+                            <td colspan="2">Modos de switchport</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">access</code></pre></td>
@@ -1210,7 +1210,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Enrutado_IPv6">Inter-VLAN &gt; <span>Enrutado con IPv6</span></h2>
 
-                <p>Si no se activa el siguiente comando en el switch de capa 3, no se podrá enrutar entre VLANs paquetes que utilizen IPv6:</p>
+                <p>Si no se activa el siguiente comando en el switch de capa 3, no se podrá enrutar entre VLANs paquetes que utilicen IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
             </div>
 
@@ -1340,7 +1340,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo portfast:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree portfast</code></pre>
-                <p class="Expl">Esto evitará que la interfaz espere al rededor de 50 segundos para empezar a aceptar tramas.</p>
+                <p class="Expl">Esto evitará que la interfaz espere alrededor de 50 segundos para empezar a aceptar tramas.</p>
 
             </div>
 
@@ -1496,7 +1496,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>2. Asignaremos una contraseña necesaria para que otros switches tengan que introducirla para conectarse al dominio:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp password &lt;Contraseña&gt;</code></pre>
 
-                <p>3. Asignaremos al switch que actue en modo servidor:</p>
+                <p>3. Asignaremos al switch que actúe en modo servidor:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp mode server</code></pre>
 
                 <p>4. Por seguridad, asignaremos que el switch use solo VTP versión 2:</p>
@@ -1583,25 +1583,25 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="HRSP_Configuracion_IP">HRSP &gt; Configuración de una IP</h2>
+                <h2 id="HSRP_Configuracion_IP">HSRP &gt; Configuración de una IP</h2>
 
                 <p>En cada switch de capa 3 o router en el que se vaya a compartir una IP en caso de que un dispositivo caiga, realizaremos los siguientes pasos:</p>
 
-                <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la IP en HRSP:</p>
+                <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la IP en HSRP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
 
-                <p>2. Le asignaremus una IP <b>diferente a la que se va a configurar con HRSP</b>:</p>
+                <p>2. Le asignaremos una IP <b>diferente a la que se va a configurar con HSRP</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP_Secundaria&gt;</code></pre>
 
-                <p>3. Asignaremos que se use solo la versión 2 de HRSP:</p>
+                <p>3. Asignaremos que se use solo la versión 2 de HSRP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# standby version 2</code></pre>
 
                 <p>4. Ahora meteremos a la interfaz en un grupo y le asignaremos que IP compartirá con otro(s) dispositivo(s):</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# standby &lt;Grupo&gt; ip &lt;IP_HRSP&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# standby &lt;Grupo&gt; ip &lt;IP_HSRP&gt;</code></pre>
                 <p class="Expl">
                     <b>Grupo</b>: Número que vincula lógicamente a varios equipos para que funcionen como un único equipo virtual.
                     <br>
-                    <b>IP_HRSP</b>: La dirección IPv4 que compartirá con otros dispositivos en el mismo grupo.
+                    <b>IP_HSRP</b>: La dirección IPv4 que compartirá con otros dispositivos en el mismo grupo.
                 </p>
 
                 <p>5. Por último encenderemos la interfaz si no se ha hecho anteriormente:</p>
@@ -1611,7 +1611,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HRSP_Configuracion_Prioridad">HRSP &gt; Configuración de la prioridad</h2>
+                <h2 id="HSRP_Configuracion_Prioridad">HSRP &gt; Configuración de la prioridad</h2>
 
                 <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la prioridad:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1627,7 +1627,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HRSP_Configuracion_Preempt">HRSP &gt; Configuración de preempt</h2>
+                <h2 id="HSRP_Configuracion_Preempt">HSRP &gt; Configuración de preempt</h2>
 
                 <p>Con preempt podemos forzar el cambio de cesión de IP de un dispositivo a otro si hay un cambio de prioridad.</p>
 
@@ -1645,9 +1645,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HRSP_Verificacion">HRSP &gt; Verificación de la configuración</h2>
+                <h2 id="HSRP_Verificacion">HSRP &gt; Verificación de la configuración</h2>
 
-                <p>Para verificar el estado de HRSP y la configuración de cada interfaz con IP compartida usaremos el siguiente comando:</p>
+                <p>Para verificar el estado de HSRP y la configuración de cada interfaz con IP compartida usaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# show standby</code></pre>
                 <p class="Expl">
                     Este comando muestra detalles que el comando con brief omite, como la MAC virtual activa,
@@ -1709,7 +1709,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">lease {días [horas] [minutos] | infinite}</code></pre></td>
-                            <td>La duración de una conecesión de IP. <u>Ejemplo</u>: "lease 1 12 25"</td>
+                            <td>La duración de una concesión de IP. <u>Ejemplo</u>: "lease 1 12 25"</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">netbios-name-server address &lt;IP&gt;</code></pre></td>
@@ -1728,7 +1728,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Modo de reenvío</h2>
 
-                <p>1. Primero entraremos a la interfaz donde se recibrán las solicitudes DHCP:</p>
+                <p>1. Primero entraremos a la interfaz donde se recibirán las solicitudes DHCP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interface&gt;</code></pre>
 
                 <p>2. Ahora configuraremos la IP del servidor DHCP al que se enviarán las solicitudes DHCP que vengan de la interfaz definida:</p>
@@ -1825,7 +1825,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>1. Primero entraremos a la interfaz donde se activará:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
 
-                <p>2. habilitaremos DHCPv6 stateless:</p>
+                <p>2. Habilitaremos DHCPv6 stateless:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 nd other-config-flag</code></pre>
 
                 <p>3. Verificaremos que está habilitado correctamente:</p>
@@ -1856,7 +1856,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
 
-                <p>2. Crearmeos una pool para el servidor DHCP:</p>
+                <p>2. Crearemos una pool para el servidor DHCP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 dhcp pool &lt;Nombre_POOL&gt;</code></pre>
 
                 <p>3. Configuraremos el servidor DHCP:</p>
@@ -1891,7 +1891,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Statelful_Servidor_Config">DHCPv6 stateful &gt; Servidor &gt; Configurar</h2>
+                <h2 id="DHCPv6_Stateful_Servidor_Config">DHCPv6 stateful &gt; Servidor &gt; Configurar</h2>
 
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -1914,7 +1914,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Statelful_Cliente_Config">DHCPv6 stateful &gt; Cliente &gt; Configurar un router</h2>
+                <h2 id="DHCPv6_Stateful_Cliente_Config">DHCPv6 stateful &gt; Cliente &gt; Configurar un router</h2>
 
                 <p>1. El router cliente DHCPv6 debe estar ipv6 unicast-routing habilitado:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
