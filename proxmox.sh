@@ -2,7 +2,6 @@
 
 # -- byad12.pages.dev/proxmox.sh
 # -- www.chemahosting.es
-# -- Script hecho por byAd12.pages.dev
 
 ##############################################################
 # CODIFICACIÓN DEL ARCHIVO

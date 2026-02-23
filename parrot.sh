@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # -- byad12.pages.dev/parrot.sh
-# -- Script hecho por byAd12.pages.dev
 
 ##############################################################
 # ACTUALIZAR E INSTALAR PAQUETES
