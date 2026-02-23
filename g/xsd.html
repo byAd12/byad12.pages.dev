@@ -1,0 +1,1245 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>XSD - XML Schema Definition</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">XSD</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">XML Schema Definition</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2>Índice de Contenidos</h2>
+
+                <h2 style="margin: 20px;" class="IndiceH2">1. Introducción</h2>
+                <ul>
+                    <li><b>Conceptos:</b> <a href="#ejemplo">Ejemplo</a> • <a href="#para-que-sirve-xsd">¿Para qué sirve XSD?</a> • <a href="#tipos-de-elementos-xml">Tipos de elementos XML</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">2. Estructura y Vinculación</h2>
+                <ul>
+                    <li><b>Esquema:</b> <a href="#estructura-xsd">Estructura XSD</a> • <a href="#vincular-xsd-xml">Vincular XSD/XML</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">3. Tipos y Valores</h2>
+                <ul>
+                    <li><b>Tipos:</b> <a href="#tipos-de-valores-en-xsd">Tipos de valores en XSD</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">4. Elemento Simple</h2>
+                <ul>
+                    <li><b>Validación:</b> <a href="#elemento-simple-validacion">Validación</a> • <a href="#elemento-simple-validacion-dato">Validación de un dato</a> • <a href="#elemento-simple-lista">Listas</a> • <a href="#elemento-simple-restricciones">Restricciones</a> • <a href="#elemento-simple-union">Unión de tipos</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">5. Elemento Complejo</h2>
+                <ul>
+                    <li><b>Estructuras:</b> <a href="#elemento-complejo-validacion">Validación</a> • <a href="#elemento-complejo-secuencia-orden">Secuencia (orden)</a> • <a href="#elemento-complejo-secuencia-cualquier-orden">Secuencia (cualquier orden)</a> • <a href="#elemento-complejo-eleccion">Elección</a></li>
+                    <li><b>Contenido:</b> <a href="#elemento-complejo-contenido-simple">Contenido simple</a> • <a href="#elemento-complejo-contenido-complejo">Contenido complejo</a> • <a href="#elemento-complejo-extension">Extensión</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">6. Reutilización y Atributos</h2>
+                <ul>
+                    <li><b>Reutilizar:</b> <a href="#reutilizacion-grupos-elementos">Grupos de elementos</a> • <a href="#reutilizacion-grupos-atributos">Grupos de atributos</a> • <a href="#atributo-validacion">Atributos y validación</a></li>
+                    <li><b>Restricciones:</b> <a href="#restricciones-longitud">Longitud</a> • <a href="#restricciones-numericas">Numéricas</a> • <a href="#restricciones-opciones">Opciones</a> • <a href="#restricciones-espacios">Espacios</a> • <a href="#restricciones-regex">Regex</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="ejemplo">Ejemplo</h2>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
+    &lt;!-- El elemento raíz es "cartelera" --&gt;
+    &lt;xs:element name="cartelera" type="tCartelera" /&gt;
+  
+    &lt;!-- Dentro de "cartelera" va a haber hasta varios elementos "pelicula" --&gt;
+    &lt;xs:complexType name="tCartelera"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="pelicula" type="tPelicula" maxOccurs="unbounded" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- El elemento "pelicula" tendrá una secuencia de sub-elementos dentro --&gt;
+    &lt;xs:complexType name="tPelicula"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="titulo" type="xs:string"  /&gt;
+            &lt;xs:element name="titulo-original" type="xs:string" minOccurs="0" maxOccurs="1" /&gt;
+            &lt;xs:element name="pais" type="xs:string" /&gt;
+            &lt;xs:element name="generos" type="tGenero" /&gt;
+            &lt;!-- Se define con xs:choice que solo pueda haber un elemento u otro --&gt;
+            &lt;xs:choice&gt;
+                &lt;xs:element name="clasificacion" type="tClasificacion" /&gt;
+                &lt;xs:element name="sin-clasificar" type="tSinClasificar" /&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:element name="sinopsis" type="xs:string" /&gt;
+            &lt;xs:choice&gt;
+                &lt;xs:element name="director" type="xs:string" /&gt;
+                &lt;xs:element name="directora" type="xs:string" /&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:element name="reparto" type="tReparto"/&gt;
+            &lt;xs:element name="web" type="url" minOccurs="0" maxOccurs="1"/&gt;
+            &lt;xs:element name="imdb" type="url"/&gt;
+            &lt;xs:element name="cartel" type="xs:string"/&gt;
+        &lt;/xs:sequence&gt;
+        &lt;!-- Después de la secuencia se define qué atributos tendrá el elemento "pelicula" --&gt;
+        &lt;xs:attribute name="codigo" type="xs:ID" use="required" /&gt;
+        &lt;xs:attribute name="duracion" type="xs:positiveInteger" use="required" /&gt;
+        &lt;xs:attribute name="ano" type="xs:positiveInteger" use="required" /&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se define una secuencia de sub-elementos dentro de la etiqueta "generos" --&gt;
+    &lt;xs:complexType name="tGenero"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="genero" type="xs:string" maxOccurs="unbounded" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se define que "clasificacion" tenga un atributo "edad" --&gt;
+    &lt;xs:complexType name="tClasificacion"&gt;
+        &lt;xs:attribute name="edad" type="tEdad" use="required"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- En el atributo "edad" se define su tipo de valor y valor mínimo --&gt;
+    &lt;xs:simpleType name="tEdad"&gt;
+        &lt;xs:restriction base="xs:integer"&gt;
+            &lt;xs:minInclusive value="0" /&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+    &lt;!-- El elemento "sin-clasificar" se define como vacío --&gt;
+    &lt;xs:complexType name="tSinClasificar" /&gt;
+
+    &lt;!-- En el elemento "reparto" se indica una secuencia de sub-elementos --&gt;
+    &lt;xs:complexType name="tReparto"&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:choice minOccurs="1" maxOccurs="unbounded"&gt;
+                &lt;xs:element name="actor" type="xs:string" /&gt;
+                &lt;xs:element name="actriz" type="xs:string" /&gt;
+            &lt;/xs:choice&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;!-- Se restringe las URLs a un patrón específico en base a una cadena de carácteres --&gt;
+    &lt;xs:simpleType name="url"&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:pattern value="([Hh][Tt]{2}[Pp][Ss]?)://.*" /&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+   
+&lt;/xs:schema&gt;</code></pre>
+            </div>
+
+            <!-- ......................................................... -->
+
+            <div>
+                <h2 id="para-que-sirve-xsd">¿Para qué sirve XSD?</h2>
+
+                <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
+
+                <p>
+                    <b>XSD <span style="color: rgb(147, 147, 206) !important;">permite validar</span></b>:
+                    <br>- La jerarquía de los elementos y los atributos permitidos.
+                    <br>- Las restricciones y las reglas de validación para el contenido de los elementos y atributos.
+                    <br>- La descripción de estructuras y tipos de datos complejos.
+                    <br>- La definición de relaciones entre elementos.
+                </p>
+
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Ventajas</span> sobre DTD</b>:
+                    <br>- La sintaxis es más avanzada y proporciona un mayor nivel de detalle.
+                    <br>- Permite restringir con mucha precisión los valores que puede tener un elemento o atributo.
+                    <br>- Los mismos procesadores que permiten interpretar ficheros XML permitirían procesar ficheros XSD ya que este está escrito sobre XML.
+                    <br>- Permite la definición de namespaces.
+                </p>
+
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Pasos</span> de validación</b>:
+                    <br>1. Creamos el documento XSD, también llamado esquema.
+                    <br>2. Vinculamos el documento XSD con el documento XML.
+                </p>
+
+                <p>
+                    Es <b style="color: rgb(147, 147, 206) !important;">importante</b> que las URLs como <span class="span_url">http://www.w3.org/2001/XMLSchema</span> o <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span> deban usar el protocolo <span class="span_url">http</span> ya que
+                    algunas aplicaciones no validan correctamente los documentos XML si indicamos las URLs en su versión <span class="span_url">https</span>. 
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            
+            <div>
+                <h2 id="tipos-de-elementos-xml">Tipos de elementos XML</h2>
+                <p>Hay que tener en cuenta que tipos de elementos existen en XML.</p>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">vacíos</span></b>:</p>
+                <p>
+                    Son aquellos elementos que no contienen ni sub-elementos, contenido o atributos:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta /&gt;</code></pre>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">simples</span></b>:</p>
+                <p>
+                    Son aquellos elementos que no contienen sub-elementos, aunque pueden tener atributos si se definen mediante <span class="span_contenido">simpleContent</span>. 
+                    Este puede contener <u>solo texto</u> o estar vacío. A continuación se muestra un ejemplo de un elemento simple:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta&gt;Valor de la etiqueta&lt;/etiqueta&gt;</code></pre>
+
+                <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">complejos</span></b>:</p>
+                <p>
+                    Son aquellos elementos que contienen algún atributo <b>y / o</b> otro elemento dentro de él.
+                    Cualquier combinación de uno o varios elementos y sub-elementos es válido si el esquema lo permite.
+                    A continuación se muestra un ejemplo de un elemento complejo:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta atributo="valor"&gt;
+    &lt;subetiqueta id="1" num="0011"&gt;Valor de la sub-etiqueta&lt;/subetiqueta&gt;
+&lt;/etiqueta&gt;</code></pre>
+                <p class="Expl">Se considera como elemento complejo cualquier elemento vacío pero que tenga al menos un atributo, lo mismo si solo tiene un sub-elemento dentro.</p>
+
+            </div>
+
+            <div>
+                <h2 id="estructura-xsd">Estructura XSD</h2>
+
+                <p>Los elementos XML que se utilizan para generar un esquema han de pertenecer al namespace <span class="span_contenido">XML Schema</span>, el que habitualmente se le asigna el prefijo <span class="span_contenido">xs:</span> aunque podría usarse cualquier otro.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+    &lt;!-- El resto de elementos --&gt;
+&lt;/xs:schema&gt;</code></pre>
+
+                <p class="Expl">
+                    La declaración XML es opcional pero recomendable añadirla al inicio del documento.
+                    <br>La etiqueta <b>schema</b> siempre será el elemento raíz.
+                    <br>El namespace <b>xmlns:xs</b> siempre apuntará a la misma URL <span class="span_url">http://www.w3.org/2001/XMLSchema</span>.
+                </p>
+            </div>
+
+            <div>
+                <h2 id="vincular-xsd-xml">Vincular un documento XSD a uno XML</h2>
+                <p>En el elemento raíz del documento XML se añadirán los siguientes atributos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;elemento_raiz 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="ruta_documento.xsd"
+&gt;
+    ...
+&lt;/elemento_raiz&gt;</code></pre>
+                <p class="Expl">
+                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                </p>
+                <p class="Expl">
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="tipos-de-valores-en-xsd">Tipos de valores en XSD</h2>
+
+                <p>Los valores se dividen en 2 grupos principales:</p>
+                <p>
+                    <b>Valores <span style="color: rgb(147, 147, 206) !important;">primitivos</span></b>: No se definen a partir de otros tipos de datos.
+                    <br><b>Valores <span style="color: rgb(147, 147, 206) !important;">derivados</span></b>: Se definen a partir de otros tipos de datos.
+                </p>
+
+                <p>Cada valor puede ser de 2 formas:</p>
+                <p>
+                    <b>Valor <span style="color: rgb(147, 147, 206) !important;">predefinido</span></b>: Valores ya creados por el estándar XML.
+                    <br><b>Valor <span style="color: rgb(147, 147, 206) !important;">personalizado</span></b>: Valores que podemos crear a partir de uno predefinido.
+                </p>
+
+                <p>Imágen con todos los valores existentes en: <a href="https://axis.apache.org/axis/cpp/images/c/XSD_Objects_Heirarchy.JPG" target="_blank">apache.org</a></p>
+
+                <p>A continuación se muestra una agrupación de valores <b>predefinidos</b> separados por tipos:</p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3">Valores de tipo <b>texto</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:string</b></td>
+                            <td>Representa cualquier cadena de carácteres</td>
+                            <td>hola</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:anyURI</b></td>
+                            <td>
+                                Representa un Uniform Resource Identifier (URI):
+                                <br>
+                                Cadena de carácteres que identifica un recurso sin ambigüedades
+                            </td>
+                            <td>
+                                <b>URL</b>: http://by.ad/12
+                                <br>
+                                <b>Ruta</b>: /img/logo.svg
+                                <br>
+                                <b>Teléfono</b>: tel:+34666777888
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:language</b></td>
+                            <td>Representa un lenguaje por su identificador, definido en <a href="https://www.ietf.org/rfc/rfc3066.txt" target="_blank">RFC 3066</a></td>
+                            <td>
+                                <b>Español</b>: es
+                                <br>
+                                <b>Gallego</b>: gl
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3">Valores de tipo <b>númerico</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:integer</b></td>
+                            <td>Valores numéricos sin decimal, puede ser positivo o negativo</td>
+                            <td>12, +12, -12</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:positiveInteger</b></td>
+                            <td>
+                                Valores numéricos enteros estrictamente positivos.
+                                <br>⚠️ <b>El 0 NO se considera positivo</b>. El valor mínimo es 1.
+                            </td>
+                            <td>1, +12</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:negativeInteger</b></td>
+                            <td>
+                                Valores numéricos enteros estrictamente negativos.
+                                <br>⚠️ <b>El 0 NO se considera negativo</b>. El valor máximo es -1.
+                            </td>
+                            <td>-1, -12</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>xs:boolean</b></td>
+                            <td>Valores verdadero o falso</td>
+                            <td>true, 1, false, 0</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:decimal</b></td>
+                            <td>Valores numéricos con decimal usando el <span class="span_contenido">.</span></td>
+                            <td>0, 12, +12, 1.2, 12.000</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3">Valores de tipo <b>tiempo</b>  en formato <a href="https://es.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:dateTime</b></td>
+                            <td>Representa la fecha y hora</td>
+                            <td>
+                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                <br>
+                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:date</b></td>
+                            <td>Representa la fecha</td>
+                            <td>
+                                año-mes-dia<b>+hora:minuto</b>
+                                <br>
+                                año-mes-dia<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:time</b></td>
+                            <td>Representa la hora</td>
+                            <td>
+                                hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                <br>
+                                hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:duration</b></td>
+                            <td>
+                                Representa una duración de tiempo
+                                <br>
+                                <u>Formato</u>: P<span class="span_contenido">año</span>Y<span class="span_contenido">mes</span>M<span class="span_contenido">dia</span>DT<span class="span_contenido">hora</span>H<span class="span_contenido">minuto</span>M<span class="span_contenido">segundo</span>S
+                                <br>
+                                Cada año, mes... se reemplaza por la duración necesaria
+                            </td>
+                            <td>
+                                <b>2 años, 4 meses, 3 dias, 5 h, 6 min, 7 seg</b>: P2Y4M3DT5H6M7S
+                                <br>
+                                <b>2 años</b>: P2Y
+                                <br>
+                                <b>1min y 30.5 seg</b>: PT1M30.5S
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gYearMonth</b></td>
+                            <td>Representa una fecha sin día</td>
+                            <td>
+                                <b>Inicio de un periodo</b>: año-mes</b>
+                                <br>
+                                <b>Finalización de un periodo</b>: -año-mes</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gMonthDay</b></td>
+                            <td>Representa una fecha sin año</td>
+                            <td>--mes-dia</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gYear</b></td>
+                            <td>Representa un año entre 0001 y 9999</td>
+                            <td>año, -año</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gMonth</b></td>
+                            <td>Representa un mes en concreto entre 01 y 12</td>
+                            <td>--mes</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:gDay</b></td>
+                            <td>Representa un día en concreto entre 01 y 31</td>
+                            <td>---día</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3">Valores de tipo <b>identificador</b></td>
+                        </tr>
+                        <tr>
+                            <td>TIPO</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>EJEMPLO(S)</b></td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:ID</b></td>
+                            <td>
+                                Solo se puede definir en atributos. Su valor debe ser único en todo el documento XML
+                                <br>
+                                Debe empezar con una letra o <span class="span_contenido">_</span> y puede contener los símbolos <span class="span_contenido">-</span>, <span class="span_contenido">_</span>, <span class="span_contenido">.</span>, <span class="span_contenido">:</span>
+                            </td>
+                            <td>gal_coruna</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:IDREF</b></td>
+                            <td>
+                                Es una referencia a un identificador que ya ha sido definido en el documento XML
+                                <br>
+                                Dará error de validación si no existe. Solo se puede definir en atributos
+                                <br>
+                                Tiene las mismas restricciones que <b>xs:ID</b>
+                            </td>
+                            <td>gal_coruna</td>
+                        </tr>
+                        <tr>
+                            <td><b>xs:IDREFS</b></td>
+                            <td>
+                                Especifica <b>varias referencias</b> a identificadores (ID) definidos en el documento.
+                                <br>
+                                Los valores deben estar separados por espacios en blanco.
+                            </td>
+                            <td>"gal_coruna and_malaga mad_madrid"</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="elemento-simple-validacion">Elemento simple &gt; <span>Validación</span></h2>
+                <p>A continuación se muestra la <u>estructura</u> para validar un elemento que no contenga ningún atributo ni sub-elementos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" minOccurs="0" maxOccurs="unbounded"/&gt;</code></pre>
+                <p class="Expl">
+                    <b>name</b>: Nombre del elemento a validar.
+                    <br><b>type</b>: Tipo de valor que se permite.
+                    <br><b>default</b>: Valor por defecto que tendrá si no se especifica uno. No puede usarse a la vez que <b>fixed</b>.
+                    <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento. No puede usarse a la vez que <b>default</b>.
+                    <br><b>minOccurs</b>: Cardinalidad que indica el número mínimo de veces que debe aparecer.
+                    <br><b>maxOccurs</b>: Cardinalidad que indica el número máximo de veces que debe aparecer (<span class="span_contenido">unbounded</span> es sin límite).
+                </p>
+
+                <p><u>Ejemplo</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idioma&gt;Inglés&lt;/idioma&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma" type="xs:string" default="Español"/&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="elemento-simple-validacion-dato">Elemento simple &gt; <span>Validación de un dato</span></h2>
+                <p>Con la siguiente etiqueta se permite definir un tipo de dato simple personalizado a partir de un tipo de dato primitivo o uno personalizado ya definido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;</code></pre>
+                <p>
+                    Si varios elementos o atributos van a tener las mismas restricciones se puede evitar duplicarlo definiéndolo solo una vez y asignándole un nombre personalizable.
+                    Este nombre se utilizará para definirlo como <span class="span_contenido">type=""</span> en la etiqueta o atributo:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:element name="etiqueta2" type="NombreRestriccionPersonalizada"/&gt;
+&lt;xs:attribute name="atributo1" type="NombreRestriccionPersonalizada"/&gt;
+
+&lt;!-- Puede declararse el valor personalizado antes o después de los elementos/atributos --&gt;
+&lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
+    &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+                <p class="Expl">Si se hubiera declarado a cada elemento tendríamos mucho más código siendo ineficiente y teniendo duplicidades:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+&lt;xs:element name="etiqueta2"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+&lt;xs:attribute name="atributo1"&gt;
+    &lt;xs:simpleType name="NombreRestriccionPersonalizada"&gt;
+        &lt;!-- Se permiten sub-elementos de tipo: restriction, list o union --&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:attribute&gt;
+</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-simple-lista">Elemento simple &gt; <span>Lista de elementos del mismo tipo</span></h2>
+
+                <p> Con las siguientes 2 maneras se puede definir una lista de elementos del mismo tipo - <span class="span_contenido">&lt;xs:list itemType="" /&gt;</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;xs:list itemType="xs:tipo_valor" /&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="lista-enteros" /&gt;
+&lt;xs:simpleType name="lista-enteros"&gt;
+    &lt;xs:list itemType="xs:tipo_valor" /&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+                <p class="Expl">Por ejemplo, si se indica <span class="span_contenido">itemType="xs:integer"</span>, el siguiente contenido de la etiqueta sería válido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;1 2 3 4 5 6&lt;/nombre_elemento&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-simple-restricciones">Elemento simple &gt; <span>Restricciones</span></h2>
+                <p>
+                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
+                    Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
+                    <u>Estructura</u>:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType/attribute&gt; &lt;!-- Este es el elemento simple o atributo a restringir --&gt;
+    &lt;xs:restriction base="xs:tipo_valor"&gt;
+        &lt;!-- Restricciones --&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType/attribute&gt;</code></pre>
+                <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
+                <p>ℹ️ Las restricciones se explican en apartados posteriores.</p>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-simple-union">Elemento simple &gt; <span>Unión de Tipos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:union</span> permite definir un tipo simple que acepte valores de diferentes tipos de datos.
+                </p>
+                <p><u>Ejemplo</u>: Un campo "talla" que acepta un número entero (38, 40) O una talla en letra (S, M, L).</p>
+                
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:simpleType name="tipo-talla"&gt;
+    &lt;xs:union memberTypes="xs:integer talla-letra" /&gt;
+&lt;/xs:simpleType&gt;
+
+&lt;!-- Definimos el tipo personalizado para las letras --&gt;
+&lt;xs:simpleType name="talla-letra"&gt;
+    &lt;xs:restriction base="xs:string"&gt;
+        &lt;xs:enumeration value="S"/&gt;
+        &lt;xs:enumeration value="M"/&gt;
+        &lt;xs:enumeration value="L"/&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+            </div>
+            
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <!-- ......................................................... -->
+            <div>
+                <h2 id="elemento-complejo-validacion">Elemento complejo &gt; <span>Validación</span></h2>
+                <p>A continuación se muestran 2 formas con la misma <u>estructura</u> para validar un elemento complejo, que puede contener atributos y/o sub-elementos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Aquí se definirá su contenido y atributos --&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>   
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" type="elemento_complejo_1" /&gt;
+
+&lt;xs:complexType name="elemento_complejo_1"&gt;
+    &lt;!-- Aquí se definirá su contenido y atributos --&gt;
+&lt;/xs:complexType&gt;</code></pre>   
+                <p class="Expl">
+                    No se puede usar <span class="span_contenido">default</span> en <b>element</b> si se usa <b>complexType</b>.
+                    <br>Con <b>complexType</b> definimos que es un elemento complejo.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-secuencia-orden">Elemento complejo &gt; <span>Secuencia de sub-elementos en un orden específico</span></h2>
+
+                <p>Para definir una secuencia de sub-elemento en el <u>orden especificado</u> se utiliza lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-secuencia-cualquier-orden">Elemento complejo &gt; <span>Secuencia de sub-elementos en cualquier orden</span></h2>
+
+                <p>Podemos definir una secuencia de sub-elementos en la que deban aparecer en <u>cualquier orden</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:all&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+            &lt;!-- Cada sub-elemento puede aparecer como máximo una vez (maxOccurs="1"). minOccurs solo puede ser 0 o 1. --&gt;
+        &lt;/xs:all&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-eleccion">Elemento complejo &gt; <span>Elección de sub-elementos</span></h2>
+
+                <p>Para definir una lista que valide que <u>solo 1</u> de los sub-elementos aparezcan y no todo se hace con:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:choice&gt;
+            &lt;!-- Aquí se definirá cada sub-elemento --&gt;
+        &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-contenido-simple">Elemento complejo &gt; <span>Contenido simple (Texto + Atributos + Restricciones)</span></h2>
+
+                <p>Se utiliza cuando un elemento es complejo porque tiene atributos, pero su contenido es solo texto (sin sub-elementos).
+                Para validar el valor del texto (ej: que sea un número positivo) y añadir atributos, debemos extender un <b>tipo simple personalizado</b>.</p>
+                
+                <p><u>Ejemplo</u>: Un precio que debe ser mayor o igual a 0 y tener un atributo de divisa.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- XML OBJETIVO: &lt;precio divisa="EUR"&gt;59.65&lt;/precio&gt; --&gt;
+
+&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;!-- 2. Extendemos la base personalizada para añadirle atributos --&gt;
+            &lt;xs:extension base="tipo-precio"&gt;
+                &lt;xs:attribute name="divisa" type="xs:string" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+
+&lt;!-- 1. Primero definimos la restricción del valor (texto/número) --&gt;
+&lt;xs:simpleType name="tipo-precio"&gt;
+    &lt;xs:restriction base="xs:decimal"&gt;
+        &lt;xs:minInclusive value="0" /&gt;
+    &lt;/xs:restriction&gt;
+&lt;/xs:simpleType&gt;</code></pre>
+
+                <p class="Expl">
+                    <b>simpleContent</b>: Indica que el elemento solo contiene texto/números, no etiquetas hijas.
+                    <br>
+                    <b>extension</b>: Permite tomar un tipo existente (en este caso <span class="span_contenido">tipo-precio</span>) y "extenderlo" agregándole atributos.
+                    <br>
+                    <b>Nota</b>: No se pueden poner restricciones (<span class="span_contenido">xs:minInclusive</span>) directamente dentro de una <span class="span_contenido">xs:extension</span>. Por eso se crea el <span class="span_contenido">simpleType</span> separado primero.
+                </p>
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-contenido-complejo">Elemento complejo &gt; <span>Contenido complejo (Explícito vs Abreviado)</span></h2>
+
+                <p>Se utiliza <b>complexContent</b> cuando el elemento contiene otros elementos (hijos). 
+                Formalmente, todo tipo complejo es una restricción de <span class="span_contenido">xs:anyType</span>.</p>
+
+                <p><u>Forma Formal (Explícita)</u>:</p>
+                <p class="Expl">Así es como XSD entiende internamente la estructura. Se define explícitamente la restricción:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="colores" type="lista-colores"/&gt;
+
+&lt;xs:complexType name="lista-colores"&gt;
+    &lt;xs:complexContent&gt;
+        &lt;xs:restriction base="xs:anyType"&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:complexContent&gt;
+&lt;/xs:complexType&gt;</code></pre>
+
+                <p><u>Forma Abreviada (Común)</u>:</p>
+                <p class="Expl">XSD permite omitir <span class="span_contenido">complexContent</span> y <span class="span_contenido">restriction</span> si simplemente estamos definiendo una secuencia de hijos estándar. El resultado es idéntico:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="lista-colores"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="elemento-complejo-extension">Elemento complejo &gt; <span>Extensión de tipos complejos</span></h2>
+
+                <p>Se utiliza cuando queremos <u>reutilizar un tipo complejo existente</u> y agregar nuevos elementos o atributos:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="fichero" type="tipoInformacion" /&gt;
+
+&lt;xs:complexType name="tipoInformacion"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="nombre" type="xs:string" /&gt;
+    &lt;/xs:sequence&gt;
+    &lt;xs:attribute name="formato" type="xs:string" /&gt;
+&lt;/xs:complexType&gt;
+
+&lt;xs:element name="archivo" type="tipoMasdatos" /&gt;
+
+&lt;xs:complexType name="tipoMasdatos"&gt;
+    &lt;xs:complexContent&gt;
+        &lt;xs:extension base="tipoInformacion"&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="creacion" type="xs:dateTime" /&gt;
+                &lt;xs:element name="edicion" type="xs:dateTime" /&gt;
+            &lt;/xs:sequence&gt;
+        &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+&lt;/xs:complexType&gt;</code></pre>
+
+                <p class="Expl">
+                    Aquí se crea un nuevo tipo complejo <span class="span_contenido">tipoMasdatos</span> que extiende <span class="span_contenido">tipoInformacion</span>.
+                    <br>
+                    Esto significa que <span class="span_contenido">archivo</span> hereda todo lo definido en <span class="span_contenido">tipoInformacion</span> (<span class="span_contenido">nombre</span> y <span class="span_contenido">formato</span>) y añade dos nuevos elementos: <span class="span_contenido">creacion</span> y <span class="span_contenido">edicion</span>.
+                </p>
+
+                <p>
+                    La extensión permite <u>reutilizar y ampliar definiciones existentes</u> de manera estructurada, evitando duplicar la información y manteniendo consistencia en el esquema.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="elemento-vacio">Elemento vacío</h2>
+
+                <p>Un elemento vacío, aunque no tenga contenido, sí puede tener atributos como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento atributos="" /&gt;</code></pre>
+
+                <p>Para validar un elemento vacío simplemente hay varias maneras:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento" /&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType /&gt;
+&lt;/xs:element&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:simpleType&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:maxLength value="0"/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+                <p>En el caso que el elemento sí tenga un atributo pero esté vacío se hace lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Aquí se definirán los atributos --&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="elemento-mixto">Elemento mixto &gt; <span>Cadena de carácteres con sub-elementos</span></h2>
+
+                <p>Un elemento mixto es aquel que combina carácteres con sub-elementos como en el siguiente ejemplo:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;texto &lt;elemento2&gt;texto&lt;/elemento2&gt;&lt;/nombre_elemento&gt;</code></pre>
+
+                <p>Para validarlo, simplemente hay que añadir un atributo <span class="span_contenido">mixed</span> al &lt;complexType&gt; como en el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
+    &lt;xs:complexType mixed="true"&gt;
+        &lt;xs:sequence&gt;
+            &lt;!-- Aquí se definirán los sub-elementos --&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="guia-rapida-combinaciones">Guía Rápida &gt; <span>Combinaciones de Estructura</span></h2>
+                <p>Resumen visual de las 4 combinaciones posibles de contenido y atributos.</p>
+
+                <p>No tiene contenido de texto ni hijos, pero sí atributos. <span class="span_contenido">&lt;precio divisa="EUR" /&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;!-- Al no declarar 'sequence' ni 'simpleContent', se asume vacío --&gt;
+        &lt;xs:attribute name="divisa" type="xs:string"/&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+                <p>Estructura clásica de anidación. <span class="span_contenido">&lt;precio&gt;&lt;cantidad&gt;...&lt;/divisa&gt;...&lt;/precio&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="cantidad" type="xs:decimal" /&gt;
+            &lt;xs:element name="divisa" type="xs:string" /&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+
+                <p>Combina secuencia y atributos. <span class="span_contenido">&lt;precio available="yes"&gt;&lt;cantidad&gt;...&lt;/precio&gt;</span></p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:element name="cantidad" type="xs:decimal" /&gt;
+            &lt;xs:element name="divisa" type="xs:string" /&gt;
+        &lt;/xs:sequence&gt;
+        &lt;!-- IMPORTANTE: Los atributos siempre van DESPUÉS de la secuencia --&gt;
+        &lt;xs:attribute name="available" type="xs:string" /&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="reutilizacion-grupos-elementos">Reutilización &gt; <span>Grupos de Elementos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:group</span> permite definir un conjunto de elementos comunes para reutilizarlos en varias partes del esquema sin tener que reescribirlos.
+                </p>
+                
+                <p><b>1. Definición del grupo</b> (hijo directo de schema):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:group name="datos-basicos"&gt;
+    &lt;xs:sequence&gt;
+        &lt;xs:element name="nombre" type="xs:string" /&gt;
+        &lt;xs:element name="fecha-nacimiento" type="xs:date" /&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:group&gt;</code></pre>
+
+                <p><b>2. Uso del grupo</b> (dentro de un complexType):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="datos-personales"&gt;
+    &lt;xs:sequence&gt;
+        &lt;!-- Referencia al grupo definido anteriormente --&gt;
+        &lt;xs:group ref="datos-basicos"/&gt;
+        &lt;xs:element name="telefono" type="xs:string"/&gt;
+    &lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="reutilizacion-grupos-atributos">Reutilización &gt; <span>Grupos de Atributos</span></h2>
+                <p>
+                    El elemento <span class="span_contenido">xs:attributeGroup</span> funciona igual que el anterior, pero para agrupar atributos que siempre van juntos.
+                </p>
+
+                <p><b>1. Definición del grupo</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attributeGroup name="info-archivo"&gt;
+    &lt;xs:attribute name="formato" type="xs:string"/&gt;
+    &lt;xs:attribute name="codificacion" type="xs:string"/&gt;
+&lt;/xs:attributeGroup&gt;</code></pre>
+
+                <p><b>2. Uso del grupo</b>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="tipo-documento"&gt;
+    &lt;xs:attributeGroup ref="info-archivo"/&gt;
+&lt;/xs:complexType&gt;</code></pre>
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="atributo-validacion">Atributo &gt; <span>Validación</span></h2>
+                <p>A continuación se muestra la <u>estructura</u> para validar un atributo de una etiqueta:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attribute name="etiqueta" type="xs:tipo_valor" default="valor" fixed="valor" use="required/optional/prohibited"/&gt;</code></pre>
+                <p class="Expl">
+                    <b>name</b>: Nombre del atributo a validar.
+                    <br><b>type</b>: Tipo de valor que se permite.
+                    <br><b>default</b>: Valor por defecto que solo se aplica si el atributo no aparece en el XML.
+                    <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento.
+                    <br><b>use</b>: Define la obligatoriedad del atributo: obligatorio (<span class="span_contenido">required</span>),
+                    opcional (<span class="span_contenido">optional</span>) 
+                    o que no pueda aparecer (<span class="span_contenido">prohibited</span>).
+                </p>
+                <p class="Expl">
+                    ⚠️ Una vez especificado <span class="span_contenido">use="required"</span> no se puede usar la opción <span class="span_contenido">default=""</span>.
+                </p>
+
+                <p>A continuación se muestra un <u>ejemplo</u> de la validación de un elemento y su atributo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idioma pais="España"&gt;Español&lt;/idioma&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="idioma"&gt;
+    &lt;xs:complexType&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base="xs:string"&gt;
+                &lt;xs:attribute name="pais" type="xs:string" default="España"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+&lt;/xs:element&gt;
+</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="restricciones-longitud">Restricciones de <span>longitud</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:length</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo):</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:length value="longitud"/&gt;</code></pre>
+                <p class="Expl">Si el valor supera o no llega al valor especificado dará un error al validar el documento.</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:minLength</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud mínima debe ser x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minLength value="longitud_minima"/&gt;</code></pre>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxLength</span></b>:</p>
+                <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud máxima debe ser x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxLength value="longitud_maxima"/&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="restricciones-numericas">Restricciones <span>numéricas</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:minInclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minInclusive value="numero_mínimo"/&gt;</code></pre>
+                <p class="Expl"><u>Valores válidos</u>: 12, +12, 1.2, +1.2</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxInclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo es x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxInclusive value="numero_máximo"/&gt;</code></pre>
+
+                <p>Se puede usar las restricciones <span class="span_contenido">xs:minInclusive</span> y <span class="span_contenido">xs:maxInclusive</span> acortando las posibilidades a un rango de números.</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:minExclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo permitido es mayor que x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minExclusive value="numero_antes_del_mínimo"/&gt;</code></pre>
+                <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor mínimo permitido es 11</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:maxExclusive</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo permitido es menos que x:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxExclusive value="numero_despues_del_máximo"/&gt;</code></pre>
+                <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor máximo permitido es 9</p>
+
+                <p><b>Restricción <span class="span_contenido">xs:totalDigits</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que el número puede tener hasta x dígitos, siendo x un número positivo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:totalDigits value="digitos_máximos"/&gt;</code></pre>
+
+                <p><b>Restricción <span class="span_contenido">xs:fractionDigits</span></b>:</p>
+                <p class="Expl">Partiendo de un tipo <b>xs:decimal</b> se le aplica la restricción de que el número puede tener hasta x dígitos después del punto decimal:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:fractionDigits value="digitos_decimales_máximos"/&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="restricciones-opciones">Restricciones con <span>opciones válidas</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:enumeration</span></b>:</p>
+                <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:enumeration value="valor_permitido_1"/&gt;
+&lt;xs:enumeration value="valor_permitido_2"/&gt;
+...</code></pre>
+                <p class="Expl">Si un valor no coincide con los permitidos se producirá un error al validar el documento XML.</p>
+                <p class="Expl">Se recomienda tener una lista breve para tener un documento lo más eficiente posible.</p>
+
+            </div>
+
+            <div>
+                <h2 id="restricciones-espacios">Restricciones sobre <span>espacios en blanco</span></h2>
+
+                <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
+                <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:whiteSpace value="preserve/replace/collapse"/&gt;</code></pre>
+                <p class="Expl">
+                    <b>preserve</b>: No se realizan modificaciones (mantiene todo igual).
+                </p>
+                <p class="Expl">
+                    <b>replace</b>: Sustituye todas las tabulaciones, saltos de línea y retornos de carro por <u>espacios en blanco</u>.
+                </p>
+                <p class="Expl">
+                    <b>collapse</b>: Realiza un <i>replace</i> y además elimina espacios extremos y reduce varios espacios consecutivos a un <u>único espacio en blanco</u>.
+                </p>
+            </div>
+
+            <div>
+                <h2 id="restricciones-regex">Restricciones con <span>Expresiones regulares</span></h2>
+
+                <p>
+                    Una expresión regular es una secuencia de caracteres que se utiliza para definir un patrón. 
+                    También se conocen como <b>regex</b> (regular expression).
+                </p>
+
+                <p>A continuación se muestra la <u>sintaxis</u> de como aplicar un patrón a un elemento o atributo para filtrar so contenido o valor:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:pattern value="patrón"/&gt;</code></pre>
+
+                <br>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="3"><b>Sintaxis</b> para crear expresiones regulares</td>
+                        </tr>
+                        <tr>
+                            <td>PATRÓN</td>
+                            <td><b>DESCRIPCIÓN</b></td>
+                            <td><b>VALORES VÁLIDOS</b></td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ola</code></pre></td>
+                            <td>Buscar una cadena de caracteres en un valor.</td>
+                            <td>ola, hola, volar, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">^X</code></pre></td>
+                            <td>El valor debe empezar con la cadena indicada.</td>
+                            <td>XML, XSD, XOGAR, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">$r</code></pre></td>
+                            <td>El valor debe acabar con la cadena indicada.</td>
+                            <td>Dormir, Buscar, Encontrar, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">x*</code></pre></td>
+                            <td>Un carácter coincide de 0 a n veces.</td>
+                            <td>Todos los valores que contengan o no la "x".</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">X+</code></pre></td>
+                            <td>Un carácter coincide de 1 a n veces.</td>
+                            <td>XML, XXZ, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">X?</code></pre></td>
+                            <td>Un carácter coincide 0 o 1 vez.</td>
+                            <td>XML, XSD, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">.</code></pre></td>
+                            <td>Permite cualquier carácter (excepto salto de línea).</td>
+                            <td>A, B, etc. <br>O usar <code>.*</code> para cualquier carácter sin límite.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\.</code></pre></td>
+                            <td>Buscar un carácter literal, ignorando su significado especial.</td>
+                            <td>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[aeiou]</code></pre></td>
+                            <td>Lista de caracteres que coincidan (solo uno de ellos).</td>
+                            <td>a, e, i, o, u</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[^aei]</code></pre></td>
+                            <td>Lista de caracteres que no coincidan.</td>
+                            <td>Todos los valores excepto a, e, i</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[a-z]</code></pre></td>
+                            <td>Rango de caracteres que coincidan.</td>
+                            <td>Todos los caracteres de la a a la z</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">c{1,3}</code></pre></td>
+                            <td>Un carácter puede repetirse entre min y max veces.</td>
+                            <td>c, cc, ccc</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\bhola\b</code></pre></td>
+                            <td>Coincidir palabra exacta.</td>
+                            <td>hola</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\d</code></pre></td>
+                            <td>Filtrar números del 0 al 9.</td>
+                            <td>0-9 (ej: 12, 65, etc.)</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\w</code></pre></td>
+                            <td>Filtrar cualquier carácter de palabra (letra, número, guion bajo).</td>
+                            <td>A, b, 1, _, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">\W</code></pre></td>
+                            <td>Filtrar cualquier carácter que no sea de palabra.</td>
+                            <td>!, @, espacio, etc.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">patrón1 | patrón2</code></pre></td>
+                            <td>Elegir entre 2 patrones.</td>
+                            <td>Valores que coincidan con patrón1 o patrón2</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">patrón1 (?=patrón2)</code></pre></td>
+                            <td>Busca patrón1 solo si le sigue patrón2.</td>
+                            <td>Valores que cumplan patrón1 seguido de patrón2</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="regex-herramientas">Expresiones regulares > <span>Herramientas</span></h2>
+                
+                <p>Las web <a href="https://regexr.com/" target="_blank">regexr.com</a> o <a href="https://regex101.com/" target="_blank">regex101.com</a> sirven para practicar la creación de estos patrones.</p>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+
+</html>

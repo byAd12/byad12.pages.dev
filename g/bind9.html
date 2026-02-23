@@ -1,0 +1,254 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>BIND9 - Linux; Windows DNS</title>
+        
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">BIND9</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Servidor DNS en Linux</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install bind9</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
+            </div>
+
+            <div>
+                <h2>Probar si funciona</h2>
+                <pre class="codigo" translate="no"><code class="bash">service bind9 start</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">service bind9 status</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">named-checkconf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">named-checkzone adr.es /etc/bind/db.adr.es</code></pre>
+            </div>
+           
+            <div>
+                <h2>Archivos importantes</h2>            
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td>Fichero de Configuración del servidor</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de zonas</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.local</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de zonas por defecto - root</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.default-zones</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fichero de Configuración del DNS</td>
+                            <td><span class="span_url" translate="no">/etc/bind/named.conf.options</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2>Si hay problemas en el DNS</h2>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/resolv.conf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart networking</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart NetworkManager</code></pre>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <div class="parte1">
+            <div>
+                <h2>Nslookup: <span>Windows y Linux</span><img class="SoporteComandoRemoto" src="../img/windows.png"><img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <p>Sirve para comprobar la configuración DNS de un dominio o IP según un registro específico.</p>
+                <p>Servidores DNS del dominio:</p>
+                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+> set type=NS
+> adr.es</code></pre>
+                <p>Servidores de correo:</p>
+                <pre class="codigo" translate="no"><code class="console">> 192.168.1.100
+> set type=MX
+> ibm.com</code></pre>
+                <p>Nombres asociados a una IPv4:</p>
+                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+> set type=A
+> asml.com</code></pre>
+            </div>
+            <div>
+                <h2>Configurar DNS como Reenviador:<br><span translate="no">/etc/bind/named.conf.local</span></h2>
+                <pre class="codigo" translate="no"><code class="nginx">options {
+directory "/var/cache/bind";
+
+forwarders {
+192.168.8.1;
+};
+
+dnssec-validation no;
+auth-nxdomain no;    # conform to RFC1035
+
+listen-on { any; };
+// listen-on-v6 { any; };
+};</code></pre>
+                <p class="Expl"><b>192.168.8.1</b>: IPv4 del dispositivo al que reenviar las peticiones.</p>
+            </div>
+        </div>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2><span>Ejemplo 1:</span> Crear una zona</h2>
+                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
+type master;
+file "/etc/bind/db.adr.es";
+};</code></pre>
+                <p><span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
+adr.es. IN      SOA     dns1.adr.es.    administrador.adr.es    (
+    1               ; N* de serie
+    604800          ; Intervalo de actualización
+    86400           ; Intervalo de reintento
+    2419200         ; Expiración
+    604800  )       ; TTL
+
+adr.es. IN      NS      dns1.adr.es.
+dns1    IN      A       192.168.0.230
+www     IN      A       192.168.0.153
+correo  IN      A       192.168.0.4
+adr.es. IN      MX      1       correo
+otra    IN      CNAME   iesjorgeguillen.es</code></pre>
+                <p>Comprobar con nslookup:</p>
+                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+> set type=NS
+> adr.es</code></pre>
+            </div>
+            <!-- ......................................................... -->
+            <div>
+                <h2><span>Ejemplo 2:</span> Crear una zona inversa</h2>
+                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">zone "0.168.192.in-addr.arpa"{
+type master;
+file "/etc/bind/db.192.168.0";
+};</code></pre>
+                <p><span class="span_url" translate="no">/etc/bind/db.192.168.0</span>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
+0.168.192.in-addr.arpa. IN      SOA     dns1.adr.es.    administrador.adr.es.   (
+        1
+        604800
+        86400
+        2419200
+        10800   )
+
+0.168.192.in-addr.arpa. IN      NS      dns1.adr.es.
+
+230     IN      PTR     dns1.adr.es.
+153     IN      PTR     www.adr.es.</code></pre>
+                <p>Comprobar con nslookup:</p>
+                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+> set type=PTR
+> 230.0.168.192.in-addr.arpa.</code></pre>
+            </div>
+            <!-- ......................................................... -->
+        </div>
+        <hr>
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <!-- ......................................................... -->
+            <div>
+                <h2><span>Ejemplo 3:</span> Crear DNS secundario</h2>
+                <p>En el servidor <b>DNS1</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
+                <pre class="codigo" translate="no"><code class="bash">listen-on {192.168.0.226;}; // La IP de dns2
+allow-transfer {192.168.0.226;}; // La IP de dns2
+allow-query {192.168.0.226;}; // La IP de dns2</code></pre>
+                <p>Ahora añadiremos lo siguiente en el fichero <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">dns2	IN	A	192.168.0.226</code></pre>
+                <p>En el servidor <b>DNS2</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
+                <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
+type slave;
+masters{192.168.0.226;}; // IP de DNS1
+file "/etc/bind/db.jonis.net";
+};</code></pre>
+            </div>
+            <!-- ......................................................... -->
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>DNS</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Configuración en <b>Windows</b></h2>
+        <hr class="SeparadorConTitulo">
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Configurar</h2>
+
+                <p>Pasos:</p>
+                <br>
+                <ol>
+                    <li>Poner IP Estática</li>
+                    <li>Administrador del Servidor > Agregar rol servidor DNS > Instalar</li>
+                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP de un servidor DNS el cual será reenviador (ej: <span class="span_url" translate="no">192.168.8.1</span>)</li>
+                </ol>
+                <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro <b>NS</b>.</p>
+                
+                <p>Para configurar registros <b>A</b>:</p>
+                <p class="Expl">Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Zonas de Búsqueda directa > Click derecho > Registro <b>A</b></p>
+
+                <p>Para configurar registros <b>MX</b>:</p>
+                <p class="Expl">Lo mismo que al crear registros <b>A</b> pero no se debe poner nombre al registro.</p>
+
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

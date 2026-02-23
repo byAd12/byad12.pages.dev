@@ -1,0 +1,553 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>XML - Extensible Markup Language</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">XML</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Extensible Markup Language</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Ejemplo</h2>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?>
+&lt;!DOCTYPE clase SYSTEM "validacion.dtd">
+&lt;clase asignatura="FOL" curso="2025">
+
+    &lt;alumnos&gt;
+
+        &lt;!-- ALUMNO 1 --&gt;
+        &lt;alumno genero="hombre"&gt;
+            &lt;nombre>PEPITO &lt;apellido&gt;GRILLO&lt;/apellido&gt;&lt;/nombre&gt;
+            &lt;nota examen="1">9.8&lt;/nota&gt;
+            &lt;nota examen="2">7.2&lt;/nota&gt;
+            &lt;actividades hechas="si" dia="18" mes="10"/&gt;
+        &lt;/alumno&gt;
+
+        &lt;!-- ALUMNO 2 --&gt;
+        &lt;alumno genero="mujer"&gt;
+            &lt;nombre>PEPA &lt;apellido&gt;POMBO&lt;/apellido&gt;&lt;/nombre&gt;
+            &lt;nota examen="1">4.2&lt;/nota&gt;
+            &lt;nota examen="2">5.5&lt;/nota&gt;
+            &lt;actividades hechas="no" dia="0" mes="0"/&gt;
+        &lt;/alumno&gt;
+    
+    &lt;/alumnos&gt;
+
+&lt;/clase&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Estructura XML</h2>
+
+                <p>Hay 2 partes en un documento XML:</p>
+
+                <p class="Expl"><b>DOCUMENT PROLOG</b> (Opcional): Siempre va en la parte superior del documento, antes del elemento raíz. Contiene las declaraciones de XML y tipos de documentos.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?>
+&lt;!DOCTYPE clase SYSTEM "validacion.dtd"></code></pre>
+                
+                <p class="Expl"><b>DOCUMENT ELEMENTS</b>: Empieza en el elemento raíz (root) y acaba en la última línea del documento.</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;clase asignatura="FOL" curso="2025">
+    ...
+&lt;/clase></code></pre>
+
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Comentarios</span></b>:
+                    <br>XML permite poner comentarios en todo el código menos dentro de etiquetas y atributos, sintaxis:
+                </p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- MENSAJE --&gt;</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Reglas &gt; Básico</h2>
+
+                <p>
+                    <b>Solo un elemento <span style="color: rgb(147, 147, 206) !important;">raíz</span></b>: 
+                    <br>
+                    Solo se puede tener un elemento raíz y en este se puede englobar el resto de las etiquetas.
+                </p>
+                <p>
+                    <b><span style="color: rgb(147, 147, 206) !important;">Cerrar</span> cada etiqueta</b>: 
+                    <br>
+                    Cada etiqueta, aunque no tenga contenido, debe ser cerrada.
+                </p>
+                <p>
+                    <b>Respetar el <span style="color: rgb(147, 147, 206) !important;">órden</span></b>: 
+                    <br>
+                    Para cerrar una etiqueta que anide a otras, las etiquetas anidades deben ser cerradas antes.
+                </p>
+                <p>
+                    <b>Respetar <span style="color: rgb(147, 147, 206) !important;">mayúsculas</span></b>: 
+                    <br>
+                    Las etiquetas de apertura y cierre deben contener el mismo nombre respetando las mayúsculas y minúsculas.
+                </p>
+            </div>
+
+            <div>
+                <h2>Reglas &gt; Atomicidad de los datos</h2>
+
+                <p>Cada etiqueta de XML sirve para guardar un valor, no está pensado para agrupar varios valores en una sola etiqueta como una dirección de una casa o como el siguiente ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt;Español, Gallego&lt;/idiomas&gt;</code></pre>
+
+                <p>Para solucionar lo anterior se debería de separar cada valor en etiquetas diferentes:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt; 
+    &lt;idioma&gt;Español&lt;/idioma&gt;
+    &lt;idioma&gt;Gallego&lt;/idioma&gt;
+&lt;/idiomas&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2>Reglas &gt; Uso de TAG o atributo</h2>
+
+                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">ATRIBUTO</b> cuando el contenido no es atómico y estructurado y además es simple. <u>Ejemplos</u>: ID, DNI, tipo, unidad.</p>
+                <p>Se usa un <b style="color: rgb(147, 147, 206) !important;">TAG</b> cuando el contenido es atómico y estructurado y además se puede dividir en sub-componentes. <u>Ejemplo</u>: La dirección de una casa.</p>
+            </div>
+
+            <div>
+                <h2>Reglas &gt; Espacios en blanco</h2>
+
+                <p>En el contenido de una etiqueta o un atributo, cuando hay más de un espacio seguido o un salto de línea, todos se omiten y solo se interpreta uno como en el siguiente caso:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;texto      atr="hello      world"&gt;Hello      World&lt;/texto&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;texto atr="hello world"&gt;Hello World&lt;/texto&gt;</code></pre>
+
+                <p>También si no ponemos ningún salto de línea en este caso se interpretará como en el segundo cuadro de código:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt;&lt;idioma&gt;Español&lt;/idioma&gt;&lt;idioma&gt;Gallego&lt;/idioma&gt;&lt;/idiomas&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt; 
+    &lt;idioma&gt;Español&lt;/idioma&gt;
+    &lt;idioma&gt;Gallego&lt;/idioma&gt;
+&lt;/idiomas&gt;</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Declaración</h2>
+
+                <p>Es recomendable empezar siempre con una "DECLARACIÓN" en la primera línea del documento. Siempre debe estar en el siguiente orden aunque también se puede definir solo <span class="span_contenido" translate="no">version</span>.</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;</code></pre>
+
+
+                <p class="Expl"><b>version</b>: La versión a trabajar con XML.
+                    <br>
+                    <b>encoding</b>: Decodificación de carácteres a usar en el documento (<a href="https://es.wikipedia.org/wiki/Codificaci%C3%B3n_de_caracteres" target="_blank">estándares</a>).
+                    <br>
+                    <b>standalone</b>: Indica si el documento depende de información en una fuente externa. Los valores son <span class="span_contenido" translate="no">yes</span> o <span class="span_contenido" translate="no">no</span>.
+                </p>
+            
+            </div>
+
+            <div>
+                <h2>Instrucciones</h2>
+
+                <p>Se pueden usar instrucciones para definir como las aplicaciones deben de procesar el documento. Formato:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?target instrucción?&gt;</code></pre>
+
+                <p>Ejemplo de instrucción para aplicar estilos en un navegador:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml-stylesheet href="./estilos.css" type="text/css"?&gt;</code></pre>
+
+                <p class="Expl">
+                    <b>xml-stylesheet</b>: Es el target/objetivo.
+                    <br>
+                    <b>href</b> y <b>type</b>: Son las instrucciones.
+                </p>
+            
+            </div>
+
+        </div>
+        <hr>
+        <div class="parte1">
+
+            <div>
+                <h2>TAG</h2>
+
+                <p>Siempre se empieza con un <b>único</b> tag raíz, donde se engloban los diferentes tags. Puede estar anidado por varios tags (uno dentro de otro).</p>
+                
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Contenido y cierre</span></b>:</p>
+
+                <p><b>TAGs</b>: Cada etiqueta/tag se pone entre los símbolos <span class="span_contenido" translate="no">&lt;tag&gt;</span> y necesitan un cierre <span class="span_contenido" translate="no">&lt;/tag&gt;</span> ("tag" puede ser un nombre personalizado. Es sensible a mayúsculas).</p>
+                <p>Entre los 2 tags va en <b>CONTENIDO</b>.</p>
+                <p>Si un tag no va a tener contenido se puede poner simplemente <span class="span_contenido" translate="no">&lt;tag/&gt;</span>.</p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Espacios en el nombre de un tag</span></b>:</p>
+
+                <p>
+                    Dentro de un <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;</span> los espacios son insignificantes (excepto antes de crear y cerrar el tag como <span class="span_error" translate="no">&lt; tag</span> o <span class="span_error" translate="no">&lt;/ tag</span>). 
+                    En el contenido del tag los espacios no importan.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Reglas en el nombre de un tag</span></b>:</p>
+
+                <p>
+                    <b>Comienzo</b>: 
+                        Se permite empezar el nombre de un tag solo con <span class="span_contenido" translate="no">_</span> o una letra. 
+                </p>
+                <p>
+                    <b>Contener</b>: 
+                        El nombre del tag puede contener: <span class="span_contenido" translate="no">_</span>, <span class="span_url" translate="no">-</span>, <span class="span_url" translate="no">.</span> y números, aunque no se recomienda usar los marcados en verde ni carácteres <u>no</u> ingleses.
+                </p>
+                <p>
+                    <b>Prohibido</b>: 
+                        Un nombre de una tag no puede contener <span class="span_error" translate="no">:</span> ya que se utiliza para definir espacio de nombres.
+                        Tampoco se permite empezar el nombre de un tag con la cadena <span class="span_error" translate="no">xml</span> ni sus variantes como <span class="span_error" translate="no">xML</span>, <span class="span_error" translate="no">xMl</span>, etc.
+                </p>
+
+                <p><b><span style="color: rgb(147, 147, 206) !important;">Reglas del contenido de un tag</span></b>:</p>
+
+                <p>
+                    Entre el tag de comienzo y cierre no se pueden usar los siguientes carácteres: <span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> ni <span class="span_error" translate="no">&quot;</span> 
+                    al ser carácteres reservados que XML puede malinterpretar. Para poder usarlos hay que usar referencias o una etiqueta CDATA (explicado más adelante).
+                </p>
+
+            </div>
+
+            <div>
+                <h2>TAG &gt; Referencias</h2>
+
+                <p>
+                    Dentro del <b>contenido</b> se pueden usar referencias que sirve para poner texto adicional en el contenido de un tag.
+                </p>
+                <p>
+                    Siempre empiezan con <span class="span_contenido" translate="no">&amp;</span> y acaba con <span class="span_contenido" translate="no">;</span>.
+                </p>
+                <p>
+                    Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser carácteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
+                </p>
+
+                <p>
+                    También se puede hacer en con un <u>identificador hexadecimal</u> como: <span class="span_contenido" translate="no">&#x<span></span>00;</span>, o con <u>referencias predefinidas</u>.
+                </p>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="4"><b>Referencias</b></td>
+                        </tr>
+                        <tr>
+                            <td>SÍMBOLO</td>
+                            <td><b>DECIMAL</b></td>
+                            <td><b>HEXADECIMAL</b></td>
+                            <td><b>PREDEFINIDAS</b></td>
+                        </tr>
+                        <tr>
+                            <td>&#x3C;</td>
+                            <td><SPAN class="span_contenido"><span>&#<span></span>60;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&x<span></span>3C;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&<span></span>lt;</span></SPAN></td>
+                        </tr>
+                        <tr>
+                            <td>&#x3E;</td>
+                            <td><SPAN class="span_contenido"><span>&#<span></span>62;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&x<span></span>3E;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&<span></span>gt;</span></SPAN></td>
+                        </tr>
+                        <tr>
+                            <td>&#x26;</td>
+                            <td><SPAN class="span_contenido"><span>&#<span></span>38;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&x<span></span>26;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&<span></span>amp;</span></SPAN></td>
+                        </tr>
+                        <tr>
+                            <td>&#x27;</td>
+                            <td><SPAN class="span_contenido"><span>&#<span></span>39;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&x<span></span>27;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&<span></span>apos;</span></SPAN></td>
+                        </tr>
+                        <tr>
+                            <td>&#x22;</td>
+                            <td><SPAN class="span_contenido"><span>&#<span></span>34;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&x<span></span>22;</span></SPAN></td>
+                            <td><SPAN class="span_contenido"><span>&<span></span>quot;</span></SPAN></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2>TAG &gt; CDATA</h2>
+
+                <p>
+                    Otra manera para poder usar los caracteres (<span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> y <span class="span_error" translate="no">&quot;</span> )
+                    sin tener que usar referencias es usar una etiqueta específica llamada CDATA que permite usarlos explícitamente sin que el documento XML lo interprete como carácteres reservados.
+                </p>
+                <p>
+                    Esta etiqueta CDATA no se puede anidar dentro de otra etiqueta CDATA. Tampoco se puede poner en su contenido la cadena <span class="span_contenido" translate="no">]]&gt;</span> ya que esto se usa solo para cerrar la etiqueta CDATA.
+                </p>
+                <p>
+                    <u>Formato</u>:
+                </p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;![CDATA[
+CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
+]]&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>TAG &gt; Atributos</h2>
+
+                <p>Cumplen las mismas reglas que los TAGs en cuestión de como se puede nombrar.</p>
+
+                <p>Cada tag puede tener varios atributos con un valor siempre entre comillas. <u>Formato</u>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;tag Atributo1="Valor" Atributo2="Valor" /&gt;</code></pre>
+
+                <p class="Expl">Siempre debe estar dentro de la parte del tag que abre el contenido <span class="span_contenido" translate="no">&lt;tag (AQUÍ)&gt;&lt;/tag&gt;</span>. Es sensible a mayúsculas.</p>
+
+                <p>Si un atributo no tiene valor se puede dejar las comillas sin contenido dentro:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;tag Atributo1="" /&gt;</code></pre>
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            
+            <div>
+                <h2>Espacio de nombres &gt; Problema</h2>
+
+                <p>
+                    Si por ejemplo queremos juntar 2 documentos XML en uno solo y hay 2 etiquetas raíz que tienen el mismo nombre 
+                    se puede usar un espacio de nombres (namespace) para diferenciar elementos que tengan el mismo nombre, asociándolos a un URI único. 
+                    Ejemplo:
+                </p>
+                <p>Estos son los documentos XML a juntar:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- visitantes.xml --&gt;
+&lt;usuarios&gt;
+    &lt;usuario dni=""/&gt;
+&lt;/usuarios&gt;</code></pre>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!-- clientes.xml --&gt;
+&lt;usuarios&gt;
+    &lt;usuario dni=""/&gt;
+&lt;/usuarios&gt;</code></pre>
+
+                <p>Al juntarlos sin namespaces, no se puede distinguir a qué documento pertenece cada elemento:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;raiz&gt;
+    &lt;usuarios&gt; &lt;!-- visitantes.xml --&gt;
+        &lt;usuario dni=""/&gt;
+    &lt;/usuarios&gt;
+
+    &lt;usuarios&gt; &lt;!-- clientes.xml --&gt;
+        &lt;usuario dni=""/&gt;
+     &lt;/usuarios&gt;
+&lt;/raiz&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Espacio de nombres &gt; Solución</h2>
+
+                <p>Para solucionar lo anterior seguiremos los siguientes pasos:</p>
+
+                <p>1. Declaramos en el elemento raíz o en la propia etiqueta "usuarios" un nombre personalizado (prefijo) para cada documento usando <span class="span_contenido">xmlns</span>:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;raiz 
+    xmlns:visitantes="https://byad12.pages.dev/visitantes.xml" 
+    xmlns:clientes="https://byad12.pages.dev/clientes.xml"
+&gt;</code></pre>
+                <p class="Expl">La URL identifica de forma única el vocabulario de cada documento; no necesariamente apunta al archivo real.</p>
+
+                <p>2. Modificamos los elementos para incluir el prefijo del namespace: <span class="span_contenido">(Prefijo_xmlns):(Nombre_tag)</span> formando así un <b>nombre cualificado</b>. También aplicamos el prefijo a los sub-elementos:</p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;visitantes:usuarios&gt;
+    &lt;visitantes:usuario dni=""/&gt;
+&lt;/visitantes:usuarios&gt;</code></pre>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;clientes:usuarios&gt;
+    &lt;clientes:usuario dni=""/&gt;
+&lt;/clientes:usuarios&gt;</code></pre>
+
+                <p>Ejemplo completo con todos los cambios:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;raiz 
+    xmlns:visitantes="https://byad12.pages.dev/visitantes.xml" 
+    xmlns:clientes="https://byad12.pages.dev/clientes.xml"
+&gt;
+    &lt;visitantes:usuarios&gt;
+        &lt;visitantes:usuario dni=""/&gt;
+    &lt;/visitantes:usuarios&gt;
+
+    &lt;clientes:usuarios&gt;
+        &lt;clientes:usuario dni=""/&gt;
+     &lt;/clientes:usuarios&gt;
+&lt;/raiz&gt;</code></pre>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2>DTD &gt; Declaración externa (local)</h2>
+
+                <p>
+                    DTD (<b>Document Type Declaration</b>) es un documento de texto plano que sirve para verificar la validez de la estructura del documento XML y de su contenido mediante unas reglas.
+                    Estas reglas definen el jerarquía y orden, tipo de contenido, atributos asociados y la integridad de los elementos.
+                </p>
+
+                <p>Si las declaraciones DTD están guardadas en un documento distinto al documento XML se puede enlazar mediante <span class="span_contenido">SYSTEM</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd"&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>DTD &gt; Declaración externa (pública)</h2>
+
+                <p>El documento DTD también puede estar alojado y ser accesible desde internet, para ello se enlaza al documento XML mediante <span class="span_contenido">PUBLIC</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
+
+                <p class="Expl">La primera parte en comillas es el identificador único público para saber que versión usar.<br>La segunda parte es la URL al archivo.</p>
+
+            </div>
+
+            <div>
+                <h2>DTD &gt; Declaración interna</h2>
+
+                <p>Se puede colocar las declaraciones dentro del mismo documento XML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz [
+    declaración1
+    declaración2
+    ...
+]&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>DTD &gt; Declaración mixta</h2>
+
+                <p>Se puede usar declaraciones internas y externas en el mismo <span class="span_contenido">DOCTYPE</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd" [
+    declaración1
+    declaración2
+    ...
+]&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>DTD &gt; Guía</h2>
+
+                <p>Puedes ver como validar un documento XML usando DTD en la siguiente <a href="dtd.html">guía</a>.</p>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Vincular un documento XSD a uno XML</h2>
+                <p>En el elemento raíz del documento XML se añadirán los siguientes atributos:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;elemento_raiz 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="ruta_documento.xsd"
+&gt;
+    ...
+&lt;/elemento_raiz&gt;</code></pre>
+                <p class="Expl">
+                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                </p>
+                <p class="Expl">
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                </p>
+
+            </div>
+
+
+            <div>
+                <h2>XSD &gt; Guía</h2>
+
+                <p>Puedes ver como validar un documento XML usando XSD en la siguiente <a href="xsd.html">guía</a>.</p>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

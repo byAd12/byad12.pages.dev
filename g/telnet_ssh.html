@@ -1,0 +1,135 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Ruth
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>Servicios Remotos - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">TELNET</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Teletype Network</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación y configuración</h2>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 23</code></pre>
+            </div>
+
+            <div>
+                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" src="../img/linux.png"> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+
+                <pre class="codigo" translate="no"><code class="bash">telnet [IP] (PUERTO)</code></pre>
+                <p class="Expl">Pide usuario y contraseña. NO viajan cifrados y pueden ser interceptados.</p>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">SSH</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Secure Shell</h2>
+        <br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Configuración <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+                <pre class="codigo" translate="no"><code class="bash">apt install openssh-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 22</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status ssh</code></pre>
+            </div>
+
+            <div>
+                <h2>Configuración <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+                <pre class="codigo" translate="no"><code class="bash">Start-Service sshd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
+                <p class="Expl">Habilitar el puerto 22 en el firewall en reglas de entrada y salida.</p>
+            </div>
+
+            <div>
+                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" src="../img/linux.png"> <img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
+
+                <pre class="codigo" translate="no"><code class="bash">ssh (USER)@[IP]</code></pre>
+                <p class="Expl">Pide usuario y contraseña. SI viajan cifrados y NO pueden ser interceptados.</p>
+            </div>
+        </div>
+
+        <div class="parte1">
+            <div>
+                <h2>Redireccionar HTTP por un socket al servidor <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+
+                <p>1. Editar el archivo <span class="span_url">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
+                <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
+GatewayPorts yes</code></pre>
+                <p>2. En el servidor reiniciar el servicio SSH:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
+                <p>3. Crear un socker por el que transmitir la información:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (USER)@[IP]</code></pre>
+                <p>4. En el navegador del cliente configurar la red a "Configuración manual de proxy", configurando un socker con la ip <span class="span_contenido">127.0.0.1</span> y el puerto <span class="span_contenido">2021</span> asignado.</p>
+            </div>
+
+            <div>
+                <h2>Abrir la GUI de un programa del servidor en el cliente <img class="SoporteComandoRemoto" src="../img/linux.png"></h2>
+
+                <p>1. Editar el archivo <span class="span_url">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
+                <pre class="codigo" translate="no"><code class="bash">X11Forwarding yes</code></pre>
+                <p>2. En el servidor reiniciar el servicio SSH:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
+                <p>3. Conectarse con X11 al servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -X (USER)@[IP]</code></pre>
+                <p>4. Abrir un programa mediante comandos.</p>
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>TLOU</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" type="text/css" href="resources/tlou.css">
+    </head>
+    <body>
+        <video autoplay muted loop>
+            <source src="../img/models/boat-on-the-shore-the-last-of-us2.960x540.mp4" type="video/mp4">
+        </video>
+
+        <div class="botones">
+            <a>HISTORIA</a>
+            <a>SIN RETORNO</a>
+            <a>OPCIONES</a>
+            <a>EXTRA</a>
+            <a>CÓMO SE HIZO</a>
+
+            <span class="espaciador"></span>
+
+            <a>SALIR AL ESCRITORIO</a>
+
+            <span class="espaciador"></span>
+        </div>
+    </body>
+
+    <style>
+        /* *, html, video, a, body{padding: 0; margin: 0; cursor: url('data:image/png;base64,PUT_YOUR_BASE64_ENCODED_IMAGE_HERE'), auto;} */
+        @font-face{font-family: "DIN"; src: url("../fonts/DIN_2014_Demi.otf");}
+
+        body{display: flex; align-items: center;}
+        html, body{height: 100%; margin: 0;}
+
+        video{position: absolute; top: 0; left: 0; width: 100vw; width: 100vw; height: 100vh; z-index: -5; object-fit: cover;}   
+
+        .botones{display: flex; flex-direction: column; justify-content: center; margin-left: 40px;}
+        .botones a{color: #787C80; user-select: none; font-family: "DIN"; display: block; width: fit-content; text-shadow: .5px .5px 1px black, -.5px -.5px 1px black; font-size: 25px; margin: 0 0 5px 40px; padding: 10px; transition: all .5s, color .2s; border: 2px solid rgba(255, 255, 255, 0);}
+        .botones a:hover{color: white; border: 2px solid white;}
+        .botones .espaciador{margin-top: 20%;}
+    </style>
+</html>
