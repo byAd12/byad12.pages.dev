@@ -22,7 +22,7 @@
 /* =================================================== */
 /* Scrollbar */
 
-::-webkit-scrollbar{background-color: #222523; height: 5px; width: 2px;}
+::-webkit-scrollbar{background-color: #222523; height: 5px; width: 3px;}
 ::-webkit-scrollbar-thumb{background-color: gray; border-radius: 20px;}
 
 /* =================================================== */
@@ -208,6 +208,8 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: 95% !important;}
     table{width: 100% !important; max-width: 100% !important; table-layout: fixed; word-wrap: break-word; page-break-inside: auto;}
+    .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
+    .BotonPersonalizadoDIV .BotonFlecha{border: 2px solid #8b9dc3 !important;}
 }
 
 /* =================================================== */

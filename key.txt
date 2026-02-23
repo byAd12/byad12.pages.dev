@@ -1,7 +1,6 @@
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v2.4.7
 Comment: Author: byad12.pages.dev
-Comment: Send encrypted messages to: adgimenezp@gmail.com
 
 mQINBGk8UHgBEADuzuIm1ZeYhvxUpyL5s8KJ/q548RfkPZAQvj4N1KvEEsYuVmkO
 3P/WY1S+G4rvPwBntg53thjPvP0aVsgf4woI8T4mJAUjtSkGLCaltRX4/VpRq4oY

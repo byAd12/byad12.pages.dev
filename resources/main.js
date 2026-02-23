@@ -157,3 +157,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ==========================================================
 // ==========================================================
+// Insertar e-mail en los enlaces
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    const binaryString = atob('YWRnaW1lbmV6cEBnbWFpbC5jb20=');
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+    }
+    const decoder = new TextDecoder();
+    
+    document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);
+
+});
+
+// ==========================================================
+// ==========================================================
