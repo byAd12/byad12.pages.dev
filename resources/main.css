@@ -274,8 +274,9 @@ footer::before{content: ""; position: absolute; top: 0; left: 50px; right: 50px;
 .footer-left h3 span{color: #7cfb2d; font-family: "Smoch";}
 .footer-links ul{list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;}
 
-
 .footer-left p *{vertical-align: middle;}
+
+.footer-left .footer-widgets{display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 5px;}
 
 .footer-links ul li a{color: white;} 
 .footer-links ul li a.actual{color: #7cfb2d;} 
