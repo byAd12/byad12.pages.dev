@@ -192,7 +192,7 @@ p a::selection{text-decoration: underline;}
 .BlogEntradas .Color1:hover div p{color: transparent !important; position: relative;}
 .BlogEntradas .Color2:hover div p{color: transparent !important; position: relative;}
 
-.BlogEntradas a .Color0:hover div p::after{content: "Redes"; position: absolute; right: 0; top: 0; color: gray !important;}
+.BlogEntradas a .Color0:hover div p::after{content: "Otros"; position: absolute; right: 0; top: 0; color: gray !important;}
 .BlogEntradas a .Color1:hover div p::after{content: "S.M.R."; position: absolute; right: 0; top: 0; color: rgb(120, 120, 200) !important;}
 .BlogEntradas a .Color2:hover div p::after{content: "A.S.I.R."; position: absolute; right: 0; top: 0; color: rgba(167, 255, 112, 0.5) !important;}
 
@@ -206,6 +206,8 @@ p a::selection{text-decoration: underline;}
 
 .LinkEntrada::before{content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 3px; background: #222523; z-index: 10;}
 .LinkEntrada:hover::before{animation: bordeAnim 0.8s forwards;}
+
+.oculto{display: none !important;}
 
 @keyframes bordeAnim{0%{left:-100%;} 50%{left:0;} 100%{left:100%;}}
 

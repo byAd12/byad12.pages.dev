@@ -65,50 +65,89 @@ document.addEventListener('DOMContentLoaded', anadir_texto_gpg);
 
 function editar_SMR() {
     const links = document.querySelectorAll('.BlogEntradas > a');
+    const boton = document.getElementById("editar_SMR");
+
+    let algunoVisible = false;
 
     links.forEach(link => {
         const entradaDiv = link.querySelector('.Entrada');
-        if (entradaDiv && entradaDiv.classList.contains('Color1')) {
-            const currentDisplay = window.getComputedStyle(link).display;
-            if (currentDisplay === 'none') {
-                link.style.display = 'block';
-            } else {
-                link.style.display = 'none';
-            }
+        if (!entradaDiv || !entradaDiv.classList.contains('Color1')) return;
+
+        // Alternar la clase oculto
+        link.classList.toggle('oculto');
+
+        // Revisar si quedó visible
+        if (!link.classList.contains('oculto')) {
+            algunoVisible = true;
         }
     });
+
+    // Actualizar estilo del botón
+    if (algunoVisible) {
+        boton.style.textDecoration = "none";
+        boton.style.color = "white";
+    } else {
+        boton.style.textDecoration = "line-through";
+        boton.style.color = "rgb(228, 196, 196)";
+    }
 }
 
 function editar_ASIR() {
     const links = document.querySelectorAll('.BlogEntradas > a');
+    const boton = document.getElementById("editar_ASIR");
+
+    let algunoVisible = false;
 
     links.forEach(link => {
         const entradaDiv = link.querySelector('.Entrada');
-        if (entradaDiv && entradaDiv.classList.contains('Color2')) {
-            const currentDisplay = window.getComputedStyle(link).display;
-            if (currentDisplay === 'none') {
-                link.style.display = 'block';
-            } else {
-                link.style.display = 'none';
-            }
+        if (!entradaDiv || !entradaDiv.classList.contains('Color2')) return;
+
+        // Alternar la clase oculto
+        link.classList.toggle('oculto');
+
+        // Revisar si quedó visible
+        if (!link.classList.contains('oculto')) {
+            algunoVisible = true;
         }
     });
+
+    // Actualizar estilo del botón
+    if (algunoVisible) {
+        boton.style.textDecoration = "none";
+        boton.style.color = "white";
+    } else {
+        boton.style.textDecoration = "line-through";
+        boton.style.color = "rgb(228, 196, 196)";
+    }
 }
 
 function editar_personal() {
     const links = document.querySelectorAll('.BlogEntradas > a');
+    const boton = document.getElementById("editar_personal");
+
+    let algunoVisible = false;
 
     links.forEach(link => {
         const entradaDiv = link.querySelector('.Entrada');
-        if (entradaDiv && entradaDiv.classList.contains('Color0')) {
-            const currentDisplay = window.getComputedStyle(link).display;
-            if (currentDisplay === 'none') {
-                link.style.display = 'block';
-            } else {
-                link.style.display = 'none';
-            }
+        if (!entradaDiv || !entradaDiv.classList.contains('Color0')) return;
+
+        // Alternar la clase oculto
+        link.classList.toggle('oculto');
+
+        // Revisar si quedó visible
+        if (!link.classList.contains('oculto')) {
+            algunoVisible = true;
         }
     });
+
+    // Actualizar estilo del botón
+    if (algunoVisible) {
+        boton.style.textDecoration = "none";
+        boton.style.color = "white";
+    } else {
+        boton.style.textDecoration = "line-through";
+        boton.style.color = "rgb(228, 196, 196)";
+    }
 }
 
 // ==========================================================
