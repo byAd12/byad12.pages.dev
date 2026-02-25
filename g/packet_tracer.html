@@ -556,10 +556,8 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             <div>
                 <h2 id="Gateway">Default Gateway (Switch)</h2>
 
-                <p>Poner la IP de la puerta de enlace predeterminada a una interfaz:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip default-gateway &lt;IpGateway&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+                <p>Para poner la IP del gateway por defecto hay que ponerlo en la configuración global:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip default-gateway &lt;IpGateway&gt;</code></pre>
             </div>
 
             <div>
@@ -579,7 +577,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <p>Desactivar la búsqueda de DNS:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# no ip domain-lookup</code></pre>
 
-                <p>Para asignar un servidor DNS a un switch o router:</p>
+                <p>Para asignar un servidor DNS a un switch o router hay que ponerlo en la configuración global:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip name-server &lt;IP_Servidor_DNS&gt;</code></pre>
             
             </div>
@@ -1983,4 +1981,5 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     </body>
 
 </html>
+
 
