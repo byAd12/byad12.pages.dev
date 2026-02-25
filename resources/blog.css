@@ -43,7 +43,7 @@ p, td, li{line-height: 1.7em;}
 p, li{color: #d0d0d0 !important;}
 p.Expl b, span.Expl, td b{color: #8b9dc3;}
 
-p::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection, table td::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
+p::selection, p a::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection, table td::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
 
 /* =================================================== */
 /* Títulos */
@@ -319,5 +319,6 @@ img.SQLImagenJoin:hover{filter: invert(1);}
 .tabla_cmd_html tr td:not(.opcion){padding: 10px 0 50px 10px;}
 
 .tabla_cmd_html pre{width: 100% !important; height: min-content !important;}
+
 
 /* =================================================== */
