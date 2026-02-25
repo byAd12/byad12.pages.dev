@@ -541,6 +541,9 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IPv4&gt; &lt;Máscara&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+                <p class="Expl">
+                    <u>Nota</u>: Hay que recordar poner la configuración del <a href="#Gateway">default-gateway</a> y <a href="#DNS">name-server</a>.
+                </p>
 
                 <p>O además una IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
@@ -1354,6 +1357,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     Esto bloqueará la interfaz si le llega un mensaje STP.
                     Es <u>importante</u> ponerlo solo en interfaces donde solo haya un PC o servidor conectado.
                 </p>
+                <p class="Expl">
+                    <u>Nota</u>: Es recomendable ponerlo junto a portfast.
+                </p>
 
             </div>
 
@@ -1623,6 +1629,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <br>
                     <b>Prioridad</b>: Número de 0 a 255 que indicará qué prioridad tenga el dispositivo. Cuanto mayor sea, mayor preferencia tendrá para ser el dispositivo activo.
                 </p>
+                <p class="Expl">
+                    <u>Nota</u>: No hace falta definir que tiene prioridad 100 ya que es la prioridad por defecto que tienen todos los switches.
+                </p>
 
             </div>
 
@@ -1638,6 +1647,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# standby &lt;Grupo&gt; preempt</code></pre>
                 <p class="Expl">
                     <b>Grupo</b>: Número que vincula lógicamente a varios equipos para que funcionen como un único equipo virtual.
+                </p>
+                <p class="Expl">
+                    <u>Nota</u>: No hace falta poner preempt en el switch que no será el activo.
                 </p>
 
                 <p>En el comando <span class="span_contenido">show standby brief</span> debería aparecer la interfaz que el modo preempt está activo (<span class="span_contenido">P</span>).</p>
@@ -1971,3 +1983,4 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     </body>
 
 </html>
+
