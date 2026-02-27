@@ -51,8 +51,11 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Instalación</h2>
+
+                <p>Instalaremos el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install vsftpd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y vsftpd</code></pre>
+
                 <p class="Expl">Al instalarlo se crea un usuario <span class="span_contenido" translate="no">ftp</span> automáticamente, que se incluye en el grupo <span class="span_contenido" translate="no">ftp</span>.</p>
                 <p class="Expl">También crea el directorio <span class="span_url" translate="no">/srv/ftp</span>, que su propietario es <span class="span_contenido" translate="no">root</span> y su grupo <span class="span_contenido" translate="no">ftp</span>. Sirve como directorio para los usuarios anónimos.</p>
             </div>

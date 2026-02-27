@@ -51,16 +51,26 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Instalación</h2>
+
+                <p>Instalaremos el servicio correspondiente solo en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install bind9</code></pre>
+
+                <p>En el firewall permitiremos el paso del puerto 53 - UDP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
             </div>
 
             <div>
                 <h2>Probar si funciona</h2>
+
+                <p>Primero miraremos si el servicio está encendido y sin errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">service bind9 start</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">service bind9 status</code></pre>
+
+                <p>Con el siguiente comando podremos verificar si hay algún error de sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="bash">named-checkconf</code></pre>
+
+                <p>Una vez configurado el servicio, podremos verificar si una zona está configurada en un archivo en específico:</p>
                 <pre class="codigo" translate="no"><code class="bash">named-checkzone adr.es /etc/bind/db.adr.es</code></pre>
             </div>
            
@@ -91,8 +101,12 @@ Código por byAd12
 
             <div>
                 <h2>Si hay problemas en el DNS</h2>
+
+                <p>Verificaremos que los siguientes archivos  no contengan registros inválidos:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/resolv.conf</code></pre>
+
+                <p>Podemos probar a reiniciar los siguientes servicios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart networking</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart NetworkManager</code></pre>
             </div>
@@ -118,7 +132,7 @@ Código por byAd12
 > asml.com</code></pre>
             </div>
             <div>
-                <h2>Configurar DNS como Reenviador:<br><span translate="no">/etc/bind/named.conf.local</span></h2>
+                <h2>Configurar DNS como Reenviador: <span translate="no">/etc/bind/named.conf.local</span></h2>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
 
@@ -132,7 +146,11 @@ auth-nxdomain no;    # conform to RFC1035
 listen-on { any; };
 // listen-on-v6 { any; };
 };</code></pre>
-                <p class="Expl"><b>192.168.8.1</b>: IPv4 del dispositivo al que reenviar las peticiones.</p>
+                <p class="Expl">
+                    <b>192.168.8.1</b>: IPv4 del dispositivo al que reenviar las peticiones.
+                    <br>
+                    <b>// listen-on-v6 { any; }</b>: Es una línea comentada que se ignorará.
+                </p>
             </div>
         </div>
         <hr>

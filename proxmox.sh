@@ -64,24 +64,25 @@ while true; do
             "${Ne}12${Bl} | favonia/cloudflare-ddns" \
             " | " \
         " | ${Az}PROXMOX ${Bl}" \
-        " | =====================" \
+        " | ============================" \
             "${Ne}13${Bl} | CT - Crear backup" \
             "${Ne}14${Bl} | CT - Restaurar backup" \
             "${Ne}15${Bl} | Restaurar local-lvm" \
             "${Ne}16${Bl} | Instalar temas" \
+            "${Ne}17${Bl} | LXC - Desbloquear contenedor" \
             " | " \
         " | ${Az}VPN - NETBIRD ${Bl}" \
         " | ============================" \
-            "${Ne}17${Bl} | Instalar y entrar en Netbird" \
-            "${Ne}18${Bl} | Desinstalar y purgar Netbird" \
+            "${Ne}18${Bl} | Instalar y entrar en Netbird" \
+            "${Ne}19${Bl} | Desinstalar y purgar Netbird" \
             " | " \
         " | ${Az}NFS ${Bl}" \
         " | ====================" \
-            "${Ne}19${Bl} | Compartir un recurso" \
+            "${Ne}20${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
         " | ==================" \
-            "${Ne}20${Bl} | Cambiar de versión" \
+            "${Ne}21${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
@@ -528,9 +529,31 @@ EOF
         ;;
 
     ##############################################################
-    # INSTALAR Y ENTRAR A NETBIRD
+    # LXC - DESBLOQUEAR CONTENEDOR
     ##############################################################
     17)
+        clear
+        read -p 'ID del contenedor: ' id_contenedor
+
+        echo -e "\n${Az}Estado el contenedor...${Bl}"
+        pct status $id_contenedor
+
+        echo -e "\n${Az}Desbloqueando el contenedor...${Bl}"
+        pct unlock $id_contenedor
+
+        echo -e "\n${Az}Estado el contenedor...${Bl}"
+        pct status $id_contenedor
+
+        echo -e "\n${Am}Si no funcionó lo anterior, puede eliminar el lock manualmente con:${Bl}"
+        echo -e "rm /var/lock/lxc/${id_contenedor}.lock"
+
+        echo -e "\n${Ve}¡Contenedor desbloqueado correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # INSTALAR Y ENTRAR A NETBIRD
+    ##############################################################
+    18)
         clear
         read -p 'Set-up key de Netbird: ' llave_netbird
         read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo
@@ -561,7 +584,7 @@ EOF
     ##############################################################
     # DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
-    18)
+    19)
         clear
 
         echo -e "\n${Az}Desconectando el peer de la red...${Bl}"
@@ -590,7 +613,7 @@ EOF
     ##############################################################
     # NFS - COMPARTIR UN RECURSO 
     ##############################################################
-    19)
+    20)
         clear
         read -p 'Carpeta local a compartir: ' carpeta_local
         read -p 'Permisos (rw,ro): ' permisos        
@@ -616,7 +639,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    20)
+    21)
         clear
         echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
         read -p 'Versión de GitHub a actualizar: ' version_github

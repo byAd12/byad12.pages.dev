@@ -110,15 +110,15 @@ p a::selection{text-decoration: underline;}
 .ProyectosInfoAvanzada .logoProyecto .a1 div{padding: 20px;}
 .ProyectosInfoAvanzada .logoProyecto .a1 *{color: white;}
 
-.ProyectosInfoAvanzada .logoProyecto .a12 p{color: rgb(228, 196, 196);}
-.ProyectosInfoAvanzada .logoProyecto .a12 .codigo{user-select: text; background-color: #7cfb2d; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: .5px solid #222523; border-radius: 5px;}
-.ProyectosInfoAvanzada .logoProyecto .a12 .codigo::selection{background-color: rgba(167, 255, 112, 0.5) !important; color: black !important;}
+.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo{user-select: text !important; background-color: #7cfb2d; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: .5px solid #222523; border-radius: 5px;}
+.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo::selection{color: #d8d8d8;}
 
 .ProyectosInfoAvanzada .logoProyecto .a12 a{background-color: #7cfb2d; user-select: none; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: 3px solid #222523; border-radius: 5px; transition: all .3s;}
 .ProyectosInfoAvanzada .logoProyecto .a12 a:hover{background-color: #222523; color: white !important; border: 3px solid #7cfb2d;}
-.ProyectosInfoAvanzada .logoProyecto .a13 p{user-select: text; color: rgb(228, 196, 196);}
 .ProyectosInfoAvanzada .logoProyecto .a13 a{color: #7cfb2d;}
 .ProyectosInfoAvanzada .logoProyecto .a13 a:hover{text-decoration: underline;}
+
+.ProyectosInfoAvanzada .logoProyecto .a12 p, .ProyectosInfoAvanzada .logoProyecto .a13 p{user-select: text; color: rgb(228, 196, 196);}
 
 @media screen and (max-width: 600px) {
   .ProyectosInfoAvanzada .ImgA{justify-content: center;}
@@ -282,7 +282,7 @@ footer::before{content: ""; position: absolute; top: 0; left: 50px; right: 50px;
 
 .footer-links ul li a{color: white;} 
 .footer-links ul li a.actual{color: #7cfb2d;} 
-.footer-links ul li a:hover{text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #7cfb2d;}
+.footer-links ul li a:hover, .a13 a:hover{text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #7cfb2d;}
 
 footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
 

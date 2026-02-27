@@ -1,13 +1,14 @@
-Mejora de contenido
+Mejora de estilos y funciones
 
-# g/*.html
-Cambio de dedicatorias
+# resources/main.css
+Mejoras de elementos :hover
+Arreglos en el hover de texto seleccionable
 
-# g/ldap.html, g/shell_script.html
-Mejora con nuevas explicaciones
+# proxmox.sh
+Nueva opción para desbloquear un contenedor de Proxmox
 
-# g/ftp.html
-Se añadió un nuevo aviso para que el carrusel de imágenes sea visto mediante la web y no en modo impresión - PDF
+# key.txt
+Nueva clave GPG
 
-# guides,html, g/iptables.html
-Nueva guía
+# g/*
+Mejora de contenido y redacción

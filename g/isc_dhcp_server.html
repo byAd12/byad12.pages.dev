@@ -51,17 +51,29 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Instalación</h2>
+
+                <p>Instalaremos el servicio correspondiente solo en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install isc-dhcp-server</code></pre>
+
+                <p>En el firewall permitiremos el paso del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
             </div>
 
             <div>
-                <h2>Probar si funciona</h2>
+                <h2>Comprobación del funcionamiento</h2>
+
+                <p>Primero miraremos si el servicio está encendido y sin errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server start</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server status</code></pre>
+
+                <p>Comprobaremos que hay un proceso DHCP ejecutándose:</p>
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep dhcp</code></pre>
+
+                <p>Miraremos que esté ejecutándose en su puerto correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">netstat -ltun | grep 67</code></pre>
+
+                <p>Comprobaremos que no haya errores del servicio registrados en el sistema:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /var/log/syslog</code></pre>
             </div>
            
@@ -88,10 +100,11 @@ Código por byAd12
 
 
             <div>
-                <h2>Comandos para DHCP</h2>
+                <h2>Comandos de DHCP en Linux</h2>
 
                 <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
+
                 <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-RELEASE</span> en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v -r</code></pre>
             </div>
@@ -103,7 +116,7 @@ Código por byAd12
             <div>
                 <h2>Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
-                <p>Todos los bloques en el mismo archivo:</p>
+                <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
 option domain-name-servers [VALOR];</code></pre>
                 <p class="Expl"><b>routers</b>: La IPv4 del enrutador.

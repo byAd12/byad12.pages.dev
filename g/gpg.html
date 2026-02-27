@@ -51,8 +51,10 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Instalación</h2>
+
+                <p>En el equipo donde crearemos la clave GPG instalaremos el servicio necesario:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt install gnupg</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y gnupg</code></pre>
             </div>
 
             <div>
@@ -79,14 +81,14 @@ Código por byAd12
                 <h2>Crear una clave pública</h2>
 
                 <pre class="codigo" translate="no"><code class="bash">gpg --full-generate-key</code></pre>
-                <p class="Expl"><b>Respuestas</b> que va a pedir: 2; 2048; 0; s.</p>
+                <p class="Expl"><b>Respuestas</b> que va a pedir: 2; 2048; 0; y.</p>
             </div>
 
             <div>
                 <h2>Exportar la clave pública</h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg --armor --export [*1] &gt; MiClave.asc</code></pre>
-                <p class="Expl"><b>*1</b>: El e-mail que pusiste al crear la clave pública.</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg --armor --export [EMAIL] &gt; MiClave.asc</code></pre>
+                <p class="Expl"><b>EMAIL</b>: La dirección de correo electrónico que se definió al crear la clave pública.</p>
             </div>
 
             <div>
