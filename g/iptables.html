@@ -180,7 +180,7 @@ Código por byAd12
             <div>
                 <h2>Establecer políticas</h2>
                 
-                <p>XXX:</p>
+                <p>Esta es la sintaxis para establecer una política:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables &lt;-t TABLA&gt; -P &lt;CADENA&gt; ACCEPT/DROP</code></pre>
                 <p class="Expl"><b>-t</b>: Tabla a modificar. Por defecto es la tabla "filter".</p>
                 <p class="Expl"><b>-P</b>: Establecer la política.</p>
@@ -195,7 +195,7 @@ Código por byAd12
             <div>
                 <h2>Listar políticas</h2>
                 
-                <p>XXX:</p>
+                <p>Esta es la primera opción para listar políticas aplicadas:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -L [CADENA] [-n] [-v] [--line-numbers]</code></pre>
                 <p class="Expl"><b>-t</b>: Tabla a modificar. Por defecto es la tabla "filter". Se separan por « Chain INPUT », « Chain OUTPUT », « Chain FORWARD ».</p>
                 <p class="Expl"><b>-L</b>: Listar.</p>
@@ -231,7 +231,7 @@ Código por byAd12
             <div>
                 <h2>Añadir reglas</h2>
                 
-                <p>XXX:</p>
+                <p>Esta es la sintaxis para crear una regla:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables (-A o -I) [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [--sport PUERTO_ORIGEN] [--dport PUERTO_DESTINO] [-j ACCEPT/DROP]</code></pre>
                 <p class="Expl"><b>-A</b> (APPEND): Los añade al final de la ACL.</p>
                 <p class="Expl"><b>-I</b> (INSERT): Los añade al principio de la ACL.</p>
@@ -248,7 +248,7 @@ Código por byAd12
             <div>
                 <h2>Comprobación si existe una regla</h2>
                 
-                <p>XXX:</p>
+                <p>A continuación puedes comprobar que una política en específico esté creada:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -C [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
                 <p class="Expl"><b>-C</b> (CHECK).</p>
 
@@ -260,7 +260,7 @@ Código por byAd12
             <div>
                 <h2>Eliminar una regla</h2>
                 
-                <p>XXX:</p>
+                <p>Para eliminar una regla hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -D [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
                 <p class="Expl"><b>-D</b> (DELETE).</p>
 
@@ -273,7 +273,7 @@ Código por byAd12
             <div>
                 <h2>Eliminar todas las reglas</h2>
                 
-                <p>XXX:</p>
+                <p>Para purgar todas las reglas hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -F [CADENA]</code></pre>
                 <p class="Expl"><b>-F</b> (FLUSH).</p>
                 <p class="Expl"><b>CADENA</b>: Si no se indica borra todas las cadenas o solo la especificada.</p>
@@ -283,7 +283,7 @@ Código por byAd12
             <div>
                 <h2>Reiniciar contadores</h2>
 
-                <p>XXX:</p>
+                <p>Para reiniciar los contadores sin borrar las reglas:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -Z [CADENA]</code></pre>
                 <p class="Expl"><b>-Z</b>: No borrar las reglas pero si resetear su contador de políticas.</p>
                 <p class="Expl"><b>CADENA</b>: De todas las cadenas por defecto o de la especificada.</p>
