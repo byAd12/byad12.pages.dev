@@ -41,7 +41,7 @@ hr.SeparadorConTitulo{margin-top: 30px;}
 
 p, td, li{line-height: 1.7em;}
 p, li{color: #d0d0d0 !important;}
-p.Expl b, span.Expl, td b{color: #8b9dc3;}
+p.Expl b, span.Expl, td b, li b{color: #8b9dc3;}
 
 p::selection, p *::selection, pre::selection, pre *::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection, table td::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
 
@@ -60,7 +60,7 @@ h2.TituloCreditosInferior a:hover{color: #2ecc71; text-decoration: underline;}
 
 .parte1 div h2{color: #7b92de; line-height: 40px; font-weight: 500; text-decoration: underline; text-underline-offset: 10px;}
 .parte1 div h2 span{color: white;}
-.parte1 div h2.IndiceH2{color: #d0d0d0; text-decoration: none;}
+.parte1 div h2.IndiceH2{color: #d0d0d0; text-decoration: none; margin-left: 0 !important;}
 
 /* Imágen del logo de Linux / Windows en el título */
 
@@ -91,8 +91,8 @@ a.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); col
 /* Texto */
 
 .codigo, p.Expl, p{margin: 15px 0 15px 0;}
-p.Expl, .codigo{margin-left: 30px;}
-.parte1 div p u{text-underline-offset: 5px;}
+p.Expl, .codigo, ul{margin-left: 30px;}
+.parte1 div p u, .TituloCreditosInferior{text-underline-offset: 5px;}
 
 .codigo{transition: all .5s; font-size: 14px; color: #e0e0e0; padding: 0; overflow-x: auto; border: 1px solid #333; font-family: 'RobotoMono', monospace;}
 .codigo:hover{border-left: 1px solid #7b92de;}
@@ -102,6 +102,7 @@ p.Expl, .codigo{margin-left: 30px;}
 
 ul li, ol li{color: #d0d0d0; font-weight: 400;}
 ol{margin-left: 3%;}
+.LiSinPunto{list-style: none;}
 
 /* =================================================== */
 /* Tablas */
@@ -117,7 +118,7 @@ table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 /* Div principales para separar el contenido */
 
 .parte1{display: flex; flex-direction: column; justify-content: center;}
-.parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: 80%; padding: 20px; border-radius: 10px; margin: 0 auto;}
+.parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 80%; padding: 20px; border-radius: 10px; margin: 0 auto;}
 
 /* =================================================== */
 /* Página de enlaces a sub-guías */
@@ -127,7 +128,7 @@ table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
-    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
     .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
 }
 
@@ -206,10 +207,13 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
     *{user-select: text !important;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
-   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SQLImagenJoinDiv, .parte1 div div, .PaginaIndice div){width: 95% !important;}
+   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 95% !important;}
     table{width: 100% !important; max-width: 100% !important; table-layout: fixed; word-wrap: break-word; page-break-inside: auto;}
     .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
     .BotonPersonalizadoDIV .BotonFlecha{border: 2px solid #8b9dc3 !important;}
+
+    .carrusel_nota_print{display: block !important;}
+    .carrusel_imagenes, .carrusel_boton{display: none !important;}
 }
 
 /* =================================================== */
@@ -233,10 +237,13 @@ ul.ULFTPCamb1:not(.menu_bar ul) li{margin-left: 40px;}
 .carrusel_imagen-agrandada{position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); z-index: 1000; max-width: 70%; max-height: 80%;} 
 .carrusel_fondo-agrandado{position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; background: rgba(0, 0, 0, 0.7) !important; z-index: 999 !important; display: none; cursor: pointer;} 
 
+.carrusel_nota_print{display: none;}
+.FTP_Botones_Externos{flex-direction: row !important; flex-wrap: wrap;}
+
 /* =================================================== */
 /* SQL */
 
-div.SQLImagenJoinDiv{max-width: 750px !important; text-align: left; justify-content: center;}
+div.SingleImagenGlobal{max-width: 750px !important; text-align: left; justify-content: center;}
 img.SQLImagenJoin{width: 70%; transition: all .5s;}
 img.SQLImagenJoin:hover{filter: invert(1);}
 

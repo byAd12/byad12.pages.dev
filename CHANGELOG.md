@@ -1,7 +1,13 @@
-Mejora de guides.html y nueva guía
+Mejora de contenido
 
-# main.js, main.css, guides.html
-Ahora se aplican unos estilos caracterísiticos para identificar si se están mostrando o no las guías filtradas
+# g/*.html
+Cambio de dedicatorias
 
-# g/markup_language.html, g/xpath.html
-Se añadió una referencia a una nueva guía de XPATH
+# g/ldap.html, g/shell_script.html
+Mejora con nuevas explicaciones
+
+# g/ftp.html
+Se añadió un nuevo aviso para que el carrusel de imágenes sea visto mediante la web y no en modo impresión - PDF
+
+# guides,html, g/iptables.html
+Nueva guía

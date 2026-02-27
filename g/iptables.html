@@ -1,0 +1,540 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: María José / Openwebinars
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="noindex,nofollow">
+        <title>IPTables</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">Iptables</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Filtrado de paquetes</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Teoría - <span>Filtrado</span></h2>
+                
+                <p>El <u>filtrado de paquetes</u> es una técnica usada por seguridad y para mejorar el rendimiento que permite analizar el tráfico de red al atravesar un dispositivo y tomar decisiones acerca del mismo pudiendo permitir o denegarlo, modificar el tráfico o separarlo.</p>
+
+                <p>Niveles de filtrado:</p>
+                <ul class="UlExpl">
+                    <li>A nivel de enlace: <b>MAC</b>.</li>
+                    <li>A nivel de red: <b>IP</b>.</li>
+                    <li>A nivel de transporte: <b>Puertos</b>, <b>estado de la conexión</b>.</li>
+                    <li>A nivel de aplicación: <b>Tipos de paquetes</b>, <b>DNS</b>.</li>
+                </ul>
+
+                <p><u>Seguimiento de la conexión</u>: También puede filtrarse paquetes dependiendo si está relacionado o no con un paquete anterior. Por ejemplo: Bloquear peticiones DNS hacia una red que previamente no realizó ninguna consulta DNS. Se hace manteniendo el estado de las conexiones previas.</p>
+
+                <p>Sistemas de filtrado:</p>
+                <ul class="UlExpl">
+                    <li><b>iptables</b>: Sucesor de ipfwadm e ipchains. No se desarrollan ya nuevas funcionalidades. Ampliamente utilizado. Disponible desde linux 2.4. Desarrollado por netfilter. Funciona solo sobre kérnel Linux en todas las distribuciones, ya viene preinstalado.</li>
+                    <li><b>nftables</b>: Sucesor de iptables. Disponible desde linux 3.13. Desarrollado por netfilter. Alto rendimiento. Se da más peso al espacio de usuario.</li>
+                    <li><b>bpfilter</b>: Permite usar bpf en linux. Disponible desde linux 4.18. La más reciente. Alto rendimiento.</li>
+                </ul>
+            
+            </div>
+
+            <div>
+                <h2>Teoría - <span>Firewall</span></h2>
+
+                <p><u>Firewall</u>: Sistema de seguridad que inspecciona el tráfico de red y selecciona el tráfico mediante reglas. Las apps de filtrado de paquetes se utilizan como firewalls.</p>
+
+                <p>Pueden ser dispositivos hardware específicos (Network Appliances) o programas software. Un dispositivo que los implementa puede además actuar como proxy, vpn, dispositivo NAT y router peor un firewall es estrictamente que actúa como control del tráfico.</p>
+
+                <p><u>NAT</u> (Network Address Translation) - Utilizado para:</p>
+
+                <ul>
+                    <li><b>SNAT</b> (Source NAT): Permite traducir una IP de una LAN a una IP pública, por ejemplo: acceder a internet. También puede usarse para evitar añadir reglas de enrutamiento estático.</li>
+                    <li><b>DNAT</b> (Destination NAT): Sirva para exponer un dispositivo de una red local para que sea accesible desde internet. Se usa mediante redirección de puertos.</li>
+                </ul>
+
+                <p>Categorías de un Firewall:</p>
+
+                <ul>
+                    <li><b>Por nodo</b>: Ubicados en cada nodo de la red protegiéndolo individuamente. Actúa en tráfico interno y externo.</li>
+                    <li><b>Perimetral</b>: Ubicados en un nodo perimetral de la red que protegen a toda la red. Se usa en ámbito corporativo.</li>
+                </ul>
+
+                <p>Políticas de un firewall:</p>
+
+                <ul>
+                    <li><b>Política DROP</b>: No se permite lo que esté implícitamente permitido en una regla.</li>
+                    <li><b>Política ACCEPT</b>: Acepta todo por defecto a no ser que se deniegue por una regla.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2>Teoría - <span>DMZ</span></h2>
+
+                <p>La DMZ (Zona Desmilitarizada) es una red separada física o lógicamente en la que se ubican los servidores que deben ser accesibles desde otra red</p>
+            
+            </div>
+
+            <div>
+                <h2>Teoría - <span>Iptables</span></h2>
+
+                <p>Elementos de Iptables:</p>
+
+                <p><u>Flujo de tráfico</u>: Se puede clasificar por entrada al nodo, salida del nodo y atravesar el nodo por interfaces.</p>
+                <p><u>Jerarquía</u>: Hay reglas que se agrupan en cadenas y estas se agrupan en tablas.</p>
+
+                <p><u>Tablas</u>:</p>
+
+                <ul>
+                    <li><b>filter</b> - Para hacer firewall. Cadenas:</li>
+                    <li class="LiSinPunto">
+                        <ul>
+                            <li>INPUT - Entrada al nodo</li>
+                            <li>OUTPUT - Salida del nodo</li>
+                            <li>FORWARD - Reenvío en el nodo</li>
+                        </ul>
+                    </li>
+                    <li><b>nat</b> - Para hacer NAT. Cadenas:</li>
+                    <li class="LiSinPunto">
+                        <ul>
+                            <li>PREROUTING - Para modificar cadenas de antes del reenvio de un paquete (antes de todo)</li>
+                            <li>INPUT</li>
+                            <li>OUTPUT</li>
+                            <li>POSTROUTING - Para modificar cadenas después del reenvío del paquete (después de todo)</li>
+                        </ul>
+                    </li>
+                    <li><b>mangle</b> - Por paquetes.</li>
+                    <li><b>raw</b> - Depurar seguimiento de la conexión.</li>
+                    <li><b>security</b> - Por MAC.</li>
+                </ul>
+
+                <p><u>Tabla FILTER</u>:</p>
+
+                <div class="SingleImagenGlobal">
+                    <a href="../img/guides/iptables/tabla_filter.png"><img class="SQLImagenJoin" src="../img/guides/iptables/tabla_filter.png"></a>
+                </div>
+
+                <p><u>Tabla FILTER y NAT</u> (INPUT es tanto de filter y nat; postrouting es de nat):</p>
+
+                <div class="SingleImagenGlobal">
+                    <a href="../img/guides/iptables/tabla_filter_y_nat.png"><img class="SQLImagenJoin" src="../img/guides/iptables/tabla_filter_y_nat.png"></a>
+                </div>
+
+                <p><u>Acciones</u> (TARGETs): Las reglas de iptables fincional como ACL (Listas de Control de Acceso) leyéndose secuencialmente hasta que se aplique una regla. Cuando se defina una regla hay que determinar si es ACCEPT (El paquete pasa), DROP (Se elimina el paquete) o RETURN (No leer más reglas y pasar a la siguiente cadena).</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Comando</h2>
+                
+                <p>Todas las reglas se aplicarán con el siguiente comando seguido de unos parámetros:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables ...</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Establecer políticas</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables &lt;-t TABLA&gt; -P &lt;CADENA&gt; ACCEPT/DROP</code></pre>
+                <p class="Expl"><b>-t</b>: Tabla a modificar. Por defecto es la tabla "filter".</p>
+                <p class="Expl"><b>-P</b>: Establecer la política.</p>
+                <p class="Expl"><b>ACCEPT/DROP</b>: Es la política que se va a emplear - ACCEPT (Aceptar todo menos lo configurado), DROP (Denegar todo menos lo configurado).</p>
+
+                <p>Ejemplos:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -P INPUT DROP</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">iptables -P OUTPUT ACCEPT</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Listar políticas</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -L [CADENA] [-n] [-v] [--line-numbers]</code></pre>
+                <p class="Expl"><b>-t</b>: Tabla a modificar. Por defecto es la tabla "filter". Se separan por « Chain INPUT », « Chain OUTPUT », « Chain FORWARD ».</p>
+                <p class="Expl"><b>-L</b>: Listar.</p>
+                <p class="Expl"><b>CADENA</b>: INPUT, OUTPUT, FORWARD.</p>
+                <p class="Expl"><b>-n</b>: De forma numérica: no resolver IPs a nombre.</p>
+                <p class="Expl"><b>-v</b>: De forma detallada.</p>
+                <p class="Expl"><b>--line-numbers</b>: Añade el número de línea por conjunto.</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -L -nv --line-numbers</code></pre>
+
+                <p>Hay otra manera para listarlo pero como se introdujo en la tabla con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -S [CADENA] [-v]</code></pre>
+                <p class="Expl"><b>-S</b>: Devuelve la cadena con el formato que se introdujo en la tabla.</p>
+                <p class="Expl"><b>CADENA</b>: INPUT, OUTPUT, FORWARD.</p>
+                <p class="Expl"><b>-v</b>: De forma detallada.</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -S -v</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Añadir reglas</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables (-A o -I) [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [--sport PUERTO_ORIGEN] [--dport PUERTO_DESTINO] [-j ACCEPT/DROP]</code></pre>
+                <p class="Expl"><b>-A</b> (APPEND): Los añade al final de la ACL.</p>
+                <p class="Expl"><b>-I</b> (INSERT): Los añade al principio de la ACL.</p>
+                <p class="Expl"><b>CADENA</b>: INPUT, OUTPUT, FORWARD.</p>
+                <p class="Expl"><b>-d -s</b>: Puede ser la IP de un nodo (192.168.1.100) o la de una red (192.168.1.0/24).</p>
+                <p class="Expl"><b>-j</b>: Regla de aceptar (ACCEPT) o denegar (DROP).</p>
+                <p class="Expl">Para decir los que NO sea algo se pone una exclamación antes de la opción como: <span>! -p</span>-</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -A INPUT -i enp0s3 -p icmp -j ACCEPT</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Comprobación si existe una regla</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -C [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
+                <p class="Expl"><b>-C</b> (CHECK).</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -C INPUT -i enp0s3 -p icmp -j ACCEPT</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Eliminar una regla</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -D [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
+                <p class="Expl"><b>-D</b> (DELETE).</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -D INPUT 1</code></pre>
+                <p class="Expl">El 1 es la primera regla de Chain INPUT.</p>
+
+            </div>
+
+            <div>
+                <h2>Eliminar todas las reglas</h2>
+                
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -F [CADENA]</code></pre>
+                <p class="Expl"><b>-F</b> (FLUSH).</p>
+                <p class="Expl"><b>CADENA</b>: Si no se indica borra todas las cadenas o solo la especificada.</p>
+
+            </div>
+
+            <div>
+                <h2>Reiniciar contadores</h2>
+
+                <p>XXX:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -Z [CADENA]</code></pre>
+                <p class="Expl"><b>-Z</b>: No borrar las reglas pero si resetear su contador de políticas.</p>
+                <p class="Expl"><b>CADENA</b>: De todas las cadenas por defecto o de la especificada.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Cadenas</h2>
+
+                <p><u>INPUT</u>: Paquete recibido por el nodo. Útil para firewall personal, no perimetral.</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -A INPUT</code></pre>
+
+                <p><u>OUTPUT</u>: Paquete generado por el nodo. Útil para firewall personal, no perimetral.</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -A OUTPUT</code></pre>
+
+                <p><u>FORWARD</u>: Útil para firewall perimetral, no personal.</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -A FORWARD</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Forward</h2>
+
+                <p>Paquetes que atraviesan el nodo. Utiliza la tabla filter. Deben permitirse los paquetes en ambos sentidos al ser perimetral.</p>
+
+                <p>Para permitir el reenvío de interfaces:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo 1 > /proc/sys/net/ipv4/ip_forward</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>SNAT (Source NAT)</h2>
+
+                <p>Cambia la IP de origen por la externa del dispositivo NAT definiéndose en las cadenas de POSTROUTING de la tabla NAT. Esto se hace si la IP es ESTÁTICA.</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT –to 80.14.1.2/32</code></pre>
+                <p class="Expl">En este ejemplo se añade en la tabla nat la cadena postrounting (después de procesar todo) a la red local que salga por la IP pública especificada.</p>
+
+                <p><u>Enmascaramiento IP</u> (IP Masquerade): Es cuando la IP del dispositivo origen es DINÁMICA con SNAT. Se debe comprobar la IP externa del dispositivo NAT antes de cambiarla en el paquete.</p>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE</code></pre>
+                <p class="Expl">En este ejemplo se mira la IP automáticamente y se cambia.</p>
+
+            </div>
+
+            <div>
+                <h2>DNAT (Destination NAT)</h2>
+
+                <p>Se usa para exponer el puerto de un nodo privado al exterior cambiando la IP destino de la externa del nodo a la del nodo a exponer. Se define en PREROUTING de la tabla NAT.</p>
+
+                <p>Para reenviar peticiones a un puerto del dispositivo NAT de un nodo interno:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A PREROUTING -p [PROTOCOLO: tcp/udp/..] –dport [PUERTO] -i [INTERFAZ] -j DNAT –to [IP_A_REDIRIGIR]( :OTRO_PUERTO_OPCIONAL)</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Extensiones de Iptables</h2>
+
+                <p>Las extensiones permiten ampliar las funcionalidades de <strong>iptables</strong> mediante el parámetro <span>-m MÓDULO</span>. Para instalarlas:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo apt install iptables-extensions</code></pre>
+
+                <p>En todas las extensiones se utiliza el parámetro de acción:</p>
+                <pre class="codigo" translate="no"><code class="bash">-j REJECT/ACCEPT</code></pre>
+
+                <p><u>Filtros de IP</u>:</p>
+                <p>Filtrar paquetes según su tipo de dirección:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m addrtype --dst-type BROADCAST/UNICAST/MULTICAST</code></pre>
+
+                <p>Seleccionar rangos de IP:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m iprange --src-range 192.168.1.1-192.168.1.100 --dst-range 10.0.0.1-10.0.0.50</code></pre>
+
+                <p><u>Comentarios y documentación</u>:</p>
+                <p>Permite añadir comentarios a las reglas para que aparezcan al listar las reglas:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m comment --comment "Bloqueo temporal de IPs"</code></pre>
+
+                <p><u>Control de conexiones y tráfico</u>:</p>
+                <p>Limitar el peso en bytes de un paquete:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m connbytes --connbytes 1024:4096</code></pre>
+
+                <p>Limitar el número de conexiones simultáneas por cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m connlimit --connlimit-above 3</code></pre>
+
+                <p>Seleccionar tráfico ICMP:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m icmp --icmp-type echo-request/echo-reply</code></pre>
+
+                <p>Limitar paquetes por velocidad:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m limit --limit 10/sec</code></pre>
+
+                <p>Seleccionar por MAC de origen:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m mac --mac-source 00:11:22:33:44:55</code></pre>
+
+                <p>Especificar múltiples puertos a la vez:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m multiport --sports 80,443 --dports 1024:2048</code></pre>
+
+                <p>Limitar el número total de paquetes por cadena:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m quota --quota 50000</code></pre>
+
+                <p><u>Módulos de protocolo</u>:</p>
+                <p>TCP:</p>
+                <pre class="codigo" translate="no"><code class="bash">-p tcp --dport 22 --sport 1024:65535 --tcp-flags SYN,RST SYN</code></pre>
+
+                <p>UDP:</p>
+                <pre class="codigo" translate="no"><code class="bash">-p udp --dport 53 --sport 1024:65535</code></pre>
+
+                <p><u>Restricciones temporales</u>:</p>
+                <p>Aplicar reglas solo en ciertos horarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m time --timestart 08:00 --timestop 18:00</code></pre>
+
+                <p><u>Seguimiento de conexiones (conntrack y state)</u>:</p>
+                <p>Control avanzado del estado de las conexiones:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m conntrack --ctstate NEW,ESTABLISHED</code></pre>
+
+                <p>Filtrar por protocolo de capa 4:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m conntrack --ctproto tcp/udp</code></pre>
+
+                <p>Filtrar por IP de origen/destino y puerto:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m conntrack --ctorigsrc 192.168.1.5 --ctorigdst 10.0.0.10 --ctorigsrcport 1024</code></pre>
+
+                <p>Módulo <strong>state</strong> como subconjunto de conntrack:</p>
+                <pre class="codigo" translate="no"><code class="bash">-m state --state NEW,ESTABLISHED</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Nuevas cadenas</h2>
+
+                <p>Se utiliza para organizar las reglas según el tipo de tráfico aumentando así el tráfico. Pej. si ay muchas líneas de iptables y, en vez de leer todas las reglas se puede organizar y controlar.</p>
+
+                <p><u>Crear una nueva cadena</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -N NUEVA_CADENA</code></pre>
+
+                <p><u>Definir el criterio para que se lea la nueva cadena</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -A INPUT -s IP_ORIGEN -j NUEVA_CADENA</code></pre>
+                <p class="Expl">Con esto se hace un return y solo lee las cadenas de NUEVA_CADENA en vez de poner ACCEPT,DROP. En este caso no hace falta especificar en otras cadenas para NUEVA_CADENA la IP ya que van dirigidas automáticamente para esa IP.</p>
+
+                <p><u>Renombrar una cadena</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -E NUEVA_CADENA NUEVO_NOMBRE</code></pre>
+
+                <p><u>Borrar la cadena</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables -X NUEVA_CADENA</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Creación de scripts</h2>
+
+                <p>Se puede crear un script de shell donde se definirán todas las reglas y cadenas como el siguiente script de ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">#!/bin/bash
+iptables -F
+iptables -t nat -F
+iptables -Z
+iptables -t nat -Z
+
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+# Crear cadenas
+# Poner reglas INPUT
+# Poner reglas OUTPUT
+# Poner reglas FORWARD</code></pre>
+                <p class="Expl">Es una buena manera de configurar varios equipos sin escribir las cadenas cada vez, además que se permite una organización con comentarios.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Persistencia de la configuración</h2>
+
+                <p>Para hacer que las reglas persistan, aunque se reinicie el nodo:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables-save > ./rules.v4</code></pre>
+                <p class="Expl">Quita automáticamente “iptables” de cada línea.</p>
+
+                <p>Restaurar las reglas:</p>
+                <pre class="codigo" translate="no"><code class="bash">iptables-restore ./rules.v4</code></pre>
+
+                <p>Restaurar <b>automáticamente</b> las reglas:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/systemd/system/iptables.servce</code></pre>
+                <p class="Expl">Cambiar <span class="span_contenido">ExecStart</span> a <span class="span_contenido">/sbin/iptables-restore ./ruta/rules.v4</span>.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+
+</html>

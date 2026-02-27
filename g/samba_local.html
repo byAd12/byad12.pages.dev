@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: Ruth
+~ Dedicatoria a: Miguel
 
 -->
 
@@ -63,7 +63,7 @@ chown nombre_usuario:nombre_grupo /carpeta_a_compartir
 chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
                 <p class="Expl"><b>Importante</b>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span> (eXecute).</p>
-                <p class="Expl">⚠️ <b>Riesgo de seguridad</b>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
+                <p class="Expl"><b>Riesgo de seguridad</b>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
                 <p class="Expl"><b>Nota de seguridad</b>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
 
                 <!-- ......................................................... -->
