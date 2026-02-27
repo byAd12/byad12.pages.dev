@@ -42,6 +42,7 @@ hr.SeparadorConTitulo{margin-top: 30px;}
 p, td, li{line-height: 1.7em;}
 p, li{color: #d0d0d0 !important;}
 p.Expl b, span.Expl, td b, li b{color: #8b9dc3;}
+.Parte1Indice b{color: #d0d0d0;}
 
 p::selection, p *::selection, pre::selection, pre *::selection, h1::selection, h2::selection, h3::selection, li::selection, code::selection, table td::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
 
