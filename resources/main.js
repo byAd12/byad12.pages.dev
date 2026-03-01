@@ -73,16 +73,13 @@ function editar_SMR() {
         const entradaDiv = link.querySelector('.Entrada');
         if (!entradaDiv || !entradaDiv.classList.contains('Color1')) return;
 
-        // Alternar la clase oculto
         link.classList.toggle('oculto');
 
-        // Revisar si quedó visible
         if (!link.classList.contains('oculto')) {
             algunoVisible = true;
         }
     });
 
-    // Actualizar estilo del botón
     if (algunoVisible) {
         boton.style.textDecoration = "none";
         boton.style.color = "white";
@@ -102,16 +99,13 @@ function editar_ASIR() {
         const entradaDiv = link.querySelector('.Entrada');
         if (!entradaDiv || !entradaDiv.classList.contains('Color2')) return;
 
-        // Alternar la clase oculto
         link.classList.toggle('oculto');
 
-        // Revisar si quedó visible
         if (!link.classList.contains('oculto')) {
             algunoVisible = true;
         }
     });
 
-    // Actualizar estilo del botón
     if (algunoVisible) {
         boton.style.textDecoration = "none";
         boton.style.color = "white";
@@ -131,16 +125,96 @@ function editar_personal() {
         const entradaDiv = link.querySelector('.Entrada');
         if (!entradaDiv || !entradaDiv.classList.contains('Color0')) return;
 
-        // Alternar la clase oculto
         link.classList.toggle('oculto');
 
-        // Revisar si quedó visible
         if (!link.classList.contains('oculto')) {
             algunoVisible = true;
         }
     });
 
-    // Actualizar estilo del botón
+    if (algunoVisible) {
+        boton.style.textDecoration = "none";
+        boton.style.color = "white";
+    } else {
+        boton.style.textDecoration = "line-through";
+        boton.style.color = "rgb(228, 196, 196)";
+    }
+}
+
+function editar_boton_filtros_avanzados() {
+    const links = document.querySelectorAll('.filtro_boton');
+    const ocultarExpandido = document.querySelectorAll('.filtro_boton_ocultar_expandido');
+    const boton = document.getElementById("editar_boton_filtros_avanzados");
+
+    const filtrosYaVisibles = Array.from(links).some(link => !link.classList.contains('oculto'));
+
+    links.forEach(link => {
+        if (filtrosYaVisibles) {
+            link.classList.add('oculto');
+        } else {
+            link.classList.remove('oculto');
+        }
+    });
+
+    ocultarExpandido.forEach(link => {
+        if (filtrosYaVisibles) {
+            link.classList.remove('oculto');
+        } else {
+            link.classList.add('oculto');
+        }
+    });
+
+    if (!filtrosYaVisibles) {
+        boton.style.color = "#7cfb2d";
+    } else {
+        boton.style.color = "white";
+    }
+}
+
+function editar_filtro_servicio_directorio() {
+    toggleFiltro('filtro_servicio_directorio', 'editar_filtro_servicio_directorio');
+}
+
+function editar_filtro_compartir_recursos() {
+    toggleFiltro('filtro_compartir_recursos', 'editar_filtro_compartir_recursos');
+}
+
+function editar_filtro_lenguaje_marcas() {
+    toggleFiltro('filtro_lenguaje_marcas', 'editar_filtro_lenguaje_marcas');
+}
+
+function editar_filtro_redes() {
+    toggleFiltro('filtro_redes', 'editar_filtro_redes');
+}
+
+function editar_filtro_linux() {
+    toggleFiltro('filtro_linux', 'editar_filtro_linux');
+}
+
+function editar_filtro_servicios_linux() {
+    toggleFiltro('filtro_servicios_linux', 'editar_filtro_servicios_linux');
+}
+
+function editar_filtro_seguridad() {
+    toggleFiltro('filtro_seguridad', 'editar_filtro_seguridad');
+}
+
+function toggleFiltro(claseFiltro, idBoton) {
+    const links = document.querySelectorAll('.BlogEntradas > a');
+    const boton = document.getElementById(idBoton);
+    let algunoVisible = false;
+
+    links.forEach(link => {
+        const entradaDiv = link.querySelector('.Entrada');
+        if (!entradaDiv || !entradaDiv.classList.contains(claseFiltro)) return;
+
+        link.classList.toggle('oculto');
+
+        if (!link.classList.contains('oculto')) {
+            algunoVisible = true;
+        }
+    });
+
     if (algunoVisible) {
         boton.style.textDecoration = "none";
         boton.style.color = "white";

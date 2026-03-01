@@ -301,6 +301,7 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
   .footer-content{max-width: 1200px; margin: 0 auto; display: block; flex-wrap: wrap; justify-content: space-between; align-items: center;}
   .footer-left{text-align: center;}
   .footer-left p{margin-bottom: 20px;}
+  .footer-widgets{justify-content: center !important;}
 }
 
 @media screen and (max-width: 500px){

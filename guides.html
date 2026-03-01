@@ -40,14 +40,22 @@
             <h2 class="projects-title">Guías</h2>
 
             <div class="GuiasBordeColores">
-                <button type="button" onclick="editar_ASIR()" id="editar_ASIR"> <span class="Color2" translate="no">•</span> A.S.I.R. </button>
-                <button type="button" onclick="editar_SMR()" id="editar_SMR"> <span class="Color1" translate="no">•</span> S.M.R. </button>
-                <button type="button" onclick="editar_personal()" id="editar_personal"> <span class="Color0" translate="no">•</span> Otros </button>
+                <button type="button" onclick="editar_ASIR()" id="editar_ASIR" class="filtro_boton_ocultar_expandido"> <span class="Color2" translate="no">•</span> A.S.I.R. </button>
+                <button type="button" onclick="editar_SMR()" id="editar_SMR" class="filtro_boton_ocultar_expandido"> <span class="Color1" translate="no">•</span> S.M.R. </button>
+                <button type="button" onclick="editar_personal()" id="editar_personal" class="filtro_boton_ocultar_expandido"> <span class="Color0" translate="no">•</span> Otros </button>
+                <button type="button" onclick="editar_boton_filtros_avanzados()" id="editar_boton_filtros_avanzados"> Filtros avanzados </button>
+                <button type="button" onclick="editar_filtro_servicio_directorio()" id="editar_filtro_servicio_directorio" class="filtro_boton oculto"> Servicios de directorio </button>
+                <button type="button" onclick="editar_filtro_compartir_recursos()" id="editar_filtro_compartir_recursos" class="filtro_boton oculto"> Recursos compartidos </button>
+                <button type="button" onclick="editar_filtro_lenguaje_marcas()" id="editar_filtro_lenguaje_marcas" class="filtro_boton oculto"> Lenguaje de marcas </button>
+                <button type="button" onclick="editar_filtro_redes()" id="editar_filtro_redes" class="filtro_boton oculto"> Redes </button>
+                <button type="button" onclick="editar_filtro_linux()" id="editar_filtro_linux" class="filtro_boton oculto"> Linux </button>
+                <button type="button" onclick="editar_filtro_servicios_linux()" id="editar_filtro_servicios_linux" class="filtro_boton oculto"> Servicios de Linux </button>
+                <button type="button" onclick="editar_filtro_seguridad()" id="editar_filtro_seguridad" class="filtro_boton oculto"> Seguridad </button>
             </div>
 
             <div class="BlogEntradas">
                 <!-- <a href="g/network_automation.html" class="LinkEntrada">
-                    <div class="Entrada Color0">
+                    <div class="Entrada Color0 filtro_redes">
                         <div>
                             <h3>Automatizar en red</h3>
                             <p>25/09/2025</p>
@@ -57,7 +65,7 @@
                 </a> -->
 
                 <!-- <a href="g/sql.html" class="LinkEntrada">
-                    <div class="Entrada Color2">
+                    <div class="Entrada Color2 filtro_base_datos">
                         <div>
                             <h3>SQL</h3>
                             <p>01/02/2025</p>
@@ -67,7 +75,7 @@
                 </a> -->
 
                 <a href="g/nis.html" class="LinkEntrada">
-                    <div class="Entrada Color2 servicio_directorios">
+                    <div class="Entrada Color2 filtro_servicio_directorio">
                         <div>
                             <h3>NIS</h3>
                             <p>19/02/2026</p>
@@ -77,7 +85,7 @@
                 </a>
 
                 <a href="g/samba_local.html" class="LinkEntrada">
-                    <div class="Entrada Color2">
+                    <div class="Entrada Color2 filtro_compartir_recursos">
                         <div>
                             <h3>SAMBA</h3>
                             <p>19/01/2026</p>
@@ -87,7 +95,7 @@
                 </a>
 
                 <a href="g/markup_language.html" class="LinkEntrada">
-                    <div class="Entrada Color2">
+                    <div class="Entrada Color2 filtro_lenguaje_marcas">
                         <div>
                             <h3>Lenguaje de Marcas</h3>
                             <p>11/01/2026</p>
@@ -97,7 +105,7 @@
                 </a>
 
                 <a href="g/nfs.html" class="LinkEntrada">
-                    <div class="Entrada Color2">
+                    <div class="Entrada Color2 filtro_compartir_recursos">
                         <div>
                             <h3>NFS: Linux</h3>
                             <p>16/12/2025</p>
@@ -107,7 +115,7 @@
                 </a>
 
                 <a href="g/packet_tracer.html" class="LinkEntrada">
-                    <div class="Entrada Color2">
+                    <div class="Entrada Color2 filtro_redes">
                         <div>
                             <h3>Packet Tracer CLI</h3>
                             <p>22/09/2025</p>
@@ -117,7 +125,7 @@
                 </a>
             
                 <a href="g/nmap.html" class="LinkEntrada">
-                    <div class="Entrada Color0">
+                    <div class="Entrada Color0 filtro_redes">
                         <div>
                             <h3>Nmap</h3>
                             <p>12/08/2025</p>
@@ -127,7 +135,7 @@
                 </a>
 
                 <a href="g/iptables.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_seguridad">
                         <div>
                             <h3>Iptables</h3>
                             <p>08/03/2025</p>
@@ -137,7 +145,7 @@
                 </a>
 
                 <a href="g/shell_script.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_linux">
                         <div>
                             <h3>Shell: Scripts</h3>
                             <p>03/02/2025</p>
@@ -147,7 +155,7 @@
                 </a>
 
                 <a href="g/postfix.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>Postfix, Mail</h3>
                             <p>28/01/2025</p>
@@ -157,7 +165,7 @@
                 </a>
 
                 <a href="g/telnet_ssh.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_seguridad">
                         <div>
                             <h3>Telnet, SSH</h3>
                             <p>16/01/2025</p>
@@ -167,7 +175,7 @@
                 </a>
 
                 <a href="g/gpg.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_seguridad">
                         <div>
                             <h3>GPG</h3>
                             <p>16/01/2025</p>
@@ -177,7 +185,7 @@
                 </a>
 
                 <a href="g/ldap.html" class="LinkEntrada">
-                    <div class="Entrada Color1 servicio_directorios">
+                    <div class="Entrada Color1 filtro_servicio_directorio">
                         <div>
                             <h3>LDAP</h3>
                             <p>14/01/2025</p>
@@ -187,7 +195,7 @@
                 </a>
 
                 <a href="g/javascript.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_lenguaje_marcas">
                         <div>
                             <h3>Guía JS: HTML</h3>
                             <p>14/01/2025</p>
@@ -197,7 +205,7 @@
                 </a>
 
                 <a href="g/ftp.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>vsftpd, FileZilla</h3>
                             <p>14/01/2025</p>
@@ -207,7 +215,7 @@
                 </a>
 
                 <a href="g/docker.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>Docker CLI</h3>
                             <p>13/01/2025</p>
@@ -217,7 +225,7 @@
                 </a>
 
                 <a href="g/apache2.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>Apache2</h3>
                             <p>9/12/2024</p>
@@ -227,7 +235,7 @@
                 </a>
 
                 <a href="g/bind9.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>Bind9</h3>
                             <p>5/11/2024</p>
@@ -237,7 +245,7 @@
                 </a>
 
                 <a href="g/isc_dhcp_server.html" class="LinkEntrada">
-                    <div class="Entrada Color1">
+                    <div class="Entrada Color1 filtro_servicios_linux">
                         <div>
                             <h3>isc-dhcp-server</h3>
                             <p>26/09/2024</p>

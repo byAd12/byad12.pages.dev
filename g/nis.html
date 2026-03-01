@@ -143,7 +143,7 @@ NISCLIENT=false</code></pre>
 
                 <p>2. Ahora editaremos el fichero de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
-                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url">/home</span> con permisos de lectura y escritura a la subred <span class="span_url">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
+                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
                 <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw)</code></pre>
 
                 <p>3. Por último exportaremos la configuración NFS para que sea efectiva:</p>
@@ -228,7 +228,7 @@ gshadow:        files systemd nis</code></pre>
                 <p class="Expl">Dentro de este fichero añadiremos la siguiente línea para poder montar la carpeta del servidor en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">&lt;IP_servidor&gt;:/home    /home    nfs    defaults    0    0</code></pre>
 
-                <p>3. Por último reiniciaremos el sistema para aplicar los cambios:</p>
+                <p>3. Por último, reiniciaremos el sistema para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">reboot -h now</code></pre>
 
                 <p>
@@ -237,6 +237,14 @@ gshadow:        files systemd nis</code></pre>
                 </p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;Usuario_del_servidor&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">pwd</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Montar_Home_NIS">Comando "<span>getent passwd</span>"</h2>
+                
+                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url">/etc/passwd</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
             </div>
 
