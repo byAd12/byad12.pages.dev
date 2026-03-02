@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: Miguel
+~ Dedicatoria a: Miguel Mourón Regueira
 
 -->
 
@@ -77,7 +77,7 @@ Código por byAd12
                 <p class="Expl">Ahora, el dominio que hayamos configurado debe enseñarse con el comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">nisdomainname</code></pre>
 
-                <p class="Expl">Además tendremos que definir ese dominio al hostname que tendrá el servidor:</p>
+                <p class="Expl">Además le asignaremos a este servidor su dominio DNS correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Servidor.dominio.tld&gt;</code></pre>
 
                 <p>2. A continuación editaremos la configuración de NIS:</p>
@@ -85,6 +85,7 @@ Código por byAd12
                 <p class="Expl">Dentro de este archivo definiremos la función del servidor con las siguientes líneas:</p>
                 <pre class="codigo" translate="no"><code class="bash">NISSERVER=master
 NISCLIENT=false</code></pre>
+                <p class="Expl">Si este servidor va a actuar como esclavo, debe reemplazarse "master" por "slave".</p>
 
                 <p>3. Por seguridad definiremos la subred de IPs que podrán entrar a interactuar con el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/ypserv.securenets</code></pre>
@@ -94,31 +95,32 @@ NISCLIENT=false</code></pre>
                 <p class="Expl">Y añadiremos una línea nueva donde definiremos la dirección de red y máscara, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="bash">255.255.255.0    192.168.1.0</code></pre>
 
-                <p>4. Ahora estableceremos un registro DNS interno por cada cliente y servidor del dominio con el siguiente archivo:</p>
+                <p>4. Ahora estableceremos un registro DNS interno por cada cliente y servidor del dominio mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Definiremos con nuevas líneas lo siguiente, con una separación entre elementos con tabuladores:</p>
                 <pre class="codigo" translate="no"><code class="bash">&lt;IP_Servidor&gt;    &lt;Hostname_Servidor.dominio.tld&gt;    &lt;Hostname_Servidor&gt;
 &lt;IP_Cliente&gt;     &lt;Hostname_Cliente.dominio.tld&gt;     &lt;Hostname_Cliente&gt;
 ...</code></pre>
+                <p class="Expl">Este paso no es obligatorio si ya hay un servicio DNS real ejecutándose para resolver los nombres de dominio.</p>
 
-                <p>5. Ahora tenemos que definir que el subdominio correspondiente al servidor va a actuar como servidor:</p>
+                <p>5. Si el servidor va a actuar como <u>esclavo</u> y además como <u>cliente</u> hay que modificar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/yp.conf</code></pre>
-                <p class="Expl">En la última línea hay que añadir lo siguiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">ypserver &lt;Hostname_Servidor.dominio.tld&gt;</code></pre>
+                <p class="Expl">Hay que añadir una nueva línea al final del archivo para definir cuál va a ser el servidor maestro:</p>
+                <pre class="codigo" translate="no"><code class="bash">ypserver &lt;Hostname_Servidor_Master.dominio.tld&gt;</code></pre>
 
-                <p>6. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
-
-                <p>7. Una vez que el paso anterior funcione sin ningún error, habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl enable rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
-
-                <p>8. Ahora generaremos la base de datos de todos los archivos del servidor como passwd, group, shadow, etc. para que los clientes lo añadan a su sistema:</p>
-                <p class="Expl">Si el servidor actuarán como <u>master</u>:</p>
+                <p>6. Ahora generaremos la base de datos de todos los archivos del servidor como passwd, group, shadow, etc. para que los clientes lo añadan a su sistema:</p>
+                <p class="Expl">Si el servidor actuará como <u>master</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -m</code></pre>
                 <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido">y</span>.</p>
 
-                <p class="Expl">Si el servidor actuarán como esclavo / <u>slave</u>:</p>
-                <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -s</code></pre>
+                <p class="Expl">Si el servidor actuará como esclavo / <u>slave</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -s &lt;Hostname_Servidor_Master.dominio.tld&gt;</code></pre>
+
+                <p>7. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
+
+                <p>8. Una vez que el paso anterior funcione sin ningún error, habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
 
             </div>
 
@@ -126,22 +128,39 @@ NISCLIENT=false</code></pre>
                 <h2>Actualización de la base de datos</h2>
                 
                 <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
-                <pre class="codigo" translate="no"><code class="bash"> make -C /var/yp</code></pre>
-                <p class="Expl">Si noy hay cambios no actualizará nada, además el comando indica si un fichero fué modificado desde la última vez que se modificó la base de datos.</p>
+                <pre class="codigo" translate="no"><code class="bash">make -C /var/yp</code></pre>
+                <p class="Expl">Si no hay cambios no actualizará nada, además el comando indica si un fichero fué modificado desde la última vez que se modificó la base de datos.</p>
 
             </div>
 
             <div>
-                <h2 id="Compartir_Home_NIS">Compartir la carpeta /home con NFS</h2>
-                
-                <p>Los siguientes pasos se explican mejor en la guía detallada sobre <a href="nfs.html">NFS</a>.</p>
+                <h2 id="Compartir_Home_NIS">Problema - El cliente no tiene carpeta /home</h2>
 
                 <p>
                     La carpeta home del usuario no existe en el cliente ya que es una carpeta local del servidor,
-                    por ello dejará iniciar sesión ya que el entorno gráfico necesita una carpeta personal para funcionar en la mayoría de los casos.
+                    por ello no dejará iniciar sesión ya que el entorno gráfico necesita una carpeta personal para funcionar en la mayoría de los casos.
                 </p>
 
-                <p>A continuación están los pasos guiados para compartir la carpeta <span class="span_url">/home</span> desde el servidor:</p>
+                <p>
+                    La mejor solución a ello es compartir la carpeta <span class="span_url">/home</span> del servidor mediante NFS y luego montarla en los clientes, permitiendo así tener perfiles móviles.
+                </p>
+
+                <p>
+                    Hay otra opción de la cual no se comparten las carpetas pero se define que cualquier usuario sin carpeta personal creada se creará automáticamente de manera local.
+                    Esto se usa cuando se quiere que los datos de un usuario esté en un equipo pero no en otro equipo.
+                </p>
+
+                <p class="Expl">Para configurarlo hay que editar el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-session</code></pre>
+                <p class="Expl">Y añadir la siguiente línea al final del fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">session	required	pam_mkhomedir.so	skel=/etc/skel/	umask=0022</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Compartir_Home_NIS">Solución - Compartir la carpeta /home por NFS</h2>
+
+                <p>Los siguientes pasos se explican mejor en la guía detallada sobre <a href="nfs.html">NFS</a>.</p>
 
                 <p>1. Primero instalaremos el servicio de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y nfs-kernel-server</code></pre>
@@ -149,12 +168,12 @@ NISCLIENT=false</code></pre>
                 <p>2. Ahora editaremos el fichero de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
                 <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
-                <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw)</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw,sync,no_subtree_check)</code></pre>
 
                 <p>3. Por último exportaremos la configuración NFS para que sea efectiva:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -ra</code></pre>
 
-                <p>En <a href="#Montar_Home_NIS">apartados posteriores</a> se enseña como montar la carpeta /home persistentemente en los clientes.</p>
+                <p>Pulse <a href="#Montar_Home_NIS">aquí</a> para ver como montar la carpeta <span class="span_url">/home</span> persistentemente en los clientes.</p>
 
             </div>
 
@@ -173,8 +192,8 @@ NISCLIENT=false</code></pre>
                 <p>1. Primero editaremos el siguiente archivo para poder definir un nombre de dominio como por ejemplo <span class="span_contenido">iso.asir</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/defaultdomain</code></pre>
 
-                <p class="Expl">Ahora definiremos ese dominio como hostname del servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Servidor.dominio.tld&gt;</code></pre>
+                <p class="Expl">Además le asignaremos a este cliente su dominio DNS correspondiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Cliente.dominio.tld&gt;</code></pre>
 
                 <p>2. A continuación editaremos la configuración de NIS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/default/nis</code></pre>
@@ -189,16 +208,16 @@ NISCLIENT=true</code></pre>
 &lt;IP_Cliente&gt;     &lt;Hostname_Cliente.dominio.tld&gt;     &lt;Hostname_Cliente&gt;
 ...</code></pre>
 
-                <p>4. Ahora tenemos que definir que el subdominio correspondiente al servidor va a actuar como servidor:</p>
+                <p>4. Ahora tenemos que definir qué servidor NIS utilizará el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/yp.conf</code></pre>
                 <p class="Expl">En la última línea hay que añadir lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">ypserver &lt;Hostname_Servidor.dominio.tld&gt;</code></pre>
 
                 <p>5. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl restart rcpbind ypbind nscd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypbind nscd</code></pre>
 
                 <p>6. Una vez que el paso anterior funcione sin errores habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl enable rcpbind ypbind nscd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable rpcbind ypbind nscd</code></pre>
 
                 <p>7. Es importante configurar que el cliente sea capaz de adoptar esos usuarios y grupos desde el servicio nis con el fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
@@ -214,7 +233,7 @@ shadow:         files systemd nis
 gshadow:        files systemd nis</code></pre>
 
                 <p>8. Si todo funciona deberíamos ser capaces de ver los usuarios y grupos creados en el servidor con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="bash">yptest</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ypcat passwd</code></pre>
                 <p class="Expl">Como prueba podemos ejecutar lo siguiente definiendo un nombre de un usario que se haya creado en el servidor y no en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;Usuario_del_servidor&gt;</code></pre>
 
@@ -246,9 +265,92 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
+                <h2 id="Montar_Home_NIS">Problema - NFS sobreescribe el contenido de /home</h2>
+
+                <p>
+                    Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url">/home</span>),
+                    va a provocar que el contenido local se machaque y solo se enseñe el contenido de la carpeta remota que se ha montado.
+                </p>
+
+                <p>
+                    <u>Soluciones</u>:
+                </p>
+
+                <ul>
+                    <li>Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url">/home-nis</span> y dejar <span class="span_url">/home</span> para usuarios locales.</li>
+                    <li class="LiSinPunto">
+                        <ul>
+                            <li><b>Ventajas</b>: Es automático del lado del cliente ya que solo se monta una carpeta.</li>
+                            <li><b>Desventajas</b>: En cada usuario se debe cambiar la ruta de su carpeta personal.</li>
+                        </ul>
+                    </li>
+
+                    <br>
+
+                    <li>Crear un script que se ejecutará cuando se vaya a montar un nuevo usuario en los clientes - <a href="#script-nis">explicación</a>.</li>
+                    <li class="LiSinPunto">
+                        <ul>
+                            <li><b>Ventajas</b>: Interactivo y fácil de usar. En el servidor solo hay que compartir la carpeta <span class="span_url">/home</span>.</li>
+                            <li><b>Desventajas</b>: Debe ejecutarse el script por cada nuevo usuario en los equipos clientes (o automatizarlo por SSH).</li>
+                        </ul>
+                    </li>
+                </ul>
+
+
+            </div>
+
+            <div id="script-nis">
+                <h2 id="Compartir_Home_NIS">Solución - Script /etc/fstab</h2>
+
+                <p>
+                    El siguiente script funciona de la siguiente manera:
+                </p>
+
+                <ol>
+                    <li>Crea un bucle.</li>
+                    <li>Al principio del bucle pide que le pases un nombre de usuario de NIS.</li>
+                    <li>Crea la carpeta personal si no existe.</li>
+                    <li>Automáticamente crea una nueva línea en <span class="span_url">/etc/fstab</span> para montar la carpeta individual de ese usuario en el sistema.</li>
+                    <li>Monta las carpetas y verifica si hay errores.</li>
+                    <li>Repite el bucle - se puede cortar con <span class="span_url">CTRL + C</span>.</li>
+                </ol>
+
+                <p>Pasos para crear el script:</p>
+
+                <p>1. Primero crearemos el archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
+
+                <p>2. Ahora añadiremos el siguiente contenido:</p>
+                <pre class="codigo" translate="no"><code class="bash">#!/usr/bin/bash
+while true; do
+	read -p "Usuario: " usuario
+	mkdir -p /home/$usuario
+	echo "192.168.1.2:/home/$usuario	/home/$usuario	nfs	defaults	0	0" >> /etc/fstab
+	mount -a
+done</code></pre>
+
+                <p>3. Le daremos al archivo permisos de ejecución:</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod +x script.sh</code></pre>
+
+                <p>4. Ejecutaremos el script:</p>
+                <pre class="codigo" translate="no"><code class="bash">./script.sh</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
                 <h2 id="Montar_Home_NIS">Comando "<span>getent passwd</span>"</h2>
                 
-                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url">/etc/passwd</span>:</p>
+                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url">/etc/passwd</span> y al comando <span class="span_contenido">ypcat passwd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
             </div>
@@ -258,11 +360,14 @@ gshadow:        files systemd nis</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <h2 class="TituloCreditosInferior">
+            <a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a>
+            <br><br>
+            Basado en material de Miguel Mourón Regueira, usado bajo licencia CC BY-NC-SA.
+        </h2>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
     </body>
 
 </html>
-
