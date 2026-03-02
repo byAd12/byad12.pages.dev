@@ -88,9 +88,10 @@ NISCLIENT=false</code></pre>
 
                 <p>3. Por seguridad definiremos la subred de IPs que podrán entrar a interactuar con el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/ypserv.securenets</code></pre>
-                <p class="Expl">Ya que por defecto se permite el acceso a todas las subredes comentaremos la siguiente línea con un <span class="span_contenido">#</span> al principio de la línea:</p>
-                <pre class="codigo" translate="no"><code class="bash"># 0.0.0.0    0.0.0.0</code></pre>
-                <p class="Expl">Y añadiremos una línea nueva donde definiremos la dirección de red y máscara como por ejemplo:</p>
+                <p class="Expl">Ya que por defecto se permite el acceso a todas las subredes comentaremos las siguientes líneas con un <span class="span_contenido">#</span> al principio de cada línea:</p>
+                <pre class="codigo" translate="no"><code class="bash"># 0.0.0.0    0.0.0.0
+# ::/0</code></pre>
+                <p class="Expl">Y añadiremos una línea nueva donde definiremos la dirección de red y máscara, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="bash">255.255.255.0    192.168.1.0</code></pre>
 
                 <p>4. Ahora estableceremos un registro DNS interno por cada cliente y servidor del dominio con el siguiente archivo:</p>
@@ -108,19 +109,23 @@ NISCLIENT=false</code></pre>
                 <p>6. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
 
-                <p>7. Una vez que el paso anterior funcione sin errores habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
+                <p>7. Una vez que el paso anterior funcione sin ningún error, habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
 
                 <p>8. Ahora generaremos la base de datos de todos los archivos del servidor como passwd, group, shadow, etc. para que los clientes lo añadan a su sistema:</p>
+                <p class="Expl">Si el servidor actuarán como <u>master</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -m</code></pre>
-                <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, hay que pulsar <span class="span_contenido">CTRL + D</span>.</p>
+                <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido">y</span>.</p>
+
+                <p class="Expl">Si el servidor actuarán como esclavo / <u>slave</u>:</p>
+                <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -s</code></pre>
 
             </div>
 
             <div>
                 <h2>Actualización de la base de datos</h2>
                 
-                <p>En caso de que haya creado un nuevo usuario o grupo en el servidor, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas:</p>
+                <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash"> make -C /var/yp</code></pre>
                 <p class="Expl">Si noy hay cambios no actualizará nada, además el comando indica si un fichero fué modificado desde la última vez que se modificó la base de datos.</p>
 
