@@ -62,11 +62,12 @@ passwd nombre_usuario
 chown nombre_usuario:nombre_grupo /carpeta_a_compartir
 chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
-                <p class="Expl"><b>Importante</b>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span> (eXecute).</p>
-                <p class="Expl"><b>Riesgo de seguridad</b>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
-                <p class="Expl"><b>Nota de seguridad</b>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
+                <p class="Expl"><u>Importante</u>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span> (eXecute).</p>
+                <p class="Expl"><u>Riesgo de seguridad</u>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
+                <p class="Expl"><u>Nota de seguridad</u>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>2. <b>Reconocer al <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
 
                 <p>Lo que haremos a continuación será meter al usuario en una base de datos independiente a /etc/shadow para que este usuario sea roconocido en sistemas Windows.</p>
@@ -78,6 +79,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">pbedit -L</code></pre>
                 
                 <!-- ......................................................... -->
+                <br>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
@@ -85,10 +87,11 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>4. <b>Editar la <span style="color: rgb(147, 147, 206) !important;">configuración</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura <b>obligatoria</b>:</p>
+                <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura obligatoria:</p>
                 <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
     path = /carpeta_a_compartir
     read only = no</code></pre>
@@ -107,7 +110,6 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <h2>Alojar una carpeta en un servidor <span>Windows</span><img class="SoporteComandoRemoto" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
-                
                 <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">usuarios</span> y <span style="color: rgb(147, 147, 206) !important;">grupos</span></b>:</p>
 
                 <p class="Expl">Antes de asignar permisos, hay que crear los usuarios y grupos que sean necesarios.</p>
@@ -125,6 +127,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 </p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>2. <b>Asignar <span style="color: rgb(147, 147, 206) !important;">permisos</span></b>:</p>
                 <p class="Expl">
                     Se puede asignar de forma que los permisos en red también se apliquen en los permisos locales (esto además quita la herencia de la carpeta):
@@ -159,14 +162,17 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl"><b>nombre_usuario</b>: El usuario que podrá montar los recursos listados.</p>
                 
                 <!-- ......................................................... -->
+                <br>
                 <p>2. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install cifs-utils</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>4. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username=usuario_Windows,password=contraseña //IP_servidor/recurso /directorio_local</code></pre>
                 <p class="Expl">
@@ -181,9 +187,11 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 </p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con el usuario que montó la carpeta</b>.</p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>5. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que se puede acceder al recurso compartido</b>.</p>
 
             </div>
@@ -196,12 +204,15 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">\\Hostname_Servidor_Windows\Recurso_Compartido</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>2. <b>En el cliente <span style="color: rgb(147, 147, 206) !important;">iniciar sesión</span> con un usuario con permisos de acceder al recurso</b>.</p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>3. <b>En el explorador de archivos <span style="color: rgb(147, 147, 206) !important;">buscar la ruta de acceso de red</span> con el buscador</b>.</p>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>4. <b>Verificar si se puede <span style="color: rgb(147, 147, 206) !important;">acceder al contenido</span></b>.</p>
 
             </div>
@@ -213,7 +224,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido">smbpasswd</span></b>.</p>
 
                 <!-- ......................................................... -->
-                
+                <br>
                 <p>2. <b>Listar los <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
 
                 <p class="Expl">Iremos al Explorador de archivos y en la barra de búsqueda buscaremos:</p>
@@ -253,6 +264,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
                 <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido">guest ok = yes</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    &lt;&lt;opciones&gt;&gt;   0   0</code></pre>
@@ -302,10 +314,12 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
 
                 <!-- ......................................................... -->
+                <br>
                 <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
 

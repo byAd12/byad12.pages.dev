@@ -1,11 +1,3 @@
-<!--
-
-Código por byAd12
-
-~ Dedicatoria a: Pablo
-
--->
-
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -21,7 +13,6 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="menu_bar" id="menu_bar">
-            <!-- BARRA DE MENÚ -->
             <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
@@ -29,7 +20,8 @@ Código por byAd12
                 <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
             </ul>
         </div>
-        
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
         <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
@@ -37,7 +29,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -47,23 +39,507 @@ Código por byAd12
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
+        <div class="parte1 Parte1Indice">
+            <div>
+                <h2>Índice de Contenidos</h2>
+
+                <h2 style="margin: 20px;" class="IndiceH2">1. Introducción</h2>
+                <ul>
+                    <li><b>Conceptos:</b> <a href="#que-es-xpath">¿Qué es XPATH?</a> • <a href="#definicion-de-nodos">Definición de nodos</a> • <a href="#estructura-path">Estructura de un path</a></li>
+                    <li><b>Otros:</b> <a href="#mejor-editor-xpath">Mejor editor XPATH</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">2. Conceptos Básicos y Selección</h2>
+                <ul>
+                    <li><b>Jerarquía y texto:</b> <a href="#uso-child">Uso del eje "child"</a> • <a href="#uso-string">Uso de la función "string()"</a></li>
+                    <li><b>Navegación base:</b> <a href="#seleccion-elemento">Selección de nodo elemento</a> • <a href="#seleccion-atributo">Selección de nodo atributo</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">3. Filtrado (Predicados)</h2>
+                <ul>
+                    <li><b>Condiciones:</b> <a href="#filtro-coincidencias">Filtro por coincidencias</a> • <a href="#filtro-numeros">Filtro de números</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">4. Navegación Avanzada</h2>
+                <ul>
+                    <li><b>Herramientas:</b> <a href="#ejes-busqueda">Ejes de búsqueda (Axes)</a> • <a href="#uso-comodines">Uso de Comodines</a></li>
+                    <li><b>Conjuntos:</b> <a href="#union-secuencias">Unión de Nodos y Secuencias</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">5. Funciones y Otros Datos</h2>
+                <ul>
+                    <li><b>Ítems y Externos:</b> <a href="#items-tipos">Ítems y Tipos de Datos</a> • <a href="#acceso-doc">Acceso a otro XML</a> • <a href="#localizar-comentarios">Localizar comentarios</a></li>
+                    <li><b>Operaciones:</b> <a href="#funciones-xpath">Funciones de XPath</a> • <a href="#funciones-avanzadas">Funciones avanzadas útiles</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
         <div class="parte1">
             <div>
-                <h2>...</h2>
+                <h2 id="que-es-xpath">¿Qué es XPATH?</h2>
                 
-                <p>...</p>
-                <pre class="codigo" translate="no"><code class="bash">...</code></pre>
+                <p>
+                    Xpath permite navegar entre los elementos y atributos de un documento XML.
+                    Para hacerlo, se basa en las relaciones de parentesco entre los nodos del documento.
+                </p>
+                <p>
+                    Se creó para ser utilizado en XSLT pero también se utiliza en XML Schema, XQuery, XLink, XPointer y XForms.
+                </p>
+                <p>
+                    Tiene varias versiones como la 1.0 que es la primera versión y tiene menos opciones, u otras versiones como la 3.1, que es la última.
+                </p>
 
+                <p>
+                    XPath se usa definiendo expresiones de camino (<u>paths</u>) para seleccionar nodos o conjuntos de nodos en un documento XML, asumiendo que su estructura interna es la de un árbol.
+                    Al aplicar una expresión, se obtiene un conjunto de nodos (que puede ser vacío).
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="definicion-de-nodos">Definición de <span>Nodos</span></h2>
+            
+                <p>
+                    XPath trata los documentos XML como un árbol de nodos.
+                    Dentro de este árbol, podemos diferenciar diferentes tipos de nodos según su localización en el documento:
+                </p>
+
+                <ul>
+                    <li><b>Nodo raíz</b> - siempre es <span class="span_url">/</span></li>
+                    <li class="LiSinPunto">
+                        <ul>
+                            <li>El elemento raíz del documento XML no es lo mismo que el nodo raíz de XPATH.</li>
+                            <li>No puede tener nodos padre.</li>
+                            <li>Puede tener cero o más nodos hijo.</li>
+                            <li>Los nodos hijo puede contener nodos de elemento, de texto, de instrucción o de comentario.</li>
+                            <li>Para ser un documento bien formado, el nodo de documento debe tener exactamente un nodo elemento hijo y ningún nodo texto hijo.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><b>Nodo elemento</b> - sub-etiquetas del nodo raíz u otro nodo elemento</li>
+                    <li><b>Nodo atributo</b> - el atributo que pueda tener un nodo elemento</li>
+                    <li><b>Nodo de texto</b> - el contenido de un nodo elemento</li>
+                    <li><b>Nodo de comentario</b> - un comentario con formato <span class="span_url">&lt;!-- ... --&gt;</span></li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="estructura-path">Estructura de un path</h2>
+            
+                <p>Un path se define separando el nombre de los nodos con barras - <span class="span_url">/</span>, como por ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/tienda/productos/producto/nombre/text()</code></pre>
+                <p class="Expl">En el ejemplo podemos identificar el nodo raíz - <span class="span_url">/</span>, seguido de una serie de nodos de elementos hasta el nodo <span class="span_url">nombre</span>, a la cual se le aplica una función para obtener un nodo de texto.</p>
+                <p class="Expl">El documento XML se podría ver por ejemplo así:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
+&lt;tienda&gt;
+    &lt;productos&gt;
+        &lt;producto id="p01"&gt;
+            &lt;nombre&gt;Agua&lt;/nombre&gt;
+        &lt;/producto&gt;
+    &lt;/productos&gt;
+&lt;/tienda&gt;</code></pre>
+                <p class="Expl">Y como resultado cogería todos los nodos de texto dentro de todos los nodos elementos <span class="span_url">nombre</span>.</p>
+            
+                <p>Hay que tener en cuenta que se puede definir con rutas absolutas o relativas:</p>
+
+                <p class="Expl">En las rutas <u>absolutas</u> se escribe cada nodo hasta llegar al resultado empezando desde la raíz, como en el ejemplo anterior.</p>
+                
+                <p class="Expl">En las rutas <u>relativas</u> se escribe <span class="span_url">//</span> para llegar a un nodo en específico, como por ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">//nombre/text()</code></pre>
+                <p class="Expl">En este ejemplo saltamos directamente a todos los nodos elementos llamados <span class="span_url">nombre</span>, pero hay que tener cuidado ya que si hay varios nodos con el mismo nombre en rutas diferentes se van a coger todos.</p>
+
+                <p>La representación en árbol de los nodos del documento XML anterior sería la siguiente:</p>
+                <div class="SingleImagenGlobal">
+                    <a href="../img/guides/xpath/xml-1-vista-arbol.png"><img class="SQLImagenJoin" src="../img/guides/xpath/xml-1-vista-arbol.png"></a>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="mejor-editor-xpath">Mejor editor para XPATH</h2>
+            
+                <p>Una recomendación es usar la página web <a href="https://xpath.playground.fontoxml.com/" target="_blank">Fonto</a>, que permite ver el resultado del XPATH en tiempo real usando la versión 3.1.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="uso-child">Uso del eje "child" (Hijos)</h2>
+                <p>
+                    En XPath, los nodos hijo son los elementos que están directamente dentro de otro. 
+                    Por defecto, cualquier ruta que escribas usa el eje child.
+                </p>
+                <p class="Expl">Si queremos usar la sintaxis explícita para el mismo documento del servidor:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/child::servicios/child::servicio</code></pre>
+                <p class="Expl">
+                    Esto es equivalente a escribir <span class="span_url">/servidor/servicios/servicio</span>. 
+                    Se usa para indicar que buscamos solo en los hijos directos.
+                </p>
+            </div>
+
+            <div>
+                <h2 id="uso-string">Uso de la función "string()"</h2>
+                <p>
+                    A diferencia de <span class="span_url">text()</span>, que solo toma el texto de un nodo específico, 
+                    la función <span class="span_url">string()</span> devuelve la <b>concatenación</b> de todo el texto del nodo y sus descendientes.
+                </p>
+                
+                <p class="Expl">Tomando como ejemplo este nodo raíz:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;producto&gt;
+    &lt;nombre&gt;Pantalla&lt;/nombre&gt;
+    &lt;precio&gt;19.99&lt;/precio&gt;
+&lt;/producto&gt;</code></pre>
+
+                <p class="Expl">Si aplicamos <span class="span_url">string()</span> al nodo raíz:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/producto/string()</code></pre>
+                
+                <p class="Expl">
+                    El resultado sería <span class="span_url">"Pantalla19.99"</span>. 
+                    Es muy útil cuando necesitas extraer todo el contenido legible de una etiqueta que tiene sub-etiquetas dentro.
+                </p>
+            </div>
+
+
+            <div>
+                <h2 id="seleccion-elemento">Selección de un nodo elemento</h2>
+                
+                <p>Primero llegaremos a la ruta donde se situe el nodo elemento <span class="span_url">tiempo_ejecucion</span> del siguiente documento XML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
+&lt;servidor&gt;
+    &lt;servicios&gt;
+        &lt;servicio programa="bind9"&gt;
+            &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+    &lt;/servicios&gt;
+&lt;/servidor&gt;</code></pre>
+                <p class="Expl">Si queremos obtener la etiqueta completa con todo su contenido simplemente lo dejaremos así:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion</code></pre>
+
+                <p class="Expl">En cambio, si solo queremos obtener el nodo texto dentro de ese nodo elemento, que en este caso es "135", tenedremos que hacer:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/text()</code></pre>
+
+                <p>La función <span class="span_contenido">parent()</span> devolverá el nombre del nodo que contiene el nodo elemento seleccionado:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/parent()</code></pre>
+                <p class="Expl">Según el ejemplo devolverá "&lt;servicio programa="bind9"&gt;" pero si seleccionamos el nodo texto devolverá "&lt;tiempo_ejecucion unidad="segundos"&gt;".</p>
+
+            </div>
+
+            <div>
+                <h2 id="seleccion-atributo">Selección de un nodo atributo</h2>
+                
+                <p>Primero llegaremos a la ruta donde se situe el nodo atributo <span class="span_url">unidad</span> del siguiente documento XML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
+&lt;servidor&gt;
+    &lt;servicios&gt;
+        &lt;servicio programa="bind9"&gt;
+            &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+    &lt;/servicios&gt;
+&lt;/servidor&gt;</code></pre>
+                <p class="Expl">Para seleccionar el nodo atributo pondremos el símbolo <span class="span_contenido">@</span> antes del nombre del atributo.</p>
+                <p class="Expl">Según versiones modernas de XPATH tendremos que definir que vamos a coger el contenido dentro del atributo con <span class="span_contenido">string()</span>, lo que nos devolverá "segundos":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/@unidad/string()</code></pre>
+
+                <p>La función <span class="span_contenido">node()</span> devolverá el nombre del atributo seleccionado:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/node()</code></pre>
+                <p class="Expl">Según el ejemplo devolverá "programa".</p>
+
+                <p>La función <span class="span_contenido">parent()</span> devolverá el nombre del nodo que contiene el atributo seleccionado:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/parent()</code></pre>
+                <p class="Expl">Según el ejemplo devolverá "&lt;servicio&gt;".</p>
+
+                <p>La función <span class="span_contenido">type()</span> devolverá en formato <b>xs:[TIPO]</b> el tipo de valor que contiene el atributo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/type()</code></pre>
+                <p class="Expl">Según el ejemplo devolverá "xs:untypedAtomic".</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="filtro-coincidencias">Filtro por coincidencias</h2>
+                
+                <p>Podemos filtrar los servicios del siguiente XML que cumplan una condición:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
+&lt;servidor&gt;
+    &lt;servicios&gt;
+        &lt;servicio programa="bind9"&gt;
+            &lt;tipo_proceso&gt;Padre&lt;/tipo_proceso&gt;
+            &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+        &lt;servicio programa="apache"&gt;
+            &lt;tipo_proceso&gt;Hijo&lt;/tipo_proceso&gt;
+            &lt;tiempo_ejecucion unidad="minutos"&gt;312&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+    &lt;/servicios&gt;
+&lt;/servidor&gt;</code></pre>
+
+                <p>Podemos filtrar los servicios cuyo programa sea exactamente "bind9":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa = "bind9"]</code></pre>
+                <p class="Expl">Según el ejemplo devolverá:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;servicio programa="bind9"&gt;
+    &lt;tipo_proceso&gt;Padre&lt;/tipo_proceso&gt;
+    &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
+&lt;/servicio&gt;</code></pre>
+
+                <p>Podemos filtrar los servicios cuyo contenido de texto no sea exactamente "bind9":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa != "bind9"]</code></pre>
+                <p class="Expl">Según el ejemplo devolverá:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;servicio programa="apache"&gt;
+    &lt;tipo_proceso&gt;Hijo&lt;/tipo_proceso&gt;
+    &lt;tiempo_ejecucion unidad="minutos"&gt;312&lt;/tiempo_ejecucion&gt;
+&lt;/servicio&gt;</code></pre>
+
+                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url">servicio</span> incluido todo los nodos que contenga.</p>
+                
+                <p>También podemos definir que nos devuelva solo un nodo específico de los servicios que cumplan la condición, como por ejemplo el nodo <span class="span_url">tipo_proceso</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa != "bind9"]/tipo_proceso/text()</code></pre>
+                <p class="Expl">Según el ejemplo devolverá "Hijo".</p>
+
+            </div>
+
+            <div>
+                <h2 id="filtro-numeros">Filtro de números</h2>
+                
+                <p>Podemos filtrar los servicios del siguiente XML que cumplan una condición sobre un número:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
+&lt;servidor&gt;
+    &lt;servicios&gt;
+        &lt;servicio programa="bind9"&gt;
+            &lt;tipo_proceso&gt;Padre&lt;/tipo_proceso&gt;
+            &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+        &lt;servicio programa="apache"&gt;
+            &lt;tipo_proceso&gt;Hijo&lt;/tipo_proceso&gt;
+            &lt;tiempo_ejecucion unidad="minutos"&gt;312&lt;/tiempo_ejecucion&gt;
+        &lt;/servicio&gt;
+    &lt;/servicios&gt;
+&lt;/servidor&gt;</code></pre>
+
+                <p>Filtramos los tiempos de ejecución si son mayores a 100:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[tiempo_ejecucion/text() > "100"]</code></pre>
+
+                <p>Filtramos los tiempos de ejecución si son menores a 100:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[tiempo_ejecucion/text() < "100"]</code></pre>
+
+                <p>Filtramos los tiempos de ejecución si son mayores o iguales a 100:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[tiempo_ejecucion/text() >= "100"]</code></pre>
+
+                <p>Filtramos los tiempos de ejecución si son menores o iguales a 100:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[tiempo_ejecucion/text() <= "100"]</code></pre>
+
+                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url">servicio</span> incluido todo los nodos que contenga.</p>
+            </div>
+
+            <div>
+                <h2 id="ejes-busqueda">Ejes de búsqueda (Axes)</h2>
+
+                <p>Los ejes permiten localizar nodos en relación al nodo actual, permitiendo una navegación más compleja que las rutas simples.</p>
+
+                <ul>
+                    <li><b>ancestor:</b> Selecciona todos los antepasados (padre, abuelo, etc.) del nodo actual.</li>
+                    <li><b>descendant:</b> Selecciona todos los descendientes (hijos, nietos, etc.).</li>
+                    <li><b>following-sibling:</b> Selecciona todos los hermanos que aparecen después del nodo actual.</li>
+                    <li><b>preceding-sibling:</b> Selecciona todos los hermanos que aparecen antes del nodo actual.</li>
+                    <li><b>self:</b> Selecciona el nodo actual (se puede abreviar con un punto <span class="span_url">.</span>).</li>
+                </ul>
+
+                <p>Ejemplo para obtener el nombre del "padre" de un nodo específico:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">//tiempo_ejecucion/parent::node()</code></pre>
+            </div>
+
+            <div>
+                <h2 id="uso-comodines">Uso de Comodines (Wildcards)</h2>
+
+                <p>XPath utiliza comodines que nos permiten buscar elementos sin conocer su nombre exacto.</p>
+
+                <ul>
+                    <li><b>*</b> - Selecciona todos los nodos elemento.</li>
+                    <li><b>@*</b> - Selecciona todos los atributos de un nodo.</li>
+                    <li><b>node()</b> - Selecciona cualquier tipo de nodo (elemento, texto, comentario, etc.).</li>
+                </ul>
+
+                <p>Selecciona todos los elementos directos dentro de servicios:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/*</code></pre>
+
+                <p>Selecciona todos los elementos directos dentro de los nodos dentro de servicios:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/*/*</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="funciones-xpath">Funciones de XPath</h2>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td></td>
+                            <td>Para <b>cadenas de texto</b></td>
+                            <td>Para <b>números o conjuntos</b></td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Contar / Unir</td>
+                            <td><pre translate="no"><code class="language-xml">concat("txt1", "txt2")</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">count(//nodos)</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Búsqueda</td>
+                            <td><pre translate="no"><code class="language-xml">contains(., "texto")</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">sum(//precios)</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Posicionamiento</td>
+                            <td><pre translate="no"><code class="language-xml">starts-with(., "A")</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">last()</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Transformación</td>
+                            <td><pre translate="no"><code class="language-xml">lower-case(.)</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">floor(19.99)</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Extracción</td>
+                            <td><pre translate="no"><code class="language-xml">substring(., 1, 5)</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">position()</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Límites</td>
+                            <td><pre translate="no"><code class="language-xml">string-length(.)</code></pre></td>
+                            <td><pre translate="no"><code class="language-xml">max(//nodos)</code></pre></td>
+                        </tr>
+                    </table>
+                </div>
+                <p>
+                    Estas funciones permiten manipular los datos obtenidos del XML. Por ejemplo, <span class="span_url">count()</span> devuelve el número total de elementos, mientras que <span class="span_url">sum()</span> realiza la suma aritmética de sus valores.
+                </p>
+            </div>
+
+            <div>
+                <h2 id="items-tipos">Ítems y Tipos de Datos</h2>
+
+                <p>En XPath, la evaluación de una expresión siempre da como resultado una secuencia de <b>Ítems</b>. Un ítem puede ser de dos tipos:</p>
+
+                <ul>
+                    <li><b>Nodos:</b> Cualquier nodo del árbol XML (raíz, elemento, atributo, etc.).</li>
+                    <li><b>Valores atómicos:</b> Valores simples como cadenas de texto, números o booleanos (true/false).</li>
+                </ul>
+
+                <p>Además, XPath maneja principalmente cuatro tipos de datos básicos: Conjunto de nodos, Booleano, Cadena de caracteres (String) y Numérico.</p>
+            </div>
+
+            <div>
+                <h2 id="acceso-doc">Acceso a datos de otro documento XML</h2>
+
+                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de archivos externos utilizando la función <span class="span_url">doc()</span>.</p>
+                <p class="Expl">Si por ejemplo queremos acceder al nodo raíz de un archivo llamado "config.xml" que está en la misma carpeta:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">doc("config.xml")/servidor</code></pre>
+            </div>
+
+            <div>
+                <h2 id="localizar-comentarios">Localizar comentarios</h2>
+                <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url">comment()</span>.</p>
+                <p class="Expl">Para localizar todos los comentarios dentro del nodo raíz:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/comment()</code></pre>
+            </div>
+
+            <div>
+                <h2 id="union-secuencias">Unión de Nodos y Secuencias</h2>
+                <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, tenemos dos operadores clave que no debemos confundir:</p>
+                
+                <p>1. Operador de Unión ( | )</p>
+                <p class="Expl">
+                    Se representa con la barra vertical <span class="span_url">|</span>. Une dos o más conjuntos de nodos. 
+                    Elimina automáticamente los duplicados y devuelve los nodos en el mismo orden en el que aparecen en el documento XML.
+                </p>
+                <p class="Expl">Seleccionar todos los programas y todos los tiempos de ejecución a la vez:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">//servicio/@programa | //tiempo_ejecucion</code></pre>
+
+                <p>2. Operador de Secuencia ( , )</p>
+                <p class="Expl">
+                    Se representa con una coma <span class="span_url">,</span> (disponible en XPath 2.0 y 3.1). 
+                    Permite concatenar resultados formando una lista o secuencia. A diferencia de la unión, <b>no elimina duplicados</b> y respeta el orden en el que escribes la consulta.
+                </p>
+                <p class="Expl">Crear una secuencia que devuelva primero los tiempos y luego los programas:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">(//tiempo_ejecucion , //servicio/@programa)</code></pre>
+            </div>
+
+            <div>
+                <h2 id="funciones-avanzadas">Funciones avanzadas útiles</h2>
+                <p>Existen funciones adicionales muy potentes para tratar datos más complejos o listas largas:</p>
+                
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td><b>Función</b></td>
+                            <td><b>Descripción y Ejemplo</b></td>
+                        </tr>
+                        <tr>
+                            <td><span class="span_url">distinct-values()</span></td>
+                            <td>
+                                Elimina los elementos duplicados de una secuencia.<br>
+                                <pre translate="no" style="margin-top: 5px;"><code class="language-xml">distinct-values(//tipo_proceso)</code></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="span_url">avg()</span></td>
+                            <td>
+                                Devuelve el valor promedio de una secuencia de números.<br>
+                                <pre translate="no" style="margin-top: 5px;"><code class="language-xml">avg(//tiempo_ejecucion)</code></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="span_url">replace()</span></td>
+                            <td>
+                                Reemplaza una cadena de texto por otra. Usa 3 valores: nodo, texto a buscar, texto nuevo.<br>
+                                <pre translate="no" style="margin-top: 5px;"><code class="language-xml">replace(., "Padre", "Principal")</code></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="span_url">matches()</span></td>
+                            <td>
+                                Comprueba si una cadena coincide con una expresión regular (Regex). Devuelve true/false.<br>
+                                <pre translate="no" style="margin-top: 5px;"><code class="language-xml">matches(., "[0-9]+")</code></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
     </body>
 
