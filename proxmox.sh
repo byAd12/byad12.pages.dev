@@ -84,6 +84,10 @@ while true; do
         " | ==================" \
             "${Ne}21${Bl} | Cambiar de versión" \
             " | " \
+        " | ${Az}PYTHON ${Bl}" \
+        " | =================================" \
+            "${Ne}22${Bl} | Ejecutar un archivo como servicio" \
+            " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
             "${Ne}0${Bl} | Cerrar" \
@@ -662,6 +666,23 @@ EOF
         pm2 save
 
         echo -e "\n${Ve}¡Uptime-kuma actualizado correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # PYTHON - EJECUTAR UN ARCHIVO COMO SERVICIO 
+    ##############################################################
+    22)
+        clear
+        echo -e "\n${Am}Hay que tener python previamente instalado.${Bl}"
+        read -p 'Ruta absoluta al archivo: ' ruta_archivo
+
+        echo -e "\n${Az}Verificando versión de python...${Bl}"
+        python --version
+        python3 --version
+
+        echo -e "\n${Az}...${Bl}"
+
+        echo -e "\n${Ve}¡Archivo asignado como servicio correctamente!${Bl}"
         ;;
 
     ##############################################################
