@@ -674,13 +674,43 @@ EOF
     22)
         clear
         echo -e "\n${Am}Hay que tener python previamente instalado.${Bl}"
+        echo -e "\n${Am}Al principio del archivo debe haber esta línea: '${Az}#!/usr/bin/env python3${Am}'.${Bl}"
         read -p 'Ruta absoluta al archivo: ' ruta_archivo
 
         echo -e "\n${Az}Verificando versión de python...${Bl}"
         python --version
         python3 --version
 
-        echo -e "\n${Az}...${Bl}"
+        echo -e "\n${Az}Asignando permisos al archivo...${Bl}"
+        chmod +x $ruta_archivo
+
+        echo -e "\n${Az}Asignando permisos al archivo...${Bl}"
+        cat <<EOF > /etc/systemd/system/script-python.service
+[Unit]
+Description=script de Python
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/python3 ${ruta_archivo}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+        echo -e "\n${Az}Recargando systemd...${Bl}"
+        systemctl daemon-reload
+
+        echo -e "\n${Az}Arrancando servicio...${Bl}"
+        systemctl start script-python.service
+
+
+        echo -e "\n${Az}Habilitando el servicio...${Bl}"
+        systemctl enable script-python.service
+
+        echo -e "\n${Az}Para editar parámetros edite el siguiente archivo: ${Az}/etc/systemd/system/script-python.service${Bl}"
 
         echo -e "\n${Ve}¡Archivo asignado como servicio correctamente!${Bl}"
         ;;

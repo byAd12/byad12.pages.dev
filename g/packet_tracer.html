@@ -100,7 +100,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h2>
                 <ul>
                     <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
-                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Conceptos">Conceptos</a></li>
+                    <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#STP_Conceptos">Conceptos de prioridad</a></li>
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
                     <li><b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Ver_Configuracion">Verificación</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a> • <a href="#VTP_Reset_Revision">Resetear la versión</a></li>
                     <li><b>Hot Standby Router Protocol (HSRP):</b> <a href="#HSRP_Configuracion_IP">Configuración de IP</a> • <a href="#HSRP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HSRP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HSRP_Verificacion">Verificación</a></li>
@@ -114,6 +114,14 @@ Código por byAd12
                     <li><b>DHCPv6 stateless:</b> <a href="#DHCPv6_Stateless_Servidor_Config">Servidor DHCPv6 stateless</a> • <a href="#DHCPv6_Stateless_Cliente_Config">Cliente DHCPv6 stateless</a></li>
                     <li><b>DHCPv6 stateful:</b> <a href="#DHCPv6_Stateful_Servidor_Config">Servidor DHCPv6 stateful</a> • <a href="#DHCPv6_Stateful_Cliente_Config">Cliente DHCPv6 stateful</a></li>
                     <li><b>DHCPv6 importante:</b> <a href="#DHCPv6_Servidor_Verificacion">Verificación</a> • <a href="#DHCPv6_Relay">Relay</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad</h2>
+                <ul>
+                    <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
+                    <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">Des/Habilitar CDP</a> • <a href="#LLDP_Des_habilitar">Des/Habilitar LLDP</a></li>
+                    <li><b>Puertos - Básico:</b> <a href="#Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</a> • <a href="#Puertos_VLAN_BlackHole">VLAN BlackHole</a></li>
+                    <li><b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • <a href="#Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Habilitar un puerto bloquado</a></li>
                 </ul>
             </div>
         </div>
@@ -689,6 +697,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# transport input ssh</code></pre>
                 <p class="Expl">Desde el momento de poner el comando se denegará conexiones telnet, solo admitirá SSH. Si se tenía alguna conexión telnet existente no la cierra.</p>
+                <p class="Expl">Hay que recordar de poner <span class="span_contenido">login local</span> si se va a permitir el acceso con nombre de usuario y contraseña.</p>
             
                 <p>🛡️ Para reforzar la seguridad, se puede forzar al switch a realizar únicamente conexiones por SSH v2.0:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip ssh version 2</code></pre>
@@ -1336,32 +1345,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="PortFast_Activar">Spanning-tree &gt; Activar <span>Port-Fast</span></h2>
-
-                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo portfast:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree portfast</code></pre>
-                <p class="Expl">Esto evitará que la interfaz espere alrededor de 50 segundos para empezar a aceptar tramas.</p>
-
-            </div>
-
-            <div>
-                <h2 id="BPDUGuard_Activar">Spanning-tree &gt; Activar <span>BPDU-Guard</span></h2>
-
-                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo bpduguard:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree bpduguard enable</code></pre>
-                <p class="Expl">
-                    Esto bloqueará la interfaz si le llega un mensaje STP.
-                    Es <u>importante</u> ponerlo solo en interfaces donde solo haya un PC o servidor conectado.
-                </p>
-                <p class="Expl">
-                    <u>Nota</u>: Es recomendable ponerlo junto a portfast.
-                </p>
-
-            </div>
-
-            <div>
                 <h2 id="STP_Conceptos">Spanning-tree > Conceptos de Prioridad</h2>
                 <p>
                     La prioridad del bridge se compone de:
@@ -1967,9 +1950,242 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Spanning-tree</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="PortFast_Activar">Spanning-tree &gt; Activar <span>Port-Fast</span></h2>
+
+                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo portfast:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree portfast</code></pre>
+                <p class="Expl">Esto evitará que la interfaz espere alrededor de 50 segundos para empezar a aceptar tramas.</p>
+                <p><u>Importante</u>: Debe ponerse solo en puertos que estén en modo acceso.</p>
+
+                <p>Además podemos habilitar portfast por defecto en todos los puertos del switch que son de acceso:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree portfast default</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="BPDUGuard_Activar">Spanning-tree &gt; Activar <span>BPDU-Guard</span></h2>
+
+                <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo bpduguard:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree bpduguard enable</code></pre>
+                <p class="Expl">
+                    Esto bloqueará la interfaz si le llega un mensaje STP.
+                </p>
+
+                <p><u>Importante</u>: Debe ponerse solo en puertos que estén en modo acceso ya que en los puertos en modo troncal suelen circular mensajes STP, haciendo que el tráfico entre switches se bloquée.</p>
+
+            </div>
 
         </div>
 
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Problemas de reconocimiento</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="CDP_Des_habilitar">Des/Habilitar el protocolo CDP</h2>
+
+                <p>
+                    CDP es un protocolo habilitado por defecto en todos los switches de Cisco.
+                    Puede detectar automáticamente otros dispositivos con CDP habilitado y ayudar a configurar automáticamente la conexión.
+                </p>
+
+                <p>
+                    <u>Problema de seguridad</u>: La información de CDP se envía por los puertos con CDP habilitado en transmisiones periódicas sin encriptar,
+                    incluyendo datos de configuración del switch. Esto es un problema ya que un atacante puede recibir estos datos y detectar vulnerabilidades
+                    según la versión del switch que envió el mensaje.
+                </p>
+
+                <p>Como solución podemos deshabilitar globalmente el protocolo CDP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# no cdp run</code></pre>
+                <p class="Expl">Para volver a habilitar el protocolo CDP globalmente podemos ejecutar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# cdp run</code></pre>
+
+                <p>Otra opción sería deshabilitarlo en una interfaz específica:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no cdp enable</code></pre>
+                <p class="Expl">Para volver a habilitar el protocolo CDP en esa interfaz podemos ejecutar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# cdp enable</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="LLDP_Des_habilitar">Des/Habilitar el protocolo LLDP</h2>
+
+                <p>LLPD también es vulnerable a los ataques de reconocimiento como el protocolo CDP.</p>
+
+                <p>Como solución podemos deshabilitar globalmente el protocolo LLPD:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# no lldp run</code></pre>
+                <p class="Expl">Para volver a habilitar el protocolo LLPD globalmente podemos ejecutar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# lldp run</code></pre>
+
+                <p>Otra opción sería deshabilitarlo en una interfaz específica:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no lldp transmit</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no lldp receive</code></pre>
+                <p class="Expl">Para volver a habilitar el protocolo LLPD en esa interfaz podemos ejecutar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# lldp transmit</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# lldp receive</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Puertos</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</h2>
+
+                <p>
+                    Una buena práctica es apagar todos los puertos que no se utilicen y así evitar que, 
+                    si alguien intenta conectar un dispositivo no autorizado, el switch no envíe ningún tipo de tráfico a ese puerto en específico:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Rango_de_Interfaces&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# shutdown</code></pre>
+                <p class="Expl">En caso de que queramos conectar un dispositivo podemos encender el puerto de nuevo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Puertos_VLAN_BlackHole">Asignar puertos no usados a la VLAN BlackHole</h2>
+
+                <p>Es buena práctica crear una vlan llamada BlackHole y meter dentro todos los puertos que no se vayan a usar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;Número_VLAN_Sin_Usar&gt;
+(config-vlan)# name BlackHole
+(config-vlan)# exit</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaces_Sin_Usar&gt;
+(config-if)# switchport mode Access
+(config-if)# switchport access vlan &lt;Número_VLAN_BlackHole&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</h2>
+
+                <p>La seguridad de puertos va dirigida solo a puertos en <b>modo acceso</b>, y se puede activar de la siguiente forma:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security</code></pre>
+
+                <p>Podemos verificar que está habilitado con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security interface &lt;Interfaz&gt;</code></pre>
+
+                <p><u>Nota</u>: Si un puerto activo está configurado con port-security y hay más de un dispositivo conectado a ese puerto, el puerto pasará al estado de error desactivado.</p>
+
+            </div>
+
+            <div>
+                <h2 id="Seguridad_Puertos_Limitar_MACs">Seguridad de puertos &gt; Limitar MACs</h2>
+
+                <p>Con port-security podemos limitar la <b>cantidad máxima</b> de MACs que puede haber en un puerto, siendo de 1 hasta 8192:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security maximum &lt;Cantidad_Máxima_MACs&gt;</code></pre>
+
+                <p>Además, podemos fijar las direcciones MAC estáticas que si podrán tener acceso al puerto:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security mac-address &lt;Dirección_MAC&gt;</code></pre>
+
+                <p>Estas MACs que se aprendan no persisten en la configuración si se reinicia el equipo, por ello podemos definir que se guarde en NVRAM:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security mac-address sticky</code></pre>
+
+                <p>Con el siguiente comando se pueden ver las direcciones MACs aprendidas por el switch en cada interfaz:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security address</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Seguridad_Puertos_Caducidad_MACs">Seguridad de puertos &gt; Caducidad de las MACs</h2>
+
+                <p>
+                    Podemos definir que las MACs que se guardan tengan un tiempo de caducidad hasta que se eliminen de la memoria.
+                    Para <b>las MACs dinámicas</b> (aprendidas automáticamente) podemos configurarlo de 2 formas:
+                </p>
+
+                <p>1. Caducidad absoluta - se eliminan después del tiempo de caducidad aunque estén activas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging type absolute</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging type time &lt;Tiempo_En_Minutos&gt;</code></pre>
+
+                <p>2. Caducidad por inactividad - se eliminan solo si no transmiten tráfico durante el tiempo de caducidad:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging type inactivity</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging type time &lt;Tiempo_En_Minutos&gt;</code></pre>
+
+                <p>Para <b>las MACs estáticas</b> (configuradas manualmente):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging static</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security aging type time &lt;Tiempo_En_Minutos&gt;</code></pre>
+                <p class="Expl">Por defecto no caducan, pero se puede habilitar el envejecimiento.</p>
+
+            </div>
+
+            <div>
+                <h2 id="Seguridad_Puertos_Modos_Violacion">Seguridad de puertos &gt; Modos de violación</h2>
+
+                <p>Podemos definir que pasará si ocurre una violación de un puerto con 3 modos diferentes:</p>
+
+                <p>1. Que la interfaz se apague inmediatamente, generar una alerta del sistema y que se incremente el contador de violaciones:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security violation shutdown</code></pre>
+
+                <p>2. Que se descarten todos los paquetes desde y hacia esa interfaz, generar una alerta del sistema y que se incremente el contador de violaciones:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security violation restrict</code></pre>
+
+                <p>3. Que se descarten todos los paquetes desde y hacia esa interfaz sin generar ninguna alerta ni incrementar el contador de violaciones:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security violation protect</code></pre>
+                <p class="Expl">Es el modo menos seguro de los tres.</p>
+
+                <p>Para verificar que una interfaz entró en modo de violación y ver su contador de violaciones podemos usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security interface &lt;Interfaz&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Seguridad de puertos &gt; Habilitar un puerto bloqueado</h2>
+
+                <p>Si una interfaz fué bloqueada podemos y no se configuró sticky podemos habilitarla de nuevo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+
+                <p>En caso de que sí se haya configurado sticky tendremos que quitar las direcciones MAC de la memoria:</p>
+                <p class="Expl">En el siguiente comando tendremos que localizar las MACs que se guardaron en memoria (sticky):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# show run interface &lt;Interfaz&gt;</code></pre>
+                <p class="Expl">En el siguiente comando borraremos las líneas exactas guardadas en memoria definiendo la palabra "no" al principio:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport port-security mac-address sticky &lt;Dirección_MAC_A_Quitar&gt;</code></pre>
+
+            </div>
+
+        </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1981,5 +2197,3 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     </body>
 
 </html>
-
-

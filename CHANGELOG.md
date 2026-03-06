@@ -1,10 +1,8 @@
-Nuevo contenido y mejoras
+Nuevas funciones y contenido
 
-# g/xpath.html
+# proxmox.sh
+Se completó la opción para crear un servicio de Python y ejecutarlo cuando se inicie el sistema
+
+# packet_tracer.html
 Nuevo contenido
-
-# g/samba_local.html
-Mejora de visibilidad
-
-# g/markup_language.html, g/xslt.html
-Nuevo botón a una nueva guía
+Se reordenó el contenido actual en nuevas secciones adecuadas
