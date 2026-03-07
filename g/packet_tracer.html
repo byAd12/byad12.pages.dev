@@ -118,10 +118,13 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad</h2>
                 <ul>
-                    <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a></li>
+                    <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Seguridad_Verificacion">Verificación</a></li>
                     <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">Des/Habilitar CDP</a> • <a href="#LLDP_Des_habilitar">Des/Habilitar LLDP</a></li>
                     <li><b>Puertos - Básico:</b> <a href="#Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</a> • <a href="#Puertos_VLAN_BlackHole">VLAN BlackHole</a></li>
-                    <li><b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • <a href="#Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Habilitar un puerto bloquado</a></li>
+                    <li><b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • <a href="#Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Habilitar un puerto bloquado</a> • <a href="#Seguridad_Puertos_Verificacion">Verificación</a></li>
+                    <li><b>Ataques de VLAN:</b> <a href="#VLAN_Hop_Mitigacion">Mitigar ataques de salto</a></li>
+                    <li><b>Ataques de DHCP:</b> <a href="#DHCP_Snooping_Configuracion">Configurar DHCP Snooping</a> • <a href="#DHCP_Snooping_Verificacion">Verificación de DHCP Snooping</a></li>
+                    <li><b>Ataques de ARP:</b> <a href="#DAI_Configuracion">Configuración de DAI</a></li>
                 </ul>
             </div>
         </div>
@@ -831,7 +834,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
 
                 <p>Para verificarlo se puede ejecutar el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show ip route</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
                 <p class="Expl">
                     Tendría que aparecer una línea como la siguiente, que indica que si se quiere llegar a la subred <span class="span_contenido">&lt;Direccion_Red&gt;/&lt;Máscara&gt;</span>, 
                     el dispositivo enrutará el paquete hacia la interfaz lógica <span class="span_contenido">Vlan&lt;VLAN_ID&gt;</span>. 
@@ -1525,7 +1528,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="VTP_Ver_Configuracion">VTP &gt; Ver la configuración</h2>
 
                 <p>Para verificar el estado de VTP y la configuración usaremos el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp status</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show vtp status</code></pre>
                 <p class="Expl">Esto mostrará todas las configuraciones anteriores menos la contraseña, además de un <span class="span_contenido">Configuration Revision</span> que es muy importante al indicar la cantidad de cambios que se realizaron en este switch (por defecto es <b>0</b>).</p>
                 <p class="Expl">En cualquier otro switch que tenga un <span class="span_contenido">Configuration Revision</span> menor al switch servidor, tendrá que actualizar su lista de VLANs.</p>
 
@@ -1536,7 +1539,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="VTP_Configuracion_Contraseña">VTP &gt; Ver la contraseña del dominio</h2>
 
                 <p>Cualquier switch de un mismo dominio debe tener la misma contraseña VTP que indique el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show vtp password</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show vtp password</code></pre>
 
             </div>
 
@@ -1641,14 +1644,14 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="HSRP_Verificacion">HSRP &gt; Verificación de la configuración</h2>
 
                 <p>Para verificar el estado de HSRP y la configuración de cada interfaz con IP compartida usaremos el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show standby</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show standby</code></pre>
                 <p class="Expl">
                     Este comando muestra detalles que el comando con brief omite, como la MAC virtual activa,
                     los temporizadores por defecto (Hello 3s, Hold 10s) y el contador de cambios de estado del router.
                 </p>
 
                 <p>También se puede ver en formato de resumen:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show standby brief</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show standby brief</code></pre>
 
             </div>
 
@@ -1753,7 +1756,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address dhcp</code></pre>
 
                 <p>3. Verificación:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show ip interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface &lt;Interfaz&gt;</code></pre>
                 <p class="Expl">Debería devolver una linea que diga "Address determined by DHCP".</p>
 
             </div>
@@ -1807,7 +1810,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
 
                 <p>2. Verificaremos que SLAAC está activado:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show ipv6 interface &lt;Interfaz&gt; | section Joined</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ipv6 interface &lt;Interfaz&gt; | section Joined</code></pre>
                 <p class="Expl">El grupo de todos los routers IPv6 responde a la dirección de multidifusión IPv6 <span class="span_url">ff02::2</span>.</p>
 
             </div>
@@ -1946,7 +1949,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 dhcp relay destination &lt;Direccion_IPv6&gt; [&lt;Tipo_Interfaz&gt; &lt;Interfaz&gt;]</code></pre>
 
                 <p>Podemos verificarlo con le siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show ipv6 dhcp interface &lt;Interfaz&gt; is in relay mode</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ipv6 dhcp interface &lt;Interfaz&gt; is in relay mode</code></pre>
 
             </div>
 
@@ -1970,7 +1973,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">Esto evitará que la interfaz espere alrededor de 50 segundos para empezar a aceptar tramas.</p>
                 <p><u>Importante</u>: Debe ponerse solo en puertos que estén en modo acceso.</p>
 
-                <p>Además podemos habilitar portfast por defecto en todos los puertos del switch que son de acceso:</p>
+                <p>Además podemos habilitar portfast por defecto en todos los puertos del switch que están en modo acceso:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree portfast default</code></pre>
 
             </div>
@@ -1981,11 +1984,25 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo bpduguard:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# spanning-tree bpduguard enable</code></pre>
-                <p class="Expl">
-                    Esto bloqueará la interfaz si le llega un mensaje STP.
-                </p>
+                <p class="Expl">Esto pondrá la interfaz en estado err-disable si recibe una BPDU, para evitar que se conecte un switch y provoque bucles en la red.</p>
 
-                <p><u>Importante</u>: Debe ponerse solo en puertos que estén en modo acceso ya que en los puertos en modo troncal suelen circular mensajes STP, haciendo que el tráfico entre switches se bloquée.</p>
+                <p><u>Importante</u>: Debe ponerse solo en puertos que estén en modo acceso y en <b>portfast</b> ya que en los puertos en modo troncal suelen circular mensajes STP, ya que en los puertos en modo troncal suelen circular BPDUs, lo que provocaría que la interfaz entrase en err-disable.</p>
+
+                <p>Además podemos habilitar BPDU-Guard por defecto en todos los puertos del switch que están en modo acceso:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree portfast bpduguard default</code></pre>
+                <p class="Expl">Siempre hay que activar portfast si se usa BPDU-Guard.</p>
+
+
+            </div>
+
+            <div>
+                <h2 id="STP_Seguridad_Verificacion">Spanning-tree &gt; Verificación</h2>
+
+                <p>Con el siguiente comando podremos ver toda la configuración relacionada con STP:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | begin span</code></pre>
+
+                <p>También podemos ver un resumen de la configuración de STP mirando si portfast o BPDU-Guar está habilitado:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show spanning-tree summary</code></pre>
 
             </div>
 
@@ -2085,6 +2102,17 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Port Security</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
             <div>
                 <h2 id="Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</h2>
 
@@ -2092,9 +2120,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security</code></pre>
-
-                <p>Podemos verificar que está habilitado con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show port-security interface &lt;Interfaz&gt;</code></pre>
 
                 <p><u>Nota</u>: Si un puerto activo está configurado con port-security y hay más de un dispositivo conectado a ese puerto, el puerto pasará al estado de error desactivado.</p>
 
@@ -2114,9 +2139,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Estas MACs que se aprendan no persisten en la configuración si se reinicia el equipo, por ello podemos definir que se guarde en NVRAM:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security mac-address sticky</code></pre>
-
-                <p>Con el siguiente comando se pueden ver las direcciones MACs aprendidas por el switch en cada interfaz:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show port-security address</code></pre>
 
             </div>
 
@@ -2164,9 +2186,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport port-security violation protect</code></pre>
                 <p class="Expl">Es el modo menos seguro de los tres.</p>
 
-                <p>Para verificar que una interfaz entró en modo de violación y ver su contador de violaciones podemos usar el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show port-security interface &lt;Interfaz&gt;</code></pre>
-
             </div>
 
             <div>
@@ -2179,10 +2198,138 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>En caso de que sí se haya configurado sticky tendremos que quitar las direcciones MAC de la memoria:</p>
                 <p class="Expl">En el siguiente comando tendremos que localizar las MACs que se guardaron en memoria (sticky):</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# show run interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show run interface &lt;Interfaz&gt;</code></pre>
                 <p class="Expl">En el siguiente comando borraremos las líneas exactas guardadas en memoria definiendo la palabra "no" al principio:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no switchport port-security mac-address sticky &lt;Dirección_MAC_A_Quitar&gt;</code></pre>
 
+            </div>
+
+            <div>
+                <h2 id="Seguridad_Puertos_Verificacion">Seguridad de puertos &gt; Verificación</h2>
+
+                <p>El siguiente comando muestra un resumen de cada interfaz con sus MACs aprendidas, el máximo y si está en modo de violación:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security</code></pre>
+
+                <p>Para mostrar todas las direcciones MAC seguras que se configuran manualmente o se aprenden dinámicamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security address</code></pre>
+
+                <p>Para verificar que una interfaz entró en modo de violación y ver su contador de violaciones podemos usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show port-security interface &lt;Interfaz&gt;</code></pre>
+
+                <p>Podemos ver de una interfaz toda la configuración asignada y las MACs aprendidas en modo sticky:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show run interface &lt;Interfaz&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Ataques de VLAN</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="VLAN_Hop_Mitigacion">VLAN &gt; Mitigar ataques de salto</h2>
+
+                <p>Un atacante puede aprovechar la negociación automática de Dynamic Trunking Protocol para simular ser un switch y conseguir que el puerto negocie un enlace trunk. De esta forma podría recibir tráfico de varias VLANs.</p>
+                <p>Esto ocurre porque normalmente un equipo está conectado a un puerto en modo acceso, que solo debería tener acceso a una VLAN.</p>
+
+                <p>Para solucionarlo tendremos que definir los puertos del switch en modo acceso y asignarle una VLAN fija, además de deshabilitar la negociación DTP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;Número_VLAN&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport nonegotiate</code></pre>
+
+                <p>En enlaces troncales también deberíamos definir una VLAN nativa distinta a la 1, permitir solo las VLANs con tráfico y quitar la negociación de DTP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk native vlan &lt;Número_VLAN_Nativa&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan &lt;VLANs_Permitidas&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport nonegotiate</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Ataques de DHCP</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="DHCP_Snooping_Configuracion">DHCP Snooping &gt; Configuración</h2>
+
+                <p>Para habilitar DHCP Snooping lo haremos en la configuración global:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping</code></pre>
+
+                <p>Además podemos definir en qué VLANs se realizará la inspección:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping vlan &lt;VLANs_A_Inspeccionar&gt;</code></pre>
+
+                <p>En las interfaces de confianza se debe definir explícitamente el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip dhcp snooping trust</code></pre>
+
+                <p>Para limitar en una interfaz la cantidad de mensajes de descubrimiento de DHCP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip dhcp snooping limit rate &lt;Número_Límite&gt;</code></pre>
+                
+            </div>
+
+            <div>
+                <h2 id="DHCP_Snooping_Verificacion">DHCP Snooping &gt; Verificación</h2>
+
+                <p>Con el siguiente comando podemos ver toda la configuración que se haya asignado, además de un esquema de todas las interfaces:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip dhcp snooping</code></pre>
+
+                <p>Para ver todas las concesiones DHCP (IP y MAC) en cada interfaz podemos usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip dhcp snooping binding</code></pre>
+                
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Seguridad - Ataques de ARP</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="DAI_Configuracion">DAI &gt; Configuración</h2>
+
+                <p>Para configurar DAI, se requiere que funcione la tabla de enlace de inspección DHCP. Por ello tendremos que habilitarlo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping</code></pre>
+
+                <p>A continuación habilitaremos en la VLAN correspondiente la inspección de DHCP y ARP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping vlan &lt;Número_VLAN&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection vlan &lt;Número_VLAN&gt;</code></pre>
+
+                <p>Debemos configurar que los enlaces troncales sean puertos confiados/trust:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Troncal&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip dhcp snooping trust</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip arp inspection trust</code></pre>
+
+                <p>Hay 3 tipos de validaciones de ARP:</p>
+                <p class="Expl">1. Por la <b>mac de origen</b> - comprueba la dirección MAC de origen en el encabezado de Ethernet con la dirección MAC del remitente en el cuerpo ARP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate src-mac</code></pre>
+                <p class="Expl">1. Por la <b>mac de destino</b> - comprueba la dirección MAC de destino en el encabezado de Ethernet con la dirección MAC de destino en el cuerpo ARP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate dst-mac</code></pre>
+                <p class="Expl">1. Por la <b>ip</b> - comprueba el cuerpo ARP en busca de direcciones IP no válidas e inesperadas, incluidas las direcciones 0.0.0.0, 255.255.255.255 y todas las direcciones de multidifusión IP:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate ip</code></pre>
+                
             </div>
 
         </div>

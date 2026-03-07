@@ -1,8 +1,8 @@
-Nuevas funciones y contenido
+Nuevo contenido y estilos
 
-# proxmox.sh
-Se completó la opción para crear un servicio de Python y ejecutarlo cuando se inicie el sistema
+# resources/blog.css
+Ampliación de la altura del scrollbar
 
 # packet_tracer.html
 Nuevo contenido
-Se reordenó el contenido actual en nuevas secciones adecuadas
+Se arreglaron ciertos comandos que se ejecutaban en el sitio equivocado

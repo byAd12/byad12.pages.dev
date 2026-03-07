@@ -22,8 +22,8 @@
 /* =================================================== */
 /* Scrollbar */
 
-::-webkit-scrollbar{background-color: #222523; height: 5px; width: 3px;}
-::-webkit-scrollbar-thumb{background-color: gray; border-radius: 20px;}
+::-webkit-scrollbar{background-color: #222523; width: 3px;}
+::-webkit-scrollbar-thumb{background-color: gray; border-radius: 20px; height: 50px;}
 
 /* =================================================== */
 /* Básico */
