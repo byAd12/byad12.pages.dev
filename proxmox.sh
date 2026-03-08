@@ -121,7 +121,7 @@ while true; do
         echo -e "\n${Az}Verificando cambios...${Bl}"
         timedatectl
 
-        echo -e "\n${Ve}¡Se ha creado el clúster correctamente!${Bl}"
+        echo -e "\n${Ve}¡Se ha configurado la hora RTC correctamente!${Bl}"
         ;;
 
     ##############################################################

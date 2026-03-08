@@ -4,12 +4,11 @@
 /* PRINCIPAL */
 
 *{margin: 0; padding: 0; box-sizing: border-box; font-family: Arial; scroll-behavior: smooth;}
-html, body{font-family: Arial; height: 100%; -webkit-user-select: none; user-select: none; overflow-x: hidden; background-color: #222523;}
+html, body{height: 100%; -webkit-user-select: none; user-select: none; overflow-x: hidden; background-color: #222523;}
 a{text-decoration: none;}
 
 br{user-select: none;}
-p a::selection{text-decoration: underline;}
-*::selection{background-color: #555; text-decoration-color: #7cfb2d !important;}
+*::selection{background-color: rgba(94, 124, 226, 0.4); color: #e0e0e0;}
 
 ::-webkit-scrollbar{width: 5px; opacity: 100%; background-color: #222523;}
 ::-webkit-scrollbar-track{box-shadow: 0 0 5% black; transition: 0.5s; background-color: #222523;}
@@ -25,7 +24,7 @@ p a::selection{text-decoration: underline;}
 /* ========================================================= */
 /* NAV BAR */
 
-.menu_bar{position: relative; background-color: #222523; height: 50px; width: 100%; max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
+.menu_bar{background-color: #222523; height: 50px; width: 100%; max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
 .menu_bar ul{list-style: none; display: flex;}
 .menu_bar .logo a, .logo a span{font-size: 25px; font-family: "Smoch" !important;}
 .menu_bar ul li{padding: 0 10px 0 10px;}
@@ -111,7 +110,7 @@ p a::selection{text-decoration: underline;}
 .ProyectosInfoAvanzada .logoProyecto .a1 *{color: white;}
 
 .ProyectosInfoAvanzada .logoProyecto .a12 p.codigo{user-select: text !important; background-color: #7cfb2d; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: .5px solid #222523; border-radius: 5px;}
-.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo::selection{color: #d8d8d8;}
+.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo::selection{color: white; background-color: #222523;}
 
 .ProyectosInfoAvanzada .logoProyecto .a12 a{background-color: #7cfb2d; user-select: none; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: 3px solid #222523; border-radius: 5px; transition: all .3s;}
 .ProyectosInfoAvanzada .logoProyecto .a12 a:hover{background-color: #222523; color: white !important; border: 3px solid #7cfb2d;}
@@ -154,12 +153,15 @@ p a::selection{text-decoration: underline;}
 .privacy span.fecha{color: #7cfb2d;}
 
 /* ========================================================= */
-/* CONTACTO */
+/* Estilos conjuntos */
 
-.ContactoP{user-select: text; color: rgb(228, 196, 196); margin: 20px;}
-.ContactoP span{color: #7cfb2d; user-select: all;}
-.ContactoP a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
-.ContactoP a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
+.ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin: 20px;  margin-top: 0;}
+.ParrafoCompartido span{color: #7cfb2d; user-select: all;}
+.ParrafoCompartido a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
+.ParrafoCompartido a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
+
+/* ========================================================= */
+/* CONTACTO */
 
 .DivPrincipal .objectDIV{margin-bottom: 50px;}
 .DivPrincipal object{display: block; justify-content: center !important; color: white !important; border: .5px solid gray; border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 500px; height: 400px; margin: 0 auto;}
@@ -188,16 +190,14 @@ p a::selection{text-decoration: underline;}
 .BlogEntradas .Color0 div p, .BlogEntradas .Color1 div p, .BlogEntradas .Color2 div p{transition: none !important;}
 .Entrada p:not(.Entrada div p){color: rgb(228, 196, 196);}
 
-.BlogEntradas .Color0:hover div p{color: transparent !important; position: relative;}
-.BlogEntradas .Color1:hover div p{color: transparent !important; position: relative;}
-.BlogEntradas .Color2:hover div p{color: transparent !important; position: relative;}
+.BlogEntradas a:hover div div p{color: transparent !important; position: relative;}
 
 .BlogEntradas a .Color0:hover div p::after{content: "Otros"; position: absolute; right: 0; top: 0; color: gray !important;}
 .BlogEntradas a .Color1:hover div p::after{content: "S.M.R."; position: absolute; right: 0; top: 0; color: rgb(120, 120, 200) !important;}
 .BlogEntradas a .Color2:hover div p::after{content: "A.S.I.R."; position: absolute; right: 0; top: 0; color: rgba(167, 255, 112, 0.5) !important;}
 
 .GuiasBordeColores .Espaciador{margin-left: 20px;}
-.GuiasBordeColores button{color: white; background-color: #222523; border-bottom: 1px solid #222523 !important; border: none; cursor: pointer; margin-right: 10px; font-size: 15px;}
+.GuiasBordeColores button{color: white; background-color: #222523; border: none; border-bottom: 1px solid #222523 !important; cursor: pointer; margin-right: 10px; font-size: 15px;}
 .GuiasBordeColores button:hover{border-bottom: 1px solid #7cfb2d !important;}
 
 .GuiasBordeColores .Color0{color: gray;}
@@ -216,10 +216,6 @@ p a::selection{text-decoration: underline;}
 
 .ScriptsAjustarVH{min-height: 69vh;}
 h3.QuitarPaddingTop{padding-top: 0 !important;}
-.GuiasP{user-select: text; color: rgb(228, 196, 196); margin: 20px; margin-top: 0;}
-.GuiasP span{color: #7cfb2d; user-select: all;}
-.GuiasP a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
-.GuiasP a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
 
 /* ========================================================= */
 /* BOTÓN PERSONALIZADO */
@@ -292,23 +288,25 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
 @media screen and (max-width: 768px){
   /* SCROLLBAR */
   *{scrollbar-width: none !important;}
+
   /* GUÍAS */
   .BlogEntradas*{transition: all .5s ease-in-out;}
   .BlogEntradas a .Entrada{width: 80vw; min-height: 100% !important;}
   .BlogEntradas a .Entrada div p{width: 30%; transition: all .5s; text-align: right;}
+
   /* FOOTER */
-  footer{background-color: #222523; padding: 30px; width: 100%; text-align: center; color: white; justify-content: center; text-align: center;}
-  .footer-content{max-width: 1200px; margin: 0 auto; display: block; flex-wrap: wrap; justify-content: space-between; align-items: center;}
+  footer{background-color: #222523; padding: 30px; width: 100%; text-align: center; color: white;}  
+  .footer-content{max-width: 1200px; margin: 0 auto; display: block;}
   .footer-left{text-align: center;}
   .footer-left p{margin-bottom: 20px;}
   .footer-widgets{justify-content: center !important;}
 }
 
 @media screen and (max-width: 500px){
+  /* BARRA DE MENÚ */
   .menu_toggle{display: block;}
   .menu_bar ul{display: none; flex-direction: column; width: 100%; text-align: center; border-top: 1px solid gray; background-color: #222523; position: absolute; top: 50px; left: 0; z-index: 10000; overflow-y: auto; max-height: 100vh;}
   .menu_bar ul li{border: 1px solid gray; border-top: none;}
-
   .menu_bar ul li:hover{background-color: #555;}
   .menu_bar ul li a{padding: 20px 0 20px 0; display: block;}
   .menu_bar.active ul{display: flex;}
@@ -332,6 +330,5 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
   .BlogEntradas a .Entrada p{word-break: break-all;}
   .ocultarMOVIL{display: none;}
 }
-
 
 /* ========================================================= */

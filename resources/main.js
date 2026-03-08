@@ -1,3 +1,5 @@
+// Por byAd12.pages.dev
+
 // ==========================================================
 // ==========================================================
 // TRADUCCIÓN - gtranslate.io
@@ -261,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Hover por palabra en los títulos
 
 document.addEventListener('DOMContentLoaded', function() {
-    const var1 = document.querySelectorAll("#proyectoH2Separar");
+    const var1 = document.querySelectorAll(".proyectoH2Separar");
     var1.forEach(elemento => {
         const palabras = elemento.innerText.split(" ");
         elemento.innerHTML = palabras.map(p => `<span>${p}</span>`).join(" ");
