@@ -90,8 +90,8 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">5. VLANs y Troncales (Switching)</h2>
                 <ul>
                     <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Archivo">Borrar vlan.dat</a></li>
-                    <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Reestablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
-                    <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Reestablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
+                    <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Restablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
+                    <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Restablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
                     <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a> • <a href="#Enrutado_IPv6">Enrutado con IPv6</a></li>
                     <li><b>Switch SVI:</b> <a href="#Switch_SVI_Configuracion">Configuración</a></li>
                     <li><b>Router:</b> <a href="#Router_Configuracion_Gateway">Configuración como gateway</a> • <a href="#Router_Ruta_Interfaz">Ruta con destino una interfaz</a> • <a href="#Router_Ruta_IP">Ruta con destino una IP</a></li>
@@ -108,7 +108,7 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">7. DHCP</h2>
                 <ul>
-                    <li><b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración en servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">Des/Activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • <a href="#DHCP_Verificacion">Verificación</a></li>
+                    <li><b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración en servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">(Des)activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • <a href="#DHCP_Verificacion">Verificación</a></li>
                     <br>
                     <li><b>DHCPv6:</b> <a href="#SLAAC_Activar">SLAAC</a> • <a href="#DHCPv6_Stateful_Activar">DHCPv6 stateful</a> • <a href="#DHCPv6_Stateless_Activar">DHCPv6 stateless</a></li>
                     <li><b>DHCPv6 stateless:</b> <a href="#DHCPv6_Stateless_Servidor_Config">Servidor DHCPv6 stateless</a> • <a href="#DHCPv6_Stateless_Cliente_Config">Cliente DHCPv6 stateless</a></li>
@@ -119,9 +119,9 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad</h2>
                 <ul>
                     <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Seguridad_Verificacion">Verificación</a></li>
-                    <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">Des/Habilitar CDP</a> • <a href="#LLDP_Des_habilitar">Des/Habilitar LLDP</a></li>
+                    <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">(Des)habilitar CDP</a> • <a href="#LLDP_Des_habilitar">(Des)habilitar LLDP</a></li>
                     <li><b>Puertos - Básico:</b> <a href="#Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</a> • <a href="#Puertos_VLAN_BlackHole">VLAN BlackHole</a></li>
-                    <li><b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • <a href="#Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Habilitar un puerto bloquado</a> • <a href="#Seguridad_Puertos_Verificacion">Verificación</a></li>
+                    <li><b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • <a href="#Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Habilitar un puerto bloqueado</a> • <a href="#Seguridad_Puertos_Verificacion">Verificación</a></li>
                     <li><b>Ataques de VLAN:</b> <a href="#VLAN_Hop_Mitigacion">Mitigar ataques de salto</a></li>
                     <li><b>Ataques de DHCP:</b> <a href="#DHCP_Snooping_Configuracion">Configurar DHCP Snooping</a> • <a href="#DHCP_Snooping_Verificacion">Verificación de DHCP Snooping</a></li>
                     <li><b>Ataques de ARP:</b> <a href="#DAI_Configuracion">Configuración de DAI</a></li>
@@ -307,6 +307,7 @@ switch: boot</code></pre>
 
                 <p>Conectarnos mediante Telnet a un host remoto:</p>
                 <pre class="codigo" translate="no"><code class="cisco">telnet (-l &lt;Usuario&gt;) &lt;IpDestino&gt;</code></pre>
+                <p class="Expl">El parámetro <span class="span_contenido">-l</span> en el Command prompt de los PCs no funciona, solo hay que definir la IP.</p>
 
                 <p>Nota - <b>TELNET</b> y <b>SSH</b>:</p>
                 <p class="Expl">Si en el router o switch que queremos conectarnos no tiene en las líneas <span class="span_contenido">vty 0 15</span> un <span class="span_contenido">password</span> y <span class="span_contenido">login</span>, el destino rechazará la conexión automáticamente.</p>
@@ -352,17 +353,17 @@ switch: boot</code></pre>
                 <p>Para filtrar solo <u>las líneas que contengan una palabra</u> como <span class="span_contenido">up</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip interface brief | include up</code></pre>
                 <p class="Expl">Esto devolvería toda las líneas que contengan la palabra <span class="span_contenido">up</span>:</p>
-                <pre class="codigo" translate="no"><code class="cisco">GigabitEthernet0 / 0/0 192.168.10.1 yes manual up
-GigabiteThernet0/0/1 192.168.11.1 yes manual up
-Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">GigabitEthernet0/0/0 192.168.10.1 yes manual up
+GigabitEthernet0/0/1 192.168.11.1 yes manual up
+Serie0/1/0 209.165.200.225 yes manual up</code></pre>
 
                 <p>Para filtrar que las líneas que contengan una palabra como <span class="span_contenido">unassigned</span> <u>no aparezcan</u>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip interface brief | exclude unassigned</code></pre>
                 <p class="Expl">Esto devolvería toda las líneas que no contengan la palabra <span class="span_contenido">unassigned</span> como:</p>
                 <pre class="codigo" translate="no"><code class="cisco">Interface IP-Address OK? Method Status Protocol
-GigabitEthernet0 / 0/0 192.168.10.1 yes manual up
-GigabiteThernet0/0/1 192.168.11.1 yes manual up
-Serie0 / 1/0 209.165.200.225 yes manual up</code></pre>
+GigabitEthernet0/0/0 192.168.10.1 yes manual up
+GigabitEthernet0/0/1 192.168.11.1 yes manual up
+Serie0/1/0 209.165.200.225 yes manual up</code></pre>
 
                 <p>Para filtrar <u>desde qué línea mostrar</u> como desde "Gateway":</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip route | begin Gateway</code></pre>
@@ -858,7 +859,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Reestablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Restablecer</span></h2>
+                <h2 id="VLAN_Restablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Restablecer</span></h2>
 
                 <p>Entraremos a la interfaz, y le quitaremos de switchport la vlan:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -883,7 +884,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Reestablecer_Modo_Troncal">VLAN &gt; Modo Troncal &gt; <span>Reestablecer</span></h2>
+                <h2 id="VLAN_Restablecer_Modo_Troncal">VLAN &gt; Modo Troncal &gt; <span>Restablecer</span></h2>
 
                 <p>Entraremos a la interfaz, y le quitaremos las interfaces permitidas y nativa:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1281,18 +1282,18 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Router_Ruta_Interfaz">Router &gt; Crear una ruta con destino una interfaz</h2>
+                <h2 id="Router_Ruta_Interfaz">Router &gt; Crear una ruta predeterminada por interfaz</h2>
 
                 <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;Interfaz&gt;</code></pre>
 
             </div>
 
             <div>
-                <h2 id="Router_Ruta_IP">Router &gt; Crear una ruta con destino una IP</h2>
+                <h2 id="Router_Ruta_IP">Router &gt; Crear una ruta predeterminada por IP</h2>
 
                 <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;IP&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt;</code></pre>
 
             </div>
 
@@ -1330,7 +1331,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="STP_Switch_Secundario">Spanning-tree &gt; Asignar un switch como <span>secundario</span></h2>
 
-                <p>Dentro del switch que queramos definir como raíz ejecutaremos lo siguiente:</p>
+                <p>Dentro del switch que queramos definir como secundario ejecutaremos lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree vlan &lt;VLAN_ID&gt; root secondary</code></pre>
                 <p class="Expl"><b>VLAN_ID</b>: La VLAN en la que este switch será secundario.</p>
 
@@ -1383,7 +1384,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>EtherChannel - LCP</h1>
+        <h1>EtherChannel - LACP</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1391,7 +1392,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="EtherChannel_Configuracion">EtherChannel &gt; LCP &gt; <span>Configuración</span></h2>
+                <h2 id="EtherChannel_Configuracion">EtherChannel &gt; LACP &gt; <span>Configuración</span></h2>
 
                 <p>Antes de realizar los siguientes pasos, asegúrese de que las VLANs ya estén creadas y que las demás interfaces necesarias estén correctamente configuradas en ambos switches.</p>
 
@@ -1433,7 +1434,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="EtherChannel_Verificacion">EtherChannel &gt; LCP &gt; <span>Verificación</span></h2>
+                <h2 id="EtherChannel_Verificacion">EtherChannel &gt; LACP &gt; <span>Verificación</span></h2>
 
                 <p>Para verificar si el EtherChannel se creó correctamente hay que ejecutar el siguiente comando en ambos switches:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show etherchannel summary</code></pre>
@@ -1454,7 +1455,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="EtherChannel_Eliminar">EtherChannel &gt; LCP &gt; <span>Eliminación de un EtherChannel existente</span></h2>
+                <h2 id="EtherChannel_Eliminar">EtherChannel &gt; LACP &gt; <span>Eliminación de un EtherChannel existente</span></h2>
 
                 <p>Paso 1. Entrar a las interfaces y eliminar el channel-group:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
@@ -1669,7 +1670,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="DHCP_Configuracion_Servidor">DHCPv4 &gt; Servidor &gt; Configuración</h2>
 
-                <p>1. Excluir las IPs reservadas/estáticas de la conecesión:</p>
+                <p>1. Excluir las IPs reservadas/estáticas de la concesión:</p>
                 <p class="Expl">Para excluir una <b>única</b> IP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp excluded-address &lt;IP&gt;</code></pre>
                 <p class="Expl">Para excluir un <b>rango</b> de IPs:</p>
@@ -1733,7 +1734,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Desactivar">DHCPv4 &gt; Servidor &gt; Des/Activar el servicio</h2>
+                <h2 id="DHCP_Desactivar">DHCPv4 &gt; Servidor &gt; (Des)activar el servicio</h2>
 
                 <p><u>Nota</u>: En Cisco IOS el servicio DHCPv4 está habilitado de manera predeterminada.</p>
                 <p><u>Importante</u>: Si se borra los enlaces DHCP o se detiene y reinicia el servicio DHCP, se pueden asignar temporalmente direcciones IP duplicadas en la red.</p>
@@ -1836,7 +1837,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>1. Primero entraremos a la interfaz donde se activará:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
 
-                <p>2. habilitaremos DHCPv6 stateless:</p>
+                <p>2. Habilitaremos DHCPv6 stateful:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 nd managed-config-flag
 (config-if)# ipv6 nd prefix default no-autoconfig</code></pre>
 
@@ -1892,7 +1893,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
 
-                <p>2. Crearmeos una pool para el servidor DHCP:</p>
+                <p>2. Crearemos una pool para el servidor DHCP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 dhcp pool &lt;Nombre_POOL&gt;</code></pre>
 
                 <p>3. Configuraremos el servidor DHCP:</p>
@@ -2018,7 +2019,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="CDP_Des_habilitar">Des/Habilitar el protocolo CDP</h2>
+                <h2 id="CDP_Des_habilitar">(Des)habilitar el protocolo CDP</h2>
 
                 <p>
                     CDP es un protocolo habilitado por defecto en todos los switches de Cisco.
@@ -2045,20 +2046,20 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="LLDP_Des_habilitar">Des/Habilitar el protocolo LLDP</h2>
+                <h2 id="LLDP_Des_habilitar">(Des)habilitar el protocolo LLDP</h2>
 
-                <p>LLPD también es vulnerable a los ataques de reconocimiento como el protocolo CDP.</p>
+                <p>LLDP también es vulnerable a los ataques de reconocimiento como el protocolo CDP.</p>
 
-                <p>Como solución podemos deshabilitar globalmente el protocolo LLPD:</p>
+                <p>Como solución podemos deshabilitar globalmente el protocolo LLDP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# no lldp run</code></pre>
-                <p class="Expl">Para volver a habilitar el protocolo LLPD globalmente podemos ejecutar:</p>
+                <p class="Expl">Para volver a habilitar el protocolo LLDP globalmente podemos ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# lldp run</code></pre>
 
                 <p>Otra opción sería deshabilitarlo en una interfaz específica:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no lldp transmit</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no lldp receive</code></pre>
-                <p class="Expl">Para volver a habilitar el protocolo LLPD en esa interfaz podemos ejecutar:</p>
+                <p class="Expl">Para volver a habilitar el protocolo LLDP en esa interfaz podemos ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# lldp transmit</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# lldp receive</code></pre>
 
@@ -2191,7 +2192,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Seguridad de puertos &gt; Habilitar un puerto bloqueado</h2>
 
-                <p>Si una interfaz fué bloqueada podemos y no se configuró sticky podemos habilitarla de nuevo:</p>
+                <p>Si una interfaz fue bloqueada y no se configuró sticky, podemos habilitarla de nuevo:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# shutdown</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
@@ -2325,9 +2326,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Hay 3 tipos de validaciones de ARP:</p>
                 <p class="Expl">1. Por la <b>mac de origen</b> - comprueba la dirección MAC de origen en el encabezado de Ethernet con la dirección MAC del remitente en el cuerpo ARP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate src-mac</code></pre>
-                <p class="Expl">1. Por la <b>mac de destino</b> - comprueba la dirección MAC de destino en el encabezado de Ethernet con la dirección MAC de destino en el cuerpo ARP:</p>
+                <p class="Expl">2. Por la <b>mac de destino</b> - comprueba la dirección MAC de destino en el encabezado de Ethernet con la dirección MAC de destino en el cuerpo ARP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate dst-mac</code></pre>
-                <p class="Expl">1. Por la <b>ip</b> - comprueba el cuerpo ARP en busca de direcciones IP no válidas e inesperadas, incluidas las direcciones 0.0.0.0, 255.255.255.255 y todas las direcciones de multidifusión IP:</p>
+                <p class="Expl">3. Por la <b>ip</b> - comprueba el cuerpo ARP en busca de direcciones IP no válidas e inesperadas, incluidas las direcciones 0.0.0.0, 255.255.255.255 y todas las direcciones de multidifusión IP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate ip</code></pre>
                 
             </div>
