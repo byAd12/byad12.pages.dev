@@ -53,9 +53,13 @@ Código por byAd12
                 <h2>Instalación</h2>
                 <p>En los clientes hay que instalar el siguiente paquete para poder acceder a carpetas compartidas por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install nfs-common</code></pre>
+                
                 <p>En el servidor hay que instalar el siguiente paquete para poder compartir una carpeta por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install nfs-kernel-server</code></pre>
                 <p class="Expl">Al instalarlo informará que se creó el archivo <span class="span_contenido">/etc/exports</span>.</p>
+
+                <p>Tanto en el cliente como en el servidor podemos adicionalmente permitir en el firewall el tráfico del servicio NFS:</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow nfs</code></pre>
             </div>
 
         </div>
@@ -181,3 +185,4 @@ Código por byAd12
         <script src="../resources/blog.js"></script>
     </body>
 </html>
+
