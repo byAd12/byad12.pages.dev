@@ -41,7 +41,7 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 style="margin: 15px 0;">LDAP</h1>
+        <h1 style="margin: 15px 0;">LDAP - Servidor</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">Servicio de Directorio</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
         <hr>
@@ -283,6 +283,65 @@ changetype: delete</code></pre>
             
             <div class="vacío"></div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">LDAP - CLiente</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Servicio de Directorio</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Conexión de un cliente al servicio LDAP de un servidor</h2>
+
+                <p>1. Primero añadiremos un registro DNS interno que apunte al dominio LDAP mediante el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
+                <p class="Expl">Añadiremos una línea en el fichero con el siguiente formato:</p>
+                <pre class="codigo" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
+
+                <p>2. Primero instalaremos los servicios necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-ldap libnss-ldap nss-updatedb libnss-db nfs-common nslcd</code></pre>
+                
+                <p class="Expl">Va a pedir una serie de preguntas, a las cuales tendremos que responder de la siguiente manera:</p>
+                <p class="Expl">1. Cual es la URL del servidor - <span class="span_contenido">ldap://[IP_SERVIDOR]</span></p>
+                <p class="Expl">2. Cual es el dominio de LDAP - <span class="span_contenido">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]</span></p>
+                <p class="Expl">3. Seleccionar "Version3"</p>
+                <p class="Expl">4. Seleccionar "Sí"</p>
+                <p class="Expl">5. Seleccionar "No"</p>
+                <p class="Expl">6. Cual es la URI del usuario administrador - <span class="span_contenido">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO]</span></p>
+                <p class="Expl">7. Va a pedir la contraseña del usuario administrador por protección antes de unirte al dominio</p>
+                <p class="Expl">8. Seleccionar "msd"</p>
+
+                <p>Si el proceso de instalación falla o no pregunta el paso 8, hay que reconfigurarlo:</p>
+                <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure ldap-auth-config</code></pre>
+
+                <p>3. Una vez configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
+                <p class="Expl">De las 3 primeras líneas reemplazaremos la palabra <span class="span_contenido">compact</span> a <span class="span_contenido">files ldap</span>.</p>
+
+                <p>4. Ahora configuraremos PAM. Primero haremos lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">update /upgrade</code></pre>
+                <p class="Expl">Y a continuación habilitaremos todo:</p>
+                <pre class="codigo" translate="no"><code class="bash">pam-auth-update</code></pre>
+
+                <p>5. Comprobaremos que podemos ver los usuarios del servidor en el cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
+
+                <p>6. Del siguiente fichero tendremos que quitar de una línea la palabra <span class="span_contenido">use-authtouc</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/Common-password</code></pre>
+
+                <p>7. Reiniciaremos el equipo para que se apliquen los cambios:</p>
+                <pre class="codigo" translate="no"><code class="bash">reboot -h now</code></pre>
+
+                <p>8. Reiniciaremos el servicio de LDAP:</p>
+                <pre class="codigo" translate="no"><code class="bash">service libnss-ldap restart</code></pre>
+
+                <p>9. Y por último intentaremos iniciar sesión con un usuario del servidor en el equipo cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">login [USUARIO_SERVIDOR]</code></pre>
+    
+            </div>
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
