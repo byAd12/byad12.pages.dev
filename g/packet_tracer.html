@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: Diego
+~ Dedicatoria a: Diego / CCNA
 
 -->
 
@@ -94,7 +94,7 @@ Código por byAd12
                     <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Restablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
                     <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a> • <a href="#Enrutado_IPv6">Enrutado con IPv6</a></li>
                     <li><b>Switch SVI:</b> <a href="#Switch_SVI_Configuracion">Configuración</a></li>
-                    <li><b>Router:</b> <a href="#Router_Configuracion_Gateway">Configuración como gateway</a> • <a href="#Router_Ruta_Interfaz">Ruta con destino una interfaz</a> • <a href="#Router_Ruta_IP">Ruta con destino una IP</a></li>
+                    <li><b>Router:</b> <a href="#Router_Configuracion_Gateway">Configuración como gateway</a></li>
                 </ul>
 
                 <h2 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h2>
@@ -125,6 +125,12 @@ Código por byAd12
                     <li><b>Ataques de VLAN:</b> <a href="#VLAN_Hop_Mitigacion">Mitigar ataques de salto</a></li>
                     <li><b>Ataques de DHCP:</b> <a href="#DHCP_Snooping_Configuracion">Configurar DHCP Snooping</a> • <a href="#DHCP_Snooping_Verificacion">Verificación de DHCP Snooping</a></li>
                     <li><b>Ataques de ARP:</b> <a href="#DAI_Configuracion">Configuración de DAI</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento</h2>
+                <ul>
+                    <li><b>Básico:</b> <a href="#Rutas_Sintaxis">Sintaxis</a></li>
+                    <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IP">Por IP</a> • <a href="#Rutas_Predeterminadas_Interfaz">Por interfaz</a> • <a href="#Rutas_Predeterminadas_IP_y_Interfaz">Por IP e interfaz</a></li>
                 </ul>
             </div>
         </div>
@@ -1281,22 +1287,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
-            <div>
-                <h2 id="Router_Ruta_Interfaz">Router &gt; Crear una ruta predeterminada por interfaz</h2>
-
-                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;Interfaz&gt;</code></pre>
-
-            </div>
-
-            <div>
-                <h2 id="Router_Ruta_IP">Router &gt; Crear una ruta predeterminada por IP</h2>
-
-                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt;</code></pre>
-
-            </div>
-
         </div>
 
         <!-- ......................................................... -->
@@ -2331,6 +2321,60 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">3. Por la <b>ip</b> - comprueba el cuerpo ARP en busca de direcciones IP no válidas e inesperadas, incluidas las direcciones 0.0.0.0, 255.255.255.255 y todas las direcciones de multidifusión IP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip arp inspection validate ip</code></pre>
                 
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Rutas_Sintaxis">Rutas &gt; Sintaxis</h2>
+
+                <p>...:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# </code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento - Rutas predeterminadas</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Rutas_Predeterminadas_Interfaz">Crear una ruta predeterminada por interfaz</h2>
+
+                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;Interfaz&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Rutas_Predeterminadas_IP">Crear una ruta predeterminada por IP</h2>
+
+                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Rutas_Predeterminadas_IP_y_Interfaz">Crear una ruta predeterminada por IP e interfaz</h2>
+
+                <p>...:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt; &lt;Interfaz&gt;</code></pre>
+
             </div>
 
         </div>
