@@ -25,8 +25,9 @@
 /* =================================================== */
 /* Scrollbar */
 
-::-webkit-scrollbar{background-color: #222523; width: 3px;}
-::-webkit-scrollbar-thumb{background-color: gray; border-radius: 20px; height: 50px;}
+::-webkit-scrollbar{width: 10px; background-color: #222523;}
+::-webkit-scrollbar-thumb{background-color: gray; background-clip: padding-box; border-radius: 20px; border: 4px solid transparent; height: 40px;}
+::-webkit-scrollbar-thumb:hover{background-color: gray; border: 2px solid transparent;}
 
 /* =================================================== */
 /* Básico */
@@ -55,7 +56,9 @@ p.Expl b, span.Expl, td b, li b{color: #8b9dc3;}
 h1{color: #7b92de; text-align: center; font-family: "Doto"; font-size: 50px; user-select: none; margin: 15px 0; font-weight: 600; letter-spacing: 0.8px;}
 h2{margin: 15px 0; letter-spacing: 0.5px;}
 
-h2.TituloSecundario{color: rgb(147, 147, 206); text-align: center !important; font-size: 20px; font-family: "Doto"; font-weight: 500;}
+h2.TituloSecundario{padding-bottom: 20px; color: rgb(147, 147, 206); text-align: center !important; font-size: 20px; font-family: "Doto"; font-weight: 500;}
+
+h2.TituloCreditosSuperior{display: none;}
 
 h2.TituloCreditosSuperior, h2.TituloCreditosInferior{color: #d0d0d0; text-align: center !important; font-size: 15px; font-family: "Doto"; margin-bottom: 0; padding-bottom: 20px; font-weight: 500;}
 h2.TituloCreditosInferior{padding-top: 20px; margin-top: 0;}

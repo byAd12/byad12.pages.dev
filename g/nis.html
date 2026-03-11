@@ -43,7 +43,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <h1 style="margin: 15px 0;">NIS</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">Network Information Service</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -265,7 +265,7 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
-                <h2 id="Montar_Home_NIS">Problema - NFS sobreescribe el contenido de /home</h2>
+                <h2>Problema - NFS sobreescribe el contenido de /home</h2>
 
                 <p>
                     Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url">/home</span>),
@@ -284,9 +284,11 @@ gshadow:        files systemd nis</code></pre>
                             <li><b>Desventajas</b>: En cada usuario se debe cambiar la ruta de su carpeta personal.</li>
                         </ul>
                     </li>
+                </ul>
 
-                    <br>
+                <br>
 
+                <ul>
                     <li>Crear un script que se ejecutará cuando se vaya a montar un nuevo usuario en los clientes - <a href="#script-nis">explicación</a>.</li>
                     <li class="LiSinPunto">
                         <ul>
@@ -348,7 +350,7 @@ done</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Montar_Home_NIS">Comando "<span>getent passwd</span>"</h2>
+                <h2>Comando "<span>getent passwd</span>"</h2>
                 
                 <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url">/etc/passwd</span> y al comando <span class="span_contenido">ypcat passwd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>

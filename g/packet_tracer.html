@@ -43,7 +43,7 @@ Código por byAd12
         <div id="Principio"></div>
         <h1>Packet Tracer</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">Command Line Interface</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos"></h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <hr>
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <!-- ......................................................... -->
@@ -109,7 +109,9 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">7. DHCP</h2>
                 <ul>
                     <li><b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración en servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">(Des)activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • <a href="#DHCP_Verificacion">Verificación</a></li>
-                    <br>
+                </ul>
+                <br>
+                <ul>
                     <li><b>DHCPv6:</b> <a href="#SLAAC_Activar">SLAAC</a> • <a href="#DHCPv6_Stateful_Activar">DHCPv6 stateful</a> • <a href="#DHCPv6_Stateless_Activar">DHCPv6 stateless</a></li>
                     <li><b>DHCPv6 stateless:</b> <a href="#DHCPv6_Stateless_Servidor_Config">Servidor DHCPv6 stateless</a> • <a href="#DHCPv6_Stateless_Cliente_Config">Cliente DHCPv6 stateless</a></li>
                     <li><b>DHCPv6 stateful:</b> <a href="#DHCPv6_Stateful_Servidor_Config">Servidor DHCPv6 stateful</a> • <a href="#DHCPv6_Stateful_Cliente_Config">Cliente DHCPv6 stateful</a></li>
@@ -326,8 +328,6 @@ switch: boot</code></pre>
                 <p class="Expl">4. En la nueva ventana pasa al modo <span class="span_contenido">Outbound PDU Details</span> y baja hasta el apartado <span class="span_contenido">TELNET</span>. Se puede ver que en cada paquete se enseña la letra enviada:</p>
                 <pre class="codigo" translate="no"><code class="cisco">TELNET DATA:C</code></pre>
             </div>
-
-        </div>
 
         </div>
 
@@ -1331,7 +1331,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p class="Expl">
                     <u>Nota Teórica</u>: Este comando fija la prioridad exactamente en <b>28672</b>.
-                    Si todos los demás switches tienen la prioridad por defecto (32768), este switch "secundario" se convertirá en el <b>Raíz</b> (porque 28672 < 32768).
+                    Si todos los demás switches tienen la prioridad por defecto (32768), este switch "secundario" se convertirá en el <b>Raíz</b> (porque 28672 &lt; 32768).
                     Solo actuará como secundario si existe otro switch con prioridad "Primary" (ej. 24576).
                 </p>
 

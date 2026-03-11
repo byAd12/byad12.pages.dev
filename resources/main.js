@@ -150,28 +150,19 @@ function editar_boton_filtros_avanzados() {
 
     const filtrosYaVisibles = Array.from(links).some(link => !link.classList.contains('oculto'));
 
-    links.forEach(link => {
-        if (filtrosYaVisibles) {
-            link.classList.add('oculto');
-        } else {
-            link.classList.remove('oculto');
-        }
-    });
-
-    ocultarExpandido.forEach(link => {
-        if (filtrosYaVisibles) {
-            link.classList.remove('oculto');
-        } else {
-            link.classList.add('oculto');
-        }
-    });
-
     if (!filtrosYaVisibles) {
+        resetearFiltrosYEstilos();
+        links.forEach(link => link.classList.remove('oculto'));
+        ocultarExpandido.forEach(link => link.classList.add('oculto'));
         boton.style.color = "#7cfb2d";
     } else {
+        links.forEach(link => link.classList.add('oculto'));
+        ocultarExpandido.forEach(link => link.classList.remove('oculto'));
         boton.style.color = "white";
+        resetearFiltrosYEstilos();
     }
 }
+
 
 function editar_filtro_servicio_directorio() {
     toggleFiltro('filtro_servicio_directorio', 'editar_filtro_servicio_directorio');
@@ -226,6 +217,28 @@ function toggleFiltro(claseFiltro, idBoton) {
     }
 }
 
+
+function resetearFiltrosYEstilos() {
+    document.querySelectorAll('.BlogEntradas > a').forEach(link => link.classList.remove('oculto'));
+
+    const botonesPrincipales = [
+        document.getElementById("editar_ASIR"),
+        document.getElementById("editar_SMR"),
+        document.getElementById("editar_personal")
+    ];
+
+    const botonesAvanzados = document.querySelectorAll('.filtro_boton');
+    const todosLosBotones = [...botonesPrincipales, ...botonesAvanzados];
+    
+    todosLosBotones.forEach(boton => {
+        if (boton) {
+            boton.style.textDecoration = "none";
+            boton.style.color = "white";
+        }
+    });
+}
+
+
 // ==========================================================
 // ==========================================================
 
@@ -275,7 +288,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Insertar e-mail en los enlaces
 
 document.addEventListener('DOMContentLoaded', function() {
-
     const binaryString = atob('YWRnaW1lbmV6cEBnbWFpbC5jb20=');
     const bytes = new Uint8Array(binaryString.length);
     for (let i = 0; i < binaryString.length; i++) {
@@ -284,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const decoder = new TextDecoder();
     
     document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);
-
 });
 
 // ==========================================================

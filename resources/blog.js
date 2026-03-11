@@ -31,9 +31,22 @@ document.addEventListener("scroll", () => {
 // OCULTAR TODOS LOS BOTONES Y MENÚS
 
 function esconder() {
-    document.getElementById("menu_bar").style.display = "none";
-    document.getElementById("gtranslate_wrapper").style.display = "none";
+    const menu = document.getElementById("menu_bar");
+    const translate = document.getElementById("gtranslate_wrapper");
+    if (menu) menu.style.display = "none";
+    if (translate) translate.style.display = "none";
+
+    const url = new URL(window.location);
+    url.searchParams.set('ocultar-menu', 'true');
+    window.history.pushState({}, '', url);
 }
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('ocultar-menu')) {
+        esconder();
+    }
+});
 
 // ==========================================================
 // ==========================================================
@@ -42,9 +55,7 @@ function esconder() {
 const elementosCodigo = document.querySelectorAll('pre');
 
 elementosCodigo.forEach(elemento => {
-  // Guardar SOLO el texto del código
   const codigoTexto = elemento.innerText;
-
   elemento.style.position = 'relative';
 
   const botonCopiar = document.createElement('span');
@@ -76,7 +87,6 @@ elementosCodigo.forEach(elemento => {
   });
 });
 
-
 // ==========================================================
 // ==========================================================
 // Cambiar el color de body
@@ -105,7 +115,7 @@ if(c){ input.value=c; aplicarColor(c); }
 
 // ==========================================================
 // ==========================================================
-// Para el carrusel de FTP
+// Para el carrusel de imágenes
 
 let indices = { server: 0, cliente: 0 };
 let carruselActivo = null;
@@ -185,13 +195,6 @@ window.addEventListener("afterprint", (event) => {
     document.getElementById("InsertarCreditos").style = "display: none;";
     document.getElementById("InsertarCreditos").innerHTML = "";
 });
-
-function aplicar_estilos_titulo() {
-    document.getElementById("TituloSecundario").style = "padding-bottom: 20px;";
-    document.getElementById("InsertarCreditos").style = "display: none;";
-}
-
-document.addEventListener('DOMContentLoaded', aplicar_estilos_titulo);
 
 // ==========================================================
 // ==========================================================
