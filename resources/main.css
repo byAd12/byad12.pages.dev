@@ -157,8 +157,8 @@ br{user-select: none;}
 
 .ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin: 20px;  margin-top: 0;}
 .ParrafoCompartido span{color: #7cfb2d; user-select: all;}
-.ParrafoCompartido a:not(a.EnlaceScript){color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
-.ParrafoCompartido a:not(a.EnlaceScript):hover{border-bottom: 1px solid #7cfb2d;}
+.ParrafoCompartido a{color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
+.ParrafoCompartido a:hover{border-bottom: 1px solid #7cfb2d;}
 
 /* ========================================================= */
 /* CONTACTO */

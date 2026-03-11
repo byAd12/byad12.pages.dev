@@ -202,6 +202,13 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 .skiptranslate{color: rgb(29, 30, 30);}
 
 /* =================================================== */
+/* Imágenes */
+
+div.SingleImagenGlobal{max-width: 750px !important; text-align: left; justify-content: center;}
+div.SingleImagenGlobal img{width: 70%; transition: all .5s;}
+div.SingleImagenGlobal img:hover{filter: invert(1);}
+
+/* =================================================== */
 /* Estilos aplicado en la impresión (CTRL - P) */
 
 @media print{
@@ -241,13 +248,6 @@ ul.ULFTPCamb1:not(.menu_bar ul) li{margin-left: 40px;}
 
 .carrusel_nota_print{display: none;}
 .FTP_Botones_Externos{flex-direction: row !important;}
-
-/* =================================================== */
-/* SQL */
-
-div.SingleImagenGlobal{max-width: 750px !important; text-align: left; justify-content: center;}
-img.SQLImagenJoin{width: 70%; transition: all .5s;}
-img.SQLImagenJoin:hover{filter: invert(1);}
 
 /* =================================================== */
 /* NMAP */

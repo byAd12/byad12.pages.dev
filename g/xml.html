@@ -270,11 +270,11 @@ Código por byAd12
                     Siempre empiezan con <span class="span_contenido" translate="no">&amp;</span> y acaba con <span class="span_contenido" translate="no">;</span>.
                 </p>
                 <p>
-                    Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser carácteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
+                    Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser carácteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&amp;#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
                 </p>
 
                 <p>
-                    También se puede hacer en con un <u>identificador hexadecimal</u> como: <span class="span_contenido" translate="no">&#x<span></span>00;</span>, o con <u>referencias predefinidas</u>.
+                    También se puede hacer en con un <u>identificador hexadecimal</u> como: <span class="span_contenido" translate="no">&amp;#x<span></span>00;</span>, o con <u>referencias predefinidas</u>.
                 </p>
 
                 <div class="TablaDivScroll">
@@ -290,33 +290,33 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td>&#x3C;</td>
-                            <td><SPAN class="span_contenido"><span>&#<span></span>60;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&x<span></span>3C;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&<span></span>lt;</span></SPAN></td>
+                            <td><span class="span_contenido">&amp;#60;</span></td>
+                            <td><span class="span_contenido">&amp;x3C;</span></td>
+                            <td><span class="span_contenido">&amp;lt;</span></td>
                         </tr>
                         <tr>
                             <td>&#x3E;</td>
-                            <td><SPAN class="span_contenido"><span>&#<span></span>62;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&x<span></span>3E;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&<span></span>gt;</span></SPAN></td>
+                            <td><span class="span_contenido">&amp;#62;</span></td>
+                            <td><span class="span_contenido">&amp;x3E;</span></td>
+                            <td><span class="span_contenido">&amp;gt;</span></td>
                         </tr>
                         <tr>
                             <td>&#x26;</td>
-                            <td><SPAN class="span_contenido"><span>&#<span></span>38;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&x<span></span>26;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&<span></span>amp;</span></SPAN></td>
+                            <td><span class="span_contenido">&amp;#38;</span></td>
+                            <td><span class="span_contenido">&amp;x26;</span></td>
+                            <td><span class="span_contenido">&amp;amp;</span></td>
                         </tr>
                         <tr>
                             <td>&#x27;</td>
-                            <td><SPAN class="span_contenido"><span>&#<span></span>39;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&x<span></span>27;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&<span></span>apos;</span></SPAN></td>
+                            <td><span class="span_contenido">&amp;#39;</span></td>
+                            <td><span class="span_contenido">&amp;x27;</span></td>
+                            <td><span class="span_contenido">&amp;apos;</span></td>
                         </tr>
                         <tr>
                             <td>&#x22;</td>
-                            <td><SPAN class="span_contenido"><span>&#<span></span>34;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&x<span></span>22;</span></SPAN></td>
-                            <td><SPAN class="span_contenido"><span>&<span></span>quot;</span></SPAN></td>
+                            <td><span class="span_contenido">&amp;#34;</span></td>
+                            <td><span class="span_contenido">&amp;x22;</span></td>
+                            <td><span class="span_contenido">&amp;quot;</span></td>
                         </tr>
                     </table>
                 </div>
