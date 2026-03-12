@@ -575,8 +575,10 @@ EOF
         grep -q "coruna1" /etc/hosts || cat <<EOF >> /etc/hosts
 172.16.0.100 coruna1
 172.16.0.101 coruna2
+
 172.16.0.102 malaga1
 172.16.0.103 malaga2
+172.16.0.104 malaga3
 EOF
 
         echo -e "\n${Az}Tu IPv4 de NetBird es:${Bl}"
