@@ -89,11 +89,11 @@ while true; do
         while [ condición ]; do
             echo -e "\n${Am}Nuevo registro DNS Interno ('exit' para cerrar):${Bl}"
             read -p 'IP de un equipo de la red: ' ip_dns
-            if [ "$nombre_dominio" == "exit" ]; then
+            if [ "$ip_dns" == "exit" ]; then
                 break
             fi
             read -p 'Registro DNS a asignar (ej. CLIENTE01): ' registro_dns
-            if [ "$nombre_dominio" == "exit" ]; then
+            if [ "$registro_dns" == "exit" ]; then
                 break
             fi
             echo "${ip_dns}   ${registro_dns} ${registro_dns}.${nombre_dominio}" >> /etc/default/nis
@@ -150,11 +150,11 @@ while true; do
         while [ condición ]; do
             echo -e "\n${Am}Nuevo registro DNS Interno ('exit' para cerrar):${Bl}"
             read -p 'IP de un equipo de la red: ' ip_dns
-            if [ "$nombre_dominio" == "exit" ]; then
+            if [ "$ip_dns" == "exit" ]; then
                 break
             fi
             read -p 'Registro DNS a asignar (ej. CLIENTE01): ' registro_dns
-            if [ "$nombre_dominio" == "exit" ]; then
+            if [ "$registro_dns" == "exit" ]; then
                 break
             fi
             echo "${ip_dns}   ${registro_dns} ${registro_dns}.${nombre_dominio}" >> /etc/default/nis
