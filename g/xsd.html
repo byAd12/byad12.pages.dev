@@ -15,6 +15,7 @@ Código por byAd12
         <title>XSD - XML Schema Definition</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -152,7 +153,7 @@ Código por byAd12
     &lt;/xs:simpleType&gt;
 
     &lt;!-- El elemento "sin-clasificar" se define como vacío --&gt;
-    &lt;xs:complexType name="tSinClasificar" /&gt;
+    &lt;xs:complexType name="tSinClasificar"&gt; &lt;xs:sequence/&gt; &lt;/xs:complexType&gt;
 
     &lt;!-- En el elemento "reparto" se indica una secuencia de sub-elementos --&gt;
     &lt;xs:complexType name="tReparto"&gt;
@@ -406,27 +407,27 @@ Código por byAd12
                             <td><b>xs:dateTime</b></td>
                             <td>Representa la fecha y hora</td>
                             <td>
-                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                AAAA-MM-DDT hh:mm:ss<b>+hh:mm</b>
                                 <br>
-                                año-mes-dia:T:hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                                AAAA-MM-DD:T:hh:mm:ss.ms<b>-hh:mm</b>
                             </td>
                         </tr>
                         <tr>
                             <td><b>xs:date</b></td>
                             <td>Representa la fecha</td>
                             <td>
-                                año-mes-dia<b>+hora:minuto</b>
+                                AAAA-MM-DD<b>+hh:mm</b>
                                 <br>
-                                año-mes-dia<b>-hora:minuto</b>
+                                AAAA-MM-DD<b>-hh:mm</b>
                             </td>
                         </tr>
                         <tr>
                             <td><b>xs:time</b></td>
                             <td>Representa la hora</td>
                             <td>
-                                hora:minuto:segundo.milisegundos<b>+hora:minuto</b>
+                                hh:mm:ss.ms<b>+hh:mm</b>
                                 <br>
-                                hora:minuto:segundo.milisegundos<b>-hora:minuto</b>
+                                hh:mm:ss.ms<b>-hh:mm</b>
                             </td>
                         </tr>
                         <tr>
@@ -493,7 +494,7 @@ Código por byAd12
                             <td>
                                 Solo se puede definir en atributos. Su valor debe ser único en todo el documento XML
                                 <br>
-                                Debe empezar con una letra o <span class="span_contenido">_</span> y puede contener los símbolos <span class="span_contenido">-</span>, <span class="span_contenido">_</span>, <span class="span_contenido">.</span>, <span class="span_contenido">:</span>
+                                Debe empezar con una letra o <span class="span_contenido">_</span> y puede contener los símbolos <span class="span_contenido">-</span>, <span class="span_contenido">_</span>, <span class="span_contenido">.</span>
                             </td>
                             <td>gal_coruna</td>
                         </tr>
@@ -1095,7 +1096,7 @@ Código por byAd12
                     También se conocen como <b>regex</b> (regular expression).
                 </p>
 
-                <p>A continuación se muestra la <u>sintaxis</u> de como aplicar un patrón a un elemento o atributo para filtrar so contenido o valor:</p>
+                <p>A continuación se muestra la <u>sintaxis</u> de como aplicar un patrón a un elemento o atributo para filtrar su contenido o valor:</p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:pattern value="patrón"/&gt;</code></pre>
 

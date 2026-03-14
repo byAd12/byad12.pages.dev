@@ -15,6 +15,7 @@ Código por byAd12
         <title>Scripting - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -53,7 +53,7 @@ Código por byAd12
             <div>
                 <h2>Estructura</h2>
 
-                <p>Primero crearemos el archivo y añadiremos contenido en el:</p>
+                <p>Primero crearemos el archivo y añadiremos contenido en él:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
 
                 <p class="Expl">Estructura del archivo:</p>
@@ -74,7 +74,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">script.sh arg1 arg2 ...</code></pre>
                 
                 <p>Dentro de un archivo, para hacer referencia a estos argumentos:</p>
-                <p class="Expl"><span class="span_contenido">$num</span>: Llamar un argumento en "num" del órgen 1 al máximo de 9.</p>
+                <p class="Expl"><span class="span_contenido">$num</span>: Llamar un argumento en "num" del orden 1 al máximo de 9.</p>
                 <p class="Expl"><span class="span_contenido">$0</span>: Devuelve el nombre del script / función.</p>
                 <p class="Expl"><span class="span_contenido">$*</span>: Devuelve a todos los argumentos separados por espacio.</p>
                 <p class="Expl"><span class="span_contenido">$#</span>: Devuelve el n. total de parámetros que se pasaron.</p>
@@ -121,7 +121,7 @@ Código por byAd12
 
                         <tr>
                             <td>Igual a (comodines)</td>
-                            <td><pre translate="no"><code class="bash">valor === valor</code></pre></td>
+                            <td><pre translate="no"><code class="bash">valor == valor</code></pre></td>
                             <td></td>
 
                         </tr>
@@ -148,7 +148,13 @@ Código por byAd12
 
                         <tr>
                             <td>Menor o igual que</td>
+                            <td></td>
                             <td><pre translate="no"><code class="bash">valor -le valor</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td>Mayor o igual que</td>
+                            <td></td>
                             <td><pre translate="no"><code class="bash">valor -ge valor</code></pre></td>
                         </tr>
 
@@ -237,7 +243,7 @@ rojo)
 echo 'El valor es rojo'
 ;;
 *)
-echo 'Este valor no estaba en nigún _)'
+echo 'Este valor no estaba en ningún _)'
 ;;
 esac
 </code></pre>
@@ -260,7 +266,7 @@ done</code></pre>
             <div>
                 <h2>Función <span>WHILE</span></h2>
 
-                <p>Ejecuta su contenido si la condición es verdadero indefinidamente hasta que se pare:</p>
+                <p>Ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
                 <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
     // Contenido
 done</code></pre>
@@ -270,7 +276,7 @@ done</code></pre>
             <div>
                 <h2>Función <span>UNTIL</span></h2>
 
-                <p>Lo mismo que <span class="span_contenido">WHILE</span>:</p>
+                <p>Ejecuta su contenido hasta que la condición sea verdadera:</p>
                 <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do
     // Contenido
 done</code></pre>

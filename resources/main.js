@@ -42,6 +42,11 @@ document.addEventListener('DOMContentLoaded', waitForTranslate);
 // navegadores
 
 function anadir_texto_gpg() {
+    estilos = `<style>
+    ::-webkit-scrollbar{width: 10px; background-color: black;}
+    ::-webkit-scrollbar-thumb{background-color: gray; background-clip: padding-box; border-radius: 20px; border: 4px solid transparent;}
+    ::-webkit-scrollbar-thumb:hover{background-color: gray; border: 2px solid transparent;}
+</style>`;
     fetch('../key.txt')
     .then(r => r.text())
     .then(texto => {
@@ -50,7 +55,7 @@ function anadir_texto_gpg() {
             obj.addEventListener('load', () => {
                 const doc = obj.contentDocument || obj.contentWindow.document;
                 doc.open();
-                doc.write(`<html><body style="background:black; color:white; font-family:monospace; white-space:pre; padding: 10px 5px;">${texto.replace(/</g, "&lt;")}</body></html>`);
+                doc.write(`<html><head>${estilos}</head><body style="background:black; color:white; font-family:monospace; white-space:pre; padding: 10px 5px;">${texto.replace(/</g, "&lt;")}</body></html>`);
                 doc.close();
             });
 

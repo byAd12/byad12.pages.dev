@@ -15,6 +15,7 @@ Código por byAd12
         <title>SQL - Inyección</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,8 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -51,10 +51,11 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>IMPORTANTE</h2>
-                <p>En SQL hay 2 tipos de comentarios según versiones. Podemos probar cada consulta intercambiando uno por otro:</p>
+                <p>En SQL hay 2 tipos de comentarios según distintas versiones como MySQL. Podemos probar cada consulta intercambiando uno por otro:</p>
 
-                <pre class="codigo" translate="no"><code class="sql">#</code></pre>
-                <pre class="codigo" translate="no"><code class="sql">--</code></pre>
+                <pre class="codigo" translate="no"><code class="sql"># </code></pre>
+                <pre class="codigo" translate="no"><code class="sql">-- </code></pre>
+                <p class="Expl">Después de los símbolos hay que añadir un espacio.</p>
 
             </div>
 
@@ -64,7 +65,7 @@ Código por byAd12
 
                 <pre class="codigo" translate="no"><code class="sql">admin'#</code></pre>
                 
-                <p class="Expl">Y como contraseña podremos poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe carácteres en los formularios o si usa Prepared Statements.</p>
+                <p class="Expl">Y como contraseña podremos poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe caracteres en los formularios o si no usa Prepared Statements.</p>
 
                 <p>Además se podría añadir a la consulta como usuario y contraseña (podemos probar con las comillas dobles: <span class="span_url">"</span>). Opciones:</p>
 

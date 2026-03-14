@@ -15,6 +15,7 @@ Código por byAd12
         <title>Active Directory</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -34,7 +35,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -60,7 +60,6 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">hosts: files dns</code></pre>
                 <p class="Expl">Esto se debe realizar porque <span class="span_url">.local</span> se intenta resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
 
-
                 <br>
                 <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
@@ -73,7 +72,7 @@ Código por byAd12
                 <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4"  y añadir <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
                 <p class="Expl">Para verificarlo realizaremos una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;</code></pre>
-                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaria el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
+                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
 
                 <br>
                 <p>4. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
@@ -99,9 +98,9 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/krb5.conf</code></pre>
                 
                 <br>
-                <p>7. A continuación tenemos que actualizar SAMBA mediante en siguiente archivo:</p>
+                <p>7. A continuación tenemos que actualizar SAMBA mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Ahora nos dirigiremos a uns sección <span class="span_contenido">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
+                <p class="Expl">Ahora nos dirigiremos a una sección <span class="span_contenido">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
 
                 <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
@@ -134,16 +133,52 @@ Código por byAd12
 
 ;   idmap config YOURDOMAINHERE : backend = tdb
 ;   idmap config YOURDOMAINHERE : range   = 100000-999999</code></pre>
-                <ul>
-                    <li><b>idmap config * :              backend = tdb</b>: Esto indica que tdb es la base de datos.</li>
-                    <li><b>idmap config * :              range   = 3000-7999</b>: Es el rango de UIDs para los usuarios de Windows que se metan al dominio.</li>
-                    <li><b>template shell = /bin/bash</b>: La terminal por defecto que tendrá en usuario que se cree desde Windows.</li>
-                    <li><b>template homedir = /home/%D/%u</b>: La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido">%D</span>.</li>
-                    <li><b>password server = *</b>: Su utilizará automáticamente cualquier controlador de dominio disponible.</li>
-                    <li><b>winbind use default domain = yes</b>: Para evitar poner el nombre de usuario como CICLO\user o user@dominio al iniciar sesión.</li>
-                    <li><b>winbind enum users = yes</b>: Permite listar todos los usuarios del dominio.</li>
-                    <li><b>winbind enum groups = yes</b>: Permite enumerar los grupos del dominio.</li>
-                </ul>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Explicación de la configuración</b></td>
+                        </tr>
+                        <tr>
+                            <td>CONFIGURACIÓN</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">idmap config * : backend = tdb</code></pre></td>
+                            <td>Esto indica que tdb es la base de datos.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">idmap config * : range = 3000-7999</code></pre></td>
+                            <td>Es el rango de UIDs para los usuarios de Windows que se metan al dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">template shell = /bin/bash</code></pre></td>
+                            <td>La terminal por defecto que tendrá en usuario que se cree desde Windows.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">template homedir = /home/%D/%u</code></pre></td>
+                            <td>La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido">%D</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">password server = *</code></pre></td>
+                            <td>Se utilizará automáticamente cualquier controlador de dominio disponible.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">winbind use default domain = yes</code></pre></td>
+                            <td>Para evitar poner el nombre de usuario como CICLO\user o user@dominio al iniciar sesión.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">winbind enum users = yes</code></pre></td>
+                            <td>Permite listar todos los usuarios del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">winbind enum groups = yes</code></pre></td>
+                            <td>Permite listar todos los grupos del dominio.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
 
                 <p class="Expl">7.5. Guardamos el archivo y salimos del editor de texto.</p>
 
@@ -167,10 +202,10 @@ Código por byAd12
                 <p class="Expl">8.5. Listaremos la información de winbind, que debería listar los usuarios de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">wbinfo -u</code></pre>
 
-                <p class="Expl">8.6. Deberiamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
+                <p class="Expl">8.6. Deberíamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_windows&gt;</code></pre>
 
-                <p class="Expl">8.7. También deberiamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
+                <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
                 <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
                 <p class="Expl">Tendremos el error de que no crea la carpeta personal, eso se soluciona editando <span class="span_url">/etc/pam.d/common-session</span> - explicado en la guía sobre <a href="nis.html#Problema-Cliente-Pamd">NIS: Problema - El cliente no tiene carpeta /home</a>.</p>

@@ -15,6 +15,7 @@ Código por byAd12
         <title>VSFTPD - Linux y FileZilla</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -129,7 +129,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">write_enable=YES</code></pre>
 
                 <p>Mensaje de <b>bienvenida</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">ftpd_banner=Mensaje con espacios</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ftpd_banner="Mensaje con espacios"</code></pre>
 
             </div>
             
@@ -141,6 +141,7 @@ Código por byAd12
 
                 <p>Enjaular a un usuario local específico - <span class="span_url" translate="no">/etc/vsftpd.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chroot_local_user=NO
+allow_writeable_chroot=YES
 chroot_list_enable=YES
 chroot_list_file=/etc/vsftpd.chroot_list</code></pre>
                 <p class="Expl"><span class="span_url" translate="no">/etc/vsftpd.chroot_list</span>:</p>
@@ -248,7 +249,7 @@ NombreUsuario2
                     </tr>
                     <tr>
                         <td><span class="span_contenido" translate="no">!mkdir</span></td>
-                        <td>Crear una carpeta en la sistema local (no el servidor)</td>
+                        <td>Crear una carpeta en el sistema local (no el servidor)</td>
                     </tr>
                     <tr>
                         <td><span class="span_contenido" translate="no">bye</span></td>
@@ -300,8 +301,8 @@ NombreUsuario2
                     <img class="carrusel_imagen" alt="Paso 4" src="../img/guides/filezilla_server/step4.png" onclick="agrandarImagen(this)">
                     <img class="carrusel_imagen" alt="Paso 5" src="../img/guides/filezilla_server/step5.png" onclick="agrandarImagen(this)">
                 </div>
-                <button class="carrusel_boton carrusel_izquierda" onclick="moverImagenes(-1, 'server')">&#10094;</button>
-                <button class="carrusel_boton carrusel_derecha" onclick="moverImagenes(1, 'server')">&#10095;</button>
+                <button class="carrusel_boton carrusel_izquierda" aria-label="Anterior" onclick="moverImagenes(-1, 'server')">&#10094;</button>
+                <button class="carrusel_boton carrusel_derecha" aria-label="Siguiente" onclick="moverImagenes(1, 'server')">&#10095;</button>
             </div>
             <!-- ......................................................... -->
             <div class="carrusel">
@@ -315,8 +316,8 @@ NombreUsuario2
                     <img class="carrusel_imagen" alt="Paso 5" src="../img/guides/filezilla_client/step5.png" onclick="agrandarImagen(this)">
                     <img class="carrusel_imagen" alt="Paso 6" src="../img/guides/filezilla_client/step6.png" onclick="agrandarImagen(this)">
                 </div>
-                <button class="carrusel_boton carrusel_izquierda" onclick="moverImagenes(-1, 'cliente')">&#10094;</button>
-                <button class="carrusel_boton carrusel_derecha" onclick="moverImagenes(1, 'cliente')">&#10095;</button>
+                <button class="carrusel_boton carrusel_izquierda" aria-label="Anterior" onclick="moverImagenes(-1, 'cliente')">&#10094;</button>
+                <button class="carrusel_boton carrusel_derecha" aria-label="Siguiente" onclick="moverImagenes(1, 'cliente')">&#10095;</button>
             </div>
 
             

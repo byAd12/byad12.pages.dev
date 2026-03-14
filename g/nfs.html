@@ -15,6 +15,7 @@ Código por byAd12
         <title>NFS - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -76,7 +76,7 @@ Código por byAd12
                 <p>2. Añadir una línea para compartir la carpeta:</p>
                 <pre class="codigo" translate="no"><code class="bash">/carpeta_a_compartir  hostname_permitido(permisos)  hostname_permitido_2(permisos)  ...</code></pre>
                 <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
-                <p class="Expl"><b>/carpeta_a_compartir</b>: La carpeta local del servidor que desea compartirse a otros equipos.</p>
+                <p class="Expl"><b>/carpeta_a_compartir</b>: La carpeta local del servidor que se desea compartir a otros equipos.</p>
                 <p class="Expl"><b>/hostname_permitido(permisos)</b>: Definimos los equipos que puedan acceder al recurso. Entre paréntesis seleccionamos los permisos <span class="span_contenido">rw</span> (<b>read and write</b>) o <span class="span_contenido">ro</span> (<b>read only</b>). <u>Definición de hostnames</u>:
                     <br><br>
                     <span class="span_contenido">*</span> - Se permite a cualquier equipo.
@@ -112,7 +112,7 @@ Código por byAd12
                 <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <span class="span_contenido">otros</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod 755 /carpeta_remota</code></pre>
 
-                <p>El comando <span class="span_contenido">ls -ld /mnt/carpeta_local</span> no da la información correcta en el cliente al dar un usuario y grupo propietario diferente al real en el servidor.
+                <p>El comando <span class="span_contenido">ls -ld /mnt/carpeta_local</span> no da la información correcta en el cliente ya que muestra el usuario y grupo local asociado a ese ID numérico, no el nombre del servidor.
                     Esto sucede ya que Linux utiliza los UID y GID del servidor y que en el cliente normalmente tiene usuarios diferentes creados en esos IDs.
                 </p>
                 <p>
@@ -166,12 +166,12 @@ Código por byAd12
                 <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
                 <p class="Expl"><b>IP_servidor</b>: La dirección IP que tiene el servidor que aloja el recurso compartido.</p>
                 <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
-                <p class="Expl"><b>/mnt/carpeta_local</b>: La span_contenido local en la que vamos a montar la carpeta.</p>
+                <p class="Expl"><b>/mnt/carpeta_local</b>: La ruta local en la que vamos a montar la carpeta.</p>
                 <p class="Expl"><b>nfs</b>: Tipo de sistema de ficheros.</p>
                 <p class="Expl"><b>defaults</b>: Opciones predefinidas.</p>
                 <p class="Expl"><b>nfsvers=3</b>: Se indica que se debe usar NFSv3.</p>
                 <p class="Expl"><b>0</b>: No realizar una copia de seguridad.</p>
-                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheiros con los programas <span class="span_contenido">dump</span> y <span class="span_contenido">fsck</span>.</p>
+                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheros con los programas <span class="span_contenido">dump</span> y <span class="span_contenido">fsck</span>.</p>
             </div>
 
 

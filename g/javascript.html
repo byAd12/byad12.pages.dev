@@ -15,6 +15,7 @@ Código por byAd12
         <title>JavaScript - Linux</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -107,7 +107,7 @@ Código por byAd12
                     </tr>
                     <tr>
                         <td><span class="span_contenido" translate="no">a = b</span></td>
-                        <td>Variable</td>
+                        <td>Asignación de un valor a una variable</td>
                     </tr>
                     <tr>
                         <td><span class="span_contenido" translate="no">a != b</span></td>
@@ -139,7 +139,11 @@ Código por byAd12
                     </tr>
                     <tr>
                         <td><span class="span_contenido" translate="no">a &amp;&amp; b</span></td>
-                        <td>Una condición u la otra</td>
+                        <td>Una condición y la otra</td>
+                    </tr>
+                    <tr>
+                        <td><span class="span_contenido" translate="no">a || b</span></td>
+                        <td>Una condición o la otra</td>
                     </tr>
                 </table>
                 
@@ -151,7 +155,7 @@ Código por byAd12
                 <p>Cada línea, menos las vacías y al abrir o cerrar un "{}" se debe poner un <span class="span_contenido">;</span> al final:</p>
                 <pre class="codigo" translate="no"><code class="js">linea;</code></pre>
 
-                <p>Al especificar un string y si contiene un <span class="span_contenido">${}</span>, se debe poner este tipo de comillas <span class="span_contenido">`</span>:</p>
+                <p>Al especificar un string y si contiene un <span class="span_contenido">${}</span>, se debe poner entre Template Literals - <span class="span_contenido">`</span>:</p>
                 <pre class="codigo" translate="no"><code class="js">console.log(`${1 + 1}`);</code></pre>
 
                 <p>Imprimir texto en la consola:</p>
@@ -318,7 +322,7 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h2>Cambiar el <span>src=""</span> de una imágen: <span translate="no">objeto.src</span></h2>
+                <h2>Cambiar el <span>src=""</span> de una imagen: <span translate="no">objeto.src</span></h2>
 
                 <p>1. Primero seleccionamos el objeto:</p>
                 <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
@@ -345,7 +349,7 @@ var1.forEach(elemento => {
                 <pre class="codigo" translate="no"><code class="js">var1 = document.getElementById("ID");</code></pre>
 
                 <p>2. Luego cambiamos su propiedad "checked" a true o false:</p>
-                <pre class="codigo" translate="no"><code class="js">var1.checked = &lt;true / false&gt;;</code></pre>
+                <pre class="codigo" translate="no"><code class="js">var1.checked = true / false</code></pre>
 
 
             </div>
@@ -356,7 +360,7 @@ var1.forEach(elemento => {
                 <p>Seleccionamos el objeto y reemplazamos todas las cadenas que coincidan por otras.:</p>
                 <pre class="codigo" translate="no"><code class="js">let texto = "palabra1__palabra2__palabra3";
 console.log(texto.replace(/__/g, "\n"));</code></pre>
-                <p class="Expl">En este caso se reemplza todos los <span class="span_contenido" translate="no">__</span> por <span class="span_contenido" translate="no">\n</span>.</p>
+                <p class="Expl">En este caso se reemplazan todos los <span class="span_contenido" translate="no">__</span> por <span class="span_contenido" translate="no">\n</span>.</p>
 
             </div>
 

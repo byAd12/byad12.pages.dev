@@ -15,6 +15,7 @@ Código por byAd12
         <title>ISC DHCP - Linux</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -71,7 +71,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep dhcp</code></pre>
 
                 <p>Miraremos que esté ejecutándose en su puerto correspondiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">netstat -ltun | grep 67</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">netstat -uap | grep 67</code></pre>
 
                 <p>Comprobaremos que no haya errores del servicio registrados en el sistema:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /var/log/syslog</code></pre>
@@ -102,10 +102,10 @@ Código por byAd12
             <div>
                 <h2>Comandos de DHCP en Linux</h2>
 
-                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> en el cliente:</p>
+                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> (DORA) en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
 
-                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-RELEASE</span> en el cliente:</p>
+                <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-RELEASE</span> (DORA) en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v -r</code></pre>
             </div>
         </div>
@@ -114,13 +114,13 @@ Código por byAd12
         <hr>
         <div class="parte1">
             <div>
-                <h2>Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+                <h2>Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
 option domain-name-servers [VALOR];</code></pre>
                 <p class="Expl"><b>routers</b>: La IPv4 del enrutador.
-                <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por espacios.
+                <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por comas.
                 </p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];

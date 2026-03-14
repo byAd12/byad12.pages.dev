@@ -66,7 +66,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">SYN → RA</td>
-                <td>RA: Indica que se rechaza la conexión (RST) y que se confirma la recepeción del SYN enviado (ACK).</td>
+                <td>RA: Indica que se rechaza la conexión (RST) y que se confirma la recepción del SYN enviado (ACK).</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → (No responde)</td>
@@ -237,7 +237,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-Pn</td>
-                <td>Deshabilita el <u>ICMP echo request</u> para averiguar si el host a está activo. Con esto se presupone que el host está siempre activo.</td>
+                <td>Deshabilita el <u>ICMP echo request</u> para averiguar si el host está activo. Con esto se presupone que el host está siempre activo.</td>
             </tr>
             <tr>
                 <td class="opcion">-sN</td>
@@ -268,12 +268,12 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">--reason</td>
-                <td>Identifica la razón de porqué está activo un host.</td>
+                <td>Identifica la razón de por qué está activo un host.</td>
             </tr>
             <tr>
                 <td class="opcion">-v<span class="c2">v</span><span class="c3">v</span></td>
                 <td>Podemos ver información en tiempo real mientras se escanea con 3 niveles de verbose. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
-                    <br>También podemos ver cuanto tiempo estimado falta para finalizar el escaneo pulsando "<span class="opcion">ESPACIO</span>" en cualquier momento.</td>
+                    <br>También podemos ver cuánto tiempo estimado falta para finalizar el escaneo pulsando "<span class="opcion">ESPACIO</span>" en cualquier momento.</td>
             </tr>
             <tr>
                 <td class="opcion">--stats-every=<span class="c1">(segundos)/s</span>[o]<span class="c2">(minutos)/m</span></td>
@@ -424,7 +424,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">--source-port <span class="c1">&lt;puerto&gt;</span></td>
-                <td>Si un sistema, ya sea de origen o destino, bloquea solicitudes, pero descubrimos puertos que pueden estar libres, como el <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para bypassar el sistema.</td>
+                <td>Si un sistema, ya sea de origen o destino, bloquea solicitudes, pero descubrimos puertos que pueden estar libres, como el <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir/bypass el sistema.</td>
             </tr>
         </table>
 
@@ -515,8 +515,8 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">smbclient -L //<span class="c1">&lt;objetivo&gt;</span>/ -N</td>
-                <td>Al realizar esta conexión al puerto <span class="opcion">443</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
-                    <br>Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient /&lt;IP&gt;/&lt;share&gt; -N</span>
+                <td>Al realizar esta conexión al puerto <span class="opcion">445</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
+                    <br>Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
                     <br><br>(<span class="opcion">-N</span>: Modo sin credenciales; <span class="opcion">-L</span>: Listar recursos compartidos)
                 </td>
             </tr>

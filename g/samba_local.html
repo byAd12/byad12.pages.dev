@@ -15,6 +15,7 @@ Código por byAd12
         <title>SAMBA</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/ini.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -76,14 +77,14 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
                 <p class="Expl">La contraseña que se asigna con <span class="span_contenido">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
                 <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">pbedit -L</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">pdbedit -L</code></pre>
                 
                 <!-- ......................................................... -->
                 <br>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
-                <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmdb</span> y <span class="span_contenido">smdb</span>.</p>
+                <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmbd</span> y <span class="span_contenido">smbd</span>.</p>
                 <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
@@ -174,7 +175,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <!-- ......................................................... -->
                 <br>
                 <p>4. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username=usuario_Windows,password=contraseña //IP_servidor/recurso /directorio_local</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username="usuario_Windows",password="contraseña" //IP_servidor/recurso /directorio_local</code></pre>
                 <p class="Expl">
                     <b>usuario_Windows</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
                     <br>

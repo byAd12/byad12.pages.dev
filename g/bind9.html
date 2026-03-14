@@ -15,6 +15,7 @@ Código por byAd12
         <title>BIND9 - Linux; Windows DNS</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/nginx.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -132,7 +133,7 @@ Código por byAd12
 > asml.com</code></pre>
             </div>
             <div>
-                <h2>Configurar DNS como Reenviador: <span translate="no">/etc/bind/named.conf.local</span></h2>
+                <h2>Configurar DNS como Reenviador: <span translate="no">/etc/bind/named.conf.options</span></h2>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
 
@@ -218,17 +219,20 @@ file "/etc/bind/db.192.168.0";
             <!-- ......................................................... -->
             <div>
                 <h2><span>Ejemplo 3:</span> Crear DNS secundario</h2>
+                
                 <p>En el servidor <b>DNS1</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">listen-on {192.168.0.226;}; // La IP de dns2
-allow-transfer {192.168.0.226;}; // La IP de dns2
-allow-query {192.168.0.226;}; // La IP de dns2</code></pre>
+allow-transfer {192.168.0.226;}; // La IP de DNS2
+allow-query {192.168.0.226;}; // La IP de DNS2</code></pre>
+                
                 <p>Ahora añadiremos lo siguiente en el fichero <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dns2	IN	A	192.168.0.226</code></pre>
+                
                 <p>En el servidor <b>DNS2</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
 type slave;
-masters{192.168.0.226;}; // IP de DNS1
-file "/etc/bind/db.jonis.net";
+masters{192.168.0.225;}; // IP de DNS1
+file "/etc/bind/db.adr.net";
 };</code></pre>
             </div>
             <!-- ......................................................... -->
@@ -249,7 +253,7 @@ file "/etc/bind/db.jonis.net";
                 <ol>
                     <li>Poner IP Estática</li>
                     <li>Administrador del Servidor > Agregar rol servidor DNS > Instalar</li>
-                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP de un servidor DNS el cual será reenviador (ej: <span class="span_url" translate="no">192.168.8.1</span>)</li>
+                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP del servidor DNS que actuará como reenviador (ej: <span class="span_url" translate="no">192.168.8.1</span>)</li>
                 </ol>
                 <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro <b>NS</b>.</p>
                 

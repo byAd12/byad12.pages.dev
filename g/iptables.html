@@ -15,6 +15,7 @@ Código por byAd12
         <title>IPTables</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -78,7 +78,7 @@ Código por byAd12
 
                 <p><u>Firewall</u>: Sistema de seguridad que inspecciona el tráfico de red y selecciona el tráfico mediante reglas. Las apps de filtrado de paquetes se utilizan como firewalls.</p>
 
-                <p>Pueden ser dispositivos hardware específicos (Network Appliances) o programas software. Un dispositivo que los implementa puede además actuar como proxy, vpn, dispositivo NAT y router peor un firewall es estrictamente que actúa como control del tráfico.</p>
+                <p>Pueden ser dispositivos hardware específicos (Network Appliances) o programas software. Un dispositivo que los implementa puede además actuar como proxy, vpn, dispositivo NAT y router pero un firewall es estrictamente que actúa como control del tráfico.</p>
 
                 <p><u>NAT</u> (Network Address Translation) - Utilizado para:</p>
 
@@ -155,7 +155,7 @@ Código por byAd12
                     <a href="../img/guides/iptables/tabla_filter_y_nat.png"><img alt="Tabla Filter y NAT" src="../img/guides/iptables/tabla_filter_y_nat.png"></a>
                 </div>
 
-                <p><u>Acciones</u> (TARGETs): Las reglas de iptables fincional como ACL (Listas de Control de Acceso) leyéndose secuencialmente hasta que se aplique una regla. Cuando se defina una regla hay que determinar si es ACCEPT (El paquete pasa), DROP (Se elimina el paquete) o RETURN (No leer más reglas y pasar a la siguiente cadena).</p>
+                <p><u>Acciones</u> (TARGETs): Las reglas de iptables funcionan como ACL (Listas de Control de Acceso) leyéndose secuencialmente hasta que se aplique una regla. Cuando se defina una regla hay que determinar si es ACCEPT (El paquete pasa), DROP (Se elimina el paquete) o RETURN (No leer más reglas y pasar a la siguiente cadena).</p>
 
             </div>
 
@@ -340,7 +340,7 @@ Código por byAd12
                 <p>Cambia la IP de origen por la externa del dispositivo NAT definiéndose en las cadenas de POSTROUTING de la tabla NAT. Esto se hace si la IP es ESTÁTICA.</p>
 
                 <p>Ejemplo:</p>
-                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT –to 80.14.1.2/32</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j SNAT --to 80.14.1.2/32</code></pre>
                 <p class="Expl">En este ejemplo se añade en la tabla nat la cadena postrounting (después de procesar todo) a la red local que salga por la IP pública especificada.</p>
 
                 <p><u>Enmascaramiento IP</u> (IP Masquerade): Es cuando la IP del dispositivo origen es DINÁMICA con SNAT. Se debe comprobar la IP externa del dispositivo NAT antes de cambiarla en el paquete.</p>
@@ -357,7 +357,7 @@ Código por byAd12
                 <p>Se usa para exponer el puerto de un nodo privado al exterior cambiando la IP destino de la externa del nodo a la del nodo a exponer. Se define en PREROUTING de la tabla NAT.</p>
 
                 <p>Para reenviar peticiones a un puerto del dispositivo NAT de un nodo interno:</p>
-                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A PREROUTING -p [PROTOCOLO: tcp/udp/..] –dport [PUERTO] -i [INTERFAZ] -j DNAT –to [IP_A_REDIRIGIR]( :OTRO_PUERTO_OPCIONAL)</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">iptables -t nat -A PREROUTING -p [PROTOCOLO: tcp/udp/..] --dport [PUERTO] -i [INTERFAZ] -j DNAT --to [IP_A_REDIRIGIR]( :OTRO_PUERTO_OPCIONAL)</code></pre>
 
             </div>
 
@@ -451,7 +451,7 @@ Código por byAd12
             <div>
                 <h2>Nuevas cadenas</h2>
 
-                <p>Se utiliza para organizar las reglas según el tipo de tráfico aumentando así el tráfico. Pej. si ay muchas líneas de iptables y, en vez de leer todas las reglas se puede organizar y controlar.</p>
+                <p>Se utiliza para organizar las reglas según el tipo de tráfico aumentando así el rendimiento. Pej. si hay muchas líneas de iptables y, en vez de leer todas las reglas se puede organizar y controlar.</p>
 
                 <p><u>Crear una nueva cadena</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -N NUEVA_CADENA</code></pre>
@@ -497,6 +497,7 @@ iptables -P FORWARD DROP
 # Poner reglas OUTPUT
 # Poner reglas FORWARD</code></pre>
                 <p class="Expl">Es una buena manera de configurar varios equipos sin escribir las cadenas cada vez, además que se permite una organización con comentarios.</p>
+                <p class="Expl"><u>Importante</u>: Antes de ejecutar el script por SSH se debe permitir explícitamente el puerto 22, de lo contrario se perderá la conexión SSH al instante</p>
 
             </div>
 
@@ -521,7 +522,7 @@ iptables -P FORWARD DROP
                 <pre class="codigo" translate="no"><code class="bash">iptables-restore ./rules.v4</code></pre>
 
                 <p>Restaurar <b>automáticamente</b> las reglas:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/systemd/system/iptables.servce</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/systemd/system/iptables.service</code></pre>
                 <p class="Expl">Cambiar <span class="span_contenido">ExecStart</span> a <span class="span_contenido">/sbin/iptables-restore ./ruta/rules.v4</span>.</p>
 
             </div>

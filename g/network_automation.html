@@ -15,6 +15,7 @@ Código por byAd12
         <title>Automatización - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -62,8 +63,8 @@ Código por byAd12
 
                 <pre class="codigo" translate="no"><code class="bash">ansible-playbook -i [HOST_FILE] -f [NUM] [TASK].yml</code></pre>
                 <p class="Expl"><b>TASK.yml</b>: Archivo que crearemos para especificar una tarea.</p>
-                <p class="Expl"><b>-f NUM</b>: Especificamos cuantas tareas ejecutará simultáneamente.</p>
-                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea:</p>
+                <p class="Expl"><b>-f NUM</b>: Especificamos cuántas tareas ejecutará simultáneamente.</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos en los que ejecutar la tarea, separándolos con saltos de línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[class1]
 10.200.0.1
 10.200.0.2
@@ -78,7 +79,7 @@ nodo.dominio.tld
 
                 <pre class="codigo" translate="no"><code class="bash">ansible [HOST] -i [HOST_FILE] -f -m ping</code></pre>
                 <p class="Expl"><b>HOST</b>: Especificamos a que hosts del archivo verificar. Puede ser simplemente <b>all</b> ejecutándolo en todos los nodos o, si hay varios <b>[ ]</b>, podemos excluir grupos con <b>all:!nombre_grupo_excluir</b>. Además podemos poner el nombre del grupo solamente.</p>
-                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos a los que ejecutar la tarea, separándolos con saltos de línea.</p>
+                <p class="Expl"><b>-i HOST_FILE</b>: Añadimos en la ruta de ejcución un archivo con un nombre entre <b>[ ]</b> y debajo una lista de nodos en los que ejecutar la tarea, separándolos con saltos de línea.</p>
                 <p class="Expl"><b>-m ping</b>: Hace un ping.</p>
             </div>
 
@@ -141,8 +142,8 @@ nodo.dominio.tld
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 style="margin: 15px 0;">PSCP</h1>
-        <h2 class="TituloSecundario">Paralell-SCP</h2>
+        <h1 style="margin: 15px 0;">Parallel-Rsync</h1>
+        <h2 class="TituloSecundario">Automatizar la copia archivos</h2>
         <br>
 
         <hr>

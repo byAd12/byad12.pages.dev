@@ -15,6 +15,7 @@ Código por byAd12
         <title>Packet Tracer - CLI</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -34,9 +35,8 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/cisco.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -285,7 +285,7 @@ switch: boot</code></pre>
                 <h2 id="PurgarConfiguracion">Eliminar toda la configuración del sistema</h2>
 
                 <p>Eliminaremos la configuración de arranque y el fichero de la configuración de VLANs:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># erase startup-conf</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco"># delete vlan.dat</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco"># write erase</code></pre>
                 <p class="Expl">Cuando pregunte si estamos seguros debemos responder con <span class="span_contenido">y</span> seguido de <span class="span_contenido">ENTER</span>.</p>
@@ -314,8 +314,7 @@ switch: boot</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">ssh -l &lt;Usuario&gt; &lt;IpDestino&gt;</code></pre>
 
                 <p>Conectarnos mediante Telnet a un host remoto:</p>
-                <pre class="codigo" translate="no"><code class="cisco">telnet (-l &lt;Usuario&gt;) &lt;IpDestino&gt;</code></pre>
-                <p class="Expl">El parámetro <span class="span_contenido">-l</span> en el Command prompt de los PCs no funciona, solo hay que definir la IP.</p>
+                <pre class="codigo" translate="no"><code class="cisco">telnet &lt;IpDestino&gt;</code></pre>
 
                 <p>Nota - <b>TELNET</b> y <b>SSH</b>:</p>
                 <p class="Expl">Si en el router o switch que queremos conectarnos no tiene en las líneas <span class="span_contenido">vty 0 15</span> un <span class="span_contenido">password</span> y <span class="span_contenido">login</span>, el destino rechazará la conexión automáticamente.</p>
@@ -966,26 +965,26 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                             <td colspan="2">Modos de switchport</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">access</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">access</code></pre></td>
                             <td>
                                 Pone la interfaz (puerto de acceso) en modo permanente de no trunking y negocia para convertir el enlace en un enlace no troncal.
                                 La interfaz se convierte en una interfaz no troncal, independientemente de si la interfaz vecina es una interfaz troncal.
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">dynamic auto</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">dynamic auto</code></pre></td>
                             <td>
                                 La interfaz se convierte en una interfaz de enlace troncal, si la interfaz vecina está configurado en modo troncal o deseable.
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">dynamic desirable</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">dynamic desirable</code></pre></td>
                             <td>
                                 La interfaz se convierte en una interfaz de enlace troncal, si la interfaz vecina está configurado en modo automático troncal, deseable o dinámico.
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">trunk</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">trunk</code></pre></td>
                             <td>
                                 El puerto queda configurado en modo troncal de forma permanente y negocia para que el enlace se convierta en una conexión troncal.
                                 La interfaz se convierte en una interfaz de enlace troncal, incluso si la interfaz vecina  no es una interfaz troncal.
@@ -1092,7 +1091,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 (config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
                 <p class="Expl"><b>interface</b>: Crea una subinterfaz lógica que identifica a la VLAN mediante el número &lt;VLAN_ID&gt;.
                     <br>
-                    <b>encapsulation dot1Q</b>: Indica que esta subinterfaz solo procesará tramas etiquetadas con la VLAN especificada.
+                    <b>encapsulation dot1Q</b>: Indica que esta subinterfaz solo procesará tramas etiquetadas con la VLAN especificada. Debe especificarse <b>antes</b> de configurar la IP.
                     <br>
                     <b>ip address</b>: Asigna a la subinterfaz la IP del gateway que usarán los dispositivos de esa VLAN para comunicarse con otras redes o VLANs.
                 </p>
@@ -1531,6 +1530,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Cualquier switch de un mismo dominio debe tener la misma contraseña VTP que indique el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vtp password</code></pre>
+                <p class="Expl">En versiones antiguas de IOS este comando no existía o la contraseña venía oculta en <span class="span_contenido">show vtp status</span>.</p>
 
             </div>
 
@@ -1679,7 +1679,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                             <td>Explicación</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="cisco">network network-number &lt;Máscara&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">network &lt;Direccion_Red&gt; &lt;Máscara&gt;</code></pre></td>
                             <td>Para definir la máscara de red en formato punteado o CIDR.</td>
                         </tr>
                         <tr>
@@ -2354,7 +2354,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Rutas_Predeterminadas_Interfaz">Crear una ruta predeterminada por interfaz</h2>
 
-                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
+                <p>Para indicar a un router o switch de capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;Interfaz&gt;</code></pre>
 
             </div>
@@ -2362,7 +2362,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Rutas_Predeterminadas_IP">Crear una ruta predeterminada por IP</h2>
 
-                <p>Para indicar a un router/capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
+                <p>Para indicar a un router o switch de capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt;</code></pre>
 
             </div>

@@ -15,6 +15,7 @@ Código por byAd12
         <title>SQL - Consultas</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,8 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -127,7 +127,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla WHERE col1 IN ("valor","valor","valor");</code></pre>
                 <p class="Expl">Devuelve las filas si col1 es uno de los valores del ().</p>
 
-                <p><span class="span_contenido">BETWEEN</span>: Solo funciona con números. Si hay decimales, se ponene con puntos.</p>
+                <p><span class="span_contenido">BETWEEN</span>: Solo funciona con números. Si hay decimales, se ponen con puntos.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla WHERE col1 BETWEEN "valor" AND "valor2";</code></pre>
             </div>
 
@@ -154,8 +154,15 @@ Código por byAd12
                 <p><span class="span_contenido">LCASE()</span>: Convierte los valores a minúsculas.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT LCASE(columna) FROM tabla;</code></pre>
 
-                <p><span class="span_contenido">CONCAT()</span>: Concadenar varias columnas en una sola.</p>
+                <p><span class="span_contenido">CONCAT()</span>: Concatenar varias columnas en una sola.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT CONCAT(col1, " ", LCASE(col2)) FROM tabla;</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Funciones agregadas</h2>
+
+                <p>Operan sobre un conjunto de filas:</p>
 
                 <p><span class="span_contenido">+</span>, <span class="span_contenido">-</span>, <span class="span_contenido">*</span>, <span class="span_contenido">/</span>: Funciones matemáticas.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT (col1 * 10) + 10 FROM tabla;</code></pre>
@@ -187,7 +194,7 @@ Código por byAd12
                 <h2>Filtro <span class="span_url_espaciado">HAVING</span></h2>
 
                 <p>Permite filtrar con funciones de agrupación:</p>
-                <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla WHERE columna3="valor" HAVING COUNT(columna1)>=10 GROUP BY columna2;</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla WHERE columna3="valor" GROUP BY columna2 HAVING COUNT(columna1)>=10;</code></pre>
             </div>
 
             <div>

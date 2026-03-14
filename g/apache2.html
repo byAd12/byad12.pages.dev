@@ -15,6 +15,7 @@ Código por byAd12
         <title>Apache2 - Linux</title>
         
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -116,7 +116,7 @@ Código por byAd12
             <div>
                 <h2>Directivas de Configuración:<br><span translate="no">/etc/apache2/mods-enabled/dir.conf</span> y <span translate="no">/etc/apache2/apache2.conf</span></h2>
                 <p><b>DirectoryIndex</b>:</p>
-                <pre class="codigo" translate="no"><code class="apache">DirectoryIndex indice.html index.htm indice.html</code></pre>
+                <pre class="codigo" translate="no"><code class="apache">DirectoryIndex indice.html index.htm</code></pre>
                 <p class="Expl">Indica qué página debe enviarse cuando el cliente sólo escribe el dominio y la carpeta.</p>
 
             </div>
@@ -175,7 +175,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">htpasswd -c /etc/apache2/ClaveAcceso NombreUsuario</code></pre>
                 <p class="Expl"><b>-c</b>: Crea el archivo. Si se vuelve a añadir a otro usuario se quita.</p>
 
-                <p>3. Crear la carpeta definida en &lt; Directory &gt;.<br>4. Reiniciar el servicio y acceder a <span class="span_url" translate="no">http://localhost/privado</span>.</p>
+                <p>3. Crear la carpeta definida en &lt;Directory&gt;.<br>4. Reiniciar el servicio y acceder a <span class="span_url" translate="no">http://localhost/privado</span>.</p>
             </div>
 
             <div>
@@ -257,7 +257,7 @@ Require user mortadelo filemon</code></pre>
 
                 <p><span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
-    Redirect / https://ali-ss.abc
+    Redirect / https://aili-ss.abc
 &lt;/VirtualHost&gt;</code></pre>
 
             </div>
@@ -313,7 +313,7 @@ Alias /aliastodos /var/www/todos</code></pre>
 &lt;Directory /var/www/html/marcos&gt;
     Options Indexes
 &lt;/Directory&gt;</code></pre>
-                <p class="Expl">Hay quitar <span class="span_contenido" translate="no">Indexes</span> de <span class="span_contenido" translate="no">Options</span> en <span class="span_url" translate="no">/var/www/html</span>.</p>
+                <p class="Expl">Hay que quitar <span class="span_contenido" translate="no">Indexes</span> de <span class="span_contenido" translate="no">Options</span> en <span class="span_url" translate="no">/var/www/html</span>.</p>
 
                 <p>Añadir en <span class="span_url" translate="no">/etc/hosts</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">127.0.0.1       luis.aili-ss.xyz

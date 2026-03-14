@@ -15,6 +15,7 @@ Código por byAd12
         <title>NIS</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -129,7 +129,7 @@ NISCLIENT=false</code></pre>
                 
                 <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">make -C /var/yp</code></pre>
-                <p class="Expl">Si no hay cambios no actualizará nada, además el comando indica si un fichero fué modificado desde la última vez que se modificó la base de datos.</p>
+                <p class="Expl">Si no hay cambios no actualizará nada, además el comando indica si un fichero fue modificado desde la última vez que se modificó la base de datos.</p>
 
             </div>
 
@@ -147,7 +147,7 @@ NISCLIENT=false</code></pre>
 
                 <p>
                     Hay otra opción de la cual no se comparten las carpetas pero se define que cualquier usuario sin carpeta personal creada se creará automáticamente de manera local.
-                    Esto se usa cuando se quiere que los datos de un usuario esté en un equipo pero no en otro equipo.
+                    Esto se usa cuando se quiere que los datos de un usuario estén en un equipo pero no en otro equipo.
                 </p>
 
                 <p class="Expl">Para configurarlo hay que editar el siguiente fichero:</p>
@@ -253,7 +253,7 @@ gshadow:        files systemd nis</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">&lt;IP_servidor&gt;:/home    /home    nfs    defaults    0    0</code></pre>
 
                 <p>3. Por último, reiniciaremos el sistema para aplicar los cambios:</p>
-                <pre class="codigo" translate="no"><code class="bash">reboot -h now</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">reboot -r now</code></pre>
 
                 <p>
                     Como resultado podremos iniciar sesión en los usuarios del sistema del servidor y ver sus carpetas con los archivos compartidos.

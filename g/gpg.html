@@ -15,6 +15,7 @@ Código por byAd12
         <title>GPG - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -72,9 +72,9 @@ Código por byAd12
             <div>
                 <h2>Descifrar archivo con clave <span>[a]simétrica</span></h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg [ARCHIVO_A_DESCIFRAR]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">gpg -d [ARCHIVO_A_DESCIFRAR]</code></pre>
                 <p class="Expl">Si el archivo tiene una <b>clave simétrica</b> va a pedir la clave simétrica y descifra el archivo.</p>
-                <p class="Expl">Si el archivo tiene una <b>clave asimétrica</b> y si fué cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
+                <p class="Expl">Si el archivo tiene una <b>clave asimétrica</b> y si fue cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
             </div>
 
             <div>
@@ -112,7 +112,7 @@ Código por byAd12
             <div>
                 <h2>Cifrar archivo con clave <span>asimétrica</span></h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg --a -r [NOMBRE_OTRA_CLAVE] [ARCHIVO_A_CIFRAR]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">gpg --a -r -e [NOMBRE_OTRA_CLAVE] [ARCHIVO_A_CIFRAR]</code></pre>
                 <p class="Expl"><b>-r</b>: Puede usarse más de 1 vez.</p>
                 <p class="Expl"><b>NOMBRE_OTRA_CLAVE</b>: El nombre o email del creador de la clave pública que se va a usar para cifrar.</p>
             </div>
@@ -122,7 +122,7 @@ Código por byAd12
 
                 <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [ARCHIVO_A_FIRMAR]</code></pre>
                 <p class="Expl">Generará un archivo <span class="span_url" translate="no">.gpg</span> que servirá como firma.</p>
-                <p class="Expl">Éste se enviará junto al archivo original para verificar si se ha modificado o no. Para verificarlo:</p>
+                <p class="Expl">Este se enviará junto al archivo original para verificar si se ha modificado o no. Para verificarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg [ARCHIVO_FIRMADO]</code></pre>
                 <p class="Expl">EL comando te pedirá la ruta del archivo original y comparará la firma.</p>
             </div>

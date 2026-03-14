@@ -15,6 +15,7 @@ Código por byAd12
         <title>Servicios Remotos - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/powershell.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -82,8 +83,8 @@ Código por byAd12
 
             <div>
                 <h2>Configuración<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
-                <pre class="codigo" translate="no"><code class="bash">Start-Service sshd</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
+                <pre class="codigo" translate="no"><code class="powershell">Start-Service sshd</code></pre>
+                <pre class="codigo" translate="no"><code class="powershell">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
                 <p class="Expl">Habilitar el puerto 22 en el firewall en reglas de entrada y salida.</p>
             </div>
 
@@ -104,9 +105,9 @@ Código por byAd12
 GatewayPorts yes</code></pre>
                 <p>2. En el servidor reiniciar el servicio SSH:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
-                <p>3. Crear un socker por el que transmitir la información:</p>
+                <p>3. Crear un socket por el que transmitir la información:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (USER)@[IP]</code></pre>
-                <p>4. En el navegador del cliente configurar la red a "Configuración manual de proxy", configurando un socker con la ip <span class="span_contenido">127.0.0.1</span> y el puerto <span class="span_contenido">2021</span> asignado.</p>
+                <p>4. En el navegador del cliente configurar la red a "Configuración manual de proxy", configurando un socker con la ip <span class="span_contenido">127.0.0.1</span>, el puerto <span class="span_contenido">2021</span> asignado y elegir "SOCKS Host".</p>
             </div>
 
             <div>

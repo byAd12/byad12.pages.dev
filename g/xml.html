@@ -15,6 +15,7 @@ Código por byAd12
         <title>XML - Extensible Markup Language</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,9 +36,9 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -123,9 +124,9 @@ Código por byAd12
                     Cada etiqueta, aunque no tenga contenido, debe ser cerrada.
                 </p>
                 <p>
-                    <b>Respetar el <span style="color: rgb(147, 147, 206) !important;">órden</span></b>: 
+                    <b>Respetar el <span style="color: rgb(147, 147, 206) !important;">orden</span></b>: 
                     <br>
-                    Para cerrar una etiqueta que anide a otras, las etiquetas anidades deben ser cerradas antes.
+                    Para cerrar una etiqueta que anide a otras, las etiquetas anidadas deben ser cerradas antes.
                 </p>
                 <p>
                     <b>Respetar <span style="color: rgb(147, 147, 206) !important;">mayúsculas</span></b>: 
@@ -189,7 +190,7 @@ Código por byAd12
 
                 <p class="Expl"><b>version</b>: La versión a trabajar con XML.
                     <br>
-                    <b>encoding</b>: Decodificación de carácteres a usar en el documento (<a href="https://es.wikipedia.org/wiki/Codificaci%C3%B3n_de_caracteres" target="_blank">estándares</a>).
+                    <b>encoding</b>: Decodificación de caracteres a usar en el documento (<a href="https://es.wikipedia.org/wiki/Codificaci%C3%B3n_de_caracteres" target="_blank">estándares</a>).
                     <br>
                     <b>standalone</b>: Indica si el documento depende de información en una fuente externa. Los valores son <span class="span_contenido" translate="no">yes</span> o <span class="span_contenido" translate="no">no</span>.
                 </p>
@@ -243,7 +244,7 @@ Código por byAd12
                 </p>
                 <p>
                     <b>Contener</b>: 
-                        El nombre del tag puede contener: <span class="span_contenido" translate="no">_</span>, <span class="span_url" translate="no">-</span>, <span class="span_url" translate="no">.</span> y números, aunque no se recomienda usar los marcados en verde ni carácteres <u>no</u> ingleses.
+                        El nombre del tag puede contener: <span class="span_contenido" translate="no">_</span>, <span class="span_url" translate="no">-</span>, <span class="span_url" translate="no">.</span> y números, aunque no se recomienda usar los marcados en verde ni caracteres <u>no</u> ingleses.
                 </p>
                 <p>
                     <b>Prohibido</b>: 
@@ -254,8 +255,8 @@ Código por byAd12
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Reglas del contenido de un tag</span></b>:</p>
 
                 <p>
-                    Entre el tag de comienzo y cierre no se pueden usar los siguientes carácteres: <span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> ni <span class="span_error" translate="no">&quot;</span> 
-                    al ser carácteres reservados que XML puede malinterpretar. Para poder usarlos hay que usar referencias o una etiqueta CDATA (explicado más adelante).
+                    Entre el tag de comienzo y cierre no se pueden usar los siguientes caracteres: <span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> ni <span class="span_error" translate="no">&quot;</span> 
+                    al ser caracteres reservados que XML puede malinterpretar. Para poder usarlos hay que usar referencias o una etiqueta CDATA (explicado más adelante).
                 </p>
 
             </div>
@@ -270,7 +271,7 @@ Código por byAd12
                     Siempre empiezan con <span class="span_contenido" translate="no">&amp;</span> y acaba con <span class="span_contenido" translate="no">;</span>.
                 </p>
                 <p>
-                    Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser carácteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&amp;#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
+                    Si, por ejemplo, hace falta colocar un símbolo en el contenido, XML lo puede malinterpretar al ser caracteres reservados así que se tendría que definir como decimal con este formato: "<span class="span_contenido" translate="no">&amp;#<span></span>00;</span>", donde 00 es el número Unicode que identifica al símbolo que queramos poner.
                 </p>
 
                 <p>
@@ -291,31 +292,31 @@ Código por byAd12
                         <tr>
                             <td>&#x3C;</td>
                             <td><span class="span_contenido">&amp;#60;</span></td>
-                            <td><span class="span_contenido">&amp;x3C;</span></td>
+                            <td><span class="span_contenido">&amp;#x3C;</span></td>
                             <td><span class="span_contenido">&amp;lt;</span></td>
                         </tr>
                         <tr>
                             <td>&#x3E;</td>
                             <td><span class="span_contenido">&amp;#62;</span></td>
-                            <td><span class="span_contenido">&amp;x3E;</span></td>
+                            <td><span class="span_contenido">&amp;#x3E;</span></td>
                             <td><span class="span_contenido">&amp;gt;</span></td>
                         </tr>
                         <tr>
                             <td>&#x26;</td>
                             <td><span class="span_contenido">&amp;#38;</span></td>
-                            <td><span class="span_contenido">&amp;x26;</span></td>
+                            <td><span class="span_contenido">&amp;#x26;</span></td>
                             <td><span class="span_contenido">&amp;amp;</span></td>
                         </tr>
                         <tr>
                             <td>&#x27;</td>
                             <td><span class="span_contenido">&amp;#39;</span></td>
-                            <td><span class="span_contenido">&amp;x27;</span></td>
+                            <td><span class="span_contenido">&amp;#x27;</span></td>
                             <td><span class="span_contenido">&amp;apos;</span></td>
                         </tr>
                         <tr>
                             <td>&#x22;</td>
                             <td><span class="span_contenido">&amp;#34;</span></td>
-                            <td><span class="span_contenido">&amp;x22;</span></td>
+                            <td><span class="span_contenido">&amp;#x22;</span></td>
                             <td><span class="span_contenido">&amp;quot;</span></td>
                         </tr>
                     </table>
@@ -328,7 +329,7 @@ Código por byAd12
 
                 <p>
                     Otra manera para poder usar los caracteres (<span class="span_error" translate="no">&lt;</span>, <span class="span_error" translate="no">&gt;</span>, <span class="span_error" translate="no">&amp;</span>, <span class="span_error" translate="no">&apos;</span> y <span class="span_error" translate="no">&quot;</span> )
-                    sin tener que usar referencias es usar una etiqueta específica llamada CDATA que permite usarlos explícitamente sin que el documento XML lo interprete como carácteres reservados.
+                    sin tener que usar referencias es usar una etiqueta específica llamada CDATA que permite usarlos explícitamente sin que el documento XML lo interprete como caracteres reservados.
                 </p>
                 <p>
                     Esta etiqueta CDATA no se puede anidar dentro de otra etiqueta CDATA. Tampoco se puede poner en su contenido la cadena <span class="span_contenido" translate="no">]]&gt;</span> ya que esto se usa solo para cerrar la etiqueta CDATA.
@@ -525,7 +526,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
     ...
 &lt;/elemento_raiz&gt;</code></pre>
                 <p class="Expl">
-                    <b>xmlns:xsi</b> es la >definición de un namespace que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    <b>xmlns:xsi</b> es la definición de un namespace que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
                     Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
                 </p>
                 <p class="Expl">

@@ -15,6 +15,7 @@ Código por byAd12
         <title>Servidor de Correo - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,7 +36,6 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script>hljs.highlightAll();</script>
@@ -89,7 +89,7 @@ Código por byAd12
                 </div>
 
                 <p><u>Formato</u> del archivo <span class="span_url">/etc/postfix/main.cf</span>:</p>
-                <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continua a la línea anterior.</p>
+                <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continúa a la línea anterior.</p>
                 <p class="Expl"><b>$parámetro</b>: Asignar un valor de un parámetro a otro.</p>
 
             </div>
@@ -135,7 +135,7 @@ Código por byAd12
 
                 <p>Para conectarse a un servidor SMTP, como postfix:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP/DNS/localhost] [PUERTO:25]</code></pre>
-                <p>Dentro de la conexión telnet:</p>
+                <p>Dentro de la conexión telnet hay que poner los siguientes campos separando cada uno por una línea vacía:</p>
                 <pre class="codigo" translate="no"><code class="bash">MAIL FROM:[CORREO_REMITENTE]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">RCPT TO:[CORREO_DESTINATARIO]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">DATA</code></pre>
