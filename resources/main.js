@@ -63,6 +63,37 @@ document.addEventListener('DOMContentLoaded', anadir_texto_gpg);
 
 // ==========================================================
 // ==========================================================
+// Enseñar información sobre las guías
+
+function datos_guias() {
+    const guias = document.querySelectorAll('.BlogEntradas > a');
+    let contador_activos = 0;
+    let primeraGuiaVisible = null;
+
+    guias.forEach(link => {
+        if (!link.classList.contains('oculto')) {
+            contador_activos++;
+            if (!primeraGuiaVisible) {
+                primeraGuiaVisible = link;
+            }
+        }
+    });
+
+    document.getElementById("InformacionGuiasTotal").innerText = contador_activos;
+    const contenedorFecha = document.getElementById("InformacionGuiasUltimaFecha");
+    
+    if (primeraGuiaVisible) {
+        const fechaTxt = primeraGuiaVisible.querySelector('div p.fecha');
+        contenedorFecha.innerText = fechaTxt ? fechaTxt.innerText : "--";
+    } else {
+        contenedorFecha.innerText = "No hay guías visibles";
+    }
+}
+
+document.addEventListener('DOMContentLoaded', datos_guias);
+
+// ==========================================================
+// ==========================================================
 // Ocultar entradas del blog o enseñarlas mediante el índice
 
 function editar_SMR() {
@@ -89,6 +120,7 @@ function editar_SMR() {
         boton.style.textDecoration = "line-through";
         boton.style.color = "rgb(228, 196, 196)";
     }
+    datos_guias();
 }
 
 function editar_ASIR() {
@@ -115,6 +147,7 @@ function editar_ASIR() {
         boton.style.textDecoration = "line-through";
         boton.style.color = "rgb(228, 196, 196)";
     }
+    datos_guias();
 }
 
 function editar_personal() {
@@ -141,6 +174,7 @@ function editar_personal() {
         boton.style.textDecoration = "line-through";
         boton.style.color = "rgb(228, 196, 196)";
     }
+    datos_guias();
 }
 
 function editar_boton_filtros_avanzados() {
@@ -161,6 +195,7 @@ function editar_boton_filtros_avanzados() {
         boton.style.color = "white";
         resetearFiltrosYEstilos();
     }
+    datos_guias();
 }
 
 
@@ -215,6 +250,7 @@ function toggleFiltro(claseFiltro, idBoton) {
         boton.style.textDecoration = "line-through";
         boton.style.color = "rgb(228, 196, 196)";
     }
+    datos_guias();
 }
 
 
@@ -237,26 +273,6 @@ function resetearFiltrosYEstilos() {
         }
     });
 }
-
-
-// ==========================================================
-// ==========================================================
-
-document.addEventListener('DOMContentLoaded', () => {
-  const sticky = document.querySelector('.menu_bar');
-  const stickyTop = sticky.offsetTop;
-
-  const checkSticky = () => {
-    if (window.scrollY >= stickyTop) {
-      sticky.classList.add('menu_bar_activo');
-    } else {
-      sticky.classList.remove('menu_bar_activo');
-    }
-  };
-
-  checkSticky();
-  window.addEventListener('scroll', checkSticky);
-});
 
 // ==========================================================
 // ==========================================================
@@ -295,7 +311,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const decoder = new TextDecoder();
     
-    document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);
+    if (document.getElementById("EmailBoton")){
+        document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);
+    }
 });
 
 // ==========================================================

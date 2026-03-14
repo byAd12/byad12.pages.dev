@@ -1,20 +1,24 @@
-Nuevas funciones y corrección de errores
-
-# resources/main.css
-Mejora de colores
-Arreglo de estilos relacionados a los botones de scripts.html
-Se cambió el color al correspondiente de los filtros de A.S.I.R.
-
-# resources/blog.css, resources/main.css
-Mejora del scrollbar e implementación de sus mismos estilos tanto para el blog como la web principal
+Nuevas funciones
 
 # resources/main.js
-Ahora el botón de filtros avanzados muestra todo antes, como un reset de las guias
+Se quitaron funciones innecesarias
+Se arregló un error sobre que no se podia llegar a un elemento
+Nueva función para conseguir datos sobre las guías
 
-# resources/blog.js
-Se añadió una nueva funcionalidad para mantener cerrado el sub-menú de las guias añadiendo "?ocultar-menu=true" a la URL
-Se migraron funciones al CSS
+# guides.html
+Nuevo indicador sobre el número total de guías que hay y cual fué la fecha de la última guía
+Nuevo enlace a una guía sobre Active Directory
+
+# g/active_directory.html
+Nueva guía explicando como unir a un cliente Linux a un dominio de AD Windows
+
+# resources/blog.css
+Mejora de estilos
 
 # g/*.html
-Se añadió un simple contenido a un h2 vacío para suprimir alertas de validación
-Arreglo de que algunas imágenes no tenian atributo alt="" y otras lo tenian duplicado
+Mejoras visuales para los títulos relacionados con los logos de Windows y Linux
+Mejoras de contenido
+Arreglo de enlaces
+
+# proxmox.html
+Nueva funcionalidad para enviar registros de comandos ejecutados en el sistema con un weebhook de Discord

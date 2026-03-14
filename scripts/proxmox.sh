@@ -84,9 +84,10 @@ while true; do
         " | ==================" \
             "${Ne}21${Bl} | Cambiar de versión" \
             " | " \
-        " | ${Az}PYTHON ${Bl}" \
-        " | =================================" \
-            "${Ne}22${Bl} | Ejecutar un archivo como servicio" \
+        " | ${Az}SERVICIOS ${Bl}" \
+        " | =====================================" \
+            "${Ne}22${Bl} | Ejecutar un archivo .py como servicio" \
+            "${Ne}23${Bl} | Alertas de Discord" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
@@ -715,6 +716,56 @@ EOF
         echo -e "\n${Az}Para editar parámetros edite el siguiente archivo: ${Az}/etc/systemd/system/script-python.service${Bl}"
 
         echo -e "\n${Ve}¡Archivo asignado como servicio correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # ALERTAS 
+    ##############################################################
+    23)
+        clear
+        read -p 'Webhook de Discord: ' webhook
+
+        echo -e "\n${Az}Instalando dependencias...${Bl}"
+        apt install -y curl
+
+        echo -e "\n${Az}Creando script...${Bl}"
+        cat <<'EOF' > /usr/local/bin/discord-alerta.sh
+#!/bin/bash
+[[ -z "$1" || "$1" == *"discord-alerta.sh"* || "$1" == "history"* ]] && exit 0
+
+WEBHOOK="REPLACEME_WEBHOOK"
+HOSTNAME=$(hostname)
+USER_NAME=$(whoami)
+USER_ID=$(id -u)
+
+CLEAN_CMD=$(echo "$1" | sed 's/"/\\"/g')
+
+MESSAGE="### host $HOSTNAME • $USER_NAME • uid \`$USER_ID\`\n\n\`\`\`bash\n$CLEAN_CMD\n\`\`\`"
+
+PAYLOAD="{\"content\": \"$MESSAGE\"}"
+curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK" > /dev/null 2>&1 &
+EOF
+
+
+        sed -i "s|REPLACEME_WEBHOOK|$webhook|" /usr/local/bin/discord-alerta.sh
+        chmod +x /usr/local/bin/discord-alerta.sh
+
+        echo -e "\n${Az}Inyectando hook en .bashrc...${Bl}"
+        cat <<'EOF' >> /root/.bashrc
+
+# --- Monitor Discord ---
+logger_discord() {
+    # Evitar bucles y comandos repetidos
+    if [ "$BASH_COMMAND" != "$LAST_CMD" ]; then
+        /usr/local/bin/discord-alerta.sh "$BASH_COMMAND"
+        LAST_CMD="$BASH_COMMAND"
+    fi
+}
+trap 'logger_discord' DEBUG
+# -----------------------
+EOF
+
+        echo -e "\n${Ve}¡Configurado! REINICIA LA SESIÓN para activar las alertas.${Bl}"
         ;;
 
     ##############################################################

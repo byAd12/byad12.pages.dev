@@ -56,7 +56,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"> <img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
 
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP] (PUERTO)</code></pre>
                 <p class="Expl">Pide usuario y contraseña. NO viajan cifrados y pueden ser interceptados.</p>
@@ -74,21 +74,21 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Configuración <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Configuración<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
                 <pre class="codigo" translate="no"><code class="bash">apt install openssh-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 22</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status ssh</code></pre>
             </div>
 
             <div>
-                <h2>Configuración <img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2>Configuración<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
                 <pre class="codigo" translate="no"><code class="bash">Start-Service sshd</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
                 <p class="Expl">Habilitar el puerto 22 en el firewall en reglas de entrada y salida.</p>
             </div>
 
             <div>
-                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"> <img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2>Conectarse a otro equipo<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
 
                 <pre class="codigo" translate="no"><code class="bash">ssh (USER)@[IP]</code></pre>
                 <p class="Expl">Pide usuario y contraseña. SI viajan cifrados y NO pueden ser interceptados.</p>
@@ -110,7 +110,7 @@ GatewayPorts yes</code></pre>
             </div>
 
             <div>
-                <h2>Abrir la GUI de un programa del servidor en el cliente <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Abrir la GUI de un programa del servidor en el cliente<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
 
                 <p>1. Editar el archivo <span class="span_url">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
                 <pre class="codigo" translate="no"><code class="bash">X11Forwarding yes</code></pre>

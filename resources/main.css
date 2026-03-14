@@ -23,7 +23,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* NAV BAR */
 
-.menu_bar{background-color: #222523; height: 50px; width: 100%; max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
+.menu_bar{backdrop-filter: blur(10px); background-color: rgba(34, 37, 35, 0.7); height: 50px; width: 100%; max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
 .menu_bar ul{list-style: none; display: flex;}
 .menu_bar .logo a, .logo a span{font-size: 25px; font-family: "Smoch" !important;}
 .menu_bar ul li{padding: 0 10px 0 10px;}
@@ -36,7 +36,6 @@ br{user-select: none;}
 .menu_bar .logo:hover:not(.nohover) span:not(.menu_toggle){color: white; text-decoration: underline;}
 
 .menu_toggle{display: none;}
-.menu_bar_activo{backdrop-filter: blur(10px); background-color: rgba(34, 37, 35, 0.7);}
 
 /* ========================================================= */
 /* BODY */
@@ -173,6 +172,9 @@ br{user-select: none;}
 
 .DivPrincipal{text-align: center; margin: 0 auto; max-width: 1500px;}
 .BlogEntradas{margin: 20px; display: flex; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0;}
+
+.InformacionGuias{color: rgb(228, 196, 196); margin-top: 20px; user-select: text; font-size: 12px;}
+.InformacionGuias span{color: greenyellow;}
 
 .BlogEntradas a{margin: 10px; position: relative; display: inline-block; overflow: hidden;}
 .BlogEntradas a .Entrada{background-color: #222523; color: white; min-height: 150px; width: 320px; transition: all .5s; border: 1px solid gray; border-top: none; position: relative; overflow: hidden;}

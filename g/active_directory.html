@@ -1,0 +1,195 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Pablo
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>Active Directory</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">Active Directory</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Servicio de directorio en una red distribuida</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>Unir un cliente <span>Linux</span> a Active Directory<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+            
+                <p><b>Cliente Linux</b>:</p>
+
+                <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url">.local</span>, es necesario editar el siguiente archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
+                <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
+                <pre class="codigo" translate="no"><code class="bash">hosts: files dns</code></pre>
+                <p class="Expl">Esto se debe realizar porque <span class="span_url">.local</span> se intenta resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
+
+
+                <br>
+                <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <p class="Expl">No va a funcionar hacer ping sin especificar en dominio ya que no hay ningún dominio de búsqueda configurado para añadir ese dominio automáticamente a la consulta.</p>
+
+                <br>
+                <p>3. Ahora configuraremos el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">nm-connection-editor</code></pre>
+                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4"  y añadir <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
+                <p class="Expl">Para verificarlo realizaremos una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
+                <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;</code></pre>
+                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaria el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
+
+                <br>
+                <p>4. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Subdominio_Cliente_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <p class="Expl">Luego reinicie la terminal.</p>
+                <p class="Expl">Para verificar los cambios se podría mirar que el siguiente archivo contenga el hostname actualizado:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
+
+                <br>
+                <p>5. Ahora estableceremos un registro DNS interno para el propio cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
+                <p class="Expl">Primero eliminaremos los registros que contengan el hostname antiguo del cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     &lt;Hostname_Cliente_Antiguo&gt;</code></pre>
+                <p class="Expl">Luego se añadirá un registro que apunte al propio cliente mediante su hostname y subdominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">&lt;IP_Cliente&gt;     &lt;Hostname_Cliente.dominio.tld&gt;     &lt;Hostname_Cliente&gt;</code></pre>
+
+
+                <br>
+                <p>6. Ahora instalaremos las dependencias necesarias:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
+                <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/krb5.conf</code></pre>
+                
+                <br>
+                <p>7. A continuación tenemos que actualizar SAMBA mediante en siguiente archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
+                <p class="Expl">Ahora nos dirigiremos a uns sección <span class="span_contenido">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
+
+                <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
+                <pre class="codigo" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
+                <p class="Expl">Por el nombre de dominio en mayúsculas y sin el TLD, por ejemplo como "CICLO" si el dominio fuera "ciclo.local":</p>
+                <pre class="codigo" translate="no"><code class="bash">workgroup = &lt;dominio_sin_tld_y_mayusculas&gt;</code></pre>
+
+                <p class="Expl">7.2. Debajo de "workgroup" añadiremos la siguiente línea, especificando el nombre de dominio completo:</p>
+                <pre class="codigo" translate="no"><code class="bash">realm = &lt;nombre_dominio&gt;.&lt;dominio_tld&gt;</code></pre>
+
+                <p class="Expl">7.3. Reemplazaremos el valor de la siguiente línea:</p>
+                <pre class="codigo" translate="no"><code class="bash">server role = standalone server</code></pre>
+                <p class="Expl">Por este otro valor, definiendo que el equipo actuará como miembro y no servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">server role = member server</code></pre>
+
+                <p class="Expl">7.4. A continuación tendremos que localizar un bloque de configuración de <span class="span_contenido">idmap</span> en la sección <span class="span_contenido">[GLOBAL]</span>, que es parecido a lo siguiente:</p>
+                <pre class="codigo" translate="no"><code class="ini">;   idmap config * :              backend = tdb
+;   idmap config * :              range   = 3000-7999
+;   idmap config YOURDOMAINHERE : backend = tdb
+;   idmap config YOURDOMAINHERE : range   = 100000-999999
+;   template shell = /bin/bash</code></pre>
+                <p class="Expl">Lo reemplazaremos a la siguiente configuración:</p>
+                <pre class="codigo" translate="no"><code class="ini">    idmap config * :              backend = tdb
+    idmap config * :              range   = 3000-7999
+    template shell = /bin/bash
+    template homedir = /home/%D/%u
+    password server = *
+    winbind use default domain = yes
+    winbind enum users = yes
+    winbind enum groups = yes
+
+;   idmap config YOURDOMAINHERE : backend = tdb
+;   idmap config YOURDOMAINHERE : range   = 100000-999999</code></pre>
+                <ul>
+                    <li><b>idmap config * :              backend = tdb</b>: Esto indica que tdb es la base de datos.</li>
+                    <li><b>idmap config * :              range   = 3000-7999</b>: Es el rango de UIDs para los usuarios de Windows que se metan al dominio.</li>
+                    <li><b>template shell = /bin/bash</b>: La terminal por defecto que tendrá en usuario que se cree desde Windows.</li>
+                    <li><b>template homedir = /home/%D/%u</b>: La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido">%D</span>.</li>
+                    <li><b>password server = *</b>: Su utilizará automáticamente cualquier controlador de dominio disponible.</li>
+                    <li><b>winbind use default domain = yes</b>: Para evitar poner el nombre de usuario como CICLO\user o user@dominio al iniciar sesión.</li>
+                    <li><b>winbind enum users = yes</b>: Permite listar todos los usuarios del dominio.</li>
+                    <li><b>winbind enum groups = yes</b>: Permite enumerar los grupos del dominio.</li>
+                </ul>
+
+                <p class="Expl">7.5. Guardamos el archivo y salimos del editor de texto.</p>
+
+                <br>
+                <p>8. Ahora hay que unir el cliente al dominio:</p>
+
+                <p class="Expl">8.1. Listaremos la información del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">net ads info</code></pre>
+
+                <p class="Expl">8.2. Intentaremos unir el cliente al dominio mediante el usuario y contraseña del Administrador del servidor Windows:</p>
+                <pre class="codigo" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
+                <p class="Expl">Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido">/etc/hosts</span>.</p>
+                <p class="Expl">Si permite unirse al dominio, podremos ver el equipo en la sección "Computers" del servidor de Windows.</p>
+
+                <p class="Expl">8.3. Listaremos la información del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">net ads info</code></pre>
+
+                <p class="Expl">8.4. Reiniciaremos el servicio de winbind:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
+
+                <p class="Expl">8.5. Listaremos la información de winbind, que debería listar los usuarios de Windows:</p>
+                <pre class="codigo" translate="no"><code class="bash">wbinfo -u</code></pre>
+
+                <p class="Expl">8.6. Deberiamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_windows&gt;</code></pre>
+
+                <p class="Expl">8.7. También deberiamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
+                <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
+                <p class="Expl">Tendremos el error de que no crea la carpeta personal, eso se soluciona editando <span class="span_url">/etc/pam.d/common-session</span> - explicado en la guía sobre <a href="nis.html#Problema-Cliente-Pamd">NIS: Problema - El cliente no tiene carpeta /home</a>.</p>
+
+                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> se aplicó al usuario de Windows:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
+                <p class="Expl">Debe aparecer la configuración de UID, carpeta /home y shell que se configuró en samba.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <script src="../resources/blog.js"></script>
+    </body>
+
+</html>
