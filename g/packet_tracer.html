@@ -79,11 +79,11 @@ Código por byAd12
                     <li><b>Lógicas:</b> <a href="#Interfaz_Loopback">Interfaz Loopback</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">4. Seguridad y Acceso</h2>
+                <h2 style="margin: 20px;" class="IndiceH2">4. Seguridad de acceso</h2>
                 <ul>
                     <li><b>Usuarios:</b> <a href="#Usuarios">Crear usuarios y privilegios</a> • <a href="#PassRules">Reglas de contraseñas</a></li>
                     <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#ServidorSSH">Configurar Servidor SSH</a></li>
-                    <li><b>Políticas:</b> <a href="#Politicas">Bloqueos por intentos y Timeout</a> • <a href="#FiltroAcceso">Filtro Transport Input</a></li>
+                    <li><b>Políticas:</b> <a href="#Politicas">Bloqueos por intentos y Timeout</a> • <a href="#Politica_Avisos">Política de avisos</a> • <a href="#FiltroAcceso">Filtro Transport Input</a></li>
                     <li><b>Avisos:</b> <a href="#SeguridadBasica">Banners (MOTD)</a></li>
                 </ul>
 
@@ -118,7 +118,7 @@ Código por byAd12
                     <li><b>DHCPv6 importante:</b> <a href="#DHCPv6_Servidor_Verificacion">Verificación</a> • <a href="#DHCPv6_Relay">Relay</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad</h2>
+                <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad y Ataques</h2>
                 <ul>
                     <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Seguridad_Verificacion">Verificación</a></li>
                     <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">(Des)habilitar CDP</a> • <a href="#LLDP_Des_habilitar">(Des)habilitar LLDP</a></li>
@@ -131,8 +131,11 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento</h2>
                 <ul>
-                    <li><b>Básico:</b> <a href="#Rutas_Sintaxis">Sintaxis</a></li>
-                    <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IP">Por IP</a> • <a href="#Rutas_Predeterminadas_Interfaz">Por interfaz</a> • <a href="#Rutas_Predeterminadas_IP_y_Interfaz">Por IP e interfaz</a></li>
+                    <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
+                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4 - Configuración</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6 - Configuración</a></li>
+                    <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4 - Configuración</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6 - Configuración</a></li>
+                    <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4 - Configuración</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6 - Configuración</a></li>
+                    <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv6">IPv4 - Configuración</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6 - Configuración</a></li>
                 </ul>
             </div>
         </div>
@@ -144,6 +147,7 @@ Código por byAd12
         <!-- ......................................................... -->
         
         <div class="parte1">
+
             <div>
                 <h2 id="Sintaxis">Sintaxis de Comandos</h2>
 
@@ -151,6 +155,7 @@ Código por byAd12
                 <p class="Expl"><b>prompt&gt;</b>: Indica el hostname del equipo que estamos configurando, aparte de si tenemos permisos: <span class="span_contenido">#</span>, o no: <span class="span_contenido">&gt;</span>.</p>
                 <p class="Expl"><b>comando</b>: Comando a ejecutar.</p>
                 <p class="Expl"><b>argumentos</b>: Antes de especificarlos una palabra clave o argumentos, se añade un espacio después del comando.</p>
+            
             </div>
             
             <div>
@@ -167,6 +172,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="cisco">Sw-Floor-1</code></pre>
                 <p>Para poder cambiar el hostname de un equipo Cisco se usa el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># hostname &lt;Nombre&gt;</code></pre>
+            
             </div>
 
             <div>
@@ -174,7 +180,9 @@ Código por byAd12
 
                 <p><u>Reglas</u>: Tener más de 8 caracteres de longitud. Combinaciones de letras, números y símbolos. Evitar el uso de la misma en varios dispositivos. No usar palabras comunes.</p>
                 <p><u>Generador de contraseñas</u>: <a href="https://www.lastpass.com/es/features/password-generator" target="_blank">letpass.com</a></p>
+            
             </div>
+
         </div>
 
         <!-- ......................................................... -->
@@ -576,14 +584,6 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <p>Para poner la IP del gateway por defecto hay que ponerlo en la configuración global:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip default-gateway &lt;IpGateway&gt;</code></pre>
             </div>
-
-            <div>
-                <h2 id="Enrutamiento">Enrutamiento Estático</h2>
-
-                <p>Para añadir una ruta a la que un router pueda acceder de manera manual:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt;</code></pre>
-                <p class="Expl"><u>Nota</u>: Si la dirección de red o una IP cambia, debe modificarse la ruta manualmente.</p>
-            </div>
             
             <div>
                 <h2 id="DNS">Servicios DNS</h2>
@@ -682,6 +682,16 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             
                 <p>Bloquear a cualquier persona durante x minutos que no pueda iniciar sesión después de x intentos dentro de un período de x minutos:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# login block-for &lt;SegundosBloqueo&gt; attempts &lt;Intentos&gt; within &lt;PeriodoMinutos&gt;</code></pre>
+            </div>
+
+            <div>
+                <h2 id="Politica_Avisos">Política de avisos del sistema</h2>
+
+                <p>Cisco IOS suele lanzar alertas mientras el usuario escribe, cortando el comando en algunos casos. Se puede evitar con el siguiente comando, que solo lanza avisos cuando el usuario no haya escrito nada:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface console/vty &lt;Número_Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-line)# logging synchronous</code></pre>
+                <p class="Expl">Se suele configurar en las interfaces de consola o vty, para acceso remoto.</p>
+
             </div>
             
             <div>
@@ -2333,10 +2343,171 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Rutas_Sintaxis">Rutas &gt; Sintaxis</h2>
+                <h2 id="Ver_Tabla_Rutas">Ver la tabla de rutas</h2>
 
-                <p>...:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# </code></pre>
+                <p>Para ver la tabla de rutas de IPv4 usaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
+                <p class="Expl">Para ver la tabla de rutas de IPv6 usaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ipv6 route</code></pre>
+
+                <p>También podemos ver la configuración guardada para ver todas las rutas configuradas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include ip route</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include ipv6 route</code></pre>
+
+                <p>Se puede filtrar la tabla para ver las rutas de una sola red:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route &lt;Dirección_Red&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ipv6 route &lt;Dirección_Red&gt;</code></pre>
+
+                <br>
+                <p>En las tablas aparecerá un código de letras indicando el tipo de ruta:</p>
+
+                <ul>
+                    <li><b>L</b> - Identifica la dirección asignada a la interfaz de un router, permitiendo determinar si recibe un paquete para la interfaz o para reenviar.</li>
+                    <li><b>C</b> - Identifica una red conectada directamente.</li>
+                    <li><b>S</b> - Identifica una ruta estática creada para llegar a una red específica.</li>
+                    <li><b>O</b> - Identifica una red que se descubre de forma dinámica de otro router con el protocolo de routing OSPF.</li>
+                    <li><b>*</b> - La ruta es candidata para una ruta predeterminada.</li>
+                </ul>
+
+                <br>
+                <p>Las <u>rutas conectadas directamente</u> indican la ruta local hacia una red que tiene conexión directa al router - "L" (Local).</p>
+
+                <p>Una <u>red conectada directamente</u> se indica mediante un código - "C" (Connected).</p>
+
+                <p>Las <u>rutas dinámicas</u> aprendidas aparecerán como - "O" (OSPF). En IPv6 aparecerá como - "O" (OSPF Intra).</p>
+
+                <p>Las <u>rutas de host estáticas</u> aparecerán como - "S" (Static), además de tener una máscara /32 (IPv4) o /128 (IPv6).</p>
+
+                <br>
+                <p><b>Estructura de la tabla</b>:</p>
+                <p class="Expl">Las redes con máscara más pequeña engloban otras subredes, en las que se enseña las rutas hacia esas subredes y el tipo de ruta.</p>
+                <p class="Expl">Las rutas con "[110/65]" significa que la ruta tiene una distancia administrativa de "110" y un costo de "65" para llegar al destino.</p>
+                <p class="Expl">El tiempo que aparece en ciertas rutas indica el tiempo desde que se aprendió la ruta especificada.</p>
+                <p class="Expl">La sección "via x" indica que para llegar a esa red se enviará por "x", que puede ser una IP, interfaz o ambas.</p>
+
+                <br>
+                <p><b>Distancias administrativas</b>:</p>
+                <p class="Expl">
+                    <span class="span_contenido">0</span> (Conectado directamente),
+                    <span class="span_contenido">1</span> (Ruta estática),
+                    <span class="span_contenido">5</span> (Ruta resumida del protocolo EIGRP),
+                    <span class="span_contenido">20</span> (BGP externo),
+                    <span class="span_contenido">90</span> (EIGRP interno),
+                    <span class="span_contenido">110</span> (OSPF),
+                    <span class="span_contenido">115</span> (IS-IS),
+                    <span class="span_contenido">120</span> (RIP),
+                    <span class="span_contenido">170</span> (EIGRP externo),
+                    <span class="span_contenido">200</span> (BGP interno),
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="Ver_Tabla_Rutas_Estaticas">Ver la tabla de rutas estáticas</h2>
+
+                <p>Para ver solo las rutas estáticas de la tabla de rutas IPv4 podemos usar:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route static</code></pre>
+
+                <p>Para ver solo las rutas estáticas de la tabla de rutas IPv6 podemos usar:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ipv6 route static</code></pre>
+
+            </div>
+
+        </div>
+    
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento - Rutas estáticas</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_IPv4"><span>IPv4</span> - Configurar rutas estáticas</h2>
+
+                <p>Para añadir una ruta a la que un router pueda acceder a una red remota podemos realizarlo de 3 maneras distintas:</p>
+
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. <b>Ruta Estática Conectada Directamente</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p><u>Nota</u>: Si la dirección de red o una IP cambia, debe modificarse la ruta manualmente. En la tabla de rutas aparecerá como "S" (Static).</p>
+            </div>
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_IPv6"><span>IPv6</span> - Configurar rutas estáticas</h2>
+
+                <p>Para añadir una ruta a la que un router pueda acceder a una red remota podemos realizarlo de 3 maneras distintas:</p>
+
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;IPv6_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. <b>Ruta Estática Conectada Directamente</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
+
+                <p><u>Nota</u>: Si la dirección de red o una IP cambia, debe modificarse la ruta manualmente. En la tabla de rutas aparecerá como "S" (Static).</p>
+                <p><u>Importante</u>: Si "IPv6_PróximoRouter" es de tipo link-local, como por ejemplo <span class="span_url">fe80::2</span>, debe usarse una ruta estática completamente especificada.</p>
+            </div>
+
+
+        </div>
+    
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento - Distancia administrativa</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_Secundario_IPv4"><span>IPv4</span> - Configurar rutas secundarias</h2>
+
+                <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
+                <p>Estas rutas secundarias tienen que tener un número de disntancia administratica mayor a 0 ya que la ruta primaria siempre será la 0.</p>
+
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+
+                <p class="Expl">2. <b>Ruta Estática Conectada Directamente</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+
+                <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+
+                <p><u>Nota</u>: En el comando "show ip route solo aparece la ruta activa con menos distancia administrativa. Para ver todas las rutas usa:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ip route</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_Secundario_IPv6"><span>IPv6</span> - Configurar rutas secundarias</h2>
+
+                <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
+                <p>Estas rutas secundarias tienen que tener un número de disntancia administratica mayor a 0 ya que la ruta primaria siempre será la 0.</p>
+
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;IPv6_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+
+                <p class="Expl">2. <b>Ruta Estática Conectada Directamente</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+
+                <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+            
+                <p><u>Nota</u>: En el comando "show ip route solo aparece la ruta activa con menos distancia administrativa. Para ver todas las rutas usa:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ipv6 route</code></pre>
 
             </div>
 
@@ -2352,26 +2523,75 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Rutas_Predeterminadas_Interfaz">Crear una ruta predeterminada por interfaz</h2>
+                <h2 id="Rutas_Predeterminadas_IPv4"><span>IPv4</span> - Configurar rutas predeterminadas</h2>
 
-                <p>Para indicar a un router o switch de capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;Interfaz&gt;</code></pre>
+                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. Mediante la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
 
             </div>
 
             <div>
-                <h2 id="Rutas_Predeterminadas_IP">Crear una ruta predeterminada por IP</h2>
+                <h2 id="Rutas_Predeterminadas_IPv6"><span>IPv6</span> - Configurar rutas predeterminadas</h2>
 
-                <p>Para indicar a un router o switch de capa3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará hacia una IP específica con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt;</code></pre>
+                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route ::/0 &lt;IPV6_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. Mediante la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route ::/0 &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route ::/0 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento - Rutas de host</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Rutas_Estaticas_Host_IPv4"><span>IPv4</span> - Configurar rutas estáticas de host</h2>
+
+                <p>Con las rutas de host estáticas se permite definir que para llegar a un host en concreto hay que enviar los paquetes por cierta ruta. Se puede definir de 3 maneras:</p>
+
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_Host&gt; 255.255.255.255 &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. Mediante la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_Host&gt; 255.255.255.255 &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_Host&gt; 255.255.255.255 &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt;</code></pre>
 
             </div>
 
             <div>
-                <h2 id="Rutas_Predeterminadas_IP_y_Interfaz">Crear una ruta predeterminada por IP e interfaz</h2>
+                <h2 id="Rutas_Estaticas_Host_IPv6"><span>IPv6</span> - Configurar rutas estáticas de host</h2>
 
-                <p>...:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;Red_De_Destino&gt; &lt;Máscara_Punteada&gt; &lt;IP&gt; &lt;Interfaz&gt;</code></pre>
+                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                
+                <p class="Expl">1. Mediante la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p class="Expl">2. Mediante la interfaz de salida del router (solo si es de tipo <b>Serial</b>):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;Interfaz_Salida&gt;</code></pre>
+
+                <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
 
             </div>
 
