@@ -62,21 +62,21 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Modificador <span class="span_url_espaciado">DISTINCT</span></h2>
+                <h2>Modificador<span class="span_url_espaciado">DISTINCT</span></h2>
 
                 <p>Solo devuelve las filas que sean no repetidas según todas las columnas dadas:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT DISTINCT col1 FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h2>Modificador <span class="span_url_espaciado">AS</span></h2>
+                <h2>Modificador<span class="span_url_espaciado">AS</span></h2>
 
                 <p><b>Alias de Columna</b>: Muestra el título de la columna pero con otro nombre. Necesita comillas si hay espacios en blanco:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 AS "alias1", col2 AS "alias2" FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h2>Cláusula <span class="span_url_espaciado">ORDER BY</span></h2>
+                <h2>Cláusula<span class="span_url_espaciado">ORDER BY</span></h2>
 
                 <p>Para cambiar el orden en el que se enseña la tabla según una columna.<br>Si no se va a enseñar una columna se puede ordenar por ella igualmente:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla ORDER BY col1 ASC/DESC;</code></pre>
@@ -85,7 +85,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Filtro <span class="span_url_espaciado">WHERE</span></h2>
+                <h2>Filtro<span class="span_url_espaciado">WHERE</span></h2>
 
                 <p><b>Operadores</b>:</p>
                 <p><span class="span_contenido">=</span> - Igual a<br>
@@ -132,7 +132,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Consultas de <span class="span_url_espaciado">UNION</span></h2>
+                <h2>Consultas de<span class="span_url_espaciado">UNION</span></h2>
 
                 <p>Solo funciona si se recogen campos compatibles entre ambas tablas. No hace falta que tengan el mismo nombre. Si se cogen 2 o más columas y hay 2 con los mismos valores en todas, no los muestra. Para ello se usa <span class="span_contenido">UNION ALL</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 FROM tabla UNION SELECT col1 FROM tabla2;</code></pre>
@@ -191,7 +191,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Filtro <span class="span_url_espaciado">HAVING</span></h2>
+                <h2>Filtro<span class="span_url_espaciado">HAVING</span></h2>
 
                 <p>Permite filtrar con funciones de agrupación:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla WHERE columna3="valor" GROUP BY columna2 HAVING COUNT(columna1)>=10;</code></pre>
@@ -208,7 +208,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Consulta <span class="span_url_espaciado">JOIN</span></h2>
+                <h2>Consulta<span class="span_url_espaciado">JOIN</span></h2>
 
                 <div class="SingleImagenGlobal">
                     <a href="../img/guides/sql/sql_join.png"><img alt="Esquema de SQL Join" src="../img/guides/sql/sql_join.png"></a>

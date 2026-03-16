@@ -36,6 +36,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/xml.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
@@ -134,7 +135,7 @@ Código por byAd12
 ;   idmap config YOURDOMAINHERE : backend = tdb
 ;   idmap config YOURDOMAINHERE : range   = 100000-999999</code></pre>
 
-                <div class="TablaDivScroll">
+                <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2"><b>Explicación de la configuración</b></td>
@@ -214,6 +215,82 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
                 <p class="Expl">Debe aparecer la configuración de UID, carpeta /home y shell que se configuró en samba.</p>
 
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+
+            <div>
+                <h2>Montar en un cliente <span>Linux</span> una carpeta de Active Directory<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+            
+                <p>1. Primero se instalarán las dependencias necesarias:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-mount cifs-utils</code></pre>
+
+                <br>
+                <p>2. Ahora editaremos el archivo de configuración de pam_mount:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/security/pam_mount.conf.xml</code></pre>
+
+                <p class="Expl">Ahora nos dirigiremos a la sección del archivo con el siguiente comentario en XML:</p>
+                <pre class="codigo" translate="no"><code class="bash">&lt;!-- Volume definitions --&gt;</code></pre>
+
+                <p class="Expl">Justo después de esa línea añadiremos nuevas etiquetas "volume" por cada carpeta a montar:</p>
+                <pre class="codigo" translate="no"><code class="xml">&lt;volume
+    fstype="cifs"
+    server="servidor_win.adrian.local"
+    path="nombre_recurso_compartido"
+    mountpoint="~/ruta_montar_localmente"
+    sgrp="nombre_grupo_permitido"
+/&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Explicación de la configuración</b></td>
+                        </tr>
+                        <tr>
+                            <td>CONFIGURACIÓN</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">fstype=""</code></pre></td>
+                            <td>Tipo de sistema de ficheros de la carpeta a montar.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">server=""</code></pre></td>
+                            <td>Subdominio completo del servidor.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">path=""</code></pre></td>
+                            <td>Nombre del recurso compartido del servidor.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">mountpoint=""</code></pre></td>
+                            <td>La ruta local del cliente donde montar el recurso compartido del servidor.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">sgrp=""</code></pre></td>
+                            <td>Nombre del grupo o grupos separados por comas cuyos miembros están permitidos para montar el recurso.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p class="Expl">En caso de querer montar una carpeta cuyo nombre sea el del usuario que la monta podemos usar la variable <span class="span_contenido">%(USER)</span>, como por ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="xml">&lt;volume
+    ...
+    path="nombre_recurso_compartido/%(USER)"
+    ...
+/&gt;</code></pre>
+
+                <p class="Expl">Hay otro tipo de variables que se pueden ver ejecutando el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">man pam_mount.conf</code></pre>
             </div>
 
         </div>
