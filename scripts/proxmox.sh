@@ -130,9 +130,14 @@ while true; do
     ##############################################################
     2)
         clear
-        read -p 'Hora a apagar: ' hora
-        read -p 'Minutos a apagar: ' minuto
-        read -p 'Segundos a apagar: ' segundos
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  Ejecutar la opción 'BIOS: Arreglo de la zona horaria'.${Bl}"
+        echo -e ""
+
+        read -p 'Hora a apagar: ' hora; [[ -z "${hora// /}" || "$hora" == "exit" ]] && continue
+        read -p 'Minutos a apagar: ' minuto; [[ -z "${minuto// /}" || "$minuto" == "exit" ]] && continue
+        read -p 'Segundos a apagar: ' segundos; [[ -z "${segundos// /}" || "$segundos" == "exit" ]] && continue
 
         echo -e "\n${Az}Verificando...${Bl}"
         if ! [[ "$hora" =~ ^[0-9]+$ ]] || ! [[ "$minuto" =~ ^[0-9]+$ ]] || ! [[ "$segundos" =~ ^[0-9]+$ ]]; then
@@ -157,7 +162,8 @@ while true; do
     ##############################################################
     3)
         clear
-        read -p 'Nombre del clúster a crear: ' nombre_cluster
+
+        read -p 'Nombre del clúster a crear: ' nombre_cluster; [[ -z "${nombre_cluster// /}" || "$nombre_cluster" == "exit" ]] && continue
 
         echo -e "\n${Az}Creando clúster con nombre $nombre_cluster...${Bl}"
         pvecm create "$nombre_cluster"
@@ -173,8 +179,14 @@ while true; do
     ##############################################################
     4)
         clear
-        echo -e "${Ro}!!! INSTALE ANTES NETBIRD !!!${Bl}"
-        read -p 'Nodo máster (coruna1): ' nodo_nombre
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  No tener ningún CT ni VM creada en el sistema.${Bl}"
+        echo -e "${Ro}  2.  Ejecutar la opción 'Instalar y entrar en Netbird'.${Bl}"
+        echo -e "${Ro}  3.  Saber la contraseña del nodo máster.${Bl}"
+        echo -e ""
+
+        read -p 'Nodo máster (coruna1): ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "$nodo_nombre" == "exit" ]] && continue
 
         echo -e "\n${Az}Actualizando certificados...${Bl}"
         pvecm updatecerts --force
@@ -190,6 +202,7 @@ while true; do
     ##############################################################
     5)
         clear
+
         echo -e "${Az}Parando servicios...${Bl}"
         systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
         killall pmxcfs 2>/dev/null
@@ -226,6 +239,7 @@ while true; do
     ##############################################################
     6)
         clear
+
         echo -e "\n${Az}Parando servicio(s)...${Bl}"
         systemctl stop pve-cluster
 
@@ -249,6 +263,10 @@ while true; do
     ##############################################################
     7)
         clear
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  El administrador debe estar activo para permitir el inicio de sesión.${Bl}"
+        echo -e ""
 
         echo -e "${Az}Instalando Cloudflared...${Bl}"
         curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
@@ -274,12 +292,17 @@ while true; do
     ##############################################################
     8)
         clear
-        echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
-        echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
-        read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel
-        read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio
-        read -p 'Puerto del servicio web: ' puerto_web
-        read -p 'http/https: ' tipo_conexion
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
+        echo -e "${Ro}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro}  3.  No tener ningún túnel previamente creado.${Bl}"
+        echo -e ""
+
+        read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
+        read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
+        read -p 'Puerto del servicio web: ' puerto_web; [[ -z "${puerto_web// /}" || "$puerto_web" == "exit" ]] && continue
+        read -p 'http/https: ' tipo_conexion; [[ -z "${tipo_conexion// /}" || "$tipo_conexion" == "exit" ]] && continue
 
         echo -e "\n${Az}Creando túnel...${Bl}"
         info=$(cloudflared tunnel create "$nombre_tunel")
@@ -332,11 +355,16 @@ EOF
     ##############################################################
     9)
         clear
-        echo -e "${Ro}!!! INSTALE E INICIE SESIÓN EN CLOUDFLARED !!!${Bl}"
-        echo -e "${Ro}!!! ELIMINE EL REGISTRO DNS SI EXISTE !!!${Bl}"
-        read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel
-        read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio
-        read -p 'Puerto del servicio web: ' puerto_web
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
+        echo -e "${Ro}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro}  3.  No tener ningún túnel previamente creado.${Bl}"
+        echo -e ""
+
+        read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
+        read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
+        read -p 'Puerto del servicio web: ' puerto_web; [[ -z "${puerto_web// /}" || "$puerto_web" == "exit" ]] && continue
 
         echo -e "\n${Az}Creando túnel...${Bl}"
         info=$(cloudflared tunnel create "$nombre_tunel")
@@ -390,6 +418,10 @@ EOF
     10)
         clear
 
+        echo -e "${Am}Aviso:${Bl}"
+        echo -e "${Am}  Los túneles creados se eliminarán localmente, pero no en Cloudflare.${Bl}"
+        echo -e ""
+
         echo -e "\n${Az}Parando el servicio 'cloudflared'...${Bl}"
         systemctl stop cloudflared
 
@@ -412,6 +444,10 @@ EOF
     ##############################################################
     11)
         clear
+
+        echo -e "${Am}Aviso:${Bl}"
+        echo -e "${Am}  Esta instalación se basa en Debian.${Bl}"
+        echo -e ""
 
         echo -e "${Az}Instalando...${Bl}"
         apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
@@ -443,8 +479,18 @@ EOF
     ##############################################################
     12)
         clear
-        read -p 'Nombre del subdominio (solo subdominio): ' subdominio
-        read -p 'CLOUDFLARE_API_TOKEN: ' api_token
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro}  2.  Tener el API TOKEN de Cloudflare.${Bl}"
+        echo -e ""
+
+        echo -e "${Am}Importante:${Bl}"
+        echo -e "${Am}  Debes proteger tu red mediante reglas de Firewall ya que la IPv4 pública será expuesta.${Bl}"
+        echo -e ""
+
+        read -p 'Nombre del subdominio (solo subdominio): ' subdominio; [[ -z "${subdominio// /}" || "$subdominio" == "exit" ]] && continue
+        read -p 'CLOUDFLARE_API_TOKEN: ' api_token; [[ -z "${api_token// /}" || "$api_token" == "exit" ]] && continue
 
         echo -e "\n${Az}Creando docker...${Bl}"
         docker run -d --restart=unless-stopped --network host -e CLOUDFLARE_API_TOKEN=$api_token -e DOMAINS=$subdominio.chemahosting.es -e PROXIED=false favonia/cloudflare-ddns:latest
@@ -460,8 +506,9 @@ EOF
     ##############################################################
     13)
         clear
-        read -p 'ID del contenedor a hacer una backup: ' id_ct
-        read -p 'Almacenamiento (local): ' almacenamiento
+
+        read -p 'ID del contenedor a hacer una backup: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
+        read -p 'Almacenamiento (local): ' almacenamiento; [[ -z "${almacenamiento// /}" || "$almacenamiento" == "exit" ]] && continue
 
         echo -e "\n${Az}Creando backup...${Bl}"
         vzdump $id_ct --mode stop --compress lzo --storage $almacenamiento
@@ -474,9 +521,10 @@ EOF
     ##############################################################
     14)
         clear
-        read -p 'ID del contenedor a restaurar una backup: ' id_ct
-        read -p 'Ruta al backup (.tar.lzo): ' ruta
-        read -p 'Almacenamiento (local-lvm): ' almacenamiento
+
+        read -p 'ID del contenedor a restaurar una backup: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
+        read -p 'Ruta al backup (.tar.lzo): ' ruta; [[ -z "${ruta// /}" || "$ruta" == "exit" ]] && continue
+        read -p 'Almacenamiento (local-lvm): ' almacenamiento; [[ -z "${almacenamiento// /}" || "$almacenamiento" == "exit" ]] && continue
 
         echo -e "\n${Az}Restaurando backup...${Bl}"
         pct restore $id_ct $ruta --storage $almacenamiento
@@ -538,7 +586,8 @@ EOF
     ##############################################################
     17)
         clear
-        read -p 'ID del contenedor: ' id_contenedor
+
+        read -p 'ID del contenedor: ' id_contenedor; [[ -z "${id_contenedor// /}" || "$id_contenedor" == "exit" ]] && continue
 
         echo -e "\n${Az}Estado el contenedor...${Bl}"
         pct status $id_contenedor
@@ -560,8 +609,17 @@ EOF
     ##############################################################
     18)
         clear
-        read -p 'Set-up key de Netbird: ' llave_netbird
-        read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  Debes tener el Set-up key de Netbird.${Bl}"
+        echo -e ""
+
+        echo -e "${Am}Importante:${Bl}"
+        echo -e "${Am}  Si es un nodo se debe cambiar la IPv4 de NetBird desde el panel de gestión.${Bl}"
+        echo -e ""
+
+        read -p 'Set-up key de Netbird: ' llave_netbird; [[ -z "${llave_netbird// /}" || "$llave_netbird" == "exit" ]] && continue
+        read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo; [[ -z "${nombre_equipo// /}" || "$nombre_equipo" == "exit" ]] && continue
 
         echo -e "\n${Az}Descargando Netbird...${Bl}"
         curl -fsSL https://pkgs.netbird.io/install.sh | bash
@@ -580,6 +638,7 @@ EOF
 172.16.0.102 malaga1
 172.16.0.103 malaga2
 172.16.0.104 malaga3
+172.16.0.105 malaga3
 EOF
 
         echo -e "\n${Az}Tu IPv4 de NetBird es:${Bl}"
@@ -622,11 +681,15 @@ EOF
     ##############################################################
     20)
         clear
-        read -p 'Carpeta local a compartir: ' carpeta_local
-        read -p 'Permisos (rw,ro): ' permisos        
-        echo -e "\n${Am}* - Todos\nDirección_red/Máscara - A toda la subred\nIPv4 o hostname - A un equipo en concreto${Bl}"
-        read -p 'A quien dar permiso (mirar la guía de arriba): ' permitido
 
+        echo -e "${Bl}Nota:${Bl}"
+        echo -e "${Bl}  Puedes editar esta configuración en un futuro con el archivo '/etc/exports'.${Bl}"
+        echo -e ""
+
+        read -p 'Carpeta local a compartir: ' carpeta_local; [[ -z "${carpeta_local// /}" || "$carpeta_local" == "exit" ]] && continue
+        read -p 'Permisos (rw,ro): ' permisos; [[ -z "${permisos// /}" || "$permisos" == "exit" ]] && continue        
+        echo -e "\n${Am}* - Todos\nDirección_red/Máscara - A toda la subred\nIPv4 o hostname - A un equipo en concreto${Bl}"
+        read -p 'A quien dar permiso (mirar la guía de arriba): ' permitido; [[ -z "${permitido// /}" || "$permitido" == "exit" ]] && continue
 
         echo -e "\n${Az}Instalando dependencias...${Bl}"
         apt install -y nfs-kernel-server nfs-common
@@ -648,9 +711,9 @@ EOF
     ##############################################################
     21)
         clear
-        echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
-        read -p 'Versión de GitHub a actualizar: ' version_github
 
+        echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
+        read -p 'Versión de GitHub a actualizar: ' version_github; [[ -z "${version_github// /}" || "$version_github" == "exit" ]] && continue
 
         echo -e "\n${Az}Parando servicios...${Bl}"
         pm2 stop uptime-kuma
@@ -676,9 +739,13 @@ EOF
     ##############################################################
     22)
         clear
-        echo -e "\n${Am}Hay que tener python previamente instalado.${Bl}"
-        echo -e "\n${Am}Al principio del archivo debe haber esta línea: '${Az}#!/usr/bin/env python3${Am}'.${Bl}"
-        read -p 'Ruta absoluta al archivo: ' ruta_archivo
+
+        echo -e "${Ro}Requisitos:${Bl}"
+        echo -e "${Ro}  1.  Hay que tener python previamente instalado.${Bl}"
+        echo -e "${Ro}  2.  Al principio del archivo .py debe haber esta línea: '${Az}#!/usr/bin/env python3${Ro}'.${Bl}"
+        echo -e ""
+
+        read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
 
         echo -e "\n${Az}Verificando versión de python...${Bl}"
         python --version
@@ -723,7 +790,8 @@ EOF
     ##############################################################
     23)
         clear
-        read -p 'Webhook de Discord: ' webhook
+
+        read -p 'Webhook de Discord: ' webhook; [[ -z "${webhook// /}" || "$webhook" == "exit" ]] && continue
 
         echo -e "\n${Az}Instalando dependencias...${Bl}"
         apt install -y curl
