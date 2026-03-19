@@ -29,12 +29,20 @@ while true; do
     clear
     /usr/games/cowsay -f tux CHEMA HOSTING
 
-    Ne=$'\033[1m'
-    Ro=$'\033[31;1m'
-    Ve=$'\033[32;1m'
-    Am=$'\033[33;1m'
-    Az=$'\033[34;1m'
-    Bl=$'\033[0m'
+    Ne=$'\033[1m' # Texto en negrita
+    Bl=$'\033[0m' # Resetear formato
+
+    Ro=$'\033[31;1m' # Texto en negrita y en rojo
+    Ro_=$'\033[31m' # Texto en rojo
+
+    Ve=$'\033[32;1m' # Texto en negrita y en verde
+    Ve_=$'\033[32m' # Texto en verde
+
+    Am=$'\033[33;1m' # Texto en negrita y en amarillo
+    Am_=$'\033[33m' # Texto en amarillo
+
+    Az=$'\033[34;1m' # Texto en negrita y en azul
+    Az_=$'\033[34m' # Texto en azul
 
     echo -e "Script hecho por ${Az}byAd12.pages.dev${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.es\n${Bl}"
 
@@ -132,7 +140,7 @@ while true; do
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  Ejecutar la opción 'BIOS: Arreglo de la zona horaria'.${Bl}"
+        echo -e "${Ro_}  1.  Ejecutar la opción 'BIOS: Arreglo de la zona horaria'.${Bl}"
         echo -e ""
 
         read -p 'Hora a apagar: ' hora; [[ -z "${hora// /}" || "$hora" == "exit" ]] && continue
@@ -181,12 +189,21 @@ while true; do
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  No tener ningún CT ni VM creada en el sistema.${Bl}"
-        echo -e "${Ro}  2.  Ejecutar la opción 'Instalar y entrar en Netbird'.${Bl}"
-        echo -e "${Ro}  3.  Saber la contraseña del nodo máster.${Bl}"
+        echo -e "${Ro_}  1.  No tener ningún CT ni VM creada en el sistema.${Bl}"
+        echo -e "${Ro_}  2.  Ejecutar la opción 'Instalar y entrar en Netbird'.${Bl}"
+        echo -e "${Ro_}  3.  Seleccionar el nodo máster que creó el clúster.${Bl}"
+        echo -e "${Ro_}  4.  Saber la contraseña del nodo máster.${Bl}"
         echo -e ""
 
         read -p 'Nodo máster (coruna1): ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "$nodo_nombre" == "exit" ]] && continue
+
+        echo -e "\n${Az}Comprobando conexión con el nodo máster...${Bl}"
+        ping -c 2 "$nodo_nombre"
+        if [ $? -ne 0 ]; then
+            echo -e "\n${Ro}ERROR: ${Ro_}No se puede alcanzar a '${Az}$nodo_nombre${Ro_}'.${Bl}"
+            read -p "\nPulse ENTER para reiniciar el programa:"
+            continue
+        fi
 
         echo -e "\n${Az}Actualizando certificados...${Bl}"
         pvecm updatecerts --force
@@ -203,35 +220,50 @@ while true; do
     5)
         clear
 
-        echo -e "${Az}Parando servicios...${Bl}"
-        systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
-        killall pmxcfs 2>/dev/null
+        read -p "${Ro_}1/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
+        read -p "${Ro_}2/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion2; [[ "$verificacion2" != "s" && "$verificacion2" != "S" ]] && continue
+        read -p "${Ro_}3/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion3; [[ "$verificacion3" != "s" && "$verificacion3" != "S" ]] && continue
+        echo -e ""
+        read -p "${Am}Ingrese la contraseña para ejecutar esta función: ${Bl}" verificacion4; [[ -z "${verificacion4// /}" || "$verificacion4" == "exit" ]] && continue
 
-        echo -e "\n${Az}Haciendo copia de seguridad de /etc/pve...${Bl}"
-        mkdir -p /root/pve_backup
-        cp -r /etc/pve/* /root/pve_backup/
+        hash_ingresado=$(echo -n "$verificacion4" | sha256sum | awk '{print $1}')
 
-        echo -e "\n${Az}Renombrando /etc/pve...${Bl}"
-        mv /etc/pve /etc/pve.bak
-        mkdir /etc/pve
+        if [ "$hash_ingresado" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]; then
+            echo -e "${Ve_}Contraseña correcta${Bl}"
 
-        echo -e "\n${Az}Iniciando pmxcfs en modo local...${Bl}"
-        pmxcfs -l &
-        sleep 5
+            echo -e "${Az}Parando servicios...${Bl}"
+            systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
+            killall pmxcfs 2>/dev/null
 
-        echo -e "\n${Az}Generando certificados locales...${Bl}"
-        pvecm updatecerts --force
-        systemctl restart pve-cluster
+            echo -e "\n${Az}Haciendo copia de seguridad de /etc/pve...${Bl}"
+            mkdir -p /root/pve_backup
+            cp -r /etc/pve/* /root/pve_backup/
 
-        echo -e "\n${Az}Deshabilitando corosync...${Bl}"
-        systemctl stop corosync
-        systemctl disable corosync
+            echo -e "\n${Az}Renombrando /etc/pve...${Bl}"
+            mv /etc/pve /etc/pve.bak
+            mkdir /etc/pve
 
-        echo -e "\n${Az}Reiniciando servicios básicos de Proxmox...${Bl}"
-        systemctl restart pvedaemon pveproxy pvestatd
+            echo -e "\n${Az}Iniciando pmxcfs en modo local...${Bl}"
+            pmxcfs -l &
+            sleep 5
 
-        echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
-        echo -e "${Ve}Copia de seguridad de /etc/pve en /root/pve_backup${Bl}"
+            echo -e "\n${Az}Generando certificados locales...${Bl}"
+            pvecm updatecerts --force
+            systemctl restart pve-cluster
+
+            echo -e "\n${Az}Deshabilitando corosync...${Bl}"
+            systemctl stop corosync
+            systemctl disable corosync
+
+            echo -e "\n${Az}Reiniciando servicios básicos de Proxmox...${Bl}"
+            systemctl restart pvedaemon pveproxy pvestatd
+
+            echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
+            echo -e "${Ve}Copia de seguridad de /etc/pve en /root/pve_backup${Bl}"
+        else
+            echo -e "${Ro_}Contraseña incorrecta${Bl}"
+        fi
+
         ;;
 
     ##############################################################
@@ -265,7 +297,7 @@ while true; do
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  El administrador debe estar activo para permitir el inicio de sesión.${Bl}"
+        echo -e "${Ro_}  1.  El administrador debe estar activo para permitir el inicio de sesión.${Bl}"
         echo -e ""
 
         echo -e "${Az}Instalando Cloudflared...${Bl}"
@@ -294,9 +326,9 @@ while true; do
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
-        echo -e "${Ro}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
-        echo -e "${Ro}  3.  No tener ningún túnel previamente creado.${Bl}"
+        echo -e "${Ro_}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
+        echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
         echo -e ""
 
         read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
@@ -357,9 +389,9 @@ EOF
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
-        echo -e "${Ro}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
-        echo -e "${Ro}  3.  No tener ningún túnel previamente creado.${Bl}"
+        echo -e "${Ro_}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
+        echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
         echo -e ""
 
         read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
@@ -481,12 +513,12 @@ EOF
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  El administrador debe eliminar el registro DNS si existe.${Bl}"
-        echo -e "${Ro}  2.  Tener el API TOKEN de Cloudflare.${Bl}"
+        echo -e "${Ro_}  1.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+        echo -e "${Ro_}  2.  Debes tener el API TOKEN de Cloudflare.${Bl}"
         echo -e ""
 
         echo -e "${Am}Importante:${Bl}"
-        echo -e "${Am}  Debes proteger tu red mediante reglas de Firewall ya que la IPv4 pública será expuesta.${Bl}"
+        echo -e "${Am_}  Debes proteger tu red mediante reglas de Firewall ya que la IPv4 pública será expuesta.${Bl}"
         echo -e ""
 
         read -p 'Nombre del subdominio (solo subdominio): ' subdominio; [[ -z "${subdominio// /}" || "$subdominio" == "exit" ]] && continue
@@ -611,11 +643,10 @@ EOF
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  Debes tener el Set-up key de Netbird.${Bl}"
-        echo -e ""
-
-        echo -e "${Am}Importante:${Bl}"
-        echo -e "${Am}  Si es un nodo se debe cambiar la IPv4 de NetBird desde el panel de gestión.${Bl}"
+        echo -e "${Ro_}  1.  Debes tener el Set-up key de Netbird.${Bl}"
+        echo -e "${Ro_}  2.  Un administrador debe cambiar la IPv4 desde el panel de administración.${Bl}"
+        echo -e "${Ro_}  3.  La IPv4 que se vaya a configurar debe estar libre.${Bl}"
+        echo -e "${Ro_}  4.  Se debe eliminar del archivo '${Az}/etc/hosts${Ro_}' cualquier registro antigüo.${Bl}"
         echo -e ""
 
         read -p 'Set-up key de Netbird: ' llave_netbird; [[ -z "${llave_netbird// /}" || "$llave_netbird" == "exit" ]] && continue
@@ -624,7 +655,7 @@ EOF
         echo -e "\n${Az}Descargando Netbird...${Bl}"
         curl -fsSL https://pkgs.netbird.io/install.sh | bash
 
-        echo -e "\n${Az}Iniciando conexión en Netbird...${Bl}"
+        echo -e "\n${Az}Iniciando conexión con Netbird...${Bl}"
         netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root --hostname "$nombre_equipo"
 
         echo -e "\n${Az}Habilitando el servicio de Netbird...${Bl}"
@@ -638,10 +669,24 @@ EOF
 172.16.0.102 malaga1
 172.16.0.103 malaga2
 172.16.0.104 malaga3
-172.16.0.105 malaga3
+172.16.0.106 malaga4
 EOF
 
-        echo -e "\n${Az}Tu IPv4 de NetBird es:${Bl}"
+        echo -e "\n${Az}Tu IPv4 de NetBird actual es:${Bl}"
+        netbird status --ipv4
+
+        echo -e "\n${Am}Cambie ahora la IPv4 del nodo desde el panel de administración de Netbird, luego puse ENTER.${Bl}"
+        read -p '' _
+
+        echo -e "\n${Az}Reiniciando conexión con Netbird...${Bl}"
+        netbird down
+        systemctl restart netbird # Aquí se debería hacer el netbird up automáticamente
+        sleep 2
+
+        echo -e "\n${Az}Verificando conexión con Netbird...${Bl}"
+        netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root --hostname "$nombre_equipo"
+
+        echo -e "\n${Az}Tu IPv4 de NetBird actual es:${Bl}"
         netbird status --ipv4
 
         echo -e "\n${Ve}¡Netbird instalado correctamente!${Bl}"
@@ -652,6 +697,8 @@ EOF
     ##############################################################
     19)
         clear
+
+        read -p "${Ro_}¿Estás seguro de querer desinstalar Netbird? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
 
         echo -e "\n${Az}Desconectando el peer de la red...${Bl}"
         netbird down
@@ -665,6 +712,10 @@ EOF
 
         echo -e "\n${Az}Desinstalando Netbird...${Bl}"
         apt remove --purge netbird -y
+
+        echo -e "\n${Az}Eliminando el repositorio y clave GPG...${Bl}"
+        rm -f /etc/apt/sources.list.d/netbird.list
+        rm -f /usr/share/keyrings/netbird-archive-keyring.gpg
 
         echo -e "\n${Az}Borrando archivos y carpetas de configuración...${Bl}"
         rm -rf /etc/netbird
@@ -682,8 +733,8 @@ EOF
     20)
         clear
 
-        echo -e "${Bl}Nota:${Bl}"
-        echo -e "${Bl}  Puedes editar esta configuración en un futuro con el archivo '/etc/exports'.${Bl}"
+        echo -e "${Ne}Nota:${Bl}"
+        echo -e "  Puedes editar esta configuración en un futuro con el archivo '${Az}/etc/exports${Bl}'."
         echo -e ""
 
         read -p 'Carpeta local a compartir: ' carpeta_local; [[ -z "${carpeta_local// /}" || "$carpeta_local" == "exit" ]] && continue
@@ -741,8 +792,8 @@ EOF
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro}  1.  Hay que tener python previamente instalado.${Bl}"
-        echo -e "${Ro}  2.  Al principio del archivo .py debe haber esta línea: '${Az}#!/usr/bin/env python3${Ro}'.${Bl}"
+        echo -e "${Ro_}  1.  Hay que tener python previamente instalado.${Bl}"
+        echo -e "${Ro_}  2.  Al principio del archivo .py debe haber esta línea: '${Az}#!/usr/bin/env python3${Ro_}'.${Bl}"
         echo -e ""
 
         read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue

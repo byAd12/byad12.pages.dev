@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: Pablo
+~ Dedicatoria a: Miguel Mourón Regueira
 
 -->
 
@@ -48,13 +48,247 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Linux</span> a Active Directory<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Crear un servidor <span>Linux</span> como controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
-                <p><b>Cliente Linux</b>:</p>
+                <p>Además de crear servidores Windows para que controlen Active Directory, podemos configurar un servidor Linux para que actúe como controlador de dominio sin necesidad de adquirir licencias y con las mismas funcionalidades.</p>
+            
+                <br>
+                <p>1. Primero asignaremos al servidor una dirección IPv4 estática. Podemos mirar la dirección IP del sistema con:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
 
+                <br>
+                <p>2. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Servidor_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <p class="Expl">Para verificar los cambios se podría mirar que el siguiente archivo contenga el hostname actualizado:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
+
+                <br>
+                <p>3. Ahora estableceremos un registro DNS interno para cada equipo de la red:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
+                <p class="Expl">Primero eliminaremos los registros que contengan el hostname antiguo del servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     &lt;Hostname_Servidor_Linux_Antiguo&gt;</code></pre>
+                <p class="Expl">Luego se añadirá un registro que apunte a cada IP de los equipos de la red mediante su hostname y dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">&lt;IP_Servidor_Linux&gt;     &lt;Hostname_Servidor_Linux.dominio.tld&gt;     &lt;Hostname_Servidor_Linux&gt;
+&lt;IP_Cliente_1&gt;     &lt;Hostname_Cliente_1.dominio.tld&gt;     &lt;Hostname_Cliente_1&gt;
+...</code></pre>
+
+                <br>
+                <p>4. Ahora instalaremos los paquetes necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind</code></pre>
+
+                <br>
+                <p>5. Pararemos los servicios y deshabilitaremos:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl stop samba-ad-dc smbd nmbd winbind</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl disable samba-ad-dc smbd nmbd winbind</code></pre>
+
+                <br>
+                <p>6. Antes de configurar nada crearé una copia de seguridad:</p>
+                <pre class="codigo" translate="no"><code class="bash">mv /etc/samba/smb.conf /etc/samba/smb.conf.bak</code></pre>
+
+                <br>
+                <p>7. Con el siguiente comando interactivo generaré una configuración de SAMBA:</p>
+                <pre class="codigo" translate="no"><code class="bash">samba-tool domain provision --use-rfc2307 --interactive</code></pre>
+                <p class="Expl">En "Realm" tiene que poner el nombre de dominio en mayúsculas.</p>
+                <p class="Expl">En "Domain" tiene que poner el nombre de dominio sin el TLD y en mayúsculas.</p>
+                <p class="Expl">En "Server Role" debe estar en <span class="span_contenido">dc</span> (Domain Controller).</p>
+                <p class="Expl">En "DNS Backend" se dejará como <span class="span_contenido">SAMBA_INTERNAL</span>.</p>
+                <p class="Expl">En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url">1.1.1.1</span>.</p>
+                <p class="Expl">Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</p>
+
+                <br>
+                <p>8. Ahora verificaremos que la configuración sea la correcta:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/samba/smb.conf</code></pre>
+
+                <br>
+                <p>9. Es necesario editar el siguiente archivo para poder resolver correctamente consultas DNS:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
+                <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
+                <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
+
+                <br>
+                <p>10. Por último iniciaremos el servicio <span class="span_contenido">winbind</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl start winbind</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable winbind</code></pre>
+
+                <br>
+                <p>En la siguiente <a href="#Administrar_DC_Linux">sección</a> se puede ver la administración del servidor mediante línea de comandos.</p>
+            
+            </div>
+        </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="Administrar_DC_Linux">Administrar un servidor <span>Linux</span> controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Gestión del dominio</b></td>
+                        </tr>
+                        <tr>
+                            <td>COMANDO</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool domain info 127.0.0.1</code></pre></td>
+                            <td>Ver información del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool domain provision --help</code></pre></td>
+                            <td>Comprobar estado del Controlador de Dominio.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Gestión de equipos del dominio</b></td>
+                        </tr>
+                        <tr>
+                            <td>COMANDO</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool computer list</code></pre></td>
+                            <td>Subdominio completo del servidor.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool computer show &lt;Hostname&gt;</code></pre></td>
+                            <td>Mostar información detallada de un equipo del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool computer delete &lt;Hostname&gt;</code></pre></td>
+                            <td>Eliminar equipo del dominio.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Gestión de usuarios</b></td>
+                        </tr>
+                        <tr>
+                            <td>COMANDO</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool user list</code></pre></td>
+                            <td>Listar todos los usuarios del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool user add &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td>Crear un nuevo usuario.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool user delete &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td>Eliminar un usuario existente.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool user setpassword &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td>Cambiar la contraseña de un usuario existente.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool user show &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td>Mirar información detallada de un usuario.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Gestión de grupos</b></td>
+                        </tr>
+                        <tr>
+                            <td>COMANDO</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool group list</code></pre></td>
+                            <td>Listar todos los grupos del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool group listmembers &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td>Listar los miembros de un grupo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool group add &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td>Crear un nuevo grupo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool group delete &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td>Eliminar un grupo existente.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool group addmembers &lt;Nombre_Grupo&gt; &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td>Añadir un usuario a un grupo.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2"><b>Gestión de unidades organizativas (OU)</b></td>
+                        </tr>
+                        <tr>
+                            <td>COMANDO</td>
+                            <td><b>EXPLICACIÓN</b></td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool ou list</code></pre></td>
+                            <td>Listar todas las unidades organizativas del dominio.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool ou create "OU=&lt;Nombre_OU&gt;,DC=&lt;Nombre_Dominio&gt;,DC=&lt;Dominio_TLD&gt;"</code></pre></td>
+                            <td>Crear una nueva unidad organizativa, como "ou=text,dc=iso,dc=local".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">samba-tool ou delete "OU=&lt;Nombre_OU&gt;,DC=&lt;Nombre_Dominio&gt;,DC=&lt;Dominio_TLD&gt;"</code></pre></td>
+                            <td>Eliminar una unidad organizativa, como "ou=text,dc=iso,dc=local".</td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+            
+                <p>Con los siguientes pasos en un cliente Linux podemos meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
+
+                <br>
                 <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url">.local</span>, es necesario editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
@@ -64,7 +298,7 @@ Código por byAd12
                 <br>
                 <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ping &lt;Hostname_Servidor&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
                 <p class="Expl">No va a funcionar hacer ping sin especificar en dominio ya que no hay ningún dominio de búsqueda configurado para añadir ese dominio automáticamente a la consulta.</p>
 
                 <br>
@@ -77,8 +311,7 @@ Código por byAd12
 
                 <br>
                 <p>4. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Subdominio_Cliente_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
-                <p class="Expl">Luego reinicie la terminal.</p>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Cliente_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
                 <p class="Expl">Para verificar los cambios se podría mirar que el siguiente archivo contenga el hostname actualizado:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
 
@@ -87,12 +320,11 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Primero eliminaremos los registros que contengan el hostname antiguo del cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">127.0.0.1     &lt;Hostname_Cliente_Antiguo&gt;</code></pre>
-                <p class="Expl">Luego se añadirá un registro que apunte al propio cliente mediante su hostname y subdominio:</p>
+                <p class="Expl">Luego se añadirá un registro que apunte al propio cliente mediante su hostname y dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">&lt;IP_Cliente&gt;     &lt;Hostname_Cliente.dominio.tld&gt;     &lt;Hostname_Cliente&gt;</code></pre>
 
-
                 <br>
-                <p>6. Ahora instalaremos las dependencias necesarias:</p>
+                <p>6. Ahora instalaremos los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
                 <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio:</p>
@@ -227,9 +459,9 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Montar en un cliente <span>Linux</span> una carpeta de Active Directory<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
-                <p>1. Primero se instalarán las dependencias necesarias:</p>
+                <p>1. Primero se instalarán los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-mount cifs-utils</code></pre>
 
@@ -248,6 +480,8 @@ Código por byAd12
     mountpoint="~/ruta_montar_localmente"
     sgrp="nombre_grupo_permitido"
 /&gt;</code></pre>
+
+                <br>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
@@ -282,6 +516,7 @@ Código por byAd12
                     </table>
                 </div>
 
+                <br>
                 <p class="Expl">En caso de querer montar una carpeta cuyo nombre sea el del usuario que la monta podemos usar la variable <span class="span_contenido">%(USER)</span>, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="xml">&lt;volume
     ...

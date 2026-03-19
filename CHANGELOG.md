@@ -1,9 +1,12 @@
-Arreglos
+GUIAS y SCRIPTS - Nuevo contenido
 
-# g/sql_select.html
-Arreglo de formato en títulos de nivel 2 (<h2>)
+# g/packet_tracer.html, g/active_directory.html
+Nuevo contenido
+
+# resources/blog.css
+Mejora de estilos
 
 # scripts/proxmox.sh
-Se añadió un nuevo nodo
-Se definieron avisos, requisitos y notas visibles para el usuario
-Ahora se detecta si algún read -p es incorrecto o vacío y se devuelve al menú principal
+Nuevos avisos
+Nuevas funcionalidades en las opciones 4), 18) y 19)
+Verificación previa para eliminar el clúster

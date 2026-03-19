@@ -2489,6 +2489,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p><u>Nota</u>: En el comando "show ip route solo aparece la ruta activa con menos distancia administrativa. Para ver todas las rutas usa:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ip route</code></pre>
 
+                <p><u>Importante</u>: Si creamos una misma ruta exacta pero con 2 distancias administrativas diferentes, solo permanecerá la que menor distancia administrativa tenga.</p>
+
             </div>
 
             <div>
