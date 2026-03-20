@@ -77,31 +77,31 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
+                            <td><pre translate="no"><code class="bash">/etc/vsftpd.conf</code></pre></td>
                             <td>Fichero de configuración</td>
-                            <td><span class="span_url" translate="no">/etc/vsftpd.conf</span></td>
                         </tr>
                         <tr>
+                            <td><pre translate="no"><code class="bash">/etc/ftpusers</code></pre></td>
                             <td>Lista de usuarios del sistema <b>excluidos</b> paras iniciar sesión</td>
-                            <td><span class="span_url" translate="no">/etc/ftpusers</span></td>
                         </tr>
                         <tr>
+                            <td><pre translate="no"><code class="bash">/etc/vsftpd.user_list</code></pre></td>
                             <td>
                                 Como el anterior pero también se puede permitir si en la configuración hay:
                                 <br><span class="span_contenido" translate="no">userlist_deny=NO</span>
                             </td>
-                            <td><span class="span_url" translate="no">/etc/vsftpd.user_list</span></td>
                         </tr>
                         <tr>
+                            <td><pre translate="no"><code class="bash">/etc/vsftpd.chroot_list</code></pre></td>
                             <td>
                                 Usuarios que no están enjaulados si lo siguiente está en la configuración:
                                 <br><span class="span_contenido" translate="no">chroot_local_user=YES</span>, <span class="span_contenido" translate="no">chroot_list_enable=YES</span>, 
                                 <br><span class="span_contenido" translate="no">chroot_list_file=[ruta]</span>
                             </td>
-                            <td><span class="span_url" translate="no">/etc/vsftpd.chroot_list</span></td>
                         </tr>
                         <tr>
+                            <td><pre translate="no"><code class="bash">/var/log/vsftpd.log</code></pre></td>
                             <td>Para ver los registros de accesos al servidor</td>
-                            <td><span class="span_url" translate="no">/var/log/vsftpd.log</span></td>
                         </tr>
                     </table>
                 </div>
@@ -117,7 +117,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Directivas de:<br><span translate="no">/etc/vsftpd.conf</span></h2>
+                <h2>Directivas de: <span translate="no">/etc/vsftpd.conf</span></h2>
 
                 <p>Activar los <b>usuario anónimos</b>: "ftp" o "anonymous". Su carpeta home será <span class="span_url">/srv/ftp</span>, de solo lectura:</p>
                 <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
@@ -210,56 +210,58 @@ NombreUsuario2
             <div>
                 <h2>Comandos más importantes para ftp</h2>
 
-                <table class="TablaComandos">
-                    <tr>
-                        <td><span class="span_contenido" translate="no">ls</span></td>
-                        <td>Listar el contenido del directorio</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">cd</span></td>
-                        <td>Cambiar de directorio</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">!cd</span></td>
-                        <td>Cambiar de directorio del sistema local (no el servidor)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">get</span></td>
-                        <td>Descargar un archivo del servidor</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">put</span></td>
-                        <td>Enviar un archivo al servidor</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">pwd</span></td>
-                        <td>Ver directorio actual</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">rm</span></td>
-                        <td>Eliminar un archivo</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">!ls</span></td>
-                        <td>Listar archivos del sistema local (no el servidor)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">mkdir</span></td>
-                        <td>Crear una carpeta</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">!mkdir</span></td>
-                        <td>Crear una carpeta en el sistema local (no el servidor)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">bye</span></td>
-                        <td>Cerrar una conexión FTP</td>
-                    </tr>
-                    <tr>
-                        <td><span class="span_contenido" translate="no">?</span></td>
-                        <td>Todos los comandos disponibles</td>
-                    </tr>
-                </table>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ls</code></pre></td>
+                            <td>Listar el contenido del directorio</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">cd</code></pre></td>
+                            <td>Cambiar de directorio</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">!cd</code></pre></td>
+                            <td>Cambiar de directorio del sistema local (no el servidor)</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">get</code></pre></td>
+                            <td>Descargar un archivo del servidor</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">put</code></pre></td>
+                            <td>Enviar un archivo al servidor</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">pwd</code></pre></td>
+                            <td>Ver directorio actual</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">rm</code></pre></td>
+                            <td>Eliminar un archivo</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">!ls</code></pre></td>
+                            <td>Listar archivos del sistema local (no el servidor)</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">mkdir</code></pre></td>
+                            <td>Crear una carpeta</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">!mkdir</code></pre></td>
+                            <td>Crear una carpeta en el sistema local (no el servidor)</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">bye</code></pre></td>
+                            <td>Cerrar una conexión FTP</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">?</code></pre></td>
+                            <td>Todos los comandos disponibles</td>
+                        </tr>
+                    </table>
+                </div>
                 
             </div>
 

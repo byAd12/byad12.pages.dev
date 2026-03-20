@@ -1,10 +1,4 @@
-GUIAS - Arreglos y nuevo contenido
-
-# g/active_directory.html
-Arreglo al cerrar elementos
+GUIAS - Arreglo del formato de las tablas
 
 # g/*.html
-Correción de opciones y sintaxis
-
-# g/cups.html, guides.html
-Enlace a una guía nueva
+Se arregló el formato de todas las tablas y se quitó el uso de <span></span> dentro de ellas
