@@ -13,7 +13,7 @@ Código por byAd12
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="noindex,nofollow">
         <title>Active Directory</title>
-
+        
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
@@ -116,6 +116,7 @@ Código por byAd12
 
                 <br>
                 <p>En la siguiente <a href="#Administrar_DC_Linux">sección</a> se puede ver la administración del servidor mediante línea de comandos.</p>
+                <p><u>Importante</u>: El usuario administrador del dominio se llama <span class="span_contenido">administrator</span> (en inglés).</p>
             
             </div>
             
@@ -527,6 +528,27 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">man pam_mount.conf</code></pre>
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/windows.png"></h2>
+            
+                <p>1. Primero configuraremos como DNS del cliente la IP del servidor / controlador de dominio.</p>
+
+                <p>2. En la sección "Cambios en el dominio o nombre de equipo" asignaremos un nombre de equipo identificativo y especificaremos el nombre de dominio del servidor.</p>
+                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido">administrator</span> y su contraseña asignada.</p>
+
+                <p>3. Reiniciaremos el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
+            </div>
+        
         </div>
 
         <!-- ......................................................... -->
