@@ -118,8 +118,7 @@ Código por byAd12
                 <p>En la siguiente <a href="#Administrar_DC_Linux">sección</a> se puede ver la administración del servidor mediante línea de comandos.</p>
             
             </div>
-        </div>
-
+            
         </div>
 
         <!-- ......................................................... -->
@@ -327,7 +326,7 @@ Código por byAd12
                 <p>6. Ahora instalaremos los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
-                <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio:</p>
+                <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/krb5.conf</code></pre>
                 
                 <br>

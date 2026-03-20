@@ -1,0 +1,144 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Juani
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>CUPS</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 style="margin: 15px 0;">CUPS</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Common Unix Printing System</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>Instalación y verificación</h2>
+                
+                <p>En el equipo donde se podrá administrar el servicio instalaremos los paquetes necesarios:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">apt install -y cups cups-pdf</code></pre>
+
+                <p>Para verificar el estado del servicio ejecutaremos el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">systemctl status cups</code></pre>
+
+                <p>A continuación permitiremos el acceso a cualquier red al servicio:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsctl --remote-any</code></pre>
+                <p class="Expl">O podemos limitar el acceso a solo la red local configurando el siguiente archivo:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
+                <p class="Expl">Buscaremos una sección <span class="span_contenido">&lt;Location /&gt;</span> y la dejaremos así, pero cambiando <span class="span_url">192.168.1.*</span> por la dirección de la red local:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">&lt;Location /&gt;
+  Order allow,deny
+  Allow localhost
+  Allow 192.168.1.*
+&lt;/Location&gt;</code></pre>
+
+                <p>Luego aplicaremos los cambios reiniciando el servicio:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
+
+                <p>Ahora verificaremos que el servicio cups esté escuchando en los puertos correspondientes. Debería ser el puerto <span class="span_url">631</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">lsof -i -P -n | grep cups</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Administración de la interfaz gráfica</h2>
+
+                <p>Primero tendremos que entrar al panel de administración web de cups. La URL debería ser:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/admin</code></pre>
+
+                <p>En la sección de <span class="span_contenido">Printers</span> pulsaremos <span class="span_contenido">Add Printer</span>.</p>
+                <p class="Expl">- Seleccionaremos <span class="span_url">CUPS-PDF (Virtual PDF Printer)</span> y luego <span class="span_contenido">Continue</span>.</p>
+                <p class="Expl">- Definiremos un nombre a la impresora, una descripción y seleccionaremos <span class="span_contenido">Share this printer</span>. Luego pulsaremos <span class="span_contenido">Continue</span>.</p>
+                <p class="Expl">- Ahora seleccionaremos en la sección <span class="span_contenido">Make</span> el driver <span class="span_url">Generic</span>, en la sección <span class="span_contenido">Model</span> el modelo <span class="span_url">Generic CUPS-PDF Printer (w/ options) (en)</span> y por último pulsaremos <span class="span_contenido">Add Printer</span>.</p>
+
+                <p>Ahora nos dirigiremos a la sección de impresoras del panel. La URL debería ser:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
+                <p class="Expl">Seleccionaremos la impresora que se ha creado en el paso anterior y ya podremos ver la cola de impresión.</p>
+
+                <p>Después de crear la impresora en el panel web (CUPS-PDF), hay que activarla y permitir trabajos especificando el nombre configurado de la impresora:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsenable &lt;Nombre_Impresora&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept &lt;Nombre_Impresora&gt;</code></pre>
+
+                <p>Ahora añadiremos una política al servicio mediante el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
+                <p class="Expl">Buscaremos una sección <span class="span_contenido">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">  JobPrivateValues none</code></pre>
+                <p class="Expl">Luego reiniciaremos el servicio para aplicar los cambios:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Agregar la impresora al Sistema</h2>
+
+                <p>En un equipo de la red listaremos las impresoras que se detecten:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">lpinfo -v</code></pre>
+
+                <p>Ahora añadiremos una impresora al sistema local asignándole un nombre (-p) mediante la IP del equipo (ipp://...) que creó la impresora y el nombre que le asignó a esta (printers/...):</p>
+                <pre class="codigo" translate="no"><code class="language-bash">lpadmin -p &lt;Nombre_Local&gt; -E -v ipp://&lt;IP_Servidor&gt;:631/printers/&lt;Nombre_Impresora&gt; -m everywhere</code></pre>
+
+                <p>Una vez añadida la activaremos y permitiremos trabajos de impresión:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsenable &lt;Nombre_Local&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept &lt;Nombre_Local&gt;</code></pre>
+
+                <p>Verificaremos que la impresora esté en el sistema:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">lpstat -p -d</code></pre>
+                <p class="Expl"><u>Nota</u>: La impresora puede aparecer inactiva ya que es una impresora virtual sin ningún dispositivo físico conectado.</p>
+
+                <p>Para verificar que se pueda imprimir podemos crear un fichero de prueba y enviarlo a la impresora:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">echo "Contenido de prueba" > &lt;Fichero_de_Prueba&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">lp -d &lt;Nombre_Local&gt; &lt;Fichero_de_Prueba&gt;</code></pre>
+
+                <p><b>Servidor</b>: En la página de impresoras deberíamos ver los trabajos enviados:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
+                <p class="Expl">Los PDFs generados se guardarán normalmente en la carpeta del servidor: <span class="span_url">/var/spool/cups-pdf/</span>.</p>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <script src="../resources/blog.js"></script>
+    </body>
+
+</html>

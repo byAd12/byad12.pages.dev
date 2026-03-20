@@ -112,7 +112,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker run -d [imagen]</code></pre>
                 
                 <p><b>Persistencia</b> de archivos:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -v [ruta_en_docker]:[ruta_en_sistema_local]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker run -v [ruta_en_sistema_local]:[ruta_en_docker]</code></pre>
                 <p class="Expl">Así se enlaza una carpeta del docker con una carpeta local para que los archivos no se eliminen al parar el docker.</p>
                 
                 <p>Modificar una variable de entorno (ej. <span class="span_contenido">PUID</span>):</p>
@@ -151,11 +151,17 @@ Código por byAd12
             <div>
                 <h2>Más opciones</h2>
                 
-                <p>Copiar archivos del host al interior de un docker:</p>
+                <p>Copiar archivos del docker al host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [docker]:[ruta_en_docker] [ruta_en_sistema_local]</code></pre>
                 <p class="Expl"><b>[docker]:____</b>: Nombre del docker específico.</p>
-                <p class="Expl"><b>____:[ruta_en_docker]</b>: Donde se copiará dentro del docker.</p>
-                <p class="Expl"><b>[ruta_en_sistema_local]</b>: Ruta del/los archivo/s en la máquina virtual.</p>
+                <p class="Expl"><b>____:[ruta_en_docker]</b>: Que archivo/s que se copìarán.</p>
+                <p class="Expl"><b>[ruta_en_sistema_local]</b>: Ruta local donde se copiarán los archivos.</p>
+
+                <p>Copiar archivos del host al interior del docker:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker cp [ruta_en_sistema_local] [docker]:[ruta_en_docker]</code></pre>
+                <p class="Expl"><b>[ruta_en_sistema_local]</b>: Ruta del/los archivo/s a copiar.</p>
+                <p class="Expl"><b>[docker]:____</b>: Nombre del docker específico.</p>
+                <p class="Expl"><b>____:[ruta_en_docker]</b>: Ruta del docker donde se copiarán los archivos.</p>
             </div>
 
             <div>

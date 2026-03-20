@@ -79,7 +79,7 @@ Código por byAd12
                 <h2>Cláusula<span class="span_url_espaciado">ORDER BY</span></h2>
 
                 <p>Para cambiar el orden en el que se enseña la tabla según una columna.<br>Si no se va a enseñar una columna se puede ordenar por ella igualmente:</p>
-                <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla ORDER BY col1 ASC/DESC;</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla ORDER BY col1 &lt;ASC o DESC&gt;;</code></pre>
                 <p class="Expl"><span class="span_contenido">ASC</span> - Ascendente<br><span class="span_contenido">DESC</span> - Descendente</p>
                 <p>Si se utiliza el modificador <span class="span_contenido">AS</span> (alias de columna), este se ordena por el nombre del alias, no el nombre real de la columna.</p>
             </div>
@@ -151,7 +151,7 @@ Código por byAd12
 
                 <p>Se puede usar funciones dentro de otras funciones:</p>
 
-                <p><span class="span_contenido">LCASE()</span>: Convierte los valores a minúsculas.</p>
+                <p><span class="span_contenido">LCASE()</span> (MySQL): Convierte los valores a minúsculas. Es más compatible usar <span class="span_contenido">LOWER()</span>.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT LCASE(columna) FROM tabla;</code></pre>
 
                 <p><span class="span_contenido">CONCAT()</span>: Concatenar varias columnas en una sola.</p>

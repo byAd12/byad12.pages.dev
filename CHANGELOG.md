@@ -1,12 +1,10 @@
-GUIAS y SCRIPTS - Nuevo contenido
+GUIAS - Arreglos y nuevo contenido
 
-# g/packet_tracer.html, g/active_directory.html
-Nuevo contenido
+# g/active_directory.html
+Arreglo al cerrar elementos
 
-# resources/blog.css
-Mejora de estilos
+# g/*.html
+Correción de opciones y sintaxis
 
-# scripts/proxmox.sh
-Nuevos avisos
-Nuevas funcionalidades en las opciones 4), 18) y 19)
-Verificación previa para eliminar el clúster
+# g/cups.html, guides.html
+Enlace a una guía nueva

@@ -73,9 +73,14 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <p>Lo que haremos a continuación será meter al usuario en una base de datos independiente a /etc/shadow para que este usuario sea roconocido en sistemas Windows.</p>
                 
-                <p class="Expl">Al usuario <span class="span_contenido">nombre_usuario</span> que creamos hay que hacer que sea reconocible como un usuario para Windows:</p>
+                <p class="Expl">Antes de nada hay que crear el usuario en el sistema local:</p>
+                <pre class="codigo" translate="no"><code class="bash">useradd [opciones] nombre_usuario</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">passwd nombre_usuario</code></pre>
+
+                <p class="Expl">Configuraremos a ese usuario para que sea reconocible como un usuario para Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
                 <p class="Expl">La contraseña que se asigna con <span class="span_contenido">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
+                
                 <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">pdbedit -L</code></pre>
                 
