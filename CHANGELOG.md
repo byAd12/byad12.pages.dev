@@ -1,4 +1,8 @@
-GUIAS - Arreglo del formato de las tablas
+Nuevas opciones y mejoras de seguridad
 
-# g/*.html
-Se arregló el formato de todas las tablas y se quitó el uso de <span></span> dentro de ellas
+# scripts/proxmox.sh
+Mejora de seguridad
+Nueva opción
+
+# scripts/bind9.sh
+Nuevo script

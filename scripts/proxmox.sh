@@ -15,11 +15,13 @@ export LC_ALL=C.UTF-8
 apt update
 apt install -y cowsay cmatrix curl
 clear
-cmatrix -b &
-PID=$!
-sleep 2
-kill $PID
-wait $PID 2>/dev/null
+if command -v cmatrix &> /dev/null; then
+    cmatrix -b &
+    PID=$!
+    sleep 2
+    kill $PID 2>/dev/null
+    wait $PID 2>/dev/null
+fi
 clear
 
 ##############################################################
@@ -53,49 +55,50 @@ while true; do
             "${Ne}2${Bl} | Configurar apagado automático" \
             " | " \
         " | ${Az}CLÚSTER ${Bl}" \
-        " | =====================" \
+        " | ==========================" \
             "${Ne}3${Bl} | Crear un clúster" \
             "${Ne}4${Bl} | Unirse a un clúster" \
-            "${Ne}5${Bl} | Eliminar un clúster" \
-            "${Ne}6${Bl} | Corosync - Configurar" \
+            "${Ne}5${Bl} | Quitar un nodo del clúster" \
+            "${Ne}6${Bl} | Eliminar un clúster" \
+            "${Ne}7${Bl} | Corosync - Configurar" \
             " | " \
         " | ${Az}CLOUDFLARED ${Bl}" \
         " | =============================" \
-            "${Ne}7${Bl} | Instalar e iniciar sesión" \
-            "${Ne}8${Bl} | Crear un túnel - HTTP(S)" \
-            "${Ne}9${Bl} | Crear un túnel - Servicio TCP" \
-            "${Ne}10${Bl} | Purgar cloudflared" \
+            "${Ne}8${Bl} | Instalar e iniciar sesión" \
+            "${Ne}9${Bl} | Crear un túnel - HTTP(S)" \
+            "${Ne}10${Bl} | Crear un túnel - Servicio TCP" \
+            "${Ne}11${Bl} | Purgar cloudflared" \
             " | " \
         " | ${Az}DOCKER ${Bl}" \
         " | ========================" \
-            "${Ne}11${Bl} | Instalar docker - Debian" \
-            "${Ne}12${Bl} | favonia/cloudflare-ddns" \
+            "${Ne}12${Bl} | Instalar docker - Debian" \
+            "${Ne}13${Bl} | favonia/cloudflare-ddns" \
             " | " \
         " | ${Az}PROXMOX ${Bl}" \
         " | ============================" \
-            "${Ne}13${Bl} | CT - Crear backup" \
-            "${Ne}14${Bl} | CT - Restaurar backup" \
-            "${Ne}15${Bl} | Restaurar local-lvm" \
-            "${Ne}16${Bl} | Instalar temas" \
-            "${Ne}17${Bl} | LXC - Desbloquear contenedor" \
+            "${Ne}14${Bl} | CT - Crear backup" \
+            "${Ne}15${Bl} | CT - Restaurar backup" \
+            "${Ne}16${Bl} | Restaurar local-lvm" \
+            "${Ne}17${Bl} | Instalar temas" \
+            "${Ne}18${Bl} | LXC - Desbloquear contenedor" \
             " | " \
         " | ${Az}VPN - NETBIRD ${Bl}" \
         " | ============================" \
-            "${Ne}18${Bl} | Instalar y entrar en Netbird" \
-            "${Ne}19${Bl} | Desinstalar y purgar Netbird" \
+            "${Ne}19${Bl} | Instalar y entrar en Netbird" \
+            "${Ne}20${Bl} | Desinstalar y purgar Netbird" \
             " | " \
         " | ${Az}NFS ${Bl}" \
         " | ====================" \
-            "${Ne}20${Bl} | Compartir un recurso" \
+            "${Ne}21${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
         " | ==================" \
-            "${Ne}21${Bl} | Cambiar de versión" \
+            "${Ne}22${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}SERVICIOS ${Bl}" \
         " | =====================================" \
-            "${Ne}22${Bl} | Ejecutar un archivo .py como servicio" \
-            "${Ne}23${Bl} | Alertas de Discord" \
+            "${Ne}23${Bl} | Ejecutar un archivo .py como servicio" \
+            "${Ne}24${Bl} | Alertas de Discord" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
@@ -215,14 +218,52 @@ while true; do
         ;;
 
     ##############################################################
-    # ELIMINAR CLUSTER
+    # SALIRSE DE UN CLUSTER
     ##############################################################
     5)
         clear
 
-        read -p "${Ro_}1/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
-        read -p "${Ro_}2/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion2; [[ "$verificacion2" != "s" && "$verificacion2" != "S" ]] && continue
-        read -p "${Ro_}3/3 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion3; [[ "$verificacion3" != "s" && "$verificacion3" != "S" ]] && continue
+        # Evitar quitar un nodo si no es desde coruna1
+        if [ "$(hostname)" != "coruna1" ]; then
+            echo -e "${Am}No puedes ejecutar esta opción en un nodo esclavo.${Bl}"
+            read -p "\nPulse ENTER para reiniciar el programa:"
+            continue
+        fi
+
+        read -p "${Ro_}1/2 ¿Estás seguro de querer quitar este nodo del clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
+        read -p "${Ro_}2/2 ¿Estás seguro de querer quitar este nodo del clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion2; [[ "$verificacion2" != "s" && "$verificacion2" != "S" ]] && continue
+        echo -e ""
+        read -p "${Am}Ingrese la contraseña para ejecutar esta función: ${Bl}" verificacion3; [[ -z "${verificacion3// /}" || "$verificacion3" == "exit" ]] && continue
+
+        hash_ingresado=$(echo -n "$verificacion3" | sha256sum | awk '{print $1}')
+
+        if [ "$hash_ingresado" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]; then
+            read -p 'Nodo a quitar del clúster: ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "$nodo_nombre" == "exit" ]] && continue
+
+            echo -e "\n${Az}Intentando quitar del clúster a $nodo_nombre...${Bl}"
+            pvecm del "$nodo_nombre"
+
+            echo -e "\n${Ve}¡Se eliminó el nodo del clúster correctamente!${Bl}"
+        else
+            echo -e "${Ro_}Contraseña incorrecta${Bl}"
+        fi
+        ;;
+
+    ##############################################################
+    # ELIMINAR CLUSTER
+    ##############################################################
+    6)
+        clear
+
+        # Evitar eliminar el clúster desde coruna1
+        if [ "$(hostname)" == "coruna1" ]; then
+            echo -e "${Am}No puedes ejecutar esta opción en el nodo maestro.${Bl}"
+            read -p "\nPulse ENTER para reiniciar el programa:"
+            continue
+        fi
+
+        read -p "${Ro_}1/2 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
+        read -p "${Ro_}2/2 ¿Estás seguro de querer eliminar el clúster? (s/${Ro}n${Ro_}): ${Bl}" verificacion2; [[ "$verificacion2" != "s" && "$verificacion2" != "S" ]] && continue
         echo -e ""
         read -p "${Am}Ingrese la contraseña para ejecutar esta función: ${Bl}" verificacion4; [[ -z "${verificacion4// /}" || "$verificacion4" == "exit" ]] && continue
 
@@ -232,31 +273,23 @@ while true; do
             echo -e "${Ve_}Contraseña correcta${Bl}"
 
             echo -e "${Az}Parando servicios...${Bl}"
-            systemctl stop pve-cluster corosync pvedaemon pveproxy pvestatd
-            killall pmxcfs 2>/dev/null
+            systemctl stop pve-cluster corosync
+            killall -9 pmxcfs 2>/dev/null
 
-            echo -e "\n${Az}Haciendo copia de seguridad de /etc/pve...${Bl}"
+            echo -e "${Az}Haciendo copia de seguridad de Corosync...${Bl}"
             mkdir -p /root/pve_backup
-            cp -r /etc/pve/* /root/pve_backup/
+            cp -r /etc/pve/corosync.conf /root/pve_backup/ 2>/dev/null
 
-            echo -e "\n${Az}Renombrando /etc/pve...${Bl}"
-            mv /etc/pve /etc/pve.bak
-            mkdir /etc/pve
-
-            echo -e "\n${Az}Iniciando pmxcfs en modo local...${Bl}"
-            pmxcfs -l &
-            sleep 5
-
-            echo -e "\n${Az}Generando certificados locales...${Bl}"
+            echo -e "${Az}Limpiando archivos de configuración de Corosync...${Bl}"
+            rm -f /etc/pve/corosync.conf
+            rm -rf /etc/corosync/*
+            
+            pmxcfs -l
             pvecm updatecerts --force
+            
             systemctl restart pve-cluster
-
-            echo -e "\n${Az}Deshabilitando corosync...${Bl}"
             systemctl stop corosync
             systemctl disable corosync
-
-            echo -e "\n${Az}Reiniciando servicios básicos de Proxmox...${Bl}"
-            systemctl restart pvedaemon pveproxy pvestatd
 
             echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
             echo -e "${Ve}Copia de seguridad de /etc/pve en /root/pve_backup${Bl}"
@@ -269,8 +302,14 @@ while true; do
     ##############################################################
     # EDITAR LA CONFIGURACIÓN DE COROSYNC
     ##############################################################
-    6)
+    7)
         clear
+
+        if [ "$(hostname)" != "coruna1" ]; then
+            echo -e "${Am}No puedes ejecutar esta opción en un nodo esclavo.${Bl}"
+            read -p "\nPulse ENTER para reiniciar el programa:"
+            continue
+        fi
 
         echo -e "\n${Az}Parando servicio(s)...${Bl}"
         systemctl stop pve-cluster
@@ -293,7 +332,7 @@ while true; do
     ##############################################################
     # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
     ##############################################################
-    7)
+    8)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -322,7 +361,7 @@ while true; do
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - HTTP(S)
     ##############################################################
-    8)
+    9)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -385,7 +424,7 @@ EOF
     ##############################################################
     # CREAR TÚNEL CLOUDFLARED - SERVICIO TCP
     ##############################################################
-    9)
+    10)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -409,8 +448,8 @@ EOF
         echo -e "\n${Az}Creando carpeta /etc/cloudflared...${Bl}"
         mkdir -p /etc/cloudflared
 
-        echo -e"\n${Az}Creando archivo $nombre_tunel.yml...${Bl}"
-        cat <<EOF > /etc/cloudflared/$nombre_tunel.yml
+        echo -e "\n${Az}Creando archivo config.yml...${Bl}"
+        cat <<EOF > /etc/cloudflared/config.yml
 tunnel: $uuid
 credentials-file: /etc/cloudflared/$uuid.json
 loglevel: debug
@@ -447,7 +486,7 @@ EOF
     ##############################################################
     # PURGAR CLOUDFLARED
     ##############################################################
-    10)
+    11)
         clear
 
         echo -e "${Am}Aviso:${Bl}"
@@ -474,7 +513,7 @@ EOF
     ##############################################################
     # INSTALAR DOCKER
     ##############################################################
-    11)
+    12)
         clear
 
         echo -e "${Am}Aviso:${Bl}"
@@ -509,7 +548,7 @@ EOF
     # CLOUDFLARE DDNS
     # GitHub: https://github.com/favonia/cloudflare-ddns
     ##############################################################
-    12)
+    13)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -536,7 +575,7 @@ EOF
     ##############################################################
     # CT - CREAR BACKUP
     ##############################################################
-    13)
+    14)
         clear
 
         read -p 'ID del contenedor a hacer una backup: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
@@ -551,7 +590,7 @@ EOF
     ##############################################################
     # CT - RESTAURAR BACKUP
     ##############################################################
-    14)
+    15)
         clear
 
         read -p 'ID del contenedor a restaurar una backup: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
@@ -567,7 +606,7 @@ EOF
     ##############################################################
     # RESTAURAR LOCAL-LVM
     ##############################################################
-    15)
+    16)
         clear
 
         host=$(hostname)
@@ -593,7 +632,7 @@ EOF
     ##############################################################
     # INSTALAR TEMAS
     ##############################################################
-    16)
+    17)
         clear
 
         echo -e "\n${Az}Descargando la carpeta...${Bl}"
@@ -616,7 +655,7 @@ EOF
     ##############################################################
     # LXC - DESBLOQUEAR CONTENEDOR
     ##############################################################
-    17)
+    18)
         clear
 
         read -p 'ID del contenedor: ' id_contenedor; [[ -z "${id_contenedor// /}" || "$id_contenedor" == "exit" ]] && continue
@@ -639,7 +678,7 @@ EOF
     ##############################################################
     # INSTALAR Y ENTRAR A NETBIRD
     ##############################################################
-    18)
+    19)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -695,7 +734,7 @@ EOF
     ##############################################################
     # DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
-    19)
+    20)
         clear
 
         read -p "${Ro_}¿Estás seguro de querer desinstalar Netbird? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
@@ -730,7 +769,7 @@ EOF
     ##############################################################
     # NFS - COMPARTIR UN RECURSO 
     ##############################################################
-    20)
+    21)
         clear
 
         echo -e "${Ne}Nota:${Bl}"
@@ -760,7 +799,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    21)
+    22)
         clear
 
         echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
@@ -788,7 +827,7 @@ EOF
     ##############################################################
     # PYTHON - EJECUTAR UN ARCHIVO COMO SERVICIO 
     ##############################################################
-    22)
+    23)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -808,13 +847,13 @@ EOF
         echo -e "\n${Az}Asignando permisos al archivo...${Bl}"
         cat <<EOF > /etc/systemd/system/script-python.service
 [Unit]
-Description=script de Python
+Description=Script de Python: $(basename "$ruta_archivo")
 After=network.target
 
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python3 ${ruta_archivo}
+ExecStart=/usr/bin/python3 "$ruta_archivo"
 Restart=on-failure
 
 [Install]
@@ -839,7 +878,7 @@ EOF
     ##############################################################
     # ALERTAS 
     ##############################################################
-    23)
+    24)
         clear
 
         read -p 'Webhook de Discord: ' webhook; [[ -z "${webhook// /}" || "$webhook" == "exit" ]] && continue
