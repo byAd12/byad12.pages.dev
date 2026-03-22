@@ -907,10 +907,9 @@ WEBHOOK="REPLACEME_WEBHOOK"
 HOSTNAME=$(hostname)
 USER_NAME=$(whoami)
 USER_ID=$(id -u)
-IP_CON=$(who am i | awk '{print $NF}' | tr -d '()')
 CLEAN_CMD=$(echo "$1" | sed 's/"/\\"/g')
 
-MESSAGE="### host $HOSTNAME • $USER_NAME (\`$IP_CON\`) • uid \`$USER_ID\`\n\n\`\`\`bash\n$CLEAN_CMD\n\`\`\`"
+MESSAGE="### host $HOSTNAME • $USER_NAME • uid \`$USER_ID\`\n\n\`\`\`bash\n$CLEAN_CMD\n\`\`\`"
 
 PAYLOAD="{\"content\": \"$MESSAGE\"}"
 curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK" > /dev/null 2>&1 &
