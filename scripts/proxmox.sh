@@ -901,7 +901,7 @@ EOF
         echo -e "\n${Az}Creando script...${Bl}"
         cat <<'EOF' > /usr/local/bin/discord-alerta.sh
 #!/bin/bash
-[[ -z "$1" || "$1" == *"discord-alerta.sh"* || "$1" == "history"* ]] && exit 0
+[[ "$1" == *"discord-alerta.sh"* ]] && exit 0
 
 WEBHOOK="REPLACEME_WEBHOOK"
 HOSTNAME=$(hostname)
@@ -923,13 +923,17 @@ EOF
             cat <<'EOF' >> /etc/bash.bashrc
 
 # --- Monitor Discord ---
+# -----------------------
 logger_discord() {
-    if [ "$BASH_COMMAND" != "$LAST_CMD" ]; then
-        /usr/local/bin/discord-alerta.sh "$BASH_COMMAND"
-        LAST_CMD="$BASH_COMMAND"
+    local ULTIMO_CMD=$(history 1 | sed 's/^[ ]*[0-9]*[ ]*//')
+    if [[ "$ULTIMO_CMD" != "$LAST_CMD_DISCORD" ]] && [[ -n "$ULTIMO_CMD" ]] && [[ "$ULTIMO_CMD" != "exit" ]]; then
+        /usr/local/bin/discord-alerta.sh "$ULTIMO_CMD"
+        export LAST_CMD_DISCORD="$ULTIMO_CMD"
     fi
 }
-trap 'logger_discord' DEBUG
+if [[ $- == *i* ]]; then
+    PROMPT_COMMAND="history -a; logger_discord; $PROMPT_COMMAND"
+fi
 # -----------------------
 EOF
             echo -e "${Ve}Hook inyectado en /etc/bash.bashrc correctamente.${Bl}"
