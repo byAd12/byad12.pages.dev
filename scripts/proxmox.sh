@@ -849,42 +849,54 @@ EOF
 
         read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
 
-        echo -e "\n${Az}Verificando versión de python...${Bl}"
-        python --version
-        python3 --version
+        echo -e "\n${Az}Setección básica...${Bl}"
+        [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
+        if [[ ! -f "$ruta_archivo" ]]; then
+            echo -e "${Ro}Error: El archivo no existe.${Bl}"
+            sleep 2; continue
+        fi
 
-        echo -e "\n${Az}Asignando permisos al archivo...${Bl}"
-        chmod +x $ruta_archivo
+        echo -e "\n${Az}Creando variables...${Bl}"
+        nombre_script=$(basename "$ruta_archivo")
+        directorio_trabajo=$(dirname "$ruta_archivo")
+        usuario_actual=$(whoami)
 
-        echo -e "\n${Az}Asignando permisos al archivo...${Bl}"
+        echo -e "\n${Az}Detectando entorno...${Bl}"
+        python_path=$(which python3)
+
+        echo -e "\n${Az}Creando unidad de servicio con Logging...${Bl}"
+        
         cat <<EOF > /etc/systemd/system/script-python.service
 [Unit]
-Description=Script de Python: $(basename "$ruta_archivo")
+Description=Servicio Python: $nombre_script
 After=network.target
 
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/bin/python3 "$ruta_archivo"
+WorkingDirectory=$directorio_trabajo
+ExecStart=$python_path -u "$ruta_archivo"
 Restart=on-failure
+RestartSec=5
+StandardOutput=append:/var/log/script-python.log
+StandardError=append:/var/log/script-python.log
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-        echo -e "\n${Az}Recargando systemd...${Bl}"
+        echo -e "\n${Az}Configurando permisos y logs...${Bl}"
+        chmod +x "$ruta_archivo"
+        touch /var/log/script-python.log
+
+        echo -e "\n${Az}Recargando y arrancando...${Bl}"
         systemctl daemon-reload
-
-        echo -e "\n${Az}Arrancando servicio...${Bl}"
-        systemctl start script-python.service
-
-
-        echo -e "\n${Az}Habilitando el servicio...${Bl}"
         systemctl enable script-python.service
+        systemctl restart script-python.service
 
-        echo -e "\n${Az}Para editar parámetros edite el siguiente archivo: ${Az}/etc/systemd/system/script-python.service${Bl}"
-
-        echo -e "\n${Ve}¡Archivo asignado como servicio correctamente!${Bl}"
+        echo -e "\n${Ve}¡Servicio configurado!${Bl}"
+        echo -e "${Az}Para ver por qué falla, usa: ${Ve}tail -f /var/log/script-python.log${Bl}"
+        echo -e "${Az}O revisa el estado: ${Ve}systemctl status script-python.service${Bl}"
         ;;
 
     ##############################################################
