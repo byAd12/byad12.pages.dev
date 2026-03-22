@@ -13,7 +13,7 @@ export LC_ALL=C.UTF-8
 # INSTALAR DEPENDENCIAS
 ##############################################################
 apt update
-apt install -y cowsay cmatrix curl
+apt install -y cowsay cmatrix curl 
 clear
 if command -v cmatrix &> /dev/null; then
     cmatrix -b &
@@ -51,7 +51,7 @@ while true; do
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
         " | ================================" \
-            "${Ne}1${Bl} | BIOS: Arreglo de la zona horaria" \
+            "${Ne}1${Bl} | Configuración inicial de un nodo" \
             "${Ne}2${Bl} | Configurar apagado automático" \
             " | " \
         " | ${Az}CLÚSTER ${Bl}" \
@@ -119,21 +119,33 @@ while true; do
     exit) break ;;
 
     ##############################################################
-    # CONFIGURAR RTC - BIOS
+    # CONFIGURACIÓN INICIAL DE UN NODO
     ##############################################################
     1)
         clear
 
-        echo -e "\n${Az}Configuración actual...${Bl}"
+        echo -e "\n${Az}Configuración actual de timedatectl...${Bl}"
         timedatectl
 
         echo -e "\n${Az}Ajustando la hora de la BIOS a RTC + 1...${Bl}"
         timedatectl set-local-rtc 1 --adjust-system-clock
 
-        echo -e "\n${Az}Verificando cambios...${Bl}"
+        echo -e "\n${Az}Verificando cambios de timedatectl...${Bl}"
         timedatectl
 
-        echo -e "\n${Ve}¡Se ha configurado la hora RTC correctamente!${Bl}"
+        echo -e "\n${Az}Instalando dependencias...${Bl}"
+        apt install -y fastfetch
+
+        echo -e "\n${Az}Aplicando configuración básica...${Bl}"
+        if ! grep -q "clear" ~/.bashrc; then
+            echo "clear" >> ~/.bashrc
+        fi
+        if ! grep -q "fastfetch" ~/.bashrc; then
+            echo "fastfetch" >> ~/.bashrc
+            echo "echo ''" >> ~/.bashrc
+        fi
+
+        echo -e "\n${Ve}¡Se ha aplicado la configuración inicial correctamente!${Bl}"
         ;;
 
     ##############################################################
@@ -895,25 +907,24 @@ WEBHOOK="REPLACEME_WEBHOOK"
 HOSTNAME=$(hostname)
 USER_NAME=$(whoami)
 USER_ID=$(id -u)
-
+IP_CON=$(who am i | awk '{print $NF}' | tr -d '()')
 CLEAN_CMD=$(echo "$1" | sed 's/"/\\"/g')
 
-MESSAGE="### host $HOSTNAME • $USER_NAME • uid \`$USER_ID\`\n\n\`\`\`bash\n$CLEAN_CMD\n\`\`\`"
+MESSAGE="### host $HOSTNAME • $USER_NAME (\`$IP_CON\`) • uid \`$USER_ID\`\n\n\`\`\`bash\n$CLEAN_CMD\n\`\`\`"
 
 PAYLOAD="{\"content\": \"$MESSAGE\"}"
 curl -s -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK" > /dev/null 2>&1 &
 EOF
 
-
         sed -i "s|REPLACEME_WEBHOOK|$webhook|" /usr/local/bin/discord-alerta.sh
         chmod +x /usr/local/bin/discord-alerta.sh
 
-        echo -e "\n${Az}Inyectando hook en .bashrc...${Bl}"
-        cat <<'EOF' >> /root/.bashrc
+        echo -e "\n${Az}Inyectando hook en /etc/bash.bashrc...${Bl}"
+        if ! grep -q "Monitor Discord" /etc/bash.bashrc; then
+            cat <<'EOF' >> /etc/bash.bashrc
 
 # --- Monitor Discord ---
 logger_discord() {
-    # Evitar bucles y comandos repetidos
     if [ "$BASH_COMMAND" != "$LAST_CMD" ]; then
         /usr/local/bin/discord-alerta.sh "$BASH_COMMAND"
         LAST_CMD="$BASH_COMMAND"
@@ -922,6 +933,10 @@ logger_discord() {
 trap 'logger_discord' DEBUG
 # -----------------------
 EOF
+            echo -e "${Ve}Hook inyectado en /etc/bash.bashrc correctamente.${Bl}"
+        else
+            echo -e "${Ro}El hook ya existe en /etc/bash.bashrc, saltando...${Bl}"
+        fi
 
         echo -e "\n${Ve}¡Configurado! REINICIA LA SESIÓN para activar las alertas.${Bl}"
         ;;
