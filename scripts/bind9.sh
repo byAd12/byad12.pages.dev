@@ -60,6 +60,7 @@ while true; do
         # INPUT
         respuesta_correcta_hash="${preguntas[$p]}"
         respuesta_usuario=$(whiptail --title "Pregunta ($((aciertos+1))/10)" --nocancel --inputbox "$p" 15 60 3>&1 1>&2 2>&3)
+        respuesta_usuario=$(echo "$respuesta_usuario" | tr '[:upper:]' '[:lower:]')
         usuario_input_hash=$(echo -n "$respuesta_usuario" | sha256sum | awk '{print $1}')
 
         # EMOJI
@@ -90,7 +91,7 @@ while true; do
                 sleep 1
                 echo $i
             done
-        } | whiptail --title "Verificando respuesta..." --gauge "Tu respuesta: '${respuesta_usuario}'\nPregunta:\n'${p}'\n\nPor favor, espera un momento..." 10 60 0
+        } | whiptail --title "Verificando respuesta..." --gauge "Tu respuesta: '${respuesta_usuario}'\nPregunta:\n'${p}'\n\nPor favor, espera un momento..." 15 60 0
 
 
         if  [ "$usuario_input_hash" == "$respuesta_correcta_hash" ]; then
