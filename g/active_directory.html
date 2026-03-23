@@ -292,7 +292,7 @@ Código por byAd12
                 <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url">.local</span>, es necesario editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
-                <pre class="codigo" translate="no"><code class="bash">hosts: files dns</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
                 <p class="Expl">Esto se debe realizar porque <span class="span_url">.local</span> se intenta resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
 
                 <br>
@@ -328,7 +328,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
                 <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/krb5.conf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
                 
                 <br>
                 <p>7. A continuación tenemos que actualizar SAMBA mediante el siguiente archivo:</p>
@@ -337,7 +337,7 @@ Código por byAd12
 
                 <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
-                <p class="Expl">Por el nombre de dominio en mayúsculas y sin el TLD, por ejemplo como "CICLO" si el dominio fuera "ciclo.local":</p>
+                <p class="Expl">Hay que poner el nombre de dominio en mayúsculas y sin el TLD, por ejemplo como "CICLO" si el dominio fuera "ciclo.local":</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = &lt;dominio_sin_tld_y_mayusculas&gt;</code></pre>
 
                 <p class="Expl">7.2. Debajo de "workgroup" añadiremos la siguiente línea, especificando el nombre de dominio completo:</p>
@@ -420,10 +420,12 @@ Código por byAd12
 
                 <p class="Expl">8.1. Listaremos la información del dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads info</code></pre>
+                <p class="Expl">En caso de que de un error, hay que verificar que el paso anterior esté hecho correctamente.</p>
 
                 <p class="Expl">8.2. Intentaremos unir el cliente al dominio mediante el usuario y contraseña del Administrador del servidor Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
                 <p class="Expl">Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido">/etc/hosts</span>.</p>
+                <p class="Expl">Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor.</p>
                 <p class="Expl">Si permite unirse al dominio, podremos ver el equipo en la sección "Computers" del servidor de Windows.</p>
 
                 <p class="Expl">8.3. Listaremos la información del dominio:</p>
@@ -441,7 +443,9 @@ Código por byAd12
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
                 <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
-                <p class="Expl">Tendremos el error de que no crea la carpeta personal, eso se soluciona editando <span class="span_url">/etc/pam.d/common-session</span> - explicado en la guía sobre <a href="nis.html#Problema-Cliente-Pamd">NIS: Problema - El cliente no tiene carpeta /home</a>.</p>
+                <p class="Expl">Tendremos el error de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">pam_auth_update</code></pre>
+                <p class="Expl">Hay que seleccionar la opción "Create home directory on login". Después podemos probar a iniciar sesión de nuevo y verificar que la carpeta se crea localmente.</p>
 
                 <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> se aplicó al usuario de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
