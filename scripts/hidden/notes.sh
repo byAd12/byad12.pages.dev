@@ -60,3 +60,5 @@ declare -A notas=(
 keys=("${!notas[@]}")
 random_key=${keys[$RANDOM % ${#keys[@]}]}
 echo -e "\n\e[44;97m${notas[$random_key]}\e[0m\n"
+
+echo -e "\n\e[1;33mzzz\e[0m\n"
