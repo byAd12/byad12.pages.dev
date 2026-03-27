@@ -408,7 +408,7 @@ originRequest:
 
 ingress:
   - hostname: $nombre_dominio.chemahosting.es
-    service: $tipo_conexion://localhost:$puerto_web
+    service: $tipo_conexion://127.0.0.1:$puerto_web
   - service: http_status:404
 EOF
 
@@ -470,7 +470,7 @@ originRequest:
 
 ingress:
   - hostname: $nombre_dominio.chemahosting.es
-    service: tcp://localhost:$puerto_web
+    service: tcp://127.0.0.1:$puerto_web
   - service: http_status:404
 EOF
 
