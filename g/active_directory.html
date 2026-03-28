@@ -111,8 +111,9 @@ Código por byAd12
 
                 <br>
                 <p>10. Por último iniciaremos el servicio <span class="span_contenido">winbind</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl start winbind</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">systemctl enable winbind</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl start samba-ad-dc smbd nmbd winbind</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable samba-ad-dc smbd nmbd winbind</code></pre>
+                <p class="Expl">Es importante que todos esos servicios estén activos para poder unirse al dominio. Si algo falla, se debe mirar el estado de cada servicio.</p>
 
                 <br>
                 <p>En la siguiente <a href="#Administrar_DC_Linux">sección</a> se puede ver la administración del servidor mediante línea de comandos.</p>

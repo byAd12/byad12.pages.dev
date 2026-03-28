@@ -1,4 +1,5 @@
-PROXMOX - Arreglo de Cloudflared
+ACTIVE DIRECTORY - Nuevo contenido
 
-# scripts/proxmox.sh
-Se arregló un problema donde Cloudflare, al apuntar a localhost, solia usar IPv6 así que se limitó a IPv4
+# g/active_directory.html
+Se cambió el contenido de un paso
+Nuevo aviso importante
