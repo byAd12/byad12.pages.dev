@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: Diego / CCNA
+~ Dedicatoria a: Diego Terrón / CCNA
 
 -->
 
@@ -42,7 +42,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div id="Principio"></div>
-        <h1>Packet Tracer</h1>
+        <h1 class="TituloPrincipal">Packet Tracer</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">Command Line Interface</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <hr>
@@ -130,13 +130,18 @@ Código por byAd12
                     <li><b>Ataques de ARP:</b> <a href="#DAI_Configuracion">Configuración de DAI</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento</h2>
+                <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento estático</h2>
                 <ul>
                     <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
-                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4 - Configuración</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6 - Configuración</a></li>
-                    <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4 - Configuración</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6 - Configuración</a></li>
-                    <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4 - Configuración</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6 - Configuración</a></li>
-                    <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv6">IPv4 - Configuración</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6 - Configuración</a></li>
+                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a></li>
+                    <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6</a></li>
+                    <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6</a></li>
+                    <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv6">IPv4</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6</a></li>
+                </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">10. Enrutamiento dinámico</h2>
+                <ul>
+                    <li><b>OSPF:</b> <a href="#xx">xx</a></li>
                 </ul>
             </div>
         </div>
@@ -2336,7 +2341,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento</h1>
+        <h1>Enrutamiento estático</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2418,7 +2423,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento - Rutas estáticas</h1>
+        <h1>Enrutamiento estático - Rutas estáticas</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2465,7 +2470,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento - Distancia administrativa</h1>
+        <h1>Enrutamiento estático - Distancia administrativa</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2518,7 +2523,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento - Rutas predeterminadas</h1>
+        <h1>Enrutamiento estático - Rutas predeterminadas</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2559,7 +2564,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento - Rutas de host</h1>
+        <h1>Enrutamiento estático - Rutas de host</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2597,6 +2602,17 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
 
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento dinámico</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
 
         </div>
 
