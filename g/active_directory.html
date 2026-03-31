@@ -274,6 +274,40 @@ Código por byAd12
 
 
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>Scripts de inicio de sesión desde un controlador de dominio (DC) <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+            
+                <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
+
+                <p>Para configurarlo, primero tendremos que editar el fichero de configuración de SAMBA:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
+                <p class="Expl">Añadiremos al final del archivo la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
+                <pre class="codigo" translate="no"><code class="bash">[netlogon]
+    path = /var/lib/samba/sysvol/&lt;dominio.tld&gt;/scripts</code></pre>
+
+                <p class="Expl">Dentro de esa ruta se podrán guardar los scripts .bat que se ejecutarán en el cliente Windows.</p>
+
+                <p class="Expl">La ruta al recurso compartido es el siguiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">\\&lt;Hostname_Servidor_Linux&gt;\netlogon</code></pre>
+
+                <p>Ahora se puede asociar el script al usuario mediante un equipo Windows con RSAT o con el siguiente comando en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">samba-tool user setprofile &lt;Nombre_Usuario&gt; --script-path &lt;Nombre_Script.bat&gt;</code></pre>
+                <p class="Expl">El script es una ruta relativa desde la ruta de sysvol configurada anteriormente.</p>
+                <p class="Expl">En el equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R &gt; <span class="span_contenido">dsa.msc</span> &gt; Usuario &gt; Propiedades &gt; Profile &gt; Logon script.</p>
+            
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
