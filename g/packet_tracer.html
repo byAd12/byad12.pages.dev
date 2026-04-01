@@ -141,7 +141,7 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">10. Enrutamiento dinámico</h2>
                 <ul>
-                    <li><b>OSPF:</b> <a href="#xx">xx</a></li>
+                    <li><b>OSPF:</b> <a href="#OSPF_Configuracion_Basica">Configuración básica</a> • <a href="#OSPF_Router_ID">Router ID</a> • <a href="#OSPF_Recargar_Configuración">Recargar la configuración</a> • <a href="#OSPF_Definir_Redes">Definir redes</a> • <a href="#OSPF_Eliminar_Redes">Eliminar redes</a> • <a href="#OSPF_Interfaz_Pasiva">Interfaz pasiva</a> • <a href="#OSPF_Tipo_Interfaz">Tipo de interfaz</a></li>
                 </ul>
             </div>
         </div>
@@ -2607,12 +2607,112 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento dinámico</h1>
+        <h1>Enrutamiento dinámico - OSPF</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
+
+            <div>
+                <h2 id="OSPF_Configuracion_Basica">Configuración básica</h2>
+
+                <p>Para configurar OSPF debemos habilitarlo explicitamente mediante el siguiente comando especficando un número de proceso entre <span class="span_contenido">1 - 65535</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# ...</code></pre>
+                <p class="Expl">Es recomendable usar el mismo número de proceso en cada router de la red que habiliten OSPF.</p>
+
+            </div>
+
+            <div>
+                <h2 id="OSPF_Router_ID">Asignar un Router ID</h2>
+
+                <p>Cada router que use OSPF debe tener un identificador único en formato de dirección IPv4. No importa si esta dirección IPv4 está en uso, ya que no se utiliza para la comunicación de datos:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# router-id &lt;Dirección_IPv4_Única&gt;</code></pre>
+                <p class="Expl">Es recomendable que esta dirección IPv4 coincida con la configurada en una <a href="#Interfaz_Loopback">interfaz de loopback</a>.</p>
+
+                <p>Para verificar el Router ID del dispositivo actual se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip protocols | include Router ID</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="OSPF_Recargar_Configuración">Recargar la configuración</h2>
+
+                <p>Un router no permitirá un cambio de Router ID a no ser que se recargue su configuración previamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip ospf process</code></pre>
+                <p class="Expl">Pedirá una confirmación, en la que tendremos que poner <span class="span_contenido">y</span>.</p>
+
+            </div>
+
+            <div>
+                <h2 id="OSPF_Definir_Redes">Definir redes</h2>
+
+                <p>Para definir las redes que se compartirán por OSPF tenemos 3 maneras diferentes de configurarlo:</p>
+
+                <p>1. <b>Por dirección de red</b>:</p>
+
+                <p class="Expl">Es importante definir la máscara de la dirección de red en formato <b>Wildcard</b>. Este formato resta <span class="span_url">255.255.255.255</span> a la máscara de red en formato punteado.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area &lt;ID_Área&gt;</code></pre>
+
+                <p>2. <b>Por la dirección IP de la interfaz</b>:</p>
+
+                <p class="Expl">Por cada interfaz de red ejecutaremos el siguiente comando especificando su dirección IP con máscara <span class="span_url">0.0.0.0</span>.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_IP&gt; 0.0.0.0 area &lt;ID_Área&gt;</code></pre>
+
+                <p>3. <b>Por interfaz</b>:</p>
+
+                <p class="Expl">Por cada interfaz de red ejecutaremos el siguiente comando especificando el número de proceso OSPF y el área en el que se sitúa.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Eliminar_Redes">Eliminar redes</h2>
+
+                <p>Para eliminar una red configurada en OSPF simplemente pondremos la palabra "no" al principio del comando:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# no network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area &lt;ID_Área&gt;</code></pre>
+
+                <p>Para ver las redes configuradas podemos usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include network</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Interfaz_Pasiva">Interfaz pasiva</h2>
+
+                <p>Configurar una interfaz como pasiva no reenvia e ignora mensajes de tipo OSPF:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# passive-interface &lt;Interfaz&gt;</code></pre>
+
+                <p>Para ver las interfaces pasivas se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip protocols</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Tipo_Interfaz">Asignar el tipo de interfaz</h2>
+
+                <p>Con el siguiente comando podremos ver el tipo de red detectado para una interfaz con la sección <span class="span_contenido">Network Type</span>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
+                <p class="Expl">Se puede verificar el Router ID del router <u>designado</u> y de <u>backup</u> si la red es de tipo BROADCAST, además de que se eligen mediante interfaces Ethernet.</p>
+
+                <p>Si el tipo de red se detecta como BROADCAST pero en realidad es una red punto a punto al haber 2 routers, se puede cambiar mediante el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf network point-to-point</code></pre>
+                <p class="Expl">Como consecuencia esto deshabilitará la elección de router designado y de backup.</p>
+
+            </div>
 
         </div>
 

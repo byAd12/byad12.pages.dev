@@ -1,4 +1,4 @@
-ACTIVE DIRECTORY - Nuevo contenido
+PACKET TRACER - Nuevo contenido
 
-# g/active_directory.html
-Nueva sección sobre scripts de inicio de sesión
+# g/packet_tracer.html
+Nueva sección sobre OSPF - todavía por completar
