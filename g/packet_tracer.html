@@ -63,7 +63,7 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">2. Diagnóstico y Verificación</h2>
                 <ul class="margin-left: 15px;">
-                    <li><b>Herramientas:</b> <a href="#Conectividad">Ping, SSH y Telnet</a></li>
+                    <li><b>Herramientas:</b> <a href="#Conectividad">Conectividad</a> • <a href="#Acceso_Remoto">Acceso remoto</a></li>
                     <li><b>Comandos Show:</b> <a href="#Comando_Show_Do">Uso de 'Do'</a> • <a href="#Verificacion_Sistema">Versión y Hardware</a></li>
                     <li><b>Tablas y Estado:</b> 
                         <a href="#Verificacion_Interfaces">Interfaces (IPs/Estado)</a> • 
@@ -310,36 +310,48 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Herramientas de Conectividad</h1>
+        <h1>Herramientas</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         
         <div class="parte1">
 
+            <div>
+                <h2 id="Conectividad">Herramientas de conectividad</h2>
 
-            <div id="AccesoRemoto">
-                <h2 id="Conectividad">Herramientas de Conectividad (Ping/SSH/Telnet)</h2>
+                <p>Se puede enviar un paquete ICMP a un host de destino para verificar si responde:</p>
+                <pre class="codigo" translate="no"><code class="cisco">ping &lt;IP_Destino&gt;</code></pre>
 
-                <p>Enviar un paquete ICMP a un host de destino para verificar si responde:</p>
-                <pre class="codigo" translate="no"><code class="cisco">ping &lt;IpDestino&gt;</code></pre>
+                <p>El siguiente comando permite identificar los routers que hay entre el origen y destino:</p>
+                <pre class="codigo" translate="no"><code class="cisco">traceroute &lt;IP_Destino&gt;</code></pre>
+                <p class="Expl">Para identificar estos routers envía el mismo paquete subiendo el <b>TTL</b> (Time To Live) cada vez.</p>
+                
+                <p>Este otro comando permiter ver los dispositivos Cisco que están conectados directamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show cdp neighbors</code></pre>
 
-                <p>Conectarnos mediante Secure Shell a un host remoto:</p>
-                <pre class="codigo" translate="no"><code class="cisco">ssh -l &lt;Usuario&gt; &lt;IpDestino&gt;</code></pre>
+            </div>
 
-                <p>Conectarnos mediante Telnet a un host remoto:</p>
-                <pre class="codigo" translate="no"><code class="cisco">telnet &lt;IpDestino&gt;</code></pre>
+            <div>
+                <h2 id="Acceso_Remoto">Herramientas de acceso remoto</h2>
+
+                <p>Para conectarse mediante Secure Shell a un host remoto:</p>
+                <pre class="codigo" translate="no"><code class="cisco">ssh -l &lt;Usuario&gt; &lt;IP_Destino&gt;</code></pre>
+
+                <p>Para conectarse mediante Telnet a un host remoto:</p>
+                <pre class="codigo" translate="no"><code class="cisco">telnet &lt;IP_Destino&gt;</code></pre>
 
                 <p>Nota - <b>TELNET</b> y <b>SSH</b>:</p>
                 <p class="Expl">Si en el router o switch que queremos conectarnos no tiene en las líneas <span class="span_contenido">vty 0 15</span> un <span class="span_contenido">password</span> y <span class="span_contenido">login</span>, el destino rechazará la conexión automáticamente.</p>
                 <p>⚠️ Nota - Problema de seguridad en <b>TELNET</b>:</p>
                 <p class="Expl">El tráfico de Telnet se envía en texto plano, incluyendo usuario y contraseña, lo que lo hace vulnerable a ataques <b>man-in-the-middle</b>. Demostración en Packet Tracer:</p>
                 <p class="Expl">1. Entra en el <span class="span_contenido">Command Prompt</span> de un PC e inicia una conexión:</p>
-                <pre class="codigo" translate="no"><code class="cisco">C:\> telnet (-l &lt;Usuario&gt;) &lt;IpDestino&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">C:\> telnet (-l &lt;Usuario&gt;) &lt;IP_Destino&gt;</code></pre>
                 <p class="Expl">2. Antes de ingresar la contraseña, cambia Packet Tracer de <span class="span_contenido">Realtime</span> a <span class="span_contenido">Simulation</span>.</p>
                 <p class="Expl">3. Se puede apreciar que por cada letra que tenga la contraseña se crea un paquete de parte del cliente. Abre a uno desde la sección <span class="span_contenido">Event List</span>.</p>
                 <p class="Expl">4. En la nueva ventana pasa al modo <span class="span_contenido">Outbound PDU Details</span> y baja hasta el apartado <span class="span_contenido">TELNET</span>. Se puede ver que en cada paquete se enseña la letra enviada:</p>
                 <pre class="codigo" translate="no"><code class="cisco">TELNET DATA:C</code></pre>
+
             </div>
 
         </div>

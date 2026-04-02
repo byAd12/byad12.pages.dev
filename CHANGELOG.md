@@ -1,4 +1,4 @@
-PACKET TRACER - Nuevo contenido
+PACKET TRACER - Mejora de contenido
 
 # g/packet_tracer.html
-Nueva sección sobre OSPF - todavía por completar
+Se separó la sección de herramientas y se añadieron nuevas
