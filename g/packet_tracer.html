@@ -141,7 +141,7 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">10. Enrutamiento dinámico</h2>
                 <ul>
-                    <li><b>OSPF:</b> <a href="#OSPF_Configuracion_Basica">Configuración básica</a> • <a href="#OSPF_Router_ID">Router ID</a> • <a href="#OSPF_Recargar_Configuración">Recargar la configuración</a> • <a href="#OSPF_Definir_Redes">Definir redes</a> • <a href="#OSPF_Eliminar_Redes">Eliminar redes</a> • <a href="#OSPF_Interfaz_Pasiva">Interfaz pasiva</a> • <a href="#OSPF_Tipo_Interfaz">Tipo de interfaz</a></li>
+                    <li><b>OSPF:</b> <a href="#OSPF_Configuracion_Basica">Configuración básica</a> • <a href="#OSPF_Router_ID">Router ID</a> • <a href="#OSPF_Recargar_Configuración">Recargar la configuración</a> • <a href="#OSPF_Definir_Redes">Definir redes</a> • <a href="#OSPF_Eliminar_Redes">Eliminar redes</a> • <a href="#OSPF_Interfaz_Pasiva">Interfaz pasiva</a> • <a href="#OSPF_Interfaz_Punto_A_Punto">Interfaz punto a punto</a> • <a href="#OSPF_Prioridad">Prioridad</a> • <a href="#OSPF_Ancho_Banda">Ancho de banda</a> • <a href="#OSPF_Verificacion">Verificación</a></li>
                 </ul>
             </div>
         </div>
@@ -2701,16 +2701,73 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Tipo_Interfaz">Asignar el tipo de interfaz</h2>
+                <h2 id="OSPF_Interfaz_Punto_A_Punto">Tipo de interfaz punto a punto</h2>
 
-                <p>Con el siguiente comando podremos ver el tipo de red detectado para una interfaz con la sección <span class="span_contenido">Network Type</span>:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
-                <p class="Expl">Se puede verificar el Router ID del router <u>designado</u> y de <u>backup</u> si la red es de tipo BROADCAST, además de que se eligen mediante interfaces Ethernet.</p>
-
-                <p>Si el tipo de red se detecta como BROADCAST pero en realidad es una red punto a punto al haber 2 routers, se puede cambiar mediante el siguiente comando:</p>
+                <p>Si el tipo de red se detecta como BROADCAST, pero en realidad se trata de un enlace <b>punto a punto</b>, se puede modificar manualmente con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf network point-to-point</code></pre>
-                <p class="Expl">Como consecuencia esto deshabilitará la elección de router designado y de backup.</p>
+                
+                <p>Al configurar la interfaz como point-to-point:</p>
+                <ul>
+                    <li>Se deshabilita la elección de DR y BDR.</li>
+                    <li>Se establece una adyacencia directa entre los dos routers.</li>
+                    <li>Se simplifica el proceso de OSPF en ese enlace.</li>
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Prioridad">Configuración de la prioridad de una interfaz</h2>
+
+                <p>Asignar una prioridad a una interfaz permite asignar manualmente qué routers será el DR o BDR según el que tenga una prioridad más alta.</p>
+                <p>Las prioridades van de <span class="span_contenido">1 - 255</span>, aunque la prioridad <span class="span_contenido">0</span> se usa para indicar que no debe ser nunca DR ni BDR:</p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf priority &lt;Prioridad&gt;</code></pre>
+
+                <p class="Expl">Después de cambiar la prioridad se debe reiniciar la configuración:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip ospf process</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Ancho_Banda">Configuración del ancho de banda</h2>
+
+                <p>En cada router del dominio OSPF se debe configurar el coste de ancho de banda si hay enlaces más rápidos que Fast Ethernet, ya que todos los costes por defecto es 100 Mbps y esto puede provocar que se prefieran otros enlaces en vez de los más rápidos como Gigabit.</p>
+
+                <p>Para cambiar este coste se debe usar el siguiente comando indicando el coste en Megabits por segundo, como por ejemplo "1000" si el ancho de banda es de 1 Gbps:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# auto-cost reference-bandwidth &lt;Velocidad_En_Mbps&gt;</code></pre>
+
+                <p>Con el siguiente comando se puede ver el coste de ancho de banda representado en Gbps:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
+
+                <p>La suma de todos los costes para llegar a una red en específico se puede ver directamente con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route | include &lt;Dirección_Red&gt;</code></pre>
+                <p class="Expl">Enseñará en la primera línea 2 números entre corchetes, como por ejemplo <span class="span_contenido">[110/11]</span>. El "11" indica ese coste total.</p>
+
+            </div>
+
+            <div>
+
+                <h2 id="OSPF_Verificacion">Comandos de verificación</h2>
+
+                <p>Con el siguiente comando podemos verificar la configuración de una interfaz en OSPF:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
+                <ul>
+                    <li>El tipo de red detectado - <span class="span_contenido">Network Type</span>.</li>
+                    <li>El rol del router en ese segmento: <span class="span_contenido">DR</span> (Designated Router), <span class="span_contenido">BDR</span> (Backup Designated Router) o <span class="span_contenido">DROTHER</span>.</li>
+                    <li>La prioridad del router en ese segmento - <span class="span_contenido">Priority</span>.</li>
+                    <li>La cantidad de vecinos, junto con sus Router ID y el estado de cada adyacencia.</li>
+                </ul>
+
+                <p>Para verificar las adyacencias de OSPF se puede utilizar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf neighbor</code></pre>
+                <p class="Expl">Por cada línea devolverá el router ID del vecino, prioridad, tiempo muerto, Dirección IP e Interfaz.</p>
+
 
             </div>
 
