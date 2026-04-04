@@ -1,4 +1,7 @@
-PACKET TRACER - Mejora de contenido
+PACKET TRACER - Mejora de contenido y arreglos
 
 # g/packet_tracer.html
-Se separó la sección de herramientas y se añadieron nuevas
+Nuevo contenido de OSPF
+Arreglos en el índice
+Mejor legibilidad de código
+Arreglos de ortografía
