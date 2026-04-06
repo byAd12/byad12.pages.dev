@@ -46,14 +46,14 @@ Código por byAd12
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1 Parte1Indice">
             <div>
                 <h2>Índice de Contenidos</h2>
 
                 <h2 style="margin: 20px;" class="IndiceH2">1. Introducción</h2>
                 <ul>
-                    <li><b>...:</b> <a href="#">...</a></li>
+                    <li><b>Básico:</b> <a href="#Ejemplo">Ejemplo</a> • <a href="#Para-que-sirve-xslt">¿Para qué sirve XSLT?</a> • <a href="#Vincular-documento-xml">Vincular el documento XML</a> • <a href="#Estructura">Estructura XSLT</a></li>
                 </ul>
 
             </div>
@@ -68,7 +68,103 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>...</h2>
+                <h2 id="Ejemplo">Ejemplo</h2>
+            
+                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Para-que-sirve-xslt">¿Para qué sirve XSLT?</h2>
+            
+                <p>XSLT es un lenguaje estandarizado por W3C para transformar documentos XML a otros formatos: HTML, PDF, CSV, etc.</p>
+
+                <p>Esta transformación en necesaria ya que XML solo guarda los datos y no se puede usar para leer ni imprimir sin antes haberlo transformado a un formato válido.</p>
+
+                <p>En esta transformación se usan las siguientes tecnologías:</p>
+                <ul>
+                    <li><b><a href="xpath.html">XPATH</a></b>: Para navegar entre los distintos elementos del documento XML.</li>
+                    <li><b>XSLT</b>: Para definir el modo de transformación del documento XML.</li>
+                    <li><b>XSL-FO</b>: Permite transformar un documento XML en otro documento que tenga un formato legible e imprimible.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="Vincular-documento-xml">Vincular el documento XML</h2>
+            
+                <p>
+                    Primero se deberá vincular el documento XML a la hoja XSL. 
+                    Para ello hay que añadir la siguiente línea en el <a href="xml.html#Estructura">prólogo</a> del documento XML:
+                </p>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml-stylesheet type="text/xsl" href="transformacion.xsl"?&gt;</code></pre>
+                <p class="Expl">Reemplace "transformacion.xsl" por la ruta relativa o absoluta de su hoja XSL.</p>
+
+            </div>
+
+            <div>
+                <h2 id="Estructura">Estructura XSLT</h2>
+            
+                <p>Las reglas de transformación XSLT se denominan hojas XSL almacenadas en ficheros de texto plano con extensión <span class="span_contenido">.xsl</span>.</p>
+
+                <p>Tipos de elementos:</p>
+                <ul>
+                    <li>Elementos <u>XSLT</u>: Definen las reglas de la transformación.</li>
+                    <li>Elementos <u>LRE</u>: Elementos literales que se replican en la transformación.</li>
+                    <li>Elementos de <u>extensión</u>: Son manejados por implementaciones concretas del procesador.</li>
+                </ul>
+
+                <p>Dentro de los Elementos XSLT hay:</p>
+                <ul>
+                    <li>Elemento <u>raíz</u>: Es el elemento <span class="span_contenido">stylesheet</span> o <span class="span_contenido">transform</span>.</li>
+                    <li>Elementos de <u>nivel superior</u>: Son hijos directos del elemento raíz.</li>
+                    <li><u>Instrucciones</u>: Están contenidas dentro de elementos de nivel superior.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="">Elemento raíz</h2>
+            
+                <p>El elemento <span class="span_contenido">stylesheet</span> engloba a todos los elementos de la hoja XSL:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;!-- Aquí se pondrán los elementos XSLT --&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+                <p class="Expl">
+                    <b>version</b>: Es importante indicar que sea "2.0".
+                    <br>
+                    <b>xmlns:xsl</b>: Es la declaración de un espacio de nombres "xsl" y normalmente se declara en la misma URL.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="">...</h2>
             
                 <p>...</p>
                 <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>

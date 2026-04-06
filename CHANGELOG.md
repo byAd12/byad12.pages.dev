@@ -1,4 +1,7 @@
-PACKET TRACER - Nuevo contenido
+Mejoras de estilos (LM) y nuevo contenido (XSLT)
 
-# g/packet_tracer.html
-Nuevo contenido de OSPF
+# g/markup_language.html, resources/blog.css
+Nuevas clases específicas para fijar el tamaño de los botones
+
+# g/xslt.html
+Nuevo contenido - sin completar
