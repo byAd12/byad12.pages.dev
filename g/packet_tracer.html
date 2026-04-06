@@ -2730,6 +2730,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Si el tipo de red se detecta como BROADCAST, pero en realidad se trata de un enlace <b>punto a punto</b>, se puede modificar manualmente con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf network point-to-point</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
                 
                 <p>Al configurar la interfaz como point-to-point:</p>
                 <ul>
@@ -2839,6 +2840,12 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
 
                 <h2 id="OSPF_Verificacion">Comandos de verificación</h2>
+
+                <p>Ver proceso de adyacencias en tiempo real:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># debug ip ospf adj</code></pre>
+                <p class="Expl">Para deshabilitarlo simplemente se añade la palabra "no" al principio del comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># no debug ip ospf adj</code></pre>
+
 
                 <p>Ver configuración OSPF de una interfaz específica:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
