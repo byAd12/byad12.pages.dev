@@ -153,7 +153,8 @@ Código por byAd12
                     <li>
                         <b>OSPF:</b> <a href="#OSPF_Configuracion_Basica">Configuración básica</a> • <a href="#OSPF_Router_ID">Router ID</a> • <a href="#OSPF_Recargar_Configuración">Recargar la configuración</a> • <a href="#OSPF_Definir_Redes">Definir redes</a> • 
                         <a href="#OSPF_Eliminar_Redes">Eliminar redes</a> • <a href="#OSPF_Interfaz_Pasiva">Interfaz pasiva</a> • <a href="#OSPF_Interfaz_Punto_A_Punto">Interfaz punto a punto</a> • <a href="#OSPF_Prioridad">Prioridad</a> • <a href="#OSPF_Ancho_Banda">Ancho de banda</a> • 
-                        <a href="#OSPF_Coste">Coste</a> • <a href="#OSPF_Intervalo_Paquetes">Intervalo de paquetes</a> • <a href="#OSPF_Propagar_Ruta_Predeterminada">Propagación de la ruta predeterminada</a> • <a href="#OSPF_Verificacion">Verificación</a>
+                        <a href="#OSPF_Coste">Coste</a> • <a href="#OSPF_Intervalo_Paquetes">Intervalo de paquetes</a> • <a href="#OSPF_Propagar_Ruta_Predeterminada">Propagación de la ruta predeterminada</a> • <a href="#OSPF_Verificacion">Verificación</a> •
+                        <a href="#OSPF_Diagnostico_Fallos">Diagnóstico de fallos</a>
                     </li>
                 </ul>
             </div>
@@ -2831,6 +2832,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">2. Se debe permitir la propagación por OSPF:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# default-information originate</code></pre>
+                <p class="Expl">⚠️ <b>Importante</b>: Suele ser necesario reiniciar Packet Tracer para que funcione correctamente.</p>
 
                 <p>Una vez configurado se debe poder ver en cada router una ruta predeterminada aprendida por OSPF con destino el router que lo propagó:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route ospf</code></pre>
@@ -2873,6 +2875,20 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Ver protocolos de enrutamiento activos:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip protocols</code></pre>
                 <p class="Expl">Permite ver el número de proceso OSPF, Router ID, interfaces involucradas y otra información de los protocolos de enrutamiento activos.</p>
+
+            </div>
+
+            <div>
+                <h2 id="OSPF_Diagnostico_Fallos">Diagnóstico de fallos</h2>
+
+                <p>1. El primer paso para descartar fallos es verificar que cada router tenga un Router ID y que sea <u>único</u>:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include router-id</code></pre>
+
+                <p>2. Hay que verificar que se hayan especificado las áreas correctas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include area</code></pre>
+
+                <p>3. Es importante comprobar que cada router detecte correctamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf neighbor</code></pre>
 
             </div>
 
