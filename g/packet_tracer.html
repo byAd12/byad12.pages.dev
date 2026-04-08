@@ -2677,17 +2677,19 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="OSPF_Definir_Redes">Definir redes</h2>
 
-                <p>Para definir las redes que se compartirán por OSPF tenemos 3 maneras diferentes de configurarlo:</p>
+                <p>Para definir las interfaces que se compartirán por OSPF tenemos 3 maneras diferentes de configurarlo:</p>
 
                 <p>1. <b>Por dirección de red</b>:</p>
 
                 <p class="Expl">Es importante definir la máscara de la dirección de red en formato <b>Wildcard</b>. Este formato resta <span class="span_url">255.255.255.255</span> a la máscara de red en formato punteado.</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route connected</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area &lt;ID_Área&gt;</code></pre>
 
                 <p>2. <b>Por la dirección IP de la interfaz</b>:</p>
 
                 <p class="Expl">Por cada interfaz de red ejecutaremos el siguiente comando especificando su dirección IP con máscara <span class="span_url">0.0.0.0</span>.</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief | include up</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_IP&gt; 0.0.0.0 area &lt;ID_Área&gt;</code></pre>
 
@@ -2721,6 +2723,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# passive-interface &lt;Interfaz&gt;</code></pre>
+
+                <p>Para quitar una interfaz del modo pasivo hay que añadir la palabra "no" al principio del comando:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# no passive-interface &lt;Interfaz&gt;</code></pre>
 
             </div>
 
@@ -2881,14 +2888,28 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="OSPF_Diagnostico_Fallos">Diagnóstico de fallos</h2>
 
-                <p>1. El primer paso para descartar fallos es verificar que cada router tenga un Router ID y que sea <u>único</u>:</p>
+                <p>1. El primer paso es verificar que el siguiente comando devuelva algo, indicando que OSPF está configurado:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip protocols</code></pre>
+
+                <p>2. En el mismo comando se puede comprobar que cada interfaz que tenga conexión a otro router no esté en modo pasivo.</p>
+
+                <p>3. Es necesario verificar que cada router tenga un Router ID y que sea <u>único</u>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | include router-id</code></pre>
 
-                <p>2. Hay que verificar que se hayan especificado las áreas correctas:</p>
+                <p>4. Hay que verificar que se hayan especificado las áreas correctas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | include area</code></pre>
 
-                <p>3. Es importante comprobar que cada router detecte correctamente:</p>
+                <p>5. Es importante comprobar que cada router detecte correctamente:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip ospf neighbor</code></pre>
+                <p class="Expl">El estado debe ser <span class="span_contenido">FULL</span>. Si es <span class="span_error">INIT</span> o <span class="span_error">EXSTART</span> puede deberse a problemas de MTU o parámetros.</p>
+
+                <p>6. Con el siguiente comando se puede verificar que todas las interfaces necesarias estén en OSPF:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface brief</code></pre>
+
+                <p>7. Como se explicó en <a href="#OSPF_Intervalo_Paquetes">Intervalo de paquetes: <span>Hello</span> y <span>Dead</span></a>, si los timers son diferentes entre vecinos se perderá la adyacencia:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface</code></pre>
+
+                <p>8. En el mismo comando se puede comprobar que el tipo de red sea BROADCAST o POINT-TO-POINT según el caso que sea, además que el coste y estado sean los correctos.</p>
 
             </div>
 
