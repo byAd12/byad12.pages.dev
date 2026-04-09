@@ -560,7 +560,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco"># config t</code></pre>
 
                 <p>Podemos configurar un puerto de switch o una interfaz de red de router (solo si entramos en config anteriormente):</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt; &lt;Número_Interfaz&gt;</code></pre>
                 <p class="Expl"><b>Interfaz</b> y <b>Número</b>: Podemos especificar un nombre completo como <span class="span_contenido">FastEthernet0/1</span> o su abreviatura como <span class="span_contenido">fa0/3</span>. 0/3 Significa que de la interfaz 0, se elige el puerto 3.</p>
                 
                 <p>Podemos asignar una descripción a cada interfaz:</p>
@@ -595,7 +595,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
 
                 <p>Podemos asignar a una interfaz una IPv4 mediante:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt; &lt;Número_Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IPv4&gt; &lt;Máscara&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
                 <p class="Expl">
@@ -603,7 +603,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 </p>
 
                 <p>O además una IPv6:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;&lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt; &lt;Número_Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 address &lt;IPv6/Máscara&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
                 <p>Si se trata de una dirección IPv6 LLA <span class="span_url">fe80::/10</span> se modifica el comando a:</p>
@@ -1981,7 +1981,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 dhcp relay destination &lt;Direccion_IPv6&gt; [&lt;Tipo_Interfaz&gt; &lt;Interfaz&gt;]</code></pre>
 
-                <p>Podemos verificarlo con le siguiente comando:</p>
+                <p>Podemos verificarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ipv6 dhcp interface &lt;Interfaz&gt; is in relay mode</code></pre>
 
             </div>
@@ -2429,7 +2429,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <span class="span_contenido">115</span> (IS-IS),
                     <span class="span_contenido">120</span> (RIP),
                     <span class="span_contenido">170</span> (EIGRP externo),
-                    <span class="span_contenido">200</span> (BGP interno),
+                    <span class="span_contenido">200</span> (BGP interno).
                 </p>
 
             </div>
