@@ -2975,21 +2975,29 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="OSPF_Multiarea_Configuracion">Configuración</h2>
 
                 <p>1. En cada router de la red hay que configurar el <a href="#OSPF_Configuracion_Basica">mismo ID de proceso</a> junto a un <a href="#OSPF_Router_ID">Router ID</a> único:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# router-id &lt;Dirección_IPv4_Única&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# router-id &lt;Dirección_IPv4_Única&gt;</code></pre>
 
-                <p>2. En el <u>router de borde de área</u> (ABR) hay que configurar sus áreas conectadas junto al área 0:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area 0
-(config-router)# network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area &lt;ID_Área_Conectada&gt;
+                <p>2. En los routers de área hay que configurar las redes del área en el que se sitúan:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;
 ...</code></pre>
-
-                <p>3. En los routers de área hay que configurar las redes del área en el que se sitúan:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt; area &lt;ID_Área_Conectada&gt;
+                
+                <p>3. En el <u>router de borde de área</u> (ABR) hay que configurar sus áreas conectadas además de la área 0:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;
 ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# ip ospf &lt;Número_Proceso&gt; area 0</code></pre>
 
-                <p>4. La <u>sumarización</u> se utiliza para que un área publique una sola ruta consolidada hacia las demás áreas, reduciendo el tamaño de las tablas de enrutamiento. Se configura dentro del proceso OSPF:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# area &lt;ID_Área_Origen&gt; range &lt;IP_Red_Sumarizada&gt; &lt;Máscara_Subred&gt;</code></pre>
-                <p class="Expl"><u>Nota</u>: Se debe especificar el ID del área donde residen originalmente las subredes antes de ser enviadas al resto de la red.</p>
+                <p>4. La <u>sumarización</u> se utiliza para que un área publique una sola ruta consolidada hacia las demás áreas, reduciendo el tamaño de las tablas de enrutamiento:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# area &lt;ID_Área_Origen&gt; range &lt;IP_Red_Sumarizada&gt; &lt;Máscara_Subred&gt;</code></pre>
+                <p class="Expl">
+                    <b>ID_Área_Origen</b>: Es el ID del área donde residen originalmente las subredes antes de ser enviadas al resto de la red.
+                    <br>
+                    <b>IP_Red_Sumarizada</b>: Es la dirección de red del conjunto de IPs que engloban a toda o gran parte del área.
+                </p>
 
                 <p>5. Por último, hay que realizar una <a href="#OSPF_Verificacion">verificación de la conectividad</a> con sus routers vecinos y las rutas aprendidas por OSPF.</p>
 
