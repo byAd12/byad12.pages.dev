@@ -1,7 +1,4 @@
-Cambio de URLs (index), Mejora de contenido (packet tracer)
-
-# index.html
-Cambio de URLs en metadatos
+Nuevo contenido (packet tracer)
 
 # g/packet_tracer.html
-Nuevo contenido en la sección de OSPF - Diagnóstico de fallos
+Nuevo contenido en la sección de OSPF - OSPF Multiárea
