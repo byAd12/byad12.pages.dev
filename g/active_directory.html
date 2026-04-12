@@ -587,7 +587,28 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+            
+                <p>1. Primero configuraremos como DNS del cliente la IP del servidor / controlador de dominio.</p>
+
+                <p>2. En la sección "Cambios en el dominio o nombre de equipo" asignaremos un nombre de equipo identificativo y especificaremos el nombre de dominio del servidor.</p>
+                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido">administrator</span> y su contraseña asignada.</p>
+
+                <p>3. Reiniciaremos el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
+            </div>
+        
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 style="color: red !important;">SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
                 <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
 
@@ -647,14 +668,44 @@ ldap_user_gid_number = gidNumber</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2 style="color: red !important;">Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
-                <p>1. Primero configuraremos como DNS del cliente la IP del servidor / controlador de dominio.</p>
+                <p>Primero editamos el fichero de configuración de samba:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
+                <p class="Expl">Y añadimos en la sección <span class="span_contenido">[global]</span> las siguientes líneas:</p>
+                <pre class="codigo" translate="no"><code class="bash">vfs objects = acl_xattr
+map acl inherit = yes
+store dos attributes = yes</code></pre>
 
-                <p>2. En la sección "Cambios en el dominio o nombre de equipo" asignaremos un nombre de equipo identificativo y especificaremos el nombre de dominio del servidor.</p>
-                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido">administrator</span> y su contraseña asignada.</p>
+            </div>
+        
+        </div>
 
-                <p>3. Reiniciaremos el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 style="color: red !important;">Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h2>
+
+                <p>Este permiso permite modificar las ACLs de los recursos compartidos.</p>
+            
+                <p>Tendremos que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant "Nombre_Grupo_A_Otorgar" SeDiskOperatorPrivilege -U administrator</code></pre>
+
+                <p>Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
+
+                <p>Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
+                <pre class="codigo" translate="no"><code class="bash">[nome_recurso]
+    path = /ruta_recurso
+    read only = no</code></pre>
+
             </div>
         
         </div>
