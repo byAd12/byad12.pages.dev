@@ -328,7 +328,10 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
                 <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
-                <p class="Expl">Esto se debe realizar porque <span class="span_url">.local</span> se intenta resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
+                <p class="Expl">Esto se debe realizar porque los dominios <span class="span_url">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
+                <p class="Expl">Además, debemos añadir al final de las siguientes líneas la palabra <span class="Expl">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd winbind
+group:          files systemd winbind</code></pre>
 
                 <br>
                 <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
@@ -469,8 +472,8 @@ Código por byAd12
                 <p class="Expl">8.4. Reiniciaremos el servicio de winbind:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
 
-                <p class="Expl">8.5. Listaremos la información de winbind, que debería listar los usuarios de Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">wbinfo -u</code></pre>
+                <p class="Expl">8.. Listaremos la información de winbind, que debería listar los usuarios de Windows:</p>
+                <pre class="codigo5" translate="no"><code class="bash">wbinfo -u</code></pre>
 
                 <p class="Expl">8.6. Deberíamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_windows&gt;</code></pre>
