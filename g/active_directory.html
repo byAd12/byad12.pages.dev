@@ -329,7 +329,7 @@ Código por byAd12
                 <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
                 <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
                 <p class="Expl">Esto se debe realizar porque los dominios <span class="span_url">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
-                <p class="Expl">Además, debemos añadir al final de las siguientes líneas la palabra <span class="Expl">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
+                <p class="Expl">Además, debemos añadir al final de las siguientes líneas la palabra <span class="span_contenido">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd winbind
 group:          files systemd winbind</code></pre>
 
