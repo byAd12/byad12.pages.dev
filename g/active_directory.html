@@ -319,7 +319,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
                 <p>Con los siguientes pasos en un cliente Linux podemos meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
@@ -481,13 +481,13 @@ group:          files systemd winbind</code></pre>
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
                 <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
-                <p class="Expl">Tendremos el error de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
+                
+                <p class="Expl"><u>Importante</u>: Tendremos el <b>error</b> de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">pam_auth_update</code></pre>
                 <p class="Expl">Hay que seleccionar la opción "Create home directory on login". Después podemos probar a iniciar sesión de nuevo y verificar que la carpeta se crea localmente.</p>
 
-                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> se aplicó al usuario de Windows:</p>
+                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
-                <p class="Expl">Debe aparecer la configuración de UID, carpeta /home y shell que se configuró en samba.</p>
 
             </div>
 
@@ -503,7 +503,13 @@ group:          files systemd winbind</code></pre>
             <div>
                 <h2>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
-                <p>1. Primero se instalarán los paquetes necesarios:</p>
+                <p>
+                    Este proceso equivale a la <b>"Carpeta particular"</b> o <b>"Unidad de red"</b> en Windows. 
+                    Permite que el usuario acceda a sus archivos alojados en el servidor desde el cliente Linux, definiendo un punto de montaje local para la carpeta compartida del dominio.
+                </p>
+
+                <br>
+                <p>1. Primero hay que instalar los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-mount cifs-utils</code></pre>
 
@@ -517,7 +523,7 @@ group:          files systemd winbind</code></pre>
                 <p class="Expl">Justo después de esa línea añadiremos nuevas etiquetas "volume" por cada carpeta a montar:</p>
                 <pre class="codigo" translate="no"><code class="xml">&lt;volume
     fstype="cifs"
-    server="servidor_win.adrian.local"
+    server="hostname_servidor.dominio.tld"
     path="nombre_recurso_compartido"
     mountpoint="~/ruta_montar_localmente"
     sgrp="nombre_grupo_permitido"
@@ -556,20 +562,80 @@ group:          files systemd winbind</code></pre>
                         </tr>
 
                     </table>
+
                 </div>
 
                 <br>
-                <p class="Expl">En caso de querer montar una carpeta cuyo nombre sea el del usuario que la monta podemos usar la variable <span class="span_contenido">%(USER)</span>, como por ejemplo:</p>
-                <pre class="codigo" translate="no"><code class="xml">&lt;volume
-    ...
-    path="nombre_recurso_compartido/%(USER)"
-    ...
-/&gt;</code></pre>
 
-                <p class="Expl">Hay otro tipo de variables que se pueden ver ejecutando el siguiente comando:</p>
+                <p class="Expl">
+                    Para situarse dentro de la carpeta personal del usuario se puede usar <span class="span_contenido">~</span> o una ruta absoluta usando variables como <span class="span_contenido">%(USER)</span> o <span class="span_contenido">%(DOMAIN)</span>.
+                    Hay más variables que se pueden ver con el siguiente comando:
+                </p>
                 <pre class="codigo" translate="no"><code class="bash">man pam_mount.conf</code></pre>
+
             </div>
 
+        </div>
+
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+            
+                <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
+
+                <br>
+                <p>1. En el cliente hay que instalar los paquetes necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit</code></pre>
+
+                <br>
+                <p>2. Ahora hay que comprobar que el dominio del servidor sea visible desde el cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">realm discovery &lt;nombre_dominio&gt;,&lt;tld&gt;</code></pre>
+
+                <br>
+                <p>3. Nos uniremos al dominio mediante el usuario Administrador. Para ello ejecutaremos el siguiente comando e ingresaremos la contraseña que pida:</p>
+                <pre class="codigo" translate="no"><code class="bash">realm join &lt;nombre_dominio&gt;,&lt;tld&gt; -U administrador</code></pre>
+
+                <br>
+                <p>4. Después de unirnos al dominio, deberiamos ser capaces de ver la información de un usuario del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
+
+                <br>
+                <p>5. Es importante quitar o comentar en el siguiente fichero una línea que dice <span class="span_contenido">services = nss, pam</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
+
+                <p class="Expl">Además, en el mismo archivo hay que poner el valor de la siguiente línea en <span class="span_contenido">false</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">use_fully_qualified_names = false</code></pre>
+
+                <br>
+                <p><u>Opcional</u>: Se puede indicar en SSSD que se quiere usar UIDs y GIDs personalizados del servidor. Para ello hay que editar el siguiente archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
+
+                <p class="Expl">Deshabilitamos la siguiente línea poniendo como valor en <span class="span_contenido">false</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldap_id_mapping = false</code></pre>
+
+                <p class="Expl">Y se añaden las siguientes líneas en la sección <span class="span_contenido">domain/Tu_Dominio</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldap_user_uid_number = uidNumber
+ldap_user_gid_number = gidNumber</code></pre>
+
+                <p class="Expl">Una vez configurado guardamos el archivo y eliminamos los UIDs y GIDs ya generados con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">rm -rf /var/lib/sss/db/*</code></pre>
+
+                <p class="Expl">Y por último reiniciamos el servicio de SSSD:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart sssd</code></pre>
+
+                <p class="Expl">Para comprobar que los usuarios cojan los UIDs correctos se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
+
+            </div>
+        
         </div>
 
         <!-- ......................................................... -->
@@ -581,7 +647,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/windows.png"></h2>
+                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
             
                 <p>1. Primero configuraremos como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
