@@ -1,4 +1,4 @@
-Nuevo contenido (packet tracer)
+Modificación de contenido (nis)
 
-# g/packet_tracer.html
-Nuevo contenido en la sección de OSPF - OSPF Multiárea
+# g/nis.html
+Se eliminó el enlace a uns cript innecesario
