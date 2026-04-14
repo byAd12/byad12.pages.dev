@@ -112,6 +112,7 @@ p.Expl, .codigo, ul{margin-left: 30px;}
 ul li, ol li{color: #d0d0d0; font-weight: 400;}
 ol{margin-left: 3%;}
 .LiSinPunto{list-style: none;}
+ul.Expl{margin-left: 60px; width: calc(100% - 60px);}
 
 /* =================================================== */
 /* Tablas */

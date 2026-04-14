@@ -92,12 +92,15 @@ Código por byAd12
                 <br>
                 <p>7. Con el siguiente comando interactivo generaré una configuración de SAMBA:</p>
                 <pre class="codigo" translate="no"><code class="bash">samba-tool domain provision --use-rfc2307 --interactive</code></pre>
-                <p class="Expl">En "Realm" tiene que poner el nombre de dominio en mayúsculas.</p>
-                <p class="Expl">En "Domain" tiene que poner el nombre de dominio sin el TLD y en mayúsculas.</p>
-                <p class="Expl">En "Server Role" debe estar en <span class="span_contenido">dc</span> (Domain Controller).</p>
-                <p class="Expl">En "DNS Backend" se dejará como <span class="span_contenido">SAMBA_INTERNAL</span>.</p>
-                <p class="Expl">En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url">1.1.1.1</span>.</p>
-                <p class="Expl">Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</p>
+
+                <ul>
+                    <li>En "Realm" tiene que poner el nombre de dominio en mayúsculas.</li>
+                    <li>En "Domain" tiene que poner el nombre de dominio sin el TLD y en mayúsculas.</li>
+                    <li>En "Server Role" debe estar en <span class="span_contenido">dc</span> (Domain Controller).</li>
+                    <li>En "DNS Backend" se dejará como <span class="span_contenido">SAMBA_INTERNAL</span>.</li>
+                    <li>En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url">1.1.1.1</span>.</li>
+                    <li>Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</li>
+                </ul>
 
                 <br>
                 <p>8. Ahora verificaremos que la configuración sea la correcta:</p>
@@ -340,9 +343,9 @@ group:          files systemd winbind</code></pre>
                 <p class="Expl">No va a funcionar hacer ping sin especificar en dominio ya que no hay ningún dominio de búsqueda configurado para añadir ese dominio automáticamente a la consulta.</p>
 
                 <br>
-                <p>3. Ahora configuraremos el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comando:</p>
+                <p>3. Ahora configuraremos el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comandom pero usando <u>un usuario diferente a root</u> ya que este no tiene permisos de modificar la interfaz gráfica:</p>
                 <pre class="codigo" translate="no"><code class="bash">nm-connection-editor</code></pre>
-                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4"  y añadir <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
+                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4" y añadir <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
                 <p class="Expl">Para verificarlo realizaremos una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;</code></pre>
                 <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
@@ -365,6 +368,7 @@ group:          files systemd winbind</code></pre>
                 <p>6. Ahora instalaremos los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
+                <p class="Expl">En caso que pida el nombre del reino de KRB5 hay que poner el nombre del dominio incluyendo el TLD.</p>
                 <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
                 
@@ -373,19 +377,23 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Ahora nos dirigiremos a una sección <span class="span_contenido">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
 
+                <br>
                 <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
                 <p class="Expl">Hay que poner el nombre de dominio en mayúsculas y sin el TLD, por ejemplo como "CICLO" si el dominio fuera "ciclo.local":</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = &lt;dominio_sin_tld_y_mayusculas&gt;</code></pre>
 
+                <br>
                 <p class="Expl">7.2. Debajo de "workgroup" añadiremos la siguiente línea, especificando el nombre de dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">realm = &lt;nombre_dominio&gt;.&lt;dominio_tld&gt;</code></pre>
 
+                <br>
                 <p class="Expl">7.3. Reemplazaremos el valor de la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">server role = standalone server</code></pre>
                 <p class="Expl">Por este otro valor, definiendo que el equipo actuará como miembro y no servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">server role = member server</code></pre>
 
+                <br>
                 <p class="Expl">7.4. A continuación tendremos que localizar un bloque de configuración de <span class="span_contenido">idmap</span> en la sección <span class="span_contenido">[GLOBAL]</span>, que es parecido a lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="ini">;   idmap config * :              backend = tdb
 ;   idmap config * :              range   = 3000-7999
@@ -451,33 +459,43 @@ group:          files systemd winbind</code></pre>
                 </div>
 
 
+                <br>
                 <p class="Expl">7.5. Guardamos el archivo y salimos del editor de texto.</p>
 
                 <br>
                 <p>8. Ahora hay que unir el cliente al dominio:</p>
 
+                <br>
                 <p class="Expl">8.1. Listaremos la información del dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads info</code></pre>
                 <p class="Expl">En caso de que de un error, hay que verificar que el paso anterior esté hecho correctamente.</p>
 
+                <br>
                 <p class="Expl">8.2. Intentaremos unir el cliente al dominio mediante el usuario y contraseña del Administrador del servidor Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
-                <p class="Expl">Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido">/etc/hosts</span>.</p>
-                <p class="Expl">Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor.</p>
-                <p class="Expl">Si permite unirse al dominio, podremos ver el equipo en la sección "Computers" del servidor de Windows.</p>
+                <ul class="Expl">
+                    <li>Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido">/etc/hosts</span>.</li>
+                    <li>Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.</li>
+                    <li>Si permite unirse al dominio, podremos ver el equipo en la sección "Computers" del servidor de Windows.</li>
+                </ul>
 
+                <br>
                 <p class="Expl">8.3. Listaremos la información del dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads info</code></pre>
 
+                <br>
                 <p class="Expl">8.4. Reiniciaremos el servicio de winbind:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
 
+                <br>
                 <p class="Expl">8.5. Listaremos la información de winbind, que debería listar los usuarios de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">wbinfo -u</code></pre>
 
+                <br>
                 <p class="Expl">8.6. Deberíamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_windows&gt;</code></pre>
 
+                <br>
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
                 <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
@@ -486,6 +504,7 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">pam_auth_update</code></pre>
                 <p class="Expl">Hay que seleccionar la opción "Create home directory on login". Después podemos probar a iniciar sesión de nuevo y verificar que la carpeta se crea localmente.</p>
 
+                <br>
                 <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
 
@@ -608,7 +627,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 style="color: red !important;">SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
                 <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
 
@@ -668,7 +687,7 @@ ldap_user_gid_number = gidNumber</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 style="color: red !important;">Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
                 <p>Primero editamos el fichero de configuración de samba:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
@@ -691,17 +710,19 @@ store dos attributes = yes</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 style="color: red !important;">Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h2>
+                <h2>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h2>
 
-                <p>Este permiso permite modificar las ACLs de los recursos compartidos.</p>
+                <p>Este permiso permite modificar las ACLs de los recursos compartidos por un servidor Linux desde un equipo Windows.</p>
             
-                <p>Tendremos que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant "Nombre_Grupo_A_Otorgar" SeDiskOperatorPrivilege -U administrator</code></pre>
+                <br>
+                <p>1. Tendremos que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant &lt;Nombre_Grupo_A_Otorgar&gt; SeDiskOperatorPrivilege -U administrator</code></pre>
 
-                <p>Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
+                <p class="Expl">Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
 
-                <p>Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
+                <br>
+                <p>2. Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
                 <pre class="codigo" translate="no"><code class="bash">[nome_recurso]
     path = /ruta_recurso
     read only = no</code></pre>
