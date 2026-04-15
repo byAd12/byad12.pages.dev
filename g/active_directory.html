@@ -536,6 +536,9 @@ group:          files systemd winbind</code></pre>
                 <p>2. Ahora editaremos el archivo de configuración de pam_mount:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/security/pam_mount.conf.xml</code></pre>
 
+                <p class="Expl">Antes de nada hay que cambiar el siguiente parámetro de <span class="span_error" translate="no">0</span> a <span class="span_contenido" translate="no">1</span> para que las carpetas de destino se creen automáticamente:</p>
+                <pre class="codigo" translate="no"><code class="bash">&lt;mkmountpoint enable="1" /&gt;</code></pre>
+
                 <p class="Expl">Ahora nos dirigiremos a la sección del archivo con el siguiente comentario en XML:</p>
                 <pre class="codigo" translate="no"><code class="bash">&lt;!-- Volume definitions --&gt;</code></pre>
 
