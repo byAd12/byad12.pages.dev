@@ -156,7 +156,7 @@ Código por byAd12
 
                 <h2 id="elementos-opciones">Elementos &gt; Opciones</h2>
 
-                <p>1. Podemos decir que el contenido de una etiqueta puede no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
+                <p>1. Podemos decir que el contenido de una etiqueta puede no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido" translate="no">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA)&gt;</code></pre>
                 <p class="Expl">Solo daría error si se ponen sub-etiquetas dentro.</p>
 
@@ -200,15 +200,15 @@ Código por byAd12
             <div>
                 <h2 id="elementos-cardinalidades">Elementos &gt; Cardinalidades</h2>
 
-                <p>Con el símbolo <span class="span_contenido">?</span> podemos definir una cardinalidad de <span class="span_url">0-1</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">?</span> podemos definir una cardinalidad de <span class="span_url" translate="no">0-1</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1?)&gt;</code></pre>
                 <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o solo una.</p>
 
-                <p>Con el símbolo <span class="span_contenido">+</span> podemos definir una cardinalidad de <span class="span_url">1-n</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">+</span> podemos definir una cardinalidad de <span class="span_url" translate="no">1-n</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1+)&gt;</code></pre>
                 <p class="Expl">Sería válido poner mínimo una etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
 
-                <p>Con el símbolo <span class="span_contenido">*</span> podemos definir una cardinalidad de <span class="span_url">0-n</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">*</span> podemos definir una cardinalidad de <span class="span_url" translate="no">0-n</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1*)&gt;</code></pre>
                 <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
 
@@ -220,7 +220,7 @@ Código por byAd12
 
                 <p>En el siguiente caso se elige entre &lt;etiqueta1&gt; o &lt;etiqueta2&gt; y de la elección se puede poner ninguna o solo una vez:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2)?, ...)&gt;</code></pre>
-                <p class="Expl">En vez de <span class="span_contenido">?</span> se puede poner las otras 2 cardinalidades posibles como <span class="span_contenido">+</span> o <span class="span_contenido">*</span> y lo que cambiaría sería la cantidad de veces que se pueda poner la etiqueta elegida.</p>
+                <p class="Expl">En vez de <span class="span_contenido" translate="no">?</span> se puede poner las otras 2 cardinalidades posibles como <span class="span_contenido" translate="no">+</span> o <span class="span_contenido" translate="no">*</span> y lo que cambiaría sería la cantidad de veces que se pueda poner la etiqueta elegida.</p>
 
                 <p>En el siguiente caso se puede poner &lt;etiqueta1&gt; y &lt;etiqueta2&gt; (en ese orden) la cantidad de veces que la cardinalidad lo permita. <u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2)+, ...)&gt;</code></pre>
@@ -272,42 +272,42 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1 | valor2 | ...) predefinido&gt;</code></pre>
                 <p class="Expl">En el ejemplo se define que un &lt;elemento&gt; tenga solo como valores válidos "valor1" y "valor2".</p>
 
-                <p>2. Que tenga una <u>cadena de caracteres</u> o ningún valor - <span class="span_contenido">CDATA</span> (Parsed Character Data).</p>
+                <p>2. Que tenga una <u>cadena de caracteres</u> o ningún valor - <span class="span_contenido" translate="no">CDATA</span> (Parsed Character Data).</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo CDATA predefinido&gt;</code></pre>
                 <p class="Expl">Dentro del atributo sí se permite el uso de caracteres reservados de XML.</p>
 
-                <p>3. Que tenga una <u>cadena de caracteres</u> que cumpla con las reglas de nombres de XML - <span class="span_contenido">NMTOKEN</span> (Name Token).</p>
+                <p>3. Que tenga una <u>cadena de caracteres</u> que cumpla con las reglas de nombres de XML - <span class="span_contenido" translate="no">NMTOKEN</span> (Name Token).</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo NMTOKEN predefinido&gt;</code></pre>
                 <p class="Expl">Dentro del atributo <b>no</b> se permite el uso de espacios ni de ningún símbolo reservado.</p>
 
-                <p>4. Que tenga una <u>lista</u> de varios <span class="span_contenido">NMTOKEN</span> separados por espacios - <span class="span_contenido">NMTOKENS</span>.</p>
+                <p>4. Que tenga una <u>lista</u> de varios <span class="span_contenido" translate="no">NMTOKEN</span> separados por espacios - <span class="span_contenido" translate="no">NMTOKENS</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo NMTOKENS predefinido&gt;</code></pre>
 
-                <p>5. Que sea un <u>identificador único</u> para cada elemento - <span class="span_contenido">ID</span>.</p>
+                <p>5. Que sea un <u>identificador único</u> para cada elemento - <span class="span_contenido" translate="no">ID</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo ID predefinido&gt;</code></pre>
                 <p class="Expl">
                     <b>Reglas</b>:
                     <br>
                     1. Cada elemento solo puede tener un atributo de tipo ID. 
                     <br>
-                    2. El valor predefinido solo puede ser <span class="span_contenido">#IMPLIED</span> o <span class="span_contenido">#REQUIRED</span>.
+                    2. El valor predefinido solo puede ser <span class="span_contenido" translate="no">#IMPLIED</span> o <span class="span_contenido" translate="no">#REQUIRED</span>.
                     <br>
-                    3. La primera letra del valor debe ser una letra o un <span class="span_contenido">_</span>.
+                    3. La primera letra del valor debe ser una letra o un <span class="span_contenido" translate="no">_</span>.
                     <br>
                     4. El valor del ID no debe repetirse en otros IDs.
                 </p>
 
-                <p>6. Que sea una <u>referencia a identificador</u> único existente - <span class="span_contenido">IDREF</span>.</p>
+                <p>6. Que sea una <u>referencia a identificador</u> único existente - <span class="span_contenido" translate="no">IDREF</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREF predefinido&gt;</code></pre>
                 <p class="Expl">
                     <b>Reglas</b>:
                     <br>
                     1. Dará error de validación si no hay un atributo ID con ese valor. 
                     <br>
-                    2. El valor predefinido solo puede ser <span class="span_contenido">#IMPLIED</span> o <span class="span_contenido">#REQUIRED</span>.
+                    2. El valor predefinido solo puede ser <span class="span_contenido" translate="no">#IMPLIED</span> o <span class="span_contenido" translate="no">#REQUIRED</span>.
                 </p>
 
-                <p>7. Es una lista de varios IDREF separados por espacios - <span class="span_contenido">IDREFS</span>.</p>
+                <p>7. Es una lista de varios IDREF separados por espacios - <span class="span_contenido" translate="no">IDREFS</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo IDREFS predefinido&gt;</code></pre>
                 <p class="Expl">Los valores que contengan tienen que existir en otros atributos ID del documento XML.</p>
                 <p class="Expl">
@@ -315,27 +315,27 @@ Código por byAd12
                     <br>
                     1. Dará error de validación si no hay un atributo ID uno de los valores de la lista. 
                     <br>
-                    2. El valor predefinido solo puede ser <span class="span_contenido">#IMPLIED</span> o <span class="span_contenido">#REQUIRED</span>.
+                    2. El valor predefinido solo puede ser <span class="span_contenido" translate="no">#IMPLIED</span> o <span class="span_contenido" translate="no">#REQUIRED</span>.
                     <br><br>
                     Puede referenciar por ejemplo a varios elementos &lt;pais&gt; donde cada uno tenga un ID con una abreviatura de su nombre.
                     En IDREFS se podría poner "es fr gl" haciendo referencia a varios paises en un solo elemento.
                 </p>
-                <p>8. Que sea la <u>representación</u> de una entidad externa - <span class="span_contenido">ENTITY</span>.</p>
-                <p>9. Que sea una <u>lista</u> de varias representaciones de una entidad externa - <span class="span_contenido">ENTITIES</span>.</p>
-                <p>10. Que sea el <u>nombre de una notación</u> - <span class="span_contenido">NOTATION</span>.</p>
+                <p>8. Que sea la <u>representación</u> de una entidad externa - <span class="span_contenido" translate="no">ENTITY</span>.</p>
+                <p>9. Que sea una <u>lista</u> de varias representaciones de una entidad externa - <span class="span_contenido" translate="no">ENTITIES</span>.</p>
+                <p>10. Que sea el <u>nombre de una notación</u> - <span class="span_contenido" translate="no">NOTATION</span>.</p>
 
             </div>
 
             <div>
                 <h2 id="atributos-valores-modificadores">Atributos &gt; Valores / Modificadores</h2>
 
-                <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido">#IMPLIED</span>:</p>
+                <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido" translate="no">#IMPLIED</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
 
-                <p>O requerido / obligatorio - <span class="span_contenido">#REQUIRED</span>:</p>
+                <p>O requerido / obligatorio - <span class="span_contenido" translate="no">#REQUIRED</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #REQUIRED&gt;</code></pre>
 
-                <p>Además se puede definir un valor fijo - <span class="span_contenido">#FIXED "valor"</span>:</p>
+                <p>Además se puede definir un valor fijo - <span class="span_contenido" translate="no">#FIXED "valor"</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #FIXED "valor_fijo"&gt;</code></pre>
                 <p class="Expl">El valor es sensible a mayúsculas y, si no coincide exactamente con lo definido, dará un error en la validación.</p>
 
@@ -373,7 +373,7 @@ Código por byAd12
                 <br>
                 <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">predefinidas</span> por XML</b>:</p>
 
-                <p>En la guía sobre <a href="xml.html">XML</a> se trata el uso de entidades predefinidas, como por ejemplo <span class="span_contenido"><span>&amp;lt;</span></span>, que tiene como valor <span class="span_contenido">&lt;</span>.</p>
+                <p>En la guía sobre <a href="xml.html">XML</a> se trata el uso de entidades predefinidas, como por ejemplo <span class="span_contenido" translate="no">&amp;lt;</span>, que tiene como valor <span class="span_contenido" translate="no">&lt;</span>.</p>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -422,7 +422,7 @@ Código por byAd12
 
                 <p>Ejemplo de una entidad personalizada:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd "Document Type Definition"&gt;</code></pre>
-                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url"><span>&<b></b>dtd;</span></span> y este devolverá el valor <span class="span_url">Document Type Definition</span>.</p>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el valor <span class="span_url" translate="no">Document Type Definition</span>.</p>
                 <p class="Expl">En el editor no aparecerá el valor, sino cuando se procese el documento como por ejemplo en un navegador.</p>
             </div>
 
@@ -447,7 +447,7 @@ Código por byAd12
 
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd SYSTEM "descripcion.txt"&gt;</code></pre>
-                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo <span class="span_url">descripcion.txt</span>.</p>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo <span class="span_url" translate="no">descripcion.txt</span>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -467,7 +467,7 @@ Código por byAd12
 
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd PUBLIC "-//W3C//TEXT dtd//EN" "https://byad12.pages.dev/robots.txt"&gt;</code></pre>
-                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo alojado en la URI asignada.</p>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo alojado en la URI asignada.</p>
 
             </div>
 
@@ -490,7 +490,7 @@ Código por byAd12
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
-                <p class="Expl">Podemos llamar a una entidad mediante <span class="span_url"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
+                <p class="Expl">Podemos llamar a una entidad mediante <span class="span_url" translate="no"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % str "(#PCDATA)"&gt;
 &lt;!ELEMENT nombre_elemento %str;&gt;</code></pre>
                 <p class="Expl">También podemos evitar escribir nombres de elementos largos y reemplazarlos por una entidad:</p>
@@ -551,9 +551,9 @@ Código por byAd12
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
 %entidad_nueva;</code></pre>
-                <p class="Expl">El archivo <span class="span_contenido">descripcion.dtd</span> contiene:</p>
+                <p class="Expl">El archivo <span class="span_contenido" translate="no">descripcion.dtd</span> contiene:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
-                <p class="Expl">Así que en el DTD se reemplazará <span class="span_contenido">%etiqueta_nueva;</span> por el contenido del archivo, quedando el siguiente resultado:</p>
+                <p class="Expl">Así que en el DTD se reemplazará <span class="span_contenido" translate="no">%etiqueta_nueva;</span> por el contenido del archivo, quedando el siguiente resultado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
 &lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
 

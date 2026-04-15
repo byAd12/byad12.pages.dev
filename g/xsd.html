@@ -180,7 +180,7 @@ Código por byAd12
             <div>
                 <h2 id="para-que-sirve-xsd">¿Para qué sirve XSD?</h2>
 
-                <p>XSD es un fichero de texto plano con extensión <span class="span_url">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
+                <p>XSD es un fichero de texto plano con extensión <span class="span_url" translate="no">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
 
                 <p>
                     <b>XSD <span style="color: rgb(147, 147, 206) !important;">permite validar</span></b>:
@@ -205,8 +205,8 @@ Código por byAd12
                 </p>
 
                 <p>
-                    Es <b style="color: rgb(147, 147, 206) !important;">importante</b> que las URLs como <span class="span_url">http://www.w3.org/2001/XMLSchema</span> o <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span> deban usar el protocolo <span class="span_url">http</span> ya que
-                    algunas aplicaciones no validan correctamente los documentos XML si indicamos las URLs en su versión <span class="span_url">https</span>. 
+                    Es <b style="color: rgb(147, 147, 206) !important;">importante</b> que las URLs como <span class="span_url" translate="no">http://www.w3.org/2001/XMLSchema</span> o <span class="span_url" translate="no">http://www.w3.org/2001/XMLSchema-instance</span> deban usar el protocolo <span class="span_url" translate="no">http</span> ya que
+                    algunas aplicaciones no validan correctamente los documentos XML si indicamos las URLs en su versión <span class="span_url" translate="no">https</span>. 
                 </p>
 
             </div>
@@ -233,7 +233,7 @@ Código por byAd12
 
                 <p><b>Elementos <span style="color: rgb(147, 147, 206) !important;">simples</span></b>:</p>
                 <p>
-                    Son aquellos elementos que no contienen sub-elementos, aunque pueden tener atributos si se definen mediante <span class="span_contenido">simpleContent</span>. 
+                    Son aquellos elementos que no contienen sub-elementos, aunque pueden tener atributos si se definen mediante <span class="span_contenido" translate="no">simpleContent</span>. 
                     Este puede contener <u>solo texto</u> o estar vacío. A continuación se muestra un ejemplo de un elemento simple:
                 </p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta&gt;Valor de la etiqueta&lt;/etiqueta&gt;</code></pre>
@@ -254,7 +254,7 @@ Código por byAd12
             <div>
                 <h2 id="estructura-xsd">Estructura XSD</h2>
 
-                <p>Los elementos XML que se utilizan para generar un esquema han de pertenecer al namespace <span class="span_contenido">XML Schema</span>, el que habitualmente se le asigna el prefijo <span class="span_contenido">xs:</span> aunque podría usarse cualquier otro.</p>
+                <p>Los elementos XML que se utilizan para generar un esquema han de pertenecer al namespace <span class="span_contenido" translate="no">XML Schema</span>, el que habitualmente se le asigna el prefijo <span class="span_contenido" translate="no">xs:</span> aunque podría usarse cualquier otro.</p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
@@ -264,7 +264,7 @@ Código por byAd12
                 <p class="Expl">
                     La declaración XML es opcional pero recomendable añadirla al inicio del documento.
                     <br>La etiqueta <b>schema</b> siempre será el elemento raíz.
-                    <br>El namespace <b>xmlns:xs</b> siempre apuntará a la misma URL <span class="span_url">http://www.w3.org/2001/XMLSchema</span>.
+                    <br>El namespace <b>xmlns:xs</b> siempre apuntará a la misma URL <span class="span_url" translate="no">http://www.w3.org/2001/XMLSchema</span>.
                 </p>
             </div>
 
@@ -279,11 +279,11 @@ Código por byAd12
     ...
 &lt;/elemento_raiz&gt;</code></pre>
                 <p class="Expl">
-                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
-                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                    <b>xmlns:xsi</b> es la <a href="xml.html">definición de un namespace</a> que se le asigna el sufijo <span class="span_contenido" translate="no">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url" translate="no">http://www.w3.org/2001/XMLSchema-instance</span>.
                 </p>
                 <p class="Expl">
-                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido" translate="no">xsi</span> utilizado para indicar la ruta al esquema XSD.
                 </p>
 
             </div>
@@ -387,7 +387,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><b>xs:decimal</b></td>
-                            <td>Valores numéricos con decimal usando el <span class="span_contenido">.</span></td>
+                            <td>Valores numéricos con decimal usando el <span class="span_contenido" translate="no">.</span></td>
                             <td>0, 12, +12, 1.2, 12.000</td>
                         </tr>
                     </table>
@@ -494,7 +494,7 @@ Código por byAd12
                             <td>
                                 Solo se puede definir en atributos. Su valor debe ser único en todo el documento XML
                                 <br>
-                                Debe empezar con una letra o <span class="span_contenido">_</span> y puede contener los símbolos <span class="span_contenido">-</span>, <span class="span_contenido">_</span>, <span class="span_contenido">.</span>
+                                Debe empezar con una letra o <span class="span_contenido" translate="no">_</span> y puede contener los símbolos <span class="span_contenido" translate="no">-</span>, <span class="span_contenido" translate="no">_</span>, <span class="span_contenido" translate="no">.</span>
                             </td>
                             <td>gal_coruna</td>
                         </tr>
@@ -543,7 +543,7 @@ Código por byAd12
                     <br><b>default</b>: Valor por defecto que tendrá si no se especifica uno. No puede usarse a la vez que <b>fixed</b>.
                     <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento. No puede usarse a la vez que <b>default</b>.
                     <br><b>minOccurs</b>: Cardinalidad que indica el número mínimo de veces que debe aparecer.
-                    <br><b>maxOccurs</b>: Cardinalidad que indica el número máximo de veces que debe aparecer (<span class="span_contenido">unbounded</span> es sin límite).
+                    <br><b>maxOccurs</b>: Cardinalidad que indica el número máximo de veces que debe aparecer (<span class="span_contenido" translate="no">unbounded</span> es sin límite).
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
@@ -561,7 +561,7 @@ Código por byAd12
 &lt;/xs:element&gt;</code></pre>
                 <p>
                     Si varios elementos o atributos van a tener las mismas restricciones se puede evitar duplicarlo definiéndolo solo una vez y asignándole un nombre personalizable.
-                    Este nombre se utilizará para definirlo como <span class="span_contenido">type=""</span> en la etiqueta o atributo:
+                    Este nombre se utilizará para definirlo como <span class="span_contenido" translate="no">type=""</span> en la etiqueta o atributo:
                 </p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="etiqueta1" type="NombreRestriccionPersonalizada"/&gt;
 &lt;xs:element name="etiqueta2" type="NombreRestriccionPersonalizada"/&gt;
@@ -594,7 +594,7 @@ Código por byAd12
             <div>
                 <h2 id="elemento-simple-lista">Elemento simple &gt; <span>Lista de elementos del mismo tipo</span></h2>
 
-                <p> Con las siguientes 2 maneras se puede definir una lista de elementos del mismo tipo - <span class="span_contenido">&lt;xs:list itemType="" /&gt;</span>:</p>
+                <p> Con las siguientes 2 maneras se puede definir una lista de elementos del mismo tipo - <span class="span_contenido" translate="no">&lt;xs:list itemType="" /&gt;</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:simpleType&gt;
         &lt;xs:list itemType="xs:tipo_valor" /&gt;
@@ -605,7 +605,7 @@ Código por byAd12
 &lt;xs:simpleType name="lista-enteros"&gt;
     &lt;xs:list itemType="xs:tipo_valor" /&gt;
 &lt;/xs:simpleType&gt;</code></pre>
-                <p class="Expl">Por ejemplo, si se indica <span class="span_contenido">itemType="xs:integer"</span>, el siguiente contenido de la etiqueta sería válido:</p>
+                <p class="Expl">Por ejemplo, si se indica <span class="span_contenido" translate="no">itemType="xs:integer"</span>, el siguiente contenido de la etiqueta sería válido:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;1 2 3 4 5 6&lt;/nombre_elemento&gt;</code></pre>
 
             </div>
@@ -630,7 +630,7 @@ Código por byAd12
             <div>
                 <h2 id="elemento-simple-union">Elemento simple &gt; <span>Unión de Tipos</span></h2>
                 <p>
-                    El elemento <span class="span_contenido">xs:union</span> permite definir un tipo simple que acepte valores de diferentes tipos de datos.
+                    El elemento <span class="span_contenido" translate="no">xs:union</span> permite definir un tipo simple que acepte valores de diferentes tipos de datos.
                 </p>
                 <p><u>Ejemplo</u>: Un campo "talla" que acepta un número entero (38, 40) O una talla en letra (S, M, L).</p>
                 
@@ -672,7 +672,7 @@ Código por byAd12
     &lt;!-- Aquí se definirá su contenido y atributos --&gt;
 &lt;/xs:complexType&gt;</code></pre>   
                 <p class="Expl">
-                    No se puede usar <span class="span_contenido">default</span> en <b>element</b> si se usa <b>complexType</b>.
+                    No se puede usar <span class="span_contenido" translate="no">default</span> en <b>element</b> si se usa <b>complexType</b>.
                     <br>Con <b>complexType</b> definimos que es un elemento complejo.
                 </p>
 
@@ -752,9 +752,9 @@ Código por byAd12
                 <p class="Expl">
                     <b>simpleContent</b>: Indica que el elemento solo contiene texto/números, no etiquetas hijas.
                     <br>
-                    <b>extension</b>: Permite tomar un tipo existente (en este caso <span class="span_contenido">tipo-precio</span>) y "extenderlo" agregándole atributos.
+                    <b>extension</b>: Permite tomar un tipo existente (en este caso <span class="span_contenido" translate="no">tipo-precio</span>) y "extenderlo" agregándole atributos.
                     <br>
-                    <b>Nota</b>: No se pueden poner restricciones (<span class="span_contenido">xs:minInclusive</span>) directamente dentro de una <span class="span_contenido">xs:extension</span>. Por eso se crea el <span class="span_contenido">simpleType</span> separado primero.
+                    <b>Nota</b>: No se pueden poner restricciones (<span class="span_contenido" translate="no">xs:minInclusive</span>) directamente dentro de una <span class="span_contenido" translate="no">xs:extension</span>. Por eso se crea el <span class="span_contenido" translate="no">simpleType</span> separado primero.
                 </p>
             </div>
 
@@ -762,7 +762,7 @@ Código por byAd12
                 <h2 id="elemento-complejo-contenido-complejo">Elemento complejo &gt; <span>Contenido complejo (Explícito vs Abreviado)</span></h2>
 
                 <p>Se utiliza <b>complexContent</b> cuando el elemento contiene otros elementos (hijos). 
-                Formalmente, todo tipo complejo es una restricción de <span class="span_contenido">xs:anyType</span>.</p>
+                Formalmente, todo tipo complejo es una restricción de <span class="span_contenido" translate="no">xs:anyType</span>.</p>
 
                 <p><u>Forma Formal (Explícita)</u>:</p>
                 <p class="Expl">Así es como XSD entiende internamente la estructura. Se define explícitamente la restricción:</p>
@@ -779,7 +779,7 @@ Código por byAd12
 &lt;/xs:complexType&gt;</code></pre>
 
                 <p><u>Forma Abreviada (Común)</u>:</p>
-                <p class="Expl">XSD permite omitir <span class="span_contenido">complexContent</span> y <span class="span_contenido">restriction</span> si simplemente estamos definiendo una secuencia de hijos estándar. El resultado es idéntico:</p>
+                <p class="Expl">XSD permite omitir <span class="span_contenido" translate="no">complexContent</span> y <span class="span_contenido" translate="no">restriction</span> si simplemente estamos definiendo una secuencia de hijos estándar. El resultado es idéntico:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="lista-colores"&gt;
     &lt;xs:sequence&gt;
         &lt;xs:element name="color" type="xs:string" maxOccurs="unbounded" /&gt;
@@ -815,9 +815,9 @@ Código por byAd12
 &lt;/xs:complexType&gt;</code></pre>
 
                 <p class="Expl">
-                    Aquí se crea un nuevo tipo complejo <span class="span_contenido">tipoMasdatos</span> que extiende <span class="span_contenido">tipoInformacion</span>.
+                    Aquí se crea un nuevo tipo complejo <span class="span_contenido" translate="no">tipoMasdatos</span> que extiende <span class="span_contenido" translate="no">tipoInformacion</span>.
                     <br>
-                    Esto significa que <span class="span_contenido">archivo</span> hereda todo lo definido en <span class="span_contenido">tipoInformacion</span> (<span class="span_contenido">nombre</span> y <span class="span_contenido">formato</span>) y añade dos nuevos elementos: <span class="span_contenido">creacion</span> y <span class="span_contenido">edicion</span>.
+                    Esto significa que <span class="span_contenido" translate="no">archivo</span> hereda todo lo definido en <span class="span_contenido" translate="no">tipoInformacion</span> (<span class="span_contenido" translate="no">nombre</span> y <span class="span_contenido" translate="no">formato</span>) y añade dos nuevos elementos: <span class="span_contenido" translate="no">creacion</span> y <span class="span_contenido" translate="no">edicion</span>.
                 </p>
 
                 <p>
@@ -869,7 +869,7 @@ Código por byAd12
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;texto &lt;elemento2&gt;texto&lt;/elemento2&gt;&lt;/nombre_elemento&gt;</code></pre>
 
-                <p>Para validarlo, simplemente hay que añadir un atributo <span class="span_contenido">mixed</span> al &lt;complexType&gt; como en el siguiente ejemplo:</p>
+                <p>Para validarlo, simplemente hay que añadir un atributo <span class="span_contenido" translate="no">mixed</span> al &lt;complexType&gt; como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType mixed="true"&gt;
         &lt;xs:sequence&gt;
@@ -883,7 +883,7 @@ Código por byAd12
                 <h2 id="guia-rapida-combinaciones">Guía Rápida &gt; <span>Combinaciones de Estructura</span></h2>
                 <p>Resumen visual de las 4 combinaciones posibles de contenido y atributos.</p>
 
-                <p>No tiene contenido de texto ni hijos, pero sí atributos. <span class="span_contenido">&lt;precio divisa="EUR" /&gt;</span></p>
+                <p>No tiene contenido de texto ni hijos, pero sí atributos. <span class="span_contenido" translate="no">&lt;precio divisa="EUR" /&gt;</span></p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
     &lt;xs:complexType&gt;
         &lt;!-- Al no declarar 'sequence' ni 'simpleContent', se asume vacío --&gt;
@@ -891,7 +891,7 @@ Código por byAd12
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
 
-                <p>Estructura clásica de anidación. <span class="span_contenido">&lt;precio&gt;&lt;cantidad&gt;...&lt;/divisa&gt;...&lt;/precio&gt;</span></p>
+                <p>Estructura clásica de anidación. <span class="span_contenido" translate="no">&lt;precio&gt;&lt;cantidad&gt;...&lt;/divisa&gt;...&lt;/precio&gt;</span></p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:sequence&gt;
@@ -901,7 +901,7 @@ Código por byAd12
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
 
-                <p>Combina secuencia y atributos. <span class="span_contenido">&lt;precio available="yes"&gt;&lt;cantidad&gt;...&lt;/precio&gt;</span></p>
+                <p>Combina secuencia y atributos. <span class="span_contenido" translate="no">&lt;precio available="yes"&gt;&lt;cantidad&gt;...&lt;/precio&gt;</span></p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="precio"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:sequence&gt;
@@ -917,7 +917,7 @@ Código por byAd12
             <div>
                 <h2 id="reutilizacion-grupos-elementos">Reutilización &gt; <span>Grupos de Elementos</span></h2>
                 <p>
-                    El elemento <span class="span_contenido">xs:group</span> permite definir un conjunto de elementos comunes para reutilizarlos en varias partes del esquema sin tener que reescribirlos.
+                    El elemento <span class="span_contenido" translate="no">xs:group</span> permite definir un conjunto de elementos comunes para reutilizarlos en varias partes del esquema sin tener que reescribirlos.
                 </p>
                 
                 <p><b>1. Definición del grupo</b> (hijo directo de schema):</p>
@@ -941,7 +941,7 @@ Código por byAd12
             <div>
                 <h2 id="reutilizacion-grupos-atributos">Reutilización &gt; <span>Grupos de Atributos</span></h2>
                 <p>
-                    El elemento <span class="span_contenido">xs:attributeGroup</span> funciona igual que el anterior, pero para agrupar atributos que siempre van juntos.
+                    El elemento <span class="span_contenido" translate="no">xs:attributeGroup</span> funciona igual que el anterior, pero para agrupar atributos que siempre van juntos.
                 </p>
 
                 <p><b>1. Definición del grupo</b>:</p>
@@ -975,12 +975,12 @@ Código por byAd12
                     <br><b>type</b>: Tipo de valor que se permite.
                     <br><b>default</b>: Valor por defecto que solo se aplica si el atributo no aparece en el XML.
                     <br><b>fixed</b>: Valor fijo que se le aplicará al contenido del elemento.
-                    <br><b>use</b>: Define la obligatoriedad del atributo: obligatorio (<span class="span_contenido">required</span>),
-                    opcional (<span class="span_contenido">optional</span>) 
-                    o que no pueda aparecer (<span class="span_contenido">prohibited</span>).
+                    <br><b>use</b>: Define la obligatoriedad del atributo: obligatorio (<span class="span_contenido" translate="no">required</span>),
+                    opcional (<span class="span_contenido" translate="no">optional</span>) 
+                    o que no pueda aparecer (<span class="span_contenido" translate="no">prohibited</span>).
                 </p>
                 <p class="Expl">
-                    ⚠️ Una vez especificado <span class="span_contenido">use="required"</span> no se puede usar la opción <span class="span_contenido">default=""</span>.
+                    ⚠️ Una vez especificado <span class="span_contenido" translate="no">use="required"</span> no se puede usar la opción <span class="span_contenido" translate="no">default=""</span>.
                 </p>
 
                 <p>A continuación se muestra un <u>ejemplo</u> de la validación de un elemento y su atributo:</p>
@@ -1010,16 +1010,16 @@ Código por byAd12
             <div>
                 <h2 id="restricciones-longitud">Restricciones de <span>longitud</span></h2>
 
-                <p><b>Restricción <span class="span_contenido">xs:length</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:length</span></b>:</p>
                 <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud debe ser exactamente x (número entero y positivo):</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:length value="longitud"/&gt;</code></pre>
                 <p class="Expl">Si el valor supera o no llega al valor especificado dará un error al validar el documento.</p>
 
-                <p><b>Restricción <span class="span_contenido">xs:minLength</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:minLength</span></b>:</p>
                 <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud mínima debe ser x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minLength value="longitud_minima"/&gt;</code></pre>
 
-                <p><b>Restricción <span class="span_contenido">xs:maxLength</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:maxLength</span></b>:</p>
                 <p class="Expl">Partiendo de cualquier tipo de valor se le aplica la restricción de que su longitud máxima debe ser x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxLength value="longitud_maxima"/&gt;</code></pre>
 
@@ -1028,32 +1028,32 @@ Código por byAd12
             <div>
                 <h2 id="restricciones-numericas">Restricciones <span>numéricas</span></h2>
 
-                <p><b>Restricción <span class="span_contenido">xs:minInclusive</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:minInclusive</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo es x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minInclusive value="numero_mínimo"/&gt;</code></pre>
                 <p class="Expl"><u>Valores válidos</u>: 12, +12, 1.2, +1.2</p>
 
-                <p><b>Restricción <span class="span_contenido">xs:maxInclusive</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:maxInclusive</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo es x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxInclusive value="numero_máximo"/&gt;</code></pre>
 
-                <p>Se puede usar las restricciones <span class="span_contenido">xs:minInclusive</span> y <span class="span_contenido">xs:maxInclusive</span> acortando las posibilidades a un rango de números.</p>
+                <p>Se puede usar las restricciones <span class="span_contenido" translate="no">xs:minInclusive</span> y <span class="span_contenido" translate="no">xs:maxInclusive</span> acortando las posibilidades a un rango de números.</p>
 
-                <p><b>Restricción <span class="span_contenido">xs:minExclusive</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:minExclusive</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor mínimo permitido es mayor que x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:minExclusive value="numero_antes_del_mínimo"/&gt;</code></pre>
                 <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor mínimo permitido es 11</p>
 
-                <p><b>Restricción <span class="span_contenido">xs:maxExclusive</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:maxExclusive</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que su valor máximo permitido es menos que x:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:maxExclusive value="numero_despues_del_máximo"/&gt;</code></pre>
                 <p class="Expl"><u>Ejemplo</u>: Si x es 10, el valor máximo permitido es 9</p>
 
-                <p><b>Restricción <span class="span_contenido">xs:totalDigits</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:totalDigits</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:integer</b> se le aplica la restricción de que el número puede tener hasta x dígitos, siendo x un número positivo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:totalDigits value="digitos_máximos"/&gt;</code></pre>
 
-                <p><b>Restricción <span class="span_contenido">xs:fractionDigits</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:fractionDigits</span></b>:</p>
                 <p class="Expl">Partiendo de un tipo <b>xs:decimal</b> se le aplica la restricción de que el número puede tener hasta x dígitos después del punto decimal:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:fractionDigits value="digitos_decimales_máximos"/&gt;</code></pre>
             </div>
@@ -1061,7 +1061,7 @@ Código por byAd12
             <div>
                 <h2 id="restricciones-opciones">Restricciones con <span>opciones válidas</span></h2>
 
-                <p><b>Restricción <span class="span_contenido">xs:enumeration</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:enumeration</span></b>:</p>
                 <p class="Expl">Asignamos una lista de uno o varios elementos <b>xs:enumeration</b> cuyo valor sea cada opción permitida:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:enumeration value="valor_permitido_1"/&gt;
 &lt;xs:enumeration value="valor_permitido_2"/&gt;
@@ -1074,7 +1074,7 @@ Código por byAd12
             <div>
                 <h2 id="restricciones-espacios">Restricciones sobre <span>espacios en blanco</span></h2>
 
-                <p><b>Restricción <span class="span_contenido">xs:whiteSpace</span></b>:</p>
+                <p><b>Restricción <span class="span_contenido" translate="no">xs:whiteSpace</span></b>:</p>
                 <p class="Expl">Con esta restricción se valida los espacios en blanco, tabulaciones, saltos de línea y retornos de carro que haya en un valor:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:whiteSpace value="preserve/replace/collapse"/&gt;</code></pre>
                 <p class="Expl">

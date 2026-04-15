@@ -94,7 +94,7 @@ Código por byAd12
 
                 <p>Mirar el contenido de un docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker inspect --format=(formato) [docker]</code></pre>
-                <p class="Expl"><b>--format=(formato)</b>: Es opcional. Este es un ejemplo de formato: <span class="span_contenido">{{.Id}}</span>.</p>
+                <p class="Expl"><b>--format=(formato)</b>: Es opcional. Este es un ejemplo de formato: <span class="span_contenido" translate="no">{{.Id}}</span>.</p>
 
             </div>
         </div>
@@ -115,7 +115,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker run -v [ruta_en_sistema_local]:[ruta_en_docker]</code></pre>
                 <p class="Expl">Así se enlaza una carpeta del docker con una carpeta local para que los archivos no se eliminen al parar el docker.</p>
                 
-                <p>Modificar una variable de entorno (ej. <span class="span_contenido">PUID</span>):</p>
+                <p>Modificar una variable de entorno (ej. <span class="span_contenido" translate="no">PUID</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -e [variable_entorno]=[valor]</code></pre>
 
                 <p>Especificar el hostname:</p>

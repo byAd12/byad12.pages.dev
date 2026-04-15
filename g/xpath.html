@@ -119,7 +119,7 @@ Código por byAd12
                 </p>
 
                 <ul>
-                    <li><b>Nodo raíz</b> - siempre es <span class="span_url">/</span></li>
+                    <li><b>Nodo raíz</b> - siempre es <span class="span_url" translate="no">/</span></li>
                     <li class="LiSinPunto">
                         <ul>
                             <li>El elemento raíz del documento XML no es lo mismo que el nodo raíz de XPATH.</li>
@@ -129,11 +129,11 @@ Código por byAd12
                             <li>Para ser un documento bien formado, el nodo de documento debe tener exactamente un nodo elemento hijo y ningún nodo texto hijo.</li>
                         </ul>
                     </li>
-                    <br>
+                    <li class="LiSinPunto"></li>
                     <li><b>Nodo elemento</b> - sub-etiquetas del nodo raíz u otro nodo elemento</li>
                     <li><b>Nodo atributo</b> - el atributo que pueda tener un nodo elemento</li>
                     <li><b>Nodo de texto</b> - el contenido de un nodo elemento</li>
-                    <li><b>Nodo de comentario</b> - un comentario con formato <span class="span_url">&lt;!-- ... --&gt;</span></li>
+                    <li><b>Nodo de comentario</b> - un comentario con formato <span class="span_url" translate="no">&lt;!-- ... --&gt;</span></li>
                 </ul>
 
             </div>
@@ -141,9 +141,9 @@ Código por byAd12
             <div>
                 <h2 id="estructura-path">Estructura de un path</h2>
             
-                <p>Un path se define separando el nombre de los nodos con barras - <span class="span_url">/</span>, como por ejemplo:</p>
+                <p>Un path se define separando el nombre de los nodos con barras - <span class="span_url" translate="no">/</span>, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/tienda/productos/producto/nombre/text()</code></pre>
-                <p class="Expl">En el ejemplo podemos identificar el nodo raíz - <span class="span_url">/</span>, seguido de una serie de nodos de elementos hasta el nodo <span class="span_url">nombre</span>, a la cual se le aplica una función para obtener un nodo de texto.</p>
+                <p class="Expl">En el ejemplo podemos identificar el nodo raíz - <span class="span_url" translate="no">/</span>, seguido de una serie de nodos de elementos hasta el nodo <span class="span_url" translate="no">nombre</span>, a la cual se le aplica una función para obtener un nodo de texto.</p>
                 <p class="Expl">El documento XML se podría ver por ejemplo así:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;tienda&gt;
@@ -153,15 +153,15 @@ Código por byAd12
         &lt;/producto&gt;
     &lt;/productos&gt;
 &lt;/tienda&gt;</code></pre>
-                <p class="Expl">Y como resultado cogería todos los nodos de texto dentro de todos los nodos elementos <span class="span_url">nombre</span>.</p>
+                <p class="Expl">Y como resultado cogería todos los nodos de texto dentro de todos los nodos elementos <span class="span_url" translate="no">nombre</span>.</p>
             
                 <p>Hay que tener en cuenta que se puede definir con rutas absolutas o relativas:</p>
 
                 <p class="Expl">En las rutas <u>absolutas</u> se escribe cada nodo hasta llegar al resultado empezando desde la raíz, como en el ejemplo anterior.</p>
                 
-                <p class="Expl">En las rutas <u>relativas</u> se escribe <span class="span_url">//</span> para llegar a un nodo en específico, como por ejemplo:</p>
+                <p class="Expl">En las rutas <u>relativas</u> se escribe <span class="span_url" translate="no">//</span> para llegar a un nodo en específico, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">//nombre/text()</code></pre>
-                <p class="Expl">En este ejemplo saltamos directamente a todos los nodos elementos llamados <span class="span_url">nombre</span>, pero hay que tener cuidado ya que si hay varios nodos con el mismo nombre en rutas diferentes se van a coger todos.</p>
+                <p class="Expl">En este ejemplo saltamos directamente a todos los nodos elementos llamados <span class="span_url" translate="no">nombre</span>, pero hay que tener cuidado ya que si hay varios nodos con el mismo nombre en rutas diferentes se van a coger todos.</p>
 
                 <p>La representación en árbol de los nodos del documento XML anterior sería la siguiente:</p>
                 <div class="SingleImagenGlobal">
@@ -195,7 +195,7 @@ Código por byAd12
                 <p class="Expl">Si queremos usar la sintaxis explícita para el mismo documento del servidor:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/child::servicios/child::servicio</code></pre>
                 <p class="Expl">
-                    Esto es equivalente a escribir <span class="span_url">/servidor/servicios/servicio</span>. 
+                    Esto es equivalente a escribir <span class="span_url" translate="no">/servidor/servicios/servicio</span>. 
                     Se usa para indicar que buscamos solo en los hijos directos.
                 </p>
             </div>
@@ -203,8 +203,8 @@ Código por byAd12
             <div>
                 <h2 id="uso-string">Uso de la función "string()"</h2>
                 <p>
-                    A diferencia de <span class="span_url">text()</span>, que solo toma el texto de un nodo específico, 
-                    la función <span class="span_url">string()</span> devuelve la <b>concatenación</b> de todo el texto del nodo y sus descendientes.
+                    A diferencia de <span class="span_url" translate="no">text()</span>, que solo toma el texto de un nodo específico, 
+                    la función <span class="span_url" translate="no">string()</span> devuelve la <b>concatenación</b> de todo el texto del nodo y sus descendientes.
                 </p>
                 
                 <p class="Expl">Tomando como ejemplo este nodo raíz:</p>
@@ -213,11 +213,11 @@ Código por byAd12
     &lt;precio&gt;19.99&lt;/precio&gt;
 &lt;/producto&gt;</code></pre>
 
-                <p class="Expl">Si aplicamos <span class="span_url">string()</span> al nodo raíz:</p>
+                <p class="Expl">Si aplicamos <span class="span_url" translate="no">string()</span> al nodo raíz:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/producto/string()</code></pre>
                 
                 <p class="Expl">
-                    El resultado sería <span class="span_url">"Pantalla19.99"</span>. 
+                    El resultado sería <span class="span_url" translate="no">"Pantalla19.99"</span>. 
                     Es muy útil cuando necesitas extraer todo el contenido legible de una etiqueta que tiene sub-etiquetas dentro.
                 </p>
             </div>
@@ -226,7 +226,7 @@ Código por byAd12
             <div>
                 <h2 id="seleccion-elemento">Selección de un nodo elemento</h2>
                 
-                <p>Primero llegaremos a la ruta donde se situe el nodo elemento <span class="span_url">tiempo_ejecucion</span> del siguiente documento XML:</p>
+                <p>Primero llegaremos a la ruta donde se situe el nodo elemento <span class="span_url" translate="no">tiempo_ejecucion</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -241,7 +241,7 @@ Código por byAd12
                 <p class="Expl">En cambio, si solo queremos obtener el nodo texto dentro de ese nodo elemento, que en este caso es "135", tenedremos que hacer:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/text()</code></pre>
 
-                <p>La función <span class="span_contenido">parent()</span> devolverá el nombre del nodo que contiene el nodo elemento seleccionado:</p>
+                <p>La función <span class="span_contenido" translate="no">parent()</span> devolverá el nombre del nodo que contiene el nodo elemento seleccionado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/parent()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "&lt;servicio programa="bind9"&gt;" pero si seleccionamos el nodo texto devolverá "&lt;tiempo_ejecucion unidad="segundos"&gt;".</p>
 
@@ -250,7 +250,7 @@ Código por byAd12
             <div>
                 <h2 id="seleccion-atributo">Selección de un nodo atributo</h2>
                 
-                <p>Primero llegaremos a la ruta donde se situe el nodo atributo <span class="span_url">unidad</span> del siguiente documento XML:</p>
+                <p>Primero llegaremos a la ruta donde se situe el nodo atributo <span class="span_url" translate="no">unidad</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -259,19 +259,19 @@ Código por byAd12
         &lt;/servicio&gt;
     &lt;/servicios&gt;
 &lt;/servidor&gt;</code></pre>
-                <p class="Expl">Para seleccionar el nodo atributo pondremos el símbolo <span class="span_contenido">@</span> antes del nombre del atributo.</p>
-                <p class="Expl">Según versiones modernas de XPATH tendremos que definir que vamos a coger el contenido dentro del atributo con <span class="span_contenido">string()</span>, lo que nos devolverá "segundos":</p>
+                <p class="Expl">Para seleccionar el nodo atributo pondremos el símbolo <span class="span_contenido" translate="no">@</span> antes del nombre del atributo.</p>
+                <p class="Expl">Según versiones modernas de XPATH tendremos que definir que vamos a coger el contenido dentro del atributo con <span class="span_contenido" translate="no">string()</span>, lo que nos devolverá "segundos":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/@unidad/string()</code></pre>
 
-                <p>La función <span class="span_contenido">node()</span> devolverá el nombre del atributo seleccionado:</p>
+                <p>La función <span class="span_contenido" translate="no">node()</span> devolverá el nombre del atributo seleccionado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/node()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "programa".</p>
 
-                <p>La función <span class="span_contenido">parent()</span> devolverá el nombre del nodo que contiene el atributo seleccionado:</p>
+                <p>La función <span class="span_contenido" translate="no">parent()</span> devolverá el nombre del nodo que contiene el atributo seleccionado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/parent()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "&lt;servicio&gt;".</p>
 
-                <p>La función <span class="span_contenido">type()</span> devolverá en formato <b>xs:[TIPO]</b> el tipo de valor que contiene el atributo:</p>
+                <p>La función <span class="span_contenido" translate="no">type()</span> devolverá en formato <b>xs:[TIPO]</b> el tipo de valor que contiene el atributo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/@programa/type()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "xs:untypedAtomic".</p>
 
@@ -320,9 +320,9 @@ Código por byAd12
     &lt;tiempo_ejecucion unidad="minutos"&gt;312&lt;/tiempo_ejecucion&gt;
 &lt;/servicio&gt;</code></pre>
 
-                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url">servicio</span> incluido todo los nodos que contenga.</p>
+                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url" translate="no">servicio</span> incluido todo los nodos que contenga.</p>
                 
-                <p>También podemos definir que nos devuelva solo un nodo específico de los servicios que cumplan la condición, como por ejemplo el nodo <span class="span_url">tipo_proceso</span>:</p>
+                <p>También podemos definir que nos devuelva solo un nodo específico de los servicios que cumplan la condición, como por ejemplo el nodo <span class="span_url" translate="no">tipo_proceso</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa != "bind9"]/tipo_proceso/text()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "Hijo".</p>
 
@@ -358,7 +358,7 @@ Código por byAd12
                 <p>Filtramos los tiempos de ejecución si son menores o iguales a 100:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[tiempo_ejecucion/text() &lt;= "100"]</code></pre>
 
-                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url">servicio</span> incluido todo los nodos que contenga.</p>
+                <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url" translate="no">servicio</span> incluido todo los nodos que contenga.</p>
             </div>
 
             <div>
@@ -371,7 +371,7 @@ Código por byAd12
                     <li><b>descendant:</b> Selecciona todos los descendientes (hijos, nietos, etc.).</li>
                     <li><b>following-sibling:</b> Selecciona todos los hermanos que aparecen después del nodo actual.</li>
                     <li><b>preceding-sibling:</b> Selecciona todos los hermanos que aparecen antes del nodo actual.</li>
-                    <li><b>self:</b> Selecciona el nodo actual (se puede abreviar con un punto <span class="span_url">.</span>).</li>
+                    <li><b>self:</b> Selecciona el nodo actual (se puede abreviar con un punto <span class="span_url" translate="no">.</span>).</li>
                 </ul>
 
                 <p>Ejemplo para obtener el nombre del "padre" de un nodo específico:</p>
@@ -445,7 +445,7 @@ Código por byAd12
                     </table>
                 </div>
                 <p>
-                    Estas funciones permiten manipular los datos obtenidos del XML. Por ejemplo, <span class="span_url">count()</span> devuelve el número total de elementos, mientras que <span class="span_url">sum()</span> realiza la suma aritmética de sus valores.
+                    Estas funciones permiten manipular los datos obtenidos del XML. Por ejemplo, <span class="span_url" translate="no">count()</span> devuelve el número total de elementos, mientras que <span class="span_url" translate="no">sum()</span> realiza la suma aritmética de sus valores.
                 </p>
             </div>
 
@@ -465,14 +465,14 @@ Código por byAd12
             <div>
                 <h2 id="acceso-doc">Acceso a datos de otro documento XML</h2>
 
-                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de archivos externos utilizando la función <span class="span_url">doc()</span>.</p>
+                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de archivos externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
                 <p class="Expl">Si por ejemplo queremos acceder al nodo raíz de un archivo llamado "config.xml" que está en la misma carpeta:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">doc("config.xml")/servidor</code></pre>
             </div>
 
             <div>
                 <h2 id="localizar-comentarios">Localizar comentarios</h2>
-                <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url">comment()</span>.</p>
+                <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url" translate="no">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url" translate="no">comment()</span>.</p>
                 <p class="Expl">Para localizar todos los comentarios dentro del nodo raíz:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/comment()</code></pre>
             </div>
@@ -483,7 +483,7 @@ Código por byAd12
                 
                 <p>1. Operador de Unión ( | )</p>
                 <p class="Expl">
-                    Se representa con la barra vertical <span class="span_url">|</span>. Une dos o más conjuntos de nodos. 
+                    Se representa con la barra vertical <span class="span_url" translate="no">|</span>. Une dos o más conjuntos de nodos. 
                     Elimina automáticamente los duplicados y devuelve los nodos en el mismo orden en el que aparecen en el documento XML.
                 </p>
                 <p class="Expl">Seleccionar todos los programas y todos los tiempos de ejecución a la vez:</p>
@@ -491,7 +491,7 @@ Código por byAd12
 
                 <p>2. Operador de Secuencia ( , )</p>
                 <p class="Expl">
-                    Se representa con una coma <span class="span_url">,</span> (disponible en XPath 2.0 y 3.1). 
+                    Se representa con una coma <span class="span_url" translate="no">,</span> (disponible en XPath 2.0 y 3.1). 
                     Permite concatenar resultados formando una lista o secuencia. A diferencia de la unión, <b>no elimina duplicados</b> y respeta el orden en el que escribes la consulta.
                 </p>
                 <p class="Expl">Crear una secuencia que devuelva primero los tiempos y luego los programas:</p>

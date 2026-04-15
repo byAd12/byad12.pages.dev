@@ -63,9 +63,9 @@ passwd nombre_usuario
 chown nombre_usuario:nombre_grupo /carpeta_a_compartir
 chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
-                <p class="Expl"><u>Importante</u>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido">x</span> (eXecute).</p>
+                <p class="Expl"><u>Importante</u>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido" translate="no">x</span> (eXecute).</p>
                 <p class="Expl"><u>Riesgo de seguridad</u>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
-                <p class="Expl"><u>Nota de seguridad</u>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
+                <p class="Expl"><u>Nota de seguridad</u>: Si usaremos este usuario solo para que pueda acceder de forma remota, podemos limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url" translate="no">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -79,7 +79,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <p class="Expl">Configuraremos a ese usuario para que sea reconocible como un usuario para Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
-                <p class="Expl">La contraseña que se asigna con <span class="span_contenido">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
+                <p class="Expl">La contraseña que se asigna con <span class="span_contenido" translate="no">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
                 
                 <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">pdbedit -L</code></pre>
@@ -89,8 +89,8 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
-                <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido">samba-ad-dc</span>, <span class="span_contenido">nmbd</span> y <span class="span_contenido">smbd</span>.</p>
-                <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url">/etc/samba</span>.</p>
+                <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido" translate="no">samba-ad-dc</span>, <span class="span_contenido" translate="no">nmbd</span> y <span class="span_contenido" translate="no">smbd</span>.</p>
+                <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url" translate="no">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -106,7 +106,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                     <br>
                     <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
                     <br>
-                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido">no</span>, o solo-lectura: <span class="span_contenido">yes</span>.
+                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido" translate="no">no</span>, o solo-lectura: <span class="span_contenido" translate="no">yes</span>.
                 </p>
 
                 <!-- ......................................................... -->
@@ -123,7 +123,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl">
                     Administrador de equipos &gt; Usuarios y grupos locales &gt; [Usuarios y Grupos] &gt; Click derecho &gt; Nuevo.
                     <br>
-                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido">smbpasswd</span>.
+                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido" translate="no">smbpasswd</span>.
 
                 </p>
                 <p class="Expl">
@@ -187,7 +187,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                     <b>contraseña</b>: Contraseña del usuario de la máquina Windows.
                 </p>
                 <p class="Expl">
-                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido en Windows. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url">/</span>.
+                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido en Windows. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
                     <br>
                     <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
                 </p>
@@ -227,7 +227,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <h2>Acceder a una carpeta de Linux desde <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
                 
                 <!-- ......................................................... -->
-                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido">smbpasswd</span></b>.</p>
+                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido" translate="no">smbpasswd</span></b>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -240,9 +240,9 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 </p>
 
                 <p class="Expl">
-                    <b>Nota</b>: Si en vez de poner una carpeta con el nombre del usuario hay una que pone <span class="span_contenido">nobody</span> significa que no se puede acceder al sistema con el usuario creado y por ello usa un usuario invitado que se llama <span class="span_contenido">nobody</span> en el sistema Linux.
+                    <b>Nota</b>: Si en vez de poner una carpeta con el nombre del usuario hay una que pone <span class="span_contenido" translate="no">nobody</span> significa que no se puede acceder al sistema con el usuario creado y por ello usa un usuario invitado que se llama <span class="span_contenido" translate="no">nobody</span> en el sistema Linux.
                     <br>
-                    Si no deja acceder al recurso compartido con un usuario invitado hay que habilitar el parámetro <span class="span_contenido">guest ok = yes</span> en el archivo <span class="span_url">/etc/samba/smb.conf</span>.
+                    Si no deja acceder al recurso compartido con un usuario invitado hay que habilitar el parámetro <span class="span_contenido" translate="no">guest ok = yes</span> en el archivo <span class="span_url" translate="no">/etc/samba/smb.conf</span>.
                 </p>
 
                 <p class="Expl">
@@ -272,10 +272,10 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <!-- ......................................................... -->
                 <br>
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
-                <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido">guest ok = yes</span>):</p>
+                <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    &lt;&lt;opciones&gt;&gt;   0   0</code></pre>
                 <p class="Expl">
-                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url">/</span>.
+                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
                     <br>
                     <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
                 </p>
@@ -287,11 +287,11 @@ chmod permisos /carpeta_a_compartir</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">defaults</code></pre></td>
-                            <td>Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido">guest ok = yes</span>).</td>
+                            <td>Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>).</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">user</code></pre></td>
-                            <td>Podemos permitir que un usuario, aunque no sea root, pueda montar carpetas con el comando <span class="span_contenido">mount</span>.</td>
+                            <td>Podemos permitir que un usuario, aunque no sea root, pueda montar carpetas con el comando <span class="span_contenido" translate="no">mount</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">noauto</code></pre></td>
@@ -306,7 +306,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <!-- ......................................................... -->
                 <p>2.1. 🔨 <b><span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span> y su solución</b>:</p>
-                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url">/etc/fstab</span> tiene el permiso local <span class="span_contenido">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
+                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
                 
                 <p class="Expl">Primero crearemos en cualquier ruta un archivo oculto de credenciales con el siguiente formato:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /ruta/a/archivo/.credenciales</code></pre>
@@ -316,7 +316,7 @@ password=contraseña</code></pre>
                 <p class="Expl">Luego guardamos el fichero y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">chown root:root /ruta/a/archivo/.credenciales
 chmod 700 /ruta/a/archivo/.credenciales</code></pre>
-                <p class="Expl">Y por último añadiremos en <span class="span_url">/etc/fstab</span> la siguiente línea:</p>
+                <p class="Expl">Y por último añadiremos en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
 
                 <!-- ......................................................... -->
@@ -344,7 +344,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                     <br>
                     Explorador de archivos &gt; Este equipo &gt; Pestaña "Equipo" &gt; Conectar a unidad de red
                 </p>
-                <p class="Expl">En la ventana asignaremos la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url">\\IP_servidor\Recurso</span>.</p>
+                <p class="Expl">En la ventana asignaremos la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\IP_servidor\Recurso</span>.</p>
 
             </div>
 
@@ -359,7 +359,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
             <div>
                 <h2>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
                 
-                <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
+                <p>Ejemplo de un bloque completo en el archivo <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
     comment = Comentario del recurso compartido.
     path = /carpeta_a_compartir
@@ -392,12 +392,12 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                     <br>
                     <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
                     <br>
-                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url">\\IP_servidor_Linux\Recurso</span>.
+                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url" translate="no">\\IP_servidor_Linux\Recurso</span>.
                 </p>
 
                 <p>Lista de control de acceso:</p>
                 <p class="Expl">
-                    <b>valid users</b>: Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).
+                    <b>valid users</b>: Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido" translate="no">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).
                     <br>
                     <b>force user</b>: Asigna la propiedad de los archivos a un usuario para evitar conflictos de permisos.
                     <br>
@@ -406,11 +406,11 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
 
                 <p>Parámetros de permisos básicos:</p>
                 <p class="Expl">
-                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido">no</span>, o solo-lectura: <span class="span_contenido">yes</span>.
+                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido" translate="no">no</span>, o solo-lectura: <span class="span_contenido" translate="no">yes</span>.
                     <br>
-                    <b>read list</b>: Lista de usuarios que solo pueden leer aunque <span class="span_contenido">read only = no</span>.
+                    <b>read list</b>: Lista de usuarios que solo pueden leer aunque <span class="span_contenido" translate="no">read only = no</span>.
                     <br>
-                    <b>write list</b>: Lista de usuarios que pueden escribir aunque <span class="span_contenido">read only = yes</span>.
+                    <b>write list</b>: Lista de usuarios que pueden escribir aunque <span class="span_contenido" translate="no">read only = yes</span>.
                 </p>
 
                 <p>Parámetros de permisos avanzados:</p>
@@ -422,27 +422,27 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
 
                 <p>Parámetros del usuario anónimo:</p>
                 <p class="Expl">
-                    <b>guest ok</b>: Para permisos que usuarios anónimos accedan: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <b>guest ok</b>: Para permisos que usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
                     <br>
-                    <b>guest only</b>: Para permisos que <u>solo</u> usuarios anónimos accedan: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <b>guest only</b>: Para permisos que <u>solo</u> usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
                     <br>
                     <b>guest account</b>: Se puede definir un usuario anónimo diferente al de por defecto.
                 </p>
 
                 <p>Parámetros de archivos:</p>
                 <p class="Expl">
-                    <b>hide files</b>: No enseña archivos por coincidencias como por ejemplo <span class="span_url">*.tmp</span>.
+                    <b>hide files</b>: No enseña archivos por coincidencias como por ejemplo <span class="span_url" translate="no">*.tmp</span>.
                     <br>
                     <b>hide dot files</b>: No enseña archivos que empiezen por un punto (ocultos).
                 </p>
 
                 <p>Parámetros de enlaces simbólicos:</p>
                 <p class="Expl">
-                    <b>follow symlinks</b>: Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <b>follow symlinks</b>: Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
                     <br>
-                    <b>inherit permissions</b>: Permite heredar permisos de la carpeta padre en nuevos archivos o sub-carpetas: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <b>inherit permissions</b>: Permite heredar permisos de la carpeta padre en nuevos archivos o sub-carpetas: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
                     <br>
-                    <b>wide links</b>: Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido">yes</span>, o no: <span class="span_contenido">no</span>.
+                    <b>wide links</b>: Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
                 </p>
 
                 <p>Parámetros de hostnames:</p>
@@ -460,7 +460,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
             <div>
                 <h2>Parámetros de la sección [global] en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
                 
-                <p>Ejemplo de un bloque completo en el archivo <span class="span_url">/etc/samba/smb.conf</span>:</p>
+                <p>Ejemplo de un bloque completo en el archivo <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[global]
     server role = standalone server   # Por defecto: auto
     netbios name = hostname
@@ -477,32 +477,32 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p class="Expl">
                     <b>server role</b>: Define el tipo de servidor Samba. Puede ser:
                     <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">standalone server</span>: Servidor independiente que autentica usuarios localmente.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">standalone server</span>: Servidor independiente que autentica usuarios localmente.
                     <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">member server</span>: Servidor integrado en un dominio existente.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">member server</span>: Servidor integrado en un dominio existente.
                     <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido">active directory domain controller</span>: Controlador de dominio.
+                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">active directory domain controller</span>: Controlador de dominio.
                     <br>
                     <br>
                     <b>netbios name</b>: Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.
                     <br>
                     <b>workgroup</b>: Nombre del grupo de trabajo o dominio al que pertenece el servidor Samba.
                     <br>
-                    <b>security</b>: Define el modo de autenticación que utilizará Samba (<span class="span_contenido">share</span>, <span class="span_contenido">user</span>, <span class="span_contenido">server</span>, <span class="span_contenido">domain</span>). Determina cómo se validan los usuarios al acceder a los recursos.
+                    <b>security</b>: Define el modo de autenticación que utilizará Samba (<span class="span_contenido" translate="no">share</span>, <span class="span_contenido" translate="no">user</span>, <span class="span_contenido" translate="no">server</span>, <span class="span_contenido" translate="no">domain</span>). Determina cómo se validan los usuarios al acceder a los recursos.
                     <br>
                     <b>encrypt passwords</b>: Indica si las contraseñas se envían cifradas. Normalmente se establece en "yes" para compatibilidad con sistemas Windows modernos.
                     <br>
-                    <b>password server</b>: Servidor o lista de servidores encargados de autenticar a los usuarios. En modo <span class="span_contenido">domain</span>, suele especificarse el controlador o controladores de dominio.
+                    <b>password server</b>: Servidor o lista de servidores encargados de autenticar a los usuarios. En modo <span class="span_contenido" translate="no">domain</span>, suele especificarse el controlador o controladores de dominio.
                     <br>
                     <b>map to guest</b>: Determina en qué casos un intento de acceso se convierte automáticamente en acceso como usuario invitado.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">never</span>: Nunca se asigna acceso como invitado. Si la autenticación falla, el acceso se deniega.
+                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">never</span>: Nunca se asigna acceso como invitado. Si la autenticación falla, el acceso se deniega.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">bad user</span>: El acceso se convierte en invitado solo cuando el nombre de usuario no existe en el sistema.
+                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad user</span>: El acceso se convierte en invitado solo cuando el nombre de usuario no existe en el sistema.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">bad password</span>: El acceso se convierte en invitado cuando la contraseña es incorrecta, incluso si el usuario existe.
+                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad password</span>: El acceso se convierte en invitado cuando la contraseña es incorrecta, incluso si el usuario existe.
                     <br>
-                    &nbsp;&nbsp;• <span class="span_contenido">bad uid</span>: El acceso se convierte en invitado cuando el usuario autenticado no puede asociarse a un UID válido en el sistema.
+                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad uid</span>: El acceso se convierte en invitado cuando el usuario autenticado no puede asociarse a un UID válido en el sistema.
                 </p>
                 
                 <p>Logs:</p>

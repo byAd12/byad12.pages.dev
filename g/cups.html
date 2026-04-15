@@ -61,7 +61,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-bash">cupsctl --remote-any</code></pre>
                 <p class="Expl">O podemos limitar el acceso a solo la red local configurando el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
-                <p class="Expl">Buscaremos una sección <span class="span_contenido">&lt;Location /&gt;</span> y la dejaremos así, pero cambiando <span class="span_url">192.168.1.*</span> por la dirección de la red local:</p>
+                <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Location /&gt;</span> y la dejaremos así, pero cambiando <span class="span_url" translate="no">192.168.1.*</span> por la dirección de la red local:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">&lt;Location /&gt;
   Order allow,deny
   Allow localhost
@@ -71,7 +71,7 @@ Código por byAd12
                 <p>Luego aplicaremos los cambios reiniciando el servicio:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
 
-                <p>Ahora verificaremos que el servicio cups esté escuchando en los puertos correspondientes. Debería ser el puerto <span class="span_url">631</span>:</p>
+                <p>Ahora verificaremos que el servicio cups esté escuchando en los puertos correspondientes. Debería ser el puerto <span class="span_url" translate="no">631</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">lsof -i -P -n | grep cups</code></pre>
 
             </div>
@@ -82,10 +82,10 @@ Código por byAd12
                 <p>Primero tendremos que entrar al panel de administración web de cups. La URL debería ser:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/admin</code></pre>
 
-                <p>En la sección de <span class="span_contenido">Printers</span> pulsaremos <span class="span_contenido">Add Printer</span>.</p>
-                <p class="Expl">- Seleccionaremos <span class="span_url">CUPS-PDF (Virtual PDF Printer)</span> y luego <span class="span_contenido">Continue</span>.</p>
-                <p class="Expl">- Definiremos un nombre a la impresora, una descripción y seleccionaremos <span class="span_contenido">Share this printer</span>. Luego pulsaremos <span class="span_contenido">Continue</span>.</p>
-                <p class="Expl">- Ahora seleccionaremos en la sección <span class="span_contenido">Make</span> el driver <span class="span_url">Generic</span>, en la sección <span class="span_contenido">Model</span> el modelo <span class="span_url">Generic CUPS-PDF Printer (w/ options) (en)</span> y por último pulsaremos <span class="span_contenido">Add Printer</span>.</p>
+                <p>En la sección de <span class="span_contenido" translate="no">Printers</span> pulsaremos <span class="span_contenido" translate="no">Add Printer</span>.</p>
+                <p class="Expl">- Seleccionaremos <span class="span_url" translate="no">CUPS-PDF (Virtual PDF Printer)</span> y luego <span class="span_contenido" translate="no">Continue</span>.</p>
+                <p class="Expl">- Definiremos un nombre a la impresora, una descripción y seleccionaremos <span class="span_contenido" translate="no">Share this printer</span>. Luego pulsaremos <span class="span_contenido" translate="no">Continue</span>.</p>
+                <p class="Expl">- Ahora seleccionaremos en la sección <span class="span_contenido" translate="no">Make</span> el driver <span class="span_url" translate="no">Generic</span>, en la sección <span class="span_contenido" translate="no">Model</span> el modelo <span class="span_url" translate="no">Generic CUPS-PDF Printer (w/ options) (en)</span> y por último pulsaremos <span class="span_contenido" translate="no">Add Printer</span>.</p>
 
                 <p>Ahora nos dirigiremos a la sección de impresoras del panel. La URL debería ser:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
@@ -97,7 +97,7 @@ Código por byAd12
 
                 <p>Ahora añadiremos una política al servicio mediante el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
-                <p class="Expl">Buscaremos una sección <span class="span_contenido">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
+                <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">  JobPrivateValues none</code></pre>
                 <p class="Expl">Luego reiniciaremos el servicio para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
@@ -127,7 +127,7 @@ Código por byAd12
 
                 <p><b>Servidor</b>: En la página de impresoras deberíamos ver los trabajos enviados:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
-                <p class="Expl">Los PDFs generados se guardarán normalmente en la carpeta del servidor: <span class="span_url">/var/spool/cups-pdf/</span>.</p>
+                <p class="Expl">Los PDFs generados se guardarán normalmente en la carpeta del servidor: <span class="span_url" translate="no">/var/spool/cups-pdf/</span>.</p>
 
             </div>
 

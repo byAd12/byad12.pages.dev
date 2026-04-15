@@ -408,7 +408,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
 
                 <p>Para solucionar lo anterior seguiremos los siguientes pasos:</p>
 
-                <p>1. Declaramos en el elemento raíz o en la propia etiqueta "usuarios" un nombre personalizado (prefijo) para cada documento usando <span class="span_contenido">xmlns</span>:</p>
+                <p>1. Declaramos en el elemento raíz o en la propia etiqueta "usuarios" un nombre personalizado (prefijo) para cada documento usando <span class="span_contenido" translate="no">xmlns</span>:</p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;raiz 
     xmlns:visitantes="https://byad12.pages.dev/visitantes.xml" 
@@ -460,7 +460,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
                     Estas reglas definen el jerarquía y orden, tipo de contenido, atributos asociados y la integridad de los elementos.
                 </p>
 
-                <p>Si las declaraciones DTD están guardadas en un documento distinto al documento XML se puede enlazar mediante <span class="span_contenido">SYSTEM</span>:</p>
+                <p>Si las declaraciones DTD están guardadas en un documento distinto al documento XML se puede enlazar mediante <span class="span_contenido" translate="no">SYSTEM</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd"&gt;</code></pre>
 
             </div>
@@ -468,7 +468,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
             <div>
                 <h2>DTD &gt; Declaración externa (pública)</h2>
 
-                <p>El documento DTD también puede estar alojado y ser accesible desde internet, para ello se enlaza al documento XML mediante <span class="span_contenido">PUBLIC</span>:</p>
+                <p>El documento DTD también puede estar alojado y ser accesible desde internet, para ello se enlaza al documento XML mediante <span class="span_contenido" translate="no">PUBLIC</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
 
                 <p class="Expl">La primera parte en comillas es el identificador único público para saber que versión usar.<br>La segunda parte es la URL al archivo.</p>
@@ -490,7 +490,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
             <div>
                 <h2>DTD &gt; Declaración mixta</h2>
 
-                <p>Se puede usar declaraciones internas y externas en el mismo <span class="span_contenido">DOCTYPE</span>:</p>
+                <p>Se puede usar declaraciones internas y externas en el mismo <span class="span_contenido" translate="no">DOCTYPE</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd" [
     declaración1
     declaración2
@@ -526,11 +526,11 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
     ...
 &lt;/elemento_raiz&gt;</code></pre>
                 <p class="Expl">
-                    <b>xmlns:xsi</b> es la definición de un namespace que se le asigna el sufijo <span class="span_contenido">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
-                    Tiene que tener como valor la URL <span class="span_url">http://www.w3.org/2001/XMLSchema-instance</span>.
+                    <b>xmlns:xsi</b> es la definición de un namespace que se le asigna el sufijo <span class="span_contenido" translate="no">xsi</span>, que puede cambiarse a otro pero debe usarse <u>siempre</u> el mismo en todo el documento. 
+                    Tiene que tener como valor la URL <span class="span_url" translate="no">http://www.w3.org/2001/XMLSchema-instance</span>.
                 </p>
                 <p class="Expl">
-                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido">xsi</span> utilizado para indicar la ruta al esquema XSD.
+                    <b>xsi:noNamespaceSchemaLocation</b> es un atributo del namespace <span class="span_contenido" translate="no">xsi</span> utilizado para indicar la ruta al esquema XSD.
                 </p>
 
             </div>

@@ -96,9 +96,9 @@ Código por byAd12
                 <ul>
                     <li>En "Realm" tiene que poner el nombre de dominio en mayúsculas.</li>
                     <li>En "Domain" tiene que poner el nombre de dominio sin el TLD y en mayúsculas.</li>
-                    <li>En "Server Role" debe estar en <span class="span_contenido">dc</span> (Domain Controller).</li>
-                    <li>En "DNS Backend" se dejará como <span class="span_contenido">SAMBA_INTERNAL</span>.</li>
-                    <li>En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url">1.1.1.1</span>.</li>
+                    <li>En "Server Role" debe estar en <span class="span_contenido" translate="no">dc</span> (Domain Controller).</li>
+                    <li>En "DNS Backend" se dejará como <span class="span_contenido" translate="no">SAMBA_INTERNAL</span>.</li>
+                    <li>En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url" translate="no">1.1.1.1</span>.</li>
                     <li>Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</li>
                 </ul>
 
@@ -113,14 +113,14 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
 
                 <br>
-                <p>10. Por último iniciaremos el servicio <span class="span_contenido">winbind</span>:</p>
+                <p>10. Por último iniciaremos el servicio <span class="span_contenido" translate="no">winbind</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl start samba-ad-dc smbd nmbd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable samba-ad-dc smbd nmbd winbind</code></pre>
                 <p class="Expl">Es importante que todos esos servicios estén activos para poder unirse al dominio. Si algo falla, se debe mirar el estado de cada servicio.</p>
 
                 <br>
                 <p>En la siguiente <a href="#Administrar_DC_Linux">sección</a> se puede ver la administración del servidor mediante línea de comandos.</p>
-                <p><u>Importante</u>: El usuario administrador del dominio se llama <span class="span_contenido">administrator</span> (en inglés).</p>
+                <p><u>Importante</u>: El usuario administrador del dominio se llama <span class="span_contenido" translate="no">administrator</span> (en inglés).</p>
             
             </div>
             
@@ -307,7 +307,7 @@ Código por byAd12
                 <p>Ahora se puede asociar el script al usuario mediante un equipo Windows con RSAT o con el siguiente comando en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">samba-tool user setprofile &lt;Nombre_Usuario&gt; --script-path &lt;Nombre_Script.bat&gt;</code></pre>
                 <p class="Expl">El script es una ruta relativa desde la ruta de sysvol configurada anteriormente.</p>
-                <p class="Expl">En el equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R &gt; <span class="span_contenido">dsa.msc</span> &gt; Usuario &gt; Propiedades &gt; Profile &gt; Logon script.</p>
+                <p class="Expl">En el equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R &gt; <span class="span_contenido" translate="no">dsa.msc</span> &gt; Usuario &gt; Propiedades &gt; Profile &gt; Logon script.</p>
             
             </div>
 
@@ -327,12 +327,12 @@ Código por byAd12
                 <p>Con los siguientes pasos en un cliente Linux podemos meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
                 <br>
-                <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url">.local</span>, es necesario editar el siguiente archivo:</p>
+                <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url" translate="no">.local</span>, es necesario editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">Dentro del archivo eliminaremos la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
                 <pre class="codigo" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
-                <p class="Expl">Esto se debe realizar porque los dominios <span class="span_url">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
-                <p class="Expl">Además, debemos añadir al final de las siguientes líneas la palabra <span class="span_contenido">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
+                <p class="Expl">Esto se debe realizar porque los dominios <span class="span_url" translate="no">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
+                <p class="Expl">Además, debemos añadir al final de las siguientes líneas la palabra <span class="span_contenido" translate="no">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd winbind
 group:          files systemd winbind</code></pre>
 
@@ -345,10 +345,10 @@ group:          files systemd winbind</code></pre>
                 <br>
                 <p>3. Ahora configuraremos el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comandom pero usando <u>un usuario diferente a root</u> ya que este no tiene permisos de modificar la interfaz gráfica:</p>
                 <pre class="codigo" translate="no"><code class="bash">nm-connection-editor</code></pre>
-                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4" y añadir <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
+                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4" y añadir <span class="span_contenido" translate="no">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
                 <p class="Expl">Para verificarlo realizaremos una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;</code></pre>
-                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
+                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido" translate="no">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url" translate="no">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
 
                 <br>
                 <p>4. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
@@ -369,13 +369,13 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
                 <p class="Expl">En caso que pida el nombre del reino de KRB5 hay que poner el nombre del dominio incluyendo el TLD.</p>
-                <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
+                <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido" translate="no">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
                 
                 <br>
                 <p>7. A continuación tenemos que actualizar SAMBA mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Ahora nos dirigiremos a una sección <span class="span_contenido">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
+                <p class="Expl">Ahora nos dirigiremos a una sección <span class="span_contenido" translate="no">[GLOBAL]</span> y cambiaremos las siguientes configuraciones:</p>
 
                 <br>
                 <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
@@ -394,7 +394,7 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">server role = member server</code></pre>
 
                 <br>
-                <p class="Expl">7.4. A continuación tendremos que localizar un bloque de configuración de <span class="span_contenido">idmap</span> en la sección <span class="span_contenido">[GLOBAL]</span>, que es parecido a lo siguiente:</p>
+                <p class="Expl">7.4. A continuación tendremos que localizar un bloque de configuración de <span class="span_contenido" translate="no">idmap</span> en la sección <span class="span_contenido" translate="no">[GLOBAL]</span>, que es parecido a lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="ini">;   idmap config * :              backend = tdb
 ;   idmap config * :              range   = 3000-7999
 ;   idmap config YOURDOMAINHERE : backend = tdb
@@ -436,7 +436,7 @@ group:          files systemd winbind</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">template homedir = /home/%D/%u</code></pre></td>
-                            <td>La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido">%D</span>.</td>
+                            <td>La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido" translate="no">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido" translate="no">%D</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">password server = *</code></pre></td>
@@ -474,7 +474,7 @@ group:          files systemd winbind</code></pre>
                 <p class="Expl">8.2. Intentaremos unir el cliente al dominio mediante el usuario y contraseña del Administrador del servidor Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
                 <ul class="Expl">
-                    <li>Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido">/etc/hosts</span>.</li>
+                    <li>Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido" translate="no">/etc/hosts</span>.</li>
                     <li>Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.</li>
                     <li>Si permite unirse al dominio, podremos ver el equipo en la sección "Computers" del servidor de Windows.</li>
                 </ul>
@@ -498,14 +498,14 @@ group:          files systemd winbind</code></pre>
                 <br>
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
-                <p class="Expl">Gracias al servicio <span class="span_contenido">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
+                <p class="Expl">Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
                 
                 <p class="Expl"><u>Importante</u>: Tendremos el <b>error</b> de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">pam_auth_update</code></pre>
                 <p class="Expl">Hay que seleccionar la opción "Create home directory on login". Después podemos probar a iniciar sesión de nuevo y verificar que la carpeta se crea localmente.</p>
 
                 <br>
-                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
+                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
 
             </div>
@@ -587,7 +587,7 @@ group:          files systemd winbind</code></pre>
                 <br>
 
                 <p class="Expl">
-                    Para situarse dentro de la carpeta personal del usuario se puede usar <span class="span_contenido">~</span> o una ruta absoluta usando variables como <span class="span_contenido">%(USER)</span> o <span class="span_contenido">%(DOMAIN)</span>.
+                    Para situarse dentro de la carpeta personal del usuario se puede usar <span class="span_contenido" translate="no">~</span> o una ruta absoluta usando variables como <span class="span_contenido" translate="no">%(USER)</span> o <span class="span_contenido" translate="no">%(DOMAIN)</span>.
                     Hay más variables que se pueden ver con el siguiente comando:
                 </p>
                 <pre class="codigo" translate="no"><code class="bash">man pam_mount.conf</code></pre>
@@ -611,7 +611,7 @@ group:          files systemd winbind</code></pre>
                 <p>1. Primero configuraremos como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
                 <p>2. En la sección "Cambios en el dominio o nombre de equipo" asignaremos un nombre de equipo identificativo y especificaremos el nombre de dominio del servidor.</p>
-                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido">administrator</span> y su contraseña asignada.</p>
+                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido" translate="no">administrator</span> y su contraseña asignada.</p>
 
                 <p>3. Reiniciaremos el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
             </div>
@@ -648,20 +648,20 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
 
                 <br>
-                <p>5. Es importante quitar o comentar en el siguiente fichero una línea que dice <span class="span_contenido">services = nss, pam</span>:</p>
+                <p>5. Es importante quitar o comentar en el siguiente fichero una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
 
-                <p class="Expl">Además, en el mismo archivo hay que poner el valor de la siguiente línea en <span class="span_contenido">false</span>:</p>
+                <p class="Expl">Además, en el mismo archivo hay que poner el valor de la siguiente línea en <span class="span_contenido" translate="no">false</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">use_fully_qualified_names = false</code></pre>
 
                 <br>
                 <p><u>Opcional</u>: Se puede indicar en SSSD que se quiere usar UIDs y GIDs personalizados del servidor. Para ello hay que editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
 
-                <p class="Expl">Deshabilitamos la siguiente línea poniendo como valor en <span class="span_contenido">false</span>:</p>
+                <p class="Expl">Deshabilitamos la siguiente línea poniendo como valor en <span class="span_contenido" translate="no">false</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldap_id_mapping = false</code></pre>
 
-                <p class="Expl">Y se añaden las siguientes líneas en la sección <span class="span_contenido">domain/Tu_Dominio</span>:</p>
+                <p class="Expl">Y se añaden las siguientes líneas en la sección <span class="span_contenido" translate="no">domain/Tu_Dominio</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldap_user_uid_number = uidNumber
 ldap_user_gid_number = gidNumber</code></pre>
 
@@ -691,7 +691,7 @@ ldap_user_gid_number = gidNumber</code></pre>
             
                 <p>Primero editamos el fichero de configuración de samba:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Y añadimos en la sección <span class="span_contenido">[global]</span> las siguientes líneas:</p>
+                <p class="Expl">Y añadimos en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
                 <pre class="codigo" translate="no"><code class="bash">vfs objects = acl_xattr
 map acl inherit = yes
 store dos attributes = yes</code></pre>

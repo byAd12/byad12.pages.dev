@@ -74,10 +74,10 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">script.sh arg1 arg2 ...</code></pre>
                 
                 <p>Dentro de un archivo, para hacer referencia a estos argumentos:</p>
-                <p class="Expl"><span class="span_contenido">$num</span>: Llamar un argumento en "num" del orden 1 al máximo de 9.</p>
-                <p class="Expl"><span class="span_contenido">$0</span>: Devuelve el nombre del script / función.</p>
-                <p class="Expl"><span class="span_contenido">$*</span>: Devuelve a todos los argumentos separados por espacio.</p>
-                <p class="Expl"><span class="span_contenido">$#</span>: Devuelve el n. total de parámetros que se pasaron.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">$num</span>: Llamar un argumento en "num" del orden 1 al máximo de 9.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">$0</span>: Devuelve el nombre del script / función.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">$*</span>: Devuelve a todos los argumentos separados por espacio.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">$#</span>: Devuelve el n. total de parámetros que se pasaron.</p>
             </div>
 
             <div>
@@ -85,7 +85,7 @@ Código por byAd12
 
                 <p>Imprimir un texto en pantalla:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo 'texto'</code></pre>
-                <p>Pedir un texto y guardarlo en la variable <span class="span_contenido">nombre_var</span>:</p>
+                <p>Pedir un texto y guardarlo en la variable <span class="span_contenido" translate="no">nombre_var</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">read -p 'texto' nombre_var</code></pre>
                 <p>Esperar cierto tiempo antes de hacer una acción:</p>
                 <pre class="codigo" translate="no"><code class="bash">sleep &lt;Segundos&gt;</code></pre>
@@ -94,7 +94,7 @@ Código por byAd12
             <div>
                 <h2>Llamar una variable</h2>
 
-                <p>Todo lo que esté dentro de <span class="span_contenido">" "</span> se interpreta como variables y texto. En cambio en <span class="span_contenido">' '</span> se interpreta todo como texto.</p>
+                <p>Todo lo que esté dentro de <span class="span_contenido" translate="no">" "</span> se interpreta como variables y texto. En cambio en <span class="span_contenido" translate="no">' '</span> se interpreta todo como texto.</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "$nombre_var"</code></pre>
             </div>
 
@@ -212,7 +212,7 @@ else
     // Qué hacer si no se cumple ninguna condición
 
 fi</code></pre>
-                <p class="Expl"> Siempre acaba en <span class="span_contenido">fi</span> para así indicar el final de la condicional.</p>
+                <p class="Expl"> Siempre acaba en <span class="span_contenido" translate="no">fi</span> para así indicar el final de la condicional.</p>
 
                 <p>Si se cumplen ambas condiciones:</p>
                 <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] && [ condición2 ]; then

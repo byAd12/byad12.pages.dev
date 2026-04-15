@@ -71,7 +71,7 @@ Código por byAd12
             <div>
                 <h2>Configuración en el servidor</h2>
                 
-                <p>1. Primero editaremos el siguiente archivo para poder definir un nombre de dominio como por ejemplo <span class="span_contenido">iso.asir</span>:</p>
+                <p>1. Primero editaremos el siguiente archivo para poder definir un nombre de dominio como por ejemplo <span class="span_contenido" translate="no">iso.asir</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/defaultdomain</code></pre>
 
                 <p class="Expl">Ahora, el dominio que hayamos configurado debe enseñarse con el comando:</p>
@@ -89,7 +89,7 @@ NISCLIENT=false</code></pre>
 
                 <p>3. Por seguridad definiremos la subred de IPs que podrán entrar a interactuar con el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/ypserv.securenets</code></pre>
-                <p class="Expl">Ya que por defecto se permite el acceso a todas las subredes comentaremos las siguientes líneas con un <span class="span_contenido">#</span> al principio de cada línea:</p>
+                <p class="Expl">Ya que por defecto se permite el acceso a todas las subredes comentaremos las siguientes líneas con un <span class="span_contenido" translate="no">#</span> al principio de cada línea:</p>
                 <pre class="codigo" translate="no"><code class="bash"># 0.0.0.0    0.0.0.0
 # ::/0</code></pre>
                 <p class="Expl">Y añadiremos una línea nueva donde definiremos la dirección de red y máscara, como por ejemplo:</p>
@@ -111,7 +111,7 @@ NISCLIENT=false</code></pre>
                 <p>6. Ahora generaremos la base de datos de todos los archivos del servidor como passwd, group, shadow, etc. para que los clientes lo añadan a su sistema:</p>
                 <p class="Expl">Si el servidor actuará como <u>master</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -m</code></pre>
-                <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido">y</span>.</p>
+                <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido" translate="no">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido" translate="no">y</span>.</p>
 
                 <p class="Expl">Si el servidor actuará como esclavo / <u>slave</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -s &lt;Hostname_Servidor_Master.dominio.tld&gt;</code></pre>
@@ -142,7 +142,7 @@ NISCLIENT=false</code></pre>
                 </p>
 
                 <p>
-                    La mejor solución a ello es compartir la carpeta <span class="span_url">/home</span> del servidor mediante NFS y luego montarla en los clientes, permitiendo así tener perfiles móviles.
+                    La mejor solución a ello es compartir la carpeta <span class="span_url" translate="no">/home</span> del servidor mediante NFS y luego montarla en los clientes, permitiendo así tener perfiles móviles.
                 </p>
 
                 <p>
@@ -167,13 +167,13 @@ NISCLIENT=false</code></pre>
 
                 <p>2. Ahora editaremos el fichero de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
-                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
+                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url" translate="no">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url" translate="no">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
                 <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw,sync,no_subtree_check)</code></pre>
 
                 <p>3. Por último exportaremos la configuración NFS para que sea efectiva:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -ra</code></pre>
 
-                <p>Pulse <a href="#Montar_Home_NIS">aquí</a> para ver como montar la carpeta <span class="span_url">/home</span> persistentemente en los clientes.</p>
+                <p>Pulse <a href="#Montar_Home_NIS">aquí</a> para ver como montar la carpeta <span class="span_url" translate="no">/home</span> persistentemente en los clientes.</p>
 
             </div>
 
@@ -189,7 +189,7 @@ NISCLIENT=false</code></pre>
             <div>
                 <h2>Configuración en el cliente</h2>
                 
-                <p>1. Primero editaremos el siguiente archivo para poder definir un nombre de dominio como por ejemplo <span class="span_contenido">iso.asir</span>:</p>
+                <p>1. Primero editaremos el siguiente archivo para poder definir un nombre de dominio como por ejemplo <span class="span_contenido" translate="no">iso.asir</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/defaultdomain</code></pre>
 
                 <p class="Expl">Además le asignaremos a este cliente su dominio DNS correspondiente:</p>
@@ -226,7 +226,7 @@ NISCLIENT=true</code></pre>
 group:          files systemd
 shadow:         files systemd
 gshadow:        files systemd</code></pre>
-                <p class="Expl">A esto, añadiendo al final de cada línea la palabra <span class="span_contenido">nis</span>:</p>
+                <p class="Expl">A esto, añadiendo al final de cada línea la palabra <span class="span_contenido" translate="no">nis</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd nis
 group:          files systemd nis
 shadow:         files systemd nis
@@ -242,7 +242,7 @@ gshadow:        files systemd nis</code></pre>
             <div>
                 <h2 id="Montar_Home_NIS">Montar la carpeta <span>/home</span> con NFS</h2>
                 
-                <p>A continuación están los pasos guiados para montar la carpeta <span class="span_url">/home</span> del servidor en cada cliente NIS:</p>
+                <p>A continuación están los pasos guiados para montar la carpeta <span class="span_url" translate="no">/home</span> del servidor en cada cliente NIS:</p>
 
                 <p>1. Primero instalaremos el servicio de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y nfs-common</code></pre>
@@ -268,7 +268,7 @@ gshadow:        files systemd nis</code></pre>
                 <h2>Problema - NFS sobreescribe el contenido de <span>/home</span></h2>
 
                 <p>
-                    Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url">/home</span>),
+                    Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url" translate="no">/home</span>),
                     va a provocar que el contenido local se machaque y solo se enseñe el contenido de la carpeta remota que se ha montado.
                 </p>
 
@@ -277,7 +277,7 @@ gshadow:        files systemd nis</code></pre>
                 </p>
 
                 <ul>
-                    <li>Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url">/home-nis</span> y dejar <span class="span_url">/home</span> para usuarios locales.</li>
+                    <li>Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url" translate="no">/home-nis</span> y dejar <span class="span_url" translate="no">/home</span> para usuarios locales.</li>
                     <li class="LiSinPunto">
                         <ul>
                             <li><b>Ventajas</b>: Es automático del lado del cliente ya que solo se monta una carpeta.</li>
@@ -292,7 +292,7 @@ gshadow:        files systemd nis</code></pre>
                     <li>Crear un script que se ejecutará cuando se vaya a montar un nuevo usuario en los clientes - <a href="#script-nis">explicación</a>.</li>
                     <li class="LiSinPunto">
                         <ul>
-                            <li><b>Ventajas</b>: Interactivo y fácil de usar. En el servidor solo hay que compartir la carpeta <span class="span_url">/home</span>.</li>
+                            <li><b>Ventajas</b>: Interactivo y fácil de usar. En el servidor solo hay que compartir la carpeta <span class="span_url" translate="no">/home</span>.</li>
                             <li><b>Desventajas</b>: Debe ejecutarse el script por cada nuevo usuario en los equipos clientes (o automatizarlo por SSH).</li>
                         </ul>
                     </li>
@@ -312,9 +312,9 @@ gshadow:        files systemd nis</code></pre>
                     <li>Crea un bucle.</li>
                     <li>Al principio del bucle pide que le pases un nombre de usuario de NIS.</li>
                     <li>Crea la carpeta personal si no existe.</li>
-                    <li>Automáticamente crea una nueva línea en <span class="span_url">/etc/fstab</span> para montar la carpeta individual de ese usuario en el sistema.</li>
+                    <li>Automáticamente crea una nueva línea en <span class="span_url" translate="no">/etc/fstab</span> para montar la carpeta individual de ese usuario en el sistema.</li>
                     <li>Monta las carpetas y verifica si hay errores.</li>
-                    <li>Repite el bucle - se puede cortar con <span class="span_url">CTRL + C</span>.</li>
+                    <li>Repite el bucle - se puede cortar con <span class="span_url" translate="no">CTRL + C</span>.</li>
                 </ol>
 
                 <p>Pasos para crear el script:</p>
@@ -353,7 +353,7 @@ done</code></pre>
             <div>
                 <h2>Comando "<span>getent passwd</span>"</h2>
                 
-                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url">/etc/passwd</span> y al comando <span class="span_contenido">ypcat passwd</span>:</p>
+                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al archivo <span class="span_url" translate="no">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el archivo <span class="span_url" translate="no">/etc/passwd</span> y al comando <span class="span_contenido" translate="no">ypcat passwd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
             </div>

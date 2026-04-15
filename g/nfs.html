@@ -56,7 +56,7 @@ Código por byAd12
                 
                 <p>En el servidor hay que instalar el siguiente paquete para poder compartir una carpeta por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install nfs-kernel-server</code></pre>
-                <p class="Expl">Al instalarlo informará que se creó el archivo <span class="span_contenido">/etc/exports</span>.</p>
+                <p class="Expl">Al instalarlo informará que se creó el archivo <span class="span_contenido" translate="no">/etc/exports</span>.</p>
 
                 <p>Tanto en el cliente como en el servidor podemos adicionalmente permitir en el firewall el tráfico del servicio NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow nfs</code></pre>
@@ -74,21 +74,29 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
 
                 <p>2. Añadir una línea para compartir la carpeta:</p>
-                <pre class="codigo" translate="no"><code class="bash">/carpeta_a_compartir  hostname_permitido(permisos)  hostname_permitido_2(permisos)  ...</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">/carpeta_a_compartir  hostname(permisos)  hostname_2(permisos)  ...</code></pre>
                 <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
-                <p class="Expl"><b>/carpeta_a_compartir</b>: La carpeta local del servidor que se desea compartir a otros equipos.</p>
-                <p class="Expl"><b>/hostname_permitido(permisos)</b>: Definimos los equipos que puedan acceder al recurso. Entre paréntesis seleccionamos los permisos <span class="span_contenido">rw</span> (<b>read and write</b>) o <span class="span_contenido">ro</span> (<b>read only</b>). <u>Definición de hostnames</u>:
-                    <br><br>
-                    <span class="span_contenido">*</span> - Se permite a cualquier equipo.
-                    <br><br>
-                    <span class="span_contenido">hostname</span> - Se permite a un equipo específico mediante su nombre de equipo.
-                    Hay que especificar en el archivo <b>/etc/hosts</b> una línea para definir su dirección IP.
-                    <br><br>
-                    <span class="span_contenido">IP</span> - Se permite a un equipo específico mediante su dirección IP.
-                    <br><br>
-                    <span class="span_contenido">dirección_red/mascara</span> - Se permite el acceso a los equipos de una subred mediante la dirección de red. 
-                    Se define la máscara en formato CIDR (ej. /24).
+                <p class="Expl">
+                    <b>/carpeta_a_compartir</b>: La carpeta local del servidor que se desea compartir a otros equipos.
+                    <br>
+                    <b>/hostname(permisos)</b>: Definimos los equipos que puedan acceder al recurso y sus permisos:
                 </p>
+                <ul class="Expl">
+                    <li><span class="span_contenido" translate="no">rw</span> - read and write.</li>
+                    <li><span class="span_contenido" translate="no">ro</span> - read only.</li>
+                </ul>
+
+                <p class="Expl"><u>Definición de hostnames</u>:</p>
+                <ul class="Expl">
+                    <li><span class="span_contenido" translate="no">*</span> - Se permite a cualquier equipo.</li>
+                    <li>
+                        <span class="span_contenido" translate="no">hostname</span> - Se permite a un equipo específico mediante su nombre de equipo.
+                        Es necesario crear un registro DNS interno en el archivo <span class="span_url" translate="no">/etc/hosts</span> para relacionar el hostname con su dirección IP.
+                    </li>
+                    <li><span class="span_contenido" translate="no">IP</span> - Se permite a un equipo específico mediante su dirección IP.</li>
+                    <li><span class="span_contenido">dirección_red/mascara</span> - Se permite el acceso a los equipos de una subred mediante la dirección de red. 
+                    Se define la máscara en formato CIDR (ej. /24).</li>
+                </ul>
 
                 <p>3. Guardar y salirse del editor y aplicar los cambios con el comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -rav</code></pre>
@@ -101,7 +109,7 @@ Código por byAd12
                 <p>1. En el cliente se puede mirar qué carpetas se puede montar del servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">showmount -e IP_servidor</code></pre>
                 <p class="Expl"><b>IP_servidor</b>: La IPv4 del servidor que aloja el recurso compartido.</p>
-                <p class="Expl">Dará error si no se instaló el paquete <span class="span_contenido">nfs-common</span>.</p>
+                <p class="Expl">Dará error si no se instaló el paquete <span class="span_contenido" translate="no">nfs-common</span>.</p>
 
                 <p>2. Una vez podamos ver el recurso hay que montar la carpeta del servidor en una carpeta del cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir /mnt/carpeta_local</code></pre>
@@ -109,14 +117,14 @@ Código por byAd12
                 <p class="Expl"><b>/mnt/carpeta_local</b>: Una ruta local del cliente en la que montar el recurso compartido.</p>
                 <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
 
-                <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <span class="span_contenido">otros</span>:</p>
+                <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <u>otros</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod 755 /carpeta_remota</code></pre>
 
-                <p>El comando <span class="span_contenido">ls -ld /mnt/carpeta_local</span> no da la información correcta en el cliente ya que muestra el usuario y grupo local asociado a ese ID numérico, no el nombre del servidor.
+                <p>El comando <span class="span_contenido" translate="no">ls -ld /mnt/carpeta_local</span> no da la información correcta en el cliente ya que muestra el usuario y grupo local asociado a ese ID numérico, no el nombre del servidor.
                     Esto sucede ya que Linux utiliza los UID y GID del servidor y que en el cliente normalmente tiene usuarios diferentes creados en esos IDs.
                 </p>
                 <p>
-                    Se puede ver los IDs del servidor sin traducirlos al nombre usuario local del cliente con el comando <span class="span_contenido">ls -ldn /mnt/carpeta_local</span>.
+                    Se puede ver los IDs del servidor sin traducirlos al nombre usuario local del cliente con el comando <span class="span_contenido" translate="no">ls -ldn /mnt/carpeta_local</span>.
                 </p>
             </div>
 
@@ -138,13 +146,13 @@ Código por byAd12
                 <p><b>A TENER EN CUENTA</b>:</p>
 
                 <p>
-                    Si la carpeta se comparte con permisos <span class="span_contenido">ro</span> y se entra de forma remota tendrá esos permisos aunque de forma local en el servidor tenga los permisos <span class="span_contenido">rwx</span>.
-                    Los permisos que se aplican son <span class="span_contenido">ro</span> al ser de forma remota. Si entra en local tendrá los permisos <span class="span_contenido">rwx</span>.
+                    Si la carpeta se comparte con permisos <span class="span_contenido" translate="no">ro</span> y se entra de forma remota tendrá esos permisos aunque de forma local en el servidor tenga los permisos <span class="span_contenido" translate="no">rwx</span>.
+                    Los permisos que se aplican son <span class="span_contenido" translate="no">ro</span> al ser de forma remota. Si entra en local tendrá los permisos <span class="span_contenido" translate="no">rwx</span>.
                     <br><br>
-                    Si es al revés (remota - <span class="span_contenido">rw</span>, local - <span class="span_contenido">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido">w</span>.
+                    Si es al revés (remota - <span class="span_contenido" translate="no">rw</span>, local - <span class="span_contenido" translate="no">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido" translate="no">w</span>.
                 </p>
                 <p><b>IMPORTANTE</b>:</p>
-                <p>Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido">ro</span> / <span class="span_contenido">rw</span>).</p>
+                <p>Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
             
                 <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
                 <p>Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
@@ -171,7 +179,7 @@ Código por byAd12
                 <p class="Expl"><b>defaults</b>: Opciones predefinidas.</p>
                 <p class="Expl"><b>nfsvers=3</b>: Se indica que se debe usar NFSv3.</p>
                 <p class="Expl"><b>0</b>: No realizar una copia de seguridad.</p>
-                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheros con los programas <span class="span_contenido">dump</span> y <span class="span_contenido">fsck</span>.</p>
+                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheros con los programas <span class="span_contenido" translate="no">dump</span> y <span class="span_contenido" translate="no">fsck</span>.</p>
             </div>
 
 

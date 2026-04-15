@@ -53,10 +53,10 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>Primero instalaremos el servidor LDAP (<span class="span_contenido">slapd</span>) y las utilidades (<span class="span_contenido">ldap-utils</span>):</p>
+                <p>Primero instalaremos el servidor LDAP (<span class="span_contenido" translate="no">slapd</span>) y las utilidades (<span class="span_contenido" translate="no">ldap-utils</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install slapd ldap-utils -y</code></pre>
-                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio del servidor (<span class="span_contenido">slapd</span>).</p>
+                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio del servidor (<span class="span_contenido" translate="no">slapd</span>).</p>
             </div>
 
             <div>
@@ -65,7 +65,7 @@ Código por byAd12
                 <p>El servicio debe estar en modo <span class="span_contenido" translate="no">active</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status slapd</code></pre>
 
-                <p>El servicio <span class="span_contenido">slapd</span> debe tener un puerto en modo <span class="span_contenido" translate="no">LISTEN</span>:</p>
+                <p>El servicio <span class="span_contenido" translate="no">slapd</span> debe tener un puerto en modo <span class="span_contenido" translate="no">LISTEN</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ss -pltu | grep slapd</code></pre>
 
                 <p>Al no haber configurado nada, deberá devolver <span class="span_contenido" translate="no">NODOMAIN</span>:</p>
@@ -79,7 +79,7 @@ Código por byAd12
             <div>
                 <h2>Formato de archivo</h2>
 
-                <p>Los archivos <span class="span_url" translate="no">.ldif</span> sirven para crear varios elementos a la vez para luego añadirlos a la BB.DD. con el comando <span class="span_contenido">ldapadd</span>:</p>
+                <p>Los archivos <span class="span_url" translate="no">.ldif</span> sirven para crear varios elementos a la vez para luego añadirlos a la BB.DD. con el comando <span class="span_contenido" translate="no">ldapadd</span>:</p>
                 <pre class="codigo" translate="no"><code class="yaml"># Elemento 1
 dn: &lt;URI&gt;
     &lt;atributos&gt;: &lt;valor&gt;
@@ -103,7 +103,7 @@ dn: &lt;URI&gt;
                 <p>Podemos comprobar el estado del servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
 
-                <p>Ahora comprobaremos que podemos entrar al servicio con el usuario <span class="span_contenido">admin</span>:</p>
+                <p>Ahora comprobaremos que podemos entrar al servicio con el usuario <span class="span_contenido" translate="no">admin</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W</code></pre>
                 <p class="Expl">Luego ponemos la contraseña y si devuelve lo que escribimos está bien configurado.</p>
             </div>
@@ -301,12 +301,12 @@ changetype: delete</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-ldap libnss-ldap nss-updatedb libnss-db nfs-common nslcd</code></pre>
                 
                 <p class="Expl">Va a pedir una serie de preguntas, a las cuales tendremos que responder de la siguiente manera:</p>
-                <p class="Expl">1. Cual es la URL del servidor - <span class="span_contenido">ldap://[IP_SERVIDOR]</span></p>
-                <p class="Expl">2. Cual es el dominio de LDAP - <span class="span_contenido">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
+                <p class="Expl">1. Cual es la URL del servidor - <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></p>
+                <p class="Expl">2. Cual es el dominio de LDAP - <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
                 <p class="Expl">3. Seleccionar "Version3"</p>
                 <p class="Expl">4. Seleccionar "Sí"</p>
                 <p class="Expl">5. Seleccionar "No"</p>
-                <p class="Expl">6. Cual es la URI del usuario administrador - <span class="span_contenido">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
+                <p class="Expl">6. Cual es la URI del usuario administrador - <span class="span_contenido" translate="no">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
                 <p class="Expl">7. Va a pedir la contraseña del usuario administrador por protección antes de unirte al dominio</p>
                 <p class="Expl">8. Seleccionar "msd"</p>
 
@@ -315,7 +315,7 @@ changetype: delete</code></pre>
 
                 <p>3. Una vez configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">De las 3 primeras líneas reemplazaremos la palabra <span class="span_contenido">compact</span> a <span class="span_contenido">files ldap</span>.</p>
+                <p class="Expl">De las 3 primeras líneas reemplazaremos la palabra <span class="span_contenido" translate="no">compact</span> a <span class="span_contenido" translate="no">files ldap</span>.</p>
 
                 <p>4. Ahora configuraremos PAM. Primero haremos lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">update /upgrade</code></pre>
@@ -325,7 +325,7 @@ changetype: delete</code></pre>
                 <p>5. Comprobaremos que podemos ver los usuarios del servidor en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
-                <p>6. Del siguiente fichero tendremos que quitar de una línea la palabra <span class="span_contenido">use_authtok</span>:</p>
+                <p>6. Del siguiente fichero tendremos que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-password</code></pre>
 
                 <p>7. Reiniciaremos el equipo para que se apliquen los cambios:</p>

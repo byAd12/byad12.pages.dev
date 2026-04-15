@@ -62,7 +62,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep postfix</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">netstat -ltn | grep 25</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">telnet localhost 25</code></pre>
-                <p class="Expl">Dentro usar el comando <span class="span_contenido">HELO</span> y debe devolver el código 250.</p>
+                <p class="Expl">Dentro usar el comando <span class="span_contenido" translate="no">>HELO</span> y debe devolver el código 250.</p>
             </div>
 
             <div>
@@ -88,7 +88,7 @@ Código por byAd12
                     </table>
                 </div>
 
-                <p><u>Formato</u> del archivo <span class="span_url">/etc/postfix/main.cf</span>:</p>
+                <p><u>Formato</u> del archivo <span class="span_url" translate="no">/etc/postfix/main.cf</span>:</p>
                 <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continúa a la línea anterior.</p>
                 <p class="Expl"><b>$parámetro</b>: Asignar un valor de un parámetro a otro.</p>
 
@@ -124,7 +124,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>ENVIAR CORREOS</h1>
-        <h2 class="TituloSecundario">Telnet y comando <span class="span_contenido">mail</span></h2>
+        <h2 class="TituloSecundario">Telnet y comando <span class="span_contenido" translate="no">>mail</span></h2>
         <hr class="SeparadorConTitulo">
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -152,7 +152,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">apt install mailutils</code></pre>
                 <p>Usar el comando [Solo funciona con cuentas reales del sistema]:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [ARCHIVO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
-                <p class="Expl"><span class="span_contenido">CTRL + D</span>: Enviar el mensaje.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">>CTRL + D</span>: Enviar el mensaje.</p>
                 <p>Si se envió a otro usuario del sistema se puede ver su correo en:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /var/mail/[NOMBRE_USUARIO]</code></pre>
             </div>
