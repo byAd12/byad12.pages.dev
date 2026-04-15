@@ -135,7 +135,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="">Elemento raíz</h2>
+                <h2 id="Elemento_Raiz">Elemento raíz</h2>
             
                 <p>El elemento <span class="span_contenido" translate="no">stylesheet</span> engloba a todos los elementos de la hoja XSL:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -145,11 +145,59 @@ Código por byAd12
     &lt;!-- Aquí se pondrán los elementos XSLT --&gt;
 
 &lt;/xsl:stylesheet&gt;</code></pre>
-                <p class="Expl">
-                    <b>version</b>: Es importante indicar que sea "2.0".
-                    <br>
-                    <b>xmlns:xsl</b>: Es la declaración de un espacio de nombres "xsl" y normalmente se declara en la misma URL.
-                </p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento raíz - <b>stylesheet</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">version=""</code></pre></td>
+                            <td>Es importante indicar que sea "2.0".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">xmlns:xsl=""</code></pre></td>
+                            <td>Es la declaración de un espacio de nombres "xsl" para el elemento <span class="span_contenido" translate="no">stylesheet</span> y normalmente se declara en la misma URL.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <br>
+            
+                <p>El elemento <span class="span_contenido" translate="no">transform</span> es alternativo al otro elemento raíz <span class="span_contenido" translate="no">stylesheet</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;xsl:transform version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;!-- Aquí se pondrán los elementos XSLT --&gt;
+
+&lt;/xsl:transform&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento raíz - <b>transform</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">version=""</code></pre></td>
+                            <td>Es importante indicar que sea "2.0".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">xmlns:xsl=""</code></pre></td>
+                            <td>Es la declaración de un espacio de nombres "xsl" para el elemento <span class="span_contenido" translate="no">transform</span> y normalmente se declara en la misma URL.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <br>
+
+                <p><u>Importante</u>: Si el elemento raíz está vacío (o solo tiene el elemento <a href="#Elemento_Output">xsl:output</a> dentro), el resultado sería todos los elementos del documento XML.</p>
 
             </div>
 
@@ -164,7 +212,376 @@ Código por byAd12
         <div class="parte1">
 
             <div>
+                <h2 id="Elemento_Output">Elemento <span>&lt;xsl:output/&gt;</span></h2>
+            
+                <p>Este elemento permite definir el formato de salida de la transformación XSLT. Se suele situar al principio dentro del <a href="#Elemento_Raiz">elemento raíz</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:output
+    method="xml|html|text"        indent="yes|no"
+
+    version=""                    encoding=""
+    omit-xml-declaration="yes|no" standalone="yes|no"
+    doctype-public=""             doctype-system=""
+    cdata-section-elements=""     media-type=""
+/&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>output</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">method="xml|html|text"</code></pre></td>
+                            <td>El formato de salida de la transformación. Por defecto es "xml".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">indent="yes|no"</code></pre></td>
+                            <td>Si la salida está indentada con su estructura de salida (XML, HTML).</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="xml">version=""</code></pre></td>
+                            <td>Si la salida es XML o HTML se puede especificar qué versión usar.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">encoding=""</code></pre></td>
+                            <td>Codificación de carácteres de la transformación del fichero.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">omit-xml-declaration="yes|no"</code></pre></td>
+                            <td>Indica si la declaración XML puede ser omitida o debe ser incluída. Por defecto es "no".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">standalone="yes|no"</code></pre></td>
+                            <td>Indica si la declaración del standalone puede aparecer.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">doctype-public=""</code></pre></td>
+                            <td>Permite establecer el valor del atributo PUBLIC en la declaración del DOCTYPE del fichero de salida.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">doctype-system=""</code></pre></td>
+                            <td>Permite establecer el valor del atributo SYSTEM en la declaración del DOCTYPE del fichero de salida.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">cdata-section-elements=""</code></pre></td>
+                            <td>Permite separar, mediante espacios en blanco, los elementos de una lista cuyo contenido debería ser escrito como secciones CDATA. </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">media-type=""</code></pre></td>
+                            <td>Permite definir el tipo MIME del fichero de salida. Por defecto es "text/xml".</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Template">Elemento <span>&lt;xsl:template&gt;</span></h2>
+            
+                <p>Este elemento es fundamental ya que permite definir una plantilla que se aplicará al contenido a transformar:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:template match="expresion-XPATH" name="nombre_plantilla"&gt;
+    
+    &lt;!-- Contenido de la plantilla --&gt;
+
+&lt;/xsl:template&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>template</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">match=""</code></pre></td>
+                            <td>Es la expresión de XPATH que selecciona los elementos XML al que aplicar la plantilla.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Nombre personalizado para la plantilla para poder invocarlo mediante <a href="Elemento_Call_Template">xsl:call-template</a>.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>Usos de <span class="span_contenido" translate="no">match=""</span>:</p>
+
+                <ul>
+                    <li>Para seleccionar el elemento raíz del documento - <span class="span_contenido" translate="no">/</span>.</li>
+                    <li>Para seleccionar un varios elementos específicos del documento - <span class="span_contenido" translate="no">nombre_elemento</span>.</li>
+                    <li>Más selecciones en la guía de <a href="xpath.html">XPATH</a>.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Template_Transformacion_HTML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en HTML</h2>
+            
+                <p>Dentro de la plantilla se puede tener la siguiente estructura HTML básica, donde podremos modificar el contenido dentro de la etiqueta <span class="span_contenido">&lt;body&gt;</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="html" indent="yes" /&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;!-- Inicio de la plantilla --&gt;
+
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Título del documento transformado&lt;/title&gt;
+            &lt;/head&gt;
+
+            &lt;body&gt;
+            
+                &lt;!-- Contenido del documento HTML transformado --&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+
+        &lt;!-- Fin de la plantilla --&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Template_Transformacion_XML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en XML</h2>
+            
+                <p>Dentro de la plantilla se puede tener la siguiente estructura XML básica, donde podremos modificar el contenido dentro de la etiqueta raíz:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="xml" indent="yes" /&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;!-- Inicio de la plantilla --&gt;
+
+        &lt;etiqueta_xml_raiz&gt;
+
+            &lt;!-- Contenido del documento XML transformado --&gt;
+
+        &lt;/etiqueta_xml_raiz&gt;
+
+        &lt;!-- Fin de la plantilla --&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Template_Transformacion_TEXT">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en TEXT</h2>
+            
+                <p>Dentro de la plantilla se puede tener la siguiente estructura, donde podremos modificar el contenido dentro del template según las necesidades:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="text" /&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;!-- Inicio de la plantilla --&gt;
+
+        &lt;!-- Contenido del documento de texto transformado --&gt;
+
+        &lt;!-- Fin de la plantilla --&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Call_Template">Elemento <span>&lt;xsl:call-template&gt;</span></h2>
+            
+                <p>Este elemento permite invocar a un template definido previamente mediante su nombre definido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:call-template name="nombre-plantilla" /&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>call-template</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Nombre de la plantilla que se va a invocar.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h2>
+            
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">&lt;xsl:call-template&gt;</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="html" indent="yes" /&gt;
+
+    &lt;xsl:template name="plantilla-parrafo"&gt;
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+    &lt;/xsl:template&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Título del documento transformado&lt;/title&gt;
+            &lt;/head&gt;
+
+            &lt;body&gt;
+            
+                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
+                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+                <p>Como resultado daría el siguiente documento HTML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Título del documento transformado&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+    
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Value_Of">Elemento <span>&lt;xsl:value-of&gt;</span></h2>
+            
+                <p>Este elemento permite coger un valor mediante consultas <a href="xpath.html">XPATH</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:value-of select="expresion-xpath" /&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>value-of</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger valores del documento XML a transformar.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>Estas consultas son relativas a donde se sitúe este elemento:</p>
+                <ul>
+                    <li>Si está dentro del elemento <a href="#Elemento_Template">xsl:template</a>, este define mediante su atributo <span class="span_contenido" translate="no">match=""</span> donde se empiezan a realizar las consultas.</li>
+                    <li>Si está dentro del elemento <a href="#Elemento_Template">xsl:for-each</a>, este define mediante su atributo <span class="span_contenido" translate="no">select=""</span> donde se empiezan a realizar las consultas.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Value_Of_Ejemplo">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo</h2>
+            
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">&lt;xsl:value-of&gt;</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="html" indent="yes" /&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;xsl:value-of select="informacion/titulo" /&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+                <p>Como resultado daría el siguiente documento HTML, transformando el párrafo al contenido que haya dentro del documento XML que coincida con la expresión XPATH <span class="span_contenido" translate="no">/informacion/titulo</span>:</p>
+                <pre class="codigo" translate="no"><code class="text">Contenido</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Value_Of_Ejemplo_Varios_Elementos">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo con varios elementos</h2>
+            
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">&lt;xsl:value-of&gt;</a> pero cogiendo valores de elementos de un elemento común repetido múltiples veces en el documento XML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="text" /&gt;
+
+    &lt;xsl:template match="persona"&gt;
+        &lt;xsl:value-of select="informacion/nombre" /&gt;,&lt;xsl:value-of select="informacion/apellido" /&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+                <p>Como resultado daría el siguiente documento de texto, como resultado el "nombre" y "apellido" de cada elemento "persona" separados por una coma:</p>
+                <pre class="codigo" translate="no"><code class="text">nombre1,apellido1
+nombre2,apellido2
+...</code></pre>
+                
+                <p>Otra forma de hacerlo es seleccionando con el elemento <a href="#Elemento_Template">xsl:template</a> a <span class="span_contenido" translate="no">/</span> y usando el elemento <a href="#Elemento_For_Each">xsl:for-each</a>.</p>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
                 <h2 id="">...</h2>
+
             
                 <p>...</p>
                 <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
