@@ -1,7 +1,5 @@
-Nuevo contenido (XSLT) y estilos
+Mejora de redacción y contenido (PK)
 
-# g/xslt.html
-Nuevo contenido del tema (sin completar)
-
-# resources/blog.css
-Se definió estilos !important debido a que las tablas no aplicaba correctamente su margen y tamaño
+# g/packet_tracer.html
+Mejoras de redacción
+Se eliminó contenido innecesario
