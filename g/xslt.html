@@ -122,6 +122,8 @@ Código por byAd12
                     <li><u>Instrucciones</u>: Están contenidas dentro de elementos de nivel superior.</li>
                 </ul>
 
+                <p><u>Importante</u> - En cualquier expresión <a href="xpath.html">XPATH</a> es recomendable usar entidades predefinidas como <span class="span_contenido">&amp;gt;</span> en vez de <span class="span_contenido">&gt;</span> para evitar problemas.</p>
+
             </div>
 
         </div>
@@ -440,7 +442,7 @@ Código por byAd12
             <div>
                 <h2 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h2>
             
-                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">&lt;xsl:call-template&gt;</a>:</p>
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">xsl:call-template</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
 
@@ -510,7 +512,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">select=""</code></pre></td>
-                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger valores del documento XML a transformar.</td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger varios nodos del documento XML para aplicar el template.</td>
                         </tr>
                         
                     </table>
@@ -527,7 +529,7 @@ Código por byAd12
             <div>
                 <h2 id="Elemento_Value_Of_Ejemplo">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo</h2>
             
-                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">&lt;xsl:value-of&gt;</a>:</p>
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">xsl:value-of</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
 
@@ -547,7 +549,7 @@ Código por byAd12
             <div>
                 <h2 id="Elemento_Value_Of_Ejemplo_Varios_Elementos">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo con varios elementos</h2>
             
-                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">&lt;xsl:value-of&gt;</a> pero cogiendo valores de elementos de un elemento común repetido múltiples veces en el documento XML:</p>
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">xsl:value-of</a> pero cogiendo valores de elementos de un elemento común repetido múltiples veces en el documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
 
@@ -565,6 +567,685 @@ nombre2,apellido2
 ...</code></pre>
                 
                 <p>Otra forma de hacerlo es seleccionando con el elemento <a href="#Elemento_Template">xsl:template</a> a <span class="span_contenido" translate="no">/</span> y usando el elemento <a href="#Elemento_For_Each">xsl:for-each</a>.</p>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Apply_Templates">Elemento <span>&lt;xsl:apply-templates&gt;</span></h2>
+
+                <p>El siguiente elemento permite seleccionar a un conjunto de nodos del documento XML y aplicarle un template:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:apply-templates select="expresion-xpath" /&gt;</code></pre>
+                
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>apply-templates</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger varios nodos del documento XML para aplicar el template.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Procesamiento_Templates">Procesamiento de templates</h2>
+
+                <ol>
+                    <li>El procesador XSLT comienza en el nodo raíz del documento.</li>
+                    <li>
+                        Busca un <a href="#Elemento_Template">xsl:template</a> cuyo atributo match coincida con ese nodo.
+                        <ul>
+                            <li>Si encuentra uno, lo ejecuta.</li>
+                            <li>
+                                Si no encuentra ninguno:
+                                <ul>
+                                    <li>puede aplicar reglas por defecto (seguir bajando por el XML),</li>
+                                    <li>o no generar salida visible.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Cuando un <a href="#Elemento_Template">xsl:template</a> se ejecuta, puede contener un elemento <a href="#Elemento_Apply_Templates">xsl:apply-templates</a>.
+                        <ul>
+                            <li>Esto hace que se seleccionen nuevos nodos y para cada uno: se busque el template correspondiente y se ejecute.</li>
+                        </ul>
+                    </li>
+                    <li>Este proceso se repite.</li>
+                </ol>
+            </div>
+
+            <div>
+                <h2 id="Elemento_Apply_Templates_Ejemplo">Elemento <span>&lt;xsl:apply-templates&gt;</span> - Ejemplo</h2>
+
+                <p>Partiendo del siguiente XML podemos llamar a un template por cada libro:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;biblioteca&gt;
+  &lt;libro&gt;
+    &lt;titulo&gt;Don Quijote&lt;/titulo&gt;
+    &lt;autor&gt;Cervantes&lt;/autor&gt;
+  &lt;/libro&gt;
+  &lt;libro&gt;
+    &lt;titulo&gt;1984&lt;/titulo&gt;
+    &lt;autor&gt;George Orwell&lt;/autor&gt;
+  &lt;/libro&gt;
+&lt;/biblioteca&gt;</code></pre>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;html&gt;
+            &lt;body&gt;
+                &lt;h2&gt;Listado de libros&lt;/h2&gt;
+
+                &lt;xsl:apply-templates select="libro" /&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+
+    &lt;!-- Contenido del template para cada libro --&gt;
+    &lt;xsl:template match="libro"&gt;
+        &lt;div&gt;
+            &lt;h3&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/h3&gt;
+            &lt;p&gt;Autor: &lt;xsl:value-of select="autor" /&gt;&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_For_Each">Elemento <span>&lt;xsl:for-each&gt;</span></h2>
+            
+                <p>El siguiente elemento permite crear un bucle que aplicará su contenido por cada nodo seleccionado:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:for-each select="expresion-xpath"&gt;
+    
+    &lt;!-- Contenido del template que se aplicará a cada nodo --&gt;
+    
+&lt;/xsl:for-each&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>for-each</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger varios nodos del documento XML para aplicar el template.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2 id="Elemento_For_Each_Ejemplo">Elemento <span>&lt;xsl:for-each&gt;</span> - Ejemplo</h2>
+            
+                <p>Por cada nodo "libro" dentro del nodo "biblioteca" se le aplicará el contenido dentro de la etiqueta <a href="#Elemento_For_Each">xsl:for-each</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;html&gt;
+            &lt;body&gt;
+                &lt;h2&gt;Listado de libros&lt;/h2&gt;
+
+                &lt;xsl:for-each select="libro"&gt;
+                    &lt;!-- Inicio del bucle --&gt;
+
+                    &lt;div&gt;
+                        &lt;h3&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/h3&gt;
+                        &lt;p&gt;Autor: &lt;xsl:value-of select="autor" /&gt;&lt;/p&gt;
+                    &lt;/div&gt;
+
+                    &lt;!-- Fin del bucle (para este libro) --&gt;
+                &lt;/xsl:for-each&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_For_Each">Elemento <span>&lt;xsl:sort&gt;</span></h2>
+            
+                <p>El siguiente elemento se sitúa dentro de un <a href="#Elemento_For_Each">xsl:for-each</a> para ordenar los nodos según unas opciones a configurar:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:sort
+    select="expresion-xpath"
+    order="ascending|descending"
+    case-order="upper-first|lower-first"
+    data-type="string|number"
+/&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>sort</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite seleccionar un texto o valor de un nodo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">order=""</code></pre></td>
+                            <td>Permite confiurar si el orden es ascendiente o descendiente. Por defecto es <span class="span_contenido">ascending</span> (ascendiente).</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">case-order=""</code></pre></td>
+                            <td>Si hay varias coincidencias se puede configurar que las mayúsculas se ordenen primero o las minúsculas. Por defecto es <span class="span_contenido">upper-first</span> (mayúsculas primero).</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">data-type=""</code></pre></td>
+                            <td>Se define el tipo de valor que contiene el nodo para poder filtrarlo. Por defecto es <span class="span_contenido">string</span>.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2 id="Elemento_Sort_Ejemplo">Elemento <span>&lt;xsl:sort&gt;</span> - Ejemplo</h2>
+            
+                <p>Dentro del <a href="#Elemento_For_Each">xsl:for-each</a> se ordenará cada nodo "libro" según su título en formato de texto en orden descendiente:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;html&gt;
+            &lt;body&gt;
+                &lt;h2&gt;Listado de libros&lt;/h2&gt;
+
+                &lt;xsl:for-each select="libro"&gt;
+
+                    &lt;xsl:sort select="titulo" order="descending" data-type="string" /&gt;
+
+                    &lt;div&gt;
+                        &lt;h3&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/h3&gt;
+                        &lt;p&gt;Autor: &lt;xsl:value-of select="autor" /&gt;&lt;/p&gt;
+                    &lt;/div&gt;
+
+                &lt;/xsl:for-each&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Attribute">Elemento <span>&lt;xsl:attribute&gt;</span></h2>
+
+                <p>El siguiente elemento permite crear en un XML o HTML de salida un atributo, definiendo su nombre y el valor que tendrá:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:attribute name="nombre"&gt;
+    &lt;xsl:value-of select="expresion-xpath" /&gt;
+&lt;/xsl:attribute&gt;</code></pre>
+                
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>attribute</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Es el nombre que tendrá el atributo dentro de un nodo.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>value-of</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite coger el valor de un nodo que tendrá este atributo.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Attribute_Ejemplo">Elemento <span>&lt;xsl:attribute&gt;</span> - Ejemplo</h2>
+            
+                <p>Dentro de cada nodo "libro" definiré el nombre del autor como atributo "nombre_autor":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;biblioteca&gt;
+            &lt;titulo&gt;Listado de libros&lt;/titulo&gt;
+
+            &lt;xsl:for-each select="libro"&gt;
+
+                &lt;libro&gt;
+                    &lt;xsl:attribute name="nombre_autor"&gt;
+                        &lt;xsl:value-of select="autor" /&gt;
+                    &lt;/xsl:attribute&gt;
+
+                    &lt;titulo&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/titulo&gt;
+                &lt;/libro&gt;
+
+            &lt;/xsl:for-each&gt;
+        &lt;/biblioteca&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Attribute_Alternativa">Alternativa al elemento <span>&lt;xsl:attribute&gt;</span></h2>
+
+                <p>La siguiente sintaxis permite escribir el atributo a mano seleccionando un valor con XPATH:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta_xml nombre_atributo="{expresion-xpath}" /&gt;</code></pre>
+                
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Sintaxis
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">etiqueta_xml</code></pre></td>
+                            <td>Hay que seleccionar el nodo XML al que se le aplicará el atributo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">nombre_atributo=""</code></pre></td>
+                            <td>Se define el nombre del atributo a crear y, entre comillas se define la consulta <a href="xpath.html">XPATH</a> que se usará como valor. Debe estar entre <span class="span_contenido">{}</span>.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span></h2>
+
+                <p>Este elemento permite crear un conjunto de atributos que pueden ser aplicados a cualquier elemento de salida:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:attribute-set name="nombre"&gt;
+    &lt;xsl:attribute name="nombre"&gt; Valor del atributo &lt;/xsl:attribute&gt;
+    ...
+&lt;/xsl:attribute-set&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>attribute-set</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Es un nombre identificativo por el que podremos llamarlo en otras partes del fichero XSLT.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span> - Uso con el atributo <span>use-attribute-sets</span></h2>
+
+                <p>Para poner el conjunto de atributos en un elemento XML se debe usar el siguiente atributo:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta_xml use-attribute-sets="nombre-set" /&gt;</code></pre>
+                
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Sintaxis
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">etiqueta_xml</code></pre></td>
+                            <td>Hay que seleccionar el nodo XML al que se le aplicará el conjunto de atributos.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">use-attribute-sets=""</code></pre></td>
+                            <td>Se define el nombre del conjunto de atributos que se desea usar.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_If">Elemento <span>&lt;xsl:if&gt;</span></h2>
+
+                <p>Este elemento permite crear una condicional para interpretar algo solo si una condición se cumple:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:if select="expresion-xpath"&gt;
+    
+    &lt;!-- Contenido a interpretar si la condición es verdadera --&gt;
+    
+&lt;/xsl:if&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>if</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite filtrar si algo cumple una condición.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_If_Ejemplo">Elemento <span>&lt;xsl:if&gt;</span> - Ejemplo</h2>
+
+                <p>En el siguiente ejemplo solo se enseñan los libros cuyo autor empieze con la letra "A":</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;biblioteca&gt;
+            &lt;titulo&gt;Listado de libros&lt;/titulo&gt;
+
+            &lt;xsl:for-each select="libro"&gt;
+
+                &lt;xsl:if select="starts-with(autor, 'A')"&gt;
+
+                    &lt;libro&gt;
+                        &lt;titulo&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/titulo&gt;
+                    &lt;/libro&gt;
+
+                &lt;/xsl:if&gt;
+
+            &lt;/xsl:for-each&gt;
+        &lt;/biblioteca&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Choose">Elemento <span>&lt;xsl:choose&gt;</span></h2>
+
+                <p>Este elemento permite crear condicionales para interpretar algo en función de que cumple la condición:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:choose&gt;
+    &lt;xsl:when test="condicion"&gt;
+        &lt;!-- Qué se interpreta si la condición es verdadera --&gt;
+    &lt;/xsl:when&gt;
+
+    &lt;!-- Se puede poner todos los elementos &lt;xsl:when&gt; que se quieran aquí --&gt;
+
+    &lt;xsl:otherwise&gt;
+        &lt;!-- Qué se interpreta si ninguna condición anterior se cumple - Es opcional --&gt;
+    &lt;/xsl:otherwise&gt;
+    
+&lt;/xsl:choose&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>when</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">test=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite filtrar si algo cumple una condición.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Choose_Ejemplo">Elemento <span>&lt;xsl:choose&gt;</span> - Ejemplo</h2>
+
+                <p>El siguiente código crea una etiqueta "color" dentro de "libro" y su valor es variable según el "precio" que tenga este "libro":</p>
+                <ol>
+                    <li>Si el precio es 0 - el color es rojo.</li>
+                    <li>Si el precio es 10 - el color es naranja.</li>
+                    <li>Si el precio es mayor a 20 - el color es verde.</li>
+                    <li>Si no cumple ninguna condición anterior - el color es negro.</li>
+                </ol>
+
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;biblioteca&gt;
+            &lt;titulo&gt;Listado de libros&lt;/titulo&gt;
+
+            &lt;xsl:for-each select="libro"&gt;
+
+                &lt;xsl:choose&gt;
+
+                    &lt;xsl:when test="precio = 0"&gt;
+                        &lt;color&gt;rojo&lt;/color&gt;
+                    &lt;/xsl:when&gt;
+                    &lt;xsl:when test="precio = 10"&gt;
+                        &lt;color&gt;naranja&lt;/color&gt;
+                    &lt;/xsl:when&gt;
+                    &lt;xsl:when test="precio > 20"&gt;
+                        &lt;color&gt;verde&lt;/color&gt;
+                    &lt;/xsl:when&gt;
+
+                    &lt;xsl:otherwise&gt;
+                        &lt;color&gt;negro&lt;/color&gt;
+                    &lt;/xsl:otherwise&gt;
+
+                &lt;/xsl:choose&gt;
+
+            &lt;/xsl:for-each&gt;
+        &lt;/biblioteca&gt;
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+            </div>
+
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Variable">Elemento <span>&lt;xsl:variable&gt;</span></h2>
+
+                <p>Este elemento permite almacenar valores para ser usados más tarde en otras partes del documento:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:variable name="nombre" select="expresion-xpath"&gt;
+
+    &lt;!-- Aquí se definirá que valor guardará la variable --&gt;
+    
+&lt;/xsl:variable&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>variable</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Nombre identificativo para poder llamar a esta variable más tarde.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es una consulta en <a href="xpath.html">XPATH</a> que permite guardar en la variable el valor que de como resultado esta consulta. Es opcional.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p><u>Resumen</u> - Puedes guardar un valor estático definiendolo dentro de esta etiqueta <a href="#Elemento_Variable">xsl:variable</a> o coger el valor desde una consulta <a href="xpath.html">XPATH</a>.</p>
+
+                <p><u>Tipos de variables</u>:</p>
+                <ul>
+                    <li><b>Global</b> - Su contenido no se podrá modificar. Se declara fuera de un elemento <a href="#Elemento_Template">xsl:template</a>.</li>
+                    <li><b>Local</b> - Su contenido se puede modificar. Se declara dentro de un elemento <a href="#Elemento_Template">xsl:template</a>.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Copy_Of">Elemento <span>&lt;xsl:variable&gt;</span> - Coger su contenido con <span>&lt;xsl:copy-of&gt;</span></h2>
+
+                <p>En cualquier lugar del documento XSLT donde se quiera coge rel contenido de la variable, solo hay que poner:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:copy-of select="$nombre" /&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>copy-of</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">select=""</code></pre></td>
+                            <td>Es el nombre identificativo de la variable a la que se hace referencia. Es importante poner el <span class="span_contenido">$</span> al principio.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>Otra forma simple es usar solo esto:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">$nombre</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Variable_Ejemplo">Elemento <span>&lt;xsl:variable&gt;</span> - Ejemplo</h2>
+
+                <p>Con el siguiente código se crea una variable cuyo valor es un estilo CSS y a este se le aplicará a todas las etiquetas:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:template match="/biblioteca"&gt;
+        &lt;html&gt;
+            &lt;body&gt;
+                &lt;h2&gt;Listado de libros&lt;/h2&gt;
+
+                &lt;xsl:for-each select="libro"&gt;
+
+                    &lt;div style="{$estilo_css}"&gt;
+
+                        &lt;h3&gt; &lt;xsl:value-of select="titulo" /&gt; &lt;/h3&gt;
+                        &lt;p&gt;Autor: &lt;xsl:value-of select="autor" /&gt;&lt;/p&gt;
+                    &lt;/div&gt;
+
+                &lt;/xsl:for-each&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+
+    &lt;!-- Esta es una variable global --&gt;
+    &lt;xsl:variable name="estilo_css"&gt;
+        border: 1px solid red; background-color: white;
+    &lt;/xsl:variable&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
 
             </div>
 

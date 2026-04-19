@@ -1,5 +1,5 @@
-Mejora de redacción y contenido (PK)
+Nuevo contenido (XSLT)
 
-# g/packet_tracer.html
-Mejoras de redacción
-Se eliminó contenido innecesario
+# g/xslt.html
+Nuevas etiquetas explicadas
+Mejora del índice
