@@ -141,7 +141,8 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento estático</h2>
                 <ul>
                     <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
-                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a> • <a href="#Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</a></li>
+                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a></li>
+                    <li><b>Importante:</b> <a href="#Enrutamiento_Estatico_Eleccion_Ruta">Cómo se elige la ruta a utilizar</a> • <a href="#Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</a> • <a href="#Enrutamiento_Estatico_Numero_Saltos">Rutas con mismo número de saltos</a></li>
                     <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6</a></li>
                     <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6</a></li>
                     <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv4">IPv4</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6</a></li>
@@ -1273,13 +1274,13 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para asignarle una IP estática de una VLAN específica a un switch para que pueda comunicarse con otros switches de la misma VLAN seguiremos los siguientes pasos:</p>
                 
                 <p>1. Crearemos una VLAN específica de gestión para los switches:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name Gestion</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
+(config-vlan)# name Gestion</code></pre>
 
                 <p>2. Entraremos a la interfaz de la VLAN y le asignaremos una IP además de indicarle que nunca se apague:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;
+(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;
+(config-if)# no shutdown</code></pre>
 
             </div>
 
@@ -2464,6 +2465,26 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+        </div>
+    
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Enrutamiento estático - Importante</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_Eleccion_Ruta">Cómo se elige la ruta a utilizar</h2>
+
+                <p>El router selecciona la ruta que más bits de prefijo coinciden con la dirección IP de destino, es decir, la ruta más específica.</p>
+
+                <p>Por ejemplo, se eligirá antes una <a href="#Enrutamiento_Estatico_IPv4">ruta estática</a> configurada manualmente hacia una red remota sobre una <a href="#Rutas_Predeterminadas_IPv4">ruta predeterminada</a>.</p>
+
+            </div>
+
             <div>
                 <h2 id="Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</h2>
 
@@ -2474,10 +2495,30 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">192.168.0.0/23</code></pre>
 
                 <p>Sin sumarizar acabaremos teniendo varias rutas:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.255.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.1.0 255.255.255.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.255.0 &lt;Destino&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.1.0 255.255.255.0 &lt;Destino&gt;</code></pre>
+
                 <p>Sumarizando acabaremos teniendo una única ruta:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 &lt;Destino&gt;</code></pre>
+
+                <p>
+                    <u>No siempre se puede sumarizar</u>: Cuando hay subredes completamente distintas que, para sumarizar se deben englobar a otras subredes que no se desean, 
+                    lo mejor es dejar las redes separadas creando así una <a href="#Enrutamiento_Estatico_IPv4">ruta estática</a> por cada subred.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_Numero_Saltos">Rutas con el mismo número de saltos</h2>
+
+                <p>Se puede dar el caso de que por 2 interfaces diferentes se pueda llegar al mismo destino, por ello es necesario seguir unas reglas:</p>
+
+                <ol>
+                    <li>Hay que fijarse en el coste de llegar al destino por ambas rutas. Un camino con interfaces de red Ethernet (GigabitEthernet y FastEthernet) suelen tener menor coste que una interfaz Serial.</li>
+                    <li>Si los caminos tiene el mismo coste de llegada, se puede crear 2 rutas estáticas sin necesidad de cambiar la <a href="#Enrutamiento_Estatico_Secundario_IPv4">distancia administrativa</a>.</li>
+                </ol>
+
+                <p>Tener 2 rutas con la misma <a href="#Enrutamiento_Estatico_Secundario_IPv4">distancia administrativa</a> permite realizar un balanceo de carga (ECMP) al poder enviar paquetes por ambas rutas a la vez.</p>
 
             </div>
 
@@ -2496,7 +2537,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="Enrutamiento_Estatico_Secundario_IPv4"><span>IPv4</span> - Configurar rutas secundarias</h2>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
-                <p>Estas rutas secundarias tienen que tener un número de distancia administrativa mayor a 0, ya que la ruta primaria siempre será la 0.</p>
+                <p>Estas rutas secundarias tienen que tener un número de distancia administrativa mayor a 1, ya que la ruta primaria siempre será la 1.</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
@@ -2519,7 +2560,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="Enrutamiento_Estatico_Secundario_IPv6"><span>IPv6</span> - Configurar rutas secundarias</h2>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
-                <p>Estas rutas secundarias deben tener un número de distancia administrativa mayor a 0, ya que la ruta primaria siempre será 0.</p>
+                <p>Estas rutas secundarias deben tener un número de distancia administrativa mayor a 1, ya que la ruta primaria siempre será 1.</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;IPv6_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
@@ -2562,6 +2603,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt;</code></pre>
+
+                <p>Esto es útil en el caso de que haya routers que solo tengan una interfaz de salida, ahorrando tiempo de configurar <a href="#Enrutamiento_Estatico_IPv4">rutas estáticas</a> manualmente para cada subred.</p>
 
             </div>
 
