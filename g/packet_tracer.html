@@ -141,7 +141,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento estático</h2>
                 <ul>
                     <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
-                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a></li>
+                    <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a> • <a href="#Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</a></li>
                     <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6</a></li>
                     <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6</a></li>
                     <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv4">IPv4</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6</a></li>
@@ -2464,6 +2464,22 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+            <div>
+                <h2 id="Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</h2>
+
+                <p>Se puede ahorrar tiempo de configuración creando menos rutas. Para ello, podemos crear una dirección de red que englobe a varias subredes como por ejemplo las siguientes:</p>
+                <pre class="codigo" translate="no"><code class="cisco">192.168.0.0/24
+192.168.1.0/24</code></pre>
+                <p class="Expl">Que se pueden sumarizar a una única subred cambiando su máscara:</p>
+                <pre class="codigo" translate="no"><code class="cisco">192.168.0.0/23</code></pre>
+
+                <p>Sin sumarizar acabaremos teniendo varias rutas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.255.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.1.0 255.255.255.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
+                <p>Sumarizando acabaremos teniendo una única ruta:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 &lt;IP_PróximoRouter&gt;/&lt;Interfaz_Salida&gt;</code></pre>
+
+            </div>
 
         </div>
     
