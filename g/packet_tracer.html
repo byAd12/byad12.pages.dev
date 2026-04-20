@@ -104,7 +104,7 @@ Código por byAd12
                     <li><b>EtherChannel (LACP):</b> <a href="#EtherChannel_Configuracion">Configuración</a> • <a href="#EtherChannel_Verificacion">Verificación</a> • <a href="#EtherChannel_Eliminar">Eliminar</a></li>
                     <li>
                         <b>VLAN Trunking Protocol (VTP):</b> <a href="#VTP_Configuracion_Servidor">Configuración en el servidor</a> • <a href="#VTP_Configuracion_Cliente">Configuración en el cliente</a> • <a href="#VTP_Ver_Configuracion">Verificación</a> • <a href="#VTP_Configuracion_Contraseña">Ver la contraseña</a> • 
-                        <a href="#VTP_Reset_Revision">Resetear la versión</a>
+                        <a href="#VTP_Reiniciar_Revision">Reiniciar la revisión</a>
                     </li>
                     <li><b>Hot Standby Router Protocol (HSRP):</b> <a href="#HSRP_Configuracion_IP">Configuración de IP</a> • <a href="#HSRP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HSRP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HSRP_Verificacion">Verificación</a></li>
                 </ul>
@@ -127,7 +127,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad y Ataques</h2>
                 <ul>
                     <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Seguridad_Verificacion">Verificación</a></li>
-                    <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Des_habilitar">(Des)habilitar CDP</a> • <a href="#LLDP_Des_habilitar">(Des)habilitar LLDP</a></li>
+                    <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Deshabilitar">(Des)habilitar CDP</a> • <a href="#LLDP_Deshabilitar">(Des)habilitar LLDP</a></li>
                     <li><b>Puertos - Básico:</b> <a href="#Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</a> • <a href="#Puertos_VLAN_BlackHole">VLAN BlackHole</a></li>
                     <li>
                         <b>Seguridad de puertos:</b> <a href="#Habilitar_Seguridad_Puertos">Habilitar</a> • <a href="#Seguridad_Puertos_Limitar_MACs">Limitar MACs</a> • <a href="#Seguridad_Puertos_Caducidad_MACs">Caducidad de las MACs</a> • <a href="#Seguridad_Puertos_Modos_Violacion">Modos de violación</a> • 
@@ -421,7 +421,7 @@ switch: boot</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Verificacion_Historial_Comandos">Ver el Historial de comandos</h2>
+                <h2 id="Verificacion_Historial_Comandos">Ver el historial de comandos</h2>
 
                 <p>Los comandos que se ejecutaron en una sesión de terminal se puede ver con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show history</code></pre>
@@ -447,7 +447,7 @@ switch: boot</code></pre>
 
         <div class="parte1">
             <div>
-                <h2 id="Comando_Show_Do">Comandos de Verificación &gt; <span>Importante</span></h2>
+                <h2 id="Comando_Show_Do">Comandos de verificación &gt; <span>Importante</span></h2>
 
                 <p>El comando <span class="span_contenido" translate="no">show</span> solo funciona si se ejecuta fuera de (config)# como el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief</code></pre>
@@ -459,7 +459,7 @@ switch: boot</code></pre>
             </div>
 
             <div>
-                <h2 id="Verificacion_Interfaces">Comandos de Verificación &gt; <span>Interfaces</span></h2>
+                <h2 id="Verificacion_Interfaces">Comandos de verificación &gt; <span>Interfaces</span></h2>
 
                 <p>Para ver todas las configuraciones de las interfaces del dispositivo en IPv4:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip interface brief</code></pre>
@@ -496,7 +496,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Verificacion_Tabla_ARP">Comandos de Verificación &gt; <span>Tabla ARP y MAC</span></h2>
+                <h2 id="Verificacion_Tabla_ARP">Comandos de verificación &gt; <span>Tabla ARP y MAC</span></h2>
 
                 <p>Para ver la tabla ARP IPv4:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip arp</code></pre>
@@ -510,14 +510,14 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Verificacion_Sistema">Comandos de Verificación &gt; <span>Sistema</span></h2>
+                <h2 id="Verificacion_Sistema">Comandos de verificación &gt; <span>Sistema</span></h2>
 
                 <p>Se puede ver el estado del hardware e información del sistema con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show version</code></pre>
             </div>
 
             <div>
-                <h2 id="Verificacion_Archivos">Comandos de Verificación &gt; <span>Archivos</span></h2>
+                <h2 id="Verificacion_Archivos">Comandos de verificación &gt; <span>Archivos</span></h2>
 
                 <p>Para ver el contenido de la memoria flash <span class="span_url" translate="no">flash:</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show flash:</code></pre>
@@ -534,7 +534,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <div class="parte1">
             <div>
-                <h2 id="NavInterfaces">Navegación y Configuración de Interfaces</h2>
+                <h2 id="NavInterfaces">Navegación y configuración de interfaces</h2>
 
                 <p>Podemos entrar en modo de configuración global del dispositivo de 2 formas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># configure terminal</code></pre>
@@ -622,7 +622,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <div class="parte1">
             <div>
-                <h2 id="FiltroAcceso">Filtro de Protocolos (Transport Input)</h2>
+                <h2 id="FiltroAcceso">Filtro de protocolos (Transport Input)</h2>
 
                 <p>Podemos permitir ciertos protocolos de acceso remoto con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15
@@ -632,7 +632,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="SeguridadBasica">Seguridad Básica y Banners</h2>
+                <h2 id="SeguridadBasica">Seguridad básica y banners</h2>
 
                 <p>Poner una contraseña en líneas de acceso:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line &lt;console/vty&gt; &lt;NumPuerto/Rango&gt;</code></pre>
@@ -663,7 +663,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="Usuarios">Gestión de Usuarios y Privilegios</h2>
+                <h2 id="Usuarios">Gestión de usuarios y privilegios</h2>
 
                 <p>Para crear un usuario <b>sin privilegios</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# username &lt;Nombre_Usuario&gt; secret &lt;Contraseña&gt;</code></pre>
@@ -684,7 +684,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="Politicas">Políticas de Seguridad (Bloqueos)</h2>
+                <h2 id="Politicas">Políticas de seguridad (bloqueos)</h2>
 
                 <p>Para aplicar una longitud mínima a cada contraseña que se cree desde este momento (no se aplica a contraseñas ya creadas):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# security passwords min-length &lt;NúmeroMínimo&gt;</code></pre>
@@ -873,7 +873,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Modo_Acceso">VLAN &gt; Modo Acceso &gt; Configuración de una interfaz</h2>
+                <h2 id="VLAN_Modo_Acceso">VLAN &gt; Modo acceso &gt; Configuración de una interfaz</h2>
 
                 <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -886,7 +886,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Restablecer_Modo_Acceso">VLAN &gt; Modo Acceso &gt; <span>Restablecer</span></h2>
+                <h2 id="VLAN_Restablecer_Modo_Acceso">VLAN &gt; Modo acceso &gt; <span>Restablecer</span></h2>
 
                 <p>Entraremos a la interfaz, y le quitaremos de switchport la vlan:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -895,7 +895,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Modo_Troncal">VLAN &gt; Modo Troncal &gt; Configuración de una interfaz</h2>
+                <h2 id="VLAN_Modo_Troncal">VLAN &gt; Modo troncal &gt; Configuración de una interfaz</h2>
 
                 <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -911,7 +911,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Restablecer_Modo_Troncal">VLAN &gt; Modo Troncal &gt; <span>Restablecer</span></h2>
+                <h2 id="VLAN_Restablecer_Modo_Troncal">VLAN &gt; Modo troncal &gt; <span>Restablecer</span></h2>
 
                 <p>Entraremos a la interfaz, y le quitaremos las interfaces permitidas y nativa:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -924,7 +924,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Ver_Interfaces_Modo_Troncal">VLAN &gt; Modo Troncal &gt; Ver configuración troncal</h2>
+                <h2 id="VLAN_Ver_Interfaces_Modo_Troncal">VLAN &gt; Modo troncal &gt; Ver configuración troncal</h2>
 
                 <p>El siguiente comando es muy importante y permite ver que interfaz actúa en modo troncal, la VLAN nativa y las VLANs permitidas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
@@ -1360,7 +1360,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="STP_Conceptos">Spanning-tree > Conceptos de Prioridad</h2>
+                <h2 id="STP_Conceptos">Spanning-tree &gt; Conceptos de prioridad</h2>
                 <p>
                     La prioridad del bridge se compone de:
                     <br>
@@ -1557,7 +1557,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VTP_Reset_Revision">VTP &gt; Resetear la Revisión (Seguridad)</h2>
+                <h2 id="VTP_Reiniciar_Revision">VTP &gt; Reiniciar la revisión (seguridad)</h2>
 
                 <p style="color: red;"><b>Importante</b>: Antes de conectar un switch a la red, debes asegurar que su "Configuration Revision" sea 0.</p>
                 <p class="Expl">Si conectas un switch con una revisión mayor a la del servidor, este sobrescribirá y borrará las VLANs de toda la red.</p>
@@ -2031,7 +2031,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="CDP_Des_habilitar">(Des)habilitar el protocolo CDP</h2>
+                <h2 id="CDP_Deshabilitar">(Des)habilitar el protocolo CDP</h2>
 
                 <p>
                     CDP es un protocolo habilitado por defecto en todos los switches de Cisco.
@@ -2058,7 +2058,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="LLDP_Des_habilitar">(Des)habilitar el protocolo LLDP</h2>
+                <h2 id="LLDP_Deshabilitar">(Des)habilitar el protocolo LLDP</h2>
 
                 <p>LLDP también es vulnerable a los ataques de reconocimiento como el protocolo CDP.</p>
 
@@ -2110,7 +2110,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 (config-vlan)# name BlackHole
 (config-vlan)# exit</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaces_Sin_Usar&gt;
-(config-if)# switchport mode Access
+(config-if)# switchport mode access
 (config-if)# switchport access vlan &lt;Número_VLAN_BlackHole&gt;</code></pre>
 
             </div>
@@ -2405,7 +2405,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 </p>
 
                 <br>
-                <p><b>Nota importante</b>: Si la dirección de red o una IP de un ruta configurada manualmente cambia, debe modificarse la ruta manualmente.</p>
+                <p><b>Nota importante</b>: Si la dirección de red o una IP de un ruta configurada manualmente cambia, debe modificarse la(s) ruta(s) afectada(s) manualmente.</p>
 
             </div>
 
@@ -2434,7 +2434,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Enrutamiento_Estatico_IPv4"><span>IPv4</span> - Configurar rutas estáticas</h2>
 
-                <p>Para añadir una ruta a la que un router pueda acceder a una red remota podemos realizarlo de 3 maneras distintas:</p>
+                <p>Para definir en routers o switches de capa 3 una ruta para poder llegar a una red remota, se puede realizar de 3 maneras distintas:</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt;</code></pre>
@@ -2450,7 +2450,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Enrutamiento_Estatico_IPv6"><span>IPv6</span> - Configurar rutas estáticas</h2>
 
-                <p>Para añadir una ruta a la que un router pueda acceder a una red remota podemos realizarlo de 3 maneras distintas:</p>
+                <p>Para definir en routers o switches de capa 3 una ruta para poder llegar a una red remota, se puede realizar de 3 maneras distintas:</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;IPv6_PróximoRouter&gt;</code></pre>
@@ -2480,7 +2480,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="Enrutamiento_Estatico_Secundario_IPv4"><span>IPv4</span> - Configurar rutas secundarias</h2>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
-                <p>Estas rutas secundarias tienen que tener un número de distancia administrativa mayor a 0 ya que la ruta primaria siempre será la 0.</p>
+                <p>Estas rutas secundarias tienen que tener un número de distancia administrativa mayor a 0, ya que la ruta primaria siempre será la 0.</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;IP_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
@@ -2491,10 +2491,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
 
-                <p><u>Nota</u>: En el comando "show ip route" solo aparece la ruta activa con menos distancia administrativa. Para ver todas las rutas usa:</p>
+                <p>
+                    <u>Importante</u>: Si creamos una misma ruta exacta pero con 2 distancias administrativas diferentes, solo estará activa la que menor distancia administrativa tenga.
+                    Para ver todas las rutas configuradasusa el siguiente comando:
+                </p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ip route</code></pre>
-
-                <p><u>Importante</u>: Si creamos una misma ruta exacta pero con 2 distancias administrativas diferentes, solo estará activa la que menor distancia administrativa tenga.</p>
 
             </div>
 
@@ -2502,7 +2503,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="Enrutamiento_Estatico_Secundario_IPv6"><span>IPv6</span> - Configurar rutas secundarias</h2>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
-                <p>Estas rutas secundarias tienen que tener un número de disntancia administratica mayor a 0 ya que la ruta primaria siempre será la 0.</p>
+                <p>Estas rutas secundarias deben tener un número de distancia administrativa mayor a 0, ya que la ruta primaria siempre será 0.</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;IPv6_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
@@ -2513,7 +2514,10 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_RedRemota&gt;/&lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
             
-                <p><u>Nota</u>: En el comando "show ip route" solo aparece la ruta activa con menos distancia administrativa. Para ver todas las rutas usa:</p>
+                <p>
+                    <u>Importante</u>: Si creamos una misma ruta exacta pero con 2 distancias administrativas diferentes, solo estará activa la que menor distancia administrativa tenga.
+                    Para ver todas las rutas configuradasusa el siguiente comando:
+                </p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ipv6 route</code></pre>
 
             </div>
@@ -2532,7 +2536,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Rutas_Predeterminadas_IPv4"><span>IPv4</span> - Configurar rutas predeterminadas</h2>
 
-                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                <p>Podemos indicar a un router o switch de Capa 3 hacia donde se enviará cualquier paquete cuya IP de destino no esté en la tabla de rutas. Para ello tenemos 3 opciones:</p>
                 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;IP_PróximoRouter&gt;</code></pre>
@@ -2541,14 +2545,14 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt;</code></pre>
 
                 <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0.0 &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt;</code></pre>
 
             </div>
 
             <div>
                 <h2 id="Rutas_Predeterminadas_IPv6"><span>IPv6</span> - Configurar rutas predeterminadas</h2>
 
-                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                <p>Podemos indicar a un router o switch de Capa 3 hacia donde se enviará cualquier paquete cuya IP de destino no esté en la tabla de rutas. Para ello tenemos 3 opciones:</p>
                 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route ::/0 &lt;IPV6_PróximoRouter&gt;</code></pre>
@@ -2575,8 +2579,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="Rutas_Estaticas_Host_IPv4"><span>IPv4</span> - Configurar rutas estáticas de host</h2>
 
-                <p>Con las rutas de host estáticas se permite definir que para llegar a un host en concreto hay que enviar los paquetes por cierta ruta. Se puede definir de 3 maneras:</p>
-                <p>Estas rutas aparecerán en la tabla de rutas como - "S" (Static), además de tener una máscara /32 (IPv4) o /128 (IPv6).</p>
+                <p>Con las rutas de host estáticas se permite definir que, para llegar a un host en concreto, hay que enviar los paquetes por cierta ruta. Se puede definir de 3 maneras:</p>
 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_Host&gt; 255.255.255.255 &lt;IP_PróximoRouter&gt;</code></pre>
@@ -2587,12 +2590,14 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_Host&gt; 255.255.255.255 &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt;</code></pre>
 
+                <p><u>Nota</u> - Estas rutas aparecerán en la tabla de rutas como - "S" (Static), además de tener una máscara /32 (IPv4).</p>
+                
             </div>
 
             <div>
                 <h2 id="Rutas_Estaticas_Host_IPv6"><span>IPv6</span> - Configurar rutas estáticas de host</h2>
 
-                <p>Podemos indicar a un router o switch de Capa 3 que cualquier paquete cuya IP de destino no esté en la tabla de rutas se enviará por una interfaz específica. Para ello tenemos 3 opciones:</p>
+                <p>Con las rutas de host estáticas se permite definir que, para llegar a un host en concreto, hay que enviar los paquetes por cierta ruta. Para ello tenemos 3 opciones:</p>
                 
                 <p class="Expl">1. Mediante la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;IP_PróximoRouter&gt;</code></pre>
@@ -2603,6 +2608,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">3. Definiendo la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 route &lt;IPv6_Host&gt;/128 &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt;</code></pre>
 
+                <p><u>Nota</u> - Estas rutas aparecerán en la tabla de rutas como - "S" (Static), además de tener una máscara /128 (IPv6).</p>
+                
             </div>
 
         </div>
@@ -2619,7 +2626,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="OSPF_Configuracion_Basica">Configuración básica</h2>
 
-                <p>Para configurar OSPF debemos habilitarlo explícitamente mediante el siguiente comando especificando un número de proceso entre <span class="span_contenido" translate="no">1 - 65535</span>:</p>
+                <p>Para configurar OSPF, debemos habilitarlo explícitamente mediante el siguiente comando, especificando un número de proceso entre <span class="span_contenido" translate="no">1 - 65535</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# ...</code></pre>
                 <p class="Expl">Es recomendable usar el mismo número de proceso en cada router de la red que habiliten OSPF.</p>
@@ -2743,7 +2750,10 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <h2 id="OSPF_Ancho_Banda">Configuración del ancho de banda</h2>
 
-                <p>En cada router del dominio OSPF se debe configurar el coste de ancho de banda si hay enlaces más rápidos que Fast Ethernet, ya que todos los costes por defecto es 100 Mbps y esto puede provocar que se prefieran otros enlaces en vez de los más rápidos como Gigabit.</p>
+                <p>
+                    En cada router del dominio OSPF se debe configurar el coste de ancho de banda si hay enlaces más rápidos que Fast Ethernet, 
+                    que todos los costes por defecto son 100 Mbps, y esto puede provocar que se prefieran otros enlaces en vez de los más rápidos, como Gigabit.
+                </p>
 
                 <p>Para cambiar este coste se debe usar el siguiente comando indicando el coste en Megabits por segundo, como por ejemplo "1000" si el ancho de banda es de 1 Gbps:</p>
 
@@ -2787,7 +2797,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip ospf neighbor</code></pre>
 
                 <br>
-                <p>Para modificar el intervalo de paquetes Hello hay que usar el siguiente comando dentro de la interfaz deseada:</p>
+                <p>Para modificar el intervalo de paquetes Hello, hay que usar el siguiente comando dentro de la interfaz deseada:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf hello-interval &lt;Tiempo_Segundos&gt;</code></pre>
                 <p class="Expl">El intervalo de paquetes Dead también se configuran dentro de la interfaz:</p>
@@ -2795,7 +2805,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>⚠️ <b>Importante</b>: Los routers vecinos deben tener el mismo intervalo de paquetes Hello o se perderá la adyacencia.</p>
 
                 <br>
-                <p>Para restablecer el intervalo de paquetes Hello hay que utilizar el siguiente comando dentro de la interfaz:</p>
+                <p>Para restablecer el intervalo de paquetes Hello, hay que utilizar el siguiente comando dentro de la interfaz:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# no ip ospf hello-interval</code></pre>
                 <p class="Expl">El intervalo de paquetes Dead también se reestablece dentro de la interfaz:</p>
@@ -2816,7 +2826,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# default-information originate</code></pre>
                 <p class="Expl">⚠️ <b>Importante</b>: Suele ser necesario reiniciar Packet Tracer para que funcione correctamente.</p>
 
-                <p>Una vez configurado se debe poder ver en cada router una ruta predeterminada aprendida por OSPF con destino el router que lo propagó:</p>
+                <p>Una vez configurado, se debe poder ver en cada router una ruta predeterminada aprendida por OSPF con destino el router que lo propagó:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route ospf</code></pre>
 
             </div>
@@ -2871,19 +2881,19 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>2. <b>Interfaces pasivas</b>:</p>
                 <p class="Expl">
-                    En el comando del paso 1. se puede comprobar que cada interfaz que tenga conexión a otro router <b>no</b> esté en modo pasivo.
+                    En el comando del paso 1, se puede comprobar que cada interfaz que tenga conexión a otro router <b>no</b> esté en modo pasivo.
                     Las únicas interfaces que deben estar en modo pasivo son aquellas que no tengan conexión a ningún router.
                 </p>
 
                 <p>3. <b>Ruta a Internet</b>:</p>
                 <p class="Expl">
-                    En el comando del paso 1. hay que verificar que el router con acceso a Internet no esté anunciando en OSPF la red externa (ISP).
+                    En el comando del paso 1, hay que verificar que el router con acceso a Internet no esté anunciando en OSPF la red externa (ISP).
                     En su lugar, se recomienda usar una ruta por defecto y <a href="#OSPF_Propagar_Ruta_Predeterminada">propagarla por OSPF</a>.
                 </p>
 
                 <p>4. <b>Fuentes de información</b>:</p>
                 <p class="Expl">
-                    En el comando del paso 1. se puede comprobar que en una misma área estén todos los routers incluido el mismo router que ejecute el comando como fuentes de información.
+                    En el comando del paso 1, se puede comprobar que en una misma área estén todos los routers, incluido el mismo router, que ejecute el comando como fuentes de información.
                 </p>
 
                 <p>5. <b>Router ID</b>:</p>
@@ -2920,8 +2930,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>10. <b>Tipo de red</b>:</p>
                 <p class="Expl">
-                    En el comando del paso 9. se puede comprobar que el tipo de red sea BROADCAST o POINT-TO-POINT según el caso que sea, 
-                    además que el coste y estado sean los correctos.
+                    En el comando del paso 9, se puede comprobar que el tipo de red sea BROADCAST o POINT-TO-POINT, según el caso que sea, 
+                    además de que el coste y estado sean los correctos.
                 </p>
 
                 <p>11. <b>Cantidad de rutas aprendidas</b>:</p>
