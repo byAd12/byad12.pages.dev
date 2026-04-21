@@ -1442,8 +1442,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">Una vez habilitadas, las interfaces deberían formar el EtherChannel correctamente.</p>
 
                 <p><u>Nota</u>: Una vez creado el EtherChannel, cualquier cambio que se vaya a hacer a las interfaces se debe hacer solo al grupo <span class="span_contenido" translate="no">Po&lt;Número&gt;</span> mediante el comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;
-(config-if)# ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
 
             </div>
 
@@ -3050,13 +3050,13 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>2. En los routers de área hay que configurar las redes del área en el que se sitúan:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;
-(config-if)# ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
                 
                 <p>3. En el <u>router de borde de área</u> (ABR) hay que configurar sus áreas conectadas además de la área 0:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;
-(config-if)# ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
 
                 <p>4. La <u>sumarización</u> se utiliza para que un área publique una sola ruta consolidada hacia las demás áreas, reduciendo el tamaño de las tablas de enrutamiento:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
