@@ -626,8 +626,8 @@ Vlan1                  unassigned      YES unset  administratively down down</co
                 <h2 id="FiltroAcceso">Filtro de protocolos (Transport Input)</h2>
 
                 <p>Podemos permitir ciertos protocolos de acceso remoto con:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15
-(config-line)# transport input &lt;ssh telnet&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-line)# transport input &lt;ssh telnet&gt;</code></pre>
                 <p class="Expl">Podemos permitir tanto ssh y telnet o solo uno de los dos. Se separan mediante espacios.</p>
 
             </div>
@@ -947,11 +947,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="VLAN_Voz">VLAN de Voz &gt; Redirigir el tráfico</h2>
 
                 <p>Primero crearemos las VLANs correspondientes:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
-(config-vlan)# name &lt;NombreInterfaz&gt;
-(config-vlan)# vlan &lt;VLAN_ID_VOZ&gt;
-(config-vlan)# name Voz
-(config-vlan)# exit</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name &lt;NombreInterfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# vlan &lt;VLAN_ID_VOZ&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name Voz</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# exit</code></pre>
 
                 <p>Ahora podremos entrar a la interfaz y asignarle el puerto de acceso (como en el apartado anterior) y luego asignar el tráfico de voz para ese puerto:</p>
 
@@ -1075,8 +1075,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
 
                 <p>Paso 1. Crear y nombrar las VLANs:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
-(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
                 <p class="Expl">
                     Este paso se realizará con cada vlan necesaria para la segmentación de la red.
                     También se realizará para crear una VLAN que una a los switches y se puedan comunicar entre ellos (VLAN de administración).
@@ -1084,35 +1084,36 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 
 
                 <p>Paso 2. Crear la interfaz de administración:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;
-(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;
-(config-if)# no shutdown
-(config-if)# exit
-(config)# ip default-gateway &lt;IP_Gateway&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# exit</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip default-gateway &lt;IP_Gateway&gt;</code></pre>
                 <p class="Expl">Este paso es para asignarle al switch, dentro de la VLAN de administración, una IP y así se pueda comunicar con otros switches.</p>
 
 
                 <p>Paso 3. Configurar puertos de acceso:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
-(config-if)# switchport mode access
-(config-if)# switchport access vlan &lt;VLAN_ID&gt;
-(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
                 <p class="Expl">Este paso se realizará con cada interfaz de cada switch en la que se tenga conectado un PC.</p>
 
 
                 <p>Paso 4. Configurar puertos de enlace troncal:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
-(config-if)# switchport mode trunk
-(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
                 <p class="Expl">Este paso se realizará con el enlace que una Switch1 y Switch2 y el enlace entre Switch1 y el Router.</p>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en el Router</span></b>:</p>
 
                 <p>Paso 1. Por cada VLAN se creará una sub-interfaz lógica sobre la interfaz física con la que se conecta el Router con el Switch1:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;.&lt;VLAN_ID&gt;
-(config-if)# encapsulation dot1Q &lt;VLAN_ID&gt;
-(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
-                <p class="Expl"><b>interface</b>: Crea una subinterfaz lógica que identifica a la VLAN mediante el número &lt;VLAN_ID&gt;.
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;.&lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# encapsulation dot1Q &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <p class="Expl">
+                    <b>interface</b>: Crea una subinterfaz lógica que identifica a la VLAN mediante el número &lt;VLAN_ID&gt;.
                     <br>
                     <b>encapsulation dot1Q</b>: Indica que esta subinterfaz solo procesará tramas etiquetadas con la VLAN especificada. Debe especificarse <b>antes</b> de configurar la IP.
                     <br>
@@ -1120,8 +1121,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 </p>
 
                 <p>Paso 2. Hay que indicar que la interfaz física con la que se conecta el Router con el Switch1 nunca se apague con:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;
-(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Física&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
 
             </div>
 
@@ -1162,26 +1163,27 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en el switch de Capa 3 / Distribución</span></b>:</p>
 
                 <p>Paso 1. Crear y nombrar las VLANs:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;
-(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# name &lt;Nombre_VLAN&gt;</code></pre>
                 <p class="Expl">Este paso se realizará con cada vlan necesaria para la segmentación de la red.</p>
 
                 <p>Paso 2. Crear las interfaces VLAN SVI:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;
-(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;
-(config-if)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip address &lt;IP&gt; &lt;Máscara&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# no shutdown</code></pre>
                 <p class="Expl">Por cada VLAN entraremos para asignarle su puerta de enlace correspondiente.</p>
 
                 <p>Paso 3. Configurar puertos entre switches o PCs:</p>
                 <p class="Expl">Si este switch de capa 3 tiene en ciertas interfaces a otros switches de capa 2 conectado, configuraremos estas interfaces de la siguiente manera:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
-(config-if)# switchport mode trunk
-(config-if)# switchport trunk native vlan &lt;VLAN_ID_Nativa&gt;
-(config-if)# switchport trunk allowed vlan &lt;Lista_VLAN_ID_Permitidas&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk native vlan &lt;VLAN_ID_Nativa&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan &lt;Lista_VLAN_ID_Permitidas&gt;</code></pre>
+                
                 <p class="Expl">Si este switch de capa 3 tiene equipos finales (PCs o servidores) conectados directamente se les asignará a una VLAN:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
-(config-if)# switchport mode access
-(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode access</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport access vlan &lt;VLAN_ID&gt;</code></pre>
 
                 <p>Paso 4. Habilitar el enrutado entre VLANs:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip routing</code></pre>
@@ -1409,34 +1411,34 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Antes de realizar los siguientes pasos, asegúrese de que las VLANs ya estén creadas y que las demás interfaces necesarias estén correctamente configuradas en ambos switches.</p>
 
                 <p>Paso 1. Configurar el EtherChannel:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;
-(config-if)# switchport mode trunk
-(config-if)# ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface Po&lt;Número&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
                 <p class="Expl">En esta interfaz lógica se debe aplicar exactamente la misma configuración que se usaría en las interfaces físicas que formarán el EtherChannel.</p>
                 <p class="Expl">El <b>número</b> es un identificador que representa al EtherChannel y debe coincidir con el que se usará en los pasos posteriores.</p>
 
                 <p>Paso 2. Aplicar la misma configuración del paso anterior en las interfaces físicas que se agruparán en el EtherChannel:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if-range)# switchport mode trunk
-(config-if-range)# ...</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if-range)# switchport mode trunk</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if-range)# ...</code></pre>
                 <p class="Expl">Todas las interfaces deben tener configuraciones idénticas para que el EtherChannel funcione correctamente.</p>
 
                 <p>Paso 3. Apagar las interfaces:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if-range)# shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if-range)# shutdown</code></pre>
                 <p class="Expl">Este paso evita inconsistencias o errores durante la creación del EtherChannel.</p>
                 
                 <p>Paso 4. Agregar las interfaces al EtherChannel:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if-range)# channel-group &lt;Número&gt; mode active</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if-range)# channel-group &lt;Número&gt; mode active</code></pre>
                 <p class="Expl">El <b>número</b> debe coincidir con el identificador del EtherChannel configurado en el paso 1.</p>
                 <p class="Expl">El modo <b>active</b> indica que se utilizará LACP para la negociación del enlace.</p>
 
                 <p><b><span style="color: orange;">Importante</span>: Antes de continuar, asegúrese de haber ejecutado correctamente todos los pasos anteriores en ambos switches.</b></p>
 
                 <p>Paso 5. Encender las interfaces:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
-(config-if-range)# no shutdown</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if-range)# no shutdown</code></pre>
                 <p class="Expl">Una vez habilitadas, las interfaces deberían formar el EtherChannel correctamente.</p>
 
                 <p><u>Nota</u>: Una vez creado el EtherChannel, cualquier cambio que se vaya a hacer a las interfaces se debe hacer solo al grupo <span class="span_contenido" translate="no">Po&lt;Número&gt;</span> mediante el comando:</p>
@@ -1851,8 +1853,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
 
                 <p>2. Habilitaremos DHCPv6 stateful:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 nd managed-config-flag
-(config-if)# ipv6 nd prefix default no-autoconfig</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 nd managed-config-flag</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ipv6 nd prefix default no-autoconfig</code></pre>
 
                 <p>3. Verificaremos que está habilitado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ipv6 interface &lt;Interfaz&gt; | begin ND</code></pre>
