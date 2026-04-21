@@ -44,6 +44,8 @@ Código por byAd12
         <h1 class="TituloPrincipal">isc-dhcp-server</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">Servidor DHCP en Linux</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -58,14 +60,17 @@ Código por byAd12
 
                 <p>En el firewall permitiremos el paso del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
+
+                <p>Después de configurar los ficheros necesarios se debe reiniciar el servicio:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server.service</code></pre>
             </div>
 
             <div>
                 <h2>Comprobación del funcionamiento</h2>
 
                 <p>Primero miraremos si el servicio está encendido y sin errores:</p>
-                <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server start</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">service isc-dhcp-server status</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl start isc-dhcp-server.service</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status isc-dhcp-server.service</code></pre>
 
                 <p>Comprobaremos que hay un proceso DHCP ejecutándose:</p>
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep dhcp</code></pre>
@@ -112,9 +117,12 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        
         <div class="parte1">
             <div>
-                <h2>1. Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+                <h2>Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
                 <p>A continuación deberemos modificar las siguientes líneas del fichero:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
@@ -130,7 +138,7 @@ INTERFACESv6=""</code></pre>
             </div>
 
             <div>
-                <h2>2. Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
+                <h2>Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
@@ -177,6 +185,8 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
