@@ -2548,11 +2548,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
 
                 <p class="Expl">3. <b>Ruta estática completamente especificada</b> - define la interfaz de salida del router (solo si es de tipo <b>Serial</b>) junto a la IP del próximo router:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IPv6_Link_Local_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route &lt;IP_RedRemota&gt; &lt;Máscara_RedRemota&gt; &lt;Interfaz_Salida&gt; &lt;IP_PróximoRouter&gt; &lt;Número_Distancia_Administrativa&gt;</code></pre>
 
                 <p>
                     <u>Importante</u>: Si creamos una misma ruta exacta pero con 2 distancias administrativas diferentes, solo estará activa la que menor distancia administrativa tenga.
-                    Para ver todas las rutas configuradasusa el siguiente comando:
+                    Para ver todas las rutas configuradas debes usar el siguiente comando:
                 </p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ip route</code></pre>
 
