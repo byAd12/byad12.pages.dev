@@ -143,7 +143,7 @@ Código por byAd12
                     <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
                     <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a></li>
                     <li><b>Importante:</b> <a href="#Enrutamiento_Estatico_Eleccion_Ruta">Cómo se elige la ruta a utilizar</a> • <a href="#Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</a> • <a href="#Enrutamiento_Estatico_Numero_Saltos">Rutas con mismo número de saltos</a></li>
-                    <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6</a></li>
+                    <li><b>Distancia administrativa:</b> <a href="#Enrutamiento_Estatico_Secundario_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_Secundario_IPv6">IPv6</a> • <a href="#Enrutamiento_Estatico_Secundario_Problema">Problema</a></li>
                     <li><b>Rutas predeterminadas:</b> <a href="#Rutas_Predeterminadas_IPv4">IPv4</a> • <a href="#Rutas_Predeterminadas_IPv6">IPv6</a></li>
                     <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv4">IPv4</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6</a></li>
                 </ul>
@@ -2577,6 +2577,17 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 </p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section ipv6 route</code></pre>
 
+            </div>
+
+            <div>
+                <h2 id="Enrutamiento_Estatico_Secundario_Problema">Problemas de las rutas secundarias</h2>
+
+                <p>
+                    Se suelen producir <b>bucles</b> de paquetes ya que los routers no son capaces de detectar que enlaces en otros routers están caídos, 
+                    provocando que el router que sabe que el enlace está caído devuelva el paquete al router que no, y este lo envíe de nuevo.
+                </p>
+                <p>La solución es usar el enrutamiento dinámico - <a href="#OSPF_Configuracion_Basica">OSPF</a>.</p>
+                
             </div>
 
         </div>
