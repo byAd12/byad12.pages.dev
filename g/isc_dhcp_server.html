@@ -114,21 +114,39 @@ Código por byAd12
         <hr>
         <div class="parte1">
             <div>
-                <h2>Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
+                <h2>1. Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+
+                <p>A continuación deberemos modificar las siguientes líneas del fichero:</p>
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
+INTERFACESv6=""</code></pre>
+                <p class="Expl">Y lo modificaremos al siguiente contenido:</p>
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[NOMBRE_INTERFAZ_RED]"
+#INTERFACESv6=""</code></pre>
+                <p class="Expl">
+                    <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
+                    <br><b>INTERFACESv6</b>: Si no se tiene IPv6 configurado, se debe comentar la línea.
+                </p>
+
+            </div>
+
+            <div>
+                <h2>2. Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
 option domain-name-servers [VALOR];</code></pre>
-                <p class="Expl"><b>routers</b>: La IPv4 del enrutador.
-                <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                <p class="Expl">
+                    <b>routers</b>: La IPv4 del enrutador.
+                    <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por comas.
                 </p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];
 max-lease-time [TIEMPO_SEGUNDOS];
 min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
-                <p class="Expl"><b>default-lease-time</b>: Tiempo base de la concesión de una configuración IP dada.
-                <br><b>max-lease-time</b>: Tiempo máximo de la concesión.
-                <br><b>min-lease-time</b>: Tiempo mínimo de la concesión.
+                <p class="Expl">
+                    <b>default-lease-time</b>: Tiempo base de la concesión de una configuración IP dada.
+                    <br><b>max-lease-time</b>: Tiempo máximo de la concesión.
+                    <br><b>min-lease-time</b>: Tiempo mínimo de la concesión.
                 </p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
@@ -136,19 +154,21 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
     range [IP_INICIAL_2] [IP_FINAL_2];
     ...
 }</code></pre>
-                <p class="Expl"><b>subnet</b>: La dirección de red IPv4.
-                <br><b>netmask</b>: Máscara punteada de la red.
-                <br><b>range</b>: Se pueden definir varios rangos DHCP podiendo así excluir ciertas IPs reservadas.
+                <p class="Expl">
+                    <b>subnet</b>: La dirección de red IPv4.
+                    <br><b>netmask</b>: Máscara punteada de la red.
+                    <br><b>range</b>: Se pueden definir varios rangos DHCP podiendo así excluir ciertas IPs reservadas.
                 </p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">host [NOMBRE] {
     hardware ethernet [MAC];
     fixed-address [IP_ESTÁTICA];
 }</code></pre>
-                <p class="Expl">Aquí definimos una IP estática mediante una MAC.
-                <br><b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
-                <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
-                <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
+                <p class="Expl">
+                    Aquí definimos una IP estática mediante una MAC.
+                    <br><b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
+                    <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
+                    <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
                 </p>
 
             </div>
