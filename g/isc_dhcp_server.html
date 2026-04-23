@@ -103,15 +103,21 @@ Código por byAd12
                 </div>
             </div>
 
-
             <div>
-                <h2>Comandos de DHCP en Linux</h2>
+                <h2>Comandos de DHCP para un cliente Linux</h2>
 
                 <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> (<u>D</u>.O.R.A.) en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
 
                 <p>Hacer una petición <span class="span_contenido" translate="no">DHCP-RELEASE</span> en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v -r</code></pre>
+            </div>
+
+            <div>
+                <h2>Comandos de administración del servidor</h2>
+
+                <p>Se pueden ver todas las direcciones IPs concedidas por el servidor DHCP, además de su tiempo de expiración:</p>
+                <pre class="codigo" translate="no"><code class="bash">dhcp-lease-list</code></pre>
             </div>
         </div>
         <!-- ......................................................... -->
