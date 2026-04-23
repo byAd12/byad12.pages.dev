@@ -59,4 +59,4 @@ declare -A notas=(
 
 keys=("${!notas[@]}")
 random_key=${keys[$RANDOM % ${#keys[@]}]}
-echo -e "\n\e[44;97m${notas[$random_key]}\e[0m\n"
+printf "\n\e[1;44;97m%-$(tput cols)s\e[0m\n\n" "${notas[$random_key]}"

@@ -2,7 +2,9 @@
 
 Código por byAd12
 
-~ Dedicatoria a: María José
+~ Dedicatoria a: María José (CFGM)
+
+~ Dedicatoria a: Miguel Mourón Regueira (CFGS)
 
 -->
 
@@ -60,6 +62,8 @@ Código por byAd12
 
                 <p>En el firewall permitiremos el paso del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
+
+                <p>Tras instalar debes configurar los siguientes ficheros: <a href="#isc-dhcp-server">/etc/default/isc-dhcp-server</a> y <a href="#dhcpd.conf">/etc/dhcp/dhcpd.conf</a>.</p>
 
                 <p>Después de configurar los ficheros necesarios se debe reiniciar el servicio:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server.service</code></pre>
@@ -128,7 +132,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h2>Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+                <h2 id="isc-dhcp-server">Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
                 <p>A continuación deberemos modificar las siguientes líneas del fichero:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
@@ -140,11 +144,13 @@ INTERFACESv6=""</code></pre>
                     <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
                     <br><b>INTERFACESv6</b>: Si no se tiene IPv6 configurado, se debe comentar la línea.
                 </p>
+                <p>Usa el siguiente comando para poder ver las interfaces del equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
 
             </div>
 
             <div>
-                <h2>Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
+                <h2 id="dhcpd.conf">Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
