@@ -56,6 +56,41 @@ Código por byAd12
                     <li><b>Básico:</b> <a href="#Ejemplo">Ejemplo</a> • <a href="#Para-que-sirve-xslt">¿Para qué sirve XSLT?</a> • <a href="#Vincular-documento-xml">Vincular el documento XML</a> • <a href="#Estructura">Estructura XSLT</a></li>
                 </ul>
 
+                <h2 style="margin: 20px;" class="IndiceH2">2. Elementos</h2>
+                <ul>
+                    <li><b>Básico:</b> <a href="#Elemento_Raiz">Elemento raíz</a> • <a href="#Elemento_Output">xsl:output</a></li>
+                    <br>
+                    <li><b>Plantillas:</b> <a href="#Elemento_Template">xsl:template</a> • <a href="#Elemento_Template_Transformacion_HTML">Transformación HTML</a> • <a href="#Elemento_Template_Transformacion_XML">Transformación XML</a> • <a href="#Elemento_Template_Transformacion_TEXT">Transformación en texto</a> • <a href="#Procesamiento_Templates">Procesamiento de templates</a></li>
+                    
+                    <br>
+                    <li><b>Coger valores:</b> <a href="#Elemento_Value_Of">xsl:value-of</a> • <a href="#Elemento_Value_Of_Ejemplo">Ejemplo</a> • <a href="#Elemento_Value_Of_Ejemplo_Varios_Elementos">Ejemplo con varios elementos</a></li>
+
+                    <br>
+                    <li><b>Llamar plantillas:</b> <a href="#Elemento_Call_Template">xsl:call-template</a> • <a href="#Elemento_Call_Template_Ejemplo">Ejemplo</a></li>
+                    <li><b>Aplicar plantillas:</b> <a href="#Elemento_Apply_Templates">xsl:apply-templates</a> • <a href="#Elemento_Apply_Templates_Ejemplo">Ejemplo</a> </li>
+                    
+                    <br>
+                    <li><b>Bucles:</b> <a href="#Elemento_For_Each">xsl:for-each</a> • <a href="#Elemento_For_Each_Ejemplo">Ejemplo</a> </li>
+
+                    <br>
+                    <li><b>Ordenar nodos:</b> <a href="#Elemento_Sort">xsl:sort</a> • <a href="#Elemento_Sort_Ejemplo">Ejemplo</a> </li>
+
+                    <br>
+                    <li><b>Crear atributos:</b> <a href="#Elemento_Attribute">xsl:attribute</a> • <a href="#Elemento_Attribute_Ejemplo">Ejemplo</a> • <a href="#Elemento_Attribute_Alternativa">Alternativa</a></li>
+                    <li><b>Conjunto de atributos:</b> <a href="#Elemento_Attribute_Set">xsl:attribute</a> • <a href="#Elemento_Use_Attribute_Set">use-attribute-sets</a></li>
+
+                    <br>
+                    <li><b>Condicional básico:</b> <a href="#Elemento_If">xsl:if</a> • <a href="#Elemento_If_Ejemplo">Ejemplo</a></li>
+                    <li><b>Condicional avanzado:</b> <a href="#Elemento_Choose">xsl:choose</a> • <a href="#Elemento_Choose_Ejemplo">Ejemplo</a></li>
+
+                    <br>
+                    <li><b>Variables:</b> <a href="#Elemento_Variable">xsl:variable</a> • <a href="#Elemento_Copy_Of">xsl:copy-of</a> • <a href="#Elemento_Variable_Ejemplo">Ejemplo</a></li>
+
+                    <br>
+                    <li><b>Tipos de valores:</b> <a href="#Elemento_Decimal_Format">xsl:decimal-format</a> • <a href="#Función_Format_Number">format-number()</a></li>
+
+                </ul>
+
             </div>
         </div>
 
@@ -406,85 +441,32 @@ Código por byAd12
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
-                <h2 id="Elemento_Call_Template">Elemento <span>&lt;xsl:call-template&gt;</span></h2>
-            
-                <p>Este elemento permite invocar a un template definido previamente mediante su nombre definido:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:call-template name="nombre-plantilla" /&gt;</code></pre>
+                <h2 id="Procesamiento_Templates">Procesamiento de templates</h2>
 
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-                        <tr class="Titulo">
-                            <td colspan="2">
-                                Atributos del elemento - <b>call-template</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
-                            <td>Nombre de la plantilla que se va a invocar.</td>
-                        </tr>
-                        
-                    </table>
-                </div>
-
-            </div>
-
-            <div>
-                <h2 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h2>
-            
-                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">xsl:call-template</a>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
-
-    &lt;xsl:output method="html" indent="yes" /&gt;
-
-    &lt;xsl:template name="plantilla-parrafo"&gt;
-        &lt;p&gt;Texto del párrafo&lt;/p&gt;
-    &lt;/xsl:template&gt;
-
-    &lt;xsl:template match="/"&gt;
-        &lt;html&gt;
-            &lt;head&gt;
-                &lt;title&gt;Título del documento transformado&lt;/title&gt;
-            &lt;/head&gt;
-
-            &lt;body&gt;
-            
-                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
-                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
-
-            &lt;/body&gt;
-        &lt;/html&gt;
-
-    &lt;/xsl:template&gt;
-
-&lt;/xsl:stylesheet&gt;</code></pre>
-
-                <p>Como resultado daría el siguiente documento HTML:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Título del documento transformado&lt;/title&gt;
-    &lt;/head&gt;
-
-    &lt;body&gt;
-    
-        &lt;p&gt;Texto del párrafo&lt;/p&gt;
-        &lt;p&gt;Texto del párrafo&lt;/p&gt;
-
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-
+                <ol>
+                    <li>El procesador XSLT comienza en el nodo raíz del documento.</li>
+                    <li>
+                        Busca un <a href="#Elemento_Template">xsl:template</a> cuyo atributo match coincida con ese nodo.
+                        <ul>
+                            <li>Si encuentra uno, lo ejecuta.</li>
+                            <li>
+                                Si no encuentra ninguno:
+                                <ul>
+                                    <li>puede aplicar reglas por defecto (seguir bajando por el XML),</li>
+                                    <li>o no generar salida visible.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Cuando un <a href="#Elemento_Template">xsl:template</a> se ejecuta, puede contener un elemento <a href="#Elemento_Apply_Templates">xsl:apply-templates</a>.
+                        <ul>
+                            <li>Esto hace que se seleccionen nuevos nodos y para cada uno: se busque el template correspondiente y se ejecute.</li>
+                        </ul>
+                    </li>
+                    <li>Este proceso se repite.</li>
+                </ol>
             </div>
 
         </div>
@@ -582,6 +564,87 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
+                <h2 id="Elemento_Call_Template">Elemento <span>&lt;xsl:call-template&gt;</span></h2>
+            
+                <p>Este elemento permite invocar a un template definido previamente mediante su nombre definido:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:call-template name="nombre-plantilla" /&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>call-template</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Nombre de la plantilla que se va a invocar.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h2>
+            
+                <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">xsl:call-template</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+
+    &lt;xsl:output method="html" indent="yes" /&gt;
+
+    &lt;xsl:template name="plantilla-parrafo"&gt;
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+    &lt;/xsl:template&gt;
+
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Título del documento transformado&lt;/title&gt;
+            &lt;/head&gt;
+
+            &lt;body&gt;
+            
+                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
+                &lt;xsl:call-template name="plantilla-parrafo" /&gt;
+
+            &lt;/body&gt;
+        &lt;/html&gt;
+
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
+
+                <p>Como resultado daría el siguiente documento HTML:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Título del documento transformado&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+    
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+        &lt;p&gt;Texto del párrafo&lt;/p&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
                 <h2 id="Elemento_Apply_Templates">Elemento <span>&lt;xsl:apply-templates&gt;</span></h2>
 
                 <p>El siguiente elemento permite seleccionar a un conjunto de nodos del documento XML y aplicarle un template:</p>
@@ -602,34 +665,6 @@ nombre2,apellido2
                     </table>
                 </div>
 
-            </div>
-
-            <div>
-                <h2 id="Procesamiento_Templates">Procesamiento de templates</h2>
-
-                <ol>
-                    <li>El procesador XSLT comienza en el nodo raíz del documento.</li>
-                    <li>
-                        Busca un <a href="#Elemento_Template">xsl:template</a> cuyo atributo match coincida con ese nodo.
-                        <ul>
-                            <li>Si encuentra uno, lo ejecuta.</li>
-                            <li>
-                                Si no encuentra ninguno:
-                                <ul>
-                                    <li>puede aplicar reglas por defecto (seguir bajando por el XML),</li>
-                                    <li>o no generar salida visible.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        Cuando un <a href="#Elemento_Template">xsl:template</a> se ejecuta, puede contener un elemento <a href="#Elemento_Apply_Templates">xsl:apply-templates</a>.
-                        <ul>
-                            <li>Esto hace que se seleccionen nuevos nodos y para cada uno: se busque el template correspondiente y se ejecute.</li>
-                        </ul>
-                    </li>
-                    <li>Este proceso se repite.</li>
-                </ol>
             </div>
 
             <div>
@@ -749,7 +784,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h2 id="Elemento_For_Each">Elemento <span>&lt;xsl:sort&gt;</span></h2>
+                <h2 id="Elemento_Sort">Elemento <span>&lt;xsl:sort&gt;</span></h2>
             
                 <p>El siguiente elemento se sitúa dentro de un <a href="#Elemento_For_Each">xsl:for-each</a> para ordenar los nodos según unas opciones a configurar:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:sort
@@ -959,7 +994,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h2 id="Elemento_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span> - Uso con el atributo <span>use-attribute-sets</span></h2>
+                <h2 id="Elemento_Use_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span> - Uso con el atributo <span>use-attribute-sets</span></h2>
 
                 <p>Para poner el conjunto de atributos en un elemento XML se debe usar el siguiente atributo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta_xml use-attribute-sets="nombre-set" /&gt;</code></pre>
@@ -1249,6 +1284,99 @@ nombre2,apellido2
 
             </div>
 
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Elemento_Decimal_Format">Elemento <span>&lt;xsl:decimal-format&gt;</span></h2>
+            
+                <p>Este elemento se sitúa directamente dentro del <a href="#Elemento_Raiz">elemento raíz</a>. Sirve para definir los caracteres y símbolos utilizados para convertir números en cadenas de texto:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:decimal-format
+    name="string"
+    decimal-separator="char"
+    grouping-separator="char"
+    infinity="string"
+    minus-sign="char"
+    NaN="string"
+    percent="char"
+    per-mille="char"
+    zero-digit="char"
+    digit="char"
+    pattern-separator="char"
+/&gt;</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Atributos del elemento - <b>decimal-format</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">name=""</code></pre></td>
+                            <td>Nombre único e identificable para poder aplicar el formato a elementos.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">decimal-separator=""</code></pre></td>
+                            <td>Es el carácter con el que separar decimales. Por defecto es <span class="span_contenido">.</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">grouping-separator=""</code></pre></td>
+                            <td>Es el carácter con el que se separan los miles. Por defecto es <span class="span_contenido">,</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">infinity=""</code></pre></td>
+                            <td>Es lo que representará el valor infinito. Por defecto es <span class="span_contenido">Infinity</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">minus-sign=""</code></pre></td>
+                            <td>Es el carácter con el que se define el símbolo negativo. Por defecto es <span class="span_contenido">-</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">NaN=""</code></pre></td>
+                            <td>Es la cadena que devuelve si el valor no es numérico.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">percent=""</code></pre></td>
+                            <td>Es el símbolo que representa al porcentaje. Por defecto es <span class="span_contenido">%</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">per-mille=""</code></pre></td>
+                            <td>Es el carácter que representa tantos por miles.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">zero-digit=""</code></pre></td>
+                            <td>Define el valor cero. Por defecto es <span class="span_contenido">0</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">digit=""</code></pre></td>
+                            <td>Es el carácter que identifica que refleja el lugar en el que falta un dígito. Por defecto es <span class="span_contenido">#</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">pattern-separator=""</code></pre></td>
+                            <td>Es el caracter utilizado para separar supatrones positivos y negativos dentro de un formato de patrones. Por defecto es <span class="span_contenido">;</span>.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="Función_Format_Number">Elemento <span>&lt;xsl:decimal-format&gt;</span> - Coger su contenido con <span>format-number()</span></h2>
+            
+                <p>...</p>
+                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
+
+            </div>
 
         </div>
 
