@@ -105,7 +105,63 @@ Código por byAd12
             <div>
                 <h2 id="Ejemplo">Ejemplo</h2>
             
-                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"&gt;
+    &lt;xsl:output method="xml" indent="yes" /&gt;
+    
+    &lt;xsl:template match="/"&gt;
+        &lt;xsl:text&gt;
+&lt;/xsl:text&gt; &lt;!-- Puse esto porque se me ponia la etiqueta &lt;?xml?&gt; pegada a &lt;usuarios&gt; --&gt;
+        &lt;usuarios&gt;
+            
+            &lt;xsl:for-each select="android/usuarios/usuario"&gt;
+                
+                &lt;usuario&gt;
+                    
+                    &lt;xsl:attribute name="id"&gt;
+                        &lt;xsl:value-of select="@id" /&gt;
+                    &lt;/xsl:attribute&gt;
+                    
+                    &lt;xsl:attribute name="nick"&gt;
+                        &lt;xsl:value-of select="nick" /&gt;
+                    &lt;/xsl:attribute&gt;
+                    
+                    &lt;nombre&gt;
+                        &lt;xsl:value-of select="nombre" /&gt;
+                    &lt;/nombre&gt;
+                    
+                    &lt;apps&gt;
+                        
+                        &lt;xsl:for-each select="apps/app"&gt;
+                            
+                            &lt;app&gt;
+                                &lt;xsl:variable name="id_app" select="@id" /&gt;
+                                
+                                &lt;xsl:attribute name="id"&gt;
+                                    &lt;xsl:value-of select="@id" /&gt;
+                                &lt;/xsl:attribute&gt;
+                                
+                                &lt;xsl:attribute name="pegi"&gt;
+                                    &lt;xsl:value-of select="//pegi[../@id = $id_app]" /&gt;
+                                &lt;/xsl:attribute&gt;
+                                
+                                &lt;xsl:value-of select="//aplicaciones/app/titulo[../@id = $id_app]" /&gt;
+                                
+                            &lt;/app&gt;
+                            
+                        &lt;/xsl:for-each&gt;
+                        
+                    &lt;/apps&gt;
+                    
+                &lt;/usuario&gt;
+                
+            &lt;/xsl:for-each&gt;
+            
+        &lt;/usuarios&gt;
+        
+    &lt;/xsl:template&gt;
+
+&lt;/xsl:stylesheet&gt;</code></pre>
 
             </div>
 
@@ -538,7 +594,7 @@ Código por byAd12
     &lt;xsl:output method="text" /&gt;
 
     &lt;xsl:template match="persona"&gt;
-        &lt;xsl:value-of select="informacion/nombre" /&gt;,&lt;xsl:value-of select="informacion/apellido" /&gt;
+        &lt;xsl:value-of select="informacion/nombre" /&gt;, &lt;xsl:value-of select="informacion/apellido" /&gt;
     &lt;/xsl:template&gt;
 
 &lt;/xsl:stylesheet&gt;</code></pre>
@@ -549,6 +605,17 @@ nombre2,apellido2
 ...</code></pre>
                 
                 <p>Otra forma de hacerlo es seleccionando con el elemento <a href="#Elemento_Template">xsl:template</a> a <span class="span_contenido" translate="no">/</span> y usando el elemento <a href="#Elemento_For_Each">xsl:for-each</a>.</p>
+                
+                <p>
+                    Se puede apreciar que, aunque se haya puesto un espacio después de la coma, este espacio no se refleja el el resultado final.
+                    Para que el espacio se refleje se puede hacer de 2 formas diferentes:
+                </p>
+
+                <p class="Expl">1. Poniendo un espacio en una etiqueta <a>xsl:text</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:value-of select="informacion/nombre" /&gt;,&lt;xsl:text&gt; &lt;/xsl:text&gt;&lt;xsl:value-of select="informacion/apellido" /&gt;</code></pre>
+
+                <p class="Expl">2. Usando una única etiqueta <a>xsl:value-of</a> pero juntando ambos elementos con la función <a href="#Elemento_Value_Of">concat()</a> de <a href="xpath.html">XPATH</a>:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:value-of select="concat(informacion/nombre, ', ', informacion/apellido)" /&gt;</code></pre>
 
             </div>
 
@@ -1371,29 +1438,26 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h2 id="Función_Format_Number">Elemento <span>&lt;xsl:decimal-format&gt;</span> - Coger su contenido con <span>format-number()</span></h2>
+                <h2 id="Función_Format_Number">Elemento <span>&lt;xsl:decimal-format&gt;</span> - Formatear valores con <span>format-number()</span></h2>
             
-                <p>...</p>
-                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
-
-            </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
-            <div>
-                <h2 id="">...</h2>
-
-            
-                <p>...</p>
-                <pre class="codigo" translate="no"><code class="language-xml">...</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+    &lt;xsl:decimal-format decimal-separator="," grouping-separator="."/&gt;
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+            &lt;body&gt;
+                &lt;table border="1"&gt;
+                    &lt;xsl:for-each select="catalogo/cd"&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="titulo"/&gt;&lt;/td&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="format-number(precio, '#.##0,00 EUR')"/&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/xsl:for-each&gt;
+                &lt;/table&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</code></pre>
 
             </div>
 
