@@ -58,7 +58,7 @@ Código por byAd12
 
                 <p>Instalaremos el servicio correspondiente solo en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install isc-dhcp-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y isc-dhcp-server</code></pre>
 
                 <p>En el firewall permitiremos el paso del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
@@ -152,41 +152,57 @@ INTERFACESv6=""</code></pre>
             <div>
                 <h2 id="dhcpd.conf">Archivo de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
-                <p>Los siguientes bloques tendrán que estar en el mismo archivo si se definen:</p>
-                <pre class="codigo" translate="no"><code class="language-ini">option routers [VALOR];
-option domain-name-servers [VALOR];</code></pre>
-                <p class="Expl">
-                    <b>routers</b>: La IPv4 del enrutador.
-                    <br><b>domain-name-servers</b>: La(s) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                <p>
+                    Las líneas que se presentan a continuación pueden definirse dentro o fuera de una "subnet".
+                    Si se definen fuera se aplicarán a todas las subredes que se creen.
                 </p>
+
+                <p>Esta configuración permite configurar el tiempo de concesión de una configuración IP a un equipo:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];
 max-lease-time [TIEMPO_SEGUNDOS];
 min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
                 <p class="Expl">
-                    <b>default-lease-time</b>: Tiempo base de la concesión de una configuración IP dada.
-                    <br><b>max-lease-time</b>: Tiempo máximo de la concesión.
-                    <br><b>min-lease-time</b>: Tiempo mínimo de la concesión.
+                    <b>default-lease-time</b>: Tiempo base en segundos de la concesión de una configuración IP dada.
+                    <br><b>max-lease-time</b>: Tiempo máximo en segundos de la concesión.
+                    <br><b>min-lease-time</b>: Tiempo mínimo en segundos de la concesión.
                 </p>
 
+                <p>Esta configuración crea una subnet donde se define la configuración IP a coneceder y los rangos de IPs a asignar:</p>
+
                 <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
+    option routers [VALOR];
+
+    option domain-name "[VALOR]";
+    option domain-name-servers [VALOR];
+
     range [IP_INICIAL] [IP_FINAL];
     range [IP_INICIAL_2] [IP_FINAL_2];
-    ...
+    # ...
 }</code></pre>
                 <p class="Expl">
                     <b>subnet</b>: La dirección de red IPv4.
                     <br><b>netmask</b>: Máscara punteada de la red.
-                    <br><b>range</b>: Se pueden definir varios rangos DHCP podiendo así excluir ciertas IPs reservadas.
                 </p>
+                <p class="Expl">
+                    <b>routers</b>: La dirección IPv4 del enrutador.
+                </p>
+                <p class="Expl">
+                    <b>domain-name</b>: El nombre del dominio de la red entre comillas.
+                    <br><b>domain-name-servers</b>: La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                </p>
+                <p class="Expl">
+                    <b>range</b>: Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.
+                </p>
+
+                <p>Opcional - también se puede definir una IP estática mediante la dirección MAC del dispositivo:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">host [NOMBRE] {
     hardware ethernet [MAC];
     fixed-address [IP_ESTÁTICA];
 }</code></pre>
                 <p class="Expl">
-                    Aquí definimos una IP estática mediante una MAC.
-                    <br><b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
+                    <b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
                     <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
                     <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
                 </p>

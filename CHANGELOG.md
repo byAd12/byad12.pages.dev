@@ -1,6 +1,11 @@
-Nuevo contenido (XSLT)
+Nuevo contenido y guía
 
-# g/xslt.html
-Nuevo ejemplo
-Se acabó la guía con la sección faltante
-Nuevas líneas explicando lo que se podia hacer con xsl:text o concat()
+# g/isc_dhcp_server.html
+Separación de bloques opcionales y obligatorios
+Mejora de explicaciones
+
+# g/debian_pxe.html
+Nueva guía
+
+# guides.html
+Nuevo enlace a la nueva guía

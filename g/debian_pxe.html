@@ -1,0 +1,272 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: María José (CFGM)
+
+~ Dedicatoria a: Miguel Mourón Regueira (CFGS)
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>Debian PXE</title>
+        
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 class="TituloPrincipal">Debian PXE</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Automatizar la instalación de Debian</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+            <div>
+                <h2>1. Configuración del servidor DHCP</h2>
+
+                <!-- ......................................................... -->
+                <p>1.1. Instalaremos el servicio correspondiente en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y isc-dhcp-server</code></pre>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>1.2. A continuación deberemos modificar el siguiente fichero para configurar las interfaces de red:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/default/isc-dhcp-server</code></pre>
+                <p class="Expl">Dentro de este fichero reemplazaremos las siguientes líneas:</p>
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
+INTERFACESv6=""</code></pre>
+                <p class="Expl">Por las siguientes líneas:</p>
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[NOMBRE_INTERFAZ_RED]"
+#INTERFACESv6=""</code></pre>
+                <p class="Expl">
+                    <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
+                    <br><b>INTERFACESv6</b>: Si no se tiene IPv6 configurado, se debe comentar la línea.
+                </p>
+                <p class="Expl">Usa el siguiente comando para poder ver las interfaces del equipo en caso necesario:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>1.3. Ahora es necesario editar el siguiente fichero para configurar el servicio DHCP:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/dhcp/dhcpd.conf</code></pre>
+
+                <p>1.3.1. Dentro de este fichero añadiremos la siguiente línea para poder obtener la arquitectura del cliente:</p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">option arch code 93 = unsigned integer 16;</code></pre>
+
+                <p>1.3.2. Además configuraremos el tiempo de concesión de las IPs:</p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];
+max-lease-time [TIEMPO_SEGUNDOS];
+min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
+                <p class="Expl">
+                    <b>default-lease-time</b>: Tiempo base en segundos de la concesión de una configuración IP dada.
+                    <br><b>max-lease-time</b>: Tiempo máximo en segundos de la concesión.
+                    <br><b>min-lease-time</b>: Tiempo mínimo en segundos de la concesión.
+                </p>
+
+                <p>1.3.3. También añadiremos esta configuración que permite crear una subnet donde se define la configuración IP a coneceder:</p>
+
+                <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
+    # Configuración básica
+    option routers [VALOR];
+    next-server [VALOR];
+
+    # Configuración DNS
+    option domain-name "[VALOR]";
+    option domain-name-servers [VALOR];
+
+    # Configuración de rangos
+    range [IP_INICIAL] [IP_FINAL];
+    range [IP_INICIAL_2] [IP_FINAL_2];
+    # ...
+
+    # Permitr arranque por red
+    allow booting;
+    allow bootp;
+
+    # Obtener la arqitectura del cliente 
+    # y seleccionar el fichero de arranque
+    if option arch = 00:07 or option arch 00:09 {
+        filename "bootnetx64.efi"; # UEFI
+    } else {
+        filename "pxelinux.0"; # BIOS
+    }
+}</code></pre>
+                <p class="Expl">Sintaxis básica:</p>
+                <p class="Expl">
+                    <b>subnet</b>: La dirección de red IPv4.
+                    <br><b>netmask</b>: Máscara punteada de la red.
+                </p>
+                <p class="Expl">Configuración básica:</p>
+                <p class="Expl">
+                    <b>routers</b>: La dirección IPv4 del enrutador.
+                    <br><b>next-server</b>: La dirección IPv4 del servidor TFTP donde se aloja el fichero de arranque.
+                </p>
+                <p class="Expl">Configuración DNS:</p>
+                <p class="Expl">
+                    <b>domain-name</b>: El nombre del dominio de la red entre comillas.
+                    <br><b>domain-name-servers</b>: La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                </p>
+                <p class="Expl">Configuración de rangos:</p>
+                <p class="Expl">
+                    <b>range</b>: Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.
+                </p>
+                <p class="Expl">El resto de líneas no deben de modificarse.</p>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>1.4. Por último habilitaremos y reiniciaremos el servicio DHCP para aplicar los cambios, además de verificar si tiene errores:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable isc-dhcp-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status isc-dhcp-server</code></pre>
+
+                <!-- ......................................................... -->
+
+            </div>
+
+            <div>
+                <h2>2. Configuración del servidor TFTP</h2>
+
+                <!-- ......................................................... -->
+                <p>2.1. Instalaremos el servicio correspondiente en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install tftpd-hpa</code></pre>
+                <p class="Expl">El servicio no requiere configuración pero si descargar los archivos necesarios.</p>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el fichero de arranque mediante CLI:</p>
+                <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">wget https://deb.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/netboot.tar.gz</code></pre>
+                <p>2.2.1. Descomprimiremos el fichero tar.gz para obtener los archivos necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
+                <p>2.2.2. Y comprobaremos que estén los ficheros de arranque necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">ls --color</code></pre>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>2.3. Por último habilitaremos el servicio de tftpd-hpa:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable tftpd-hpa</code></pre>
+
+            </div>
+
+            <div>
+                <h2>3. Comprobación del funcionamiento</h2>
+
+                <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y configurar arranque por red IPv4.</p>
+
+                <p class="Expl">
+                    En el caso de una máquina virtual de VirtualBox, se debe tener la MV cliente y servidor en una misma red NAT (sin DHCP activado) y, 
+                    en la pestaña de "Sistema" de la configuración, se debe habilitar el arranque por red y subir su prioridad de arranque por encima de otros.
+                </p>
+
+                <p>
+                    Una vez se inicie el sistema, normalmente requerirá al instante de obtener una configuración IP y un fichero de arranque
+                    que se pulse la tecla F12 u otra.
+                </p>
+
+                <p class="Expl">Una vez pulsado, debería aparecer el menú de instalación de Debian.</p>
+
+                <p>Para comprobar que el servidor esté concediendo direcciones IPs se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">dhcp-lease-list</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>4. Automatizar las preguntas de la instalación</h2>
+
+                <p>4.1. Crearemos un fichero .txt con las siguientes líneas de respuestas según las necesidades de la instalación:</p>
+
+                <p class="Expl">País, idioma y codificación de carácteres:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string es_ES.UTF-8</code></pre>
+
+                <p class="Expl">Distribución del teclado:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select es</code></pre>
+
+                <p>...</p>
+
+                <!-- <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre>
+
+                <p class="Expl"></p>
+                <pre class="codigo" translate="no"><code class="text"></code></pre> -->
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>
