@@ -218,42 +218,150 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
             <div>
                 <h2>4. Automatizar las preguntas de la instalación</h2>
 
-                <p>4.1. Crearemos un fichero .txt con las siguientes líneas de respuestas según las necesidades de la instalación:</p>
+                <p>4.1. Crearemos un fichero .txt dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.</p>
+                <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
 
-                <p class="Expl">País, idioma y codificación de carácteres:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string es_ES.UTF-8</code></pre>
+                <br>
+                <p>Configuración regional:</p>
 
-                <p class="Expl">Distribución del teclado:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select es</code></pre>
+                <p class="Expl">País, idioma y codificación de carácteres (<span class="span_contenido">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string &lt;es_ES.UTF-8&gt;</code></pre>
+
+                <p class="Expl">Distribución del teclado (<span class="span_contenido">es</span> - "español"):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select &lt;es&gt;</code></pre>
+
+                <br>
+                <p>Las siguientes 3 opciones de configuración de red deben especificarse juntas:</p>
+
+                <p class="Expl">Seleccionar la interfaz de red con conexión (<span class="span_contenido">auto</span> - se detecta automáticamente):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/choose_interface select auto</code></pre>
+
+                <p class="Expl">Definir el hostname del equipo [DHCP puede sobreescribirlo]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_hostname string &lt;nombre_host&gt;</code></pre>
+
+                <p class="Expl">Definir el dominio del equipo [DHCP puede sobreescribirlo]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_domain string &lt;nombre_dominio&gt;</code></pre>
+
+                <p class="Expl">En equipos con tarjetas de red Wi-Fi se puede deshabilitar WEP (Wired Equivalent Privacy), que está obsoleto y sustituido por WPA:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/wireless_wep string</code></pre>
+
+
+                <br>
+                <p>Gestión de usuarios:</p>
+
+                <p class="Expl">Definir la contraseña del usuario root:</p>
+                <pre class="codigo" translate="no"><code class="text">passwd passwd/root-password password contraseña_segura
+passwd passwd/root-password-again password contraseña_segura</code></pre>
+
+                <p class="Expl">Crear un nuevo usuario local [se solicita obligatoriamente]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-fullname string &lt;nombre_completo_usuario&gt;
+d-i passwd/username string &lt;nombre_usuario&gt;
+
+d-i passwd/user-password password &lt;contraseña_segura&gt;
+d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
+
+                <p class="Expl">Asignar la contraseña al usuario local mediante un hash MD5 [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-password-crypted password &lt;Hash_MD5&gt;</code></pre>
+
+                <p class="Expl">Asignar un UID al usuario local [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-uid string &lt;número_uid&gt;</code></pre>
+
+                <br>
+                <p>Gestión de la zona horaria:</p>
+
+                <p class="Expl">Establecer el reloj en UTC:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i clock-setup/utc boolean true</code></pre>
+
+                <p class="Expl">Establecer la zona horaria actual (<span class="span_contenido">Europe/Madrid</span> - se saca con la carpeta <span class="span_url">/usr/share/zoneinfo/</span>):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i time/zone string &lt;Europe/Madrid&gt;</code></pre>
+
+                <p class="Expl">Establecer la hora correcta del reloj por NTP:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp boolean true</code></pre>
+                
+                <p class="Expl">Se puede elegir que servidor NTP se quiere usar [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp-server string &lt;ntp.roa.es&gt;</code></pre>
+
+                <br>
+                <p>Particionar el disco:</p>
+
+                <p class="Expl">Primero hay que establecer el método de particionado (regular, lvm, crypto):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/method string regular</code></pre>
+
+                <p class="Expl">Eliminar configuraciones LVM previas si existen [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-lvm/device_remove_lvm boolean true</code></pre>
+
+                <p class="Expl">Eliminar configuraciones RAID previas si existen [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-md/device_remove_md boolean true</code></pre>
+
+                <p class="Expl">Elegir el tipo de particionado:</p>
+                <ul>
+                    <li><b>atomic</b> - Todos los archivos en una partición</li>
+                    <li><b>home</b> - La partición /home se separa del resto</li>
+                    <li><b>multi</b> - Las particiones /home, /var, /tmp se separan del resto</li>
+                </ul>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select &lt;atomic&gt;</code></pre>
+
+                <p class="Expl">Después de configurar el particionado se debe especificar que se aplique el proceso sin más preguntas:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true</code></pre>
+
+                <br>
+                <p>Gestión de paquetes:</p>
+
+                <p class="Expl">Hay que elegir que mirror se usará para la instalación del sistema, ya que netinst requiere el uso de red:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
+d-i mirror/http/hostname string &lt;ftp.es.debian.org&gt;
+d-i mirror/http/directory string /debian
+d-i mirror/http/proxy string</code></pre>
+
+                <br>
+                <p>Configuraciones de personalización:</p>
+
+                <p class="Expl">Para rechazar el envío opcional de estadísticas a los desarrolladores de Debian:</p>
+                <pre class="codigo" translate="no"><code class="text">popularity-contest popularity-contest/participate boolean false</code></pre>
+
+                <br>
+                <p>Selección de paquetes a instalar:</p>
+
+                <p class="Expl">Para instalar un entorno gráfico de escritorio con GNOME:</p>
+                <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard, desktop
+tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
+
+                <br>
+                <p>Instalar el gestor de arranque GRUB:</p>
+
+                <p class="Expl">Para instalar GRUB si <b>solo</b> está Debian instalado:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i grub-installer/only_debian boolean true</code></pre>
+
+                <p class="Expl">Para instalar GRUB si hay <b>otro</b> sistema operativo instalado a parte de Debian:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i grub-installer/with_other_os boolean true</code></pre>
+
+                <p class="Expl">Para instalar GRUB en el sector MBR del disco:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i grub-installer/bootdev string /dev/sda</code></pre>
+
+                <br>
+                <p>Configuración final:</p>
+
+                <p class="Expl">Para que no se abra un diálogo de información cuando la instalación acabe y que además reinicie el sistema:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i finish-install/reboot_in_progress note</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2>5. ...</h2>
 
                 <p>...</p>
-
-                <!-- <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre>
-
-                <p class="Expl"></p>
-                <pre class="codigo" translate="no"><code class="text"></code></pre> -->
 
             </div>
 
