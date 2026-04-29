@@ -216,9 +216,9 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>4. Automatizar las preguntas de la instalación</h2>
+                <h2 id="Archivo_Respuestas">4. Automatizar las preguntas de la instalación</h2>
 
-                <p>4.1. Crearemos un fichero .txt dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.</p>
+                <p>4.1. Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.</p>
                 <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
 
                 <br>
@@ -359,9 +359,93 @@ tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>5. ...</h2>
+                <h2>5. Modificar el menú de arranque en la instalación</h2>
 
-                <p>...</p>
+                <p>5.1. Primero tendremos que editar el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /srv/tftp/debian-installer/amd64/boot-screens/txt.cfg</code></pre>
+
+                <p>Dentro de ese fichero nos encontraremos bloques de configuración como el siguiente:</p>
+                <pre class="codigo" translate="no"><code class="text">label install
+        menu label ^Install
+        kernel debian-installer/amd64/linux
+        append vga=788 initrd=debian-installer/amd64/initrd.gz --- quiet</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Formato del bloque de configuración
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">label &lt;...&gt;</code></pre></td>
+                            <td>Nombre identificativo para la entrada.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">menu label &lt;...&gt;</code></pre></td>
+                            <td>
+                                Es la descripción de la entrada que el usuario verá. 
+                                El símbolo <span class="span_contenido">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, la opción se activará (este símbolo es opcional).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">kernel &lt;...&gt;</code></pre></td>
+                            <td>Es el kernel a cargar.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">append</code></pre></td>
+                            <td>Define las opciones de la instalación.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">vga=788</code></pre></td>
+                            <td>Define la resolución de la pantalla a usar para la instalacion.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">initrd=...</code></pre></td>
+                            <td>Define la ruta al archivo de Initial RAM Disk, que contiene controladores y herramientas necesarias para montar el sistema.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">---</code></pre></td>
+                            <td>Define que todo lo que tenga a la derecha se procese por el kernel.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">quiet</code></pre></td>
+                            <td>Indica que no muestre los logs durante la instalación.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>5.2. Lo que hay que hacer es añadir debajo del bloque de configuración existente otro bloque separado por una línea vacía:</p>
+                <pre class="codigo" translate="no"><code class="text">label instalacion-desatendida-gnome
+        menu label Instalación desatendida de ^GNOME
+        kernel debian-installer/amd64/linux
+        append vga=788 initrd=debian-installer/amd64/initrd.gz auto=true priority=critical pressed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt; --- quiet</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Opciones de configuración nuevas
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">auto=true</code></pre></td>
+                            <td>Indica que todos los pasos se deben procesar cuando se cargue el archivo de respuestas.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">priority=critical</code></pre></td>
+                            <td>Especifica que no deben aparecer diálogos si no son de prioridad crítica.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="xml">pressed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt;</code></pre></td>
+                            <td>Indica la ruta al servidor TFTP donde se encuentra el <a href="#Archivo_Respuestas">archivo de respuestas</a>.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>5.3. Ahora simplemente se guarda el fichero y ya estaría funcionando la nueva configuración.</p>
 
             </div>
 
