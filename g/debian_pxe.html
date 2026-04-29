@@ -54,6 +54,15 @@ Código por byAd12
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
+                <h2>Requisitos iniciales</h2>
+
+                <p>El servidor debe tener una IPv4 estática y un hostname identificativo:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
+
+            </div>
+
+            <div>
                 <h2>1. Configuración del servidor DHCP</h2>
 
                 <!-- ......................................................... -->
@@ -89,14 +98,32 @@ INTERFACESv6=""</code></pre>
 
                 <p>1.3.2. Además configuraremos el tiempo de concesión de las IPs:</p>
 
-                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [TIEMPO_SEGUNDOS];
-max-lease-time [TIEMPO_SEGUNDOS];
-min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
-                <p class="Expl">
-                    <b>default-lease-time</b>: Tiempo base en segundos de la concesión de una configuración IP dada.
-                    <br><b>max-lease-time</b>: Tiempo máximo en segundos de la concesión.
-                    <br><b>min-lease-time</b>: Tiempo mínimo en segundos de la concesión.
-                </p>
+                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];
+max-lease-time [SEGUNDOS];
+min-lease-time [SEGUNDOS];</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración de <b>tiempos de concesión</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];</code></pre></td>
+                            <td>Tiempo base en segundos de la concesión de una configuración IP dada.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">max-lease-time [SEGUNDOS];</code></pre></td>
+                            <td>Tiempo máximo en segundos de la concesión.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">min-lease-time [SEGUNDOS];</code></pre></td>
+                            <td>Tiempo mínimo en segundos de la concesión.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>1.3.3. También añadiremos esta configuración que permite crear una subnet donde se define la configuración IP a coneceder:</p>
 
@@ -126,26 +153,121 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
         filename "pxelinux.0"; # BIOS
     }
 }</code></pre>
-                <p class="Expl">Sintaxis básica:</p>
-                <p class="Expl">
-                    <b>subnet</b>: La dirección de red IPv4.
-                    <br><b>netmask</b>: Máscara punteada de la red.
-                </p>
-                <p class="Expl">Configuración básica:</p>
-                <p class="Expl">
-                    <b>routers</b>: La dirección IPv4 del enrutador.
-                    <br><b>next-server</b>: La dirección IPv4 del servidor TFTP donde se aloja el fichero de arranque.
-                </p>
-                <p class="Expl">Configuración DNS:</p>
-                <p class="Expl">
-                    <b>domain-name</b>: El nombre del dominio de la red entre comillas.
-                    <br><b>domain-name-servers</b>: La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
-                </p>
-                <p class="Expl">Configuración de rangos:</p>
-                <p class="Expl">
-                    <b>range</b>: Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.
-                </p>
-                <p class="Expl">El resto de líneas no deben de modificarse.</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                <b>Inicio</b> de la configuración básica
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {</code></pre></td>
+                            <td>La dirección de red IPv4 y su máscara en formato punteado.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración <b>básica</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option routers [VALOR];</code></pre></td>
+                            <td>La dirección IPv4 del enrutador.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">next-server [VALOR];</code></pre></td>
+                            <td>La dirección IPv4 del servidor TFTP donde se aloja el fichero de arranque.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración <b>DNS</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option domain-name "[VALOR]";</code></pre></td>
+                            <td>El nombre del dominio de la red entre comillas.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option domain-name-servers [VALOR];</code></pre></td>
+                            <td>La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración de <b>rangos</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">range [IP_INICIAL] [IP_FINAL];</code></pre></td>
+                            <td>Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p class="Expl">Las siguientes líneas no deben modificarse:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Habilitar servicios <b>rangos</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">allow booting;</code></pre></td>
+                            <td>Permite que el servidor proporcione toda la información necesaria para el arranque por red (PXE).</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">allow bootp;</code></pre></td>
+                            <td>Habilita soporte para clientes que usan el protocolo BOOTP.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Selección del <b>fichero de arranque</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Gracias al condicional <span class="span_contenido">ip option ...</span> se permite detectar la arquitectura del cliente para elegir el fichero correcto.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">filename "bootnetx64.efi";</code></pre></td>
+                            <td>Este fichero se usa en sistemas UEFI.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">filename "pxelinux.0";</code></pre></td>
+                            <td>Este fichero se usa en sistemas BIOS.</td>
+                        </tr>
+                            <td colspan="2">
+                                Si solo hay equipos sin UEFI en la red se puede quitar todo el bloque condicional y poner simplemente <span class="span_contenido">filename "pxelinux.0";</span>.
+                            </td>
+                    </table>
+                </div>
 
                 <!-- ......................................................... -->
                 <br>
@@ -172,6 +294,10 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
                 <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el fichero de arranque mediante CLI:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">wget https://deb.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/netboot.tar.gz</code></pre>
+                <p class="Expl">
+                    La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
+                    Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
+                </p>
                 <p>2.2.1. Descomprimiremos el fichero tar.gz para obtener los archivos necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
                 <p>2.2.2. Y comprobaremos que estén los ficheros de arranque necesarios:</p>
@@ -187,7 +313,7 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
             <div>
                 <h2>3. Comprobación del funcionamiento</h2>
 
-                <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y configurar arranque por red IPv4.</p>
+                <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y hablitar el arranque por red IPv4.</p>
 
                 <p class="Expl">
                     En el caso de una máquina virtual de VirtualBox, se debe tener la MV cliente y servidor en una misma red NAT (sin DHCP activado) y, 
@@ -218,7 +344,11 @@ min-lease-time [TIEMPO_SEGUNDOS];</code></pre>
             <div>
                 <h2 id="Archivo_Respuestas">4. Automatizar las preguntas de la instalación</h2>
 
-                <p>4.1. Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.</p>
+                <p>
+                    4.1. 
+                    Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación. 
+                    Un ejemplo de un archivo de respuestas es el que proporciona directamente Debian en el siguiente <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">enlace</a>.
+                </p>
                 <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
 
                 <br>
