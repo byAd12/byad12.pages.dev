@@ -1,8 +1,4 @@
-Nuevo contenido (DEBIAN_PXE, ISC_DHCP_SERVER)
+Nuevo contenido (PACKET_TRACER)
 
-# g/debian_pxe.html
-Nuevos enlaces a la página oficial de Debian
-Nuevas tablas para explicar parámetros
-
-# g/isc_dhcp_server.html
-Simplificación de parámetros
+# g/packet_tracer.html
+Se acabó la sección sobre ACL estándar y extendida

@@ -164,7 +164,13 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">11. Listas de control de acceso</h2>
                 <ul>
                     <li>
-                        <b>...:</b> <a href="#">.</a>
+                        <b>Notas:</b> <a href="#ACL_Donde_Ubicar">Donde ubicar las ACL</a> • <a href="#ACL_Orden_Creación">Orden de creación</a> • <a href="#ACL_Importante">A tener en cuenta</a>
+                    </li>
+                    <li>
+                        <b>ACL estándar:</b> <a href="#ACL_Estandar_Sintaxis">Sintaxis</a> • <a href="#ACL_Estandar_Direccion_Red">ACL para una red</a> • <a href="#ACL_Estandar_Host">ACL para una única IP</a> • <a href="#ACL_Estandar_Todos">ACL para todos las IPs</a>
+                    </li>
+                    <li>
+                        <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos">Ejemplos</a> • <a href="#ACL_Nombre">Crear ACLs con un nombre</a>
                     </li>
                 </ul>
 
@@ -3082,6 +3088,173 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 </p>
 
                 <p>5. Por último, hay que realizar una <a href="#OSPF_Verificacion">verificación de la conectividad</a> con sus routers vecinos y las rutas aprendidas por OSPF.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>ACL</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Donde_Ubicar">Donde ubicar las ACL</h2>
+                
+                <p>Las <a href="#ACL_Estandar_Sintaxis">ACL estándar</a> deben aplicarse lo más cerca posible del destino del tráfico.</p>
+                <p>Las <a href="#ACL_Extendida_Sintaxis">ACL extendidas</a> deben ubicarse lo más cerca posible del origen del tráfico que se desea filtrar.</p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Orden_Creación">En qué orden se deben crear las ACL</h2>
+
+                <p>El orden de las reglas dentro de una ACL es fundamental, ya que el router evalúa las entradas de <u>forma secuencial</u>, de arriba hacia abajo.</p>
+
+                <p>En el momento en que un paquete coincide con una regla, se aplica esa acción (permit o deny) y no se continúan evaluando las reglas siguientes.</p>
+
+                <p>Por este motivo:</p>
+                <ul>
+                    <li>Las reglas más restrictivas deben colocarse al inicio de la ACL.</li>
+                    <li>Las reglas más generales o menos restrictivas deben ubicarse al final.</li>
+                </ul>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Importante">A tener en cuenta</h2>
+                
+                <p>Por defecto, todo el tráfico está <u>denegado implícitamente</u>. Esto significa que, si no se especifican reglas de permit, todo será bloqueado automáticamente.</p>
+                <p>Por lo tanto, una ACL que solo contenga reglas de deny no tendrá efecto práctico si no incluye también reglas de permit, ya que el comportamiento por defecto ya es denegar todo.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>ACL Estándar</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Estandar_Sintaxis">Sintaxis</h2>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;A_Quien&gt;</code></pre>
+
+                <p class="Expl">
+                    <b>Número_ACL</b>: Es un número identificativo para la ACL, que van del 1 a 99, o 1300 a 1999.
+                    <br>
+                    <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
+                    <br>
+                    <b>A_Quien</b>: Se define la dirección de red o IP que se permite o deniega el tráfico.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Estandar_Direccion_Red">ACL asignada a una dirección de red</h2>
+
+                <p>
+                    Para definir a quien se le aplica la ACL se debe usar una IP con una máscara <b>WildCard</b>,
+                    que se calcula restando <span class="span_contenido">255.255.255.255</span> a la máscara punteada.
+                    Un ejemplo sería la máscara /24 (255.255.255.0) que, restada a 255.255.255.255, daría como resultado 0.0.0.255.
+                </p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt;</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Estandar_Host">ACL asignada a un host</h2>
+
+                <p>
+                    Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico de una única IP - <span class="span_contenido">IP_Host</span>:
+                </p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; host &lt;IP_Host&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;IP_Host&gt; 0.0.0.0</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Estandar_Todos">ACL asignada a todas las IPs</h2>
+
+                <p>
+                    Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico a todas las IPs que existen:
+                </p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; any</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; 0.0.0.0 255.255.255.255</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>ACL Extendida</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;Protocolo&gt; &lt;Origen&gt; &lt;Destino&gt; [Puerto]</code></pre>
+
+                <p class="Expl">
+                    <b>Número_ACL</b>: Es un número identificativo para la ACL, que van del 100 a 199, o 2000 a 2699.
+                    <br>
+                    <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
+                    <br>
+                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp"...
+                    <br>
+                    <b>Origen</b>: Es la IP y máscara WildCard de los hosts de origen.
+                    <br>
+                    <b>Destino</b>: Es la IP y máscara WildCard de los hosts de destino.
+                    <br>
+                    <b>Puerto</b>: Se define que puerto específico se le aplicará la ACL.
+                </p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
+
+                <p>Permitir el tráfico HTTP/TCP de la red 192.168.10.0/24 a cualquier destino:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80</code></pre>
+                <p class="Expl">Esto solo permitiría el tráfico HTTP, harían falta más reglas para permitir más tipo de tráfico.</p>
+
+                <p>Denegar el tráfico SSH/TCP de cualquier IP a la red local 192.168.10.0/24:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 100 deny tcp any 192.168.10.0 0.0.0.255 eq 22
+(config)# access-list 100 permit ip any any</code></pre>
+                <p class="Expl">Sin la segunda línea no se permitiría ningún tipo de tráfico ya que todo lo que no se permita se <a href="#ACL_Importante">deniega por defecto</a>.</p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Nombre">Crear ACLs con un nombre</h2>
+
+                <p>
+                    Para crear ACLs se puede hacer con un número identificativo (como se vió hasta ahora) o mediante un nombre identificativo y único.
+                    De esta forma no hace falta poner "access-list Número" al principio de cada regla permit / deny:
+                </p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list extended &lt;Nombre_ACL&gt;
+(config-ext-nacl)# &lt;permit / deny&gt; &lt;Objetivo&gt;
+(config-ext-nacl)# ...</code></pre>
+
+                <p><u>Nota</u>: Esto sirve para ACL <a href="#ACL_Estandar_Sintaxis">estándar</a> o <a href="#ACL_Extendida_Sintaxis">extendida</a>.</p>
 
             </div>
 
