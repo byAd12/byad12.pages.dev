@@ -82,7 +82,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">4. Seguridad de acceso</h2>
                 <ul>
                     <li><b>Usuarios:</b> <a href="#Usuarios">Crear usuarios y privilegios</a> • <a href="#PassRules">Reglas de contraseñas</a></li>
-                    <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#ServidorSSH">Configurar Servidor SSH</a></li>
+                    <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#Servidor_SSH">Configurar Servidor SSH</a></li>
                     <li><b>Políticas:</b> <a href="#Politicas">Bloqueos por intentos y Timeout</a> • <a href="#Politica_Avisos">Política de avisos</a> • <a href="#FiltroAcceso">Filtro Transport Input</a></li>
                     <li><b>Avisos:</b> <a href="#SeguridadBasica">Banners (MOTD)</a></li>
                 </ul>
@@ -170,14 +170,23 @@ Código por byAd12
                         <b>ACL estándar:</b> <a href="#ACL_Estandar_Sintaxis">Sintaxis</a> • <a href="#ACL_Estandar_Direccion_Red">ACL para una red</a> • <a href="#ACL_Estandar_Host">ACL para una única IP</a> • <a href="#ACL_Estandar_Todos">ACL para todos las IPs</a>
                     </li>
                     <li>
-                        <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos">Ejemplos</a> • <a href="#ACL_Nombre">Crear ACLs con un nombre</a>
+                        <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos">Ejemplos</a>
+                    </li>
+                    <li>
+                        <b>Más funciones:</b> <a href="#ACL_Nombre">Crear ACLs con un nombre</a> • <a href="#ACL_Comentario">Asignar un comentario</a> • <a href="#ACL_Borrar_Regla">Borrar una regla</a> • <a href="#ACL_Anadir_Regla_Intermedia">Añadir una regla en una posición especifica</a>
+                    </li>
+                    <li>
+                        <b>Asignar una ACL:</b> <a href="#ACL_Aplicar_Interfaz">A una interfaz</a> • <a href="#ACL_Aplicar_VTY">A las líneas VTY</a>
                     </li>
                 </ul>
 
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>...:</b> <a href="#">.</a>
+                        <b>NAT estático:</b> <a href="#">.</a>
+                    </li>
+                    <li>
+                        <b>NAT dinámico:</b> <a href="#">.</a>
                     </li>
                 </ul>
             </div>
@@ -729,7 +738,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="ServidorSSH">Configuración de un servidor SSH</h2>
+                <h2 id="Servidor_SSH">Configuración de un servidor SSH</h2>
 
                 <p>1. 
                     Antes de nada hay que verificar si el switch soporta realizar funciones criptográficas. 
@@ -3147,7 +3156,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="ACL_Estandar_Sintaxis">Sintaxis</h2>
                 
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;A_Quien&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;A_Quien&gt; &lt;log&gt;</code></pre>
 
                 <p class="Expl">
                     <b>Número_ACL</b>: Es un número identificativo para la ACL, que van del 1 a 99, o 1300 a 1999.
@@ -3155,6 +3164,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
                     <br>
                     <b>A_Quien</b>: Se define la dirección de red o IP que se permite o deniega el tráfico.
+                    <br>
+                    <b>log</b>: Si se pone la palabra "log" al final del comando, el sistema avisará cuando esta regla se cumple y aplica (opcional).
+
                 </p>
 
             </div>
@@ -3169,6 +3181,13 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 </p>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;Dirección_Red&gt; &lt;Máscara_Wildcard&gt;</code></pre>
+
+                <p>Mediante direcciones de red podremos sumarizar para evitar crear muchas reglas, como por ejemplo:</p>
+                <p class="Expl">Con una máscara /23 podemos resumir dos redes /24 (192.168.0.0 y 192.168.1.0) en una sola regla, evitando definirlas manualmente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 10 permit 192.168.0.0 0.0.1.255</code></pre>
+                <p class="Expl">Sin sumarizar tendríamos 2 reglas a configurar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 10 permit 192.168.0.0 0.0.0.255
+(config)# access-list 10 permit 192.168.1.0 0.0.0.255</code></pre>
 
             </div>
 
@@ -3210,51 +3229,232 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
                 
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;Protocolo&gt; &lt;Origen&gt; &lt;Destino&gt; [Puerto]</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny / remark [Texto]&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]</code></pre>
 
                 <p class="Expl">
                     <b>Número_ACL</b>: Es un número identificativo para la ACL, que van del 100 a 199, o 2000 a 2699.
                     <br>
                     <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
                     <br>
-                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp"...
-                    <br>
+                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp", "icmp", "ospf", "ip" (cualquier protocolo de Internet), etc.
+                    <br><br>
                     <b>Origen</b>: Es la IP y máscara WildCard de los hosts de origen.
                     <br>
+                    <b>Puerto_Origen</b>: Es el puerto de host de origen a comparar (opcional).
+                    <br><br>
                     <b>Destino</b>: Es la IP y máscara WildCard de los hosts de destino.
                     <br>
-                    <b>Puerto</b>: Se define que puerto específico se le aplicará la ACL.
+                    <b>Puerto_Destino</b>: Es el puerto de host de destino a comparar (opcional).
+                    <br><br>
+                    <b>established</b>: Si se pone la palabra "established", solo se comparará si la conexión es TCP y se ha establecido la conexión (opcional).
+                    <br>
+                    <b>log</b>: Si se pone la palabra "log" al final del comando, el sistema avisará cuando esta regla se cumple y aplica (opcional).
                 </p>
+
+                <p>Para definir el puerto se puede hacer de distintas maneras:</p>
+                <ul>
+                    <li><b>eq (Puerto)</b> - Que el puerto sea igual al puerto especificado.</li>
+                    <li><b>lt (Puerto)</b> - Que el puerto sea menor al puerto especificado.</li>
+                    <li><b>gt (Puerto)</b> - Que el puerto sea mayor al puerto especificado.</li>
+                    <li><b>neq (Puerto)</b> - Que el puerto no sea igual al puerto especificado.</li>
+                    <li>El puerto puede ser un número o un nombre que Cisco defina, como por ejemplo "www" para el puerto "80" o "ssh" para el puerto "22".</li>
+                </ul>
 
             </div>
 
             <div>
                 <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
 
-                <p>Permitir el tráfico HTTP/TCP de la red 192.168.10.0/24 a cualquier destino:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80</code></pre>
-                <p class="Expl">Esto solo permitiría el tráfico HTTP, harían falta más reglas para permitir más tipo de tráfico.</p>
+                <p><b>Tráfico WEB</b>:</p>
+
+                <p>Permitir solo el tráfico HTTP/TCP y HTTPS/TCP de la red 192.168.10.0/24 a cualquier destino:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80
+(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 443</code></pre>
+                <p class="Expl">Esta ACL "100" debería asignarse a la entrada de tráfico de la interfaz donde el router tenga conectado la red 192.168.10.0/24.</p>
+                <p class="Expl">
+                    Opcionalmente también se puede limitar las respuestas de entrada a la red desde Internet para que solo se permita el tráfico de las 
+                    conexiones TCP que se hayan iniciado en la red local, evitando así intentos de conexiones externas a equipos de la red:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 101 permit tcp any 192.168.10.0 0.0.0.255 established</code></pre>
+                <p class="Expl">Esta ACL "101" debe aplicarse a los paquetes salientes de la interfaz conectada a la red 192.168.10.0/24 (out).</p>
+
+                <p><b>Tráfico SSH</b>:</p>
 
                 <p>Denegar el tráfico SSH/TCP de cualquier IP a la red local 192.168.10.0/24:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 100 deny tcp any 192.168.10.0 0.0.0.255 eq 22
-(config)# access-list 100 permit ip any any</code></pre>
-                <p class="Expl">Sin la segunda línea no se permitiría ningún tipo de tráfico ya que todo lo que no se permita se <a href="#ACL_Importante">deniega por defecto</a>.</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list 102 deny tcp any 192.168.10.0 0.0.0.255 eq 22
+(config)# access-list 102 permit ip any any</code></pre>
+                <p class="Expl">
+                    Esta ACL "102" debería asignarse a la entrada de tráfico de la interfaz donde el router tenga conectado la red 192.168.10.0/24.
+                    <br>
+                    Sin la segunda línea no se permitiría ningún tipo de tráfico ya que todo lo que no se permita se <a href="#ACL_Importante">deniega por defecto</a>.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Más funciones de las ACL</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Nombre">Crear ACLs extendidas con un nombre</h2>
+
+                <p>
+                    Para crear ACLs se puede hacer con un número identificativo (como se vió hasta ahora) o mediante un nombre identificativo y único.
+                    De esta forma no hace falta poner "access-list Número" al principio de cada regla permit / deny.
+                    La única regla es que no debe haber espacios en el nombre.
+                </p>
+
+                <p>Si es una ACL estándar:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list standard &lt;Nombre_ACL&gt;
+(config-std-nacl)# &lt;permit / deny&gt; &lt;A_Quien&gt;
+(config-std-nacl)# ...</code></pre>
+                
+                <p>Si es una ACL extendida:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list extended &lt;Nombre_ACL&gt;
+(config-ext-nacl)# &lt;permit / deny&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]
+(config-ext-nacl)# ...</code></pre>
 
             </div>
 
             <div>
-                <h2 id="ACL_Nombre">Crear ACLs con un nombre</h2>
+                <h2 id="ACL_Comentario">Asignar un comentario a una ACL extendida</h2>
 
                 <p>
-                    Para crear ACLs se puede hacer con un número identificativo (como se vió hasta ahora) o mediante un nombre identificativo y único.
-                    De esta forma no hace falta poner "access-list Número" al principio de cada regla permit / deny:
+                    Un comentario permite asignar una descripción breve de hasta 100 carácteres a cada ACL, permitiendo identificarlas fácilmente. 
+                    Se puede crear comentarios en una lista identificada por un número:
                 </p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; remark &lt;Texto&gt;</code></pre>
 
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list extended &lt;Nombre_ACL&gt;
-(config-ext-nacl)# &lt;permit / deny&gt; &lt;Objetivo&gt;
-(config-ext-nacl)# ...</code></pre>
+                <p>También se puede poner comentarios si la ACL se creó por un nombre:</p>
+                <p class="Expl">Si es una ACL estándar:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list standard &lt;Nombre_ACL&gt;
+(config-std-nacl)# remark &lt;Texto&gt;</code></pre>
 
-                <p><u>Nota</u>: Esto sirve para ACL <a href="#ACL_Estandar_Sintaxis">estándar</a> o <a href="#ACL_Extendida_Sintaxis">extendida</a>.</p>
+                <p class="Expl">En una ACL extendida se hace igual pero cambiando "standard" por "extended".</p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Borrar_Regla">Como borrar una regla del ACL</h2>
+
+                <p>Primero debes que número de secuencia tiene la regla en la lista:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
+                
+                <p>Métete a la ACL para eliminar la regla con el número de secuencia del paso anterior y luego crea la regla de nuevo pero indicando el número de secuencia:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list standard &lt;Número_ACL / Nombre_ACL&gt;
+(config-std-nacl)# no &lt;Número_Secuencia_Regla&gt;
+(config-std-nacl)# &lt;Número_Secuencia_Regla&gt; &lt;Pon_La_Regla_Aquí&gt;</code></pre>
+                <p class="Expl">En una ACL extendida se hace igual pero cambiando "standard" por "extended".</p>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Anadir_Regla_Intermedia">Como añadir una regla en una posición especifica de la ACL</h2>
+
+                <p>Primero debes mirar entre qué reglas se va a situar la nueva regla:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
+                <p class="Expl">Ahora escoge un número de secuencia libre entre esas 2 reglas. Por ejemplo, para crear una regla entre las reglas con número de secuencia 10 y 20, puedes crear la nueva regla con un número de secuencia 15.</p>
+                
+                <p>Métete a la ACL a editar para ingresar la nueva regla con el número de secuencia escogido en el paso anterior:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list standard &lt;Número_ACL / Nombre_ACL&gt;
+(config-std-nacl)# &lt;Número_Secuencia_Intermedio_Regla&gt; &lt;Crea_La_Regla_Aquí&gt;</code></pre>
+                <p class="Expl">En una ACL extendida se hace igual pero cambiando "standard" por "extended".</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Asignar una ACL</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Aplicar_Interfaz">Asignar una ACL a una interfaz</h2>
+
+                <p>Primero hay que meterse en la interfaz a la que se le vaya a aplicar la ACL:</p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
+
+                <p class="Expl">
+                    Y luego hay que ejecutar el siguiente comando especificando la ACL mediante su número o nombre (según como se haya creado), 
+                    seguido de que si se aplica a paquetes entrantes (in) o salientes (out):
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip access-group &lt;Número_ACL / Nombre_ACL&gt; &lt;in / out&gt;</code></pre>
+
+                <p><b>Ejemplo</b>: Se permite a la red acceder a sitios web y solo se permiten conexiones TCP a la red si están establecidas:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list extended SURFING
+(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 any eq 80
+(config-ext-nacl)# permit tcp 192.168.10.0 0.0.0.255 any eq 443
+(config-ext-nacl)# exit
+(config)#
+(config)# ip access-list extended BROWSING
+(config-ext-nacl)# permit tcp any 192.168.10.0 0.0.0.255 established
+(config-ext-nacl)# exit
+(config)#
+(config)# interface g0/0/0
+(config-if)# ip access-group SURFING in
+(config-if)# ip access-group BROWSING out
+(config-if)# end</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="ACL_Aplicar_VTY">Asignar una ACL a las líneas VTY</h2>
+
+                <p>Para permitir a un unos equipos específicos el acceso remoto VTY de un router tendremos que crear primero una ACL:</p>
+                
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip access-list standard &lt;Nombre_ACL&gt;
+(config-std-nacl)# permit host &lt;IP_Host&gt;
+(config-std-nacl)# deny any</code></pre>
+
+                <p>Luego tendremos que meternos a las conexiones VTY y aplicar la ACL:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15
+(config-line)# access-class &lt;Nombre_ACL&gt; in</code></pre>
+                <p>Si el acceso remoto no está configurado todavía, se recomienda seguir la guía: <a href="#Servidor_SSH">Configuración de un servidor SSH</a>.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Verificación de ACL</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="ACL_Verificar">Comandos de verificación</h2>
+
+                <p>Con el siguiente comando se pueden ver todas las ACL creadas junto a sus reglas y el número de secuencia correspondiente a cada regla:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
+                <p class="Expl">Esto también muestra un contador por cada regla que indica cuántos paquetes se denegaron o permitieron. Para reiniciar estos contadores:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear access-list counters &lt;Número_ACL / Nombre_ACL&gt;</code></pre>
+
+                <p>También se puede ver las ACL y sus reglas en la configuración del equipo, pero no se enseñan los números de secuencia:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show run | section access-list</code></pre>
+
+                <p>Para verificar en una interfaz que ACL tiene aplicadas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface &lt;Interfaz&gt; | include access list</code></pre>
 
             </div>
 

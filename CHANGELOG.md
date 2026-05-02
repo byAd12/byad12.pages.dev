@@ -1,4 +1,4 @@
 Nuevo contenido (PACKET_TRACER)
 
 # g/packet_tracer.html
-Se acabó la sección sobre ACL estándar y extendida
+Se acabó completamente la guía de ACL
