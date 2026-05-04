@@ -1,4 +1,4 @@
-Nuevo contenido (PACKET_TRACER)
+Nuevo contenido (DEBIAN_PXE)
 
-# g/packet_tracer.html
-Se acabó completamente la guía de NAT y PAT
+# g/debian_pxe.html
+Se añadió una nueva sección para crear particiones manualmente
