@@ -178,15 +178,24 @@ Código por byAd12
                     <li>
                         <b>Asignar una ACL:</b> <a href="#ACL_Aplicar_Interfaz">A una interfaz</a> • <a href="#ACL_Aplicar_VTY">A las líneas VTY</a>
                     </li>
+                    <li>
+                        <b>Otros:</b> <a href="#ACL_Verificar">Comandos de verificación</a>
+                    </li>
                 </ul>
 
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estático:</b> <a href="#">.</a>
+                        <b>NAT estática:</b> <a href="#NAT_Estatica_Configuracion">Configuración</a>
                     </li>
                     <li>
-                        <b>NAT dinámico:</b> <a href="#">.</a>
+                        <b>NAT dinámica:</b> <a href="#NAT_Dinamica_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamica_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
+                    </li>
+                    <li>
+                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a href="#PAT_Configuracion_Pool">Configuración con un pool</a>
+                    </li>
+                    <li>
+                        <b>Importante:</b> <a href="#NAT_Verificacion">Verificación de la configuración NAT</a> • <a href="#NAT_Identificar_Interfaz">Identificar una interfaz interna o externa</a>
                     </li>
                 </ul>
             </div>
@@ -3163,7 +3172,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <br>
                     <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
                     <br>
-                    <b>A_Quien</b>: Se define la dirección de red o IP que se permite o deniega el tráfico.
+                    <b>A_Quien</b>: Se define la dirección de red y su máscara Wildcard o la IP de un host al que se permite o deniega el tráfico.
                     <br>
                     <b>log</b>: Si se pone la palabra "log" al final del comando, el sistema avisará cuando esta regla se cumple y aplica (opcional).
 
@@ -3455,6 +3464,242 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Para verificar en una interfaz que ACL tiene aplicadas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip interface &lt;Interfaz&gt; | include access list</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>NAT estática</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="NAT_Estatica_Configuracion">Configuración</h2>
+
+                <p>
+                    La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
+                    de modo que el host interno puede ser accesible desde el exterior y, al mismo tiempo, 
+                    utiliza siempre esa misma IP pública para comunicarse hacia Internet.
+                </p>
+
+                <p>Con la NAT estática se requiere que haya suficientes direcciones públicas disponibles para satisfacer la cantidad total de sesiones de usuario simultáneas.</p>
+
+                <br>
+                <p>1. Se vincula una IP local interna (privada) con una IP global interna (pública):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static &lt;IP_Local_Interna&gt; &lt;IP_Global_Interna&gt;</code></pre>
+                
+                <p>2. Ahora hay que definir que interfaces actuarán como interna y externa:</p>
+                <p class="Expl"><b>Interna</b> - Son aquellas interfaces conectadas a la red privada (LAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Interna&gt;
+(config-if)# ip nat inside</code></pre>
+
+                <p class="Expl"><b>Externa</b> - Son aquellas interfaces conectadas a la red pública (WAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Externa&gt;
+(config-if)# ip nat outside</code></pre>
+
+                <p>A estas interfaces también hay que <a href="#Direccionamiento">configurarles una IP</a> y definir que estén activas.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>NAT dinámica</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="NAT_Dinamica_Configuracion">Configuración</h2>
+
+                <p>
+                    La NAT dinámica permite asignar de forma automática una dirección IP pública 
+                    a un host interno a partir de un conjunto de direcciones disponibles (pool), 
+                    de modo que cada host interno recibe una IP pública del pool mientras haya disponibles.
+                </p>
+
+                <br>
+                <p>1. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat pool &lt;Nombre_Pool&gt; &lt;Primera_IP&gt; &lt;Ultima_IP&gt; netmask &lt;Máscara_Red&gt;</code></pre>
+                <p class="Expl">
+                    <b>Nombre_Pool</b>: Nombre identificativo del pool.
+                    <br>
+                    <b>Primera_IP</b>: Primera IP disponible del pool.
+                    <br>
+                    <b>Ultima_IP</b>: Última IP disponible del pool.
+                    <br>
+                    <b>Máscara_Red</b>: máscara en formato punteado.
+                </p>
+
+                <p>2. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+
+                <p>3. Enlazar la ACL del paso 2 con la pool creada en el paso 1:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source list &lt;Número_ACL&gt; pool &lt;Nombre_Pool&gt;</code></pre>
+
+                <p>4. Ahora hay que definir que interfaces actuarán como interna y externa:</p>
+                <p class="Expl"><b>Interna</b> - Son aquellas interfaces conectadas a la red privada (LAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Interna&gt;
+(config-if)# ip nat inside</code></pre>
+
+                <p class="Expl"><b>Externa</b> - Son aquellas interfaces conectadas a la red pública (WAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Externa&gt;
+(config-if)# ip nat outside</code></pre>
+
+                <p><u>Nota</u>: Las traducciones dinámicas se crean cuando hay tráfico y se eliminan tras un tiempo de inactividad.</p>
+
+            </div>
+
+            <div>
+                <h2 id="NAT_Dinamica_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+
+                <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
+                <p>Para borrar solo una entrada dinámica en específico:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation inside &lt;Global_IP&gt; &lt;Local_IP&gt; [outside &lt;Global_IP&gt; &lt;Local_IP&gt;]</code></pre>
+                <p>Para borrar solo una entrada dinámica extendida en específico:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation {tcp | udp} inside &lt;Global_IP&gt; &lt;Global_Port&gt; &lt;Local_IP&gt; &lt;Local_Port&gt; [outside &lt;Global_IP&gt; &lt;Global_Port&gt; &lt;Local_IP&gt; &lt;Local_Port&gt;]</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>PAT</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="PAT_Configuracion_Unica_IPv4">Configuración para usar una única IPv4</h2>
+
+                <p>
+                    PAT permite que múltiples hosts internos compartan una única dirección IP 
+                    pública, diferenciando cada conexión mediante el uso de números de puerto. 
+                    De esta forma, varios dispositivos de la red privada pueden acceder 
+                    simultáneamente a redes externas, ya que el router traduce no solo la dirección 
+                    IP, sino también el puerto de origen, asignando combinaciones únicas para cada sesión.
+                </p>
+
+                <br>
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+
+                <p>2. Vincular la ACL con la interfaz externa conectada a la red pública (WAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source list &lt;Número_ACL&gt; interface &lt;Interfaz&gt; overload</code></pre>
+
+                <p>3. Ahora hay que definir que interfaces actuarán como interna y externa:</p>
+                <p class="Expl"><b>Interna</b> - Son aquellas interfaces conectadas a la red privada (LAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Interna&gt;
+(config-if)# ip nat inside</code></pre>
+
+                <p class="Expl"><b>Externa</b> - Son aquellas interfaces conectadas a la red pública (WAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Externa&gt;
+(config-if)# ip nat outside</code></pre>
+                
+            </div>
+
+            <div>
+                <h2 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
+
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+
+                <p>2. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat pool &lt;Nombre_Pool&gt; &lt;Primera_IP&gt; &lt;Ultima_IP&gt; netmask &lt;Máscara_Red&gt;</code></pre>
+                <p class="Expl">
+                    <b>Nombre_Pool</b>: Nombre identificativo del pool.
+                    <br>
+                    <b>Primera_IP</b>: Primera IP disponible del pool.
+                    <br>
+                    <b>Ultima_IP</b>: Última IP disponible del pool.
+                    <br>
+                    <b>Máscara_Red</b>: máscara en formato punteado.
+                </p>
+
+                <p>3. Vincular la ACL del paso 1 con la pool creada en el paso 2:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source list &lt;Número_ACL&gt; pool &lt;Nombre_Pool&gt; overload</code></pre>
+
+                <p>4. Ahora hay que definir que interfaces actuarán como interna y externa:</p>
+                <p class="Expl"><b>Interna</b> - Son aquellas interfaces conectadas a la red privada (LAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Interna&gt;
+(config-if)# ip nat inside</code></pre>
+
+                <p class="Expl"><b>Externa</b> - Son aquellas interfaces conectadas a la red pública (WAN):</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Externa&gt;
+(config-if)# ip nat outside</code></pre>
+                
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>NAT - Verificación</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="NAT_Verificacion">Verificación de la configuración NAT</h2>
+
+                <p>Este comando permite ver las traducciones NAT activas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations</code></pre>
+                <p class="Expl">
+                    Las traducciones NAT estáticas siempre aparecen en la tabla, aunque no estén activas en ese momento.
+                    <br>
+                    Cuando una traducción está activa, se muestra en una entrada adicional donde se especifica el protocolo de comunicación
+                    y las direcciones IP correspondientes a Outside local y Outside global.
+                </p>
+
+                <p class="Expl">Añadiendo la palabra <span class="span_contenido">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido cuánto tiempo hace que se creó y usó la entrada:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations verbose</code></pre>
+                
+                <p class="Expl">Como se puede comprobar, el tiempo de expiración de cada traducción es de 24 horas. Para cambiarlo usa el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat translation timeout &lt;Tiempo_En_Segundos&gt;</code></pre>
+
+                <br>
+                <p>Este comando muestra información sobre el número total de traducciones activas, las pools configuradas y todas las interfaces configuradas como internas y externas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip nat statistics</code></pre>
+                <p class="Expl">También hay una fila de estadísticas "Hits: 0  Misses: 0", donde:</p>
+                <ul class="Expl">
+                    <li><b>Hits</b> - número de paquetes que han coincidido con una traducción NAT existente.</li>
+                    <li><b>Misses</b> - número de paquetes que no encontraron una traducción existente y requirieron la creación de una nueva entrada NAT (o no pudieron ser traducidos).</li>
+                </ul>
+                <p class="Expl">Para reiniciar estas estadísticas puedes usar:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># clear ip nat statistics</code></pre>
+
+                <br>
+                <p>Alternativamente, para ver la pool configurada se puede ver directamente desde la configuración del dispositivo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include NAT</code></pre>
+
+            </div>
+
+            <div>
+                <h2 id="NAT_Identificar_Interfaz">Cómo identificar una interfaz interna o externa</h2>
+
+                <p>Con el siguiente comando podremos ver todas las interfaces activas con sus IPs configuradas:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief | include up</code></pre>
+
+                <ul class="Expl">
+                    <li>Una interfaz interna (<b>inside</b>) suele estar conectada a la red local (LAN) y normalmente tiene una dirección IP privada.</li>
+                    <li>Una interfaz externa (<b>outside</b>) está conectada a la red pública o a otra red externa (WAN), y suele tener una dirección IP pública, aunque no siempre es así.</li>
+                </ul>
+
+                <p>Hay que tener en cuenta que NAT o PAT se configura únicamente en el router que separe la red local (LAN) con una red externa (WAN).</p>
 
             </div>
 
