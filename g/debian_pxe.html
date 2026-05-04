@@ -452,6 +452,7 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
 d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true</code></pre>
+                <p class="Expl">En la sección de "<a href="#Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</a>" se explica detalladamente como crear cada partición necesaria desde el fichero de respuestas.</p>
 
                 <br>
                 <p>Gestión de paquetes:</p>
@@ -592,6 +593,98 @@ tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
                 </div>
 
                 <p>5.3. Ahora simplemente se guarda el fichero y ya estaría funcionando la nueva configuración.</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h2>
+
+                <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
+
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string \
+    &lt;nombre receta&gt; :: \
+        &lt;partición 1&gt;  \
+            &lt;Opciones&gt; \
+        .              \
+        &lt;partición 2&gt;  \
+            &lt;Opciones&gt; \
+        .              \
+        &lt;partición 3&gt;  \
+            &lt;Opciones&gt;
+        .</code></pre>
+                <p class="Expl">El símbolo <span class="span_contenido">\</span> sirve para continuar la línea en otra.</p>
+
+                <p>Formato de cada partición:</p>
+                <pre class="codigo" translate="no"><code class="text">&lt;Tamaño mínimo MB&gt; &lt;Prioridad MB&gt; &lt;Tamaño máximo MB&gt; &lt;Sistema de archivos&gt; \
+    &lt;Opciones&gt; \</code></pre>
+
+                <p>Formato de las opciones de cada partición:</p>
+                <pre class="codigo" translate="no"><code class="text">&lt;Nombre Opción 1&gt;{ &lt;Atributos de la opción&gt; } &lt;Nombre Opción 2&gt;{ &lt;Atributos de la opción&gt; } ...</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Tipos de opciones de cada partición
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">$primary{ }</code></pre></td>
+                            <td>Indica que la partición debe ser primaria. No necesita atributos.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">$bootable{  }</code></pre></td>
+                            <td>Indica que la partición es arrancable. No necesita atributos.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">method{ format }</code></pre></td>
+                            <td>Indica que la partición debe ser formateada.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">use_filesystem{ } filesystem{ &lt;Sistema de archivos&gt; }</code></pre></td>
+                            <td>Define qué sistema de archivos usar, como "ext4".</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">mountpoint{ &lt;Donde&gt; }</code></pre></td>
+                            <td>Define dónde se montará la partición en el árbol de directorios, como "/".</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p><b>Ejemplo</b> - Creación de una partición /boot, swap y otra con el resto de espacio:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string \
+    boot-root :: \
+        40 50 100 ext4 \
+            $primary{ } $bootable{ } \
+            method{ format } format{ } \
+            use_filesystem{ } filesystem{ ext4 } \
+            mountpoint{ /boot } \
+        . \
+        500 10000 1000000000 ext4 \
+            method{ format } format{ } \
+            use_filesystem{ } filesystem{ ext4 } \
+            mountpoint{ / } \
+        . \
+        64 512 300% linux-swap \
+            method{ swap } format{ } \
+        .</code></pre>
+
+                <p>Una vez se configuren las particiones se debe indicar otras configuraciones avanzadas:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm boolean true
+d-i partman/confirm_nooverwrite boolean true</code></pre>
 
             </div>
 
