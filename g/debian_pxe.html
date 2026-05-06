@@ -472,9 +472,11 @@ d-i mirror/http/proxy string</code></pre>
                 <br>
                 <p>Selección de paquetes a instalar:</p>
 
-                <p class="Expl">Para instalar un entorno gráfico de escritorio con GNOME:</p>
+                <p class="Expl">Para instalar un entorno gráfico de escritorio con interfaz de GNOME o MATE:</p>
                 <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard, desktop
-tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
+tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
+                <p class="Expl">Opcionalmente se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string &lt;Paquete1&gt; &lt;Paquete2&gt; &lt;...&gt;</code></pre>
 
                 <br>
                 <p>Instalar el gestor de arranque GRUB:</p>
@@ -562,7 +564,9 @@ tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
                         
                     </table>
                 </div>
+                <p class="Expl">Podremos crear varios bloques de estos y, en cada uno, definir un archivo de respuestas diferentes para tener varios métodos de instalación desatendida.</p>
 
+                <br>
                 <p>5.2. Lo que hay que hacer es añadir debajo del bloque de configuración existente otro bloque separado por una línea vacía:</p>
                 <pre class="codigo" translate="no"><code class="text">label instalacion-desatendida-gnome
         menu label Instalación desatendida de ^GNOME
@@ -624,10 +628,24 @@ tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
         .</code></pre>
                 <p class="Expl">El símbolo <span class="span_contenido">\</span> sirve para continuar la línea en otra.</p>
 
+                <br>
                 <p>Formato de cada partición:</p>
                 <pre class="codigo" translate="no"><code class="text">&lt;Tamaño mínimo MB&gt; &lt;Prioridad MB&gt; &lt;Tamaño máximo MB&gt; &lt;Sistema de archivos&gt; \
     &lt;Opciones&gt; \</code></pre>
+                <p class="Expl">La suma del tamaño mínimo de cada partición debe ser el mínimo espacio en MB que deba tener el disco, si no dará un error y no instalará el sistema.</p>
+                <p class="Expl">Del espacio restante se repartirá proporcionalmente entre las particiones según la prioridad que tengan.</p>
+                <ul class="Expl">
+                    <li>La prioridad se calcula restando la Prioridad y el Tamaño mínimo, dando un porcentaje indicando qué parte del espacio restante le corresponde. La suma de estos porcentajes debería ser 100.</li>
+                    <li>Si el espacio que le corresponde a una partición sobrepasa el espacio máximo, solo cogerá el máximo.</li>
+                    <li>
+                        Ya que nunca pueda quedar espacio libre en el disco, se puede especificar en una partición que el espacio máximo sea <span class="span_contenido">-1</span> (sin máximo) para que esta ocupe todo el espacio restante.
+                        <ul>
+                            <li>Si no se define este <span class="span_contenido">-1</span> y todas las particiones no ocupan la totalidad del disco, la última partición cogerá todo el espacio restante.</li>
+                        </ul>
+                    </li>
+                </ul>
 
+                <br>
                 <p>Formato de las opciones de cada partición:</p>
                 <pre class="codigo" translate="no"><code class="text">&lt;Nombre Opción 1&gt;{ &lt;Atributos de la opción&gt; } &lt;Nombre Opción 2&gt;{ &lt;Atributos de la opción&gt; } ...</code></pre>
 
@@ -663,22 +681,22 @@ tasksel tasksel/desktop multiselect &lt;gnome&gt;</code></pre>
                 </div>
 
                 <p><b>Ejemplo</b> - Creación de una partición /boot, swap y otra con el resto de espacio:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string \
-    boot-root :: \
-        40 50 100 ext4 \
-            $primary{ } $bootable{ } \
-            method{ format } format{ } \
-            use_filesystem{ } filesystem{ ext4 } \
-            mountpoint{ /boot } \
-        . \
-        500 10000 1000000000 ext4 \
-            method{ format } format{ } \
-            use_filesystem{ } filesystem{ ext4 } \
-            mountpoint{ / } \
-        . \
-        64 512 300% linux-swap \
-            method{ swap } format{ } \
-        .</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string                         \
+      boot-root ::                                            \
+              40 50 100 ext3                                  \
+                      $primary{ } $bootable{ }                \
+                      method{ format } format{ }              \
+                      use_filesystem{ } filesystem{ ext3 }    \
+                      mountpoint{ /boot }                     \
+              .                                               \
+              500 10000 1000000000 ext3                       \
+                      method{ format } format{ }              \
+                      use_filesystem{ } filesystem{ ext3 }    \
+                      mountpoint{ / }                         \
+              .                                               \
+              64 512 300% linux-swap                          \
+                      method{ swap } format{ }                \
+              .</code></pre>
 
                 <p>Una vez se configuren las particiones se debe indicar otras configuraciones avanzadas:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-partitioning/confirm_write_new_label boolean true

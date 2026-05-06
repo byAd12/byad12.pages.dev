@@ -112,7 +112,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">7. DHCP</h2>
                 <ul>
                     <li>
-                        <b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración en servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">(Des)activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • 
+                        <b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración de un servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">(Des)activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • 
                         <a href="#DHCP_Verificacion">Verificación</a>
                     </li>
                 </ul>
@@ -186,7 +186,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estática:</b> <a href="#NAT_Estatica_Configuracion">Configuración</a>
+                        <b>NAT estática:</b> <a href="#NAT_Estatica_Configuracion_IPs">Traducción de IPs</a> • <a href="#NAT_Estatica_Configuracion_Puertos">Traducción de IPs y puertos</a>
                     </li>
                     <li>
                         <b>NAT dinámica:</b> <a href="#NAT_Dinamica_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamica_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
@@ -1723,50 +1723,62 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="DHCP_Configuracion_Servidor">DHCPv4 &gt; Servidor &gt; Configuración</h2>
 
-                <p>1. Excluir las IPs reservadas/estáticas de la concesión:</p>
+                <p>1. Primero hay que excluir todas las IPs que sean reservadas/estáticas del rango de IPs que DHCP va a conceder:</p>
                 <p class="Expl">Para excluir una <b>única</b> IP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp excluded-address &lt;IP&gt;</code></pre>
                 <p class="Expl">Para excluir un <b>rango</b> de IPs:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp excluded-address &lt;IP_Inicio&gt; &lt;IP_Fin&gt;</code></pre>
 
-
-                <p>2. Hay que definir un nombre identificativo para el pool de DHCPv4 que crearemos:</p>
+                <p>2. Ahora hay que definir un nombre identificativo para el pool de DHCPv4 que hay se debe crear:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp pool &lt;Nombre_Pool&gt;</code></pre>
 
-                <p>3. Definir configuraciones:</p>
+                <p>3. Una vez ejecutemos el paso 2 entraremos en un modo donde podremos configurar las configuraciones que se darán a los clientes:</p>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td>Configuración</td>
+                            <td>Configuración <b>obligatoria</b></td>
                             <td>Explicación</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">network &lt;Direccion_Red&gt; &lt;Máscara&gt;</code></pre></td>
-                            <td>Para definir la máscara de red en formato punteado o CIDR.</td>
+                            <td>Sirve para definir la máscara de red en formato punteado o CIDR.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="cisco">default-router address &lt;IP&gt;</code></pre></td>
-                            <td>Importante, es la IP de la puerta de enlace.</td>
+                            <td><pre translate="no"><code class="cisco">default-router &lt;IP&gt;</code></pre></td>
+                            <td>Importante, es la IP de la puerta de enlace / default gateway.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="cisco">dns-server address &lt;IP&gt;</code></pre></td>
-                            <td>La IP del servidor DNS.</td>
+                            <td><pre translate="no"><code class="cisco">dns-server &lt;IP&gt;</code></pre></td>
+                            <td>Es la IP del servidor DNS. Se puede omitir si no se quiere configurar pero, cuando sea necesario, habrá que configurarlo manualmente.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td>Configuración <b>opcional</b></td>
+                            <td>Explicación</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">domain-name &lt;Dominio&gt;</code></pre></td>
-                            <td>El nombre de dominio que tendrán los clientes DHCP.</td>
+                            <td>Es el nombre de dominio que tendrán los clientes DHCP.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">lease {días [horas] [minutos] | infinite}</code></pre></td>
-                            <td>La duración de una concesión de IP. <u>Ejemplo</u>: "lease 1 12 25"</td>
+                            <td>
+                                Es la duración de una concesión de IP. 
+                                Ejemplo: "lease 1 12 25".
+                            </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="cisco">netbios-name-server address &lt;IP&gt;</code></pre></td>
-                            <td
-                            >El servidor WINS que ejecute el servicio NetBIOS.
+                            <td><pre translate="no"><code class="cisco">netbios-name-server &lt;IP&gt;</code></pre></td>
+                            <td>
+                                Es el servidor WINS que ejecute el servicio NetBIOS.
                                 <br>
-                                Se recomienda reemplazar WINS por DNS.
+                                Se recomienda reemplazar su uso por DNS.
                             </td>
                         </tr>
 
@@ -1776,7 +1788,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Modo de reenvío</h2>
+                <h2 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Configurar el modo de reenvío</h2>
 
                 <p>1. Primero entraremos a la interfaz donde se recibirán las solicitudes DHCP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interface&gt;</code></pre>
@@ -1801,7 +1813,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Cliente_DHCP_Router">DHCPv4 &gt; Cliente &gt; Router con DHCPv4</h2>
+                <h2 id="DHCP_Cliente_DHCP_Router">DHCPv4 &gt; Cliente &gt; Usar DHCPv4 en un router</h2>
 
                 <p>1. Primero entraremos a la interfaz:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -3172,7 +3184,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <br>
                     <b>permit / deny</b>: Se define implícitamente si se permite o deniega el tráfico.
                     <br>
-                    <b>A_Quien</b>: Se define la dirección de red y su máscara Wildcard o la IP de un host al que se permite o deniega el tráfico.
+                    <b>A_Quien</b>: Se define la dirección de red y su <b>máscara Wildcard</b> o la IP de un host al que se permite o deniega el tráfico.
                     <br>
                     <b>log</b>: Si se pone la palabra "log" al final del comando, el sistema avisará cuando esta regla se cumple y aplica (opcional).
 
@@ -3479,7 +3491,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Estatica_Configuracion">Configuración</h2>
+                <h2 id="NAT_Estatica_Configuracion_IPs">Configuración con traducción de IPs</h2>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3506,6 +3518,35 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
+            <div>
+                <h2 id="NAT_Estatica_Configuracion_Puertos">Configuración con traducción de IPs y puertos</h2>
+
+                <p>A continuación se muestra la sintaxis para traducir la IP local interna (privada) a la IP global interna (pública) mediante puertos:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static &lt;Protocolo&gt; &lt;IP_Local_Interna&gt; &lt;Puerto_Local&gt; &lt;IP_global_interna&gt; &lt;Puerto_Global&gt;</code></pre>
+                
+                <p class="Expl">
+                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp", "icmp", "ospf", "ip" (cualquier protocolo de Internet), etc.
+                    <br><br>
+                    <b>IP_Local_Interna</b>: Es la IP privada del host (LAN).
+                    <br>
+                    <b>Puerto_Local</b>: Es el puerto del servicio en el host interno (LAN).
+                    <br><br>
+                    <b>IP_Global_Interna</b>: Es la IP pública del router (WAN).
+                    <br>
+                    <b>Puerto_Global</b>: Es el puerto del router expuesto hacia Internet (WAN).
+                </p>
+
+                <p>Un ejemplo sería el siguiente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static tcp 192.168.0.2 80 182.204.54.130 80</code></pre>
+                <p class="Expl">El router redirige todo el tráfico:</p>
+                <ul class="Expl">
+                    <li>que llegue a 182.204.54.130:80 (IP pública)</li>
+                    <li>hacia 192.168.0.2:80 (servidor interno)</li>
+                </ul>
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
@@ -3518,7 +3559,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Dinamica_Configuracion">Configuración</h2>
+                <h2 id="NAT_Dinamica_Configuracion">Configuración con una pool de direcciones</h2>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3526,8 +3567,13 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     de modo que cada host interno recibe una IP pública del pool mientras haya disponibles.
                 </p>
 
+                <p><u>Nota</u>: Cada IP pública del pool solo puede ser utilizada por un host a la vez.</p>
+
                 <br>
-                <p>1. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+
+                <p>2. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat pool &lt;Nombre_Pool&gt; &lt;Primera_IP&gt; &lt;Ultima_IP&gt; netmask &lt;Máscara_Red&gt;</code></pre>
                 <p class="Expl">
                     <b>Nombre_Pool</b>: Nombre identificativo del pool.
@@ -3538,9 +3584,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <br>
                     <b>Máscara_Red</b>: máscara en formato punteado.
                 </p>
-
-                <p>2. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
 
                 <p>3. Enlazar la ACL del paso 2 con la pool creada en el paso 1:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source list &lt;Número_ACL&gt; pool &lt;Nombre_Pool&gt;</code></pre>
@@ -3590,6 +3633,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     De esta forma, varios dispositivos de la red privada pueden acceder 
                     simultáneamente a redes externas, ya que el router traduce no solo la dirección 
                     IP, sino también el puerto de origen, asignando combinaciones únicas para cada sesión.
+                </p>
+
+                <p>
+                    A diferencia de NAT dinámica, varias direcciones IP privadas pueden compartir una misma IP 
+                    pública simultáneamente gracias a la traducción de puertos.
                 </p>
 
                 <br>
@@ -3668,7 +3716,10 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">Añadiendo la palabra <span class="span_contenido">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido cuánto tiempo hace que se creó y usó la entrada:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations verbose</code></pre>
                 
-                <p class="Expl">Como se puede comprobar, el tiempo de expiración de cada traducción es de 24 horas. Para cambiarlo usa el siguiente comando:</p>
+                <p class="Expl">
+                    El tiempo de expiración depende del tipo de tráfico, aunque por defecto puede ser de hasta 24 horas.
+                    Para cambiarlo usa el siguiente comando:
+                </p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat translation timeout &lt;Tiempo_En_Segundos&gt;</code></pre>
 
                 <br>
@@ -3684,7 +3735,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <br>
                 <p>Alternativamente, para ver la pool configurada se puede ver directamente desde la configuración del dispositivo:</p>
-                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include NAT</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | include nat</code></pre>
 
             </div>
 
