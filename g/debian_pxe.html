@@ -52,9 +52,32 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1 Parte1Indice">
+            <div>
+                <h2>Índice de Contenidos</h2>
+
+                <ul>
+                    <li><a href="#Requisitos_Iniciales">Requisitos iniciales</a></li>
+                    <li><a href="#Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</a></li>
+                    <li><a href="#Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</a></li>
+                    <li><a href="#Comprobación_Funcionamiento">3. Comprobación del funcionamiento</a></li>
+                    <li><a href="#Archivo_Respuestas">4. Automatizar las preguntas de la instalación</a> (archivo de respuestas)</li>
+                    <li><a href="#Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</a></li>
+                    <li><a href="#Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</a> (opcional)</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
         <div class="parte1">
             <div>
-                <h2>Requisitos iniciales</h2>
+                <h2 id="Requisitos_Iniciales">Requisitos iniciales</h2>
 
                 <p>El servidor debe tener una IPv4 estática y un hostname identificativo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
@@ -63,7 +86,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>1. Configuración del servidor DHCP</h2>
+                <h2 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h2>
 
                 <!-- ......................................................... -->
                 <p>1.1. Instalaremos el servicio correspondiente en el servidor:</p>
@@ -141,7 +164,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                     </table>
                 </div>
 
-                <p>1.3.3. También añadiremos esta configuración que permite crear una subnet donde se define la configuración IP a coneceder:</p>
+                <p>1.3.3. También añadiremos esta configuración que permite crear una subnet donde se define la configuración IP a conceder:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
     # Configuración básica
@@ -157,11 +180,11 @@ min-lease-time [SEGUNDOS];</code></pre>
     range [IP_INICIAL_2] [IP_FINAL_2];
     # ...
 
-    # Permitr arranque por red
+    # Permitir arranque por red
     allow booting;
     allow bootp;
 
-    # Obtener la arqitectura del cliente 
+    # Obtener la arquitectura del cliente 
     # y seleccionar el fichero de arranque
     if option arch = 00:07 or option arch 00:09 {
         filename "bootnetx64.efi"; # UEFI
@@ -217,7 +240,10 @@ min-lease-time [SEGUNDOS];</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">option domain-name-servers [VALOR];</code></pre></td>
-                            <td>La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.</td>
+                            <td>
+                                La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                                Estos servidores deben poder resolver el mirror para instalar Debian.
+                            </td>
                         </tr>
                         
                     </table>
@@ -287,7 +313,7 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>1.4. Por último habilitaremos y reiniciaremos el servicio DHCP para aplicar los cambios, además de verificar si tiene errores:</p>
+                <p>1.4. Por último habilitaremos y reiniciaremos el servicio DHCP para aplicar los cambios, además de verificar si hay errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status isc-dhcp-server</code></pre>
@@ -297,7 +323,7 @@ min-lease-time [SEGUNDOS];</code></pre>
             </div>
 
             <div>
-                <h2>2. Configuración del servidor TFTP</h2>
+                <h2 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h2>
 
                 <!-- ......................................................... -->
                 <p>2.1. Instalaremos el servicio correspondiente en el servidor:</p>
@@ -314,7 +340,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                     La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
                 </p>
-                <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 3 - Gestión de paquetes).</p>
+                <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 4 - Gestión de paquetes).</p>
                 
                 <p>2.2.1. Descomprimiremos el fichero tar.gz para obtener los archivos necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
@@ -330,9 +356,9 @@ min-lease-time [SEGUNDOS];</code></pre>
             </div>
 
             <div>
-                <h2>3. Comprobación del funcionamiento</h2>
+                <h2 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h2>
 
-                <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y hablitar el arranque por red IPv4.</p>
+                <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y habilitar el arranque por red IPv4.</p>
 
                 <p class="Expl">
                     En el caso de una máquina virtual de VirtualBox, se debe tener la MV cliente y servidor en una misma red NAT (sin DHCP activado) y, 
@@ -365,15 +391,16 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <p>
                     4.1. 
-                    Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación. 
-                    Un ejemplo de un archivo de respuestas es el que proporciona directamente Debian en el siguiente <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">enlace</a>.
+                    Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
+                    Puedes agrupar varios archivos de respuestas en una carpeta conjunta para una mejor organización.
+                    Un ejemplo de un archivo de respuestas es el preseed de <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">Debian</a>.
                 </p>
                 <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
 
                 <br>
                 <p>Configuración regional:</p>
 
-                <p class="Expl">País, idioma y codificación de carácteres (<span class="span_contenido">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
+                <p class="Expl">País, idioma y codificación de caracteres (<span class="span_contenido">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string &lt;es_ES.UTF-8&gt;</code></pre>
 
                 <p class="Expl">Distribución del teclado (<span class="span_contenido">es</span> - "español"):</p>
@@ -455,10 +482,10 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
 d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true</code></pre>
-                <p class="Expl">En la sección de "<a href="#Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</a>" se explica detalladamente como crear cada partición necesaria desde el fichero de respuestas.</p>
+                <p class="Expl">En la sección de "<a href="#Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</a>" se explica detalladamente como crear cada partición necesaria desde el archivo de respuestas.</p>
 
                 <br>
-                <p>Gestión de paquetes:</p>
+                <p>Gestión del mirror / repositorio:</p>
 
                 <p class="Expl">Hay que elegir que mirror se usará para la instalación del sistema, ya que netinst requiere el uso de red:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
@@ -473,12 +500,19 @@ d-i mirror/http/proxy string</code></pre>
                 <pre class="codigo" translate="no"><code class="text">popularity-contest popularity-contest/participate boolean false</code></pre>
 
                 <br>
-                <p>Selección de paquetes a instalar:</p>
+                <p>Instalar el sistema:</p>
 
-                <p class="Expl">Para instalar un entorno gráfico de escritorio con interfaz de GNOME o MATE:</p>
+                <p class="Expl">Para instalar el sistema estándar <u>con</u> interfaz gráfica (GNOME, MATE...) y un entorno de escritorio:</p>
                 <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard, desktop
 tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
-                <p class="Expl">Opcionalmente se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
+
+                <p class="Expl">Para instalar el sistema estándar <u>sin</u> interfaz gráfica ni entorno de escritorio:</p>
+                <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard</code></pre>
+
+                <br>
+                <p><small>Opcional -</small> Instalar paquetes adicionales:</p>
+
+                <p class="Expl">Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string &lt;Paquete1&gt; &lt;Paquete2&gt; &lt;...&gt;</code></pre>
 
                 <br>
@@ -499,6 +533,31 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p class="Expl">Para que no se abra un diálogo de información cuando la instalación acabe y que además reinicie el sistema:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i finish-install/reboot_in_progress note</code></pre>
 
+                <br>
+                <p><small>Opcional -</small> Ejecutar comandos:</p>
+
+                <p class="Expl">Con el siguiente comando se especifica qué comandos separados por ";" se ejecutarán al finalizar la instalación:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
+    &lt;Comando 1&gt;; \
+    &lt;Comando 1&gt;; \ 
+    ...;</code></pre>
+
+                <br>
+                <p><small>Opcional -</small> Compartir carpetas por NFS:</p>
+
+                <p class="Expl">Para compartir una carpeta por NFS se requiere instalar "nfs-kernel-server":</p>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
+                <p class="Expl">Ahora hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
+    mkdir -p &lt;Ruta_Absoluta&gt;; \
+    echo "&lt;Ruta_Absoluta&gt; *(&lt;ro / rw&gt;)" >> /target/etc/exports; \ 
+    in-target exportfs -a; \
+    in-target systemctl enable nfs-kernel-server;</code></pre>
+                <ul class="Expl">
+                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartira, especificando su ruta absoluta.</li>
+                    <li><b>echo</b> - Ahora se añade una línea a <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
+                </ul>
+
             </div>
 
         </div>
@@ -511,7 +570,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>5. Modificar el menú de arranque en la instalación</h2>
+                <h2 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h2>
 
                 <p>5.1. Primero tendremos que editar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /srv/tftp/debian-installer/amd64/boot-screens/txt.cfg</code></pre>
@@ -537,7 +596,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td><pre translate="no"><code class="xml">menu label &lt;...&gt;</code></pre></td>
                             <td>
                                 Es la descripción de la entrada que el usuario verá. 
-                                El símbolo <span class="span_contenido">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, la opción se activará (este símbolo es opcional).
+                                El símbolo <span class="span_contenido">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, se seleccionará la opción (este símbolo es opcional).
                             </td>
                         </tr>
                         <tr>
@@ -550,7 +609,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">vga=788</code></pre></td>
-                            <td>Define la resolución de la pantalla a usar para la instalacion.</td>
+                            <td>Define la resolución de la pantalla a usar para la instalación.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">initrd=...</code></pre></td>
@@ -567,7 +626,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                         
                     </table>
                 </div>
-                <p class="Expl">Podremos crear varios bloques de estos y, en cada uno, definir un archivo de respuestas diferentes para tener varios métodos de instalación desatendida.</p>
 
                 <br>
                 <p>5.2. Lo que hay que hacer es añadir debajo del bloque de configuración existente otro bloque separado por una línea vacía:</p>
@@ -599,7 +657,22 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     </table>
                 </div>
 
+                <p class="Expl">
+                    Si no se usa <span class="span_contenido">priority=critical</span>, el instalador mostrará el diálogo para configurar el hostname, aunque ya esté definido en el archivo de respuestas. 
+                    Esto evita que varios equipos se instalen con el mismo nombre en la misma red.
+                </p>
+                <p class="Expl">
+                    Si se usa, el diálogo se omite y todos los equipos usarán el mismo hostname definido en el archivo, por lo que después será necesario cambiarlo manualmente en cada equipo.
+                </p>
+
+                <br>
                 <p>5.3. Ahora simplemente se guarda el fichero y ya estaría funcionando la nueva configuración.</p>
+
+                <br>
+                <p>
+                    <u>Nota</u>: Se pueden añadir varias entradas en el menú de arranque, cada una con un fichero de respuestas distinto. Esto permite instalar diferentes sistemas con configuraciones específicas. 
+                    Para identificarlos fácilmente, cada entrada debe tener un <span class="span_contenido">label</span> diferente.
+                </p>
 
             </div>
 
@@ -614,7 +687,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h2>
+                <h2 id="Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</h2>
 
                 <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
 
@@ -635,15 +708,15 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p>Formato de cada partición:</p>
                 <pre class="codigo" translate="no"><code class="text">&lt;Tamaño mínimo MB&gt; &lt;Prioridad MB&gt; &lt;Tamaño máximo MB&gt; &lt;Sistema de archivos&gt; \
     &lt;Opciones&gt; \</code></pre>
-                <p class="Expl">La suma del tamaño mínimo de cada partición debe ser el mínimo espacio en MB que deba tener el disco, si no dará un error y no instalará el sistema.</p>
-                <p class="Expl">Del espacio restante se repartirá proporcionalmente entre las particiones según la prioridad que tengan.</p>
+                <p class="Expl">La suma de los tamaños mínimos indica el espacio mínimo que debe tener el disco. Si el disco es más pequeño, la instalación fallará.</p>
+                <p class="Expl">El espacio restante se reparte entre las particiones según su prioridad.</p>
                 <ul class="Expl">
-                    <li>La prioridad se calcula restando la Prioridad y el Tamaño mínimo, dando un porcentaje indicando qué parte del espacio restante le corresponde. La suma de estos porcentajes debería ser 100.</li>
-                    <li>Si el espacio que le corresponde a una partición sobrepasa el espacio máximo, solo cogerá el máximo.</li>
-                    <li>
-                        Ya que nunca pueda quedar espacio libre en el disco, se puede especificar en una partición que el espacio máximo sea <span class="span_contenido">-1</span> (sin máximo) para que esta ocupe todo el espacio restante.
+                    <li>La prioridad se calcula restando la Prioridad con el Tamaño mínimo.</li>
+                    <li>Este valor determina qué porcentaje del espacio libre recibe cada partición. La suma de todos los porcentajes debería ser 100.
                         <ul>
-                            <li>Si no se define este <span class="span_contenido">-1</span> y todas las particiones no ocupan la totalidad del disco, la última partición cogerá todo el espacio restante.</li>
+                            <li>Si una partición supera su tamaño máximo, solo usará el máximo permitido.</li>
+                            <li>Para que una partición use todo el espacio restante, se puede indicar <span class="span_contenido">-1</span> como tamaño máximo.</li>
+                            <li>Si ninguna partición tiene <span class="span_contenido">-1</span> y queda espacio sin asignar, la última partición ocupará el espacio restante.</li>
                         </ul>
                     </li>
                 </ul>
