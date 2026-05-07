@@ -309,7 +309,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                 <br>
                 <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el fichero de arranque mediante CLI:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">wget https://deb.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/netboot.tar.gz</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">wget https://ftp.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
                     La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
@@ -459,7 +459,7 @@ d-i partman/confirm_nooverwrite boolean true</code></pre>
 
                 <p class="Expl">Hay que elegir que mirror se usará para la instalación del sistema, ya que netinst requiere el uso de red:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
-d-i mirror/http/hostname string &lt;ftp.es.debian.org&gt;
+d-i mirror/http/hostname string &lt;deb.debian.org&gt;
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string</code></pre>
 
@@ -571,7 +571,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">label instalacion-desatendida-gnome
         menu label Instalación desatendida de ^GNOME
         kernel debian-installer/amd64/linux
-        append vga=788 initrd=debian-installer/amd64/initrd.gz auto=true priority=critical pressed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt; --- quiet</code></pre>
+        append vga=788 initrd=debian-installer/amd64/initrd.gz auto=true priority=critical preseed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt; --- quiet</code></pre>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
@@ -589,7 +589,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td>Especifica que no deben aparecer diálogos si no son de prioridad crítica.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">pressed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">preseed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt;</code></pre></td>
                             <td>Indica la ruta al servidor TFTP donde se encuentra el <a href="#Archivo_Respuestas">archivo de respuestas</a>.</td>
                         </tr>
                         
