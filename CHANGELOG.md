@@ -1,9 +1,4 @@
-Mejora de contenido (DEBIAN_PXE)
+Nuevo contenido (PK)
 
-# g/debian_pxe.html
-Arreglos pequeños
-Nuevo índice
-Arreglos de ortografía
-
-# resources/blog.css
-Se solucionó un problema con el alto en los scrollbar
+# g/packet_tracer.html
+Nueva sección de BGP

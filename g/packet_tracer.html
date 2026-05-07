@@ -198,6 +198,13 @@ Código por byAd12
                         <b>Importante:</b> <a href="#NAT_Verificacion">Verificación de la configuración NAT</a> • <a href="#NAT_Identificar_Interfaz">Identificar una interfaz interna o externa</a>
                     </li>
                 </ul>
+
+                <h2 style="margin: 20px;" class="IndiceH2">12. Compartir rutas</h2>
+                <ul>
+                    <li>
+                        <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- ......................................................... -->
@@ -944,7 +951,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">Se puede añadir qué VLANs tienen permitido el paso por el enlace troncal.</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan &lt;Lista_de_VLAN_ID&gt;</code></pre>
 
-                <p><u>Nota</u>: Si posteriormente se desea añadir otra VLAN como permitida se puede añadir individualmente sin necesidad de especificar todas las VLANs de nuevo:</p>
+                <p><u>Nota</u> - Si posteriormente se desea añadir otra VLAN como permitida se puede añadir individualmente sin necesidad de especificar todas las VLANs de nuevo:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport trunk allowed vlan add &lt;Nueva_VLAN_ID_Permitida&gt;</code></pre>
 
             </div>
@@ -3755,6 +3762,69 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
         </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Compartir rutas</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        
+        <div class="parte1">
+
+            <div>
+                <h2 id="BGP_Configuracion">Configuración de BGP</h2>
+
+                <p>Es necesario entender que BGP se debería usar solo cuando un sistema autónomo (AS) tiene conexión con mínimo otros 2 sistemas autónomos.</p>
+
+                <p>1. Primero hay que habilitar BGP especificando el Número de Sistema Autónomo (ASN) correspondiente a la entidad:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router bgp &lt;Número_ASN&gt;</code></pre>
+                <p class="Expl">Tipos de números ASN:</p>
+                <ul class="Expl">
+                    <li><b>Privado</b> - Cualquier número entre 64512 y 65534.</li>
+                    <li><b>Público</b> - Cualquier número asignado directamente por la <a href="https://www.iana.org/assignments/as-numbers/as-numbers.xhtml" target="_blank">IANA</a>.</li>
+                </ul>
+
+                <p>2. Ahora hay que configurar cada entidad vecina indicando su IP y el número ASN al que pertenece:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# neighbor &lt;IP_Vecino&gt; remote-as &lt;Número_ASN_Vecino&gt;</code></pre>
+
+                <p>3. Una vez configurados los pasos anteriores en todas las entidades, debería aparecer un mensaje similar al siguiente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">%BGP-5-ADJCHANGE: neighbor &lt;IP_Vecino&gt; Up</code></pre>
+
+                <p>4. En cada entidad se deben definir las redes que se desean publicar a otras entidades:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# network &lt;Dirección_Red&gt; mask &lt;Máscara_Red&gt;</code></pre>
+
+                <p class="Expl"><u>Que redes publicar</u>:</p>
+                <ul class="Expl">
+                    <li>Redes propias de la entidad.</li>
+                    <li>Redes que deban ser alcanzables desde otros sistemas autónomos.</li>
+                    <li>Redes internas que se quieran hacer públicas mediante BGP.</li>
+                </ul>
+
+                <br>
+                <p class="Expl"><u>Que redes no se recomienda publicar</u>:</p>
+                <ul class="Expl">
+                    <li>Redes de gestión interna.</li>
+                    <li>Redes no utilizadas.</li>
+                    <li>Prefijos demasiado específicos innecesariamente.</li>
+                </ul>
+
+                <br>
+                <p class="Expl">
+                    <u>Importante</u> - Las redes solo se anunciarán si existe previamente una ruta hacia ellas en la tabla de enrutamiento.
+                    En caso necesario, puede crearse una ruta estática hacia <span class="span_contenido">Null0</span> únicamente para que la red exista en la tabla de rutas:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# ip route &lt;Dirección_Red&gt; &lt;Máscara_Red&gt; Null0</code></pre>
+                <p class="Expl">Esta ruta no envía tráfico a ningún destino real; simplemente permite anunciar la red mediante BGP.</p>
+
+                <p>5. Para comprobar que BGP funciona se puede ver que las rutas a redes publicadas por los sistemas autónomos se vean desde el resto de AS:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
+                <p class="Expl">Las rutas creadas por BGP se indican mediante la letra "B".</p>
+
+            </div>
+
+        </div>
+
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
