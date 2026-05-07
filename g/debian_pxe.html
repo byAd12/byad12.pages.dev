@@ -309,13 +309,16 @@ min-lease-time [SEGUNDOS];</code></pre>
                 <br>
                 <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el fichero de arranque mediante CLI:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">wget https://ftp.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">wget https://ftp.es.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
                     La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
                 </p>
+                <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 3 - Gestión de paquetes).</p>
+                
                 <p>2.2.1. Descomprimiremos el fichero tar.gz para obtener los archivos necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
+                
                 <p>2.2.2. Y comprobaremos que estén los ficheros de arranque necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls --color</code></pre>
 
@@ -459,7 +462,7 @@ d-i partman/confirm_nooverwrite boolean true</code></pre>
 
                 <p class="Expl">Hay que elegir que mirror se usará para la instalación del sistema, ya que netinst requiere el uso de red:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
-d-i mirror/http/hostname string &lt;deb.debian.org&gt;
+d-i mirror/http/hostname string ftp.es.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string</code></pre>
 
