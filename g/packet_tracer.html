@@ -202,7 +202,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Compartir rutas</h2>
                 <ul>
                     <li>
-                        <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a>
+                        <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a> • <a href="#BGP_Verificacion">Verificación</a>
                     </li>
                 </ul>
             </div>
@@ -3817,7 +3817,12 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# ip route &lt;Dirección_Red&gt; &lt;Máscara_Red&gt; Null0</code></pre>
                 <p class="Expl">Esta ruta no envía tráfico a ningún destino real; simplemente permite anunciar la red mediante BGP.</p>
 
-                <p>5. Para comprobar que BGP funciona se puede ver que las rutas a redes publicadas por los sistemas autónomos se vean desde el resto de AS:</p>
+            </div>
+
+            <div>
+                <h2 id="BGP_Verificacion">Verificación de BGP</h2>
+
+                <p>Para comprobar que BGP funciona se puede ver que las rutas a redes publicadas por los sistemas autónomos se vean desde el resto de AS:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
                 <p class="Expl">Las rutas creadas por BGP se indican mediante la letra "B".</p>
 
