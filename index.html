@@ -330,6 +330,7 @@ if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'lo
     const texto = document.createElement('span');
     texto.textContent = "Versión no publicada";
     document.getElementById('contador-container').appendChild(texto);
+    document.getElementById('contador-container').style.setProperty('user-select', 'text', 'important');
 }
 </script>
 

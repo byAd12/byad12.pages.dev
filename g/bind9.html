@@ -53,7 +53,7 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>Instalaremos el servicio correspondiente solo en el servidor:</p>
+                <p>En el servidor hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install bind9</code></pre>
 
@@ -82,19 +82,19 @@ Código por byAd12
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf</code></pre></td>
-                            <td>Fichero de Configuración del servidor</td>
+                            <td>archivo de Configuración del servidor</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.local</code></pre></td>
-                            <td>Fichero de zonas</td>
+                            <td>archivo de zonas</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.default-zones</code></pre></td>
-                            <td>Fichero de zonas por defecto - root</td>
+                            <td>archivo de zonas por defecto - root</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.options</code></pre></td>
-                            <td>Fichero de Configuración del DNS</td>
+                            <td>archivo de Configuración del DNS</td>
                         </tr>
                     </table>
                 </div>
@@ -220,15 +220,15 @@ file "/etc/bind/db.192.168.0";
             <div>
                 <h2><span>Ejemplo 3:</span> Crear DNS secundario</h2>
                 
-                <p>En el servidor <b>DNS1</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
+                <p>En el servidor <b>DNS1</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">listen-on {192.168.0.226;}; // La IP de dns2
 allow-transfer {192.168.0.226;}; // La IP de DNS2
 allow-query {192.168.0.226;}; // La IP de DNS2</code></pre>
                 
-                <p>Ahora añadiremos lo siguiente en el fichero <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <p>Ahora añadiremos lo siguiente en el archivo <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dns2	IN	A	192.168.0.226</code></pre>
                 
-                <p>En el servidor <b>DNS2</b> editaremos el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
+                <p>En el servidor <b>DNS2</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
 type slave;
 masters{192.168.0.225;}; // IP de DNS1

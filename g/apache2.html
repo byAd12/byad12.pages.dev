@@ -71,11 +71,11 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/apache2.conf</code></pre></td>
-                            <td>Fichero con todas las zonas del servidor</td>
+                            <td>archivo con todas las zonas del servidor</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/ports.conf</code></pre></td>
-                            <td>Fichero con los puertos a usar</td>
+                            <td>archivo con los puertos a usar</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/mods-available</code></pre><pre translate="no"><code class="bash">/etc/apache2/mods-enabled</code></pre></td>
@@ -87,7 +87,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/sites-available/000-default.conf</code></pre></td>
-                            <td>Fichero de configuración por defecto</td>
+                            <td>archivo de configuración por defecto</td>
                         </tr>
                     </table>
                 </div>
@@ -124,7 +124,7 @@ Código por byAd12
             <div>
                 <h2>Etiqueta &lt;Directory&gt; en: <span translate="no">/etc/apache2/apache2.conf</span></h2>
                 <p>Sirve para dar permisos a un directorio concreto del disco duro del servidor. Da igual si hay tabuladores o espacios aunque las mayúsculas si importan.</p>
-                <p>Se puede poner dentro de una etiqueta <span class="span_contenido" translate="no">VirtualHost</span> y esta tendrá más prioridad que si se pone en el fichero <span class="span_url" translate="no">apache2.conf</span>.</p>
+                <p>Se puede poner dentro de una etiqueta <span class="span_contenido" translate="no">VirtualHost</span> y esta tendrá más prioridad que si se pone en el archivo <span class="span_url" translate="no">apache2.conf</span>.</p>
                 
                 <p>Formato:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;Directory /ruta/absoluta/directorio&gt;
@@ -134,7 +134,7 @@ Código por byAd12
                 <p>Etiquetas:</p>
                 <p class="Expl"><b>Options Indexes</b>: Dar permisos para mostrar el contenido de la carpeta en caso de no haber localizado el recurso solicitado. Si no tiene permiso con indexes dará un error si no localiza el recurso.</p>
                 <p class="Expl"><b>Options FollowSymLinks</b>: Si no se pone, los alias no funcionan.</p>
-                <p class="Expl"><b>DirectoryIndex [File]</b>: Se definen los ficheros por defecto que abrirá el servidor en caso de no haberse especificado en la URL. Se intentarán abrir en el orden en que aparecen. Si no se puede abrir ninguno y si la opción Indexes está definida mostrará el directorio principal, si no enseñará un error.</p>
+                <p class="Expl"><b>DirectoryIndex [File]</b>: Se definen los archivos por defecto que abrirá el servidor en caso de no haberse especificado en la URL. Se intentarán abrir en el orden en que aparecen. Si no se puede abrir ninguno y si la opción Indexes está definida mostrará el directorio principal, si no enseñará un error.</p>
 
             </div>
 
@@ -153,7 +153,7 @@ Código por byAd12
                 <p class="Expl"><b>ServerAdmin</b>: Administrador del dominio.</p>
                 <p class="Expl"><b>DocumentRoot</b>: Carpeta raíz del sitio web.</p>
                 <p class="Expl"><b>LogLevel</b>: <span class="span_contenido" translate="no">debug</span>, <span class="span_contenido" translate="no">info</span>, <span class="span_contenido" translate="no">notice</span>, <span class="span_contenido" translate="no">warn</span>, <span class="span_contenido" translate="no">error</span>, <span class="span_contenido" translate="no">crit</span>, <span class="span_contenido" translate="no">alert</span>, <span class="span_contenido" translate="no">emerg</span>.</p>
-                <p class="Expl"><b>ErrorLog</b>: Fichero donde se definen los logs, <span class="span_url" translate="no">${APACHE_LOG_DIR}/error.log</span>.</p>
+                <p class="Expl"><b>ErrorLog</b>: archivo donde se definen los logs, <span class="span_url" translate="no">${APACHE_LOG_DIR}/error.log</span>.</p>
 
 
             </div>
@@ -169,7 +169,7 @@ Código por byAd12
     Require user NombreUsuario
 &lt;/Directory&gt;</code></pre>
                 <p class="Expl"><b>AuthName</b>: Texto identificativo.</p>
-                <p class="Expl"><b>AuthUserFile</b>: Fichero donde se meterán los usuarios con sus claves.</p>
+                <p class="Expl"><b>AuthUserFile</b>: archivo donde se meterán los usuarios con sus claves.</p>
 
                 <p>2. Comando para crear <b>AuthUserFile</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">htpasswd -c /etc/apache2/ClaveAcceso NombreUsuario</code></pre>
@@ -190,7 +190,7 @@ Código por byAd12
 
                 <h2>Habilitar un Puerto</h2>
 
-                <p>Añadiremos la siguiente línea en el fichero <span class="span_url" translate="no">/etc/ports.conf</span>:</p>
+                <p>Añadiremos la siguiente línea en el archivo <span class="span_url" translate="no">/etc/ports.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">Listen 8080</code></pre>
 
             </div>
@@ -198,26 +198,26 @@ Código por byAd12
             <div>
                 <h2>Página de Error</h2>
 
-                <p>Configuraremos el fichero <span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
+                <p>Configuraremos el archivo <span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
     ErrorDocument 404 "Mensaje"
     ErrorDocument 404 /404.html
 &lt;/VirtualHost&gt;</code></pre>
                 <p class="Expl"><b>404</b>: Código HTTP de error.</p>
-                <p class="Expl"><b>"Mensaje"</b>: El mensaje que se enseñará en un nuevo fichero.</p>
-                <p class="Expl"><b>/404.html</b>: El fichero personalizado que se enseñará. Se busca desde <span class="span_url" translate="no">DocumentRoot</span>.</p>
+                <p class="Expl"><b>"Mensaje"</b>: El mensaje que se enseñará en un nuevo archivo.</p>
+                <p class="Expl"><b>/404.html</b>: El archivo personalizado que se enseñará. Se busca desde <span class="span_url" translate="no">DocumentRoot</span>.</p>
             </div>
 
             <div>
-                <h2>Ficheros <span translate="no">.htaccess</span></h2>
+                <h2>archivos <span translate="no">.htaccess</span></h2>
 
-                <p>Sirve para poder dar directivas desde un fichero ubicado en el directorio donde se de permisos.</p>
+                <p>Sirve para poder dar directivas desde un archivo ubicado en el directorio donde se de permisos.</p>
 
                 <p><span class="span_url" translate="no">/etc/apache2/apache2.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/html/marcos&gt;
     AllowOverride all
 &lt;/Directory&gt;</code></pre>
-                <p class="Expl"><b>AllowOverride all</b>: Permitir el uso de ficheros .htaccess.</p>
+                <p class="Expl"><b>AllowOverride all</b>: Permitir el uso de archivos .htaccess.</p>
 
                 <p><span class="span_url" translate="no">/var/www/html/marcos/.htaccess</span>: Es el archivo por defecto en el que se van a buscar las directivas.</p>
                 <pre class="codigo" translate="no"><code class="apache">AuthName "Mensaje"

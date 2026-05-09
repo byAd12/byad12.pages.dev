@@ -152,7 +152,7 @@ Código por byAd12
                     Si es al revés (remota - <span class="span_contenido" translate="no">rw</span>, local - <span class="span_contenido" translate="no">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido" translate="no">w</span>.
                 </p>
                 <p><b>IMPORTANTE</b>:</p>
-                <p>Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
+                <p>Los permisos efectivos son los más restrictivos entre los permisos del sistema de archivos y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
             
                 <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
                 <p>Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
@@ -175,11 +175,11 @@ Código por byAd12
                 <p class="Expl"><b>IP_servidor</b>: La dirección IP que tiene el servidor que aloja el recurso compartido.</p>
                 <p class="Expl"><b>/carpeta_remota</b>: La ruta en el servidor del recurso compartido.</p>
                 <p class="Expl"><b>/mnt/carpeta_local</b>: La ruta local en la que vamos a montar la carpeta.</p>
-                <p class="Expl"><b>nfs</b>: Tipo de sistema de ficheros.</p>
+                <p class="Expl"><b>nfs</b>: Tipo de sistema de archivos.</p>
                 <p class="Expl"><b>defaults</b>: Opciones predefinidas.</p>
                 <p class="Expl"><b>nfsvers=3</b>: Se indica que se debe usar NFSv3.</p>
                 <p class="Expl"><b>0</b>: No realizar una copia de seguridad.</p>
-                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de ficheros con los programas <span class="span_contenido" translate="no">dump</span> y <span class="span_contenido" translate="no">fsck</span>.</p>
+                <p class="Expl"><b>0</b>: No realizar una comprobación del sistema de archivos con los programas <span class="span_contenido" translate="no">dump</span> y <span class="span_contenido" translate="no">fsck</span>.</p>
             </div>
 
 

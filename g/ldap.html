@@ -292,9 +292,9 @@ changetype: delete</code></pre>
             <div>
                 <h2>Conexión de un cliente al servicio LDAP de un servidor</h2>
 
-                <p>1. Primero añadiremos un registro DNS interno que apunte al dominio LDAP mediante el siguiente fichero:</p>
+                <p>1. Primero añadiremos un registro DNS interno que apunte al dominio LDAP mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
-                <p class="Expl">Añadiremos una línea en el fichero con el siguiente formato:</p>
+                <p class="Expl">Añadiremos una línea en el archivo con el siguiente formato:</p>
                 <pre class="codigo" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO_SIN_PUNTO]</code></pre>
 
                 <p>2. Primero instalaremos los servicios necesarios:</p>
@@ -313,7 +313,7 @@ changetype: delete</code></pre>
                 <p>Si el proceso de instalación falla o no pregunta el paso 8, hay que reconfigurarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure ldap-auth-config</code></pre>
 
-                <p>3. Una vez configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
+                <p>3. Una vez configurado hay que editar el siguiente archivo para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">De las 3 primeras líneas reemplazaremos la palabra <span class="span_contenido" translate="no">compact</span> a <span class="span_contenido" translate="no">files ldap</span>.</p>
 
@@ -325,7 +325,7 @@ changetype: delete</code></pre>
                 <p>5. Comprobaremos que podemos ver los usuarios del servidor en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
-                <p>6. Del siguiente fichero tendremos que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
+                <p>6. Del siguiente archivo tendremos que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-password</code></pre>
 
                 <p>7. Reiniciaremos el equipo para que se apliquen los cambios:</p>

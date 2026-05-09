@@ -129,7 +129,7 @@ NISCLIENT=false</code></pre>
                 
                 <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">make -C /var/yp</code></pre>
-                <p class="Expl">Si no hay cambios no actualizará nada, además el comando indica si un fichero fue modificado desde la última vez que se modificó la base de datos.</p>
+                <p class="Expl">Si no hay cambios no actualizará nada, además el comando indica si un archivo fue modificado desde la última vez que se modificó la base de datos.</p>
 
             </div>
 
@@ -150,9 +150,9 @@ NISCLIENT=false</code></pre>
                     Esto se usa cuando se quiere que los datos de un usuario estén en un equipo pero no en otro equipo.
                 </p>
 
-                <p class="Expl">Para configurarlo hay que editar el siguiente fichero:</p>
+                <p class="Expl">Para configurarlo hay que editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-session</code></pre>
-                <p class="Expl">Y añadir la siguiente línea al final del fichero:</p>
+                <p class="Expl">Y añadir la siguiente línea al final del archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">session	required	pam_mkhomedir.so	skel=/etc/skel/	umask=0022</code></pre>
 
             </div>
@@ -165,9 +165,9 @@ NISCLIENT=false</code></pre>
                 <p>1. Primero instalaremos el servicio de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt install -y nfs-kernel-server</code></pre>
 
-                <p>2. Ahora editaremos el fichero de configuración de NFS:</p>
+                <p>2. Ahora editaremos el archivo de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
-                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url" translate="no">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url" translate="no">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
+                <p class="Expl">Dentro de este archivo añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url" translate="no">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url" translate="no">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
                 <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw,sync,no_subtree_check)</code></pre>
 
                 <p>3. Por último exportaremos la configuración NFS para que sea efectiva:</p>
@@ -219,9 +219,9 @@ NISCLIENT=true</code></pre>
                 <p>6. Una vez que el paso anterior funcione sin errores habrá que habilitar los servicios para que estén iniciados aunque se reinicie el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable rpcbind ypbind nscd</code></pre>
 
-                <p>7. Es importante configurar que el cliente sea capaz de adoptar esos usuarios y grupos desde el servicio nis con el fichero:</p>
+                <p>7. Es importante configurar que el cliente sea capaz de adoptar esos usuarios y grupos desde el servicio nis con el archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">Dentro de este fichero cambiaremos esto:</p>
+                <p class="Expl">Dentro de este archivo cambiaremos esto:</p>
                 <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd
 group:          files systemd
 shadow:         files systemd
@@ -249,7 +249,7 @@ gshadow:        files systemd nis</code></pre>
 
                 <p>2. Añadiremos un montaje persistente y automático en /etc/fstab:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
-                <p class="Expl">Dentro de este fichero añadiremos la siguiente línea para poder montar la carpeta del servidor en el sistema local:</p>
+                <p class="Expl">Dentro de este archivo añadiremos la siguiente línea para poder montar la carpeta del servidor en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">&lt;IP_servidor&gt;:/home    /home    nfs    defaults    0    0</code></pre>
 
                 <p>3. Por último, reiniciaremos el sistema para aplicar los cambios:</p>

@@ -90,7 +90,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 
                 <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
                 <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido" translate="no">samba-ad-dc</span>, <span class="span_contenido" translate="no">nmbd</span> y <span class="span_contenido" translate="no">smbd</span>.</p>
-                <p class="Expl">Además se crea una carpeta esencial que contiene los ficheros de configuración: <span class="span_url" translate="no">/etc/samba</span>.</p>
+                <p class="Expl">Además se crea una carpeta esencial que contiene los archivos de configuración: <span class="span_url" translate="no">/etc/samba</span>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -306,14 +306,14 @@ chmod permisos /carpeta_a_compartir</code></pre>
 
                 <!-- ......................................................... -->
                 <p>2.1. 🔨 <b><span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span> y su solución</b>:</p>
-                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
+                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este archivo.</p>
                 
                 <p class="Expl">Primero crearemos en cualquier ruta un archivo oculto de credenciales con el siguiente formato:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /ruta/a/archivo/.credenciales</code></pre>
-                <p class="Expl">Dentro de este fichero indicaremos el usuario y contraseña:</p>
+                <p class="Expl">Dentro de este archivo indicaremos el usuario y contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">username=usuario
 password=contraseña</code></pre>
-                <p class="Expl">Luego guardamos el fichero y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
+                <p class="Expl">Luego guardamos el archivo y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">chown root:root /ruta/a/archivo/.credenciales
 chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p class="Expl">Y por último añadiremos en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
@@ -543,7 +543,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <p><u>Acceso denegado</u> - Hay que comprobar que los permisos sean los correctos:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls -ld /recurso_montado</code></pre>
 
-                <p><u>Montaje de /etc/fstab</u> - Hay que comprobar que la configuración del fichero de montaje sea correcto:</p>
+                <p><u>Montaje de /etc/fstab</u> - Hay que comprobar que la configuración del archivo de montaje sea correcto:</p>
                 <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
             </div>
         </div>

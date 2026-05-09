@@ -293,7 +293,7 @@ Código por byAd12
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
-                <p>Para configurarlo, primero tendremos que editar el fichero de configuración de SAMBA:</p>
+                <p>Para configurarlo, primero tendremos que editar el archivo de configuración de SAMBA:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Añadiremos al final del archivo la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">[netlogon]
@@ -498,7 +498,7 @@ group:          files systemd winbind</code></pre>
                 <br>
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
-                <p class="Expl">Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
+                <p class="Expl">Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que modifica el archivo <span class="span_url" translate="no">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
                 
                 <p class="Expl"><u>Importante</u>: Tendremos el <b>error</b> de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">pam_auth_update</code></pre>
@@ -564,7 +564,7 @@ group:          files systemd winbind</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">fstype=""</code></pre></td>
-                            <td>Tipo de sistema de ficheros de la carpeta a montar.</td>
+                            <td>Tipo de sistema de archivos de la carpeta a montar.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">server=""</code></pre></td>
@@ -651,7 +651,7 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
 
                 <br>
-                <p>5. Es importante quitar o comentar en el siguiente fichero una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>:</p>
+                <p>5. Es importante quitar o comentar en el siguiente archivo una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
 
                 <p class="Expl">Además, en el mismo archivo hay que poner el valor de la siguiente línea en <span class="span_contenido" translate="no">false</span>:</p>
@@ -692,7 +692,7 @@ ldap_user_gid_number = gidNumber</code></pre>
             <div>
                 <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
             
-                <p>Primero editamos el fichero de configuración de samba:</p>
+                <p>Primero editamos el archivo de configuración de samba:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Y añadimos en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
                 <pre class="codigo" translate="no"><code class="bash">vfs objects = acl_xattr

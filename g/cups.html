@@ -95,7 +95,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-bash">cupsenable &lt;Nombre_Impresora&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-bash">cupsaccept &lt;Nombre_Impresora&gt;</code></pre>
 
-                <p>Ahora añadiremos una política al servicio mediante el siguiente fichero:</p>
+                <p>Ahora añadiremos una política al servicio mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
                 <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">  JobPrivateValues none</code></pre>
@@ -121,9 +121,9 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-bash">lpstat -p -d</code></pre>
                 <p class="Expl"><u>Nota</u>: La impresora puede aparecer inactiva ya que es una impresora virtual sin ningún dispositivo físico conectado.</p>
 
-                <p>Para verificar que se pueda imprimir podemos crear un fichero de prueba y enviarlo a la impresora:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">echo "Contenido de prueba" > &lt;Fichero_de_Prueba&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="language-bash">lp -d &lt;Nombre_Local&gt; &lt;Fichero_de_Prueba&gt;</code></pre>
+                <p>Para verificar que se pueda imprimir podemos crear un archivo de prueba y enviarlo a la impresora:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">echo "Contenido de prueba" > &lt;archivo_de_Prueba&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">lp -d &lt;Nombre_Local&gt; &lt;archivo_de_Prueba&gt;</code></pre>
 
                 <p><b>Servidor</b>: En la página de impresoras deberíamos ver los trabajos enviados:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>

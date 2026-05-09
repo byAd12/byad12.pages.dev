@@ -95,9 +95,9 @@ Código por byAd12
 
                 <!-- ......................................................... -->
                 <br>
-                <p>1.2. A continuación deberemos modificar el siguiente fichero para configurar las interfaces de red:</p>
+                <p>1.2. A continuación hay que modificar el siguiente archivo para configurar las interfaces de red:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/default/isc-dhcp-server</code></pre>
-                <p class="Expl">Dentro de este fichero reemplazaremos las siguientes líneas:</p>
+                <p class="Expl">Dentro de este archivo se deben reemplazar las siguientes líneas:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
 INTERFACESv6=""</code></pre>
                 <p class="Expl">Por las siguientes líneas:</p>
@@ -117,7 +117,7 @@ INTERFACESv6=""</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">INTERFACESv6=""</code></pre></td>
-                            <td>Si no se tiene IPv6 configurado, se debe comentar la línea.</td>
+                            <td>Si IPv6 no está configurado se debe comentar esta línea.</td>
                         </tr>
                         
                     </table>
@@ -128,10 +128,10 @@ INTERFACESv6=""</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>1.3. Ahora es necesario editar el siguiente fichero para configurar el servicio DHCP:</p>
+                <p>1.3. Ahora es necesario editar el siguiente archivo para configurar el servicio DHCP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/dhcp/dhcpd.conf</code></pre>
 
-                <p>1.3.1. Dentro de este fichero añadiremos la siguiente línea para poder obtener la arquitectura del cliente:</p>
+                <p>1.3.1. Dentro de este archivo añadiremos la siguiente línea para poder obtener la arquitectura del cliente:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">option arch code 93 = unsigned integer 16;</code></pre>
 
@@ -150,21 +150,21 @@ min-lease-time [SEGUNDOS];</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];</code></pre></td>
-                            <td>Tiempo base en segundos de la concesión de una configuración IP dada.</td>
+                            <td>Tiempo base en segundos de la concesión IP.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">max-lease-time [SEGUNDOS];</code></pre></td>
-                            <td>Tiempo máximo en segundos de la concesión.</td>
+                            <td>Tiempo máximo en segundos de la concesión IP.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">min-lease-time [SEGUNDOS];</code></pre></td>
-                            <td>Tiempo mínimo en segundos de la concesión.</td>
+                            <td>Tiempo mínimo en segundos de la concesión IP.</td>
                         </tr>
                         
                     </table>
                 </div>
 
-                <p>1.3.3. También añadiremos esta configuración que permite crear una subnet donde se define la configuración IP a conceder:</p>
+                <p>1.3.3. La configuración de las concesiones IP se configuran con el siguiente bloque:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
     # Configuración básica
@@ -185,7 +185,7 @@ min-lease-time [SEGUNDOS];</code></pre>
     allow bootp;
 
     # Obtener la arquitectura del cliente 
-    # y seleccionar el fichero de arranque
+    # y seleccionar el archivo de arranque
     if option arch = 00:07 or option arch 00:09 {
         filename "bootnetx64.efi"; # UEFI
     } else {
@@ -221,7 +221,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">next-server [VALOR];</code></pre></td>
-                            <td>La dirección IPv4 del servidor TFTP donde se aloja el fichero de arranque.</td>
+                            <td>La dirección IPv4 del servidor TFTP donde se aloja el archivo de arranque.</td>
                         </tr>
                         
                     </table>
@@ -289,21 +289,21 @@ min-lease-time [SEGUNDOS];</code></pre>
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Selección del <b>fichero de arranque</b>
+                                Selección del <b>archivo de arranque</b>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                Gracias al condicional <span class="span_contenido">ip option ...</span> se permite detectar la arquitectura del cliente para elegir el fichero correcto.
+                                Gracias al condicional <span class="span_contenido">ip option ...</span> se permite detectar la arquitectura del cliente para elegir el archivo correcto.
                             </td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">filename "bootnetx64.efi";</code></pre></td>
-                            <td>Este fichero se usa en sistemas UEFI.</td>
+                            <td>Este archivo se usa en sistemas UEFI.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="language-ini">filename "pxelinux.0";</code></pre></td>
-                            <td>Este fichero se usa en sistemas BIOS.</td>
+                            <td>Este archivo se usa en sistemas BIOS.</td>
                         </tr>
                             <td colspan="2">
                                 Si solo hay equipos sin UEFI en la red se puede quitar todo el bloque condicional y poner simplemente <span class="span_contenido">filename "pxelinux.0";</span>.
@@ -313,7 +313,7 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>1.4. Por último habilitaremos y reiniciaremos el servicio DHCP para aplicar los cambios, además de verificar si hay errores:</p>
+                <p>1.4. Por último habilita y reinicia el servicio DHCP para aplicar los cambios, además de verificar si hay errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status isc-dhcp-server</code></pre>
@@ -333,19 +333,19 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el fichero de arranque mediante CLI:</p>
+                <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el archivo de arranque mediante CLI:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">wget https://ftp.es.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
                     La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
                 </p>
-                <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 4 - Gestión de paquetes).</p>
+                <p class="Expl"><u>Importante</u>: El repositorio donde se saque este archivo debe ser el mismo con el que se instalará el sistema (paso 4 - Gestión de paquetes).</p>
                 
-                <p>2.2.1. Descomprimiremos el fichero tar.gz para obtener los archivos necesarios:</p>
+                <p>2.2.1. Descomprimiremos el archivo tar.gz para obtener los archivos necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
                 
-                <p>2.2.2. Y comprobaremos que estén los ficheros de arranque necesarios:</p>
+                <p>2.2.2. Y comprobaremos que estén los archivos de arranque necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls --color</code></pre>
 
                 <!-- ......................................................... -->
@@ -366,7 +366,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                 </p>
 
                 <p>
-                    Una vez se inicie el sistema, normalmente requerirá al instante de obtener una configuración IP y un fichero de arranque
+                    Una vez se inicie el sistema, normalmente requerirá al instante de obtener una configuración IP y un archivo de arranque
                     que se pulse la tecla F12 u otra.
                 </p>
 
@@ -391,11 +391,11 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <p>
                     4.1. 
-                    Crearemos un fichero con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
+                    Crearemos un archivo con extensión .cfg dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
                     Puedes agrupar varios archivos de respuestas en una carpeta conjunta para una mejor organización.
-                    Un ejemplo de un archivo de respuestas es el preseed de <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">Debian</a>.
+                    Un ejemplo completo de un archivo de respuestas es el preseed de <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">Debian</a>.
                 </p>
-                <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
+                <p>Ten en cuenta que cada línea que se añada en el archivo quitará una o varias preguntas del proceso de instalación de Debian:</p>
 
                 <br>
                 <p>Configuración regional:</p>
@@ -482,12 +482,15 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
 d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true</code></pre>
-                <p class="Expl">En la sección de "<a href="#Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</a>" se explica detalladamente como crear cada partición necesaria desde el archivo de respuestas.</p>
+                <p class="Expl">
+                    En la sección de "<a href="#Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</a>" 
+                    se explica detalladamente como crear cada partición necesaria gestionando manualmente su espacio en disco.
+                </p>
 
                 <br>
                 <p>Gestión del mirror / repositorio:</p>
 
-                <p class="Expl">Hay que elegir que mirror se usará para la instalación del sistema, ya que netinst requiere el uso de red:</p>
+                <p class="Expl">Ya que netinst requiere el uso de red, hay que elegir que mirror se usará para la instalación del sistema:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
 d-i mirror/http/hostname string ftp.es.debian.org
 d-i mirror/http/directory string /debian
@@ -536,16 +539,17 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <br>
                 <p><small>Opcional -</small> Ejecutar comandos:</p>
 
-                <p class="Expl">Con el siguiente comando se especifica qué comandos separados por ";" se ejecutarán al finalizar la instalación:</p>
+                <p class="Expl">Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
     &lt;Comando 1&gt;; \
     &lt;Comando 1&gt;; \ 
     ...;</code></pre>
+                <p class="Expl">El ";" indica el final de cada línea de comando a ejecutar y el "\" indica un salto de línea de la configuración de preseed.</p>
 
                 <br>
                 <p><small>Opcional -</small> Compartir carpetas por NFS:</p>
 
-                <p class="Expl">Para compartir una carpeta por NFS se requiere instalar "nfs-kernel-server":</p>
+                <p class="Expl">Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
                 <p class="Expl">Ahora hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
@@ -572,10 +576,10 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             <div>
                 <h2 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h2>
 
-                <p>5.1. Primero tendremos que editar el siguiente fichero:</p>
+                <p>5.1. Primero tendremos que editar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /srv/tftp/debian-installer/amd64/boot-screens/txt.cfg</code></pre>
 
-                <p>Dentro de ese fichero nos encontraremos bloques de configuración como el siguiente:</p>
+                <p class="Expl">Dentro de ese archivo nos encontraremos bloques de configuración como el siguiente:</p>
                 <pre class="codigo" translate="no"><code class="text">label install
         menu label ^Install
         kernel debian-installer/amd64/linux
@@ -666,11 +670,12 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 </p>
 
                 <br>
-                <p>5.3. Ahora simplemente se guarda el fichero y ya estaría funcionando la nueva configuración.</p>
+                <p>5.3. Ahora guarda el archivo y ya estaría funcionando la nueva configuración.</p>
 
                 <br>
                 <p>
-                    <u>Nota</u>: Se pueden añadir varias entradas en el menú de arranque, cada una con un fichero de respuestas distinto. Esto permite instalar diferentes sistemas con configuraciones específicas. 
+                    <u>Nota</u>: Se pueden añadir varias entradas en el menú de arranque separados por una línea en blanco, cada una con un archivo de respuestas distinto. 
+                    Esto permite instalar diferentes sistemas con configuraciones específicas. 
                     Para identificarlos fácilmente, cada entrada debe tener un <span class="span_contenido">label</span> diferente.
                 </p>
 
@@ -692,15 +697,15 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
 
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string \
-    &lt;nombre receta&gt; :: \
-        &lt;partición 1&gt;  \
-            &lt;Opciones&gt; \
-        .              \
-        &lt;partición 2&gt;  \
-            &lt;Opciones&gt; \
-        .              \
-        &lt;partición 3&gt;  \
-            &lt;Opciones&gt;
+    &lt;nombre receta&gt; ::                \
+        &lt;partición 1&gt;                 \
+            &lt;Opciones&gt;                \
+        .                             \
+        &lt;partición 2&gt;                 \
+            &lt;Opciones&gt;                \
+        .                             \
+        &lt;partición 3&gt;                 \
+            &lt;Opciones&gt;                \
         .</code></pre>
                 <p class="Expl">El símbolo <span class="span_contenido">\</span> sirve para continuar la línea en otra.</p>
 

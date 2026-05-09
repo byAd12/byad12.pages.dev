@@ -56,16 +56,16 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>Instalaremos el servicio correspondiente solo en el servidor:</p>
+                <p>En el servidor hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y isc-dhcp-server</code></pre>
 
-                <p>En el firewall permitiremos el paso del puerto 67 - UDP (DHCP):</p>
+                <p>En el firewall hay que permitir el tráfico del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67</code></pre>
 
-                <p>Tras instalar debes configurar los siguientes ficheros: <a href="#isc-dhcp-server">/etc/default/isc-dhcp-server</a> y <a href="#dhcpd.conf">/etc/dhcp/dhcpd.conf</a>.</p>
+                <p>Tras instalar el servicio se deben configurar los siguientes archivos: <a href="#isc-dhcp-server">/etc/default/isc-dhcp-server</a> y <a href="#dhcpd.conf">/etc/dhcp/dhcpd.conf</a>.</p>
 
-                <p>Después de configurar los ficheros necesarios se debe reiniciar el servicio:</p>
+                <p>Después de configurar los archivos necesarios hay que reiniciar el servicio:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server.service</code></pre>
             </div>
 
@@ -93,15 +93,15 @@ Código por byAd12
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/default/isc-dhcp-server</code></pre></td>
-                            <td>Fichero para indicar la interfaz</td>
+                            <td>archivo para indicar la interfaz.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/dhcp/dhcpd.conf</code></pre></td>
-                            <td>Fichero de Configuración del servidor</td>
+                            <td>archivo de Configuración del servidor.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/var/log/syslog</code></pre></td>
-                            <td>Fichero de registro de errores del sistema</td>
+                            <td>archivo de registro de errores del sistema.</td>
                         </tr>
                     </table>
                 </div>
@@ -134,7 +134,7 @@ Código por byAd12
             <div>
                 <h2 id="isc-dhcp-server">Archivo de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
-                <p>A continuación deberemos modificar las siguientes líneas del fichero:</p>
+                <p>A continuación deberemos modificar las siguientes líneas del archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
 INTERFACESv6=""</code></pre>
                 <p class="Expl">Y lo modificaremos al siguiente contenido:</p>
@@ -142,7 +142,7 @@ INTERFACESv6=""</code></pre>
 #INTERFACESv6=""</code></pre>
                 <p class="Expl">
                     <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
-                    <br><b>INTERFACESv6</b>: Si no se tiene IPv6 configurado, se debe comentar la línea.
+                    <br><b>INTERFACESv6</b>: Si IPv6 no está configurado se debe comentar esta línea.
                 </p>
                 <p>Usa el siguiente comando para poder ver las interfaces del equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
