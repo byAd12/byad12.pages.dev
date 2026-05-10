@@ -1,8 +1,4 @@
-Mejora de redacción y contenido
+Nuevo contenido (PK)
 
-# g/*.html
-Se reemplazó la palabra "fichero" por "archivo" ya que se usaban ambos
-Mejora de redacción
-
-# index.html
-Ahora se puede seleccionar el texto "Versión no publicada"
+# g/packet_tracer.html
+Nuevo contenido

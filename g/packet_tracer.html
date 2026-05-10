@@ -3799,6 +3799,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     <li>Redes propias de la entidad.</li>
                     <li>Redes que deban ser alcanzables desde otros sistemas autónomos.</li>
                     <li>Redes internas que se quieran hacer públicas mediante BGP.</li>
+                    <li>La ruta 0.0.0.0/0 solo la debe publicar el router con conexión directa.</li>
                 </ul>
 
                 <br>
@@ -3825,6 +3826,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para comprobar que BGP funciona se puede ver que las rutas a redes publicadas por los sistemas autónomos se vean desde el resto de AS:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
                 <p class="Expl">Las rutas creadas por BGP se indican mediante la letra "B".</p>
+
+                <p>Para ver la configuración BGP de cada dispositivo:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show running-config | section bgp</code></pre>
 
             </div>
 
