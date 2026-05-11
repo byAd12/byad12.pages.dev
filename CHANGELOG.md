@@ -1,5 +1,4 @@
-Mejora de contenido (DEBIAN_PXE)
+Nuevo enlace (footer)
 
-# g/debian_pxe.html
-Mejora del índice
-Se separó secciones del documento para mayor claridad
+# *.html
+Se añadió un nuevo enlac en el footer
