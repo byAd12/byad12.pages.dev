@@ -302,16 +302,17 @@
         <footer>
             <div class="footer-content">
                 <!-- INFORMACIÓN FOOTER-->
-                <div class="footer-left">
+                <div class="footer-header">
                     <h3 translate="no">by<span>Ad</span>12</h3>
-                    <p translate="no"><span class="copyright">© 2023 - 2026</span> • <a class="enlace-codigo-fuente" href="https://github.com/byAd12/byad12.pages.dev" target="_blank">Código fuente</a></p>
-                    <p class="footer-widgets"><span id="contador-container"></span> • <span class="gtranslate_wrapper" id="Traductor"></span></p>
+                    <p translate="no"><span class="copyright">© 2023 - 2026</span></p>
+                    <p class="footer-header-widgets"><span id="widget-contador"></span> • <span class="gtranslate_wrapper" id="Traductor"></span></p>
                 </div>
                 <!-- LINKS FOOTER -->
                 <div class="footer-links">
                     <ul>
                         <li class="NoHover"></li>
 
+                        <li><a href="https://github.com/byAd12/byad12.pages.dev" target="_blank">Código fuente</a></li>
                         <li><a href="privacy.html">Política de privacidad</a></li>
                         <li><a href="contact.html">Información de contacto</a></li>
                     </ul>
@@ -325,12 +326,12 @@ if (window.location.hostname !== '127.0.0.1' && window.location.hostname !== 'lo
     const img = document.createElement('img');
     img.src = "https://hitscounter.dev/api/hit?url=https%3A%2F%2Fbyad12.pages.dev%2F&label=VISITAS&icon=github&color=%237cfb2d&message=&style=flat-square&tz=UTC";
     img.alt = "API contador de visitas";
-    document.getElementById('contador-container').appendChild(img);
+    document.getElementById('widget-contador').appendChild(img);
 } else {
     const texto = document.createElement('span');
     texto.textContent = "Versión no publicada";
-    document.getElementById('contador-container').appendChild(texto);
-    document.getElementById('contador-container').style.setProperty('user-select', 'text', 'important');
+    document.getElementById('widget-contador').appendChild(texto);
+    document.getElementById('widget-contador').style.setProperty('user-select', 'text', 'important');
 }
 </script>
 

@@ -265,26 +265,19 @@ div.BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); co
 
 footer{padding: 30px; text-align: center; color: white; position: relative; max-width: 1500px; margin: 0 auto;}
 footer::before{content: ""; position: absolute; top: 0; left: 50px; right: 50px; height: 1px; background-color: #7cfb2d;}
-.footer-content{max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;}
+.footer-content{max-width: 1500px; margin: 0 auto; display: block;}
 .footer-content p span.copyright{user-select: text;}
 
-.footer-left{text-align: left; display: flex; flex-direction: column; gap: 10px;}
-.footer-left h3{font-size: 30px; color: white; font-family: "Smoch";}
-.footer-left h3 span{color: #7cfb2d; font-family: "Smoch";}
+.footer-header{text-align: center; display: flex; flex-direction: column; gap: 10px;}
+.footer-header h3{font-size: 30px; color: white; font-family: "Smoch";}
+.footer-header h3 span{color: #7cfb2d; font-family: "Smoch";}
 .footer-links ul{list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;}
 
-.footer-left p *{vertical-align: middle;}
-
-.footer-left .footer-widgets{display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: 5px;}
+.footer-header .footer-header-widgets{display: flex; align-items: center; gap: 5px; justify-content: center; margin-bottom: 20px;}
 
 .footer-links ul li a{color: white;} 
 .footer-links ul li a.actual{color: #7cfb2d;} 
 .footer-links ul li a:hover, .a13 a:hover{text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #7cfb2d;}
-
-footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
-
-.enlace-codigo-fuente{user-select: text; color: white; text-decoration: none; font-size: 16px; padding: 0 5px 0 5px; cursor: pointer;}
-.enlace-codigo-fuente:hover{text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #7cfb2d;}
 
 /* ========================================================= */
 /* @MEDIA */
@@ -294,16 +287,9 @@ footer .cloudflare-logo img{height: 1em; vertical-align: middle;}
   *{scrollbar-width: none !important;}
 
   /* GUÍAS */
-  .BlogEntradas*{transition: all .5s ease-in-out;}
+  .BlogEntradas *{transition: all .5s ease-in-out;}
   .BlogEntradas a .Entrada{width: 80vw; min-height: 100% !important;}
   .BlogEntradas a .Entrada div p{width: 30%; transition: all .5s; text-align: right;}
-
-  /* FOOTER */
-  footer{background-color: #222523; padding: 30px; width: 100%; text-align: center; color: white;}  
-  .footer-content{max-width: 1200px; margin: 0 auto; display: block;}
-  .footer-left{text-align: center;}
-  .footer-left p{margin-bottom: 20px;}
-  .footer-widgets{justify-content: center !important;}
 }
 
 @media screen and (max-width: 500px){

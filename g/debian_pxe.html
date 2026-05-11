@@ -57,16 +57,27 @@ Código por byAd12
                 <h2>Índice de Contenidos</h2>
 
                 <ul>
-                    <li><a href="#Requisitos_Iniciales">Requisitos iniciales</a></li>
-                    <li><a href="#Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</a></li>
-                    <li><a href="#Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</a></li>
-                    <li><a href="#Comprobación_Funcionamiento">3. Comprobación del funcionamiento</a></li>
-                    <li><a href="#Archivo_Respuestas">4. Automatizar las preguntas de la instalación</a> (archivo de respuestas)</li>
-                    <li><a href="#Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</a></li>
+                    <li>Principal: 
+                        <ul>
+                            <li><a href="#Requisitos_Iniciales">Requisitos iniciales</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <br>
                 <ul>
-                    <li>Archivo de respuestas - Configuración opcional:
+                    <li>Pasos de configuración:
+                        <ul>
+                            <li><a href="#Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</a></li>
+                            <li><a href="#Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</a></li>
+                            <li><a href="#Comprobación_Funcionamiento">3. Comprobación del funcionamiento</a></li>
+                            <li><a href="#Archivo_Respuestas">4. Crear el archivo de respuestas</a></li>
+                            <li><a href="#Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <ul>
+                    <li>Configuración opcional del archivo de respuestas:
                         <ul>
 
                             <li><a href="#Instalar_Paquetes_Adicionales">Instalar paquetes adicionales</a></li>
@@ -97,6 +108,22 @@ Código por byAd12
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Pasos de configuración</h1>
+        <h2 class="TituloSecundario">Lograr una instalación desatendida</h2>
+        <br>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
+             
             <div>
                 <h2 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h2>
 
@@ -334,6 +361,9 @@ min-lease-time [SEGUNDOS];</code></pre>
 
             </div>
 
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
+
             <div>
                 <h2 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h2>
 
@@ -367,6 +397,9 @@ min-lease-time [SEGUNDOS];</code></pre>
 
             </div>
 
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
+
             <div>
                 <h2 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h2>
 
@@ -389,17 +422,11 @@ min-lease-time [SEGUNDOS];</code></pre>
 
             </div>
 
-        </div>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
 
             <div>
-                <h2 id="Archivo_Respuestas">4. Automatizar las preguntas de la instalación</h2>
+                <h2 id="Archivo_Respuestas">4. Crear el archivo de respuestas</h2>
 
                 <p>
                     4.1. 
@@ -550,14 +577,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
             </div>
 
-        </div>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
 
             <div>
                 <h2 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h2>
@@ -672,7 +693,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>Configuración opcional</h1>
-        <h2 class="TituloSecundario">Fichero de respuestas</h2>
+        <h2 class="TituloSecundario">Archivo de respuestas</h2>
         <br>
         <hr>
         <!-- ......................................................... -->
