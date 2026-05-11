@@ -167,7 +167,7 @@ Código por byAd12
                         <b>Notas:</b> <a href="#ACL_Donde_Ubicar">Donde ubicar las ACL</a> • <a href="#ACL_Orden_Creación">Orden de creación</a> • <a href="#ACL_Importante">A tener en cuenta</a>
                     </li>
                     <li>
-                        <b>ACL estándar:</b> <a href="#ACL_Estandar_Sintaxis">Sintaxis</a> • <a href="#ACL_Estandar_Direccion_Red">ACL para una red</a> • <a href="#ACL_Estandar_Host">ACL para una única IP</a> • <a href="#ACL_Estandar_Todos">ACL para todos las IPs</a>
+                        <b>ACL estándar:</b> <a href="#ACL_Estandar_Sintaxis">Sintaxis</a> • <a href="#ACL_Estandar_Dirección_Red">ACL para una red</a> • <a href="#ACL_Estandar_Host">ACL para una única IP</a> • <a href="#ACL_Estandar_Todos">ACL para todos las IPs</a>
                     </li>
                     <li>
                         <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos">Ejemplos</a>
@@ -202,7 +202,7 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Compartir rutas</h2>
                 <ul>
                     <li>
-                        <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a> • <a href="#BGP_Verificacion">Verificación</a>
+                        <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a> • <a href="#BGP_Verificacion">Verificación</a> • <a href="#BGP_Propagar_Rutas">Propagación de rutas</a>
                     </li>
                 </ul>
             </div>
@@ -910,11 +910,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para verificarlo se puede ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
                 <p class="Expl">
-                    Tendría que aparecer una línea como la siguiente, que indica que si se quiere llegar a la subred <span class="span_contenido" translate="no">&lt;Direccion_Red&gt;/&lt;Máscara&gt;</span>, 
+                    Tendría que aparecer una línea como la siguiente, que indica que si se quiere llegar a la subred <span class="span_contenido" translate="no">&lt;Dirección_Red&gt;/&lt;Máscara&gt;</span>, 
                     el dispositivo enrutará el paquete hacia la interfaz lógica <span class="span_contenido" translate="no">Vlan&lt;VLAN_ID&gt;</span>. 
                     Luego, internamente, el sistema enviará el paquete por el puerto físico correspondiente a la VLAN:
                 </p>
-                <pre class="codigo" translate="no"><code class="cisco">C    &lt;Direccion_Red&gt;/&lt;Máscara&gt; is directly connected, Vlan&lt;VLAN_ID&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">C    &lt;Dirección_Red&gt;/&lt;Máscara&gt; is directly connected, Vlan&lt;VLAN_ID&gt;</code></pre>
 
             </div>
 
@@ -1748,7 +1748,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                             <td>Explicación</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="cisco">network &lt;Direccion_Red&gt; &lt;Máscara&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="cisco">network &lt;Dirección_Red&gt; &lt;Máscara&gt;</code></pre></td>
                             <td>Sirve para definir la máscara de red en formato punteado o CIDR.</td>
                         </tr>
                         <tr>
@@ -2840,6 +2840,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# no passive-interface &lt;Interfaz&gt;</code></pre>
 
+                <p><u>Importante</u> - Las interfaces pasivas también se <a href="#OSPF_Definir_Redes">definen con OSPF</a>.</p>
+
             </div>
 
             <div>
@@ -3200,7 +3202,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Estandar_Direccion_Red">ACL asignada a una dirección de red</h2>
+                <h2 id="ACL_Estandar_Dirección_Red">ACL asignada a una dirección de red</h2>
 
                 <p>
                     Para definir a quien se le aplica la ACL se debe usar una IP con una máscara <b>WildCard</b>,
@@ -3759,6 +3761,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Hay que tener en cuenta que NAT o PAT se configura únicamente en el router que separe la red local (LAN) con una red externa (WAN).</p>
 
+                <p>También es importante saber que NAT solo se usa cuando el tráfico de una red interna (local) tiene que salir hacia una red pública.</p>
+
             </div>
 
         </div>
@@ -3818,6 +3822,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# ip route &lt;Dirección_Red&gt; &lt;Máscara_Red&gt; Null0</code></pre>
                 <p class="Expl">Esta ruta no envía tráfico a ningún destino real; simplemente permite anunciar la red mediante BGP.</p>
 
+                <br>
+                <p><u>Nota</u> - No hay que meter en OSPF los enlaces entre los sistemas autónomos, solo las redes que estén dentro del sistema autónomo.</p>
+
             </div>
 
             <div>
@@ -3832,8 +3839,29 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
-        </div>
+            <div>
+                <h2 id="BGP_Propagar_Rutas">Propagación de rutas</h2>
 
+                <p><b>OSPF</b>:</p>
+                <p class="Expl">
+                    Si la red interna de un sistema autónomo utiliza OSPF como protocolo de enrutamiento, 
+                    el router de borde de área debe redistribuir las rutas aprendidas mediante BGP dentro del dominio OSPF.
+
+                    Para ello, se configura el siguiente comando en el proceso OSPF correspondiente, indicando el número de ASN:
+                </p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# ! Configuración de router-id, passive-interface, network, etc.
+(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
+
+                <p><b>Rutas estáticas</b>:</p>
+                <p class="Expl">
+                    En redes que utilizan únicamente rutas estáticas, las rutas aprendidas por BGP no se propagan automáticamente. 
+                    Por ello, es necesario configurar manualmente en cada router una <a href="#Rutas_Predeterminadas_IPv4">ruta predeterminada</a> apuntando hacia el router que publica las rutas mediante BGP.
+                </p>
+
+            </div>
+
+        </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
