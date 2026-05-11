@@ -1,4 +1,5 @@
-Nuevo contenido (PK)
+Mejora de contenido (DEBIAN_PXE)
 
-# g/packet_tracer.html
-Nuevo contenido
+# g/debian_pxe.html
+Mejora del índice
+Se separó secciones del documento para mayor claridad

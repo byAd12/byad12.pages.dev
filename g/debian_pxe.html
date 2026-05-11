@@ -63,7 +63,19 @@ Código por byAd12
                     <li><a href="#Comprobación_Funcionamiento">3. Comprobación del funcionamiento</a></li>
                     <li><a href="#Archivo_Respuestas">4. Automatizar las preguntas de la instalación</a> (archivo de respuestas)</li>
                     <li><a href="#Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</a></li>
-                    <li><a href="#Crear_Particiones_Manualmente">Archivo de respuestas: crear particiones manualmente</a> (opcional)</li>
+                </ul>
+                <br>
+                <ul>
+                    <li>Archivo de respuestas - Configuración opcional:
+                        <ul>
+
+                            <li><a href="#Instalar_Paquetes_Adicionales">Instalar paquetes adicionales</a></li>
+                            <li><a href="#Ejecutar_Comandos_Adicionales">Ejecución de comandos adicionales</a></li>
+                            <li><a href="#Compartir_Carpeta_NFS">Compartir una carpeta por NFS</a></li>
+                            <li><a href="#Crear_Particiones_Manualmente">Crear particiones manualmente</a></li>
+
+                        </ul>
+                        
                 </ul>
 
             </div>
@@ -335,7 +347,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                 <br>
                 <p>2.2. Ahora, como usuario "root", nos situaremos en la ruta necesaria y descargaremos el archivo de arranque mediante CLI:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">wget https://ftp.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">wget https://ftp.es.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
                     La URL corresponde al archivo comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtenerla, se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del archivo <span class="span_url">netboot/netboot.tar.gz</span>.
@@ -492,7 +504,7 @@ d-i partman/confirm_nooverwrite boolean true</code></pre>
 
                 <p class="Expl">Ya que netinst requiere el uso de red, hay que elegir que mirror se usará para la instalación del sistema:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i mirror/country string manual
-d-i mirror/http/hostname string deb.debian.org
+d-i mirror/http/hostname string ftp.es.debian.org
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string</code></pre>
 
@@ -513,12 +525,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard</code></pre>
 
                 <br>
-                <p><small>Opcional -</small> Instalar paquetes adicionales:</p>
-
-                <p class="Expl">Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
-                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string &lt;Paquete1&gt; &lt;Paquete2&gt; &lt;...&gt;</code></pre>
-
-                <br>
                 <p>Instalar el gestor de arranque GRUB:</p>
 
                 <p class="Expl">Para instalar GRUB si <b>solo</b> está Debian instalado:</p>
@@ -537,30 +543,10 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">d-i finish-install/reboot_in_progress note</code></pre>
 
                 <br>
-                <p><small>Opcional -</small> Ejecutar comandos:</p>
-
-                <p class="Expl">Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
-    &lt;Comando 1&gt;; \
-    &lt;Comando 1&gt;; \ 
-    ...;</code></pre>
-                <p class="Expl">El ";" indica el final de cada línea de comando a ejecutar y el "\" indica un salto de línea de la configuración de preseed.</p>
-
-                <br>
-                <p><small>Opcional -</small> Compartir carpetas por NFS:</p>
-
-                <p class="Expl">Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
-                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
-                <p class="Expl">Ahora hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
-    mkdir -p &lt;Ruta_Absoluta&gt;; \
-    echo "&lt;Ruta_Absoluta&gt; *(&lt;ro / rw&gt;)" >> /target/etc/exports; \ 
-    in-target exportfs -a; \
-    in-target systemctl enable nfs-kernel-server;</code></pre>
-                <ul class="Expl">
-                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea a <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
-                </ul>
+                <p>
+                    Todas las líneas de esta sección crea una instalación completamente desatendida.
+                    Hay configuraciones adicionales que se explican al final de la guía.
+                </p>
 
             </div>
 
@@ -678,6 +664,104 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     Esto permite instalar diferentes sistemas con configuraciones específicas. 
                     Para identificarlos fácilmente, cada entrada debe tener un <span class="span_contenido">label</span> diferente.
                 </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Configuración opcional</h1>
+        <h2 class="TituloSecundario">Fichero de respuestas</h2>
+        <br>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Instalar_Paquetes_Adicionales">Archivo de respuestas: instalar paquetes adicionales</h2>
+
+                <p>Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string &lt;Paquete1&gt; &lt;Paquete2&gt; &lt;...&gt;</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Ejecutar_Comandos_Adicionales">Archivo de respuestas: ejecución de comandos adicionales</h2>
+
+                <p>Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
+    in-target &lt;Comando 1&gt;; \
+    in-target &lt;Comando 2&gt;; \ 
+    ...;</code></pre>
+
+                <ul class="Expl">
+                    <li><b>in-target</b> - Indica que el comando se va a ejecutar en el sistema a instalar y no en el instalador.</li>
+                    <li>El <span class="span_contenido">;</span> indica el final de cada línea de comando a ejecutar y el <span class="span_contenido">\</span> indica un salto de línea de la configuración de preseed.</li>
+                </ul>
+
+                <br>
+                <p>Para definir una ruta del instalador se puede hacer de 2 formas que dan el mismo resultado:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr>
+                            <td><pre translate="no"><code class="text">in-target echo /&lt;Ruta_Absoluta&gt;</code></pre></td>
+                            <td>Ejecuta el comando directamente en el sistema a instalar.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="text">echo /target/&lt;Ruta_Absoluta&gt;</code></pre></td>
+                            <td>Ejecuta el comando en el instalador pero modificando los archivos del sistema a instalar.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Compartir_Carpeta_NFS">Archivo de respuestas: crear particiones manualmente</h2>
+
+                <p>Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
+
+                <br>
+
+                <p>Ahora hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
+    mkdir -p /target/&lt;Ruta_Absoluta&gt;; \
+    echo "/&lt;Ruta_Absoluta&gt; *(ro)" >> /target/etc/exports; \
+    in-target systemctl enable nfs-kernel-server;</code></pre>
+                    
+                <ul class="Expl">
+                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta absoluta.</li>
+                    <li><b>echo</b> - Ahora se añade una línea a <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
+                    <li><b>systemctl</b> - Se indica que se debe habilitar el servicio de NFS para que arranque cuando se inicie el sistema.</li>
+                </ul>
+
+                <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">ejecución de comandos adicionales</a>" se puede ver la explicación sobre "Target".</p>
 
             </div>
 
