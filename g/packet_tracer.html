@@ -3846,12 +3846,17 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p class="Expl">
                     Si la red interna de un sistema autónomo utiliza OSPF como protocolo de enrutamiento, 
                     el router de borde de área debe redistribuir las rutas aprendidas mediante BGP dentro del dominio OSPF.
-
-                    Para ello, se configura el siguiente comando en el proceso OSPF correspondiente, indicando el número de ASN:
                 </p>
+
+                <p class="Expl">1. Primero se debe entrar en la configuración de OSPF indicando su número de proceso:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
-(config-router)# ! Configuración de router-id, passive-interface, network, etc.
-(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
+(config-router)# ! Configuración de router-id, passive-interface, network, etc.</code></pre>
+                
+<p class="Expl">2. Para redistribuir todas las rutas BGP menos la ruta por defecto hay que indicar el número ASN de ese sistema autónomo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
+                
+                <p class="Expl">3. Si hay una ruta por defecto en la tabla de rutas (aprendida por BGP o creada estáticamente), esta se debe redistribuir con:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config-router)# default-information originate</code></pre>
 
                 <p><b>Rutas estáticas</b>:</p>
                 <p class="Expl">
