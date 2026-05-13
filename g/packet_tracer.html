@@ -3837,6 +3837,12 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para ver la configuración BGP de cada dispositivo:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | section bgp</code></pre>
 
+                <p>Con el siguiente comando se pueden ver las rutas aprendidas por BGP y cual es el vecino a enviar el paquete para llegar a cada ruta:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip bgp</code></pre>
+
+                <p>También se puede ver un resumen de toda la configuración BGP, incluido información de cada vecino:</p>
+                <pre class="codigo" translate="no"><code class="cisco"># show ip bgp summary</code></pre>
+
             </div>
 
             <div>
@@ -3848,15 +3854,16 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     el router de borde de área debe redistribuir las rutas aprendidas mediante BGP dentro del dominio OSPF.
                 </p>
 
-                <p class="Expl">1. Primero se debe entrar en la configuración de OSPF indicando su número de proceso:</p>
+                <p class="Expl">Para redistribuir todas las rutas aprendidas por BGP, excepto la ruta por defecto, es necesario indicar el número de sistema autónomo (ASN):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
-(config-router)# ! Configuración de router-id, passive-interface, network, etc.</code></pre>
+(config-router)# ! Configuración de router-id, passive-interface, network, etc.
+(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
                 
-<p class="Expl">2. Para redistribuir todas las rutas BGP menos la ruta por defecto hay que indicar el número ASN de ese sistema autónomo:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
-                
-                <p class="Expl">3. Si hay una ruta por defecto en la tabla de rutas (aprendida por BGP o creada estáticamente), esta se debe redistribuir con:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# default-information originate</code></pre>
+                <p class="Expl">Si además existe una ruta por defecto en la tabla de enrutamiento (aprendida por BGP o configurada estáticamente), esta debe anunciarse explícitamente mediante:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# ! Configuración de router-id, passive-interface, network, etc.
+(config-router)# redistribute bgp &lt;Número_ASN&gt; subnets
+(config-router)# default-information originate</code></pre>
 
                 <p><b>Rutas estáticas</b>:</p>
                 <p class="Expl">
