@@ -1,5 +1,4 @@
-Mejora de contenido (PK)
+Mejora de explicaciones (PK)
 
 # g/packet_tracer.html
-Nuevos comandos
 Mejora de explicaciones

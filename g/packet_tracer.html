@@ -186,13 +186,16 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estática:</b> <a href="#NAT_Estatica_Configuracion_IPs">Traducción de IPs</a> • <a href="#NAT_Estatica_Configuracion_Puertos">Traducción de IPs y puertos</a>
+                        <b>NAT estático:</b> <a href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
                     </li>
                     <li>
-                        <b>NAT dinámica:</b> <a href="#NAT_Dinamica_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamica_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
+                        <b>NAT dinámico:</b> <a href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
                     </li>
                     <li>
                         <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a href="#PAT_Configuracion_Pool">Configuración con un pool</a>
+                    </li>
+                    <li>
+                        <b>NAT estático con PAT:</b> <a href="#NAT_Estatico_Configuracion_Puertos">Traducción de IPs y puertos</a>
                     </li>
                     <li>
                         <b>Importante:</b> <a href="#NAT_Verificacion">Verificación de la configuración NAT</a> • <a href="#NAT_Identificar_Interfaz">Identificar una interfaz interna o externa</a>
@@ -3103,30 +3106,27 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             <div>
                 <h2 id="OSPF_Multiarea_Configuracion">Configuración</h2>
 
-                <p>1. En cada router de la red hay que configurar el <a href="#OSPF_Configuracion_Basica">mismo ID de proceso</a> junto a un <a href="#OSPF_Router_ID">Router ID</a> único:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# router-id &lt;Dirección_IPv4_Única&gt;</code></pre>
+                <p>1. En todos los routers de la red se debe configurar el <a href="#OSPF_Configuracion_Basica">mismo ID de proceso</a> OSPF junto con un <a href="#OSPF_Router_ID">Router ID</a> único para cada dispositivo:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# router-id &lt;Dirección_IPv4_Única&gt;</code></pre>
 
-                <p>2. En los routers de área hay que configurar las redes del área en el que se sitúan:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
+                <p>2. En cada router se debe indicar a qué área pertenece cada interfaz:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;
+(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;
+(config-if)# ...</code></pre>
                 
-                <p>3. En el <u>router de borde de área</u> (ABR) hay que configurar sus áreas conectadas además de la área 0:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ip ospf &lt;Número_Proceso&gt; area &lt;ID_Área&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-if)# ...</code></pre>
+                <p>3. En los <u>routers de borde de área</u> (<b>ABR</b>) se debe realizar la misma configuración anterior, asegurándose de que al menos una de sus interfaces pertenezca al área 0.</p>
 
-                <p>4. La <u>sumarización</u> se utiliza para que un área publique una sola ruta consolidada hacia las demás áreas, reduciendo el tamaño de las tablas de enrutamiento:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-router)# area &lt;ID_Área_Origen&gt; range &lt;IP_Red_Sumarizada&gt; &lt;Máscara_Subred&gt;</code></pre>
-                <p class="Expl">
-                    <b>ID_Área_Origen</b>: Es el ID del área donde residen originalmente las subredes antes de ser enviadas al resto de la red.
-                    <br>
-                    <b>IP_Red_Sumarizada</b>: Es la dirección de red del conjunto de IPs que engloban a toda o gran parte del área.
-                </p>
+                <p>4. En cada ABR se deben anunciar las redes sumarizadas de las áreas a las que está conectado directamente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
+(config-router)# area &lt;ID_Área_Origen&gt; range &lt;IP_Red_Sumarizada&gt; &lt;Máscara_Subred&gt;</code></pre>
+                <ul class="Expl">
+                    <li><b>ID_Área_Origen</b>: identificador del área donde se encuentran las rutas que se desean resumir.</li>
+                    <li><b>IP_Red_Sumarizada</b>: dirección de red que engloba el conjunto de subredes del área.</li>
+                    <li><b>Máscara_Subred</b>: máscara correspondiente a la red sumarizada.</li>
+                </ul>
 
-                <p>5. Por último, hay que realizar una <a href="#OSPF_Verificacion">verificación de la conectividad</a> con sus routers vecinos y las rutas aprendidas por OSPF.</p>
+                <p>5. Finalmente, se debe <a href="#OSPF_Verificacion">verificar de la conectividad</a> entre routers vecinos y comprobar las rutas aprendidas mediante OSPF.</p>
 
             </div>
 
@@ -3500,7 +3500,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Estatica_Configuracion_IPs">Configuración con traducción de IPs</h2>
+                <h2 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3527,35 +3527,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             </div>
 
-            <div>
-                <h2 id="NAT_Estatica_Configuracion_Puertos">Configuración con traducción de IPs y puertos</h2>
-
-                <p>A continuación se muestra la sintaxis para traducir la IP local interna (privada) a la IP global interna (pública) mediante puertos:</p>
-
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static &lt;Protocolo&gt; &lt;IP_Local_Interna&gt; &lt;Puerto_Local&gt; &lt;IP_global_interna&gt; &lt;Puerto_Global&gt;</code></pre>
-                
-                <p class="Expl">
-                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp", "icmp", "ospf", "ip" (cualquier protocolo de Internet), etc.
-                    <br><br>
-                    <b>IP_Local_Interna</b>: Es la IP privada del host (LAN).
-                    <br>
-                    <b>Puerto_Local</b>: Es el puerto del servicio en el host interno (LAN).
-                    <br><br>
-                    <b>IP_Global_Interna</b>: Es la IP pública del router (WAN).
-                    <br>
-                    <b>Puerto_Global</b>: Es el puerto del router expuesto hacia Internet (WAN).
-                </p>
-
-                <p>Un ejemplo sería el siguiente:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static tcp 192.168.0.2 80 182.204.54.130 80</code></pre>
-                <p class="Expl">El router redirige todo el tráfico:</p>
-                <ul class="Expl">
-                    <li>que llegue a 182.204.54.130:80 (IP pública)</li>
-                    <li>hacia 192.168.0.2:80 (servidor interno)</li>
-                </ul>
-
-            </div>
-
         </div>
 
         <!-- ......................................................... -->
@@ -3568,7 +3539,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Dinamica_Configuracion">Configuración con una pool de direcciones</h2>
+                <h2 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3611,7 +3582,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="NAT_Dinamica_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+                <h2 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
 
                 <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
@@ -3697,6 +3668,46 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz_Externa&gt;
 (config-if)# ip nat outside</code></pre>
                 
+            </div>
+
+        </div>
+
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>NAT estático con PAT</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+                <h2 id="NAT_Estatico_Configuracion_Puertos">Configuración con traducción de IPs y puertos</h2>
+
+                <p>A continuación se muestra la sintaxis para traducir la IP local interna (privada) a la IP global interna (pública) mediante puertos:</p>
+
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static &lt;Protocolo&gt; &lt;IP_Local_Interna&gt; &lt;Puerto_Local&gt; &lt;IP_global_interna&gt; &lt;Puerto_Global&gt;</code></pre>
+                
+                <p class="Expl">
+                    <b>Protocolo</b>: Se define qué a qué tipo de tráfico se refiere, como "tcp", "udp", "icmp", "ospf", "ip" (cualquier protocolo de Internet), etc.
+                    <br><br>
+                    <b>IP_Local_Interna</b>: Es la IP privada del host (LAN).
+                    <br>
+                    <b>Puerto_Local</b>: Es el puerto del servicio en el host interno (LAN).
+                    <br><br>
+                    <b>IP_Global_Interna</b>: Es la IP pública del router (WAN).
+                    <br>
+                    <b>Puerto_Global</b>: Es el puerto del router expuesto hacia Internet (WAN).
+                </p>
+
+                <p>Un ejemplo sería el siguiente:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source static tcp 192.168.0.2 80 182.204.54.130 80</code></pre>
+                <p class="Expl">El router redirige todo el tráfico:</p>
+                <ul class="Expl">
+                    <li>que llegue a 182.204.54.130:80 (IP pública)</li>
+                    <li>hacia 192.168.0.2:80 (servidor interno)</li>
+                </ul>
+
             </div>
 
         </div>
@@ -3809,9 +3820,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <br>
                 <p class="Expl"><u>Que redes no se recomienda publicar</u>:</p>
                 <ul class="Expl">
-                    <li>Redes de gestión interna.</li>
+                    <li>Redes de gestión interna, como una LAN.</li>
                     <li>Redes no utilizadas.</li>
-                    <li>Prefijos demasiado específicos innecesariamente.</li>
                 </ul>
 
                 <br>
@@ -3864,6 +3874,9 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 (config-router)# ! Configuración de router-id, passive-interface, network, etc.
 (config-router)# redistribute bgp &lt;Número_ASN&gt; subnets
 (config-router)# default-information originate</code></pre>
+                <ul class="Expl">
+                    <li>En verdad no haría falta ejecutar el comando "redistribute ...", pero en Packet Tracer no funciona del todo bien.</li>
+                </ul>
 
                 <p><b>Rutas estáticas</b>:</p>
                 <p class="Expl">
