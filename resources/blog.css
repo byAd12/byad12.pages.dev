@@ -140,7 +140,7 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
-    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: calc(100% - 40px) !important;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){padding-left: 0 !important; padding-right: 0 !important; width: 100% !important; margin: 0 !important;}
     .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
 }
 
@@ -161,12 +161,13 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 
 @media (max-width: 1040px){
     .parte1{display: block; width: 100%; margin: 0;}
-    .parte1.codigo{margin: 5px 0;}
+    .parte1 .codigo{margin: 5px 0;}
 }
 
 @media screen and (max-width: 768px){
     .ocultarMOVIL{display: none;}
     .FTP_Botones_Externos{flex-wrap: wrap;}
+    h1:not(.menu_bar h1){word-break: break-all;}
 }
 
 @media (max-width: 350px){
