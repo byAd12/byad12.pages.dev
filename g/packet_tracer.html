@@ -170,7 +170,7 @@ Código por byAd12
                         <b>ACL estándar:</b> <a href="#ACL_Estandar_Sintaxis">Sintaxis</a> • <a href="#ACL_Estandar_Dirección_Red">ACL para una red</a> • <a href="#ACL_Estandar_Host">ACL para una única IP</a> • <a href="#ACL_Estandar_Todos">ACL para todos las IPs</a>
                     </li>
                     <li>
-                        <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos">Ejemplos</a>
+                        <b>ACL extendida:</b> <a href="#ACL_Extendida_Sintaxis" style="color: red;">Sintaxis</a> • <a href="#ACL_Extendida_Ejemplos" style="color: red;">Ejemplos</a>
                     </li>
                     <li>
                         <b>Más funciones:</b> <a href="#ACL_Nombre">Crear ACLs con un nombre</a> • <a href="#ACL_Comentario">Asignar un comentario</a> • <a href="#ACL_Borrar_Regla">Borrar una regla</a> • <a href="#ACL_Anadir_Regla_Intermedia">Añadir una regla en una posición especifica</a>
@@ -186,13 +186,13 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estático:</b> <a href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
+                        <b>NAT estático:</b> <a style="color: red;" href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
                     </li>
                     <li>
-                        <b>NAT dinámico:</b> <a href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
+                        <b>NAT dinámico:</b> <a style="color: red;" href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a style="color: red;" href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
                     </li>
                     <li>
-                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a href="#PAT_Configuracion_Pool">Configuración con un pool</a>
+                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a style="color: red;" href="#PAT_Configuracion_Pool">Configuración con un pool</a>
                     </li>
                     <li>
                         <b>NAT estático con PAT:</b> <a href="#NAT_Estatico_Configuracion_Puertos">Traducción de IPs y puertos</a>
@@ -3257,7 +3257,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
+                <h2 style="color: red;" id="ACL_Extendida_Sintaxis">Sintaxis</h2>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny / remark [Texto]&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]</code></pre>
 
@@ -3293,7 +3293,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
+                <h2 style="color: red;" id="ACL_Extendida_Ejemplos">Ejemplos</h2>
 
                 <p><b>Tráfico WEB</b>:</p>
 
@@ -3500,7 +3500,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
+                <h2 style="color: red;" id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3539,7 +3539,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
+                <h2 style="color: red;" id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3550,8 +3550,12 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p><u>Nota</u>: Cada IP pública del pool solo puede ser utilizada por un host a la vez.</p>
 
                 <br>
-                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+                <p>Pasos de configuración:</p>
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>:</p>
+                <p class="Expl">1.1. Primero hay que denegar todas las IPs de los equipos que no tienen que acceder fuera de la red:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; deny host &lt;IP_Host&gt;</code></pre>
+                <p class="Expl">1.2. Al final hay que permitir a la red que podrá acceder fuera de la red privada, especificado su dirección de red con <b>máscara WildCard</b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;Dirección_Red&gt; &lt;Máscara_Red_WildCard&gt;</code></pre>
 
                 <p>2. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat pool &lt;Nombre_Pool&gt; &lt;Primera_IP&gt; &lt;Ultima_IP&gt; netmask &lt;Máscara_Red&gt;</code></pre>
@@ -3582,7 +3586,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+                <h2 style="color: red;" id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
 
                 <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
@@ -3620,11 +3624,16 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     pública simultáneamente gracias a la traducción de puertos.
                 </p>
 
-                <br>
-                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
 
-                <p>2. Vincular la ACL con la interfaz externa conectada a la red pública (WAN):</p>
+                <br>
+                <p>Pasos de configuración:</p>
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>:</p>
+                <p class="Expl">1.1. Primero hay que denegar todas las IPs de los equipos que no tienen que acceder fuera de la red:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; deny host &lt;IP_Host&gt;</code></pre>
+                <p class="Expl">1.2. Al final hay que permitir a la red que podrá acceder fuera de la red privada, especificado su dirección de red con <b>máscara WildCard</b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;Dirección_Red&gt; &lt;Máscara_Red_WildCard&gt;</code></pre>
+
+                <p>2. Vincular la ACL del paso 1 con la interfaz externa conectada a la red pública (WAN):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat inside source list &lt;Número_ACL&gt; interface &lt;Interfaz&gt; overload</code></pre>
 
                 <p>3. Ahora hay que definir que interfaces actuarán como interna y externa:</p>
@@ -3639,10 +3648,20 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
+                <h2 style="color: red;" id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
 
-                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>, definiendo solo las redes que van a ser traducidas:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;A_Quien&gt;</code></pre>
+                <p>
+                    También se puede configurar PAT a partir de un conjunto de direcciones disponibles (pool), 
+                    de modo que cada host interno recibe una IP pública del pool mientras haya disponibles.
+                </p>
+
+                <br>
+                <p>Pasos de configuración:</p>
+                <p>1. Crear una <a href="#ACL_Estandar_Sintaxis">ACL estándar</a>:</p>
+                <p class="Expl">1.1. Primero hay que denegar todas las IPs de los equipos que no tienen que acceder fuera de la red:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; deny host &lt;IP_Host&gt;</code></pre>
+                <p class="Expl">1.2. Al final hay que permitir a la red que podrá acceder fuera de la red privada, especificado su dirección de red con <b>máscara WildCard</b>:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; permit &lt;Dirección_Red&gt; &lt;Máscara_Red_WildCard&gt;</code></pre>
 
                 <p>2. Definir el conjunto de direcciones disponibles (pool) para la traducción:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip nat pool &lt;Nombre_Pool&gt; &lt;Primera_IP&gt; &lt;Ultima_IP&gt; netmask &lt;Máscara_Red&gt;</code></pre>
@@ -3733,7 +3752,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     y las direcciones IP correspondientes a Outside local y Outside global.
                 </p>
 
-                <p class="Expl">Añadiendo la palabra <span class="span_contenido">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido cuánto tiempo hace que se creó y usó la entrada:</p>
+                <p class="Expl">Añadiendo la palabra <span class="span_contenido">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido desde hace cuánto tiempo se creó y usó la entrada:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations verbose</code></pre>
                 
                 <p class="Expl">
@@ -3869,7 +3888,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 (config-router)# ! Configuración de router-id, passive-interface, network, etc.
 (config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
                 
-                <p class="Expl">Si además existe una ruta por defecto en la tabla de enrutamiento (aprendida por BGP o configurada estáticamente), esta debe anunciarse explícitamente mediante:</p>
+                <p class="Expl">Si además existe una ruta por defecto en la tabla de enrutamiento (aprendida por BGP o configurada estáticamente), esta debe anunciarse explícitamente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
 (config-router)# ! Configuración de router-id, passive-interface, network, etc.
 (config-router)# redistribute bgp &lt;Número_ASN&gt; subnets
