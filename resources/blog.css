@@ -167,7 +167,7 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 @media screen and (max-width: 768px){
     .ocultarMOVIL{display: none;}
     .FTP_Botones_Externos{flex-wrap: wrap;}
-    h1:not(.menu_bar h1){word-break: break-all;}
+    h1:not(.menu_bar h1){overflow-wrap: break-word; word-break: normal;}
 }
 
 @media (max-width: 350px){
