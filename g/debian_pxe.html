@@ -83,6 +83,7 @@ Código por byAd12
                             <li><a href="#Instalar_Paquetes_Adicionales">Instalar paquetes adicionales</a></li>
                             <li><a href="#Ejecutar_Comandos_Adicionales">Ejecución de comandos adicionales</a></li>
                             <li><a href="#Compartir_Carpeta_NFS">Compartir una carpeta por NFS</a></li>
+                            <li><a href="#Montar_Carpeta_NFS">Montar una carpeta por NFS</a></li>
                             <li><a href="#Crear_Particiones_Manualmente">Crear particiones manualmente</a></li>
 
                         </ul>
@@ -509,10 +510,10 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-md/device_remove_md boolean true</code></pre>
 
                 <p class="Expl">Elegir el tipo de particionado:</p>
-                <ul>
-                    <li><b>atomic</b> - Todos los archivos en una partición</li>
-                    <li><b>home</b> - La partición /home se separa del resto</li>
-                    <li><b>multi</b> - Las particiones /home, /var, /tmp se separan del resto</li>
+                <ul class="Expl">
+                    <li><b>atomic</b> - Todos los archivos en una partición.</li>
+                    <li><b>home</b> - La partición /home se separa del resto.</li>
+                    <li><b>multi</b> - Las particiones /home, /var, /tmp se separan del resto.</li>
                 </ul>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select &lt;atomic&gt;</code></pre>
 
@@ -763,26 +764,63 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Compartir_Carpeta_NFS">Archivo de respuestas: crear particiones manualmente</h2>
+                <h2 id="Compartir_Carpeta_NFS">Archivo de respuestas: compartir una carpeta por NFS</h2>
 
                 <p>Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
 
                 <br>
 
-                <p>Ahora hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <p>Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
     mkdir -p /target/&lt;Ruta_Absoluta&gt;; \
-    echo "/&lt;Ruta_Absoluta&gt; *(ro)" >> /target/etc/exports; \
+    echo "/&lt;Ruta_Absoluta&gt;    *(ro)" >> /target/etc/exports; \
     in-target systemctl enable nfs-kernel-server;</code></pre>
                     
                 <ul class="Expl">
-                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea a <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
+                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta local absoluta.</li>
+                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
                     <li><b>systemctl</b> - Se indica que se debe habilitar el servicio de NFS para que arranque cuando se inicie el sistema.</li>
                 </ul>
 
                 <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">ejecución de comandos adicionales</a>" se puede ver la explicación sobre "Target".</p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h2 id="Montar_Carpeta_NFS">Archivo de respuestas: montar una carpeta por NFS</h2>
+
+                <p>Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-common":</p>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-common</code></pre>
+
+                <br>
+
+                <p>Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
+    mkdir -p /target/&lt;Carpeta_Local&gt;; \
+    echo "&lt;IP_Servidor&gt;:/&lt;Carpeta_Remota&gt;    /&lt;Carpeta_Local&gt;    nfs    defaults,_netdev,nfsvers=3    0    0" >> /target/etc/fstab;</code></pre>
+                    
+                <ul class="Expl">
+                    <li><b>mkdir</b> - Se debe crear la carpeta antes de montarla, especificando la ruta local absoluta.</li>
+                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_url">/etc/fstab</span>, donde se especifica la carpeta NFS a montar en el sistema local cada vez que el sistema se inicia.</li>
+                    <li>Hay que usar el tabulador para separar los elementos del comando "<b>echo</b>".</li>
+                </ul>
+
+                <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">ejecución de comandos adicionales</a>" se puede ver la explicación sobre "Target".</p>
+
+                <br>
+                <p><u>Verificación</u> - Una vez instalado el sistema se puede comprobar con el siguiente comando si se ha montado:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount | grep &lt;Carpeta_Local&gt;</code></pre>
 
             </div>
 
