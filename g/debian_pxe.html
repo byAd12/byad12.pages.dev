@@ -726,7 +726,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p>Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
     in-target &lt;Comando 1&gt;; \
-    in-target &lt;Comando 2&gt;; \ 
+    in-target &lt;Comando 2&gt;; \
     ...;</code></pre>
 
                 <ul class="Expl">
@@ -766,12 +766,13 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             <div>
                 <h2 id="Compartir_Carpeta_NFS">Archivo de respuestas: compartir una carpeta por NFS</h2>
 
-                <p>Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
+                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
+                <p class="Expl">Suele ser necesario poner esta línea antes de la configuración del paso 2.</p>
 
                 <br>
 
-                <p>Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <p>2. Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
     mkdir -p /target/&lt;Ruta_Absoluta&gt;; \
     echo "/&lt;Ruta_Absoluta&gt;    *(ro)" >> /target/etc/exports; \
@@ -800,12 +801,13 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             <div>
                 <h2 id="Montar_Carpeta_NFS">Archivo de respuestas: montar una carpeta por NFS</h2>
 
-                <p>Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-common":</p>
+                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-common":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-common</code></pre>
+                <p class="Expl">Suele ser necesario poner esta línea antes de la configuración del paso 2.</p>
 
                 <br>
 
-                <p>Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
+                <p>2. Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
     mkdir -p /target/&lt;Carpeta_Local&gt;; \
     echo "&lt;IP_Servidor&gt;:/&lt;Carpeta_Remota&gt;    /&lt;Carpeta_Local&gt;    nfs    defaults,_netdev,nfsvers=3    0    0" >> /target/etc/fstab;</code></pre>
