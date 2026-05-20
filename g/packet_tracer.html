@@ -186,13 +186,13 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estático:</b> <a" href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
+                        <b>NAT estático:</b> <a href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
                     </li>
                     <li>
-                        <b>NAT dinámico:</b> <a" href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a" href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
+                        <b>NAT dinámico:</b> <a href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
                     </li>
                     <li>
-                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a" href="#PAT_Configuracion_Pool">Configuración con un pool</a>
+                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a href="#PAT_Configuracion_Pool">Configuración con un pool</a>
                     </li>
                     <li>
                         <b>NAT estático con PAT:</b> <a href="#NAT_Estatico_Configuracion_Puertos">Traducción de IPs y puertos</a>
@@ -3262,7 +3262,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2" id="ACL_Extendida_Sintaxis">Sintaxis</h2>
+                <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny / remark [Texto]&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]</code></pre>
 
@@ -3298,7 +3298,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2" id="ACL_Extendida_Ejemplos">Ejemplos</h2>
+                <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
 
                 <p><b>Tráfico WEB</b>:</p>
 
@@ -3505,7 +3505,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2" id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
+                <h2 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3544,7 +3544,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2" id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
+                <h2 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3591,7 +3591,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2" id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+                <h2 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
 
                 <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
@@ -3653,7 +3653,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2" id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
+                <h2 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
 
                 <p>
                     También se puede configurar PAT a partir de un conjunto de direcciones disponibles (pool), 
