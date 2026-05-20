@@ -2776,6 +2776,11 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Para verificar el Router ID del dispositivo actual se puede usar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip protocols | include Router ID</code></pre>
 
+                <p>
+                    <u>Importante</u> - Si no se especifica un router-id, el dispositivo se asignará uno aleatorio.
+                    El problema es que cuando se reinicie una interfaz, este ID va a cambiar dando problemas con vecinos OSPF con IDs diferentes. 
+                </p>
+
             </div>
 
             <div>
