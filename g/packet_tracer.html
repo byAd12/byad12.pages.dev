@@ -186,13 +186,13 @@ Código por byAd12
                 <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
                 <ul>
                     <li>
-                        <b>NAT estático:</b> <a href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
+                        <b>NAT estático:</b> <a" href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
                     </li>
                     <li>
-                        <b>NAT dinámico:</b> <a href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
+                        <b>NAT dinámico:</b> <a" href="#NAT_Dinamico_Configuracion">Configuración con un pool</a> • <a" href="#NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</a>
                     </li>
                     <li>
-                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a href="#PAT_Configuracion_Pool">Configuración con un pool</a>
+                        <b>PAT:</b> <a href="#PAT_Configuracion_Unica_IPv4">Configuración con una única IP</a> • <a" href="#PAT_Configuracion_Pool">Configuración con un pool</a>
                     </li>
                     <li>
                         <b>NAT estático con PAT:</b> <a href="#NAT_Estatico_Configuracion_Puertos">Traducción de IPs y puertos</a>
@@ -2563,6 +2563,21 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>Sumarizando acabaremos teniendo una única ruta:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 &lt;Destino&gt;</code></pre>
 
+                <br>
+                <p>También se pueden omitir rutas si estas coinciden con la ruta por defecto. Por ejemplo si tenemos las siguientes rutas:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 s0/1/1
+(config)# ip route 0.0.0.0 0.0.0 s0/1/1</code></pre>
+                <p class="Expl">Se puede simplificar a una sola ruta:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 0.0.0.0 0.0.0 s0/1/1</code></pre>
+                <p>Otro ejemplo sería el siguiente, donde tenemos una ruta de respaldo y una ruta por defecto:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 s0/1/1
+(config)# ip route 192.168.0.0 255.255.254.0 s0/1/0 100
+(config)# ip route 0.0.0.0 0.0.0 s0/1/0</code></pre>
+                <p class="Expl">Se puede quitar la segunda ruta ya que coincide con la ruta por defecto:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# ip route 192.168.0.0 255.255.254.0 s0/1/1
+(config)# ip route 0.0.0.0 0.0.0 s0/1/0</code></pre>
+                
+                <br>
                 <p>
                     <u>No siempre se puede sumarizar</u>: Cuando hay subredes completamente distintas que, para sumarizar se deben englobar a otras subredes que no se desean, 
                     lo mejor es dejar las redes separadas creando así una <a href="#Enrutamiento_Estatico_IPv4">ruta estática</a> por cada subred.
@@ -2775,11 +2790,6 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>Para verificar el Router ID del dispositivo actual se puede usar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip protocols | include Router ID</code></pre>
-
-                <p>
-                    <u>Importante</u> - Si no se especifica un router-id, el dispositivo se asignará uno aleatorio.
-                    El problema es que cuando se reinicie una interfaz, este ID va a cambiar dando problemas con vecinos OSPF con IDs diferentes. 
-                </p>
 
             </div>
 
@@ -3262,7 +3272,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
+                <h2" id="ACL_Extendida_Sintaxis">Sintaxis</h2>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny / remark [Texto]&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]</code></pre>
 
@@ -3298,7 +3308,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
+                <h2" id="ACL_Extendida_Ejemplos">Ejemplos</h2>
 
                 <p><b>Tráfico WEB</b>:</p>
 
@@ -3505,7 +3515,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
+                <h2" id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3544,7 +3554,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
+                <h2" id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3591,7 +3601,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+                <h2" id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
 
                 <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
@@ -3653,7 +3663,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
+                <h2" id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
 
                 <p>
                     También se puede configurar PAT a partir de un conjunto de direcciones disponibles (pool), 
@@ -3888,7 +3898,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     el router de borde de área debe redistribuir las rutas aprendidas mediante BGP dentro del dominio OSPF.
                 </p>
 
-                <p class="Expl">Para redistribuir todas las rutas aprendidas por BGP, excepto la ruta por defecto, es necesario indicar el número de sistema autónomo (ASN):</p>
+                <p class="Expl">Para redistribuir todas las rutas aprendidas por BGP desde otros AS, es necesario indicar el número de sistema autónomo propio (ASN):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
 (config-router)# ! Configuración de router-id, passive-interface, network, etc.
 (config-router)# redistribute bgp &lt;Número_ASN&gt; subnets</code></pre>
@@ -3899,7 +3909,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 (config-router)# redistribute bgp &lt;Número_ASN&gt; subnets
 (config-router)# default-information originate</code></pre>
                 <ul class="Expl">
-                    <li>En verdad no haría falta ejecutar el comando "redistribute ...", pero en Packet Tracer no funciona del todo bien.</li>
+                    <li>Se debe poner "default-information originate" solo en el router que está conectado directamente a Internet.</li>
+                    <li>No suele ser necesario redistribuir las rutas de un router conectado directamente a Internet si este solo tiene la ruta por defecto, pero en Packet Tracer no funciona del todo bien.</li>
                 </ul>
 
                 <p><b>Rutas estáticas</b>:</p>

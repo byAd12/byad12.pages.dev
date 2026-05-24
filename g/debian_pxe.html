@@ -824,20 +824,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p><u>Verificación</u> - Una vez instalado el sistema se puede comprobar con el siguiente comando si se ha montado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount | grep &lt;Carpeta_Local&gt;</code></pre>
 
-                <p>
-                    <u>Problemas</u> - Con Debian 13 y con una configuración DHCP suele dar fallos al montar la carpeta.
-                    Esto se debe a un problema del sistema y su única solución es poner una IP estática/fija:
-                </p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/network/interfaces</code></pre>
-                <p class="Expl">Primero comenta la siguiente línea (puede que la interfaz <span class="span_contenido">enp0s3</span> sea diferente):</p>
-                <pre class="codigo" translate="no"><code class="bash">#iface enp0s3 inet dhcp</code></pre>
-                <p class="Expl">Luego añade la siguiente configuración:</p>
-                <pre class="codigo" translate="no"><code class="bash">iface enp0s3 inet static
-address &lt;IP_Estática&gt;
-netmask &lt;Máscara_Red&gt;
-gateway &lt;IP_Puerta_Enlace&gt;
-</code></pre>
-
             </div>
 
         </div>
