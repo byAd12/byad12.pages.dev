@@ -1,4 +1,4 @@
-Mejora de contenido (PK)
+Mejora de contenido (DEBIAN_PXE)
 
-# g/packet_tracer.html
+# g/debian_pxe.html
 Mejora de contenido
