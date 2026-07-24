@@ -1,4 +1,4 @@
-Arreglo de formato (PK)
+Hotfix (debian_pxe)
 
-# g/packet_tracer.html
-Se quitó una coma para arreglar el formato de una etiqueta HTML.
+# g/debian_pxe.html
+Se añadió un carácter para arreglar una pieza de código.

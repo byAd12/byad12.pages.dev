@@ -226,7 +226,7 @@ min-lease-time [SEGUNDOS];</code></pre>
 
     # Obtener la arquitectura del cliente 
     # y seleccionar el archivo de arranque
-    if option arch = 00:07 or option arch 00:09 {
+    if option arch = 00:07 or option arch = 00:09 {
         filename "bootnetx64.efi"; # UEFI
     } else {
         filename "pxelinux.0"; # BIOS
