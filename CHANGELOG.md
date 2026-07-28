@@ -1,4 +1,5 @@
-Hotfix (debian_pxe)
+Nuevo contenido (script)
 
-# g/debian_pxe.html
-Se añadió un carácter para arreglar una pieza de código.
+# scripts/proxmox.sh
+Nueva opción (21) para crear un CT y configurar OpenVPN
+Pequeños arreglos

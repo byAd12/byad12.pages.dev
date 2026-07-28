@@ -82,23 +82,24 @@ while true; do
             "${Ne}17${Bl} | Instalar temas" \
             "${Ne}18${Bl} | LXC - Desbloquear contenedor" \
             " | " \
-        " | ${Az}VPN - NETBIRD ${Bl}" \
+        " | ${Az}VPN ${Bl}" \
         " | ============================" \
             "${Ne}19${Bl} | Instalar y entrar en Netbird" \
             "${Ne}20${Bl} | Desinstalar y purgar Netbird" \
+            "${Ne}21${Bl} | Crear CT de OpenVPN" \
             " | " \
         " | ${Az}NFS ${Bl}" \
         " | ====================" \
-            "${Ne}21${Bl} | Compartir un recurso" \
+            "${Ne}22${Bl} | Compartir un recurso" \
             " | " \
         " | ${Az}UPTIME-KUMA ${Bl}" \
         " | ==================" \
-            "${Ne}22${Bl} | Cambiar de versión" \
+            "${Ne}23${Bl} | Cambiar de versión" \
             " | " \
         " | ${Az}SERVICIOS ${Bl}" \
         " | =====================================" \
-            "${Ne}23${Bl} | Ejecutar un archivo .py como servicio" \
-            "${Ne}24${Bl} | Alertas de Discord" \
+            "${Ne}24${Bl} | Ejecutar un archivo .py como servicio" \
+            "${Ne}25${Bl} | Alertas de Discord" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
@@ -688,7 +689,7 @@ EOF
         ;;
 
     ##############################################################
-    # INSTALAR Y ENTRAR A NETBIRD
+    # VPN - INSTALAR Y ENTRAR A NETBIRD
     ##############################################################
     19)
         clear
@@ -744,7 +745,7 @@ EOF
         ;;
 
     ##############################################################
-    # DESINSTALAR Y PURGAR NETBIRD
+    # VPN - DESINSTALAR Y PURGAR NETBIRD
     ##############################################################
     20)
         clear
@@ -779,9 +780,71 @@ EOF
         ;;
 
     ##############################################################
-    # NFS - COMPARTIR UN RECURSO 
+    # VPN - CREAR CT DE OPENVPN
     ##############################################################
     21)
+        clear
+
+        read -p 'ID para asignar al CT: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
+        read -p 'Nombre para asignar al CT (a-z; 0-9; -): ' name_ct; [[ -z "${name_ct// /}" || "$name_ct" == "exit" ]] && continue
+        read -p 'Storage donde se guardará la plantilla: ' storage_name_template; [[ -z "${storage_name_template// /}" || "$storage_name_template" == "exit" ]] && continue
+        read -p 'Storage donde se guardará el disco del CT: ' storage_name_ct; [[ -z "${storage_name_ct// /}" || "$storage_name_ct" == "exit" ]] && continue
+        read -p 'Cantidad de GigaBytes para asignar al CT: ' ct_gigabytes; [[ -z "${ct_gigabytes// /}" || "$ct_gigabytes" == "exit" ]] && continue
+        
+        read -p 'Dirección IPv4/Máscara CIDR (ej. 10.200.0.4/16): ' ip_address; [[ -z "${ip_address// /}" || "$ip_address" == "exit" ]] && continue
+        read -p 'Dirección IPv4 del Gateway: ' gateway_address; [[ -z "${gateway_address// /}" || "$gateway_address" == "exit" ]] && continue
+
+        echo -e "\n${Az}Descargando plantilla de Debian 13 standard AMD64...${Bl}"
+        if ! pveam list "$storage_name_template" | grep -q "$template"; then
+            pveam update
+            pveam download "$storage_name_template" "$template"
+        fi
+
+        echo -e "\n${Az}Creando el CT mediante la plantilla...${Bl}"
+        pct create $id_ct $storage_name_template:vztmpl/debian-13-standard_13.6-1_amd64.tar.zst \
+            --unprivileged 1 -features nesting=1 \
+            --net0 name=eth0,bridge=vmbr0,firewall=0,ip=$ip_address,gw=$gateway_address,type=veth \
+            --nameserver 1.1.1.1 \
+            --onboot 1 \
+            --hostname "$name_ct" \
+            --rootfs $storage_name_ct:$ct_gigabytes
+
+        echo -e "\n${Az}Editando /dev/net/tun...${Bl}"
+        conf="/etc/pve/lxc/$id_ct.conf"
+        grep -qxF "lxc.cgroup2.devices.allow: c 10:200 rwm" "$conf" || echo "lxc.cgroup2.devices.allow: c 10:200 rwm" >> "$conf"
+        grep -qxF "lxc.mount.entry: /dev/net dev/net none bind,create=dir" "$conf" || echo "lxc.mount.entry: /dev/net dev/net none bind,create=dir" >> "$conf"
+        if [[ -e /dev/net/tun ]]; then
+            chown 100000:100000 /dev/net/tun
+            ls -l /dev/net/tun
+        fi
+
+        echo -e "\n${Az}Iniciando el CT...${Bl}"
+        pct start $id_ct
+
+        echo -e "\n${Az}Instalando dependencias en el CT...${Bl}"
+        pct exec "$id_ct" -- apt update
+        pct exec "$id_ct" -- apt dist-upgrade -y
+        pct exec "$id_ct" -- apt install -y openvpn git
+        pct exec "$id_ct" -- git clone https://github.com/Nyr/openvpn-install /root/openvpn-install
+
+        clear
+        echo -e "\n${Az}Entrando en el CT...${Bl}"
+        echo -e "\n${Bl}Ejecute el siguiente comando para configurar una contraseña de root:"
+        echo -e "\n${Am}  passwd root${Bl}"
+        echo -e "\n${Bl}Ejecute los siguientes comandos para configurar OpenVPN:"
+        echo -e "\n${Am}  cd openvpn-install; bash openvpn-install.sh${Bl}"
+        echo -e "\n${Bl}Al acabar de configurarlo, copie el perfil .ovpn creado y ejecute:"
+        echo -e "\n${Am}  exit${Bl}"
+        echo -e "\n${Bl}SHELL DENTRO DEL CONTENEDOR:"
+        pct enter $id_ct
+
+        echo -e "\n${Ve}¡Contenedor creado y configurado correctamente!${Bl}"
+        ;;
+
+    ##############################################################
+    # NFS - COMPARTIR UN RECURSO 
+    ##############################################################
+    22)
         clear
 
         echo -e "${Ne}Nota:${Bl}"
@@ -811,7 +874,7 @@ EOF
     ##############################################################
     # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
     ##############################################################
-    22)
+    23)
         clear
 
         echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
@@ -839,7 +902,7 @@ EOF
     ##############################################################
     # PYTHON - EJECUTAR UN ARCHIVO COMO SERVICIO 
     ##############################################################
-    23)
+    24)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
@@ -902,7 +965,7 @@ EOF
     ##############################################################
     # ALERTAS 
     ##############################################################
-    24)
+    25)
         clear
 
         read -p 'Webhook de Discord: ' webhook; [[ -z "${webhook// /}" || "$webhook" == "exit" ]] && continue
