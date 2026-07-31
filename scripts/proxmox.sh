@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# -- byad12.pages.dev/proxmox.sh
-# -- www.chemahosting.es
+# -- byad12.pages.dev/scripts/proxmox.sh
+# -- https://www.chemahosting.es
 
 ##############################################################
 # CODIFICACIÓN DEL ARCHIVO
@@ -13,7 +13,7 @@ export LC_ALL=C.UTF-8
 # INSTALAR DEPENDENCIAS
 ##############################################################
 apt update
-apt install -y cowsay cmatrix curl 
+apt install -y cowsay cmatrix curl
 clear
 if command -v cmatrix &> /dev/null; then
     cmatrix -b &
@@ -124,13 +124,13 @@ while true; do
         ;;
 
     ##############################################################
-    # APAGADO AUTOMÁTICO - CRONTAB
+    # APAGADO AUTOMÁTICO
     ##############################################################
     2)
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro_}  1.  Ejecutar la opción 'BIOS: Arreglo de la zona horaria'.${Bl}"
+        echo -e "${Ro_}  1.  Ejecutar la opción número 1, llamada 'Configuración inicial'.${Bl}"
         echo -e ""
 
         read -p 'Hora a apagar: ' hora; [[ -z "${hora// /}" || "$hora" == "exit" ]] && continue
@@ -179,18 +179,18 @@ while true; do
         ;;
 
     ##############################################################
-    # CLÚSTER
+    # PROXMOX - CLÚSTER
     ##############################################################
     4)
         clear
 
         printf "%b\n" \
-            " | ${Az}CLÚSTER - OPCIONES ${Bl}" \
-            " | =============================" \
-                "${Ne}1${Bl} | Crear un clúster" \
-                "${Ne}2${Bl} | Unirse a un clúster existente" \
-                "${Ne}3${Bl} | Quitar un nodo del clúster" \
-                "${Ne}4${Bl} | Eliminar un clúster" \
+            " | ${Az}CLÚSTER - OPCIONES | CONTRASEÑA | MÁSTER ${Bl}" \
+            " | ============================= | ========== | ======" \
+                "${Ne}1${Bl} | Crear un clúster |  | Sí" \
+                "${Ne}2${Bl} | Unirse a un clúster existente |  | " \
+                "${Ne}3${Bl} | Quitar un nodo del clúster | Sí | Sí" \
+                "${Ne}4${Bl} | Eliminar un clúster | Sí | " \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -199,7 +199,7 @@ while true; do
         case $var_sec in
 
         ##############################################################
-        # CREAR CLUSTER
+        # PROXMOX - CLÚSTER - CREAR UN CLÚSTER
         ##############################################################
         1)
             clear
@@ -216,7 +216,7 @@ while true; do
             ;;
 
         ##############################################################
-        # UNIRSE A CLUSTER
+        # PROXMOX - CLÚSTER - UNIRSE A CLÚSTER EXISTENTE
         ##############################################################
         2)
             clear
@@ -248,7 +248,7 @@ while true; do
             ;;
 
         ##############################################################
-        # SALIRSE DE UN CLUSTER
+        # PROXMOX - CLÚSTER - QUITAR UN NODO DEL CLÚSTER
         ##############################################################
         3)
             clear
@@ -280,7 +280,7 @@ while true; do
             ;;
 
         ##############################################################
-        # ELIMINAR CLUSTER
+        # PROXMOX - CLÚSTER - ELIMINAR UN CLUSTER
         ##############################################################
         4)
             clear
@@ -330,7 +330,7 @@ while true; do
             ;;
 
         ##############################################################
-        # MENÚ
+        # PROXMOX - CLÚSTER - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -340,15 +340,15 @@ while true; do
         ;;
 
     ##############################################################
-    # COROSYNC
+    # PROXMOX - COROSYNC
     ##############################################################
     5)
         clear
 
         printf "%b\n" \
-            " | ${Az}COROSYNC - OPCIONES ${Bl}" \
-            " | =======================" \
-                "${Ne}1${Bl} | Editar la configuración" \
+            " | ${Az}COROSYNC - OPCIONES | CONTRASEÑA | MÁSTER ${Bl}" \
+            " | ======================= | ========== | ======" \
+                "${Ne}1${Bl} | Editar la configuración |  | Sí" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -357,7 +357,7 @@ while true; do
         case $var_sec in
 
         ##############################################################
-        # EDITAR LA CONFIGURACIÓN DE COROSYNC
+        # PROXMOX - COROSYNC - EDITAR LA CONFIGURACIÓN
         ##############################################################
         1)
 
@@ -388,7 +388,7 @@ while true; do
             ;;
 
         ##############################################################
-        # MENÚ
+        # PROXMOX - COROSYNC - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -399,17 +399,17 @@ while true; do
 
 
     ##############################################################
-    # CONTENEDORES LXC
+    # PROXMOX - CONTENEDORES LXC
     ##############################################################
     6)
         clear
 
         printf "%b\n" \
             " | ${Az}CT LXC - OPCIONES ${Bl}" \
-            " | ============================" \
-                "${Ne}1${Bl} | Crear un backup de un CT" \
-                "${Ne}2${Bl} | Restaurar un backup de un CT" \
-                "${Ne}3${Bl} | Desbloquear un CT" \
+            " | ===================" \
+                "${Ne}1${Bl} | Crear un backup" \
+                "${Ne}2${Bl} | Restaurar un backup" \
+                "${Ne}3${Bl} | Quitar bloqueo" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -418,7 +418,7 @@ while true; do
         case $var_sec in
 
         ##############################################################
-        # CREAR UN BACKUP DE UN CT
+        # PROXMOX - CONTENEDORES LXC - CREAR UN BACKUP
         ##############################################################
         1)
             clear
@@ -433,7 +433,7 @@ while true; do
             ;;
 
         ##############################################################
-        # RESTAURAR UN BACKUP DE UN CT
+        # PROXMOX - CONTENEDORES LXC - RESTAURAR UN BACKUP
         ##############################################################
         2)
             clear
@@ -449,12 +449,12 @@ while true; do
             ;;
 
         ##############################################################
-        # DESBLOQUEAR UN CT
+        # PROXMOX - CONTENEDORES LXC - QUITAR BLOQUEO
         ##############################################################
         3)
             clear
 
-            read -p 'ID del contenedor: ' id_contenedor; [[ -z "${id_contenedor// /}" || "$id_contenedor" == "exit" ]] && continue
+            read -p 'ID del contenedor bloqueado: ' id_contenedor; [[ -z "${id_contenedor// /}" || "$id_contenedor" == "exit" ]] && continue
 
             echo -e "\n${Az}Estado el contenedor...${Bl}"
             pct status $id_contenedor
@@ -472,7 +472,7 @@ while true; do
             ;;
 
         ##############################################################
-        # MENÚ
+        # PROXMOX - CONTENEDORES LXC - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -482,7 +482,7 @@ while true; do
         ;;
 
     ##############################################################
-    # LOCAL-LVM
+    # PROXMOX - LOCAL-LVM
     ##############################################################
     7)
         clear
@@ -499,7 +499,7 @@ while true; do
         case $var_sec in
 
         ##############################################################
-        # RESTAURAR LOCAL-LVM
+        # PROXMOX - LOCAL-LVM - RESTAURAR LOCAL-LVM
         ##############################################################
         1)
             clear
@@ -526,7 +526,7 @@ while true; do
             ;;
 
         ##############################################################
-        # MENÚ
+        # PROXMOX - LOCAL-LVM - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -536,18 +536,18 @@ while true; do
         ;;
 
     ##############################################################
-    # CLOUDFLARED
+    # SERVICIOS - CLOUDFLARED
     ##############################################################
     8)
         clear
 
         printf "%b\n" \
             " | ${Az}CLOUDFLARED - OPCIONES ${Bl}" \
-            " | =============================" \
+            " | =================================" \
                 "${Ne}1${Bl} | Instalar e iniciar sesión" \
                 "${Ne}2${Bl} | Crear un túnel - HTTP(S)" \
                 "${Ne}3${Bl} | Crear un túnel - Servicio TCP" \
-                "${Ne}4${Bl} | Purgar cloudflared" \
+                "${Ne}4${Bl} | Desinstalar y purgar configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -556,7 +556,7 @@ while true; do
         case $var_sec in
 
         ##############################################################
-        # INSTALAR E INICIAR SESIÓN EN CLOUDFLARED
+        # SERVICIOS - CLOUDFLARED - INSTALAR E INICIAR SESIÓN
         ##############################################################
         1)
             clear
@@ -585,7 +585,7 @@ while true; do
             ;;
 
         ##############################################################
-        # CREAR TÚNEL CLOUDFLARED - HTTP(S)
+        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL HTTP(S)
         ##############################################################
         2)
             clear
@@ -648,7 +648,7 @@ EOF
             ;;
 
         ##############################################################
-        # CREAR TÚNEL CLOUDFLARED - SERVICIO TCP
+        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL SERVICIO TCP
         ##############################################################
         3)
             clear
@@ -710,7 +710,7 @@ EOF
             ;;
 
         ##############################################################
-        # PURGAR CLOUDFLARED
+        # SERVICIOS - CLOUDFLARED - DESINSTALAR Y PURGAR CONFIGURACIÓN
         ##############################################################
         4)
             clear
@@ -737,7 +737,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # SERVICIOS - CLOUDFLARED - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -747,16 +747,16 @@ EOF
         ;;
 
     ##############################################################
-    # DOCKER
+    # SERVICIOS - DOCKER
     ##############################################################
     9)
         clear
 
         printf "%b\n" \
             " | ${Az}DOCKER - OPCIONES ${Bl}" \
-            " | ==================================" \
+            " | ====================================" \
                 "${Ne}1${Bl} | Instalar Docker en Debian" \
-                "${Ne}2${Bl} | Configurar favonia/cloudflare-ddns" \
+                "${Ne}2${Bl} | Configurar 'favonia/cloudflare-ddns'" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -765,7 +765,7 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # INSTALAR DOCKER
+        # SERVICIOS - DOCKER - INSTALAR DOCKER EN DEBIAN
         ##############################################################
         1)
             clear
@@ -799,7 +799,7 @@ EOF
             ;;
 
         ##############################################################
-        # CLOUDFLARE DDNS
+        # SERVICIOS - DOCKER - CONFIGURAR CLOUDFLARE DDNS
         # GitHub: https://github.com/favonia/cloudflare-ddns
         ##############################################################
         2)
@@ -827,7 +827,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # SERVICIOS - DOCKER - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -837,7 +837,7 @@ EOF
         ;;
 
     ##############################################################
-    # UPTIME-KUMA
+    # SERVICIOS - UPTIME-KUMA
     ##############################################################
     10)
         clear
@@ -854,12 +854,12 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # UPTIME-KUMA - ACTUALIZAR VERSIÓN 
+        # SERVICIOS - UPTIME-KUMA - CAMBIAR DE VERSIÓN 
         ##############################################################
         1)
             clear
 
-            echo -e "\n${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}"
+            echo -e "${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}\n"
             read -p 'Versión de GitHub a actualizar: ' version_github; [[ -z "${version_github// /}" || "$version_github" == "exit" ]] && continue
 
             echo -e "\n${Az}Parando servicios...${Bl}"
@@ -882,7 +882,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # SERVICIOS - UPTIME-KUMA - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -892,7 +892,7 @@ EOF
         ;;
 
     ##############################################################
-    # NFS
+    # SERVICIOS - NFS
     ##############################################################
     11)
         clear
@@ -909,7 +909,7 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # COMPARTIR UN RECURSO CON NFS 
+        # SERVICIOS - NFS - COMPARTIR UN RECURSO 
         ##############################################################
         1)
             clear
@@ -939,7 +939,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # SERVICIOS - NFS - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -949,7 +949,7 @@ EOF
         ;;
 
     ##############################################################
-    # PYTHON
+    # SERVICIOS - PYTHON
     ##############################################################
     12)
         clear
@@ -967,7 +967,7 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # PYTHON - EJECUTAR UN ARCHIVO COMO SERVICIO 
+        # SERVICIOS - PYTHON - EJECUTAR UN ARCHIVO .PY COMO SERVICIO 
         ##############################################################
         1)
             clear
@@ -1030,7 +1030,7 @@ EOF
             ;;
 
         ##############################################################
-        # ALERTAS 
+        # SERVICIOS - PYTHON - CONFIGURAR ALERTAS DE DISCORD
         ##############################################################
         2)
             clear
@@ -1087,7 +1087,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # SERVICIOS - PYTHON - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -1097,7 +1097,7 @@ EOF
         ;;
 
     ##############################################################
-    # NETBIRD
+    # VPN - NETBIRD
     ##############################################################
     13)
         clear
@@ -1105,8 +1105,8 @@ EOF
         printf "%b\n" \
             " | ${Az}NETBIRD - OPCIONES ${Bl}" \
             " | ============================" \
-                "${Ne}1${Bl} | Instalar y entrar en Netbird" \
-                "${Ne}2${Bl} | Desinstalar y purgar Netbird" \
+                "${Ne}1${Bl} | Instalar y entrar en la red" \
+                "${Ne}2${Bl} | Desinstalar y purgar la configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -1115,7 +1115,7 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # VPN - INSTALAR Y ENTRAR A NETBIRD
+        # VPN - NETBIRD - INSTALAR Y ENTRAR EN LA RED
         ##############################################################
         1)
             clear
@@ -1171,7 +1171,7 @@ EOF
             ;;
 
         ##############################################################
-        # VPN - DESINSTALAR Y PURGAR NETBIRD
+        # VPN - NETBIRD - DESINSTALAR Y PURGAR LA CONFIGURACIÓN
         ##############################################################
         2)
             clear
@@ -1206,7 +1206,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # VPN - NETBIRD - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"
@@ -1216,15 +1216,15 @@ EOF
         ;;
 
     ##############################################################
-    # OPENVPN
+    # VPN - OPENVPN
     ##############################################################
     14)
         clear
 
         printf "%b\n" \
             " | ${Az}OPENVPN - OPCIONES ${Bl}" \
-            " | ===================" \
-                "${Ne}1${Bl} | Crear CT de OpenVPN" \
+            " | ======================" \
+                "${Ne}1${Bl} | Crear y configurar un contenedor" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -1233,7 +1233,7 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # VPN - CREAR CT DE OPENVPN
+        # VPN - OPENVPN - CREAR Y CONFIGURAR UN CONTENEDOR
         ##############################################################
         1)
             clear
@@ -1295,7 +1295,7 @@ EOF
             ;;
 
         ##############################################################
-        # MENÚ
+        # VPN - OPENVPN - MENÚ
         ##############################################################
         *)
             echo -e "${Ro}Valor inválido${Bl}"

@@ -1,4 +1,5 @@
-Nuevo contenido (script)
+Arreglo de contenido (script)
 
 # scripts/proxmox.sh
-Se crearon sub-páginas para englobar todo el contenido
+Mejora de comentarios internos
+Arreglo de pequeños bugs
