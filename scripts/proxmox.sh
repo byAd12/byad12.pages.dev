@@ -12,8 +12,20 @@ export LC_ALL=C.UTF-8
 ##############################################################
 # INSTALAR DEPENDENCIAS
 ##############################################################
-apt update
-apt install -y cowsay cmatrix curl
+PAQUETES=()
+
+command -v /usr/games/cowsay >/dev/null 2>&1 || PAQUETES+=("cowsay")
+command -v cmatrix >/dev/null 2>&1 || PAQUETES+=("cmatrix")
+command -v curl >/dev/null 2>&1 || PAQUETES+=("curl")
+
+if [ ${#PAQUETES[@]} -gt 0 ]; then
+    apt update
+    apt install -y "${PAQUETES[@]}"
+fi
+
+##############################################################
+# ANIMACIÓN DE CMATRIX
+##############################################################
 clear
 if command -v cmatrix &> /dev/null; then
     cmatrix -b &
@@ -102,16 +114,16 @@ while true; do
         echo -e "\n${Az}Configuración actual de timedatectl...${Bl}"
         timedatectl
 
-        echo -e "\n${Az}Ajustando la hora de la BIOS a RTC + 1...${Bl}"
+        echo -e "\n${Az}Ajustando la hora de la BIOS a '${Am_}RTC + 1${Az}'...${Bl}"
         timedatectl set-local-rtc 1 --adjust-system-clock
 
-        echo -e "\n${Az}Verificando cambios de timedatectl...${Bl}"
+        echo -e "\n${Az}Verificando los cambios de timedatectl...${Bl}"
         timedatectl
 
-        echo -e "\n${Az}Instalando dependencias...${Bl}"
+        echo -e "\n${Az}Instalando el paquete '${Am_}fastfetch${Az}' mediante APT...${Bl}"
         apt install -y fastfetch
 
-        echo -e "\n${Az}Aplicando configuración básica...${Bl}"
+        echo -e "\n${Az}Aplicando modificaciones en '${Am_}~/.bashrc${Az}'...${Bl}"
         if ! grep -q "clear" ~/.bashrc; then
             echo "clear" >> ~/.bashrc
         fi
@@ -130,14 +142,15 @@ while true; do
         clear
 
         echo -e "${Ro}Requisitos:${Bl}"
-        echo -e "${Ro_}  1.  Ejecutar la opción número 1, llamada 'Configuración inicial'.${Bl}"
+        echo -e "${Ro_}  1.  Ejecutar la opción número '1' del script -> 'Configuración inicial'.${Bl}"
         echo -e ""
+        read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
         read -p 'Hora a apagar: ' hora; [[ -z "${hora// /}" || "$hora" == "exit" ]] && continue
         read -p 'Minutos a apagar: ' minuto; [[ -z "${minuto// /}" || "$minuto" == "exit" ]] && continue
         read -p 'Segundos a apagar: ' segundos; [[ -z "${segundos// /}" || "$segundos" == "exit" ]] && continue
 
-        echo -e "\n${Az}Verificando...${Bl}"
+        echo -e "\n${Az}Verificando los valores entregados...${Bl}"
         if ! [[ "$hora" =~ ^[0-9]+$ ]] || ! [[ "$minuto" =~ ^[0-9]+$ ]] || ! [[ "$segundos" =~ ^[0-9]+$ ]]; then
             echo -e "${Ro}Error: Solo se permiten números.${Bl}"
             exit 1
@@ -148,11 +161,11 @@ while true; do
             exit 1
         fi
 
-        echo -e "\n${Az}Editando Crontab...${Bl}"
+        echo -e "\n${Az}Añadiendo la regla de apagado con Crontab...${Bl}"
         tarea="$minuto $hora * * * /sbin/shutdown -h now"
         (crontab -l 2>/dev/null; echo "$tarea") | crontab -
 
-        echo -e "\n${Ve}¡Política creada correctamente!${Bl}"
+        echo -e "\n${Ve}¡Se configuró el apagado automático correctamente!${Bl}"
         ;;
 
     ##############################################################
@@ -161,21 +174,21 @@ while true; do
     3)
         clear
 
-        echo -e "\n${Az}Descargando la carpeta...${Bl}"
+        echo -e "\n${Az}Descargando '${Am_}PVEThemes${Az}' desde GitHub...${Bl}"
         git clone https://github.com/Happyrobot33/PVEThemes
 
-        echo -e "\n${Az}Haciendo 'cd' dentro de la carpeta...${Bl}"
+        echo -e "\n${Az}Navegando dentro de la carpeta mediante el comando '${Am_}cd${Az}'...${Bl}"
         cd PVEThemes
 
-        echo -e "\n${Az}Dando permisos al script...${Bl}"
+        echo -e "\n${Az}Dando permisos de ejecución al script '${Am_}install.sh${Az}'...${Bl}"
         chmod +x install.sh
         
-        echo -e "\n${Az}Ejecutando el script...${Bl}"
-        echo -e "\n${Am}(EJECUTE LA OPCIÓN 'instalar')${Bl}"
+        echo -e "\n${Az}Ejecutando el script '${Am_}install.sh${Az}'...${Bl}"
+        echo -e "\n${Am}  ->  Porfavor, ejecute la opción 'instalar'.${Bl}"
         ./install.sh
 
-        echo -e "\n${Az}Temas instalados correctamente!${Bl}"
-        echo -e "\n${Am}(Borre la caché de la página web y luego ve al apartado de 'temas')${Bl}"
+        echo -e "\n${Az}¡Se han instalado los temas de Proxmo UI correctamente!${Bl}"
+        echo -e "\n${Am}  ->  Borre la caché de la página web y luego vaya al apartado de 'temas'.${Bl}"
         ;;
 
     ##############################################################
@@ -206,10 +219,10 @@ while true; do
 
             read -p 'Nombre del clúster a crear: ' nombre_cluster; [[ -z "${nombre_cluster// /}" || "$nombre_cluster" == "exit" ]] && continue
 
-            echo -e "\n${Az}Creando clúster con nombre $nombre_cluster...${Bl}"
+            echo -e "\n${Az}Creando un clúster con el nombre '${Am_}${nombre_cluster}${Az}'...${Bl}"
             pvecm create "$nombre_cluster"
 
-            echo -e "\n${Az}Actualizando certificados...${Bl}"
+            echo -e "\n${Az}Forzando la actualización de los certificados...${Bl}"
             pvecm updatecerts --force
 
             echo -e "\n${Ve}¡Se ha creado el clúster correctamente!${Bl}"
@@ -227,21 +240,22 @@ while true; do
             echo -e "${Ro_}  3.  Seleccionar el nodo máster que creó el clúster.${Bl}"
             echo -e "${Ro_}  4.  Saber la contraseña del nodo máster.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Nodo máster (coruna1): ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "$nodo_nombre" == "exit" ]] && continue
 
-            echo -e "\n${Az}Comprobando conexión con el nodo máster...${Bl}"
+            echo -e "\n${Az}Comprobando la conexión con el nodo máster con un PING...${Bl}"
             ping -c 2 "$nodo_nombre"
             if [ $? -ne 0 ]; then
-                echo -e "\n${Ro}ERROR: ${Ro_}No se puede alcanzar a '${Az}$nodo_nombre${Ro_}'.${Bl}\n"
+                echo -e "\n${Ro}ERROR: ${Ro_}No se puede alcanzar a '${Am_}${nodo_nombre}${Ro}'.${Bl}\n"
                 read -p "Pulse ENTER para reiniciar el programa:"
                 continue
             fi
 
-            echo -e "\n${Az}Actualizando certificados...${Bl}"
+            echo -e "\n${Az}Forzando la actualización de los certificados...${Bl}"
             pvecm updatecerts --force
 
-            echo -e "\n${Az}Intentando unirse al clúster $nodo_nombre...${Bl}"
+            echo -e "\n${Az}Intentando unirse al clúster de '${Am_}${nodo_nombre}${Az}'...${Bl}"
             pvecm add "$nodo_nombre"
 
             echo -e "\n${Ve}¡Se unió al clúster correctamente!${Bl}"
@@ -302,27 +316,33 @@ while true; do
             if [ "$hash_ingresado" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]; then
                 echo -e "${Ve_}Contraseña correcta${Bl}"
 
-                echo -e "${Az}Parando servicios...${Bl}"
+                echo -e "${Az}Parando los servicios '${Am_}pve-cluster${Az}' y '${Am_}corosync${Az}'...${Bl}"
                 systemctl stop pve-cluster corosync
                 killall -9 pmxcfs 2>/dev/null
 
-                echo -e "${Az}Haciendo copia de seguridad de Corosync...${Bl}"
+                echo -e "${Az}Haciendo una copia de seguridad de Corosync...${Bl}"
                 mkdir -p /root/pve_backup
                 cp -r /etc/pve/corosync.conf /root/pve_backup/ 2>/dev/null
 
-                echo -e "${Az}Limpiando archivos de configuración de Corosync...${Bl}"
+                echo -e "${Az}Limpiando los archivos de configuración de Corosync...${Bl}"
                 rm -f /etc/pve/corosync.conf
                 rm -rf /etc/corosync/*
                 
+                echo -e "${Az}Forzando la actualización de los certificados...${Bl}"
                 pmxcfs -l
                 pvecm updatecerts --force
                 
+                echo -e "${Az}Reiniciando el servicio '${Am_}pve-cluster${Az}'...${Bl}"
                 systemctl restart pve-cluster
+
+                echo -e "${Az}Deteniendo el servicio '${Am_}corosync${Az}'...${Bl}"
                 systemctl stop corosync
+
+                echo -e "${Az}Deshabilitando el servicio '${Am_}corosync${Az}'...${Bl}"
                 systemctl disable corosync
 
                 echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
-                echo -e "${Ve}Copia de seguridad de /etc/pve en /root/pve_backup${Bl}"
+                echo -e "${Ve} -> La copia de seguridad de '${Am_}/etc/pve${Ve}' se encuentra en '${Am_}/root/pve_backup${Ve}'.${Bl}"
             else
                 echo -e "${Ro_}Contraseña incorrecta${Bl}"
             fi
@@ -369,19 +389,19 @@ while true; do
                 continue
             fi
 
-            echo -e "\n${Az}Parando servicio(s)...${Bl}"
+            echo -e "${Az}Deteniendo el servicio '${Am_}pve-cluster${Az}'...${Bl}"
             systemctl stop pve-cluster
 
-            echo -e "\n${Az}Iniciando pmxcfs en local...${Bl}"
+            echo -e "\n${Az}Iniciando '${Am_}pmxcfs${Az}' en local...${Bl}"
             pmxcfs -l
 
-            echo -e "\n${Az}Abriendo el editor nano...${Bl}"
+            echo -e "\n${Az}Iniciando el editor de texto con el archivo '${Am_}/etc/pve/corosync.conf${Az}'...${Bl}"
             /usr/bin/nano /etc/pve/corosync.conf
 
-            echo -e "\n${Az}Cerrando pmxcfs...${Bl}"
+            echo -e "\n${Az}Cerrando todos los procesos de '${Am_}pmxcfs${Az}'...${Bl}"
             killall pmxcfs
 
-            echo -e "\n${Az}Iniciando servicios...${Bl}"
+            echo -e "${Az}Iniciando los servicios '${Am_}pve-cluster${Az}', '${Am_}pvedaemon${Az}' y '${Am_}pvestatd${Az}'...${Bl}"
             systemctl start pve-cluster pvedaemon pvestatd
 
             echo -e "\n${Ve}¡Se configuró corosync correctamente!${Bl}"
@@ -426,7 +446,7 @@ while true; do
             read -p 'ID del contenedor a hacer una backup: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
             read -p 'Almacenamiento (local): ' almacenamiento; [[ -z "${almacenamiento// /}" || "$almacenamiento" == "exit" ]] && continue
 
-            echo -e "\n${Az}Creando backup...${Bl}"
+            echo -e "\n${Az}Creando el backup del contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
             vzdump $id_ct --mode stop --compress lzo --storage $almacenamiento
 
             echo -e "\n${Ve}¡Backup creado correctamente!${Bl}"
@@ -442,7 +462,7 @@ while true; do
             read -p 'Ruta al backup (.tar.lzo): ' ruta; [[ -z "${ruta// /}" || "$ruta" == "exit" ]] && continue
             read -p 'Almacenamiento (local-lvm): ' almacenamiento; [[ -z "${almacenamiento// /}" || "$almacenamiento" == "exit" ]] && continue
 
-            echo -e "\n${Az}Restaurando backup...${Bl}"
+            echo -e "\n${Az}Restaurando el backup del contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
             pct restore $id_ct $ruta --storage $almacenamiento
 
             echo -e "\n${Az}¡Backup restaurado correctamente!${Bl}"
@@ -454,21 +474,19 @@ while true; do
         3)
             clear
 
-            read -p 'ID del contenedor bloqueado: ' id_contenedor; [[ -z "${id_contenedor// /}" || "$id_contenedor" == "exit" ]] && continue
+            read -p 'ID del contenedor bloqueado: ' id_ct; [[ -z "${id_ct// /}" || "$id_ct" == "exit" ]] && continue
 
-            echo -e "\n${Az}Estado el contenedor...${Bl}"
-            pct status $id_contenedor
+            echo -e "\n${Az}Verificando el estado el contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
+            pct status $id_ct
 
-            echo -e "\n${Az}Desbloqueando el contenedor...${Bl}"
-            pct unlock $id_contenedor
+            echo -e "\n${Az}Desbloqueando el contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
+            pct unlock $id_ct
 
-            echo -e "\n${Az}Estado el contenedor...${Bl}"
-            pct status $id_contenedor
+            echo -e "\n${Az}Verificando el estado el contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
+            pct status $id_ct
 
-            echo -e "\n${Am}Si no funcionó lo anterior, puede eliminar el lock manualmente con:${Bl}"
-            echo -e "rm /var/lock/lxc/${id_contenedor}.lock"
-
-            echo -e "\n${Ve}¡Contenedor desbloqueado correctamente!${Bl}"
+            echo -e "\n${Am}Si el contenedor sigue bloqueado, puede eliminar el bloqueo manualmente con el siguiente comando:${Bl}"
+            echo -e "  rm /var/lock/lxc/${id_ct}.lock"
             ;;
 
         ##############################################################
@@ -563,25 +581,27 @@ while true; do
 
             echo -e "${Ro}Requisitos:${Bl}"
             echo -e "${Ro_}  1.  El administrador debe estar activo para permitir el inicio de sesión.${Bl}"
+            echo -e "${Ro_}  2.  Tener un sistema AMD64.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
-            echo -e "${Az}Instalando Cloudflared...${Bl}"
+            echo -e "${Az}Instalando Cloudflared AMD64 desde GitHub...${Bl}"
             curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
             apt install -y ./cloudflared.deb
 
             echo -e "${Az}Eliminando el archivo temporal...${Bl}"
             rm -f ./cloudflared.deb
 
-            echo -e "\n${Az}Instalando el servicio de cloudflared...${Bl}"
+            echo -e "\n${Az}Instalando el servicio de Cloudflared...${Bl}"
             cloudflared service install
 
-            echo -e "\n${Az}Habilitando el servicio de cloudflared...${Bl}"
+            echo -e "\n${Az}Habilitando el servicio de Cloudflared...${Bl}"
             systemctl enable --now cloudflared
 
-            echo -e "\n${Az}Inicie sesión con la siguiente URL...${Bl}"
+            echo -e "\n${Az}Porfavor, inicie sesión con la siguiente URL...${Bl}"
             cloudflared login
 
-            echo -e "\n${Ve}¡Instalado y configurado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Cloudflared fue instalado y configurado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -595,6 +615,7 @@ while true; do
             echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
             echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
             read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
@@ -604,15 +625,14 @@ while true; do
             echo -e "\n${Az}Creando túnel...${Bl}"
             info=$(cloudflared tunnel create "$nombre_tunel")
 
-            # EXTRAER UUID
+            echo -e "\n${Az}Extrayendo el UUID del túnel...${Bl}"
             uuid=$(echo "$info" | grep -oE '[0-9a-fA-F-]{36}' | head -n 1)
+            echo -e "UUID del túnel: ${Am}${uuid}${Bl}"
 
-            echo -e "UUID del túnel: ${Am}$uuid${Bl}"
-
-            echo -e "\n${Az}Creando la carpeta /etc/cloudflared...${Bl}"
+            echo -e "\n${Az}Creando la carpeta '${Am_}/etc/cloudflared/${Az}'...${Bl}"
             mkdir -p /etc/cloudflared
 
-            echo -e "\n${Az}Creando y configurando el archivo config.yml...${Bl}"
+            echo -e "\n${Az}Creando y configurando el archivo '${Am_}/etc/cloudflared/config.yml${Az}'...${Bl}"
             cat <<EOF > /etc/cloudflared/config.yml
 tunnel: $uuid
 credentials-file: /etc/cloudflared/$uuid.json
@@ -635,7 +655,7 @@ EOF
             echo -e "\n${Az}Creando registro DNS CNAME...${Bl}"
             cloudflared tunnel route dns "$nombre_tunel" "$nombre_dominio"
 
-            echo -e "\n${Az}Instalando el servicio de cloudflared...${Bl}"
+            echo -e "\n${Az}Instalando el servicio de Cloudflared...${Bl}"
             cloudflared service install
 
             echo -e "\n${Az}Habilitando el servicio de Cloudflared...${Bl}"
@@ -658,6 +678,7 @@ EOF
             echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
             echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
             read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
@@ -671,10 +692,10 @@ EOF
 
             echo -e "UUID del túnel: ${Am}$uuid${Bl}"
 
-            echo -e "\n${Az}Creando carpeta /etc/cloudflared...${Bl}"
+            echo -e "\n${Az}Creando la carpeta '${Am_}/etc/cloudflared/${Az}'...${Bl}"
             mkdir -p /etc/cloudflared
 
-            echo -e "\n${Az}Creando archivo config.yml...${Bl}"
+            echo -e "\n${Az}Creando el archivo '${Am_}/etc/cloudflared/config.yml${Az}'...${Bl}"
             cat <<EOF > /etc/cloudflared/config.yml
 tunnel: $uuid
 credentials-file: /etc/cloudflared/$uuid.json
@@ -688,16 +709,16 @@ ingress:
 - service: http_status:404
 EOF
 
-            echo -e "\n${Az}Copiando credenciales del túnel...${Bl}"
+            echo -e "\n${Az}Copiando las credenciales del túnel a '${Am_}/etc/cloudflared/${Az}'...${Bl}"
             cp ~/.cloudflared/"$uuid".json /etc/cloudflared/
 
             chmod 600 /etc/cloudflared/"$uuid".json
             chown root:root /etc/cloudflared/"$uuid".json
 
-            echo -e "\n${Az}Creando registro DNS CNAME...${Bl}"
+            echo -e "\n${Az}Creando un registro DNS tipo CNAME...${Bl}"
             cloudflared tunnel route dns "$nombre_tunel" "$nombre_dominio"
 
-            echo -e "\n${Az}Instalando el servicio de cloudflared...${Bl}"
+            echo -e "\n${Az}Instalando el servicio de Cloudflared...${Bl}"
             cloudflared service install
 
             echo -e "\n${Az}Habilitando el servicio de Cloudflared...${Bl}"
@@ -719,20 +740,20 @@ EOF
             echo -e "${Am}  Los túneles creados se eliminarán localmente, pero no en Cloudflare.${Bl}"
             echo -e ""
 
-            echo -e "\n${Az}Parando el servicio 'cloudflared'...${Bl}"
+            echo -e "\n${Az}Parando el servicio de Cloudflared...${Bl}"
             systemctl stop cloudflared
 
-            echo -e "\n${Az}Deshabilitando el servicio 'cloudflared'...${Bl}"
+            echo -e "\n${Az}Deshabilitando el servicio de Cloudflared...${Bl}"
             systemctl disable cloudflared
 
-            echo -e "\n${Az}Purgando el paquete 'cloudflared'...${Bl}"
+            echo -e "\n${Az}Purgando el paquete de Cloudflared...${Bl}"
             apt purge cloudflared -y
 
-            echo -e "\n${Az}Eliminando configuraciones...${Bl}"
+            echo -e "\n${Az}Eliminando las configuraciones...${Bl}"
             rm -rf /etc/cloudflared/*
             rm -rf /root/.cloudflared/*
 
-            echo -e "\n${Ve}¡Cloudflared purgado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Cloudflared ha sido purgado correctamente!${Bl}"
             echo -e "\n${Am}(Los registros DNS deben eliminarse manualmente)${Bl}"
             ;;
 
@@ -795,7 +816,7 @@ EOF
             echo -e "\n${Az}Verificando...${Bl}"
             systemctl status docker
 
-            echo -e "\n${Ve}¡Docker instalado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Docker ha sido instalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -809,21 +830,23 @@ EOF
             echo -e "${Ro_}  1.  El administrador debe eliminar el registro DNS si existe.${Bl}"
             echo -e "${Ro_}  2.  Debes tener el API TOKEN de Cloudflare.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             echo -e "${Am}Importante:${Bl}"
             echo -e "${Am_}  Debes proteger tu red mediante reglas de Firewall ya que la IPv4 pública será expuesta.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Nombre del subdominio (solo subdominio): ' subdominio; [[ -z "${subdominio// /}" || "$subdominio" == "exit" ]] && continue
             read -p 'CLOUDFLARE_API_TOKEN: ' api_token; [[ -z "${api_token// /}" || "$api_token" == "exit" ]] && continue
 
-            echo -e "\n${Az}Creando docker...${Bl}"
+            echo -e "\n${Az}Creando el docker...${Bl}"
             docker run -d --restart=unless-stopped --network host -e CLOUDFLARE_API_TOKEN=$api_token -e DOMAINS=$subdominio.chemahosting.es -e PROXIED=false favonia/cloudflare-ddns:latest
 
             echo -e "\n${Az}Verificando...${Bl}"
             docker ps -a | grep favonia/cloudflare-ddns
 
-            echo -e "${Ve}¡Docker creado correctamente!${Bl}"
+            echo -e "${Ve}¡El docker ha sido creado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -862,23 +885,23 @@ EOF
             echo -e "${Am}Para ver la última versión disponible: ${Az}https://github.com/louislam/uptime-kuma/releases${Bl}\n"
             read -p 'Versión de GitHub a actualizar: ' version_github; [[ -z "${version_github// /}" || "$version_github" == "exit" ]] && continue
 
-            echo -e "\n${Az}Parando servicios...${Bl}"
+            echo -e "\n${Az}Parando el servicio '${Am_}uptime-kuma${Az}'...${Bl}"
             pm2 stop uptime-kuma
 
-            echo -e "\n${Az}Obteniendo versiones...${Bl}"
+            echo -e "\n${Az}Obteniendo las versiones disponibles en GitHub...${Bl}"
             cd /opt/uptime-kuma
             git fetch --all
             git checkout "$version_github"
 
-            echo -e "\n${Az}Instalando actualizaciones...${Bl}"
+            echo -e "\n${Az}Instalando las actualizaciones...${Bl}"
             npm install --omit=dev --no-audit
             npm run download-dist
 
-            echo -e "\n${Az}Reiniciando servicios...${Bl}"
+            echo -e "\n${Az}Reiniciando el servicio '${Am_}uptime-kuma${Az}'...${Bl}"
             pm2 restart uptime-kuma
             pm2 save
 
-            echo -e "\n${Ve}¡Uptime-kuma actualizado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Uptime-kuma ha sido actualizado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -923,19 +946,19 @@ EOF
             echo -e "\n${Am}* - Todos\nDirección_red/Máscara - A toda la subred\nIPv4 o hostname - A un equipo en concreto${Bl}"
             read -p 'A quien dar permiso (mirar la guía de arriba): ' permitido; [[ -z "${permitido// /}" || "$permitido" == "exit" ]] && continue
 
-            echo -e "\n${Az}Instalando dependencias...${Bl}"
+            echo -e "\n${Az}Instalando las dependencias '${Am_}nfs-kernel-server${Az}' y '${Am_}nfs-common${Az}'...${Bl}"
             apt install -y nfs-kernel-server nfs-common
 
-            echo -e "\n${Az}Configurando '/etc/exports'...${Bl}"
+            echo -e "\n${Az}Configurando '${Am_}/etc/exports${Az}'...${Bl}"
             echo "$carpeta_local $permitido($permisos,sync,no_subtree_check,no_root_squash)" >> /etc/exports
 
-            echo -e "\n${Az}Aplicando cambios...${Bl}"
+            echo -e "\n${Az}Aplicando los cambios...${Bl}"
             exportfs -ra
 
-            echo -e "\n${Az}Reiniciando servicio...${Bl}"
+            echo -e "\n${Az}Reiniciando el servicio '${Am_}nfs-kernel-server${Az}'...${Bl}"
             systemctl restart nfs-kernel-server
 
-            echo -e "\n${Ve}¡Recurso compartido correctamente!${Bl}"
+            echo -e "\n${Ve}¡El recurso ha sido compartido correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -976,25 +999,26 @@ EOF
             echo -e "${Ro_}  1.  Hay que tener python previamente instalado.${Bl}"
             echo -e "${Ro_}  2.  Al principio del archivo .py debe haber esta línea: '${Az}#!/usr/bin/env python3${Ro_}'.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
 
-            echo -e "\n${Az}Setección básica...${Bl}"
+            echo -e "\n${Az}Realizando las verificaciones necesarias...${Bl}"
             [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
             if [[ ! -f "$ruta_archivo" ]]; then
                 echo -e "${Ro}Error: El archivo no existe.${Bl}"
                 sleep 2; continue
             fi
 
-            echo -e "\n${Az}Creando variables...${Bl}"
+            echo -e "\n${Az}Definiendo las variables necesarias...${Bl}"
             nombre_script=$(basename "$ruta_archivo")
             directorio_trabajo=$(dirname "$ruta_archivo")
             usuario_actual=$(whoami)
 
-            echo -e "\n${Az}Detectando entorno...${Bl}"
+            echo -e "\n${Az}Detectando el entorno...${Bl}"
             python_path=$(which python3)
 
-            echo -e "\n${Az}Creando unidad de servicio con Logging...${Bl}"
+            echo -e "\n${Az}Creando la unidad de servicio con Logging...${Bl}"
             
             cat <<EOF > /etc/systemd/system/script-python.service
 [Unit]
@@ -1015,16 +1039,18 @@ StandardError=append:/var/log/script-python.log
 WantedBy=multi-user.target
 EOF
 
-            echo -e "\n${Az}Configurando permisos y logs...${Bl}"
+            echo -e "\n${Az}Configurando los permisos y registros...${Bl}"
             chmod +x "$ruta_archivo"
             touch /var/log/script-python.log
 
-            echo -e "\n${Az}Recargando y arrancando...${Bl}"
+            echo -e "\n${Az}Ejecutando '${Am_}systemctl daemon-reload${Az}'...${Bl}"
             systemctl daemon-reload
+
+            echo -e "\n${Az}Habilitando y reiniciando el servicio '${Am_}script-python${Az}'...${Bl}"
             systemctl enable script-python.service
             systemctl restart script-python.service
 
-            echo -e "\n${Ve}¡Servicio configurado!${Bl}"
+            echo -e "\n${Ve}¡El servicio ha sido configurado correctamente!${Bl}"
             echo -e "${Az}Para ver por qué falla, usa: ${Ve}tail -f /var/log/script-python.log${Bl}"
             echo -e "${Az}O revisa el estado: ${Ve}systemctl status script-python.service${Bl}"
             ;;
@@ -1037,10 +1063,10 @@ EOF
 
             read -p 'Webhook de Discord: ' webhook; [[ -z "${webhook// /}" || "$webhook" == "exit" ]] && continue
 
-            echo -e "\n${Az}Instalando dependencias...${Bl}"
+            echo -e "\n${Az}Instalando la dependencia '${Am_}curl${Az}'...${Bl}"
             apt install -y curl
 
-            echo -e "\n${Az}Creando script...${Bl}"
+            echo -e "\n${Az}Creando el script '${Am_}/usr/local/bin/discord-alerta.sh${Az}'...${Bl}"
             cat <<'EOF' > /usr/local/bin/discord-alerta.sh
 #!/bin/bash
 [[ "$1" == *"discord-alerta.sh"* ]] && exit 0
@@ -1060,7 +1086,7 @@ EOF
             sed -i "s|REPLACEME_WEBHOOK|$webhook|" /usr/local/bin/discord-alerta.sh
             chmod +x /usr/local/bin/discord-alerta.sh
 
-            echo -e "\n${Az}Inyectando hook en /etc/bash.bashrc...${Bl}"
+            echo -e "\n${Az}Inyectando el hook en '${Am_}/etc/bash.bashrc${Az}'...${Bl}"
             if ! grep -q "Monitor Discord" /etc/bash.bashrc; then
                 cat <<'EOF' >> /etc/bash.bashrc
 
@@ -1078,9 +1104,9 @@ if [[ $- == *i* ]]; then
 fi
 # -----------------------
 EOF
-                echo -e "${Ve}Hook inyectado en /etc/bash.bashrc correctamente.${Bl}"
+                echo -e "${Ve}El hook ha sido inyectado correctamente en '${Am_}/etc/bash.bashrc${Az}'.${Bl}"
             else
-                echo -e "${Ro}El hook ya existe en /etc/bash.bashrc, saltando...${Bl}"
+                echo -e "${Ro}El hook ya existe en '${Am_}/etc/bash.bashrc${Az}', omitiendo...${Bl}"
             fi
 
             echo -e "\n${Ve}¡Configurado! REINICIA LA SESIÓN para activar las alertas.${Bl}"
@@ -1104,7 +1130,7 @@ EOF
 
         printf "%b\n" \
             " | ${Az}NETBIRD - OPCIONES ${Bl}" \
-            " | ============================" \
+            " | =====================================" \
                 "${Ne}1${Bl} | Instalar y entrar en la red" \
                 "${Ne}2${Bl} | Desinstalar y purgar la configuración" \
                 | column --table --separator '|' --keep-empty-lines
@@ -1126,20 +1152,24 @@ EOF
             echo -e "${Ro_}  3.  La IPv4 que se vaya a configurar debe estar libre.${Bl}"
             echo -e "${Ro_}  4.  Se debe eliminar del archivo '${Az}/etc/hosts${Ro_}' cualquier registro antigüo.${Bl}"
             echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
 
             read -p 'Set-up key de Netbird: ' llave_netbird; [[ -z "${llave_netbird// /}" || "$llave_netbird" == "exit" ]] && continue
             read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo; [[ -z "${nombre_equipo// /}" || "$nombre_equipo" == "exit" ]] && continue
 
-            echo -e "\n${Az}Descargando Netbird...${Bl}"
+            echo -e "\n${Az}Instalando la dependencia '${Am_}curl${Az}'...${Bl}"
+            apt install -y curl
+
+            echo -e "\n${Az}Instalando Netbird...${Bl}"
             curl -fsSL https://pkgs.netbird.io/install.sh | bash
 
-            echo -e "\n${Az}Iniciando conexión con Netbird...${Bl}"
+            echo -e "\n${Az}Iniciando la conexión con Netbird...${Bl}"
             netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root --hostname "$nombre_equipo"
 
-            echo -e "\n${Az}Habilitando el servicio de Netbird...${Bl}"
+            echo -e "\n${Az}Habilitando el servicio '${Am_}netbird${Az}'...${Bl}"
             systemctl enable --now netbird
 
-            echo -e "\n${Az}Añadiendo los nodos a /etc/hosts...${Bl}"
+            echo -e "\n${Az}Añadiendo los nodos a '${Am_}/etc/hosts${Az}'...${Bl}"
             grep -q "coruna1" /etc/hosts || cat <<EOF >> /etc/hosts
 172.16.0.100 coruna1
 172.16.0.101 coruna2
@@ -1150,24 +1180,24 @@ EOF
 172.16.0.106 malaga4
 EOF
 
-            echo -e "\n${Az}Tu IPv4 de NetBird actual es:${Bl}"
+            echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
             netbird status --ipv4
 
             echo -e "\n${Am}Cambie ahora la IPv4 del nodo desde el panel de administración de Netbird, luego puse ENTER.${Bl}"
             read -p '' _
 
-            echo -e "\n${Az}Reiniciando conexión con Netbird...${Bl}"
+            echo -e "\n${Az}Reiniciando la conexión con Netbird...${Bl}"
             netbird down
             systemctl restart netbird # Aquí se debería hacer el netbird up automáticamente
             sleep 2
 
-            echo -e "\n${Az}Verificando conexión con Netbird...${Bl}"
+            echo -e "\n${Az}Verificando la conexión con Netbird...${Bl}"
             netbird up --setup-key "$llave_netbird" --allow-server-ssh --enable-ssh-root --hostname "$nombre_equipo"
 
-            echo -e "\n${Az}Tu IPv4 de NetBird actual es:${Bl}"
+            echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
             netbird status --ipv4
 
-            echo -e "\n${Ve}¡Netbird instalado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Netbird ha sido instalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1184,25 +1214,25 @@ EOF
             echo -e "\n${Az}Quitando el peer de la red...${Bl}"
             netbird deregister
 
-            echo -e "\n${Az}Parando servicios...${Bl}"
+            echo -e "\n${Az}Deteniendo el servicio '${Am_}netbird${Az}'...${Bl}"
             systemctl stop netbird
             systemctl disable netbird
 
             echo -e "\n${Az}Desinstalando Netbird...${Bl}"
             apt remove --purge netbird -y
 
-            echo -e "\n${Az}Eliminando el repositorio y clave GPG...${Bl}"
+            echo -e "\n${Az}Eliminando el repositorio y la clave GPG...${Bl}"
             rm -f /etc/apt/sources.list.d/netbird.list
             rm -f /usr/share/keyrings/netbird-archive-keyring.gpg
 
-            echo -e "\n${Az}Borrando archivos y carpetas de configuración...${Bl}"
+            echo -e "\n${Az}Borrando los archivos y carpetas de configuración...${Bl}"
             rm -rf /etc/netbird
             rm -rf /var/lib/netbird
             rm -rf /var/log/netbird
             rm -rf ~/.config/netbird
             rm -rf ~/.netbird
 
-            echo -e "\n${Ve}¡Netbird desinstalado correctamente!${Bl}"
+            echo -e "\n${Ve}¡Netbird ha sido desinstalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1223,7 +1253,7 @@ EOF
 
         printf "%b\n" \
             " | ${Az}OPENVPN - OPCIONES ${Bl}" \
-            " | ======================" \
+            " | ================================" \
                 "${Ne}1${Bl} | Crear y configurar un contenedor" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
@@ -1262,7 +1292,7 @@ EOF
                 --hostname "$name_ct" \
                 --rootfs $storage_name_ct:$ct_gigabytes
 
-            echo -e "\n${Az}Editando /dev/net/tun...${Bl}"
+            echo -e "\n${Az}Editando '${Am_}/dev/net/tun${Az}'...${Bl}"
             conf="/etc/pve/lxc/$id_ct.conf"
             grep -qxF "lxc.cgroup2.devices.allow: c 10:200 rwm" "$conf" || echo "lxc.cgroup2.devices.allow: c 10:200 rwm" >> "$conf"
             grep -qxF "lxc.mount.entry: /dev/net dev/net none bind,create=dir" "$conf" || echo "lxc.mount.entry: /dev/net dev/net none bind,create=dir" >> "$conf"
@@ -1274,7 +1304,7 @@ EOF
             echo -e "\n${Az}Iniciando el CT...${Bl}"
             pct start $id_ct
 
-            echo -e "\n${Az}Instalando dependencias en el CT...${Bl}"
+            echo -e "\n${Az}Instalando las dependencias en el CT...${Bl}"
             pct exec "$id_ct" -- apt update
             pct exec "$id_ct" -- apt dist-upgrade -y
             pct exec "$id_ct" -- apt install -y openvpn git
