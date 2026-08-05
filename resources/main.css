@@ -23,7 +23,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* NAV BAR */
 
-.menu_bar{backdrop-filter: blur(10px); background-color: rgba(34, 37, 35, 0.7); height: 50px; width: 100%; max-width: 1500px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
+.menu_bar{backdrop-filter: blur(10px); background-color: rgba(34, 37, 35, 0.7); height: 50px; width: 100%; max-width: 1250px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; position: -webkit-sticky; position: sticky; top: 0; z-index: 9999;}
 .menu_bar ul{list-style: none; display: flex;}
 .menu_bar .logo a, .logo a span{font-size: 25px; font-family: "Smoch" !important;}
 .menu_bar ul li{padding: 0 10px 0 10px;}
@@ -40,7 +40,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* BODY */
 
-.fondo{height: 100vh; margin: 0 auto; max-width: 1500px; padding-bottom: 30px; background-color: #222523; position: relative; background-size: cover; background-repeat: no-repeat; align-items: center; background-position: center; justify-content: center;}
+.fondo{height: 100vh; margin: 0 auto; max-width: 1250px; padding-bottom: 30px; background-color: #222523; position: relative; background-size: cover; background-repeat: no-repeat; align-items: center; background-position: center; justify-content: center;}
 .fondo p{color: white; text-align: center; padding-bottom: 25px; font-size: 20px;}
 
 .fondo h2{font-family: "Smoch"; color: white; max-width: 100%; min-width: 50%; text-align: center; padding: 10px 0px 20px 0px; font-size: 70px; user-select: none;}
@@ -71,7 +71,7 @@ br{user-select: none;}
 @media screen and (min-height: 800px) {
   .fondo{height: min-content;}
   .fondo .flecha{display: none;}
-  .ProyectosInfoAvanzada{margin-top: 100px !important; margin-bottom: 50px !important;}
+  .SeccionProyectos{margin-top: 100px !important; margin-bottom: 50px !important;}
 }
 
 @media screen and (max-height: 625px) {
@@ -82,52 +82,49 @@ br{user-select: none;}
 /* ========================================================= */
 /* INDEX - PROYECTOS */
 
-.projects-title{font-size: 36px; user-select: text; margin-bottom: 20px; padding-top: 20px; color: white; position: relative; display: inline-block; scroll-margin-top: 50px;} 
+.projects-title{font-size: 36px; user-select: text; margin-bottom: 40px; padding-top: 20px; color: white; position: relative; display: inline-block; scroll-margin-top: 50px;} 
 .projects-title-h3{font-size: 20px; user-select: text; margin-bottom: 20px; padding-top: 20px; color: rgba(167, 255, 112, 0.5); position: relative; display: inline-block; scroll-margin-top: 50px;} 
 
-.ProyectosInfoAvanzada{margin: 0 auto; max-width: 1500px; margin-bottom: 50px;}
+.SeccionProyectos{margin: 0 auto; margin-bottom: 50px; max-width: 1250px; text-align: center;}
 
-.ProyectosInfoAvanzada .ProyectoDIV{margin-left: 5vw; margin-right: 5vw; text-align: left; display: flex; min-height: 300px; align-items: center;}
-.ProyectosInfoAvanzada .ImgA{margin-top: 20px; display: flex; flex-wrap: wrap;}
-.ProyectosInfoAvanzada .ImgA a{display: inline-block; margin-right: 20px;}
-.ProyectosInfoAvanzada .contenidoProyecto{width: 70%; padding-right: 20px;}
-.ProyectosInfoAvanzada .contenidoProyecto p{user-select: text; color: rgb(228, 196, 196);}
-.ProyectosInfoAvanzada .logoProyecto{width: 30%; text-align: center;}
+.SeccionProyectos .ContenedorProyectos{width: 100%; display: flex; flex-direction: row; flex-wrap: nowrap; text-align: left; border: .5px solid gray;}
+.SeccionProyectos .ContenedorProyectos *{color: white; text-align: left; user-select: text;}
 
-.ProyectosInfoAvanzada .contenidoProyecto h2{font-size: 25px; user-select: text; margin-bottom: 20px; padding-top: 20px; display: inline-block; color: rgba(167, 255, 112, 0.5);}
-.ProyectosInfoAvanzada .contenidoProyecto h2 span:hover{text-decoration: underline; text-underline-offset: 10px; text-decoration-color: #7cfb2d; color: rgba(167, 255, 112, 0.5);}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos{width: 25%; border-right: .5px solid gray;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .TituloIndice{padding: 10px; font-size: 12px; border-bottom: .5px solid gray;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button{transition: .2s all; cursor: pointer; width: 100%; padding: 10px; border: none; border-bottom: .5px solid gray; background-color: transparent; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: stretch;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button.ProyectoActual{border-left: 5px solid rgba(167, 255, 112, 0.5);}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button *{user-select: none;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button .Izquierda{height: 100%; width: 90%;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button .Izquierda span.NombreProyecto{font-size: 17px; font-weight: bold;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button .Izquierda span.EtiquetasProyecto{color: rgb(228, 196, 196);}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button .Derecha{display: flex; width: 10%; justify-content: center; align-items: center;}
+.SeccionProyectos .ContenedorProyectos .IndiceProyectos .Lista button:hover:not(button.ProyectoActual:hover){border-left: 5px solid rgb(196, 196, 255);}
 
-.ProyectosInfoAvanzada{text-align: center;}
-.ProyectosInfoAvanzada .projects-title{margin-bottom: 30px;}
+.SeccionProyectos .ContenedorProyectos .ContenidoProyectos{width: 75%; padding: 10px;}
 
-.ProyectosInfoAvanzada .logoProyecto .a1{background-color: #222523; border-top: 3px solid #7cfb2d !important; user-select: text;}
-.ProyectosInfoAvanzada .logoProyecto .a12{background-color: #222523; user-select: text;}
+.ProyectoIndividual{display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: space-between; min-height: 400px;}
 
-.ProyectosInfoAvanzada .logoProyecto .a1, .ProyectosInfoAvanzada .logoProyecto .a1 div{border: .5px solid gray;}
-.ProyectosInfoAvanzada .logoProyecto .a1 div{padding: 20px;}
-.ProyectosInfoAvanzada .logoProyecto .a1 *{color: white;}
+.ProyectoIndividual .Arriba .EtiquetasProyecto{padding-bottom: 10px; font-size: 12px; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: stretch;}
+.ProyectoIndividual .Arriba .EtiquetasProyecto .FechaProyecto{background-color: rgba(167, 255, 112, 0.5); color: black; padding: 0 20px 0 20px;}
+.ProyectoIndividual .Arriba .DatosProyecto, .ProyectoIndividual .Abajo{padding: 20px;}
+.ProyectoIndividual .Arriba .DatosProyecto .TituloProyecto{font-size: 30px; font-weight: bold; padding: 10px 0 10px 0; color: rgba(167, 255, 112, 0.5);}
+.ProyectoIndividual .Arriba .DatosProyecto .DescripcionProyecto{color: rgb(228, 196, 196); padding-bottom: 10px; height: 100px;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos{padding-top: 10px; display: flex; flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 50px;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna{width: 50%;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna div{padding-bottom: 10px;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna span:not(span.Dato){color: rgb(228, 196, 196);}
 
-.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo{user-select: text !important; background-color: #7cfb2d; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: .5px solid #222523; border-radius: 5px;}
-.ProyectosInfoAvanzada .logoProyecto .a12 p.codigo::selection{color: white; background-color: #222523;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna > div {display: flex; align-items: center; width: 100%;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna > div::after{content: "";  flex-grow: 1; border-bottom: 1px dashed rgba(228, 196, 196, 0.4); margin: 0 10px;}
+.ProyectoIndividual .Arriba .DatosProyecto .ColumnaDatos .Columna span.Dato{order: 2;}
 
-.ProyectosInfoAvanzada .logoProyecto .a12 a{background-color: #7cfb2d; user-select: none; color: black !important; display: inline-block; padding: 10px 20px; margin-top: 10px; margin-bottom: 10px; border: 3px solid #222523; border-radius: 5px; transition: all .3s;}
-.ProyectosInfoAvanzada .logoProyecto .a12 a:hover{background-color: #222523; color: white !important; border: 3px solid #7cfb2d;}
-.ProyectosInfoAvanzada .logoProyecto .a13 a {color: #7cfb2d;}
-.ProyectosInfoAvanzada .logoProyecto .a13 a:hover {text-decoration: underline;}
+.ProyectoIndividual .Abajo{display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between;}
+.ProyectoIndividual .Abajo .Izquierda{display: flex; flex-direction: row; flex-wrap: nowrap; gap: 10px; align-items: center;}
+.ProyectoIndividual .Abajo .Derecha a *{user-select: none;}
+.ProyectoIndividual .Abajo .Derecha a .BotonFlecha span{color: black;}
 
-.ProyectosInfoAvanzada .logoProyecto .a12 p, .ProyectosInfoAvanzada .logoProyecto .a13 p{user-select: text; color: rgb(228, 196, 196);}
-
-@media screen and (max-width: 600px) {
-  .ProyectosInfoAvanzada .ImgA{justify-content: center;}
-  .ProyectosInfoAvanzada .ImgA a{margin-top: 10px;}
-  .FlexBotonesPrincipales{flex-direction: column;}
-}
-
-@media screen and (max-width: 1000px) {
-  .ProyectoDIV{display: block !important; height: 100% !important;}
-  .ProyectosInfoAvanzada .contenidoProyecto{width: 100%; padding-right: 0px;}
-  .ProyectosInfoAvanzada .logoProyecto{width: 100%; margin-top: 50px; margin-bottom: 20px;}
-}
+#Proyecto-MiniBoy, #Proyecto-Malicious-IPs-And-Domains, #Proyecto-Chema-Hosting{display: none;}
 
 /* ========================================================= */
 /* TRADUCTOR */
@@ -141,7 +138,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* PRIVACIDAD */
 
-.privacy{padding: 20px; min-height: 100vh; margin: 0 auto; max-width: 1500px}
+.privacy{padding: 20px; min-height: 100vh; margin: 0 auto; max-width: 1250px;}
 .privacy h1, h2{color: white; margin-top: 0; margin-bottom: 10px; user-select: text;}
 .privacy h1{color: rgba(167, 255, 112, 0.5);}
 .privacy p{font-size: 16px; line-height: 1.5; margin-bottom: 20px; color: rgb(228, 196, 196); text-align: justify; user-select: text;}
@@ -170,7 +167,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* GUÍA */
 
-.DivPrincipal{text-align: center; margin: 0 auto; max-width: 1500px;}
+.DivPrincipal{text-align: center; margin: 0 auto; max-width: 1250px;}
 .BlogEntradas{margin: 20px; display: flex; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0;}
 
 .InformacionGuias{color: rgb(228, 196, 196); margin-top: 20px; user-select: text; font-size: 12px;}
@@ -228,7 +225,7 @@ div.BotonPersonalizadoCode{display: flex; margin: 0 auto; max-width: max-content
 div.BotonPersonalizadoCode pre.MuestraDeCodigo{width: 100%; overflow-x: auto; user-select: text; margin: 0;}
 div.BotonPersonalizadoCode pre.MuestraDeCodigo code{white-space: nowrap; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; display: block; height: 100%;}
 
-div.BotonPersonalizadoCode a.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+div.BotonPersonalizadoCode a.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px;}
 div.BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 
 div.BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
@@ -263,9 +260,9 @@ div.BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); co
 /* ========================================================= */
 /* FOOTER */
 
-footer{padding: 30px; text-align: center; color: white; position: relative; max-width: 1500px; margin: 0 auto;}
+footer{padding: 30px; text-align: center; color: white; position: relative; max-width: 1250px; margin: 0 auto;}
 footer::before{content: ""; position: absolute; top: 0; left: 50px; right: 50px; height: 1px; background-color: #7cfb2d;}
-.footer-content{max-width: 1500px; margin: 0 auto; display: block;}
+.footer-content{max-width: 1250px; margin: 0 auto; display: block;}
 .footer-content p span.copyright{user-select: text;}
 
 .footer-header{text-align: center; display: flex; flex-direction: column; gap: 10px;}
