@@ -106,7 +106,7 @@ br{user-select: none;}
 .ProyectoIndividual{display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: space-between; min-height: 400px;}
 
 .ProyectoIndividual .Arriba .EtiquetasProyecto{padding-bottom: 10px; font-size: 12px; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: stretch;}
-.ProyectoIndividual .Arriba .EtiquetasProyecto .FechaProyecto{background-color: rgba(167, 255, 112, 0.5); color: black; padding: 0 20px 0 20px;}
+.ProyectoIndividual .Arriba .EtiquetasProyecto .FechaProyecto{background-color: rgba(167, 255, 112, 0.5); color: black; padding: 0 20px 0 20px; user-select: none;}
 .ProyectoIndividual .Arriba .DatosProyecto, .ProyectoIndividual .Abajo{padding: 20px;}
 .ProyectoIndividual .Arriba .DatosProyecto .TituloProyecto{font-size: 30px; font-weight: bold; padding: 10px 0 10px 0; color: rgba(167, 255, 112, 0.5);}
 .ProyectoIndividual .Arriba .DatosProyecto .DescripcionProyecto{color: rgb(228, 196, 196); padding-bottom: 10px; height: 100px;}
@@ -121,10 +121,10 @@ br{user-select: none;}
 
 .ProyectoIndividual .Abajo{display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between;}
 .ProyectoIndividual .Abajo .Izquierda{display: flex; flex-direction: row; flex-wrap: nowrap; gap: 10px; align-items: center;}
-.ProyectoIndividual .Abajo .Derecha a *{user-select: none;}
+.ProyectoIndividual .Abajo .Izquierda *, .ProyectoIndividual .Abajo .Derecha *{user-select: none;}
 .ProyectoIndividual .Abajo .Derecha a .BotonFlecha span{color: black;}
 
-#Proyecto-MiniBoy, #Proyecto-Malicious-IPs-And-Domains, #Proyecto-Chema-Hosting{display: none;}
+#Proyecto-AILI-SS, #Proyecto-Malicious-IPs-And-Domains, #Proyecto-MiniBoy{display: none;}
 
 /* ========================================================= */
 /* TRADUCTOR */
@@ -254,8 +254,8 @@ div.BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); co
 .BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
 .BotonPersonalizadoTexto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 
-.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
-.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5); color: black;}
+.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5) !important;}
 
 /* ========================================================= */
 /* FOOTER */

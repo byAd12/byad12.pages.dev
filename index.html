@@ -120,16 +120,16 @@
 
                     <div class="Lista">
 
-                        <button onclick="EnsenarProyectoAiliSS()" class="ProyectoActual" id="EnsenarProyectoAiliSSBoton">
+                        <button onclick="EnsenarProyectoChemaHosting()" class="ProyectoActual" id="EnsenarProyectoChemaHostingBoton">
                             <div class="Izquierda">
-                                <span class="NombreProyecto">AILI-SS Software</span> <br> <span class="EtiquetasProyecto">Ciberseguridad</span>
+                                <span class="NombreProyecto">Chema Hosting</span> <br> <span class="EtiquetasProyecto">Hosting</span>
                             </div>
                             <div class="Derecha"> <span>▷</span> </div>
                         </button>
 
-                        <button onclick="EnsenarProyectoMiniBoy()" id="EnsenarProyectoMiniBoyBoton">
+                        <button onclick="EnsenarProyectoAiliSS()" id="EnsenarProyectoAiliSSBoton">
                             <div class="Izquierda">
-                                <span class="NombreProyecto">Discord Bot "MiniBoy"</span> <br> <span class="EtiquetasProyecto">Automatización</span>
+                                <span class="NombreProyecto">AILI-SS Software</span> <br> <span class="EtiquetasProyecto">Ciberseguridad</span>
                             </div>
                             <div class="Derecha"> <span>▷</span> </div>
                         </button>
@@ -141,9 +141,9 @@
                             <div class="Derecha"> <span>▷</span> </div>
                         </button>
 
-                        <button onclick="EnsenarProyectoChemaHosting()" id="EnsenarProyectoChemaHostingBoton">
+                        <button onclick="EnsenarProyectoMiniBoy()" id="EnsenarProyectoMiniBoyBoton">
                             <div class="Izquierda">
-                                <span class="NombreProyecto">Chema Hosting</span> <br> <span class="EtiquetasProyecto">Hosting</span>
+                                <span class="NombreProyecto">Discord Bot "MiniBoy"</span> <br> <span class="EtiquetasProyecto">Automatización</span>
                             </div>
                             <div class="Derecha"> <span>▷</span> </div>
                         </button>
@@ -156,12 +156,61 @@
 
                 <div class="ContenidoProyectos">
 
+                    <!-- ========================= -->
+
+                    <div class="ProyectoIndividual" id="Proyecto-Chema-Hosting">
+
+                        <div class="Arriba">
+
+                            <div class="EtiquetasProyecto">
+                                <span>LISTA DE PROYECTOS - 01 / 04</span>
+                                <span class="FechaProyecto">14/11/2025</span>
+                            </div>
+
+                            <div class="DatosProyecto">
+
+                                <p class="TituloProyecto">Chema Hosting</p>
+                                <p class="DescripcionProyecto">Clúster de Proxmox privado que aloja todo tipo de servicios y juegos. También tiene un script ejecutable para la consola de un sistema Linux con todas las funcionalidades necesarias para mantener el clúster y sus servicios.</p>
+
+                                <div class="ColumnaDatos">
+                                    <div class="Columna">
+                                        <div> <span>Sistema operativo</span> <span class="Separador"></span> <span class="Dato">Proxmox</span> </div>
+                                        <div> <span>Dominio</span> <span class="Separador"></span> <span class="Dato">chemahosting.es</span> </div>
+                                    </div>
+                                    <div class="Columna">
+                                        <div> <span>Nodos</span> <span class="Separador"></span> <span class="Dato">2</span> </div>
+                                        <div> <span>Gestión DNS</span> <span class="Separador"></span> <span class="Dato">Cloudflare</span> </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="Abajo">
+
+                            <div class="Izquierda">
+                            </div>
+
+                            <div class="Derecha">
+                                <a class="BotonPersonalizadoTexto" href="https://www.chemahosting.es/" target="_blank">
+                                    <p class="TextoRelacionado">Visitar la página web</p>
+                                    <p class="BotonFlecha"><span>↗</span></p>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ========================= -->
+
                     <div class="ProyectoIndividual" id="Proyecto-AILI-SS">
 
                         <div class="Arriba">
 
-                            <div class="EtiquetasProyecto" id="Proyecto-AILI-SS">
-                                <span>LISTA DE PROYECTOS - 01 / 04</span>
+                            <div class="EtiquetasProyecto">
+                                <span>LISTA DE PROYECTOS - 02 / 04</span>
                                 <span class="FechaProyecto">04/10/2024</span>
                             </div>
 
@@ -196,54 +245,6 @@
                             <div class="Derecha">
                                 <a class="BotonPersonalizadoTexto" href="https://github.com/byAd12/AILI-SS/releases/latest" target="_blank">
                                     <p class="TextoRelacionado">Descargar en GitHub</p>
-                                    <p class="BotonFlecha"><span>↗</span></p>
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- ========================= -->
-
-                    <div class="ProyectoIndividual" id="Proyecto-MiniBoy">
-
-                        <div class="Arriba">
-
-                            <div class="EtiquetasProyecto">
-                                <span>LISTA DE PROYECTOS - 02 / 04</span>
-                                <span class="FechaProyecto">01/08/2021</span>
-                            </div>
-
-                            <div class="DatosProyecto">
-
-                                <p class="TituloProyecto">Discord Bot "MiniBoy"</p>
-                                <p class="DescripcionProyecto">Un bot de Discord multifuncional actualmente verificado que cuenta con más de 90 comandos pensados para ser útil en todos los ámbitos. Actualmente se puede encontrar en la página web los enlaces a las tiendas donde se puede adquirir el código fuente.</p>
-
-                                <div class="ColumnaDatos">
-                                    <div class="Columna">
-                                        <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
-                                        <div> <span>Comandos</span> <span class="Separador"></span> <span class="Dato">90 (Slash + Prefix)</span> </div>
-                                    </div>
-                                    <div class="Columna">
-                                        <div> <span>Base de datos</span> <span class="Separador"></span> <span class="Dato">PostgreeSQL</span> </div>
-                                        <div> <span>Tiene sistema premium</span> <span class="Separador"></span> <span class="Dato">Sí</span> </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="Abajo">
-
-                            <div class="Izquierda">
-                                <img alt="Bot Status" src="https://dcbadge.limes.pink/api/shield/871336640503775282?bot=true&style=social">
-                            </div>
-
-                            <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://dsc.gg/miniboy" target="_blank">
-                                    <p class="TextoRelacionado">Probar en Discord</p>
                                     <p class="BotonFlecha"><span>↗</span></p>
                                 </a>
                             </div>
@@ -303,28 +304,28 @@
 
                     <!-- ========================= -->
 
-                    <div class="ProyectoIndividual" id="Proyecto-Chema-Hosting">
+                    <div class="ProyectoIndividual" id="Proyecto-MiniBoy">
 
                         <div class="Arriba">
 
                             <div class="EtiquetasProyecto">
                                 <span>LISTA DE PROYECTOS - 04 / 04</span>
-                                <span class="FechaProyecto">14/11/2025</span>
+                                <span class="FechaProyecto">01/08/2021</span>
                             </div>
 
                             <div class="DatosProyecto">
 
-                                <p class="TituloProyecto">Chema Hosting</p>
-                                <p class="DescripcionProyecto">Clúster de Proxmox privado que aloja todo tipo de servicios y juegos. También tiene un script ejecutable para la consola de un sistema Linux con todas las funcionalidades necesarias para mantener el clúster y sus servicios.</p>
+                                <p class="TituloProyecto">Discord Bot "MiniBoy"</p>
+                                <p class="DescripcionProyecto">Un bot de Discord multifuncional actualmente verificado que cuenta con más de 90 comandos pensados para ser útil en todos los ámbitos. Actualmente se puede encontrar en la página web los enlaces a las tiendas donde se puede adquirir el código fuente.</p>
 
                                 <div class="ColumnaDatos">
                                     <div class="Columna">
-                                        <div> <span>Sistema operativo</span> <span class="Separador"></span> <span class="Dato">Proxmox</span> </div>
-                                        <div> <span>Dominio</span> <span class="Separador"></span> <span class="Dato">chemahosting.es</span> </div>
+                                        <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
+                                        <div> <span>Comandos</span> <span class="Separador"></span> <span class="Dato">90 (Slash + Prefix)</span> </div>
                                     </div>
                                     <div class="Columna">
-                                        <div> <span>Nodos</span> <span class="Separador"></span> <span class="Dato">2</span> </div>
-                                        <div> <span>Gestión DNS</span> <span class="Separador"></span> <span class="Dato">Cloudflare</span> </div>
+                                        <div> <span>Base de datos</span> <span class="Separador"></span> <span class="Dato">PostgreeSQL</span> </div>
+                                        <div> <span>Tiene sistema premium</span> <span class="Separador"></span> <span class="Dato">Sí</span> </div>
                                     </div>
                                 </div>
 
@@ -335,11 +336,12 @@
                         <div class="Abajo">
 
                             <div class="Izquierda">
+                                <img alt="Bot Status" src="https://dcbadge.limes.pink/api/shield/871336640503775282?bot=true&style=social">
                             </div>
 
                             <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://www.chemahosting.es/" target="_blank">
-                                    <p class="TextoRelacionado">Visitar la página web</p>
+                                <a class="BotonPersonalizadoTexto" href="https://dsc.gg/miniboy" target="_blank">
+                                    <p class="TextoRelacionado">Probar en Discord</p>
                                     <p class="BotonFlecha"><span>↗</span></p>
                                 </a>
                             </div>
