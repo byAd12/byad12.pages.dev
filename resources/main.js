@@ -285,7 +285,7 @@ function resetearFiltrosYEstilos() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.querySelector('.menu_toggle');
-    const menuBar = document.querySelector('.menu_bar');
+    const menuBar = document.querySelector('.Seccion_Barra_Navegacion');
 
     toggle.addEventListener('click', function() {
         menuBar.classList.toggle('active');

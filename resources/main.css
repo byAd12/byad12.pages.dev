@@ -49,8 +49,11 @@ body{display: flex; flex-direction: column; align-items: center; height: max-con
 
 section, footer{width: 100%; text-align: center; display: flex; justify-content: center;}
 section .Div_Contenido, footer .Div_Contenido{max-width: 1250px; width: 100%; height: 100%; padding: 50px;}
-
 section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: center; margin-bottom: 50px; font-size: 36px; user-select: text; color: white; scroll-margin-top: 50px;}
+
+@media screen and (max-width: 768px){
+  section .Div_Contenido, footer .Div_Contenido{padding: 25px;}
+}
 
 /* ========================================================= */
 /* INDEX - SECCIÓN INICIAL */
@@ -128,13 +131,13 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 
 .Proyecto_Individual .Arriba .Datos_Proyecto, .Proyecto_Individual .Abajo{padding: 20px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Titulo_Proyecto{font-size: 30px; font-weight: bold; padding: 10px 0 10px 0; color: rgba(167, 255, 112, 0.5);}
-.Proyecto_Individual .Arriba .Datos_Proyecto .Descripcion_Proyecto{color: rgb(228, 196, 196); padding-bottom: 10px; height: 100px;}
+.Proyecto_Individual .Arriba .Datos_Proyecto .Descripcion_Proyecto{color: rgb(228, 196, 196); padding-bottom: 10px; min-height: 100px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos{padding-top: 10px; display: flex; flex-direction: row; flex-wrap: nowrap; width: 100%; gap: 50px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna{width: 50%;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna div{padding-bottom: 10px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna span:not(span.Dato){color: rgb(228, 196, 196);}
 
-.Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna > div {display: flex; align-items: center; width: 100%;}
+.Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna > div{display: flex; align-items: center; width: 100%;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna > div::after{content: "";  flex-grow: 1; border-bottom: 1px dashed rgba(228, 196, 196, 0.4); margin: 0 10px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna span.Dato{order: 2;}
 
@@ -144,6 +147,27 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Proyecto_Individual .Abajo .Derecha a .BotonFlecha span{color: black;}
 
 #Proyecto-AILI-SS, #Proyecto-Malicious-IPs-And-Domains, #Proyecto-MiniBoy{display: none;}
+
+@media screen and (max-width: 1120px){
+  .Seccion_Proyectos .Contenedor_Proyectos{flex-direction: column;}
+  .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos,
+  .Seccion_Proyectos .Contenedor_Proyectos .Lista_Paginas{width: 100%;}
+  .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones{display: flex; flex-direction: row; flex-wrap: wrap;}
+  .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button{width: 50%;}
+  .Proyecto_Individual .Abajo{flex-direction: column; gap: 20px;}
+  .Proyecto_Individual .Abajo .Izquierda{justify-content: center; flex-wrap: wrap;}
+}
+
+@media screen and (max-width: 768px){
+  .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos{flex-direction: column; flex-wrap: nowrap; gap: 10px;}
+  .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna{width: 100%; gap: 10px;}
+}
+
+@media screen and (max-width: 625px){
+  .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button{width: 100%;}
+  .Proyecto_Individual .Arriba .Etiquetas_Proyecto{flex-direction: column; gap: 10px; align-items: center;}
+  .Proyecto_Individual .Arriba .Datos_Proyecto .Descripcion_Proyecto{margin-bottom: 30px;}
+}
 
 /* ========================================================= */
 /* INDEX - SECCIÓN DE SCRIPTS */
@@ -162,6 +186,18 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 .Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border: 3px solid rgba(167, 255, 112, 0.5); }
 .Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+
+.Contenedor_Scripts .Script_Individual_Esconder{display: none;}
+
+@media screen and (max-width: 1120px){
+  .Contenedor_Scripts{grid-template-columns: repeat(2, 1fr);}
+  .Contenedor_Scripts .Script_Individual_Esconder{display: block;}
+}
+
+@media screen and (max-width: 768px){
+  .Contenedor_Scripts{grid-template-columns: repeat(1, 1fr);}
+  .Contenedor_Scripts .Script_Individual_Esconder{display: none;}
+}
 
 /* ========================================================= */
 /* TRADUCTOR */
@@ -196,7 +232,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* ========================================================= */
 /* CONTACTO */
 
-.Seccion_Contacto object{display: block; justify-content: center !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 500px; height: 400px; margin: 0 auto;}
+.Seccion_Contacto object{display: block; justify-content: center !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 100%; max-width: 500px; height: 400px; margin: 0 auto;}
 
 /* ========================================================= */
 /* MODELOS */
@@ -303,12 +339,13 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 @media screen and (max-width: 500px){
   /* BARRA DE MENÚ */
   .menu_toggle{display: block;}
-  .Seccion_Barra_Navegacion ul{display: none; flex-direction: column; width: 100%; text-align: center; border-top: 1px solid rgba(128, 128, 128, 0.5); background-color: #222523; position: absolute; top: 50px; left: 0; z-index: 10000; overflow-y: auto; max-height: 100vh;}
-  .Seccion_Barra_Navegacion ul li{border: 1px solid rgba(128, 128, 128, 0.5); border-top: none;}
-  .Seccion_Barra_Navegacion ul li:hover{background-color: #555;}
-  .Seccion_Barra_Navegacion ul li a{padding: 20px 0 20px 0; display: block;}
-  .Seccion_Barra_Navegacion.active ul{display: flex;}
-  .Seccion_Barra_Navegacion .logo{flex: 1; display: flex; justify-content: space-between; align-items: center;}
+
+  .Seccion_Barra_Navegacion .Div_Contenido ul{display: none; flex-direction: column; width: 100%; text-align: center; border-top: 1px solid rgba(128, 128, 128, 0.5); background-color: #222523; position: absolute; top: 50px; left: 0; z-index: 10000; overflow-y: auto; max-height: 100vh;}
+  .Seccion_Barra_Navegacion .Div_Contenido ul li{border: 1px solid rgba(128, 128, 128, 0.5); border-top: none;}
+  .Seccion_Barra_Navegacion .Div_Contenido ul li:hover{background-color: #555;}
+  .Seccion_Barra_Navegacion .Div_Contenido ul li a{padding: 20px 0 20px 0; display: block;}
+  .Seccion_Barra_Navegacion.active .Div_Contenido ul{display: flex;}
+  .Seccion_Barra_Navegacion .Div_Contenido .logo{flex: 1; display: flex; justify-content: space-between; align-items: center;}
 
   /* CONTACTO */
   .DivPrincipal object{width: 100%; min-height: 300px;}
@@ -316,6 +353,7 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 
 @media screen and (max-width: 350px){
   /* GUÍAS */
+  .BlogEntradas a .Entrada{width: 100%;}
   .BlogEntradas a .Entrada div{display: block;}
   .BlogEntradas a .Entrada div h3{width: 100%; text-align: center; margin-bottom: 5px;}
   .BlogEntradas a .Entrada div p{width: 100%; text-align: center;}
