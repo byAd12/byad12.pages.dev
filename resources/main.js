@@ -326,10 +326,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Abrir las páginas de los proyectos
 
 function ReiniciarProyectosHover() {
-    document.getElementById("EnsenarProyectoAiliSSBoton").classList.remove("ProyectoActual");
-    document.getElementById("EnsenarProyectoMiniBoyBoton").classList.remove("ProyectoActual");
-    document.getElementById("EnsenarProyectoMaliciousIPsBoton").classList.remove("ProyectoActual");
-    document.getElementById("EnsenarProyectoChemaHostingBoton").classList.remove("ProyectoActual");
+    document.getElementById("EnsenarProyectoAiliSSBoton").classList.remove("Proyecto_Actual");
+    document.getElementById("EnsenarProyectoMiniBoyBoton").classList.remove("Proyecto_Actual");
+    document.getElementById("EnsenarProyectoMaliciousIPsBoton").classList.remove("Proyecto_Actual");
+    document.getElementById("EnsenarProyectoChemaHostingBoton").classList.remove("Proyecto_Actual");
 }
 
 function EnsenarProyectoAiliSS() {
@@ -338,7 +338,7 @@ function EnsenarProyectoAiliSS() {
     document.getElementById("Proyecto-Malicious-IPs-And-Domains").style.display = "none";
     document.getElementById("Proyecto-Chema-Hosting").style.display = "none";
     ReiniciarProyectosHover();
-    document.getElementById("EnsenarProyectoAiliSSBoton").classList.add("ProyectoActual");
+    document.getElementById("EnsenarProyectoAiliSSBoton").classList.add("Proyecto_Actual");
 }
 
 function EnsenarProyectoMiniBoy() {
@@ -347,7 +347,7 @@ function EnsenarProyectoMiniBoy() {
     document.getElementById("Proyecto-Malicious-IPs-And-Domains").style.display = "none";
     document.getElementById("Proyecto-Chema-Hosting").style.display = "none";
     ReiniciarProyectosHover();
-    document.getElementById("EnsenarProyectoMiniBoyBoton").classList.add("ProyectoActual");
+    document.getElementById("EnsenarProyectoMiniBoyBoton").classList.add("Proyecto_Actual");
 }
 
 function EnsenarProyectoMaliciousIPs() {
@@ -356,7 +356,7 @@ function EnsenarProyectoMaliciousIPs() {
     document.getElementById("Proyecto-Malicious-IPs-And-Domains").style.display = "flex";
     document.getElementById("Proyecto-Chema-Hosting").style.display = "none";
     ReiniciarProyectosHover();
-    document.getElementById("EnsenarProyectoMaliciousIPsBoton").classList.add("ProyectoActual");
+    document.getElementById("EnsenarProyectoMaliciousIPsBoton").classList.add("Proyecto_Actual");
 }
 
 function EnsenarProyectoChemaHosting() {
@@ -365,7 +365,7 @@ function EnsenarProyectoChemaHosting() {
     document.getElementById("Proyecto-Malicious-IPs-And-Domains").style.display = "none";
     document.getElementById("Proyecto-Chema-Hosting").style.display = "flex";
     ReiniciarProyectosHover();
-    document.getElementById("EnsenarProyectoChemaHostingBoton").classList.add("ProyectoActual");
+    document.getElementById("EnsenarProyectoChemaHostingBoton").classList.add("Proyecto_Actual");
 }
 
 // ==========================================================

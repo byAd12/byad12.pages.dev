@@ -19,6 +19,11 @@
         <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
         <!-- ============================== -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ============================== -->
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -40,313 +45,332 @@
         <!-- ========================= -->
         <!-- ========================= -->
 
-        <div class="menu_bar">
-            <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no">
-                <a href="index.html">by<span>Ad</span>12</a>
-                <span class="menu_toggle">&#9776;</span>
-            </h1>
-            <ul>
-                <li><a href="index.html" class="actual">~</a></li>
-                <li><a href="guides.html">~/Guías</a></li>
-                <li><a href="scripts.html">~/Scripts</a></li>
-                <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
-                <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
-            </ul>
-        </div>
-
-        <!-- ========================= -->
-        <!-- ========================= -->
-        <!-- ========================= -->
-
-        <div class="fondo">
-            <!-- =============== -->
-            <!-- IMÁGEN Y TÍTULO -->
-            <!-- =============== -->
-
-            <div class="fondo-img">
-                <img src="img/logo.ico" alt="Logo byAd12">
+        <section class="Seccion_Barra_Navegacion">
+            <div class="Div_Contenido">
+                <h1 class="logo" translate="no">
+                    <a href="index.html">by<span>Ad</span>12</a>
+                    <span class="menu_toggle">&#9776;</span>
+                </h1>
+                <ul>
+                    <li><a href="index.html" class="actual">~</a></li>
+                    <li><a href="guides.html">~/Guías</a></li>
+                    <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
+                    <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
+                </ul>
             </div>
-            <h2 translate="no">by<span>Ad</span>12</h2>
+        </section>
 
-            <!-- ==================== -->
-            <!-- LINKS REDES SOCIALES -->
-            <!-- ==================== -->
+        <!-- ========================= -->
+        <!-- ========================= -->
+        <!-- ========================= -->
 
-            <div class="fondo-imagenes">
-                <div class="HoverParaEnseñar">
-                    <a href="https://github.com/byAd12" target="_blank"><img src="img/github.svg" alt="Logo GitHub"></a>
-                    <p translate="no">GitHub</p>
+        <section class="Seccion_Inicial">
+            <div class="Div_Contenido">
+                <!-- =============== -->
+                <!-- IMÁGEN Y TÍTULO -->
+                <!-- =============== -->
+
+                <div class="fondo-img">
+                    <img src="img/logo.ico" alt="Logo byAd12">
                 </div>
-                <div class="HoverParaEnseñar">
-                    <a href="" id="EmailBoton" target="_blank"><img src="img/gmail.svg" alt="Logo Gmail"></a>
-                    <p translate="no">Email</p>
+                <h2 translate="no">by<span>Ad</span>12</h2>
+
+                <!-- ==================== -->
+                <!-- LINKS REDES SOCIALES -->
+                <!-- ==================== -->
+
+                <div class="fondo-imagenes">
+                    <div class="HoverParaEnseñar">
+                        <a href="https://github.com/byAd12" target="_blank"><img src="img/github.svg" alt="Logo GitHub"></a>
+                        <p translate="no">GitHub</p>
+                    </div>
+                    <div class="HoverParaEnseñar">
+                        <a href="" id="EmailBoton" target="_blank"><img src="img/gmail.svg" alt="Logo Gmail"></a>
+                        <p translate="no">Email</p>
+                    </div>
+                    <div class="HoverParaEnseñar">
+                        <a href="https://steamcommunity.com/id/byAd12" target="_blank"><img src="img/steam.svg" alt="Logo Steam"></a>
+                        <p translate="no">Steam</p>
+                    </div>
+                    <div class="HoverParaEnseñar">
+                        <a href="https://app.hackthebox.com/users/2496373" target="_blank"><img src="img/hackthebox.svg" alt="Logo HackTheBox"></a>
+                        <p translate="no">HackTheBox</p>
+                    </div>
                 </div>
-                <div class="HoverParaEnseñar">
-                    <a href="https://steamcommunity.com/id/byAd12" target="_blank"><img src="img/steam.svg" alt="Logo Steam"></a>
-                    <p translate="no">Steam</p>
-                </div>
-                <div class="HoverParaEnseñar">
-                    <a href="https://app.hackthebox.com/users/2496373" target="_blank"><img src="img/hackthebox.svg" alt="Logo HackTheBox"></a>
-                    <p translate="no">HackTheBox</p>
+                
+                <div class="flecha">
+                    <a href="#proyectos"> ▼ </a>
                 </div>
             </div>
-            
-            <div class="flecha">
-                <a href="#proyectos"> ▼ </a>
-            </div>
-        </div>
+        </section>
 
         <!-- ========================= -->
         <!-- ========================= -->
         <!-- ========================= -->
 
-        <div class="SeccionProyectos">
-            <h2 class="projects-title" id="proyectos">Proyectos</h2>
+        <section class="Seccion_Proyectos">
+            <div class="Div_Contenido">
+                <h2 id="proyectos">Mis proyectos</h2>
 
-            <div class="ContenedorProyectos">
+                <div class="Contenedor_Proyectos">
 
-                <!-- ========================= -->
+                    <!-- ========================= -->
 
-                <div class="IndiceProyectos">
+                    <div class="Indice_Proyectos">
 
-                    <div class="TituloIndice">
+                        <div class="TituloIndice">
 
-                        <p>ÍNDICE</p>
+                            <p>ÍNDICE</p>
+
+                        </div>
+
+                        <!-- ========================= -->
+
+                        <div class="Lista_Botones">
+
+                            <button onclick="EnsenarProyectoChemaHosting()" class="Proyecto_Actual" id="EnsenarProyectoChemaHostingBoton">
+                                <div class="Izquierda">
+                                    <span class="Nombre_Proyecto">Chema Hosting</span> <br> <span class="Etiquetas_Proyecto">Hosting</span>
+                                </div>
+                                <div class="Derecha"> <span>▷</span> </div>
+                            </button>
+
+                            <button onclick="EnsenarProyectoAiliSS()" id="EnsenarProyectoAiliSSBoton">
+                                <div class="Izquierda">
+                                    <span class="Nombre_Proyecto">AILI-SS Software</span> <br> <span class="Etiquetas_Proyecto">Ciberseguridad</span>
+                                </div>
+                                <div class="Derecha"> <span>▷</span> </div>
+                            </button>
+
+                            <button onclick="EnsenarProyectoMaliciousIPs()" id="EnsenarProyectoMaliciousIPsBoton">
+                                <div class="Izquierda">
+                                    <span class="Nombre_Proyecto">Malicious IPs & Domains</span> <br> <span class="Etiquetas_Proyecto">Ciberseguridad</span>
+                                </div>
+                                <div class="Derecha"> <span>▷</span> </div>
+                            </button>
+
+                            <button onclick="EnsenarProyectoMiniBoy()" id="EnsenarProyectoMiniBoyBoton">
+                                <div class="Izquierda">
+                                    <span class="Nombre_Proyecto">Discord Bot "MiniBoy"</span> <br> <span class="Etiquetas_Proyecto">Automatización</span>
+                                </div>
+                                <div class="Derecha"> <span>▷</span> </div>
+                            </button>
+                            
+                        </div>
 
                     </div>
 
                     <!-- ========================= -->
 
-                    <div class="Lista">
+                    <div class="Lista_Paginas">
 
-                        <button onclick="EnsenarProyectoChemaHosting()" class="ProyectoActual" id="EnsenarProyectoChemaHostingBoton">
-                            <div class="Izquierda">
-                                <span class="NombreProyecto">Chema Hosting</span> <br> <span class="EtiquetasProyecto">Hosting</span>
-                            </div>
-                            <div class="Derecha"> <span>▷</span> </div>
-                        </button>
+                        <!-- ========================= -->
 
-                        <button onclick="EnsenarProyectoAiliSS()" id="EnsenarProyectoAiliSSBoton">
-                            <div class="Izquierda">
-                                <span class="NombreProyecto">AILI-SS Software</span> <br> <span class="EtiquetasProyecto">Ciberseguridad</span>
-                            </div>
-                            <div class="Derecha"> <span>▷</span> </div>
-                        </button>
+                        <div class="Proyecto_Individual" id="Proyecto-Chema-Hosting">
 
-                        <button onclick="EnsenarProyectoMaliciousIPs()" id="EnsenarProyectoMaliciousIPsBoton">
-                            <div class="Izquierda">
-                                <span class="NombreProyecto">Malicious IPs & Domains</span> <br> <span class="EtiquetasProyecto">Ciberseguridad</span>
-                            </div>
-                            <div class="Derecha"> <span>▷</span> </div>
-                        </button>
+                            <div class="Arriba">
 
-                        <button onclick="EnsenarProyectoMiniBoy()" id="EnsenarProyectoMiniBoyBoton">
-                            <div class="Izquierda">
-                                <span class="NombreProyecto">Discord Bot "MiniBoy"</span> <br> <span class="EtiquetasProyecto">Automatización</span>
-                            </div>
-                            <div class="Derecha"> <span>▷</span> </div>
-                        </button>
-                        
-                    </div>
-
-                </div>
-
-                <!-- ========================= -->
-
-                <div class="ContenidoProyectos">
-
-                    <!-- ========================= -->
-
-                    <div class="ProyectoIndividual" id="Proyecto-Chema-Hosting">
-
-                        <div class="Arriba">
-
-                            <div class="EtiquetasProyecto">
-                                <span>LISTA DE PROYECTOS - 01 / 04</span>
-                                <span class="FechaProyecto">14/11/2025</span>
-                            </div>
-
-                            <div class="DatosProyecto">
-
-                                <p class="TituloProyecto">Chema Hosting</p>
-                                <p class="DescripcionProyecto">Clúster de Proxmox privado que aloja todo tipo de servicios y juegos. También tiene un script ejecutable para la consola de un sistema Linux con todas las funcionalidades necesarias para mantener el clúster y sus servicios.</p>
-
-                                <div class="ColumnaDatos">
-                                    <div class="Columna">
-                                        <div> <span>Sistema operativo</span> <span class="Separador"></span> <span class="Dato">Proxmox</span> </div>
-                                        <div> <span>Dominio</span> <span class="Separador"></span> <span class="Dato">chemahosting.es</span> </div>
+                                <div class="Etiquetas_Proyecto">
+                                    <span>LISTA DE PROYECTOS - 01 / 04</span>
+                                    <div class="Derecha">
+                                        <span class="Tipo_Proyecto">HOSTING</span>
+                                        <span class="Fecha_Proyecto">14/11/2025</span>
                                     </div>
-                                    <div class="Columna">
-                                        <div> <span>Nodos</span> <span class="Separador"></span> <span class="Dato">2</span> </div>
-                                        <div> <span>Gestión DNS</span> <span class="Separador"></span> <span class="Dato">Cloudflare</span> </div>
+                                </div>
+
+                                <div class="Datos_Proyecto">
+
+                                    <p class="Titulo_Proyecto">Chema Hosting</p>
+                                    <p class="Descripcion_Proyecto">Clúster de Proxmox privado que aloja todo tipo de servicios y juegos. También tiene un script ejecutable para la consola de un sistema Linux con todas las funcionalidades necesarias para mantener el clúster y sus servicios.</p>
+
+                                    <div class="Tabla_De_Datos">
+                                        <div class="Columna">
+                                            <div> <span>Sistema operativo</span> <span class="Separador"></span> <span class="Dato">Proxmox</span> </div>
+                                            <div> <span>Dominio</span> <span class="Separador"></span> <span class="Dato">chemahosting.es</span> </div>
+                                        </div>
+                                        <div class="Columna">
+                                            <div> <span>Nodos</span> <span class="Separador"></span> <span class="Dato">2</span> </div>
+                                            <div> <span>Gestión DNS</span> <span class="Separador"></span> <span class="Dato">Cloudflare</span> </div>
+                                        </div>
                                     </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="Abajo">
+
+                                <div class="Izquierda">
+                                </div>
+
+                                <div class="Derecha">
+                                    <a class="BotonPersonalizadoTexto" href="https://www.chemahosting.es/" target="_blank">
+                                        <p class="TextoRelacionado">Visitar la página web</p>
+                                        <p class="BotonFlecha"><span>↗</span></p>
+                                    </a>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="Abajo">
+                        <!-- ========================= -->
 
-                            <div class="Izquierda">
-                            </div>
+                        <div class="Proyecto_Individual" id="Proyecto-AILI-SS">
 
-                            <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://www.chemahosting.es/" target="_blank">
-                                    <p class="TextoRelacionado">Visitar la página web</p>
-                                    <p class="BotonFlecha"><span>↗</span></p>
-                                </a>
-                            </div>
+                            <div class="Arriba">
 
-                        </div>
-
-                    </div>
-
-                    <!-- ========================= -->
-
-                    <div class="ProyectoIndividual" id="Proyecto-AILI-SS">
-
-                        <div class="Arriba">
-
-                            <div class="EtiquetasProyecto">
-                                <span>LISTA DE PROYECTOS - 02 / 04</span>
-                                <span class="FechaProyecto">04/10/2024</span>
-                            </div>
-
-                            <div class="DatosProyecto">
-
-                                <p class="TituloProyecto">AILI-SS Software</p>
-                                <p class="DescripcionProyecto">Proyecto de una empresa de seguridad para redes de área local (LAN) en ámbitos de empresa y hogares dotando de un servicio como aplicación donde se incluyen varias tecnologías y herramientas para ahorrar tiempo al usuario que usa nuestro servicio y sobre todo para ser de utilidad en el ámbito de las redes locales.</p>
-
-                                <div class="ColumnaDatos">
-                                    <div class="Columna">
-                                        <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
-                                        <div> <span>Sistemas Operativos</span> <span class="Separador"></span> <span class="Dato">Windows, Linux</span> </div>
+                                <div class="Etiquetas_Proyecto">
+                                    <span>LISTA DE PROYECTOS - 02 / 04</span>
+                                    <div class="Derecha">
+                                        <span class="Tipo_Proyecto">CIBERSEGURIDAD</span>
+                                        <span class="Fecha_Proyecto">04/10/2024</span>
                                     </div>
-                                    <div class="Columna">
-                                        <div> <span>Requiere licencia</span> <span class="Separador"></span> <span class="Dato">Sí (gratuita)</span> </div>
+                                </div>
+
+                                <div class="Datos_Proyecto">
+
+                                    <p class="Titulo_Proyecto">AILI-SS Software</p>
+                                    <p class="Descripcion_Proyecto">Proyecto de una empresa de seguridad para redes de área local (LAN) en ámbitos de empresa y hogares dotando de un servicio como aplicación donde se incluyen varias tecnologías y herramientas para ahorrar tiempo al usuario que usa nuestro servicio y sobre todo para ser de utilidad en el ámbito de las redes locales.</p>
+
+                                    <div class="Tabla_De_Datos">
+                                        <div class="Columna">
+                                            <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
+                                            <div> <span>Sistemas Operativos</span> <span class="Separador"></span> <span class="Dato">Windows, Linux</span> </div>
+                                        </div>
+                                        <div class="Columna">
+                                            <div> <span>Requiere licencia</span> <span class="Separador"></span> <span class="Dato">Sí (gratuita)</span> </div>
+                                        </div>
                                     </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="Abajo">
+
+                                <div class="Izquierda">
+                                    <a href="https://github.com/byAd12/AILI-SS/" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/byAd12/AILI-SS"></a>
+                                    <a href="https://github.com/byAd12/AILI-SS/blob/main/LICENSE" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/license/byAd12/AILI-SS?style=social"></a>
+                                    <a href="https://github.com/byAd12/AILI-SS/releases" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/v/release/byAd12/AILI-SS?style=social"></a>
+                                    <a href="https://www.youtube.com/watch?v=DGkqmM8FMDU" target="_blank" rel="noopener"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-YouTube-red?style=social&logo=youtube"></a>
+                                </div>
+
+                                <div class="Derecha">
+                                    <a class="BotonPersonalizadoTexto" href="https://github.com/byAd12/AILI-SS/releases/latest" target="_blank">
+                                        <p class="TextoRelacionado">Descargar en GitHub</p>
+                                        <p class="BotonFlecha"><span>↗</span></p>
+                                    </a>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="Abajo">
+                        <!-- ========================= -->
 
-                            <div class="Izquierda">
-                                <a href="https://github.com/byAd12/AILI-SS/" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/byAd12/AILI-SS"></a>
-                                <a href="https://github.com/byAd12/AILI-SS/blob/main/LICENSE" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/license/byAd12/AILI-SS?style=social"></a>
-                                <a href="https://github.com/byAd12/AILI-SS/releases" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/v/release/byAd12/AILI-SS?style=social"></a>
-                                <a href="https://www.youtube.com/watch?v=DGkqmM8FMDU" target="_blank" rel="noopener"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-YouTube-red?style=social&logo=youtube"></a>
-                            </div>
+                        <div class="Proyecto_Individual" id="Proyecto-Malicious-IPs-And-Domains">
 
-                            <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://github.com/byAd12/AILI-SS/releases/latest" target="_blank">
-                                    <p class="TextoRelacionado">Descargar en GitHub</p>
-                                    <p class="BotonFlecha"><span>↗</span></p>
-                                </a>
-                            </div>
+                            <div class="Arriba">
 
-                        </div>
-
-                    </div>
-
-                    <!-- ========================= -->
-
-                    <div class="ProyectoIndividual" id="Proyecto-Malicious-IPs-And-Domains">
-
-                        <div class="Arriba">
-
-                            <div class="EtiquetasProyecto">
-                                <span>LISTA DE PROYECTOS - 03 / 04</span>
-                                <span class="FechaProyecto">27/01/2024</span>
-                            </div>
-
-                            <div class="DatosProyecto">
-
-                                <p class="TituloProyecto">Malicious IPs & Domains</p>
-                                <p class="DescripcionProyecto">Programa en Python3 que usa la API de Cloudflare y VirusTotal para generar un reporte completo sobre una IP (sólo IPv4) o de una página web mediante su DNS. Enseña datos como reportes de confiabilidad de varios antivirus, recursos enlazados, información sobre el nombre de dominio y otras funcionalidades.</p>
-
-                                <div class="ColumnaDatos">
-                                    <div class="Columna">
-                                        <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
-                                        <div> <span>Tecnologías</span> <span class="Separador"></span> <span class="Dato">CloudFlare, VirusTotal</span> </div>
+                                <div class="Etiquetas_Proyecto">
+                                    <span>LISTA DE PROYECTOS - 03 / 04</span>
+                                    <div class="Derecha">
+                                        <span class="Tipo_Proyecto">CIBERSEGURIDAD</span>
+                                        <span class="Fecha_Proyecto">27/01/2024</span>
                                     </div>
-                                    <div class="Columna">
-                                        <div> <span>Almacenamiento</span> <span class="Separador"></span> <span class="Dato">JSON</span> </div>
-                                        <div> <span>Requiere API Keys</span> <span class="Separador"></span> <span class="Dato">Sí (gratuitas)</span> </div>
+                                </div>
+
+                                <div class="Datos_Proyecto">
+
+                                    <p class="Titulo_Proyecto">Malicious IPs & Domains</p>
+                                    <p class="Descripcion_Proyecto">Programa en Python3 que usa la API de Cloudflare y VirusTotal para generar un reporte completo sobre una IP (sólo IPv4) o de una página web mediante su DNS. Enseña datos como reportes de confiabilidad de varios antivirus, recursos enlazados, información sobre el nombre de dominio y otras funcionalidades.</p>
+
+                                    <div class="Tabla_De_Datos">
+                                        <div class="Columna">
+                                            <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
+                                            <div> <span>Tecnologías</span> <span class="Separador"></span> <span class="Dato">CloudFlare, VirusTotal</span> </div>
+                                        </div>
+                                        <div class="Columna">
+                                            <div> <span>Almacenamiento</span> <span class="Separador"></span> <span class="Dato">JSON</span> </div>
+                                            <div> <span>Requiere API Keys</span> <span class="Separador"></span> <span class="Dato">Sí (gratuitas)</span> </div>
+                                        </div>
                                     </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="Abajo">
+
+                                <div class="Izquierda">
+                                    <a href="https://github.com/byAd12/Malicious-Webs-and-IPs/" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/byAd12/Malicious-Webs-and-IPs"></a>
+                                    <a href="https://github.com/byAd12/Malicious-Webs-and-IPs/blob/main/LICENSE" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/license/byAd12/Malicious-Webs-and-IPs?style=social"></a>
+                                </div>
+
+                                <div class="Derecha">
+                                    <a class="BotonPersonalizadoTexto" href="https://github.com/byAd12/Malicious-Webs-and-IPs" target="_blank">
+                                        <p class="TextoRelacionado">Ver en GitHub</p>
+                                        <p class="BotonFlecha"><span>↗</span></p>
+                                    </a>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="Abajo">
+                        <!-- ========================= -->
 
-                            <div class="Izquierda">
-                                <a href="https://github.com/byAd12/Malicious-Webs-and-IPs/" target="_blank"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/byAd12/Malicious-Webs-and-IPs"></a>
-                                <a href="https://github.com/byAd12/Malicious-Webs-and-IPs/blob/main/LICENSE" target="_blank"><img alt="GitHub License" src="https://img.shields.io/github/license/byAd12/Malicious-Webs-and-IPs?style=social"></a>
-                            </div>
+                        <div class="Proyecto_Individual" id="Proyecto-MiniBoy">
 
-                            <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://github.com/byAd12/Malicious-Webs-and-IPs" target="_blank">
-                                    <p class="TextoRelacionado">Ver en GitHub</p>
-                                    <p class="BotonFlecha"><span>↗</span></p>
-                                </a>
-                            </div>
+                            <div class="Arriba">
 
-                        </div>
-
-                    </div>
-
-                    <!-- ========================= -->
-
-                    <div class="ProyectoIndividual" id="Proyecto-MiniBoy">
-
-                        <div class="Arriba">
-
-                            <div class="EtiquetasProyecto">
-                                <span>LISTA DE PROYECTOS - 04 / 04</span>
-                                <span class="FechaProyecto">01/08/2021</span>
-                            </div>
-
-                            <div class="DatosProyecto">
-
-                                <p class="TituloProyecto">Discord Bot "MiniBoy"</p>
-                                <p class="DescripcionProyecto">Un bot de Discord multifuncional actualmente verificado que cuenta con más de 90 comandos pensados para ser útil en todos los ámbitos. Actualmente se puede encontrar en la página web los enlaces a las tiendas donde se puede adquirir el código fuente.</p>
-
-                                <div class="ColumnaDatos">
-                                    <div class="Columna">
-                                        <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
-                                        <div> <span>Comandos</span> <span class="Separador"></span> <span class="Dato">90 (Slash + Prefix)</span> </div>
+                                <div class="Etiquetas_Proyecto">
+                                    <span>LISTA DE PROYECTOS - 04 / 04</span>
+                                    <div class="Derecha">
+                                        <span class="Tipo_Proyecto">AUTOMATIZACIÓN</span>
+                                        <span class="Fecha_Proyecto">01/08/2021</span>
                                     </div>
-                                    <div class="Columna">
-                                        <div> <span>Base de datos</span> <span class="Separador"></span> <span class="Dato">PostgreeSQL</span> </div>
-                                        <div> <span>Tiene sistema premium</span> <span class="Separador"></span> <span class="Dato">Sí</span> </div>
+                                </div>
+
+                                <div class="Datos_Proyecto">
+
+                                    <p class="Titulo_Proyecto">Discord Bot "MiniBoy"</p>
+                                    <p class="Descripcion_Proyecto">Un bot de Discord multifuncional actualmente verificado que cuenta con más de 90 comandos pensados para ser útil en todos los ámbitos. Actualmente se puede encontrar en la página web los enlaces a las tiendas donde se puede adquirir el código fuente.</p>
+
+                                    <div class="Tabla_De_Datos">
+                                        <div class="Columna">
+                                            <div> <span>Lenguaje</span> <span class="Separador"></span> <span class="Dato">Python3</span> </div>
+                                            <div> <span>Comandos</span> <span class="Separador"></span> <span class="Dato">90 (Slash + Prefix)</span> </div>
+                                        </div>
+                                        <div class="Columna">
+                                            <div> <span>Base de datos</span> <span class="Separador"></span> <span class="Dato">PostgreeSQL</span> </div>
+                                            <div> <span>Tiene sistema premium</span> <span class="Separador"></span> <span class="Dato">Sí</span> </div>
+                                        </div>
                                     </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="Abajo">
+
+                                <div class="Izquierda">
+                                    <img alt="Bot Status" src="https://dcbadge.limes.pink/api/shield/871336640503775282?bot=true&style=social">
+                                </div>
+
+                                <div class="Derecha">
+                                    <a class="BotonPersonalizadoTexto" href="https://dsc.gg/miniboy" target="_blank">
+                                        <p class="TextoRelacionado">Probar en Discord</p>
+                                        <p class="BotonFlecha"><span>↗</span></p>
+                                    </a>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <div class="Abajo">
-
-                            <div class="Izquierda">
-                                <img alt="Bot Status" src="https://dcbadge.limes.pink/api/shield/871336640503775282?bot=true&style=social">
-                            </div>
-
-                            <div class="Derecha">
-                                <a class="BotonPersonalizadoTexto" href="https://dsc.gg/miniboy" target="_blank">
-                                    <p class="TextoRelacionado">Probar en Discord</p>
-                                    <p class="BotonFlecha"><span>↗</span></p>
-                                </a>
-                            </div>
-
-                        </div>
+                        <!-- ========================= -->
 
                     </div>
 
@@ -354,11 +378,70 @@
 
                 </div>
 
-                <!-- ========================= -->
-
             </div>
 
-        </div>
+        </section>
+
+        <!-- ========================= -->
+        <!-- ========================= -->
+        <!-- ========================= -->
+
+        <section class="Seccion_Scripts">
+            <div class="Div_Contenido">
+                <h2 id="scripts">Mis scripts</h2>
+
+                <p class="Descripcion_General_Scripts">
+                    A continuación podrás ver mis scripts de gestión públicos.
+                    <br>
+                    El uso de "sudo" es para poder ejecutar el script sin problemas de permisos.
+                    <br>
+                    Si da fallos, puedes instalar sudo: "apt install -y sudo" y asignarle el grupo sudo a tu usuario.
+                </p>
+
+                <div class="Contenedor_Scripts">
+
+                    <!-- ========================= -->
+
+                    <div class="Script_Individual">
+                        <p class="Titulo_Script">parrot.sh</p>
+                        <p class="Descripcion_Script">Este script es mi archivo de configuración esencial para Parrot Security OS (basado en Linux).</p>
+                    
+                        <div class="BotonPersonalizadoCode">
+                            <pre class="MuestraDeCodigo"><code translate="no" class="bash">wget https://byad12.pages.dev/scripts/parrot.sh -O parrot.sh; chmod +x ./parrot.sh; ./parrot.sh</code></pre>
+                            <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/scripts/parrot.sh" target="_blank" class="BotonFlecha"><span>↗</span></a>
+                        </div>
+                    </div>
+
+                    <!-- ========================= -->
+
+                    <div class="Script_Individual">
+                        <p class="Titulo_Script">proxmox.sh</p>
+                        <p class="Descripcion_Script">Con este script se genera un menú de administración completo para las necesidades de gestión en mi clúster de Proxmox.</p>
+                    
+                        <div class="BotonPersonalizadoCode">
+                            <pre class="MuestraDeCodigo"><code translate="no" class="bash">wget https://byad12.pages.dev/scripts/proxmox.sh -O proxmox.sh; chmod +x ./proxmox.sh; sudo ./proxmox.sh</code></pre>
+                            <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/scripts/proxmox.sh" target="_blank" class="BotonFlecha"><span>↗</span></a>
+                        </div>
+                    </div>
+
+                    <!-- ========================= -->
+
+                    <div class="Script_Individual">
+                        <p class="Titulo_Script">nis.sh</p>
+                        <p class="Descripcion_Script">Este script permite automatizar la configuración de los servidores y clientes del servicio NIS mediante un menú de opciones.</p>
+                    
+                        <div class="BotonPersonalizadoCode">
+                            <pre class="MuestraDeCodigo"><code translate="no" class="bash">wget https://byad12.pages.dev/scripts/nis.sh -O nis.sh; chmod +x ./nis.sh; sudo ./nis.sh</code></pre>
+                            <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/scripts/nis.sh" target="_blank" class="BotonFlecha"><span>↗</span></a>
+                        </div>
+                    </div>
+
+                    <!-- ========================= -->
+
+                </div>
+
+            </div>
+        </section>
 
         <!-- ========================= -->
         <!-- ========================= -->
@@ -382,26 +465,23 @@
         </div> -->
 
         <!-- === -->
-        <div style="height: 20px;"></div>
-        <!-- === -->
 
         <!-- ========================= -->
         <!-- ========================= -->
         <!-- ========================= -->
 
         <footer>
-            <div class="footer-content">
-                <!-- INFORMACIÓN FOOTER-->
-                <div class="footer-header">
+            <div class="Div_Contenido">
+                <!-- ENCABEZADO -->
+                <div class="Footer_Encabezado">
                     <h3 translate="no">by<span>Ad</span>12</h3>
                     <p translate="no"><span class="copyright">© 2023 - 2026</span></p>
-                    <p class="footer-header-widgets"><span id="widget-contador"></span> • <span class="gtranslate_wrapper" id="Traductor"></span></p>
+                    <p class="Footer_Encabezado_Widgets"><span id="widget-contador"></span> • <span class="gtranslate_wrapper" id="Traductor"></span></p>
                 </div>
-                <!-- LINKS FOOTER -->
-                <div class="footer-links">
-                    <ul>
-                        <li class="NoHover"></li>
 
+                <!-- ENLACES -->
+                <div class="Footer_Enlaces">
+                    <ul>
                         <li><a href="https://github.com/byAd12/byad12.pages.dev" target="_blank">Código fuente</a></li>
                         <li><a href="privacy.html">Política de privacidad</a></li>
                         <li><a href="contact.html">Información de contacto</a></li>

@@ -21,67 +21,72 @@
         <!-- ============================== -->
     </head>
     <body>
-        <div class="menu_bar">
-            <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no">
-                <a href="index.html">by<span>Ad</span>12</a>
-                <span class="menu_toggle">&#9776;</span>
-            </h1>
-            <ul>
-                <li><a href="index.html">~</a></li>
-                <li><a href="guides.html">~/Guías</a></li>
-                <li><a href="scripts.html">~/Scripts</a></li>
-                <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
-                <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
-            </ul>
-        </div>
+        <section class="Seccion_Barra_Navegacion">
+            <div class="Div_Contenido">
+                <h1 class="logo" translate="no">
+                    <a href="index.html">by<span>Ad</span>12</a>
+                    <span class="menu_toggle">&#9776;</span>
+                </h1>
+                <ul>
+                    <li><a href="index.html">~</a></li>
+                    <li><a href="guides.html">~/Guías</a></li>
+                    <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
+                    <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
+                </ul>
+            </div>
+        </section>
+
         <!-- DIV DE LA PRIVACIDAD DE LA WEB -->
-        <div class="privacy">
-            <h1>Política de Privacidad</h1>
-            <p>Gracias por visitar <a id="domain">cargando...</a>.</p>
-            <!-- Insertar el dominio -->
-            <script>
-                document.getElementById("domain").textContent = window.location.hostname;
-                document.getElementById("domain").href = window.location;
-            </script>
-                
-            <h2><span class="PrivacidadNumero">1</span>. Información que Recopilamos</h2>
-            <p><b>No se recopila</b> ninguna información personal de los visitantes. No se utilizan cookies, tecnologías de seguimiento ni ningún otro medio para rastrear su actividad en este sitio web. Ninguna información identificable como nombre, dirección, número de teléfono, dirección de correo electrónico o cualquier otra información personal identificable es tratada en este sitio web.</p>
+        <section class="Seccion_Privacidad">
+            <div class="Div_Contenido">
+                <h2>Política de Privacidad</h2>
+
+                <div class="La_Chapa_De_Texto">
+                    
+                    <p class="Subtitulo">1. Información que Recopilamos</p>
+                    <p><b>No se recopila</b> ninguna información personal de los visitantes. No se utilizan cookies, tecnologías de seguimiento ni ningún otro medio para rastrear su actividad en este sitio web. Ninguna información identificable como nombre, dirección, número de teléfono, dirección de correo electrónico o cualquier otra información personal identificable es tratada en este sitio web.</p>
+                    
+                    <p class="Subtitulo">2. Sitios y Enlaces de Terceros</p>
+                    <p>Este sitio web puede contener enlaces a sitios externos que no son operados por el desarrollador. Aunque se toman medidas razonables al enlazar a sitios de terceros, no hay ningún control sobre el contenido o las prácticas de privacidad de estos sitios. Por lo tanto, este sitio web no se responsabiliza de la protección y privacidad de cualquier información que proporcione mientras visita estos sitios. Se le recomienda revisar las políticas de privacidad de cualquier sitio de terceros antes de proporcionar cualquier información personal.</p>
+                    <p>
+                        Este página web utiliza el servicio de traducción de <a target="_blank" href="https://gtranslate.io/privacy-policy">gtranslate.io</a> para mostrar el contenido en diferentes idiomas. Este servicio puede procesar direcciones IP, determinar la ubicación aproximada del visitante y utilizar cookies o scripts externos para ofrecer la traducción automática, lo cual está fuera del control del desarrollador.
+                        Asimismo, se utilizan elementos de la API de <a target="_blank" href="https://hitscounter.dev">hitscounter.dev</a> para mostrar un contador de visitas y de <a target="_blank" href="https://shields.io">shields.io</a> para mostrar badges personalizadas. Estos servicios pueden procesar datos técnicos no identificables (por ejemplo, número de visitas o solicitudes de carga) únicamente con fines estadísticos y de visualización, sin que el desarrollador almacene información personal.
+                    </p>
+                    
+                    <p class="Subtitulo">3. Cambios en esta Política</p>
+                    <p>Esta Política de Privacidad puede modificarse en cualquier momento y las actualizaciones serán efectivas tras su publicación en esta página. El uso continuado del sitio implica la aceptación de dichos cambios. Última modificación: <span class="fecha">06/08/2026</span>.</p>
+                    
+                    <p class="Subtitulo">4. Contacto</p>
+                    <p>Pulse <a href="contact.html">aquí</a> para ir a la página que contiene información de contacto.</p>
+
+                    <p style="text-align: right;">Gracias por visitar <a id="Cargar_Nombre_Dominio">cargando...</a>, <br> ~ byAd12.</p> <!-- Script para insertar el dominio --> <script>document.getElementById("Cargar_Nombre_Dominio").textContent = window.location.hostname; document.getElementById("Cargar_Nombre_Dominio").href = window.location;</script>
             
-            <h2><span class="PrivacidadNumero">2</span>. Sitios y Enlaces de Terceros</h2>
-            <p>Este sitio web puede contener enlaces a sitios externos que no son operados por el desarrollador. Aunque se toman medidas razonables al enlazar a sitios de terceros, no hay ningún control sobre el contenido o las prácticas de privacidad de estos sitios. Por lo tanto, este sitio web no se responsabiliza de la protección y privacidad de cualquier información que proporcione mientras visita estos sitios. Se le recomienda revisar las políticas de privacidad de cualquier sitio de terceros antes de proporcionar cualquier información personal.
-                
-                <br><br>Este página web utiliza el servicio de traducción de <a target="_blank" href="https://gtranslate.io/privacy-policy">gtranslate.io</a> para mostrar el contenido en diferentes idiomas. Este servicio puede procesar direcciones IP, determinar la ubicación aproximada del visitante y utilizar cookies o scripts externos para ofrecer la traducción automática, lo cual está fuera del control del desarrollador.
-                
-                Asimismo, se utilizan elementos de la API de <a target="_blank" href="https://hitscounter.dev">hitscounter.dev</a> para mostrar un contador de visitas y de <a target="_blank" href="https://shields.io">shields.io</a> para mostrar badges personalizadas. Estos servicios pueden procesar datos técnicos no identificables (por ejemplo, número de visitas o solicitudes de carga) únicamente con fines estadísticos y de visualización, sin que el desarrollador almacene información personal.
-            </p>
-            
-            <h2><span class="PrivacidadNumero">3</span>. Cambios en esta Política</h2>
-            <p>Esta Política de Privacidad puede modificarse en cualquier momento y las actualizaciones serán efectivas tras su publicación en esta página. El uso continuado del sitio implica la aceptación de dichos cambios. Última modificación: <span class="fecha">13/08/2025</span>.</p>
-            
-            <h2><span class="PrivacidadNumero">4</span>. Contacto</h2>
-            <p><a href="contact.html">Información de contacto</a>.</p>
-        </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- ========================= -->
         <!-- ========================= -->
         <!-- ========================= -->
 
         <footer>
-            <div class="footer-content">
-                <!-- INFORMACIÓN FOOTER -->
-                <div class="footer-header">
+            <div class="Div_Contenido">
+                <!-- ENCABEZADO -->
+                <div class="Footer_Encabezado">
                     <h3 translate="no">by<span>Ad</span>12</h3>
                     <p translate="no"><span class="copyright">© 2023 - 2026</span></p>
-                    <p class="footer-header-widgets"><span class="gtranslate_wrapper" id="Traductor"></span></p>
+                    <p class="Footer_Encabezado_Widgets"><span class="gtranslate_wrapper" id="Traductor"></span></p>
                 </div>
-                <!-- LINKS FOOTER -->
-                <div class="footer-links">
+
+                <!-- ENLACES -->
+                <div class="Footer_Enlaces">
                     <ul>
                         <li><a href="https://github.com/byAd12/byad12.pages.dev" target="_blank">Código fuente</a></li>
-                        <li><a href="privacy.html" class="actual">Política de privacidad</a></li>
+                        <li><a href="privacy.html">Política de privacidad</a></li>
                         <li><a href="contact.html">Información de contacto</a></li>
                     </ul>
+                    
                 </div>
             </div>
         </footer>
