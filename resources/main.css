@@ -240,6 +240,14 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Seccion_Modelos .Div_Contenido .Contenido_Modelos{display: flex; flex-direction: column; gap: 20px;}
 
 /* ========================================================= */
+/* ERROR */
+
+.Seccion_Error .Div_Contenido{display: flex; flex-direction: column; justify-content: center;}
+.Seccion_Error .Div_Contenido .Codigo_Error{font-size: 100px !important;}
+.Seccion_Error .Div_Contenido .Codigo_Error span{color: #7cfb2d !important;}
+.Seccion_Error .Div_Contenido .Div_Boton_Volver{width: 100%;}
+
+/* ========================================================= */
 /* GUÍA */
 
 .DivPrincipal{text-align: center; margin: 0 auto; max-width: 1250px;}
@@ -290,15 +298,15 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 
 /* PARA TEXTO */
 
-.BotonPersonalizadoTexto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0;}
+.Boton_Personalizado_Texto{display: flex; margin: 0 auto; align-items: center; justify-content: center; gap: 0;}
 
-.BotonPersonalizadoTexto p.TextoRelacionado{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; background-color: #22272e; color: #adbac7; padding: 1em; user-select: text;}
+.Boton_Personalizado_Texto p.TextoRelacionado{border-bottom-left-radius: 5px; border-top-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none; background-color: #22272e; color: #adbac7; padding: 1em; user-select: text;}
 
-.BotonPersonalizadoTexto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
-.BotonPersonalizadoTexto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
+.Boton_Personalizado_Texto p.BotonFlecha{display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: 3px solid transparent;}
+.Boton_Personalizado_Texto p.BotonFlecha span{margin: 0 auto; transition: all .3s;}
 
-.BotonPersonalizadoTexto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5); color: black;}
-.BotonPersonalizadoTexto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5) !important;}
+.Boton_Personalizado_Texto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5); color: black;}
+.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5) !important;}
 
 /* ========================================================= */
 /* FOOTER */
@@ -310,7 +318,7 @@ footer .Div_Contenido .Footer_Encabezado{text-align: center; display: flex; flex
 footer .Div_Contenido .Footer_Encabezado h3{font-size: 30px; color: white; font-family: "Smoch";}
 footer .Div_Contenido .Footer_Encabezado h3 span{color: #7cfb2d; font-family: "Smoch";}
 footer .Div_Contenido .Footer_Encabezado p span.copyright{user-select: text;}
-footer .Div_Contenido .Footer_Encabezado .Footer_Encabezado_Widgets{display: flex; align-items: center; gap: 5px; justify-content: center;}
+footer .Div_Contenido .Footer_Encabezado .Footer_Encabezado_Widgets{display: flex; gap: 5px; align-items: center; justify-content: center;}
 
 footer .Div_Contenido .Footer_Enlaces ul{list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;}
 footer .Div_Contenido .Footer_Enlaces ul li a{color: white;} 
