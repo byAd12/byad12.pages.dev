@@ -173,7 +173,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* INDEX - SECCIÓN DE SCRIPTS */
 
 .Seccion_Scripts p:not(.Titulo_Script){color: rgb(228, 196, 196);}
-.Seccion_Scripts p.Descripcion_General_Scripts{user-select: text; margin-bottom: 20px;}
+.Seccion_Scripts p.Descripcion_General_Scripts{user-select: text; margin-bottom: 50px;}
 
 .Contenedor_Scripts{display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(128, 128, 128, 0.5); border-right: 1px solid rgba(128, 128, 128, 0.5);}
 .Contenedor_Scripts .Script_Individual{min-width: 0; width: 100%; min-height: 200px; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column; gap: 20px;}
@@ -224,7 +224,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* ========================================================= */
 /* Estilos conjuntos */
 
-.ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin-bottom: 20px; margin-top: 0;}
+.ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin-bottom: 50px; margin-top: 0;}
 .ParrafoCompartido span{color: #7cfb2d; user-select: all;}
 .ParrafoCompartido a{color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
 .ParrafoCompartido a:hover{border-bottom: 1px solid #7cfb2d;}
@@ -284,12 +284,6 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .oculto{display: none !important;}
 
 @keyframes bordeAnim{0%{left:-100%;} 50%{left:0;} 100%{left:100%;}}
-
-/* ========================================================= */
-/* SCRIPTS */
-
-.ScriptsAjustarVH{min-height: 69vh;}
-h3.QuitarPaddingTop{padding-top: 0 !important;}
 
 /* ========================================================= */
 /* BOTÓN PERSONALIZADO */

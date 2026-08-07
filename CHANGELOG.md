@@ -1,1 +1,1 @@
-Arreglo general de estilos + @media
+Ligeras mejoras de estilos
