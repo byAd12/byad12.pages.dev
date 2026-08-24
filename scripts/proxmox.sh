@@ -1253,8 +1253,9 @@ EOF
 
         printf "%b\n" \
             " | ${Az}OPENVPN - OPCIONES ${Bl}" \
-            " | ================================" \
-                "${Ne}1${Bl} | Crear y configurar un contenedor" \
+            " | ======================================" \
+                "${Ne}1${Bl} | Crear un CT y ejecutar openvpn-install" \
+                "${Ne}2${Bl} | Solo ejecutar openvpn-install" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -1322,6 +1323,28 @@ EOF
             pct enter $id_ct
 
             echo -e "\n${Ve}¡Contenedor creado y configurado correctamente!${Bl}"
+            ;;
+
+        ##############################################################
+        # VPN - OPENVPN - EJECUTAR OPENVPN-INSTALL
+        ##############################################################
+        2)
+            clear
+
+            echo -e "\n${Az}Instalando las dependencias...${Bl}"
+            apt update
+            apt dist-upgrade -y
+            apt install -y openvpn git
+
+            echo -e "\n${Az}Descargando openvpn-install en '${Am_}/root/openvpn-install${Az}'...${Bl}"
+            git clone https://github.com/Nyr/openvpn-install /root/openvpn-install
+
+            echo -e "\n${Az}Ejecutando openvpn-install mediante bash...${Bl}"
+            echo -e "\n${Bl}  Al acabar de configurarlo, copie el perfil .ovpn creado."
+            cd /root/openvpn-install
+            bash openvpn-install.sh
+
+            echo -e "\n${Ve}¡Openvpn-install ejecutado correctamente!${Bl}"
             ;;
 
         ##############################################################

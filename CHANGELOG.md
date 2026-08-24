@@ -1,5 +1,4 @@
-Mejora de estilos
+Mejora de script (proxmox.sh)
 
-# *
-Mejora del nombre de las clases HTML
-Mejora de estilos
+# scripts/proxmox.sh
+Nueva opción de OpenVPN
