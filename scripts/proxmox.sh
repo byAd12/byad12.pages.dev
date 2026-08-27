@@ -1320,6 +1320,7 @@ EOF
             echo -e "\n${Bl}Al acabar de configurarlo, copie el perfil .ovpn creado y ejecute:"
             echo -e "\n${Am}  exit${Bl}"
             echo -e "\n${Bl}SHELL DENTRO DEL CONTENEDOR:"
+            echo -e ""
             pct enter $id_ct
 
             echo -e "\n${Ve}¡Contenedor creado y configurado correctamente!${Bl}"
