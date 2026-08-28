@@ -641,9 +641,9 @@ originRequest:
 noTLSVerify: true
 
 ingress:
-- hostname: $nombre_dominio.chemahosting.es
+  - hostname: $nombre_dominio.chemahosting.es
     service: $tipo_conexion://127.0.0.1:$puerto_web
-- service: http_status:404
+  - service: http_status:404
 EOF
 
             echo -e "\n${Az}Copiando credenciales del túnel...${Bl}"
@@ -704,9 +704,9 @@ originRequest:
 noTLSVerify: true
 
 ingress:
-- hostname: $nombre_dominio.chemahosting.es
-    service: tcp://127.0.0.1:$puerto_web
-- service: http_status:404
+  - hostname: $nombre_dominio.chemahosting.es
+      service: tcp://127.0.0.1:$puerto_web
+  - service: http_status:404
 EOF
 
             echo -e "\n${Az}Copiando las credenciales del túnel a '${Am_}/etc/cloudflared/${Az}'...${Bl}"
