@@ -746,6 +746,9 @@ EOF
             echo -e "\n${Az}Deshabilitando el servicio de Cloudflared...${Bl}"
             systemctl disable cloudflared
 
+            echo -e "\n${Az}Desinstalando el servicio de Cloudflared...${Bl}"
+            cloudflared service uninstall
+
             echo -e "\n${Az}Purgando el paquete de Cloudflared...${Bl}"
             apt purge cloudflared -y
 
