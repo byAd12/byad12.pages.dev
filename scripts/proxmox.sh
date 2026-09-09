@@ -637,8 +637,9 @@ while true; do
 tunnel: $uuid
 credentials-file: /etc/cloudflared/$uuid.json
 loglevel: debug
+
 originRequest:
-noTLSVerify: true
+  noTLSVerify: true
 
 ingress:
   - hostname: $nombre_dominio.chemahosting.es
@@ -663,6 +664,9 @@ EOF
 
             echo -e "\n${Az}Reiniciando el servicio de Cloudflared...${Bl}"
             systemctl restart cloudflared
+
+            echo -e "\n${Az}Verificando la sintaxis de '${Am_}/etc/cloudflared/config.yml${Az}'...${Bl}"
+            cloudflared tunnel ingress validate
 
             echo -e "\n${Ve}¡Túnel creado correctamente!${Bl}"
             ;;
@@ -700,8 +704,9 @@ EOF
 tunnel: $uuid
 credentials-file: /etc/cloudflared/$uuid.json
 loglevel: debug
+
 originRequest:
-noTLSVerify: true
+  noTLSVerify: true
 
 ingress:
   - hostname: $nombre_dominio.chemahosting.es
