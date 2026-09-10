@@ -1331,6 +1331,13 @@ EOF
             echo -e ""
             pct enter $id_ct
 
+            clear
+            echo -e "\n${Az}Verificando el servicio de openvpn...${Bl}"
+            pct exec "$id_ct" -- systemctl | grep openvpn
+
+            echo -e "\n${Az}Verificando el puerto de openvpn...${Bl}"
+            pct exec "$id_ct" -- ps aux | grep vpn
+
             echo -e "\n${Ve}¡Contenedor creado y configurado correctamente!${Bl}"
             ;;
 
