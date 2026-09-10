@@ -19,6 +19,7 @@ br{user-select: none;}
 
 @font-face{font-family: "Oswald"; src: url("../fonts/Oswald.ttf");}
 @font-face{font-family: "Smoch"; src: url("../fonts/SmoochSans-VariableFont_wght.ttf");}
+@font-face{font-family: "FiraCode"; src: url('../fonts/FiraCode-VariableFont_wght.ttf');}
 
 /* ========================================================= */
 /* MENÚ NAVEGACIÓN */
@@ -307,6 +308,49 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 
 .Boton_Personalizado_Texto:hover p.BotonFlecha{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5); color: black;}
 .Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5) !important;}
+
+/* ========================================================= */
+/* TOPOLOGÍA DEL CLÚSTER */
+
+.contenedor-scroll-red{width: 1250px; overflow-x: auto; -webkit-overflow-scrolling: touch;  padding-bottom: 15px; color: white; user-select: text;}
+.bloque_topologia_red{display: flex; flex-direction: column; gap: 0; justify-content: center; align-items: center; width: 100%;}
+.bloque_topologia_red a{font-family: "FiraCode"; color: lightblue;}
+
+.bloque_topologia_red .linea-separadora{height: 25px;}
+.bloque_topologia_red .linea-separadora-vertical{width: 0.1px; background-color: gray;}
+.bloque_topologia_red .linea-separadora-vertical-dashed{width: 0.1px; border-left: 0.1px dashed gray;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-arriba{width: 50%; border: 1px solid gray; border-bottom: none;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-arriba-dashed{width: 50%; border: 1px dashed gray; border-bottom: none;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-abajo-dashed{width: 50%; border: 1px dashed gray; border-top: none;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-central{width: 50%; border: 1px solid gray; border-bottom: none; border-top: none;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-central-dashed{width: 50%; border: 1px dashed gray; border-bottom: none; border-top: none;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-central-solo-izquierda{width: 50%; border-left: 1px solid gray;}
+.bloque_topologia_red .linea-separadora-horizontal-2-nodos-central-solo-derecha{width: 50%; border-right: 1px solid gray;}
+
+.bloque_topologia_red .nodos_red{display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; width: 100%;}
+
+.bloque_topologia_red .nota-doble{display: flex; justify-content: space-between; width: 50%; height: 0; margin-bottom: 35px;}
+.bloque_topologia_red .nota-doble p{margin: 0; padding: 0 10px; background-color: #191919; line-height: 1;}
+.bloque_topologia_red .nota-doble p:first-child{transform: translate(-50%, -50%);}
+.bloque_topologia_red .nota-doble p:last-child{transform: translate(50%, -50%);}
+
+.bloque_topologia_red .nodo_red{padding: 15px; border: 1px solid gray; width: 45%; text-align: left;}
+.bloque_topologia_red .nodo_red .nombre-nodo{font-weight: bold; font-family: "FiraCode";}
+.bloque_topologia_red .nodo_red.vacio{background: transparent; border: none;}
+.bloque_topologia_red .nodo_red.proxmox{background-color: #191919; border: 2px solid lightblue;}
+.bloque_topologia_red .nodo_red.proxmox .nombre-nodo, .bloque_topologia_red .nodo_red.proxmox .nombre-nodo *{color: lightblue;}
+.bloque_topologia_red .nodo_red.netbird{background-color: #191919; border: 2px solid green;}
+.bloque_topologia_red .nodo_red.netbird .nombre-nodo, .bloque_topologia_red .nodo_red.netbird .nombre-nodo *{color: green;}
+.bloque_topologia_red .nodo_red.cloudflare{background-color: #191919; border: 2px solid orange;}
+.bloque_topologia_red .nodo_red.cloudflare .nombre-nodo, .bloque_topologia_red .nodo_red.cloudflare .nombre-nodo *{color: orange;}
+.bloque_topologia_red .nodo_red.servicio .nombre-nodo, .bloque_topologia_red .nodo_red.servicio .nombre-nodo *{color: white;}
+
+.bloque_topologia_red .nodo_red .detalles-nodo{padding-top: 15px; font-size: 14px;}
+.bloque_topologia_red .nodo_red .detalles-nodo span{color: gray; user-select: all; font-family: "FiraCode";}
+
+@media screen and (max-width: 1245px) {
+    .bloque_topologia_red{width: 1300px; min-width: 1300px;}
+}
 
 /* ========================================================= */
 /* FOOTER */

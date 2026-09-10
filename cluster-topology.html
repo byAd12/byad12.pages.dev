@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title translate="no">byAd12 - Topología del clúster</title>
+        <meta name="description" content="Consulte como puedes contactar a byAd12 y como puedes donar a sus proyectos.">
+        <meta name="keywords" content="Blog, Guías, Guía, LDAP, JS, BIND9, APACHE, APACHE2, FTP, VSFTPD, DOCKERS, GPG, byAd12">
+        <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- ============================== -->
+        <meta property="og:title" content="byAd12 - Contacto">
+        <meta property="og:description" content="Consulte como puedes contactar a byAd12 y como puedes donar a sus proyectos.">
+        <meta property="og:image" content="https://byAd12.pages.dev/img/logo.ico">
+        <meta property="og:url" content="https://byAd12.pages.dev/contact.html">
+        <!-- ============================== -->
+        <link rel="stylesheet" type="text/css" href="resources/main.css">
+        <!-- ============================== -->
+        <script src="resources/main.js"></script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
+        <!-- ============================== -->
+    </head>
+    <body>
+        <section class="Seccion_Barra_Navegacion">
+            <div class="Div_Contenido">
+                <h1 class="logo" translate="no">
+                    <a href="index.html">by<span>Ad</span>12</a>
+                    <span class="menu_toggle">&#9776;</span>
+                </h1>
+                <ul>
+                    <li><a href="index.html">~</a></li>
+                    <li><a href="guides.html">~/Guías</a></li>
+                    <!--<li><a href="models.html" class="actual">~/Modelos</a></li>-->
+                    <!--<li class="ocultarMOVIL"><a href="#Traductor">./Translate</a></li>-->
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            
+            <div class="contenedor-scroll-red">
+                <div class="bloque_topologia_red">
+
+                        <div class="nodo_red cloudflare">
+                            <p class="nombre-nodo">Servicio Cloud: <a href="https://www.cloudflare.com" target="_blank">Cloudflare</a></p>
+
+                            <p class="detalles-nodo">
+                                - Servidor DNS "<a href="https://one.one.one.one/dns/" target="_blank">1.1.1.1</a>".
+                                <br>
+                                - Gestión DNS para el dominio "<a href="https://www.chemahosting.es" target="_blank">chemahosting.es</a>".
+                                <br>
+                                - Despliegue automático de la web "<a href="https://www.chemahosting.es" target="_blank">www.chemahosting.es</a>" mediante un Worker Build y <a href="https://github.com/Chemahosting/www.chemahosting.es" target="_blank">GitHub</a>.
+                            </p>
+                        </div>
+
+                    <div class="linea-separadora linea-separadora-vertical-dashed"></div>
+
+                    <div class="nota">
+                        <p>Internet</p>
+                    </div>
+
+                    <div class="linea-separadora linea-separadora-vertical-dashed"></div>
+
+                    <div class="nota">
+                        <p>Gateway<br>(10.200.0.1)</p>
+                    </div>
+                    <div class="linea-separadora linea-separadora-vertical"></div>
+                    <div class="linea-separadora linea-separadora-horizontal-2-nodos-arriba"></div>
+
+                    <div class="nodos_red">
+
+                        <div class="nodo_red proxmox">
+                            <p class="nombre-nodo">Nodo Proxmox VE: <a href="https://coruna1.XX" target="_blank">coruna1</a></p>
+
+                            <p class="detalles-nodo">
+                                IP Local: <span>10.200.0.2/16</span> • 
+                                ...
+                            </p>
+
+                            <p class="detalles-nodo">
+                                RAM: <span>X GB</span> • 
+                                HDD: <span>X GB</span> • 
+                                CPU: <span>i3-7100</span> • 
+                                Núcleos: <span>4</span>
+                            </p>
+                        </div>
+
+                        <div class="nodo_red proxmox">
+                            <p class="nombre-nodo">Nodo Proxmox VE: <a href="https://coruna2.XX" target="_blank">coruna2</a></p>
+
+                            <p class="detalles-nodo">
+                                IP Local: <span>10.200.0.3/16</span> • 
+                                ...
+                            </p>
+
+                            <p class="detalles-nodo">
+                                RAM: <span>X GB</span> • 
+                                HDD: <span>X GB</span> • 
+                                CPU: <span>X</span> • 
+                                Núcleos: <span>X</span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="linea-separadora linea-separadora-horizontal-2-nodos-central"></div>
+
+                    <div class="nodos_red">
+
+                        <div class="nodo_red servicio">
+                            <p class="nombre-nodo">Servicio: <a>Cloudflared</a></p>
+                            <p class="detalles-nodo">
+                                Túnel de Cloudflare: <span>https://localhost:8006</span> → <span>coruna1.XX</span>
+                                <br>
+                                Protección: Zero Trust + OAuth
+                            </p>
+                        </div>
+
+                        <div class="nodo_red servicio">
+                            <p class="nombre-nodo">Servicio: <a>Cloudflared</a></p>
+                            <p class="detalles-nodo">
+                                Túnel de Cloudflare: <span>https://localhost:8006</span> → <span>coruna2.XX</span>
+                                <br>
+                                Protección: Zero Trust + OAuth
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="linea-separadora linea-separadora-horizontal-2-nodos-central"></div>
+
+                    <div class="nodos_red">
+
+                        <div class="nodo_red servicio">
+                            <p class="nombre-nodo">...</p>
+                        </div>
+
+                        <div class="nodo_red servicio">
+                            <p class="nombre-nodo">...</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- ========================= -->
+        <!-- ========================= -->
+        <footer>
+            <div class="Div_Contenido">
+                <!-- ENCABEZADO -->
+                <div class="Footer_Encabezado">
+                    <h3 translate="no">by<span>Ad</span>12</h3>
+                    <p translate="no"><span class="copyright">© 2023 - 2026</span></p>
+                    <p class="Footer_Encabezado_Widgets"><span class="gtranslate_wrapper" id="Traductor"></span></p>
+                </div>
+
+                <!-- ENLACES -->
+                <div class="Footer_Enlaces">
+                    <ul>
+                        <li><a href="https://github.com/byAd12/byad12.pages.dev" target="_blank">Código fuente</a></li>
+                        <li><a href="privacy.html">Política de privacidad</a></li>
+                        <li><a href="contact.html">Información de contacto</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </footer>
+        
+    </body>
+</html>
