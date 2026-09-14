@@ -154,20 +154,20 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker run -p [puerto_local]:[puerto_docker] [docker]</code></pre>
                 <p class="Expl Expl_nivel2"><b>-p</b>: Redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> del host al <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</p>
 
-                <p class="Expl">También se puede especificar la IP <span class="span_contenido" translate="no">[ip_local]</span> del sistema local del host:</p>
+                <p class="Expl">También se puede especificar la IP del sistema local del host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p [ip_local]:[puerto_local]:[puerto_docker] [docker]</code></pre>
 
                 <p>Modo de red:</p>
                 
+                <p class="Expl"><b>Modo host</b>: El docker no tendrá IP ni mapeo de puertos. Solo será un proceso del host:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker run --network host [docker]</code></pre>
+
                 <p class="Expl">
                     <b>Modo bridge</b>: Por defecto el docker está en el modo de red <span class="span_contenido" translate="no">bridge</span>.
                     Tiene IP propia (a partir de la red creada por docker) y permite usar mapeo de puertos. El DNS que tendrá será el utilizado en el host.
                 </p>
-                
-                <p class="Expl"><b>Modo host</b>: El docker no tendrá IP ni mapeo de puertos. Solo será un proceso del host:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --network host [docker]</code></pre>
 
-                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde con:</p>
+                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde mediante el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker update [parámetros] [docker]</code></pre>
                 
             </div>
