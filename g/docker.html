@@ -134,10 +134,11 @@ Código por byAd12
 
                 <p class="Expl">Asignar un nombre para poder identificar el docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name [nuevo_nombre] [docker]</code></pre>
-                <p class="Expl Expl_nivel2"><b>[docker]</b>: Seleccionar el docker a ejecutar.</p>
                 
                 <p class="Expl">Indicar que se quiere ejecutar el docker persistentemente hasta que se detenga manualmente:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --restart unless-stopped [docker]</code></pre>
+
+                <p>Limitación de recursos:</p>
 
                 <p class="Expl">Limitar los núcleos de la CPU que puede utilizar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --cpus [cantidad_CPU] [docker]</code></pre>
@@ -146,20 +147,15 @@ Código por byAd12
                 <p class="Expl">Limitar los cantidad máxima de RAM que puede utilizar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --memory [cantidad_RAM] [docker]</code></pre>
                 <p class="Expl Expl_nivel2">Formato de <b>[cantidad_RAM]</b>: "512M" (MiB), "1G" (GiB).</p>
-            
-                <p class="Expl">Cualquiera de estas opciones se puede modificar más tarde con:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker update [parámetros] [docker]</code></pre>
 
                 <p>Redirección de puertos:</p>
 
-                <p class="Expl">Para redireccionar un puerto del host al docker:</p>
+                <p class="Expl">Se pueden redireccionarse varios puertos a la vez, para ello hay que repetir la opción <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p [puerto_local]:[puerto_docker] [docker]</code></pre>
-                <p class="Expl Expl_nivel2">Se pueden redireccionarse varios puertos a la vez, para ello hay que repetir la opción <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar.</p>
-                <p class="Expl Expl_nivel2"><b>-p 8089:80</b>: Redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> del host al <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</p>
-                <p class="Expl Expl_nivel2"><b>[docker]</b>: Es el ID del docker a ejecutar.</p>
-                
+                <p class="Expl Expl_nivel2"><b>-p</b>: Redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> del host al <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</p>
+
+                <p class="Expl">También se puede especificar la IP <span class="span_contenido" translate="no">[ip_local]</span> del sistema local del host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p [ip_local]:[puerto_local]:[puerto_docker] [docker]</code></pre>
-                <p class="Expl Expl_nivel2">En este caso se redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> de la IP <span class="span_contenido" translate="no">[ip_local]</span> al puerto <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</p>
 
                 <p>Modo de red:</p>
                 
@@ -170,6 +166,9 @@ Código por byAd12
                 
                 <p class="Expl"><b>Modo host</b>: El docker no tendrá IP ni mapeo de puertos. Solo será un proceso del host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --network host [docker]</code></pre>
+
+                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde con:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker update [parámetros] [docker]</code></pre>
                 
             </div>
 
