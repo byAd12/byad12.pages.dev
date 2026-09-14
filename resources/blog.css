@@ -99,7 +99,7 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 /* =================================================== */
 /* Texto */
 
-.codigo, p.Expl, , p.Expl_nivel2, p{margin: 15px 0 15px 0;}
+.codigo, p.Expl, p.Expl_nivel2, p{margin: 15px 0 15px 0;}
 p.Expl, .codigo, ul{margin-left: 30px;}
 p.Expl_nivel2{margin-left: 60px;}
 .parte1 div p u, .TituloCreditosInferior{text-underline-offset: 5px;}
