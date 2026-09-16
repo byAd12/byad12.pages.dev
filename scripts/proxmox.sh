@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # -- byad12.pages.dev/scripts/proxmox.sh
-# -- https://www.chemahosting.es
+# -- https://www.chemahosting.eu
 
 ##############################################################
 # CODIFICACIÓN DEL ARCHIVO
@@ -58,7 +58,7 @@ while true; do
     Az=$'\033[34;1m' # Texto en negrita y en azul
     Az_=$'\033[34m' # Texto en azul
 
-    echo -e "Script hecho por ${Az}byAd12.pages.dev${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.es\n${Bl}"
+    echo -e "Script hecho por ${Az}byAd12.pages.dev${Bl}\n   ${Ne}2025${Bl} - ${Az}www.chemahosting.eu\n${Bl}"
 
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
@@ -642,7 +642,7 @@ originRequest:
   noTLSVerify: true
 
 ingress:
-  - hostname: $nombre_dominio.chemahosting.es
+  - hostname: $nombre_dominio.chemahosting.eu
     service: $tipo_conexion://127.0.0.1:$puerto_web
   - service: http_status:404
 EOF
@@ -709,7 +709,7 @@ originRequest:
   noTLSVerify: true
 
 ingress:
-  - hostname: $nombre_dominio.chemahosting.es
+  - hostname: $nombre_dominio.chemahosting.eu
       service: tcp://127.0.0.1:$puerto_web
   - service: http_status:404
 EOF
@@ -849,7 +849,7 @@ EOF
             read -p 'CLOUDFLARE_API_TOKEN: ' api_token; [[ -z "${api_token// /}" || "$api_token" == "exit" ]] && continue
 
             echo -e "\n${Az}Creando el docker...${Bl}"
-            docker run -d --restart=unless-stopped --network host -e CLOUDFLARE_API_TOKEN=$api_token -e DOMAINS=$subdominio.chemahosting.es -e PROXIED=false favonia/cloudflare-ddns:latest
+            docker run -d --restart=unless-stopped --network host -e CLOUDFLARE_API_TOKEN=$api_token -e DOMAINS=$subdominio.chemahosting.eu -e PROXIED=false favonia/cloudflare-ddns:latest
 
             echo -e "\n${Az}Verificando...${Bl}"
             docker ps -a | grep favonia/cloudflare-ddns
