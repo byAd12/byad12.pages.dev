@@ -273,7 +273,7 @@ ul.ULFTPCamb1:not(.menu_bar ul) li{margin-left: 40px;}
 
 .tabla_cmd th{color: gray;}
 .tabla_cmd td{color: white; line-height: 23px; padding: 10px !important; background-color: #2a2c2e;}
-.tabla_cmd td u{color: rgb(228, 196, 196); text-underline-offset: 1px;}
+.tabla_cmd td u{color: rgb(228, 219, 219); text-underline-offset: 3px;}
 .tabla_cmd td.titulo{text-align: left; font-family: "Doto"; font-size: 20px; background-color: rgb(29, 30, 30); top: 0; position: sticky;}
 .tabla_cmd td.opcion{color: #2ecc71; text-align: center;}
 .tabla_cmd span.opcion{color: rgba(46, 204, 113, 0.8);}

@@ -58,56 +58,56 @@ Código por byAd12
             <!-- ================== -->
             <!-- ================== -->
             <tr>
-                <td class="titulo" colspan="2">CONEXIONES TCP</td>
+                <td class="titulo" colspan="2">ESTADOS DE UNA CONEXIÓN TCP</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → SYN/ACK → ACK</td>
-                <td>Conexión TCP exitosa.</td>
+                <td>La conexión TCP se estableció exitosamente.</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → RA</td>
-                <td>RA: Indica que se rechaza la conexión (RST) y que se confirma la recepción del SYN enviado (ACK).</td>
+                <td>RA: Indica que se rechaza la conexión (<span class="negativo">RST</span>) y que se confirma la recepción del SYN enviado (<span class="positivo">ACK</span>).</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → (No responde)</td>
-                <td>Posibles causas: Host apagado, firewall ignorando paquetes o paquete perdido.</td>
+                <td>El objetivo no responde porque puede estar apagado, el firewall filtra los paquetes o se perdió el paquete.</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → SYN/ACK → (No recibe ACK)</td>
-                <td>Nuestro host no responde a la conexión (conexión TCP-SYN).</td>
+                <td>Nuestro host no responde a la conexión (método <span class="opcion">TCP-SYN</span>).</td>
             </tr>
             <tr>
                 <td class="opcion">SYN → SYN</td>
-                <td>Error del servidor al responder con SYN.</td>
+                <td>Se produjo un error en el objetivo ya que responde con la flag <span class="negativo">SYN</span>.</td>
             </tr>
             <tr>
                 <td class="opcion">FIN → FIN/ACK → ACK</td>
-                <td>Conexión TCP finalizada.</td>
+                <td>La conexión TCP se finalizó exitosamente.</td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
             <tr>
-                <td class="titulo" colspan="2">OBJETIVOS</td>
+                <td class="titulo" colspan="2">SELECCIONAR EL OBJETIVO</td>
             </tr>
             <tr>
                 <td class="opcion">10.200.0.0<span class="c1">/16</span></td>
-                <td>La red entera.</td>
+                <td>Todas las IPs de la dirección de red especificada.</td>
             </tr>
             <tr>
                 <td class="opcion">10.200.0.1</td>
-                <td>Un único objetivo.</td>
+                <td>Un única IP.</td>
             </tr>
             <tr>
                 <td class="opcion">10.200.0.1 10.200.0.2</td>
-                <td>Ciertas IPs separadas por espacios.</td>
+                <td>Varias IPs separadas por espacios.</td>
             </tr>
             <tr>
                 <td class="opcion">10.200.0.<span class="c1">0-20</span></td>
                 <td>Un rango de ciertas IPs.</td>
             </tr>
             <tr>
-                <td class="opcion">-iL<span class="c1">&lt;nombre_archivo&gt;</span></td>
-                <td>Varias IPs en un archivo separadas una tras otra con saltos de línea.</td>
+                <td class="opcion">-iL<span class="c1">&lt;ruta_archivo&gt;</span></td>
+                <td>Las IPs se pueden almacenar en un archivo siendo separadas mediante con saltos de línea.</td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
@@ -116,7 +116,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-p<span class="c1">-</span></td>
-                <td>Los 65.535 puertos.</td>
+                <td>Todos los 65.535 puertos.</td>
             </tr>
             <tr>
                 <td class="opcion">-p <span class="c1">22</span></td>
@@ -124,7 +124,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-p <span class="c1">22,80,443</span></td>
-                <td>Varios puertos separados por comas.</td>
+                <td>Un conjunto de puertos separados por comas.</td>
             </tr>
             <tr>
                 <td class="opcion">-p <span class="c1">22-443</span></td>
@@ -132,11 +132,11 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-F</td>
-                <td>Los 100 primeros puertos más importantes según nmap.</td>
+                <td>Los 100 primeros puertos más importantes clasificados por Nmap.</td>
             </tr>
             <tr>
                 <td class="opcion">--top-ports=<span class="c1">10</span></td>
-                <td>Los 10 puertos más importantes según nmap.</td>
+                <td>Los 10 puertos más importantes clasificados por Nmap.</td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
@@ -149,16 +149,19 @@ Código por byAd12
                     Funcionamiento del escaneo <span class="opcion">TCP-SYN</span>:
 
                     <ul>
-                        <li>Se envía SYN al host</li>
-                        <li>Si responde con SYN/ACK se detecta el puerto como '<span class="positivo">open</span>'</li>
-                        <li>Si responde con RA (RST y ACK) se detecta el puerto como '<span class="negativo">closed</span>'</li>
-                        <li>Si no responde se detecta el puerto como '<span class="intermedio">filtered</span>'</li>
+                        <li>Se envía al objetivo un paquete con la flag SYN
+                            <ul>
+                                <li>Si responde con la flag SYN/ACK, el puerto se clasifica como '<span class="positivo">open</span>'</li>
+                                <li>Si responde con RA (RST + ACK), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
+                                <li>Si no se recibe una respuesta, el puerto se clasifica como '<span class="intermedio">filtered</span>'</li>
+                            </ul>
+                        </li>
                     </ul>
                     
-                    <br>Predefinido si no se especifica.
+                    <br>Es el tipo de escaneo predefinido si no se especifica otro.
                     <br>
-                    <br><u>Útil</u>: Es rápido.
-                    <br><u>Problemas</u>: Se necesita permisos de root al tener que modificar paquetes.
+                    <br><u>Ventaja</u>: Es rápido.
+                    <br><u>Problemas</u>: Se necesita permisos de administrador para poder modificar los paquetes.
                 </td>
             </tr>
             <tr>
@@ -167,16 +170,19 @@ Código por byAd12
                     Funcionamiento del escaneo <span class="opcion">TCP-CONNECT</span>:
 
                     <ul>
-                        <li>Se envía SYN al host</li>
-                        <li>Si responde con SYN/ACK se le envía ACK para completar la conexión y se detecta como '<span class="positivo">open</span>'</li>
-                        <li>Si responde con RA (RST y ACK) se detecta el puerto como '<span class="negativo">closed</span>'</li>
-                        <li>Si no responde se detecta el puerto como '<span class="intermedio">filtered</span>'</li>
+                        <li>Se envía al objetivo un paquete con la flag SYN
+                            <ul>
+                                <li>Si responde con SYN/ACK, nuestro host le enviará la flag ACK para completar la conexión, clasificando así el puerto como '<span class="positivo">open</span>'</li>
+                                <li>Si responde con RA (RST y ACK), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
+                                <li>Si no se recibe una respuesta, el puerto se clasifica como '<span class="intermedio">filtered</span>'</li>
+                            </ul>
+                        </li>
                     </ul>
                     
-                    <br>La diferencia con <span class="opcion">TCP-SYN</span> es que sí completa la conexión TCP.
+                    <br>La diferencia con el escaneo <span class="opcion">TCP-SYN</span> es que en <span class="opcion">TCP-CONNECT</span> se llega a completar la conexión TCP.
                     <br>
-                    <br><u>Útil</u>: No provoca fallos en el servidor. Es más fiable en la detección. Menos detectable por IPS.
-                    <br><u>Problemas</u>: Más posibilidades de registrar la conexión en un log. Es más lento que SYN-TCP.
+                    <br><u>Ventajas</u>: No provoca fallos en el servidor. Es más fiable en la detección. Menos detectable por sistemas IPS.
+                    <br><u>Problema</u>: Más posibilidades de registrar la conexión en un log. Es más lento que escaneo <span class="opcion">TCP-SYN</span>.
                 </td>
             </tr>
             <tr>
@@ -185,13 +191,16 @@ Código por byAd12
                     Funcionamiento del escaneo <span class="opcion">TCP-ACK</span>:
 
                     <ul>
-                        <li>Se envía un paquete TCP con la bandera ACK</li>
-                        <li>Si se recibe un paquete con RST entonces el puerto permite una conexión pudiendo estar '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'</li>
-                        <li>Si no se recibe una respuesta el puerto está bloqueado así que es '<span class="intermedio">filtered</span>'</li>
+                        <li>Se envía al objetivo un paquete con la flag ACK
+                            <ul>
+                                <li>Si se recibe la flag RST entonces el puerto permite una conexión. Posibles estados: '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'</li>
+                                <li>Si no se recibe una respuesta, el puerto puede estar bloqueado asi que se clasificará como '<span class="intermedio">filtered</span>'</li>
+                            </ul>
+                        </li>
                     </ul>
 
-                    <br><u>Útil</u>: Mucho más difícil de filtrar para firewalls y sistemas IDS/IPS ya que no se puede averiguar si el ACK forma parte de una conexión establecida. Permite descubrir información sobre el estado del firewall o del sistema sin iniciar una conexión.
-                    <br><u>Problemas</u>: No se sabe si está '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'.
+                    <br><u>Ventajas</u>: Es mucho más difícil de filtrar para firewalls y sistemas IDS/IPS ya que no se puede averiguar si el ACK forma parte de una conexión establecida. Permite descubrir información sobre el estado del firewall o del sistema sin iniciar una conexión.
+                    <br><u>Problema</u>: No se averiguar si el puerto está en estado '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'.
                 </td>
             </tr>
             <tr>
@@ -200,27 +209,36 @@ Código por byAd12
                     Funcionamiento del escaneo <span class="opcion">UDP</span>:
 
                     <ul>
-                        <li>Se envía un paquete UDP al host</li>
-                        <li>Si se recibe una respuesta el puerto es '<span class="positivo">active</span>'</li>
-                        <li>Si se recibe error 3 (inalcanzable) el puerto es '<span class="negativo">closed</span>'</li>
-                        <li>Si se recibe otro error diferente el puerto es '<span class="intermedio">open|filtered</span>'</li>
+                        <li>Se envía un paquete UDP al host
+                            <ul>
+                                <li>Si se recibe una respuesta, el puerto se clasifica como '<span class="positivo">active</span>'</li>
+                                <li>Si se recibe un error 3 (inalcanzable), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
+                                <li>Si se recibe otro error diferente, el puerto se clasifica como '<span class="intermedio">open|filtered</span>'</li>
+                            </ul>
+                        </li>
                     </ul>
 
-                    <br><u>Útil</u>: Podemos hacer conexiones a servicios UDP, por ejemplo DNS que utiliza el puerto 53 TCP y UDP.
-                    <br><u>Problemas</u>: Más lento que un escaneo TCP. No sabemos si recibió el paquete al ser un protocolo sin estado.
+                    <br><u>Ventaja</u>: Podemos hacer conexiones a servicios UDP, por ejemplo DNS que utiliza el puerto 53 TCP y UDP.
+                    <br><u>Problemas</u>: Es más lento que un escaneo TCP. No sabemos si recibió el paquete al ser un protocolo sin estado.
                 </td>
             </tr>
             <tr>
                 <td class="opcion">-PE</td>
                 <td>
-                    Funcionamiento del escaneo <span class="opcion">ICMP echo request</span>:
+                    Funcionamiento del escaneo <span class="opcion">ICMP Echo Request</span>:
 
                     <ul>
-                        <li>Antes de enviar el ICMP y, si está en la misma red que el objetivo, envia un ARP request.</li>
-                        <li>Si recibe un ARP reply, el host está '<span class="positivo">active</span>'</li>
-                        <li>Si no, se envia un ICMP Echo Request</li>
-                        <li>Si se recibe un ICMP reply el host está '<span class="positivo">active</span>'</li>
-                        <li>Si se recibe un ICMP reply el host está '<span class="negativo">inactive</span>'</li>
+                        <li>Antes de enviar el paquete ICMP y, si nuestro host está en la misma red que el objetivo, se enviará un paquete ARP Request aunque se puede omitir usando el parámetro "<span class="opcion">--disable-arp-ping</span>".
+                            <ul>
+                                <li>Si recibe un ARP reply, el host está '<span class="positivo">active</span>'</li>
+                                <li>Si no se recibe un ARP reply, se enviará un ICMP Echo Request
+                                    <ul>
+                                        <li>Si se recibe un ICMP reply, el host está '<span class="positivo">active</span>'</li>
+                                        <li>Si se recibe un ICMP reply, el host está '<span class="negativo">inactive</span>'</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <br><u>Problemas</u>: Es muy detectable por sistemas IPS o firewalls.
@@ -233,11 +251,11 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">--disable-arp-ping</td>
-                <td>Deshabilita la <u>resolución de MAC por ARP</u> al realizarse por defecto para poder enviar el paquete. Por ejemplo en el escaneo <span class="opcion">-PE</span>.</td>
+                <td>Deshabilita la <u>resolución de direcciones MAC mediante solicitudes ARP</u> que se realiza por defecto para poder enviar un paquete, como por ejemplo en el escaneo <span class="opcion">ICMP Echo Request</span> (<span class="opcion">-PE</span>).</td>
             </tr>
             <tr>
                 <td class="opcion">-Pn</td>
-                <td>Deshabilita el <u>ICMP echo request</u> para averiguar si el host está activo. Con esto se presupone que el host está siempre activo.</td>
+                <td>Deshabilita el uso de paquetes <u>ICMP Echo Request</u> para averiguar si el host está activo. Una vez deshabilitado se presupone que el host está activo.</td>
             </tr>
             <tr>
                 <td class="opcion">-sN</td>
@@ -250,8 +268,10 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-sV</td>
-                <td>En el host intenta averiguar el S.O.
-                    <br>En sus puertos abiertos intenta averiguar el servicio que se ejecuta, versión y detalles.
+                <td>
+                    Con este parámetro se puede intentar averiguar que S.O. utiliza el host.
+                    <br>
+                    Además, mediante sus puertos abiertos se intenta averiguar el servicio que se ejecuta, su versión y detalles.
                 </td>
             </tr>
             <tr>
@@ -260,24 +280,34 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">--packet-trace</td>
-                <td>Nos da la información detallada de cada paquete enviado y recibido incluyendo banderas.<br>Se puede encontrar paquetes enviado por nosotros (<span class="opcion">SENT</span>) o recibidos (<span class="opcion">RCVD</span>).</td>
+                <td>
+                    Nos da la información detallada de cada paquete enviado y recibido incluyendo las flags.
+                    <br>
+                    Se indica que paquetes han sido enviados por nuestro host (<span class="opcion">SENT</span>) y cuales se recibieron (<span class="opcion">RCVD</span>).
+                </td>
             </tr>
             <tr>
                 <td class="opcion">--traceroute</td>
-                <td>Identifica cada salto que da el paquete para llegar a su destino.</td>
+                <td>Identifica cada "salto" que da el paquete hasta que llega a su destino.</td>
             </tr>
             <tr>
                 <td class="opcion">--reason</td>
-                <td>Identifica la razón de por qué está activo un host.</td>
+                <td>Identifica la razón de porqué está activo un host.</td>
             </tr>
             <tr>
                 <td class="opcion">-v<span class="c2">v</span><span class="c3">v</span></td>
-                <td>Podemos ver información en tiempo real mientras se escanea con 3 niveles de verbose. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
-                    <br>También podemos ver cuánto tiempo estimado falta para finalizar el escaneo pulsando "<span class="opcion">ESPACIO</span>" en cualquier momento.</td>
+                <td>
+                    Con verbose se puede visualizar en tiempo real la información del escaneo. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
+                    En cualquier momento se puede ver el tiempo estimado que queda hasta finalizar el escaneo pulsando la tecla "<span class="opcion">ESPACIO</span>".
+                </td>
             </tr>
             <tr>
                 <td class="opcion">--stats-every=<span class="c1">(segundos)/s</span>[o]<span class="c2">(minutos)/m</span></td>
-                <td>Nmap envia información cada x segundos o minutos. NO se puede poner minutos y segundos a la vez.</td>
+                <td>
+                    Se puede modificar el tiempo en minutos o segundos para que Nmap envie información.
+                    <br>
+                    NO se puede indicar los minutos y segundos a la vez.
+                </td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
@@ -287,24 +317,28 @@ Código por byAd12
             <tr>
                 <td class="opcion">--initial-RTT-timeout <span class="c1">min</span>:<span class="c2">initial</span>:<span class="c3">max</span></td>
                 <td>
-                    <ul>
-                        <li><span class="opcion">min</span>: Tiempo mínimo de espera permitido. Predeterminado: 100ms.</li>
-                        <li><span class="opcion">initial</span>: Tiempo máximo en el que se espera un paquete. Cuando lo reciba cambiará este valor para futuros paquetes en el tiempo que tardó pero nunca debe ser menos que <span class="opcion">min</span> y no más que <span class="opcion">max</span>.</li>
-                        <li><span class="opcion">max</span>: Tiempo máximo de espera permitido.</li>
-                    </ul>
+                    <span class="opcion">min</span>: Tiempo mínimo de espera permitido (el tiempo por defecto es de 100 ms).
+                    <br>
+                    <span class="opcion">initial</span>: Tiempo máximo en el que se espera un paquete. Cuando lo reciba cambiará este valor para futuros paquetes en el tiempo que tardó pero nunca debe ser menos que <span class="opcion">min</span> y no más que <span class="opcion">max</span>.
+                    <br>
+                    <span class="opcion">max</span>: Tiempo máximo de espera permitido.
                 </td>
             </tr>
             <tr>
                 <td class="opcion">--max-retries <span class="c1">&lt;intentos&gt;</span></td>
-                <td>Intenta enviar un paquete si no lo recibe hasta x veces. Predeterminado: 10.</td>
+                <td>Intenta enviar un paquete si no lo recibe hasta x veces (por defecto son 10).</td>
             </tr>
             <tr>
-                <td class="opcion">--min-rate <span class="c1">&lt;paquetes&gt;</span></td>
-                <td>Nmap intentará igualar la tasa de paquetes que envía cada segundo.</td>
+                <td class="opcion">--min-rate <span class="c1">&lt;número_paquetes&gt;</span></td>
+                <td>Nmap intentará igualar la tasa de paquetes que envía cada segundo con el número asignado en este parámetro.</td>
             </tr>
             <tr>
                 <td class="opcion">-T <span class="c1">&lt;0-5&gt;</span></td>
-                <td>Lo anterior es manual pero hay 6 plantillas predefinidas según niveles. El nivel 0 es el más lento y sigiloso y, el nivel 5, lo más rápido y detectable. El valor intermedio e ideal es el nivel 3.</td>
+                <td>
+                    El parámetro <span class="opcion">--min-rate</span> se configura manualmente, por ello existen 6 plantillas predefinidas según niveles.
+                    El nivel 0 es el más lento y sigiloso y, el nivel 5, es el más rápido y detectable. 
+                    El valor ideal es el nivel 3.
+                </td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
@@ -371,15 +405,15 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">-sC</td>
-                <td>Uso de scripts predeterminados (<span class="opcion">default</span>).</td>
+                <td>Se utilizarán los scripts predeterminados (<span class="opcion">default</span>).</td>
             </tr>
             <tr>
                 <td class="opcion">--script <span class="c1">&lt;script/categoria&gt;</span></td>
-                <td>Cargar un único script con su nombre o varios con una categoría.</td>
+                <td>Con este parámetro se puede utilizar uno o varios script identificados por su nombre.</td>
             </tr>
             <tr>
                 <td class="opcion">-A</td>
-                <td>Combina detección de S.O. (<span class="opcion">-O</span>), detección de versiones y servicios (<span class="opcion">-sV</span>), scripts default (<span class="opcion">-sC</span>) y <span class="opcion">--traceroute</span>.</td>
+                <td>Es un parámetro comodín que combina la detección del S.O. (<span class="opcion">-O</span>), la detección de versiones y servicios (<span class="opcion">-sV</span>), utiliza los scripts predeterminados (<span class="opcion">-sC</span>) e identifica cada "salto" que da el paquete (<span class="opcion">--traceroute</span>).</td>
             </tr>
         </table>
 
@@ -399,32 +433,34 @@ Código por byAd12
             <tr>
                 <td class="opcion">[RECOMENDACIÓN]</td>
                 <td>
-                    Se puede tener una <span class="opcion">VPS</span> con una IP distinta pudiendo así dividir escaneos o, si un host nuestro está bloqueado del sistema objetivo, podemos seguir con la <span class="opcion">VPS</span>.
-                    
-                    <br><br>Además si llegamos a realizar un ataque y el objetivo lo detecta, puede contactar con nuestro ISP para parar el ataque y, así, bloquearnos el acceso a internet desde esa IP.
+                    Con una <span class="opcion">VPS</span> se permite dividir la carga de los escaneos que se realicen y también se puede saltar los bloqueos que haya impuesto el sistema objetivo hacia nuestro host.
+                    <br><br>
+                    También, si el objetivo detecta un ataque desde nuestra red doméstica, se puede contactar con el ISP para detener el ataque bloqueando el uso de la IP pública.
                 </td>
             </tr>
             <tr>
                 <td class="opcion">-D RND:<span class="c1">&lt;cantidad_IPs&gt;</span></td>
-                <td>Esta opción permite enviar el mismo paquete x cantidad de veces desde diferentes IPs pero siempre añadiendo nuestra IP real en la lista.
-                    <br><u>Problema</u>: Los routers e ISP si ven una IP fuera de su rango como origen pueden descartar el paquete y no llegar al destino (<span class="c1">IP spoofing</span>).
+                <td>
+                    Esta opción permite enviar el mismo paquete x cantidad de veces desde diferentes IPs pero siempre añadiendo nuestra IP real en la lista (<span class="opcion">IP spoofing</span>).
+                    <br><br>
+                    <u>Problema</u>: Los routers e ISP si ven una IP de origen fuera de su rango de IPs pueden descartar el paquete para que no llegue al destino.
                 </td>
             </tr>
             <tr>
                 <td class="opcion">-S <span class="c1">&lt;IP_origen&gt;</span></td>
-                <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo <span class="c1">IP ID</span>. Es recomendable que la IP exista para recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
+                <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo <span class="c1">IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
             </tr>
             <tr>
                 <td class="opcion">-e <span class="c1">&lt;interfaz&gt;</span></td>
-                <td>Se puede enviar el paquete por diferentes interfaces a la predeterminada del sistema.</td>
+                <td>Esta opción permite enviar el paquete por diferentes interfaces a la predeterminada del sistema.</td>
             </tr>
             <tr>
-                <td class="opcion">--dns-server <span class="c1">&lt;server1,server2&gt;</span></td>
-                <td>Se puede cambiar el servidor DNS para hacer las consultas.</td>
+                <td class="opcion">--dns-server <span class="c1">&lt;server1(,server2)&gt;</span></td>
+                <td>Esta opción permite cambiar el servidor DNS que responderá a las consultas durante el escaneo.</td>
             </tr>
             <tr>
                 <td class="opcion">--source-port <span class="c1">&lt;puerto&gt;</span></td>
-                <td>Si un sistema, ya sea de origen o destino, bloquea solicitudes, pero descubrimos puertos que pueden estar libres, como el <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir/bypass el sistema.</td>
+                <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero descubrimos que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
             </tr>
         </table>
 
@@ -436,19 +472,22 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">ttl <span class="c1">64</span></td>
-                <td>Posibles S.O.: Linux, MacOS, Android, FreeBSD</td>
+                <td>Posibles S.O.: Linux, MacOS, Android, FreeBSD.</td>
             </tr>
             <tr>
                 <td class="opcion">ttl <span class="c1">128</span></td>
-                <td>Posibles S.O.: Windows</td>
+                <td>Posibles S.O.: Windows.</td>
             </tr>
             <tr>
                 <td class="opcion">ttl <span class="c1">255</span></td>
-                <td>Posibles S.O.: Cisco IOS, Solaris</td>
+                <td>Posibles S.O.: Cisco IOS, Solaris.</td>
             </tr>
             <tr>
-                <td class="opcion"><span class="c1">otros</span></td>
-                <td>El ttl es un valor que se puede cambiar, por lo tanto la identificación se puede realizar mediante firmas usando <span class="opcion">-O</span>.</td>
+                <td class="opcion"><span class="c1">[otros resultados]</span></td>
+                <td>
+                    El TTL (Time To Live) es un valor que se puede cambiar manualmente así que es un método completamente fiable o útil.
+                    Se puede identificar el S.O. mediante firmas con el parámetro <span class="opcion">-O</span>.
+                </td>
             </tr>
             <!-- ================== -->
             <!-- ================== -->
@@ -457,8 +496,8 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">
-                    SENT (0.0381s) TCP <span class="c1">nosotros</span> > <span class="c2">destino</span> S ...
-                    <br>SENT (1.0411s) TCP <span class="c1">nosotros</span> > <span class="c2">destino</span> S ...
+                    SENT (0.0381s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
+                    <br>SENT (1.0411s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
                     <br>… Nmap done: ... scanned in <span class="c3">2.06</span> seconds
                 </td>
                 <td>Este caso llamado <span class="opcion">dropped</span> se puede ver que se envia 2 paquetes SYN y en ninguno responde, dando un mayor tiempo de espera para intentar recibir una respuesta.
@@ -467,7 +506,7 @@ Código por byAd12
             </tr>
             <tr>
                 <td class="opcion">
-                    SENT (0.0381s) TCP <span class="c1">nosotros</span> > <span class="c2">destino</span> S ...
+                    SENT (0.0381s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
                     <br>RCVD (0.0487s) ICMP [<span class="c2">destino</span> Port unreachable (type=3/code=3)
                     <br>… Nmap done: ... scanned in <span class="c3">0.05</span> seconds
                 </td>
