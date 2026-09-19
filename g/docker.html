@@ -54,22 +54,22 @@ Código por byAd12
             <div>
                 <h2>Imágenes</h2>
 
-                <p>Instalar una imagen:</p>
+                <p>Descargar una imagen desde el repositorio <a href="https://hub.docker.com/" target="_blank">hub.docker.com</a> sin necesidad de autenticarse:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker pull [imagen]:(tag)</code></pre>
-                <p class="Expl"><b>Tag</b>: La versión del docker a ejecutar, si no se especifica será <span class="span_contenido" translate="no">latest</span>.</p>
+                <p class="Expl"><b>Tag</b>: La versión del docker a ejecutar, si no se especifica será la última versión disponible - <span class="span_contenido" translate="no">latest</span>.</p>
                 
                 <p>Crear un docker sin iniciarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker create [imagen]:(tag)</code></pre>
 
                 <p>Ver todas las imágenes descargadas:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker images ls</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">docker images</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
 
                 <p>Ver solo una imagen descargada específica:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image (imagen)</code></pre>
                 
                 <p>Eliminar una imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image rm (imagen)</code></pre>
+                <p class="Expl"><u>Nota</u>: no debe haber ninún docker creado asociado con esta imagen.</p>
                 
                 <p>Inspeccionar una imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image inspect (imagen)</code></pre>
@@ -108,98 +108,213 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Crear/Ejecutar un docker</h2>
+                <h2>Crear e iniciar un docker</h2>
 
-                <p>El comando <span class="span_contenido" translate="no">docker run</span> permite ejecutar un docker existente o crear uno nuevo a partir de una imagen:</p>
+                <p>
+                    El comando <span class="span_contenido" translate="no">docker run</span> permite ejecutar un docker existente o crear uno nuevo a partir de una imagen.
+                    Una vez creado se iniciará automáticamente:
+                </p>
                 <pre class="codigo" translate="no"><code class="bash">docker run (parámetros) [docker]</code></pre>
                 <p class="Expl">
-                    <b>docker</b>: Puede ser el ID d un docker existente o el nombre de una imagen con la que se creará el docker.
+                    <b>docker</b>: Puede ser el ID de un docker existente o el nombre de una imagen con la que se creará el docker.
                     <br>
                     Si esta imagen no se descargó previamente, el sistema descargará la versión <span class="span_contenido" translate="no">latest</span> a no ser que se especifique otra versión.
                 </p>
 
                 <p>Parámetros de <span class="span_contenido" translate="no">docker run</span>:</p>
-                
-                <p class="Expl">Ejecutar el docker en <b>segundo plano</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -d (otros_parámetros) [imagen]</code></pre>
-                
-                <p class="Expl"><b>Persistencia de archivos</b> - enlazar una carpeta del docker con una carpeta local para que los archivos no se eliminen al detener el docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -v [ruta_en_sistema_local]:[ruta_en_docker]</code></pre>
-                
-                <p class="Expl">Modificar una variable de entorno (pej. <span class="span_contenido" translate="no">PUID</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -e [variable_entorno]=[valor]</code></pre>
 
-                <p class="Expl">Especificar el hostname que tendrá el docker internamente:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -h [hostname]</code></pre>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
 
-                <p class="Expl">Asignar un nombre para poder identificar el docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --name [nuevo_nombre] [docker]</code></pre>
-                
-                <p class="Expl">Indicar que se quiere ejecutar el docker persistentemente hasta que se detenga manualmente:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --restart unless-stopped [docker]</code></pre>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-d</code></pre></td>
+                            <td>Ejecuta el docker en <b>segundo plano</b>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-v [ruta_en_sistema_local]:[ruta_en_docker]</code></pre></td>
+                            <td><b>Persistencia de archivos</b> - Sirve para eenlazar una carpeta del docker con una carpeta local para que los archivos no se eliminen al detener el docker.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-e [variable_entorno]=[valor]</code></pre></td>
+                            <td>Modifica una variable de entorno (pej. <span class="span_contenido" translate="no">PUID</span>).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-h [hostname]</code></pre></td>
+                            <td>Especifica el hostname que tendrá el docker internamente.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--name [nuevo_nombre]</code></pre></td>
+                            <td>Asigna un nombre para poder identificar el docker.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--restart unless-stopped</code></pre></td>
+                            <td>Indica que se quiere ejecutar el docker persistentemente hasta que se detenga manualmente.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Limitación de recursos:</p>
 
-                <p class="Expl">Limitar los núcleos de la CPU que puede utilizar:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --cpus [cantidad_CPU] [docker]</code></pre>
-                <p class="Expl Expl_nivel2"><b>[cantidad_CPU]</b>: Número (que puede ser decimal) que indica los núcleos máximos para el docker.</p>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
 
-                <p class="Expl">Limitar los cantidad máxima de RAM que puede utilizar:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --memory [cantidad_RAM] [docker]</code></pre>
-                <p class="Expl Expl_nivel2">Formato de <b>[cantidad_RAM]</b>: "512M" (MiB), "1G" (GiB).</p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--cpus [cantidad_CPU]</code></pre></td>
+                            <td>Limita los núcleos de la CPU que el docker puede utilizar como máximo (número decimal).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-m [cantidad_RAM][unidad]
+--memory [cantidad_RAM][unidad]</code></pre></td>
+                            <td>
+                                Ambos parámetros realizan la misma función:
+                                <br>
+                                Limita la cantidad de RAM que el docker puede utilizar como máximo.
+                                Ejemplos: "512M" (MiB), "1G" (GiB).
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>Abrir una terminal al ejecutar el docker:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">docker run -it [docker] [bash/sh]</code></pre></td>
+                            <td>
+                                Para que al ejecutar el docker se abra una terminal se debe especificar el tipo de terminal: <span class="span_contenido" translate="no">bash</span> o <span class="span_contenido" translate="no">sh</span>.
+                                Para abrir la terminal en un docker que ya se está ejecutando, mire la sección "Abrir una terminal en un docker iniciado".
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
 
                 <p>Redirección de puertos:</p>
 
-                <p class="Expl">Se pueden redireccionarse varios puertos a la vez, para ello hay que repetir la opción <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -p [puerto_local]:[puerto_docker] [docker]</code></pre>
-                <p class="Expl Expl_nivel2"><b>-p</b>: Redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> del host al <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</p>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
 
-                <p class="Expl">También se puede especificar la IP del sistema local del host:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -p [ip_local]:[puerto_local]:[puerto_docker] [docker]</code></pre>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p [puerto_local]:[puerto_docker]</code></pre></td>
+                            <td>Se redirecciona el puerto <span class="span_contenido" translate="no">[puerto_local]</span> del host hacia el puerto <span class="span_contenido" translate="no">[puerto_docker]</span> del docker.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p [ip_local]:[puerto_local]:[puerto_docker]</code></pre></td>
+                            <td>También se puede especificar la IP del sistema local del host.</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                Se puede redireccionar varios puertos a la vez, para ello hay que repetir el parámetro <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar.
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Modo de red:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td colspan="2">
+                                <b>Modo bridge</b>: Por defecto el docker está en el modo de red <span class="span_contenido" translate="no">bridge</span>.
+                                <br>
+                                Tiene IP propia (a partir de la red creada por docker) y permite usar mapeo de puertos.
+                                El servidor DNS será el mismo servidor que utiliza el host.
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--network host</code></pre></td>
+                            <td><b>Modo host</b>: Con este parámetro el docker no tendrá IP ni mapeo de puertos, solo será un proceso del host.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>Otras configuraciones de red:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--dns=[ip_servidor_dns]</code></pre></td>
+                            <td>
+                                Con este parámetro se indica manualmente el servidor DNS para el docker.
+                                Para añadir un servidor secundario se debe duplicar este parámetro.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--add-host=[dominio]:[ip]</code></pre></td>
+                            <td>
+                                Con este parámetro se indica una nuevo registro DNS interno en el fichero <span class="span_url" translate="no">/etc/hosts</span>.
+                                Para añadir otro registro se debe duplicar este parámetro.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
                 
-                <p class="Expl"><b>Modo host</b>: El docker no tendrá IP ni mapeo de puertos. Solo será un proceso del host:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --network host [docker]</code></pre>
-
-                <p class="Expl">
-                    <b>Modo bridge</b>: Por defecto el docker está en el modo de red <span class="span_contenido" translate="no">bridge</span>.
-                    Tiene IP propia (a partir de la red creada por docker) y permite usar mapeo de puertos. El DNS que tendrá será el utilizado en el host.
-                </p>
-
                 <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde mediante el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker update [parámetros] [docker]</code></pre>
                 
             </div>
 
             <div>
-                <h2>Gestionar la ejecución de un docker</h2>
-
-                <p>Iniciar un docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker start [id]</code></pre>
-                <p class="Expl"><b>[id]</b>: El identificador asignado al docker.</p>
-
-                <p>Detener un docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker stop [id]</code></pre>
-
-                <p>Pausar o reanudar un docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker pause [id]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">docker unpause [id]</code></pre>
-
-            </div>
-
-            <div>
                 <h2>Listar los dockers</h2>
 
-                <p>Ver los dockers en ejecución:</p>
+                <p>Para ver los dockers en ejecución:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker ps</code></pre>
 
                 <p>Ver todos los dockers en ejecución y detenidos:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker ps -a</code></pre>
+
+                <p>Los 2 comandos anteriores muestran el ID, nombre, tiempo de ejecución y tiempo de creación de cada docker.</p>
             </div>
 
             <div>
-                <h2>Más opciones</h2>
+                <h2>Gestionar la ejecución de un docker</h2>
+
+                <p>Iniciar un docker:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker start [docker]</code></pre>
+
+                <p>Detener un docker:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker stop [docker]</code></pre>
+
+                <p>Pausar o reanudar un docker:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker pause [docker]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker unpause [docker]</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Eliminar un docker</h2>
+
+                <p>Para eliminar un docker primero se debe detener manualmente:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker stop [docker]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker rm [docker]</code></pre>
+
+                <p>O también se puede forzar la eliminación sin necesidad de detenerlo manualmente:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker rm -f [docker]</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Copiar archivos entre el host y el docker</h2>
                 
                 <p>Cómo copiar archivos internos del docker al host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [docker]:[ruta_en_docker] [ruta_en_sistema_local]</code></pre>
@@ -215,14 +330,17 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Gestionar un docker mediante una shell</h2>
+                <h2>Abrir una terminal en un docker iniciado</h2>
 
-                <p>Shell:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker exec -it [id] sh</code></pre>
-                <p class="Expl"><b>-i</b>: Modo interactivo.</p>
-                <p class="Expl"><b>-t</b>: Proporciona una interfaz de línea de comandos.</p>
-                <p class="Expl"><b>[id]</b>: El identificador de docker al que se quiere acceder.</p>
-                <p class="Expl"><b>sh</b>: Abre una sesión de <span class="span_contenido" translate="no">shell</span>. También puede ser <span class="span_contenido" translate="no">bash</span> u otra terminal.</p>
+                <pre class="codigo" translate="no"><code class="bash">docker exec -it [docker] [bash/sh]</code></pre>
+                <p class="Expl">
+                    <b>-i</b>: Modo interactivo.
+                    <br>
+                    <b>-t</b>: Proporciona una interfaz de línea de comandos.
+                    <br>
+                    <b>[docker]</b>: El identificador de docker al que se quiere acceder.
+                    <br>
+                    <b>[bash/sh]</b>: Abre una sesión de <span class="span_contenido" translate="no">bash</span> o <span class="span_contenido" translate="no">shell</span>.</p>
             </div>
             
             <div>
@@ -286,7 +404,7 @@ Código por byAd12
                 <h2>Docker "<span>httpd</span>"</h2>
                 <p>Añadir una página .html:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 80:80 -p 443:443 -d httpd</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">docker exec -it [id] sh</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker exec -it [docker] [bash/sh]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt install nano</code></pre>
                 <p class="Expl"><b>./htdocs/index.html</b>: Editar el archivo para cambiar la página default.</p>

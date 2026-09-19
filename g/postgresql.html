@@ -1,0 +1,219 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Julio García Abeledo
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>PostgreSQL</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 class="TituloPrincipal">PostgreSQL</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">xxx</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+
+        <div class="parte1">
+            <div>
+
+                <h2>Instalación</h2>
+
+                <p>1. Instalaremos el servicio correspondiente en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql postgresql-contrib sudo</code></pre>
+
+                <p>2. Para verificar que se ha instalado correctamente se debe poder ejecutar el siguiente comando y también ver el estado del servicio:</p>
+                <pre class="codigo" translate="no"><code class="bash">psql --version</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status postgresql</code></pre>
+
+                <p>3. Para que el servicio de PostgreSQL se inicie automáticamente al iniciar el equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable --now postgresql</code></pre>
+
+                <p>4. Por último reiniciaremos el servicio:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
+                
+            </div>
+
+            <div>
+
+                <h2>Gestionar la base de datos</h2>
+
+                <p>Para entrar a la base de datos debemos ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario <span class="span_contenido" translate="no">postgres</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
+
+                <p>Comandos básicos de SQL:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SELECT version();</code></pre></td>
+                            <td>Indica la versión del servicio de PostgreSQL instalado en el sistema.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\l</code></pre></td>
+                            <td>Lista todas las bases de datos existentes en el clúster.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\du</code></pre></td>
+                            <td>Lista los roles y usuarios, junto con sus atributos y permisos globales.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\conninfo</code></pre></td>
+                            <td>Muestra la información de la conexión actual con la base de datos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\q</code></pre></td>
+                            <td>Cierra la sesión y finaliza el comando <span class="span_contenido" translate="no">psql</span>.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>Configuraciones del sistema:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW config_file;</code></pre></td>
+                            <td>Devuelve la ruta absoluta del archivo principal de configuración.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW hba_file;</code></pre></td>
+                            <td>Devuelve la ruta absoluta del archivo de autenticación de clientes.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW data_directory;</code></pre></td>
+                            <td>Muestra la ruta del directorio de datos del clúster.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW port;</code></pre></td>
+                            <td>Muestra el puerto TCP/IP en el que el servidor está escuchando conexiones entrantes (por defecto suele ser <span class="span_contenido" translate="no">5432</span>).</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>Para verificar por cual puerto está escuchando el servicio de PostgreSQL (es lo mismo que la consulta SQL <span class="span_contenido" translate="no">SHOW port;</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep postgres</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2>Permitir conexiones remotas</h2>
+
+                <p>1. Primero debes copiar la ruta local que indique el comando <span class="span_contenido" translate="no">SHOW hba_file;</span>:</p>
+                <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql
+SHOW hba_file;
+\q</code></pre>
+                <p>2. Debes editar el archivo que se encuentra en la ruta del paso 1 con <span class="span_contenido" translate="no">nano</span>.</p>
+                
+                <p>3. Dentro del archivo del paso 2 hay que añadir una nueva línea indicando la dirección de red cuyos equipos tendrán permisos de hacer conexiones remotas:</p>
+                <pre class="codigo" translate="no"><code class="bash">host all all [dirección_red/mascara] scram-sha-256</code></pre>
+                
+                <p>4. Se debe reiniciar el servicio de PostgreSQL para aplicar los cambios:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
+
+                <p>5. Si el firewall está activado, se debe crear una regla para permitir las conexiones de IPs que estén en el rango de la dirección de red hacia el puerto de PostgreSQL:</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow from [dirección_red/mascara] to any port [puerto_postgresql] proto tcp</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+
+                <h2>Creación de usuarios</h2>
+
+                <p>Para crear un nuevo usuario en la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="sql">CREATE USER [nombre_usuario] WITH PASSWORD '[contraseña_usuario]';</code></pre>
+                <p class="Expl">Una vez creado, se puede comprobar que el usuario nuevo aparece en el listado:</p>
+                <pre class="codigo" translate="no"><code class="sql">\du</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2>Creación de bases de datos</h2>
+
+                <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
+                <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [nombre_base_datos] OWNER [nombre_usuario_propietario];</code></pre>
+                <p class="Expl">Una vez creado, se puede comprobar que la base de datos aparece en el listado:</p>
+                <pre class="codigo" translate="no"><code class="sql">\l</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2>xxx</h2>
+
+                <p>xxx:</p>
+                <pre class="codigo" translate="no"><code class="bash">xxx</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>
+

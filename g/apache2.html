@@ -50,14 +50,17 @@ Código por byAd12
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h2>1. Instalación</h2>
 
-                <p>Instalaremos el servicio correspondiente en el servidor:</p>
+                <p>1. Instalaremos el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y apache2 apache2-utils</code></pre>
 
-                <p>Permitir en el firewall los puertos que se vayan a utilizar:</p>
+                <p>2. En el firewall hay que permitir los puertos que se vayan a utilizar:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow [Puerto]/[Protocolo]</code></pre>
+
+                <p>3. Para que el servicio de Apache se inicie automáticamente al iniciar el equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable --now apache2</code></pre>
             </div>
 
             <div>
@@ -78,12 +81,28 @@ Código por byAd12
                             <td>Archivo con los puertos a usar</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">/etc/apache2/mods-available</code></pre><pre translate="no"><code class="bash">/etc/apache2/mods-enabled</code></pre></td>
-                            <td><b>Mods</b> disponibles y habilitados</td>
+                            <td>
+                                <pre translate="no"><code class="bash">/etc/apache2/mods-available</code></pre>
+                            </td>
+                            <td><b>Mods</b> disponibles</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">/etc/apache2/sites-available</code></pre><pre translate="no"><code class="bash">/etc/apache2/sites-enabled</code></pre></td>
-                            <td><b>Sitios virtuales</b> disponibles y habilitados</td>
+                            <td>
+                                <pre translate="no"><code class="bash">/etc/apache2/mods-enabled</code></pre>
+                            </td>
+                            <td><b>Mods</b> habilitados</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre translate="no"><code class="bash">/etc/apache2/sites-available</code></pre>
+                            </td>
+                            <td><b>Sitios virtuales</b> disponibles</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <pre translate="no"><code class="bash">/etc/apache2/sites-enabled</code></pre>
+                            </td>
+                            <td><b>Sitios virtuales</b> habilitados</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/sites-available/000-default.conf</code></pre></td>
@@ -95,7 +114,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Archivo de configuración de un sitio virtual</h2>
+                <h2>2. Configurar un sitio virtual</h2>
 
                 <p>
                     Normalmente los archivos de configuración de sitios virtuales se almacenan en la carpeta <span class="span_url" translate="no">/etc/apache2/sites-available/</span>.
@@ -103,7 +122,7 @@ Código por byAd12
                     Su sintaxis completa es la siguiente:
                 </p>
 
-                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:[puerto]&gt;
+                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost [ip/*]:[puerto]&gt;
 
         [poner aquí los parámetros]
 
@@ -117,7 +136,7 @@ Código por byAd12
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">La etiqueta <span class="span_contenido" translate="no">VirtualHost</span> crea un nuevo sitio virtual disponible disponible desde todas sus IPs - <span class="span_contenido" translate="no">*</span> y el puerto especificado - <span class="span_contenido" translate="no">puerto</span>.</td>
+                            <td colspan="2">La etiqueta <span class="span_contenido" translate="no">VirtualHost</span> crea un nuevo sitio virtual disponible disponible desde todas sus IPs - <span class="span_contenido" translate="no">*</span> o a una ip específica en un puerto específico - <span class="span_contenido" translate="no">puerto</span>.</td>
                         </tr>
 
                         <tr>
@@ -161,17 +180,26 @@ Código por byAd12
                 </div>
 
                 <p>Para activar un sitio virtual se puede hacer de 2 maneras que hacen el mismo proceso:</p>
-                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/[ruta_local].conf /etc/apache2/sites-enabled</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">a2ensite [ruta_local].conf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/[nombre_archivo_sitio_virtual].conf /etc/apache2/sites-enabled</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">a2ensite [nombre_archivo_sitio_virtual]</code></pre>
 
 
                 <p>Para que Apache2 esuche por el puerto deseado se debe modificar el archivo <span class="span_url" translate="no">/etc/ports.conf</span> y añadir esta línea por cada puerto a escuchar:</p>
                 <pre class="codigo" translate="no"><code class="apache">Listen [puerto_a_escuchar]</code></pre>
 
+                <p>
+                    En caso de que <span class="span_contenido" translate="no">ServerName</span> un dominio "ficticio" que no tenga resolución DNS pública, en los clientes Linux se puede configurar una resolución de nombres local para que apunte a la IP del servidor Apache.
+                    Para ello, se edita el siguiente fichero añadiendo una línea con el formato "ip dominio":
+                </p>
+                <pre class="codigo" translate="no"><code class="apache">nano /etc/hosts</code></pre>
+
+                <p>Para probar que se puede acceder al sitio web se puede ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="apache">curl http(s)://[IP/dominio](:puerto)</code></pre>
+
             </div>
 
             <div>
-                <h2>Configuración de directorios</h2>
+                <h2>3. Configuración de directorios</h2>
 
                 <p>
                     En el archivo <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> se pueden definir los permisos a un directorio específico del disco duro del servidor.
@@ -227,6 +255,17 @@ Código por byAd12
                 <p>En caso de no definir el parámetro <span class="span_contenido" translate="no">DirectoryIndex</span>, los archivos por defecto se configuran en: <span class="span_url" translate="no">/etc/apache2/mods-enabled/dir.conf</span>.</p>
 
             </div>
+
+        </div>
+        
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Configuraciones adicionales</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
 
             <div>
                 <h2>Como configurar un directorio privado</h2>
@@ -296,9 +335,14 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
             </div>
 
         </div>
+
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h1>Ejemplos</h1>
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
         <div class="parte1">
             <div>
                 <h2>Ejemplo: <span>Práctica 1</span></h2>

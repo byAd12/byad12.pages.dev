@@ -101,58 +101,72 @@ document.addEventListener('DOMContentLoaded', datos_guias);
 // ==========================================================
 // Ocultar entradas del blog o enseñarlas mediante el índice
 
-function editar_SMR() {
-    const links = document.querySelectorAll('.BlogEntradas > a');
-    const boton = document.getElementById("editar_SMR");
+let estado_SMR = true;
+let estado_ASIR = true;
 
-    let algunoVisible = false;
+function actualizar_visibilidad_categorias() {
+    const links = document.querySelectorAll('.BlogEntradas > a');
 
     links.forEach(link => {
         const entradaDiv = link.querySelector('.Entrada');
-        if (!entradaDiv || !entradaDiv.classList.contains('Color1')) return;
+        if (!entradaDiv) return;
 
-        link.classList.toggle('oculto');
+        if (entradaDiv.classList.contains('Color1')) {
+            if (estado_SMR) {
+                link.classList.remove('oculto');
+            } else {
+                link.classList.add('oculto');
+            }
+        }
 
-        if (!link.classList.contains('oculto')) {
-            algunoVisible = true;
+        if (entradaDiv.classList.contains('Color2')) {
+            if (estado_ASIR) {
+                link.classList.remove('oculto');
+            } else {
+                link.classList.add('oculto');
+            }
+        }
+
+        if (entradaDiv.classList.contains('Color3')) {
+            if (estado_SMR || estado_ASIR) {
+                link.classList.remove('oculto');
+            } else {
+                link.classList.add('oculto');
+            }
         }
     });
 
-    if (algunoVisible) {
-        boton.style.textDecoration = "none";
-        boton.style.color = "white";
-    } else {
-        boton.style.textDecoration = "line-through";
-        boton.style.color = "rgb(228, 196, 196)";
-    }
     datos_guias();
 }
 
-function editar_ASIR() {
-    const links = document.querySelectorAll('.BlogEntradas > a');
-    const boton = document.getElementById("editar_ASIR");
+function editar_SMR() {
+    const boton = document.getElementById("editar_SMR");
+    estado_SMR = !estado_SMR;
 
-    let algunoVisible = false;
-
-    links.forEach(link => {
-        const entradaDiv = link.querySelector('.Entrada');
-        if (!entradaDiv || !entradaDiv.classList.contains('Color2')) return;
-
-        link.classList.toggle('oculto');
-
-        if (!link.classList.contains('oculto')) {
-            algunoVisible = true;
-        }
-    });
-
-    if (algunoVisible) {
+    if (estado_SMR) {
         boton.style.textDecoration = "none";
         boton.style.color = "white";
     } else {
         boton.style.textDecoration = "line-through";
         boton.style.color = "rgb(228, 196, 196)";
     }
-    datos_guias();
+
+    actualizar_visibilidad_categorias();
+}
+
+function editar_ASIR() {
+    const boton = document.getElementById("editar_ASIR");
+    estado_ASIR = !estado_ASIR;
+
+    if (estado_ASIR) {
+        boton.style.textDecoration = "none";
+        boton.style.color = "white";
+    } else {
+        boton.style.textDecoration = "line-through";
+        boton.style.color = "rgb(228, 196, 196)";
+    }
+
+    actualizar_visibilidad_categorias();
 }
 
 function editar_personal() {
@@ -222,6 +236,10 @@ function editar_filtro_redes() {
 
 function editar_filtro_linux() {
     toggleFiltro('filtro_linux', 'editar_filtro_linux');
+}
+
+function editar_filtro_bbdd() {
+    toggleFiltro('filtro_bbdd', 'editar_filtro_bbdd');
 }
 
 function editar_filtro_servicios_linux() {

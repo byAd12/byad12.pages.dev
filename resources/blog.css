@@ -15,6 +15,13 @@
 /* Color párrafos y texto - #d0d0d0 */
 
 /* =================================================== */
+/*                       Márgenes                      */
+/* =================================================== */
+
+/* Expl, .codigo - 30px */
+/* Expl2 - 60px */
+
+/* =================================================== */
 /* =================================================== */
 /* Fuentes */
 
@@ -99,9 +106,9 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 /* =================================================== */
 /* Texto */
 
-.codigo, p.Expl, p.Expl_nivel2, p{margin: 15px 0 15px 0;}
+.codigo, p.Expl, p.Expl2, p{margin: 15px 0 15px 0;}
 p.Expl, .codigo, ul{margin-left: 30px;}
-p.Expl_nivel2{margin-left: 60px;}
+p.Expl2, .codigo.Expl2{margin-left: 60px !important;}
 .parte1 div p u, .TituloCreditosInferior{text-underline-offset: 5px;}
 
 .codigo{transition: all .5s; font-size: 14px; color: #e0e0e0; padding: 0; overflow-x: auto; border: 1px solid #333; font-family: 'RobotoMono', monospace;}
