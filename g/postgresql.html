@@ -53,9 +53,9 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h2>Instalación</h2>
+                <h2>Instalación en el servidor</h2>
 
-                <p>1. Instalaremos el servicio correspondiente en el servidor:</p>
+                <p>1. Instalaremos el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql postgresql-contrib sudo</code></pre>
 
@@ -72,11 +72,70 @@ Código por byAd12
             </div>
 
             <div>
+                <h2>Asignar una IP estática en el servidor</h2>
+
+                <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
+
+                <p class="Expl">1. Primero se debe realizar una copia de seguridad:</p>
+                <pre class="codigo" translate="no"><code class="bash">cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.backup</code></pre>
+
+                <p class="Expl">2. Luego se debe asignar la siguiente configuración, modificando los valores con la configuración de la red en la que se aloja el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">network:
+    version: 2
+    ethernets:
+        [Interfaz_de_red/enp0s3]
+            dhcp4: false
+            addresses:
+              - [IP_estática/Máscara_CIDR]
+            routes:
+              - to: default
+                via: [IP_default_gateway]
+            nameservers:
+              addresses:
+                - 1.1.1.1
+                - 1.0.0.1</code></pre>
+
+                <p class="Expl">3. Probaremos que la configuración sea válida con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
+
+                <p class="Expl">4. Por último hay que aplicar la configuración si el paso 3 no dio ningún error:</p>
+                <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
+
+                <p class="Expl">Para comprobar que la IP estática se configuró correctamente se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2>Instalación en el cliente</h2>
+
+                <p>1. Instalaremos el servicio de PostgreSQL para clientes:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql-client</code></pre>
+
+                <p>2. Una vez instalado se puede ejecutar el siguiente comando para crear una conexión a una base de datos del servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">psql -h [IP_Servidor] -p [Puerto_Servidor/:5432] -U [Usuario] -d [Nombre_base_de_datos]</code></pre>
+
+            </div>
+
+            <div>
 
                 <h2>Gestionar la base de datos</h2>
 
                 <p>Para entrar a la base de datos debemos ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario <span class="span_contenido" translate="no">postgres</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
+                <p class="Expl">Otra manera de ejecutar comandos SQL directamente es:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
+
+                <p>Para ver según el sistema la versión, nombre del clúster puerto, estado, propietario, ruta de datos y registros se debe usar el comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
+                <p class="Expl">
+                    En sistemas Debian y Ubuntu se permite gestionar varias versiones y clústers.
+                    <br>
+                    El clúster por defecto se llama <span class="span_contenido" translate="no">main</span>.
+                </p>
 
                 <p>Comandos básicos de SQL:</p>
 

@@ -61,6 +61,61 @@ Código por byAd12
 
                 <p>3. Para que el servicio de Apache se inicie automáticamente al iniciar el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now apache2</code></pre>
+
+            </div>
+
+            <div>
+                <h2>2. Asignar una IP estática</h2>
+
+                <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
+
+                <p class="Expl">1. Primero se debe realizar una copia de seguridad:</p>
+                <pre class="codigo" translate="no"><code class="bash">cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.backup</code></pre>
+
+                <p class="Expl">2. Luego se debe asignar la siguiente configuración, modificando los valores con la configuración de la red en la que se aloja el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">network:
+    version: 2
+    ethernets:
+        &lt;Interfaz_de_red/enp0s3&gt;
+            dhcp4: false
+            addresses:
+              - &lt;IP_estática/Máscara_CIDR&gt;
+            routes:
+              - to: default
+                via: &lt;IP_default_gateway&gt;
+            nameservers:
+              addresses:
+                - 1.1.1.1
+                - 1.0.0.1</code></pre>
+
+                <p class="Expl">3. Probaremos que la configuración sea válida con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
+
+                <p class="Expl">4. Por último hay que aplicar la configuración si el paso 3 no dio ningún error:</p>
+                <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
+
+                <p class="Expl">Para comprobar que la IP estática se configuró correctamente se puede usar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
+
+            </div>
+
+            <div>
+                <h2>3. Permitir el acceso remoto</h2>
+
+                <p>1. Instalaremos el servicio de SSH en el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y openssh-server</code></pre>
+
+                <p>2. Para que el servicio de SSH se inicie automáticamente al iniciar el equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable --now ssh</code></pre>
+
+                <p>3. Verificaremos el estado del servicio y que escucha por el puerto 22/tcp:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl status ssh</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep ':22'</code></pre>
+
+                <p>4. En el cliente se debería de poder crear la conexión SSH hacia el servidor:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh &lt;Nombre_usuario&gt;@&lt;IP_servidor&gt;</code></pre>
+
             </div>
 
             <div>
