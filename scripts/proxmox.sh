@@ -145,6 +145,7 @@ while true; do
         echo -e "${Ro_}  1.  Ejecutar la opción número '1' del script -> 'Configuración inicial'.${Bl}"
         echo -e ""
         read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
         read -p 'Hora a apagar: ' hora; [[ -z "${hora// /}" || "$hora" == "exit" ]] && continue
         read -p 'Minutos a apagar: ' minuto; [[ -z "${minuto// /}" || "$minuto" == "exit" ]] && continue
@@ -241,6 +242,7 @@ while true; do
             echo -e "${Ro_}  4.  Saber la contraseña del nodo máster.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Nodo máster (coruna1): ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "$nodo_nombre" == "exit" ]] && continue
 
@@ -585,6 +587,7 @@ while true; do
             echo -e "${Ro_}  2.  Tener un sistema AMD64.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             echo -e "${Az}Instalando Cloudflared AMD64 desde GitHub...${Bl}"
             curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
@@ -617,6 +620,7 @@ while true; do
             echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
             read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
@@ -683,6 +687,7 @@ EOF
             echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
             read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
@@ -761,6 +766,7 @@ EOF
             echo -e "${Ro_}  3.  No tener ningún túnel previamente creado.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
             read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
@@ -917,11 +923,13 @@ EOF
             echo -e "${Ro_}  2.  Debes tener el API TOKEN de Cloudflare.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             echo -e "${Am}Importante:${Bl}"
             echo -e "${Am_}  Debes proteger tu red mediante reglas de Firewall ya que la IPv4 pública será expuesta.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Nombre del subdominio (solo subdominio): ' subdominio; [[ -z "${subdominio// /}" || "$subdominio" == "exit" ]] && continue
             read -p 'CLOUDFLARE_API_TOKEN: ' api_token; [[ -z "${api_token// /}" || "$api_token" == "exit" ]] && continue
@@ -1086,6 +1094,7 @@ EOF
             echo -e "${Ro_}  2.  Al principio del archivo .py debe haber esta línea: '${Az}#!/usr/bin/env python3${Ro_}'.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "$ruta_archivo" == "exit" ]] && continue
 
@@ -1239,6 +1248,7 @@ EOF
             echo -e "${Ro_}  4.  Se debe eliminar del archivo '${Az}/etc/hosts${Ro_}' cualquier registro antigüo.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+            echo -e ""
 
             read -p 'Set-up key de Netbird: ' llave_netbird; [[ -z "${llave_netbird// /}" || "$llave_netbird" == "exit" ]] && continue
             read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo; [[ -z "${nombre_equipo// /}" || "$nombre_equipo" == "exit" ]] && continue
