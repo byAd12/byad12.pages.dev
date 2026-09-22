@@ -561,11 +561,12 @@ while true; do
 
         printf "%b\n" \
             " | ${Az}CLOUDFLARED - OPCIONES ${Bl}" \
-            " | =================================" \
+            " | ============================================" \
                 "${Ne}1${Bl} | Instalar e iniciar sesión" \
                 "${Ne}2${Bl} | Crear un túnel - HTTP(S)" \
-                "${Ne}3${Bl} | Crear un túnel - Servicio TCP" \
-                "${Ne}4${Bl} | Desinstalar y purgar configuración" \
+                "${Ne}3${Bl} | Crear un túnel secundario - HTTP(S)" \
+                "${Ne}4${Bl} | Crear un túnel - Servicio TCP" \
+                "${Ne}5${Bl} | Desinstalar y purgar configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -672,9 +673,86 @@ EOF
             ;;
 
         ##############################################################
-        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL SERVICIO TCP
+        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL SECUNDARIO HTTP(S)
         ##############################################################
         3)
+            clear
+
+            echo -e "${Ro}Requisitos:${Bl}"
+            echo -e "${Ro_}  1.  Ejecutar la opción 'Instalar e iniciar sesión' de Cloudflared.${Bl}"
+            echo -e "${Ro_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
+            echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " _; [[ -z "${_// /}" || "$_" == "exit" ]] && continue
+
+            read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "$nombre_tunel" == "exit" ]] && continue
+            read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "$nombre_dominio" == "exit" ]] && continue
+            read -p 'Puerto del servicio web: ' puerto_web; [[ -z "${puerto_web// /}" || "$puerto_web" == "exit" ]] && continue
+            read -p 'http/https: ' tipo_conexion; [[ -z "${tipo_conexion// /}" || "$tipo_conexion" == "exit" ]] && continue
+
+            echo -e "\n${Az}Creando segundo túnel...${Bl}"
+            info=$(cloudflared tunnel create "$nombre_tunel")
+
+            echo -e "\n${Az}Extrayendo el UUID...${Bl}"
+            uuid=$(echo "$info" | grep -oE '[0-9a-fA-F-]{36}' | head -n 1)
+            echo -e "UUID del túnel: ${Am}${uuid}${Bl}"
+
+            mkdir -p /etc/cloudflared
+
+            echo -e "\n${Az}Creando configuración independiente para este túnel...${Bl}"
+            cat <<EOF > /etc/cloudflared/config-$nombre_tunel.yml
+tunnel: $uuid
+credentials-file: /etc/cloudflared/$uuid.json
+loglevel: debug
+
+originRequest:
+  noTLSVerify: true
+
+ingress:
+  - hostname: $nombre_dominio.chemahosting.eu
+    service: $tipo_conexion://127.0.0.1:$puerto_web
+  - service: http_status:404
+EOF
+
+            echo -e "\n${Az}Copiando credenciales...${Bl}"
+            cp ~/.cloudflared/"$uuid".json /etc/cloudflared/
+            chmod 600 /etc/cloudflared/"$uuid".json
+            chown root:root /etc/cloudflared/"$uuid".json
+
+            echo -e "\n${Az}Creando registro DNS CNAME...${Bl}"
+            cloudflared tunnel route dns "$nombre_tunel" "$nombre_dominio"
+
+            echo -e "\n${Az}Creando servicio Systemd personalizado ('cloudflared-$nombre_tunel.service')...${Bl}"
+            cat <<EOF > /etc/systemd/system/cloudflared-$nombre_tunel.service
+[Unit]
+Description=Cloudflare Tunnel ($nombre_tunel)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/cloudflared --config /etc/cloudflared/config-$nombre_tunel.yml tunnel run
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+            echo -e "\n${Az}Recargando systemd y levantando el nuevo servicio...${Bl}"
+            systemctl daemon-reload
+            systemctl enable cloudflared-$nombre_tunel
+            systemctl restart cloudflared-$nombre_tunel
+
+            echo -e "\n${Az}Verificando la sintaxis...${Bl}"
+            cloudflared --config /etc/cloudflared/config-$nombre_tunel.yml tunnel ingress validate
+
+            echo -e "\n${Ve}¡Segundo túnel '$nombre_tunel' creado y corriendo en paralelo!${Bl}"
+            ;;
+
+        ##############################################################
+        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL SERVICIO TCP
+        ##############################################################
+        4)
             clear
 
             echo -e "${Ro}Requisitos:${Bl}"
@@ -738,7 +816,7 @@ EOF
         ##############################################################
         # SERVICIOS - CLOUDFLARED - DESINSTALAR Y PURGAR CONFIGURACIÓN
         ##############################################################
-        4)
+        5)
             clear
 
             echo -e "${Am}Aviso:${Bl}"
