@@ -106,7 +106,7 @@ Código por byAd12
                 <td>Un rango de ciertas IPs.</td>
             </tr>
             <tr>
-                <td class="opcion">-iL<span class="c1">&lt;ruta_archivo&gt;</span></td>
+                <td class="opcion">-iL <span class="c1">&lt;ruta_archivo&gt;</span></td>
                 <td>Las IPs se pueden almacenar en un archivo siendo separadas mediante con saltos de línea.</td>
             </tr>
             <!-- ================== -->
@@ -141,7 +141,7 @@ Código por byAd12
             <!-- ================== -->
             <!-- ================== -->
             <tr>
-                <td class="titulo" colspan="2">TIPOS DE ESCANEOS</td>
+                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - TCP</td>
             </tr>
             <tr>
                 <td class="opcion">-sS</td>
@@ -200,8 +200,32 @@ Código por byAd12
                     </ul>
 
                     <br><u>Ventajas</u>: Es mucho más difícil de filtrar para firewalls y sistemas IDS/IPS ya que no se puede averiguar si el ACK forma parte de una conexión establecida. Permite descubrir información sobre el estado del firewall o del sistema sin iniciar una conexión.
-                    <br><u>Problema</u>: No se averiguar si el puerto está en estado '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'.
+                    <br><u>Problema</u>: No se puede averiguar si el puerto está en estado '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'.
                 </td>
+            </tr>
+            <tr>
+                <td class="opcion">-sN</td>
+                <td>
+                    Funcionamiento del escaneo <span class="opcion">TCP-Null</span>:
+
+                    <ul>
+                        <li>Se envía al objetivo un paquete sin ninguna flag TCP activada (todos los bits en 0)
+                            <ul>
+                                <li>Si el puerto está cerrado, el objetivo responderá con un paquete con la flag RST. Estado: '<span class="negativo">closed</span>'</li>
+                                <li>Si no se recibe ninguna respuesta, el puerto se clasificará como '<span class="intermedio">open|filtered</span>'</li>
+                                <li>Si se recibe un error ICMP inalcanzable (tipo 3), se clasificará como '<span class="intermedio">filtered</span>'</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <br><u>Ventajas</u>: Muy sigiloso. Permite eludir firewalls sin estado (stateless) o filtros que bloquean paquetes SYN convencionales, sin iniciar una conexión TCP completa.
+                    <br><u>Problema</u>: Sistemas como Windows, Cisco y BSD no cumplen estrictamente la RFC 793 y devuelven RST en todos los puertos, mostrando erróneamente todos los puertos como '<span class="negativo">closed</span>'.
+                </td>
+            </tr>
+            <!-- ================== -->
+            <!-- ================== -->
+            <tr>
+                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - UDP</td>
             </tr>
             <tr>
                 <td class="opcion">-sU</td>
@@ -222,6 +246,11 @@ Código por byAd12
                     <br><u>Problemas</u>: Es más lento que un escaneo TCP. No sabemos si recibió el paquete al ser un protocolo sin estado.
                 </td>
             </tr>
+            <!-- ================== -->
+            <!-- ================== -->
+            <tr>
+                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - ICMP / DESCUBRIMIENTO</td>
+            </tr>
             <tr>
                 <td class="opcion">-PE</td>
                 <td>
@@ -234,7 +263,7 @@ Código por byAd12
                                 <li>Si no se recibe un ARP reply, se enviará un ICMP Echo Request
                                     <ul>
                                         <li>Si se recibe un ICMP reply, el host está '<span class="positivo">active</span>'</li>
-                                        <li>Si se recibe un ICMP reply, el host está '<span class="negativo">inactive</span>'</li>
+                                        <li>Si no se recibe respuesta o es inalcanzable, el host está '<span class="negativo">inactive</span>'</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -242,6 +271,25 @@ Código por byAd12
                     </ul>
 
                     <br><u>Problemas</u>: Es muy detectable por sistemas IPS o firewalls.
+                </td>
+            </tr>
+            <tr>
+                <td class="opcion">-sn</td>
+                <td>
+                    Funcionamiento del <span class="opcion">Ping Scan</span>:
+
+                    <ul>
+                        <li>Deshabilita por completo el escaneo de puertos y únicamente sondea qué equipos están encendidos y conectados a la red
+                            <ul>
+                                <li>En red local (LAN con root): Se envían solicitudes ARP/NDP; si el objetivo responde, el host se clasifica como '<span class="positivo">up</span>'</li>
+                                <li>Hacia hosts remotos: Se envían sondeos ICMP Echo, TCP SYN (puerto 443), TCP ACK (puerto 80) e ICMP Timestamp; con cualquier respuesta el host se clasifica como '<span class="positivo">up</span>'</li>
+                                <li>Si no hay respuesta tras los reintentos, el objetivo se clasifica como '<span class="negativo">down</span>'</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <br><u>Ventajas</u>: Es extremadamente rápido al omitir el análisis de los 1000 puertos por defecto.
+                    <br><u>Problema</u>: Los hosts remotos protegidos por firewalls que bloquean ICMP y los puertos 80/443 pueden aparecer falsamente como '<span class="negativo">down</span>'.
                 </td>
             </tr>
             <!-- ================== -->
@@ -257,10 +305,6 @@ Código por byAd12
                 <td class="opcion">-Pn</td>
                 <td>Deshabilita el uso de paquetes <u>ICMP Echo Request</u> para averiguar si el host está activo. Una vez deshabilitado se presupone que el host está activo.</td>
             </tr>
-            <tr>
-                <td class="opcion">-sN</td>
-                <td>Deshabilita el <u>escaneo de puertos</u> ya que por defecto se escanean los 1000 primeros.</td>
-            </tr>
             <!-- ================== -->
             <!-- ================== -->
             <tr>
@@ -269,9 +313,9 @@ Código por byAd12
             <tr>
                 <td class="opcion">-sV</td>
                 <td>
-                    Con este parámetro se puede intentar averiguar que S.O. utiliza el host.
+                    Determina el servicio que se ejecuta en cada puerto abierto, su versión y detalles adicionales.
                     <br>
-                    Además, mediante sus puertos abiertos se intenta averiguar el servicio que se ejecuta, su versión y detalles.
+                    En algunos casos, la información del banner del servicio puede desvelar el S.O.
                 </td>
             </tr>
             <tr>
@@ -397,7 +441,7 @@ Código por byAd12
                         <li><span class="opcion">malware</span>: Se comprueba si está infectado.</li>
                         <li><span class="opcion">safe</span>: No se realizan accesos intrusivos.</li>
                         <li><span class="opcion">version</span>: Detección de versiones de servicios.</li>
-                        <li><span class="opcion">vuln</span>: Buscar vulnerabilidaes específicas.</li>
+                        <li><span class="opcion">vuln</span>: Buscar vulnerabilidades específicas.</li>
                     </ul>
                     
                     <br>Esto se puede aplicar a todos los puertos o solo a algunos con <span class="opcion">-p</span>. <a href="https://nmap.org/nsedoc/index.html" target="_blank">Ver más scripts o categorías</a>.
@@ -485,7 +529,7 @@ Código por byAd12
             <tr>
                 <td class="opcion"><span class="c1">[otros resultados]</span></td>
                 <td>
-                    El TTL (Time To Live) es un valor que se puede cambiar manualmente así que es un método completamente fiable o útil.
+                    El TTL (Time To Live) es un valor que se puede cambiar manualmente así que no es un método completamente fiable.
                     Se puede identificar el S.O. mediante firmas con el parámetro <span class="opcion">-O</span>.
                 </td>
             </tr>
