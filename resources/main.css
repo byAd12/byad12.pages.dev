@@ -264,25 +264,15 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .BlogEntradas a .Entrada.Color1{border-top: 3px solid rgb(120, 120, 200);}
 .BlogEntradas a .Entrada.Color2{border-top: 3px solid rgba(167, 255, 112, 0.5);}
 .BlogEntradas a .Entrada.Color3::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(
-        to right, 
-        rgb(120, 120, 200) 50%, 
-        rgba(167, 255, 112, 0.5) 50%
-    );
-    pointer-events: none;
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; pointer-events: none;
+    background: linear-gradient(to right, rgb(120, 120, 200) 50%, rgba(167, 255, 112, 0.5) 50%);
 }
 
 .BlogEntradas a .Entrada .SOBlog{max-width: 14px; transform: translateY(3px); transition: all .5s;}
 .BlogEntradas a .Entrada div{display: flex; background-color: #222523; padding: 20px; border-bottom: 1px solid rgba(128, 128, 128, 0.5);}
 .BlogEntradas a .Entrada div{justify-content: center; align-items: center; display: flex;}
 .BlogEntradas a .Entrada div h3{width: 70%; text-align: left;}
-.BlogEntradas a .Entrada div p{width: 30%; transition: all .5s; text-align: right; vertical-align: middle;}
+.BlogEntradas a .Entrada div p{width: 30%; text-align: right; vertical-align: middle;}
 .BlogEntradas a .Entrada p:not(.Entrada div p){text-align: left; padding: 20px;}
 .BlogEntradas .Color0 div p, .BlogEntradas .Color1 div p, .BlogEntradas .Color2 div p{transition: none !important;}
 .Entrada p:not(.Entrada div p){color: rgb(228, 196, 196);}
