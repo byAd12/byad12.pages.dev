@@ -52,7 +52,8 @@ Código por byAd12
                 <h2>Instalación y verificación</h2>
                 
                 <p>En el equipo donde se podrá administrar el servicio instalaremos los paquetes necesarios:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">apt install -y cups cups-pdf</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">apt-get install -y cups cups-pdf</code></pre>
 
                 <p>Para verificar el estado del servicio ejecutaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl status cups</code></pre>
@@ -61,11 +62,11 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-bash">cupsctl --remote-any</code></pre>
                 <p class="Expl">O podemos limitar el acceso a solo la red local configurando el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
-                <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Location /&gt;</span> y la dejaremos así, pero cambiando <span class="span_url" translate="no">192.168.1.*</span> por la dirección de la red local:</p>
+                <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Location /&gt;</span> y la dejaremos así, pero definiendo el valor <span class="span_url" translate="no">Dirección_de_red_local</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">&lt;Location /&gt;
   Order allow,deny
   Allow localhost
-  Allow 192.168.1.*
+  Allow [Dirección_de_red_local]
 &lt;/Location&gt;</code></pre>
 
                 <p>Luego aplicaremos los cambios reiniciando el servicio:</p>
@@ -80,7 +81,7 @@ Código por byAd12
                 <h2>Administración de la interfaz gráfica</h2>
 
                 <p>Primero tendremos que entrar al panel de administración web de cups. La URL debería ser:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/admin</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_local_servidor]:631/admin</code></pre>
 
                 <p>En la sección de <span class="span_contenido" translate="no">Printers</span> pulsaremos <span class="span_contenido" translate="no">Add Printer</span>.</p>
                 <p class="Expl">- Seleccionaremos <span class="span_url" translate="no">CUPS-PDF (Virtual PDF Printer)</span> y luego <span class="span_contenido" translate="no">Continue</span>.</p>
@@ -88,16 +89,16 @@ Código por byAd12
                 <p class="Expl">- Ahora seleccionaremos en la sección <span class="span_contenido" translate="no">Make</span> el driver <span class="span_url" translate="no">Generic</span>, en la sección <span class="span_contenido" translate="no">Model</span> el modelo <span class="span_url" translate="no">Generic CUPS-PDF Printer (w/ options) (en)</span> y por último pulsaremos <span class="span_contenido" translate="no">Add Printer</span>.</p>
 
                 <p>Ahora nos dirigiremos a la sección de impresoras del panel. La URL debería ser:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_local_servidor]:631/printers</code></pre>
                 <p class="Expl">Seleccionaremos la impresora que se ha creado en el paso anterior y ya podremos ver la cola de impresión.</p>
 
                 <p>Después de crear la impresora en el panel web (CUPS-PDF), hay que activarla y permitir trabajos especificando el nombre configurado de la impresora:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">cupsenable &lt;Nombre_Impresora&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept &lt;Nombre_Impresora&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsenable [Nombre_impresora]</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept [Nombre_impresora]</code></pre>
 
                 <p>Ahora añadiremos una política al servicio mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
-                <p class="Expl">Buscaremos una sección <span class="span_contenido" translate="no">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
+                <p class="Expl">Buscaremos una sección llamada <span class="span_contenido" translate="no">&lt;Policy default&gt;</span> y configuraremos la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">  JobPrivateValues none</code></pre>
                 <p class="Expl">Luego reiniciaremos el servicio para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
@@ -111,22 +112,22 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-bash">lpinfo -v</code></pre>
 
                 <p>Ahora añadiremos una impresora al sistema local asignándole un nombre (-p) mediante la IP del equipo (ipp://...) que creó la impresora y el nombre que le asignó a esta (printers/...):</p>
-                <pre class="codigo" translate="no"><code class="language-bash">lpadmin -p &lt;Nombre_Local&gt; -E -v ipp://&lt;IP_Servidor&gt;:631/printers/&lt;Nombre_Impresora&gt; -m everywhere</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">lpadmin -p [Nombre_impresora_local] -E -v ipp://[IP_servidor]:631/printers/[Nombre_impresora] -m everywhere</code></pre>
 
-                <p>Una vez añadida la activaremos y permitiremos trabajos de impresión:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">cupsenable &lt;Nombre_Local&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept &lt;Nombre_Local&gt;</code></pre>
+                <p>Una vez se añada la impresora hay que activarla y permitir los trabajos de impresión mediante el nombre configurado en el paso anterior:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsenable [Nombre_impresora_local]</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">cupsaccept [Nombre_impresora_local]</code></pre>
 
                 <p>Verificaremos que la impresora esté en el sistema:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">lpstat -p -d</code></pre>
                 <p class="Expl"><u>Nota</u>: La impresora puede aparecer inactiva ya que es una impresora virtual sin ningún dispositivo físico conectado.</p>
 
                 <p>Para verificar que se pueda imprimir podemos crear un archivo de prueba y enviarlo a la impresora:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">echo "Contenido de prueba" > &lt;archivo_de_Prueba&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="language-bash">lp -d &lt;Nombre_Local&gt; &lt;archivo_de_Prueba&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">echo "Contenido de prueba" > [Archivo_de_prueba]</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">lp -d &lt;Nombre_Local&gt; [Archivo_de_prueba]</code></pre>
 
                 <p><b>Servidor</b>: En la página de impresoras deberíamos ver los trabajos enviados:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">https://&lt;IP_Local_Servidor&gt;:631/printers</code></pre>
+                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_local_servidor]:631/printers</code></pre>
                 <p class="Expl">Los PDFs generados se guardarán normalmente en la carpeta del servidor: <span class="span_url" translate="no">/var/spool/cups-pdf/</span>.</p>
 
             </div>
