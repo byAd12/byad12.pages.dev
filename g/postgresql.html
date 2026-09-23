@@ -84,7 +84,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">network:
     version: 2
     ethernets:
-        [Interfaz_de_red/enp0s3]
+        [Interfaz_de_red]
             dhcp4: false
             addresses:
               - [IP_estática/Máscara_CIDR]
@@ -116,7 +116,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql-client</code></pre>
 
                 <p>2. Una vez instalado se puede ejecutar el siguiente comando para crear una conexión a una base de datos del servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">psql -h [IP_Servidor] -p [Puerto_Servidor/:5432] -U [Usuario] -d [Nombre_base_de_datos]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">psql -h [IP_servidor] -p [Puerto_servidor/:5432] -U [Nombre_usuario] -d [Nombre_base_de_datos]</code></pre>
 
             </div>
 
@@ -214,13 +214,13 @@ SHOW hba_file;
                 <p>2. Debes editar el archivo que se encuentra en la ruta del paso 1 con <span class="span_contenido" translate="no">nano</span>.</p>
                 
                 <p>3. Dentro del archivo del paso 2 hay que añadir una nueva línea indicando la dirección de red cuyos equipos tendrán permisos de hacer conexiones remotas:</p>
-                <pre class="codigo" translate="no"><code class="bash">host all all [dirección_red/mascara] scram-sha-256</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">host all all [Dirección_red/Máscara] scram-sha-256</code></pre>
                 
                 <p>4. Se debe reiniciar el servicio de PostgreSQL para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
 
                 <p>5. Si el firewall está activado, se debe crear una regla para permitir las conexiones de IPs que estén en el rango de la dirección de red hacia el puerto de PostgreSQL:</p>
-                <pre class="codigo" translate="no"><code class="bash">ufw allow from [dirección_red/mascara] to any port [puerto_postgresql] proto tcp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow from [Dirección_red/Máscara] to any port [puerto_postgresql] proto tcp</code></pre>
 
             </div>
 
@@ -239,7 +239,7 @@ SHOW hba_file;
                 <h2>Creación de usuarios</h2>
 
                 <p>Para crear un nuevo usuario en la base de datos:</p>
-                <pre class="codigo" translate="no"><code class="sql">CREATE USER [nombre_usuario] WITH PASSWORD '[contraseña_usuario]';</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">CREATE USER [Nombre_usuario] WITH PASSWORD '[Contraseña_usuario]';</code></pre>
                 <p class="Expl">Una vez creado, se puede comprobar que el usuario nuevo aparece en el listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\du</code></pre>
 
@@ -250,7 +250,7 @@ SHOW hba_file;
                 <h2>Creación de bases de datos</h2>
 
                 <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
-                <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [nombre_base_datos] OWNER [nombre_usuario_propietario];</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
                 <p class="Expl">Una vez creado, se puede comprobar que la base de datos aparece en el listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\l</code></pre>
 

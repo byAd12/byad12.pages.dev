@@ -56,12 +56,12 @@ Código por byAd12
                 <!-- ......................................................... -->
                 <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span></b>:</p>
 
-                <pre class="codigo" translate="no"><code class="bash">mkdir /carpeta_a_compartir
-groupadd nombre_grupo
-useradd -g nombre_grupo nombre_usuario
-passwd nombre_usuario
-chown nombre_usuario:nombre_grupo /carpeta_a_compartir
-chmod permisos /carpeta_a_compartir</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /[Carpeta_a_compartir]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">groupadd [Nombre_grupo]
+useradd -g [Nombre_grupo] [Nombre_usuario]
+passwd [Nombre_usuario]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">chown [Nombre_usuario]:[Nombre_grupo] /[Carpeta_a_compartir]
+chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
                 <p class="Expl"><u>Importante</u>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido" translate="no">x</span> (eXecute).</p>
                 <p class="Expl"><u>Riesgo de seguridad</u>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que estemos compartiendo.</p>
@@ -74,11 +74,11 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p>Lo que haremos a continuación será meter al usuario en una base de datos independiente a /etc/shadow para que este usuario sea roconocido en sistemas Windows.</p>
                 
                 <p class="Expl">Antes de nada hay que crear el usuario en el sistema local:</p>
-                <pre class="codigo" translate="no"><code class="bash">useradd [opciones] nombre_usuario</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">passwd nombre_usuario</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">useradd (Opciones) [Nombre_usuario]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">passwd [Nombre_usuario]</code></pre>
 
                 <p class="Expl">Configuraremos a ese usuario para que sea reconocible como un usuario para Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a [Nombre_usuario]</code></pre>
                 <p class="Expl">La contraseña que se asigna con <span class="span_contenido" translate="no">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
                 
                 <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
@@ -87,8 +87,8 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <!-- ......................................................... -->
                 <br>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
-                
-                <pre class="codigo" translate="no"><code class="bash">apt install -y samba</code></pre>
+
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y samba</code></pre>
                 <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido" translate="no">samba-ad-dc</span>, <span class="span_contenido" translate="no">nmbd</span> y <span class="span_contenido" translate="no">smbd</span>.</p>
                 <p class="Expl">Además se crea una carpeta esencial que contiene los archivos de configuración: <span class="span_url" translate="no">/etc/samba</span>.</p>
 
@@ -98,11 +98,11 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura obligatoria:</p>
-                <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
-    path = /carpeta_a_compartir
+                <pre class="codigo" translate="no"><code class="ini">[Nombre_recurso]
+    path = /[Carpeta_a_compartir]
     read only = no</code></pre>
                 <p class="Expl">
-                    <b>[nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
+                    <b>[Nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
                     <br>
                     <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
                     <br>
@@ -163,41 +163,59 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <h2>Acceder a una carpeta Linux o Windows desde otro <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
                 
                 <!-- ......................................................... -->
-                <p>1. <b>Explorar los recursos compartidos del servidor</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">smbclient -L //IP_servidor nombre_usuario</code></pre>
-                <p class="Expl"><b>nombre_usuario</b>: El usuario que podrá montar los recursos listados.</p>
+                <p>1. <b>Explorar los recursos compartidos del servidor que puede montar un usuario</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbclient -L //[IP_servidor] [Nombre_usuario]</code></pre>
                 
                 <!-- ......................................................... -->
-                <br>
                 <p>2. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mkdir /directorio_local_a_montar</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /[Directorio_local_a_montar]</code></pre>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt install cifs-utils</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y cifs-utils</code></pre>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>4. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username="usuario_Windows",password="contraseña" //IP_servidor/recurso /directorio_local</code></pre>
-                <p class="Expl">
-                    <b>usuario_Windows</b>: Usuario de la máquina Windows con permisos para acceder al recurso compartido.
-                    <br>
-                    <b>contraseña</b>: Contraseña del usuario de la máquina Windows.
-                </p>
-                <p class="Expl">
-                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido en Windows. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
-                    <br>
-                    <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
-                </p>
+                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username="Nombre_usuario_Windows",password="Contraseña" //[IP_servidor]/[Recurso] /[Directorio_local]</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">Nombre_usuario_Windows</code></pre></td>
+                            <td>Usuario de la máquina Windows con permisos para acceder al recurso compartido.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">Contraseña</code></pre></td>
+                            <td>Contraseña del usuario de la máquina Windows.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">//[IP_servidor]/[Recurso]</code></pre></td>
+                            <td>
+                                Ruta del recurso compartido en Windows.
+                                <br>
+                                <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">/[Directorio_local]</code></pre></td>
+                            <td>Carpeta local donde se montará el recurso compartido.</td>
+                        </tr>
+
+                    </table>
+                </div>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con el usuario que montó la carpeta</b>.</p>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>5. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que se puede acceder al recurso compartido</b>.</p>
 
             </div>
@@ -207,18 +225,15 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Copiar la <span style="color: rgb(147, 147, 206) !important;">ruta de acceso de red</span> en el servidor</b>.</p>
-                <pre class="codigo" translate="no"><code class="bash">\\Hostname_Servidor_Windows\Recurso_Compartido</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">\\[Hostname_servidor_Windows]\[Recurso_compartido]</code></pre>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>2. <b>En el cliente <span style="color: rgb(147, 147, 206) !important;">iniciar sesión</span> con un usuario con permisos de acceder al recurso</b>.</p>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>3. <b>En el explorador de archivos <span style="color: rgb(147, 147, 206) !important;">buscar la ruta de acceso de red</span> con el buscador</b>.</p>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>4. <b>Verificar si se puede <span style="color: rgb(147, 147, 206) !important;">acceder al contenido</span></b>.</p>
 
             </div>
@@ -230,13 +245,12 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido" translate="no">smbpasswd</span></b>.</p>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>2. <b>Listar los <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
 
                 <p class="Expl">Iremos al Explorador de archivos y en la barra de búsqueda buscaremos:</p>
-                <pre class="codigo" translate="no"><code class="bash">\\IP_servidor_Linux</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">\\[IP_servidor_Linux]</code></pre>
                 <p class="Expl">
-                    Aparecerá el recurso <span class="span_url">carpeta_a_compartir</span> y otra llamada <span class="span_contenido">nombre_usuario</span>, que es la carpeta personal del usuario de Linux.
+                    Aparecerá el recurso <span class="span_url">[Carpeta_a_compartir]</span> y otra llamada <span class="span_contenido">[Nombre_usuario]</span>, que es la carpeta personal del usuario de Linux.
                 </p>
 
                 <p class="Expl">
@@ -273,17 +287,17 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <br>
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
                 <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    &lt;&lt;opciones&gt;&gt;   0   0</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    [Opciones]   0   0</code></pre>
                 <p class="Expl">
-                    <b>//IP_servidor/recurso</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
+                    <b>//[IP_servidor]/[Nombre_recurso]</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
                     <br>
-                    <b>/directorio_local</b>: Carpeta local donde se montará el recurso compartido.
+                    <b>/[Directorio_local]</b>: Carpeta local donde se montará el recurso compartido.
                 </p>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>OPCIONES</b></td>
+                            <td colspan="2">Parámetros</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">defaults</code></pre></td>
@@ -298,7 +312,7 @@ chmod permisos /carpeta_a_compartir</code></pre>
                             <td>Para que no se monte automáticamente la carpeta.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">username=...,password=...</code></pre></td>
+                            <td><pre translate="no"><code class="bash">username=[Nombre_usuario],password=[Contraseña]</code></pre></td>
                             <td>Podemos asignar las credenciales del usuario que tendrá acceso a este recurso compartido.</td>
                         </tr>
                     </table>
@@ -309,23 +323,21 @@ chmod permisos /carpeta_a_compartir</code></pre>
                 <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este archivo.</p>
                 
                 <p class="Expl">Primero crearemos en cualquier ruta un archivo oculto de credenciales con el siguiente formato:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /ruta/a/archivo/.credenciales</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_archivo_credenciales]</code></pre>
                 <p class="Expl">Dentro de este archivo indicaremos el usuario y contraseña:</p>
-                <pre class="codigo" translate="no"><code class="bash">username=usuario
-password=contraseña</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">username=[Nombre_usuario]
+password=[Contraseña]</code></pre>
                 <p class="Expl">Luego guardamos el archivo y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
-                <pre class="codigo" translate="no"><code class="bash">chown root:root /ruta/a/archivo/.credenciales
-chmod 700 /ruta/a/archivo/.credenciales</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">chown root:root /[Ruta_archivo_credenciales]
+chmod 700 /[Ruta_archivo_credenciales]</code></pre>
                 <p class="Expl">Y por último añadiremos en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
-                <pre class="codigo" translate="no"><code class="bash">//IP_servidor/nombre_recurso    /directorio_local    cifs    credentials=/ruta/a/archivo/.credenciales   0   0</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    credentials=/[Ruta_archivo_credenciales]   0   0</code></pre>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
 
                 <!-- ......................................................... -->
-                <br>
                 <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta</b>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
 
@@ -344,7 +356,7 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                     <br>
                     Explorador de archivos &gt; Este equipo &gt; Pestaña "Equipo" &gt; Conectar a unidad de red
                 </p>
-                <p class="Expl">En la ventana asignaremos la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\IP_servidor\Recurso</span>.</p>
+                <p class="Expl">En la ventana asignaremos la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\[IP_servidor]\Recurso</span>.</p>
 
             </div>
 
@@ -360,39 +372,39 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <h2>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
                 
                 <p>Ejemplo de un bloque completo en el archivo <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="ini">[nombre_recurso]
+                <pre class="codigo" translate="no"><code class="ini">[Nombre_recurso]
     comment = Comentario del recurso compartido.
-    path = /carpeta_a_compartir
-    browseable = no              # Por defecto: yes
-    valid users = user1,user2,%S
-    force user = user1           # Por defecto: El usuario que inicia la conexión
-    force group = group1         # Por defecto: El grupo primario del usuario que inicia la conexión
-    read only = no               # Por defecto: yes
-    read list = user1,user2
-    write list = user1,user2
+    path = /[Carpeta_a_compartir]
+    browseable = no                # Por defecto: yes
+    valid users = [Usuario1],[Usuario2],%S
+    force user = [Usuario1]        # Por defecto: El usuario que inicia la conexión
+    force group = [Grupo1]         # Por defecto: El grupo primario del usuario que inicia la conexión
+    read only = no                 # Por defecto: yes
+    read list = [Usuario1],[Usuario2]
+    write list = [Usuario1],[Usuario2]
     create mask = 0700
     directory mask = 0700
-    guest ok = no                # Por defecto: no
-    guest only = no              # Por defecto: no
-    guest account = user1        # Por defecto: nobody
+    guest ok = no                 # Por defecto: no
+    guest only = no               # Por defecto: no
+    guest account = [Usuario1]    # Por defecto: nobody
     hide files = *.tmp
     hide dot files = yes
-    follow symlinks = yes        # Por defecto: yes
-    inherit permissions = no     # Por defecto: no
+    follow symlinks = yes         # Por defecto: yes
+    inherit permissions = no      # Por defecto: no
     wide links = no
-    hosts allow = pc1            # Por defecto: (todos)
-    hosts deny = pc2
+    hosts allow = [PC1]           # Por defecto: (todos)
+    hosts deny = [PC2]
 </code></pre>
 
                 <p>Parámetros básicos:</p>
                 <p class="Expl">
-                    <b>[nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
+                    <b>[Nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
                     <br>
                     <b>comment</b>: Comentario opcional que no afecta en la configuración.
                     <br>
                     <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
                     <br>
-                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url" translate="no">\\IP_servidor_Linux\Recurso</span>.
+                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url" translate="no">\\[IP_servidor]_Linux\Recurso</span>.
                 </p>
 
                 <p>Lista de control de acceso:</p>
@@ -462,15 +474,15 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 
                 <p>Ejemplo de un bloque completo en el archivo <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[global]
-    server role = standalone server   # Por defecto: auto
-    netbios name = hostname
-    workgroup = nombre_dominio   # Por defecto: (nulo)
-    security = nivel             # Por defecto: user
-    encrypt passwords = no       # Por defecto: no
-    password server = ...        # Por defecto: (nulo)
-    map to guest = never         # Por defecto: never
+    server role = standalone server # Por defecto: auto
+    netbios name = [Hostname]
+    workgroup = [Nombre_dominio]    # Por defecto: (nulo)
+    security = [Nivel]              # Por defecto: user
+    encrypt passwords = no          # Por defecto: no
+    password server = [Contraseña]  # Por defecto: (nulo)
+    map to guest = never            # Por defecto: never
     log level = 1
-    log file = /ruta
+    log file = /[Ruta_archivo_logs]
 </code></pre>
 
                 <p>Parámetros básicos:</p>
@@ -538,10 +550,10 @@ chmod 700 /ruta/a/archivo/.credenciales</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status smbd</code></pre>
 
                 <p><u>Fallo de autentificación</u> - Otro problema puede ser que el usuario con el que se intenta acceder no esté añadido en smbpasswd:</p>
-                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a nombre_usuario</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a [Nombre_usuario]</code></pre>
 
                 <p><u>Acceso denegado</u> - Hay que comprobar que los permisos sean los correctos:</p>
-                <pre class="codigo" translate="no"><code class="bash">ls -ld /recurso_montado</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ls -ld /[Ruta_al_recurso_montado]</code></pre>
 
                 <p><u>Montaje de /etc/fstab</u> - Hay que comprobar que la configuración del archivo de montaje sea correcto:</p>
                 <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>

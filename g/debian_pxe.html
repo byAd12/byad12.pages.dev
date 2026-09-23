@@ -141,7 +141,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
 INTERFACESv6=""</code></pre>
                 <p class="Expl">Por las siguientes líneas:</p>
-                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[NOMBRE_INTERFAZ_RED]"
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[Nombre_interfaz_de_red]"
 #INTERFACESv6=""</code></pre>
 
                 <div class="TablaDivScroll Expl">
@@ -177,9 +177,9 @@ INTERFACESv6=""</code></pre>
 
                 <p>1.3.2. Además configuraremos el tiempo de concesión de las IPs:</p>
 
-                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];
-max-lease-time [SEGUNDOS];
-min-lease-time [SEGUNDOS];</code></pre>
+                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [Segundos];
+max-lease-time [Segundos];
+min-lease-time [Segundos];</code></pre>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
@@ -189,15 +189,15 @@ min-lease-time [SEGUNDOS];</code></pre>
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">default-lease-time [Segundos];</code></pre></td>
                             <td>Tiempo base en segundos de la concesión IP.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">max-lease-time [SEGUNDOS];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">max-lease-time [Segundos];</code></pre></td>
                             <td>Tiempo máximo en segundos de la concesión IP.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">min-lease-time [SEGUNDOS];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">min-lease-time [Segundos];</code></pre></td>
                             <td>Tiempo mínimo en segundos de la concesión IP.</td>
                         </tr>
                         
@@ -206,18 +206,18 @@ min-lease-time [SEGUNDOS];</code></pre>
 
                 <p>1.3.3. La configuración de las concesiones IP se configuran con el siguiente bloque:</p>
 
-                <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
+                <pre class="codigo" translate="no"><code class="language-ini">subnet [Dirección_de_red] netmask [Máscara_punteada] {
     # Configuración básica
-    option routers [VALOR];
-    next-server [VALOR];
+    option routers [IP_default_gateway];
+    next-server [IP_servidor_TFTP];
 
     # Configuración DNS
-    option domain-name "[VALOR]";
-    option domain-name-servers [VALOR];
+    option domain-name "[Nombre_dominio]";
+    option domain-name-servers [IP_servidor_DNS];
 
     # Configuración de rangos
-    range [IP_INICIAL] [IP_FINAL];
-    range [IP_INICIAL_2] [IP_FINAL_2];
+    range [IP_inicial_1] [IP_final_2];
+    range [IP_inicial_2] [IP_final_2];
     # ...
 
     # Permitir arranque por red
@@ -256,11 +256,11 @@ min-lease-time [SEGUNDOS];</code></pre>
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">option routers [VALOR];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">option routers [...];</code></pre></td>
                             <td>La dirección IPv4 del enrutador.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">next-server [VALOR];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">next-server [...];</code></pre></td>
                             <td>La dirección IPv4 del servidor TFTP donde se aloja el archivo de arranque.</td>
                         </tr>
                         
@@ -275,11 +275,11 @@ min-lease-time [SEGUNDOS];</code></pre>
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">option domain-name "[VALOR]";</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">option domain-name "[...]";</code></pre></td>
                             <td>El nombre del dominio de la red entre comillas.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">option domain-name-servers [VALOR];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">option domain-name-servers [...];</code></pre></td>
                             <td>
                                 La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
                                 Estos servidores deben poder resolver el mirror para instalar Debian.
@@ -297,7 +297,7 @@ min-lease-time [SEGUNDOS];</code></pre>
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="language-ini">range [IP_INICIAL] [IP_FINAL];</code></pre></td>
+                            <td><pre translate="no"><code class="language-ini">range [IP_inicial] [IP_final];</code></pre></td>
                             <td>Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.</td>
                         </tr>
                         
@@ -441,10 +441,10 @@ min-lease-time [SEGUNDOS];</code></pre>
                 <p>Configuración regional:</p>
 
                 <p class="Expl">País, idioma y codificación de caracteres (<span class="span_contenido">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
-                <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string &lt;es_ES.UTF-8&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string [idioma_PAIS.Codificación]</code></pre>
 
                 <p class="Expl">Distribución del teclado (<span class="span_contenido">es</span> - "español"):</p>
-                <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select &lt;es&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select [Distribución_del_teclado]</code></pre>
 
                 <br>
                 <p>Las siguientes 3 opciones de configuración de red deben especificarse juntas:</p>
@@ -453,10 +453,10 @@ min-lease-time [SEGUNDOS];</code></pre>
                 <pre class="codigo" translate="no"><code class="text">d-i netcfg/choose_interface select auto</code></pre>
 
                 <p class="Expl">Definir el hostname del equipo [DHCP puede sobreescribirlo]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_hostname string &lt;nombre_host&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_hostname string [Nombre_host]</code></pre>
 
                 <p class="Expl">Definir el dominio del equipo [DHCP puede sobreescribirlo]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_domain string &lt;nombre_dominio&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i netcfg/get_domain string [Nombre_dominio]</code></pre>
 
                 <p class="Expl">En equipos con tarjetas de red Wi-Fi se puede deshabilitar WEP (Wired Equivalent Privacy), que está obsoleto y sustituido por WPA:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i netcfg/wireless_wep string</code></pre>
@@ -470,17 +470,17 @@ min-lease-time [SEGUNDOS];</code></pre>
 passwd passwd/root-password-again password contraseña_segura</code></pre>
 
                 <p class="Expl">Crear un nuevo usuario local [se solicita obligatoriamente]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-fullname string &lt;nombre_completo_usuario&gt;
-d-i passwd/username string &lt;nombre_usuario&gt;
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-fullname string [Nombre_completo_usuario]
+d-i passwd/username string [Nombre_usuario]
 
-d-i passwd/user-password password &lt;contraseña_segura&gt;
-d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
+d-i passwd/user-password password [Contraseña_segura]
+d-i passwd/user-password-again password [Contraseña_segura]</code></pre>
 
                 <p class="Expl">Asignar la contraseña al usuario local mediante un hash MD5 [opcional]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-password-crypted password &lt;Hash_MD5&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-password-crypted password [Hash_MD5]</code></pre>
 
                 <p class="Expl">Asignar un UID al usuario local [opcional]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-uid string &lt;número_uid&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i passwd/user-uid string [Número_UID]</code></pre>
 
                 <br>
                 <p>Gestión de la zona horaria:</p>
@@ -489,19 +489,19 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">d-i clock-setup/utc boolean true</code></pre>
 
                 <p class="Expl">Establecer la zona horaria actual (<span class="span_contenido">Europe/Madrid</span> - se saca con la carpeta <span class="span_url">/usr/share/zoneinfo/</span>):</p>
-                <pre class="codigo" translate="no"><code class="text">d-i time/zone string &lt;Europe/Madrid&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i time/zone string [Zona_horaria]</code></pre>
 
                 <p class="Expl">Establecer la hora correcta del reloj por NTP:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp boolean true</code></pre>
                 
-                <p class="Expl">Se puede elegir que servidor NTP se quiere usar [opcional]:</p>
-                <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp-server string &lt;ntp.roa.es&gt;</code></pre>
+                <p class="Expl">Se puede elegir que servidor NTP se quiere usar, como pej. <span class="span_contenido">ntp.roa.es</span> [opcional]:</p>
+                <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp-server string [Servidor_NTP]</code></pre>
 
                 <br>
                 <p>Particionar el disco:</p>
 
-                <p class="Expl">Primero hay que establecer el método de particionado (regular, lvm, crypto):</p>
-                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/method string regular</code></pre>
+                <p class="Expl">Primero hay que establecer el método de particionado (<span class="span_contenido">regular</span> (principal), <span class="span_contenido">lvm</span>, <span class="span_contenido">crypto</span>):</p>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/method string [Método_particionado]</code></pre>
 
                 <p class="Expl">Eliminar configuraciones LVM previas si existen [opcional]:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-lvm/device_remove_lvm boolean true</code></pre>
@@ -511,11 +511,11 @@ d-i passwd/user-password-again password &lt;contraseña_segura&gt;</code></pre>
 
                 <p class="Expl">Elegir el tipo de particionado:</p>
                 <ul class="Expl">
-                    <li><b>atomic</b> - Todos los archivos en una partición.</li>
-                    <li><b>home</b> - La partición /home se separa del resto.</li>
-                    <li><b>multi</b> - Las particiones /home, /var, /tmp se separan del resto.</li>
+                    <li><span class="span_contenido">atomic</span> - Todos los archivos en una partición.</li>
+                    <li><span class="span_contenido">home</span> - La partición /home se separa del resto.</li>
+                    <li><span class="span_contenido">multi</span> - Las particiones /home, /var, /tmp se separan del resto.</li>
                 </ul>
-                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select &lt;atomic&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select [Tipo_particionado]</code></pre>
 
                 <p class="Expl">Después de configurar el particionado se debe especificar que se aplique el proceso sin más preguntas:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-partitioning/confirm_write_new_label boolean true
@@ -601,18 +601,18 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">label &lt;...&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">label [...]</code></pre></td>
                             <td>Nombre identificativo para la entrada.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">menu label &lt;...&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">menu label [...]</code></pre></td>
                             <td>
                                 Es la descripción de la entrada que el usuario verá. 
                                 El símbolo <span class="span_contenido">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, se seleccionará la opción (este símbolo es opcional).
                             </td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">kernel &lt;...&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">kernel [...]</code></pre></td>
                             <td>Es el kernel a cargar.</td>
                         </tr>
                         <tr>
@@ -624,7 +624,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td>Define la resolución de la pantalla a usar para la instalación.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">initrd=...</code></pre></td>
+                            <td><pre translate="no"><code class="xml">initrd=[...]</code></pre></td>
                             <td>Define la ruta al archivo de Initial RAM Disk, que contiene controladores y herramientas necesarias para montar el sistema.</td>
                         </tr>
                         <tr>
@@ -644,7 +644,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="text">label instalacion-desatendida-gnome
         menu label Instalación desatendida de ^GNOME
         kernel debian-installer/amd64/linux
-        append vga=788 initrd=debian-installer/amd64/initrd.gz auto=true priority=critical preseed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt; --- quiet</code></pre>
+        append vga=788 initrd=debian-installer/amd64/initrd.gz auto=true priority=critical preseed/url=tftp://[IP_servidor_TFTP]/[Archivo_Respuestas].cfg --- quiet</code></pre>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
@@ -662,7 +662,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td>Especifica que no deben aparecer diálogos si no son de prioridad crítica.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">preseed/url=tftp://&lt;IP_Servidor_TFTP&gt;/&lt;Archivo_Respuestas.cfg&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">preseed/url=tftp://[IP_servidor_TFTP]/[Archivo_Respuestas].cfg</code></pre></td>
                             <td>Indica la ruta al servidor TFTP donde se encuentra el <a href="#Archivo_Respuestas">archivo de respuestas</a>.</td>
                         </tr>
                         
@@ -706,7 +706,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <h2 id="Instalar_Paquetes_Adicionales">Archivo de respuestas: instalar paquetes adicionales</h2>
 
                 <p>Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
-                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string &lt;Paquete1&gt; &lt;Paquete2&gt; &lt;...&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string [Paquete1] (Paquete2 ...)</code></pre>
 
             </div>
 
@@ -725,8 +725,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <p>Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
-    in-target &lt;Comando 1&gt;; \
-    in-target &lt;Comando 2&gt;; \
+    in-target [Comando 1]; \
+    in-target [Comando 2]; \
     ...;</code></pre>
 
                 <ul class="Expl">
@@ -740,11 +740,11 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr>
-                            <td><pre translate="no"><code class="text">in-target echo /&lt;Ruta_Absoluta&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="text">in-target echo /[Ruta_absoluta]</code></pre></td>
                             <td>Ejecuta el comando directamente en el sistema a instalar.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="text">echo /target/&lt;Ruta_Absoluta&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="text">echo /target/[Ruta_absoluta]</code></pre></td>
                             <td>Ejecuta el comando en el instalador pero modificando los archivos del sistema a instalar.</td>
                         </tr>
                         
@@ -781,8 +781,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <p>2. Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
-    mkdir -p /target/&lt;Ruta_Absoluta&gt;; \
-    echo "/&lt;Ruta_Absoluta&gt;    *(ro)" >> /target/etc/exports; \
+    mkdir -p /target/[Ruta_absoluta]; \
+    echo "/[Ruta_absoluta]    *(ro)" >> /target/etc/exports; \
     in-target systemctl enable nfs-kernel-server;</code></pre>
                     
                 <ul class="Expl">
@@ -816,8 +816,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <p>2. Luego hay que especificar que se debe ejecutar una serie de comandos al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
-    mkdir -p /target/&lt;Carpeta_Local&gt;; \
-    echo "&lt;IP_Servidor&gt;:/&lt;Carpeta_Remota&gt;    /&lt;Carpeta_Local&gt;    nfs    defaults,_netdev,nfsvers=3    0    0" >> /target/etc/fstab;</code></pre>
+    mkdir -p /target/[Carpeta_local]; \
+    echo "[IP_servidor]:/[Carpeta_remota]    /[Carpeta_local]    nfs    defaults,_netdev,nfsvers=3    0    0" >> /target/etc/fstab;</code></pre>
                     
                 <ul class="Expl">
                     <li><b>mkdir</b> - Se debe crear la carpeta antes de montarla, especificando la ruta local absoluta.</li>
@@ -849,22 +849,22 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
 
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string \
-    &lt;nombre receta&gt; ::                \
-        &lt;partición 1&gt;                 \
-            &lt;Opciones&gt;                \
+    [Nombre de la receta] ::          \
+        [Partición 1]                 \
+            [Opciones]                \
         .                             \
-        &lt;partición 2&gt;                 \
-            &lt;Opciones&gt;                \
+        [Partición 2]                 \
+            [Opciones]                \
         .                             \
-        &lt;partición 3&gt;                 \
-            &lt;Opciones&gt;                \
+        [Partición 3]                 \
+            [Opciones]                \
         .</code></pre>
                 <p class="Expl">El símbolo <span class="span_contenido">\</span> sirve para continuar la línea en otra.</p>
 
                 <br>
                 <p>Formato de cada partición:</p>
-                <pre class="codigo" translate="no"><code class="text">&lt;Tamaño mínimo MB&gt; &lt;Prioridad MB&gt; &lt;Tamaño máximo MB&gt; &lt;Sistema de archivos&gt; \
-    &lt;Opciones&gt; \</code></pre>
+                <pre class="codigo" translate="no"><code class="text">[Tamaño mínimo MB] [Prioridad MB] [Tamaño máximo MB] [Sistema de archivos] \
+    [Opciones] \</code></pre>
                 <p class="Expl">La suma de los tamaños mínimos indica el espacio mínimo que debe tener el disco. Si el disco es más pequeño, la instalación fallará.</p>
                 <p class="Expl">El espacio restante se reparte entre las particiones según su prioridad.</p>
                 <ul class="Expl">
@@ -902,11 +902,11 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td>Indica que la partición debe ser formateada.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="text">use_filesystem{ } filesystem{ &lt;Sistema de archivos&gt; }</code></pre></td>
+                            <td><pre translate="no"><code class="text">use_filesystem{ } filesystem{ [Sistema de archivos] }</code></pre></td>
                             <td>Define qué sistema de archivos usar, como "ext4".</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="text">mountpoint{ &lt;Donde&gt; }</code></pre></td>
+                            <td><pre translate="no"><code class="text">mountpoint{ [Donde se va amontar] }</code></pre></td>
                             <td>Define dónde se montará la partición en el árbol de directorios, como "/".</td>
                         </tr>
                         

@@ -107,11 +107,12 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 /* Texto */
 
 .codigo, p.Expl, p.Expl2, p{margin: 15px 0 15px 0;}
+.codigo, .codigo code, td pre{font-size: 14px;}
 p.Expl, .codigo, ul{margin-left: 30px;}
 p.Expl2, .codigo.Expl2{margin-left: 60px !important;}
-.parte1 div p u, .TituloCreditosInferior{text-underline-offset: 5px;}
+.parte1 div p u, .TituloCreditosInferior, .TablaDivScroll td u{text-underline-offset: 5px;}
 
-.codigo{transition: all .5s; font-size: 14px; color: #e0e0e0; padding: 0; overflow-x: auto; border: 1px solid #333; font-family: 'RobotoMono', monospace;}
+.codigo{transition: all .5s; font-size: 14px; color: #e0e0e0; padding: 0; overflow-x: auto; border: 1px solid #333;}
 .codigo:hover{border-left: 1px solid #7b92de;}
 
 /* =================================================== */
@@ -132,7 +133,7 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll table.TablaComandos tr.Titulo{background-color: rgba(123, 146, 222, 0.2);}
 .TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .TablaDivScroll table.TablaComandos td{width: auto;}
-.TablaDivScroll table.TablaComandos td pre{width: 100%;white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word; overflow-x: hidden;}
+.TablaDivScroll table.TablaComandos td pre{width: 100%; white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word; overflow-x: hidden;}
 
 /* =================================================== */
 /* Div principales para separar el contenido */

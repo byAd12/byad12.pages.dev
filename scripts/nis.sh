@@ -63,8 +63,8 @@ while true; do
         read -p 'Máscara punteada de la dirección de red (ej. 255.255.255.0): ' mascara_red
 
         echo -e "\n${Az}Instalando NIS...${Bl}"
-        apt update
-        apt install -y nis
+        apt-get update
+        apt-get install -y nis
 
         echo -e "\n${Az}Configurando el dominio...${Bl}"
         echo "${nombre_dominio}" > /etc/defaultdomain
@@ -124,8 +124,8 @@ while true; do
         read -p 'Máscara punteada de la dirección de red (ej. 255.255.255.0): ' mascara_red
 
         echo -e "\n${Az}Instalando NIS...${Bl}"
-        apt update
-        apt install -y nis
+        apt-get update
+        apt-get install -y nis
 
         echo -e "\n${Az}Configurando el dominio...${Bl}"
         echo "${nombre_dominio}" > /etc/defaultdomain
@@ -196,8 +196,8 @@ while true; do
         read -p 'Máscara punteada de la dirección de red (ej. 255.255.255.0): ' mascara_red
 
         echo -e "\n${Az}Instalando NIS...${Bl}"
-        apt update
-        apt install -y nis
+        apt-get update
+        apt-get install -y nis
 
         echo -e "\n${Az}Configurando el dominio...${Bl}"
         echo "${nombre_dominio}" > /etc/defaultdomain

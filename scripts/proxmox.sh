@@ -19,8 +19,8 @@ command -v cmatrix >/dev/null 2>&1 || PAQUETES+=("cmatrix")
 command -v curl >/dev/null 2>&1 || PAQUETES+=("curl")
 
 if [ ${#PAQUETES[@]} -gt 0 ]; then
-    apt update
-    apt install -y "${PAQUETES[@]}"
+    apt-get update
+    apt-get install -y "${PAQUETES[@]}"
 fi
 
 ##############################################################
@@ -889,8 +889,8 @@ EOF
 
             echo -e "${Az}Instalando...${Bl}"
             apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
-            apt update
-            apt install -y ca-certificates curl
+            apt-get update
+            apt-get install -y ca-certificates curl
             install -m 0755 -d /etc/apt/keyrings
             curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
             chmod a+r /etc/apt/keyrings/docker.asc
@@ -901,8 +901,8 @@ Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
 Components: stable
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
-            apt update
-            apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            apt-get update
+            apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
             systemctl start docker
 
             echo -e "\n${Az}Verificando...${Bl}"
@@ -1402,9 +1402,9 @@ EOF
             pct start $id_ct
 
             echo -e "\n${Az}Instalando las dependencias en el CT...${Bl}"
-            pct exec "$id_ct" -- apt update
+            pct exec "$id_ct" -- apt-get update
             pct exec "$id_ct" -- apt dist-upgrade -y
-            pct exec "$id_ct" -- apt install -y openvpn git
+            pct exec "$id_ct" -- apt-get install -y openvpn git
             pct exec "$id_ct" -- git clone https://github.com/Nyr/openvpn-install /root/openvpn-install
 
             clear
@@ -1436,9 +1436,9 @@ EOF
             clear
 
             echo -e "\n${Az}Instalando las dependencias...${Bl}"
-            apt update
+            apt-get update
             apt dist-upgrade -y
-            apt install -y openvpn git
+            apt-get install -y openvpn git
 
             echo -e "\n${Az}Descargando openvpn-install en '${Am_}/root/openvpn-install${Az}'...${Bl}"
             git clone https://github.com/Nyr/openvpn-install /root/openvpn-install

@@ -62,7 +62,7 @@ Código por byAd12
 
                 <br>
                 <p>2. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Servidor_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_servidor_Linux].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">Para verificar los cambios se podría mirar que el siguiente archivo contenga el hostname actualizado:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
 
@@ -70,10 +70,10 @@ Código por byAd12
                 <p>3. Ahora estableceremos un registro DNS interno para cada equipo de la red:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Primero eliminaremos los registros que contengan el hostname antiguo del servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     &lt;Hostname_Servidor_Linux_Antiguo&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     [Hostname_servidor_antiguo_Linux]</code></pre>
                 <p class="Expl">Luego se añadirá un registro que apunte a cada IP de los equipos de la red mediante su hostname y dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">&lt;IP_Servidor_Linux&gt;     &lt;Hostname_Servidor_Linux.dominio.tld&gt;     &lt;Hostname_Servidor_Linux&gt;
-&lt;IP_Cliente_1&gt;     &lt;Hostname_Cliente_1.dominio.tld&gt;     &lt;Hostname_Cliente_1&gt;
+                <pre class="codigo" translate="no"><code class="bash">[IP_servidor_Linux]     [Hostname_servidor_Linux].[Nombre_dominio].[TLD]     [Hostname_servidor_Linux]
+&lt;IP_Cliente_1&gt;     [Hostname_cliente1].[Nombre_dominio].[TLD]     [Hostname_cliente1]
 ...</code></pre>
 
                 <br>
@@ -171,11 +171,11 @@ Código por byAd12
                             <td>Subdominio completo del servidor.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool computer show &lt;Hostname&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool computer show [Hostname]</code></pre></td>
                             <td>Mostar información detallada de un equipo del dominio.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool computer delete &lt;Hostname&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool computer delete [Hostname]</code></pre></td>
                             <td>Eliminar equipo del dominio.</td>
                         </tr>
 
@@ -196,19 +196,19 @@ Código por byAd12
                             <td>Listar todos los usuarios del dominio.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool user add &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool user add [Nombre_usuario]</code></pre></td>
                             <td>Crear un nuevo usuario.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool user delete &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool user delete [Nombre_usuario]</code></pre></td>
                             <td>Eliminar un usuario existente.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool user setpassword &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool user setpassword [Nombre_usuario]</code></pre></td>
                             <td>Cambiar la contraseña de un usuario existente.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool user show &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool user show [Nombre_usuario]</code></pre></td>
                             <td>Mirar información detallada de un usuario.</td>
                         </tr>
 
@@ -229,19 +229,19 @@ Código por byAd12
                             <td>Listar todos los grupos del dominio.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool group listmembers &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool group listmembers [Nombre_grupo]</code></pre></td>
                             <td>Listar los miembros de un grupo.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool group add &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool group add [Nombre_grupo]</code></pre></td>
                             <td>Crear un nuevo grupo.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool group delete &lt;Nombre_Grupo&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool group delete [Nombre_grupo]</code></pre></td>
                             <td>Eliminar un grupo existente.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool group addmembers &lt;Nombre_Grupo&gt; &lt;Nombre_Usuario&gt;</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool group addmembers [Nombre_grupo] [Nombre_usuario]</code></pre></td>
                             <td>Añadir un usuario a un grupo.</td>
                         </tr>
 
@@ -262,11 +262,11 @@ Código por byAd12
                             <td>Listar todas las unidades organizativas del dominio.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool ou create "OU=&lt;Nombre_OU&gt;,DC=&lt;Nombre_Dominio&gt;,DC=&lt;Dominio_TLD&gt;"</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool ou create "OU=[Nombre_unidad_organizativa],DC=[Nombre_dominio],DC=[TLD]"</code></pre></td>
                             <td>Crear una nueva unidad organizativa, como "ou=text,dc=iso,dc=local".</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="xml">samba-tool ou delete "OU=&lt;Nombre_OU&gt;,DC=&lt;Nombre_Dominio&gt;,DC=&lt;Dominio_TLD&gt;"</code></pre></td>
+                            <td><pre translate="no"><code class="xml">samba-tool ou delete "OU=[Nombre_unidad_organizativa],DC=[Nombre_dominio],DC=[TLD]"</code></pre></td>
                             <td>Eliminar una unidad organizativa, como "ou=text,dc=iso,dc=local".</td>
                         </tr>
 
@@ -297,15 +297,15 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Añadiremos al final del archivo la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">[netlogon]
-    path = /var/lib/samba/sysvol/&lt;dominio.tld&gt;/scripts</code></pre>
+    path = /var/lib/samba/sysvol/[Nombre_dominio].[TLD]/scripts</code></pre>
 
                 <p class="Expl">Dentro de esa ruta se podrán guardar los scripts .bat que se ejecutarán en el cliente Windows.</p>
 
                 <p class="Expl">La ruta al recurso compartido es el siguiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">\\&lt;Hostname_Servidor_Linux&gt;\netlogon</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">\\[Hostname_servidor_Linux]\netlogon</code></pre>
 
                 <p>Ahora se puede asociar el script al usuario mediante un equipo Windows con RSAT o con el siguiente comando en el servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">samba-tool user setprofile &lt;Nombre_Usuario&gt; --script-path &lt;Nombre_Script.bat&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">samba-tool user setprofile [Nombre_usuario] --script-path [Nombre_script].bat</code></pre>
                 <p class="Expl">El script es una ruta relativa desde la ruta de sysvol configurada anteriormente.</p>
                 <p class="Expl">En el equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R &gt; <span class="span_contenido" translate="no">dsa.msc</span> &gt; Usuario &gt; Propiedades &gt; Profile &gt; Logon script.</p>
             
@@ -339,20 +339,20 @@ group:          files systemd winbind</code></pre>
                 <br>
                 <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">ping &lt;Hostname_Servidor&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ping [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">No va a funcionar hacer ping sin especificar en dominio ya que no hay ningún dominio de búsqueda configurado para añadir ese dominio automáticamente a la consulta.</p>
 
                 <br>
                 <p>3. Ahora configuraremos el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comandom pero usando <u>un usuario diferente a root</u> ya que este no tiene permisos de modificar la interfaz gráfica:</p>
                 <pre class="codigo" translate="no"><code class="bash">nm-connection-editor</code></pre>
-                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4" y añadir <span class="span_contenido" translate="no">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en la sección de "Dominios de búsqueda".</p>
+                <p class="Expl">Esto abrirá un gestor avanzado para configurar la red. Tendremos que ir a "Ajustes de IPv4" y añadir <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en la sección de "Dominios de búsqueda".</p>
                 <p class="Expl">Para verificarlo realizaremos una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
-                <pre class="codigo" translate="no"><code class="bash">ping &lt;Subdominio_Servidor&gt;</code></pre>
-                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido" translate="no">search &lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</span> en el archivo <span class="span_url" translate="no">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
+                <pre class="codigo" translate="no"><code class="bash">ping [Subdominio_servidor]</code></pre>
+                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en el archivo <span class="span_url" translate="no">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio Networking regenera su configuración en cada inicio del sistema.</p>
 
                 <br>
                 <p>4. Tenemos que asignar un hostname al cliente definiendo su dominio completo:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname &lt;Hostname_Cliente_Linux&gt;.&lt;Nombre_Dominio&gt;.&lt;Dominio_TLD&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_cliente_Linux].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">Para verificar los cambios se podría mirar que el siguiente archivo contenga el hostname actualizado:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/hostname</code></pre>
 
@@ -360,14 +360,14 @@ group:          files systemd winbind</code></pre>
                 <p>5. Ahora estableceremos un registro DNS interno para el propio cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Primero eliminaremos los registros que contengan el hostname antiguo del cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     &lt;Hostname_Cliente_Antiguo&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">127.0.0.1     [Hostname_cliente_antiguo]</code></pre>
                 <p class="Expl">Luego se añadirá un registro que apunte al propio cliente mediante su hostname y dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">&lt;IP_Cliente&gt;     &lt;Hostname_Cliente.dominio.tld&gt;     &lt;Hostname_Cliente&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">[IP_cliente]     [Hostname_cliente].[Nombre_dominio].[TLD]     [Hostname_cliente]</code></pre>
 
                 <br>
                 <p>6. Ahora instalaremos los paquetes necesarios:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
                 <p class="Expl">En caso que pida el nombre del reino de KRB5 hay que poner el nombre del dominio incluyendo el TLD.</p>
                 <p class="Expl">Para verificar que se instalaron con éxito podremos consultar el siguiente archivo y verificar que <span class="span_contenido" translate="no">default_realm</span> deberia ser el nombre de dominio en mayúsculas:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
@@ -381,11 +381,11 @@ group:          files systemd winbind</code></pre>
                 <p class="Expl">7.1. Reemplazaremos el valor "WORKGROUP" de la siguiente línea, que es el grupo de trabajo:</p>
                 <pre class="codigo" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
                 <p class="Expl">Hay que poner el nombre de dominio en mayúsculas y sin el TLD, por ejemplo como "CICLO" si el dominio fuera "ciclo.local":</p>
-                <pre class="codigo" translate="no"><code class="bash">workgroup = &lt;dominio_sin_tld_y_mayusculas&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">workgroup = [Dominio_sin_TLD_y_en_mayúsculas]</code></pre>
 
                 <br>
                 <p class="Expl">7.2. Debajo de "workgroup" añadiremos la siguiente línea, especificando el nombre de dominio completo:</p>
-                <pre class="codigo" translate="no"><code class="bash">realm = &lt;nombre_dominio&gt;.&lt;dominio_tld&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">realm = [Nombre_dominio].[TLD]</code></pre>
 
                 <br>
                 <p class="Expl">7.3. Reemplazaremos el valor de la siguiente línea:</p>
@@ -493,11 +493,11 @@ group:          files systemd winbind</code></pre>
 
                 <br>
                 <p class="Expl">8.6. Deberíamos ser capaces de ver la información del usuario de Windows con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_windows&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">id [Nombre_usuario_windows]</code></pre>
 
                 <br>
                 <p class="Expl">8.7. También deberíamos ser capaces de iniciar sesión con el usuario. Podemos probarlo con el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="bash">login &lt;usuario_windows&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">login [Nombre_usuario_windows]</code></pre>
                 <p class="Expl">Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que modifica el archivo <span class="span_url" translate="no">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
                 
                 <p class="Expl"><u>Importante</u>: Tendremos el <b>error</b> de que no crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
@@ -506,7 +506,7 @@ group:          files systemd winbind</code></pre>
 
                 <br>
                 <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep &lt;usuario_windows&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep [Nombre_usuario_windows]</code></pre>
 
             </div>
 
@@ -529,8 +529,8 @@ group:          files systemd winbind</code></pre>
 
                 <br>
                 <p>1. Primero hay que instalar los paquetes necesarios:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-mount cifs-utils</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y libpam-mount cifs-utils</code></pre>
 
                 <br>
                 <p>2. Ahora editaremos el archivo de configuración de pam_mount:</p>
@@ -640,15 +640,15 @@ group:          files systemd winbind</code></pre>
 
                 <br>
                 <p>2. Ahora hay que comprobar que el dominio del servidor sea visible desde el cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">realm discovery &lt;nombre_dominio&gt;,&lt;tld&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">realm discovery [Nombre_dominio].[TLD]</code></pre>
 
                 <br>
                 <p>3. Nos uniremos al dominio mediante el usuario Administrador. Para ello ejecutaremos el siguiente comando e ingresaremos la contraseña que pida:</p>
-                <pre class="codigo" translate="no"><code class="bash">realm join &lt;nombre_dominio&gt;,&lt;tld&gt; -U administrador</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">realm join [Nombre_dominio].[TLD] -U administrador</code></pre>
 
                 <br>
                 <p>4. Después de unirnos al dominio, deberiamos ser capaces de ver la información de un usuario del dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">id [Usuario_del_dominio]</code></pre>
 
                 <br>
                 <p>5. Es importante quitar o comentar en el siguiente archivo una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>:</p>
@@ -675,7 +675,7 @@ ldap_user_gid_number = gidNumber</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sssd</code></pre>
 
                 <p class="Expl">Para comprobar que los usuarios cojan los UIDs correctos se puede usar el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="bash">id &lt;usuario_dominio&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">id [Usuario_del_dominio]</code></pre>
 
             </div>
         
@@ -719,15 +719,15 @@ store dos attributes = yes</code></pre>
             
                 <br>
                 <p>1. Tendremos que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant &lt;Nombre_Grupo_A_Otorgar&gt; SeDiskOperatorPrivilege -U administrator</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant [Nombre_grupo_a_otorgar] SeDiskOperatorPrivilege -U administrator</code></pre>
 
                 <p class="Expl">Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
 
                 <br>
                 <p>2. Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
-                <pre class="codigo" translate="no"><code class="bash">[nome_recurso]
-    path = /ruta_recurso
+                <pre class="codigo" translate="no"><code class="bash">[Nombre_recurso]
+    path = /[Ruta_al_recurso]
     read only = no</code></pre>
 
             </div>

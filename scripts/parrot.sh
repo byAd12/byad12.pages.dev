@@ -5,8 +5,8 @@
 ##############################################################
 # ACTUALIZAR E INSTALAR PAQUETES
 ##############################################################
-apt update
-apt install -y bat openvpn neofetch htop micro cowsay
+apt-get update
+apt-get install -y bat openvpn neofetch htop micro cowsay
 clear
 
 ##############################################################

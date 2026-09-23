@@ -48,7 +48,7 @@ Código por byAd12
                 <td class="titulo" colspan="2">COMANDOS BÁSICOS</td>
             </tr>
             <tr>
-                <td class="opcion">nmap <span class="c1">&lt;tipo&gt;</span> <span class="c2">&lt;opciones&gt;</span> <span class="c3">&lt;objetivo&gt;</span></td>
+                <td class="opcion">nmap <span class="c1">[Tipo]</span> <span class="c2">[Opciones]</span> <span class="c3">[Objetivo]</span></td>
                 <td>Sintaxis básica.</td>
             </tr>
             <tr>
@@ -346,7 +346,7 @@ Código por byAd12
                 </td>
             </tr>
             <tr>
-                <td class="opcion">--stats-every=<span class="c1">(segundos)/s</span>[o]<span class="c2">(minutos)/m</span></td>
+                <td class="opcion">--stats-every=<span class="c1">(Segundos)/s</span>[o]<span class="c2">(Minutos)/m</span></td>
                 <td>
                     Se puede modificar el tiempo en minutos o segundos para que Nmap envie información.
                     <br>
@@ -369,15 +369,15 @@ Código por byAd12
                 </td>
             </tr>
             <tr>
-                <td class="opcion">--max-retries <span class="c1">&lt;intentos&gt;</span></td>
+                <td class="opcion">--max-retries <span class="c1">[Número_intentos]</span></td>
                 <td>Intenta enviar un paquete si no lo recibe hasta x veces (por defecto son 10).</td>
             </tr>
             <tr>
-                <td class="opcion">--min-rate <span class="c1">&lt;número_paquetes&gt;</span></td>
+                <td class="opcion">--min-rate <span class="c1">[Número_paquetes]</span></td>
                 <td>Nmap intentará igualar la tasa de paquetes que envía cada segundo con el número asignado en este parámetro.</td>
             </tr>
             <tr>
-                <td class="opcion">-T <span class="c1">&lt;0-5&gt;</span></td>
+                <td class="opcion">-T <span class="c1">[0-5]</span></td>
                 <td>
                     El parámetro <span class="opcion">--min-rate</span> se configura manualmente, por ello existen 6 plantillas predefinidas según niveles.
                     El nivel 0 es el más lento y sigiloso y, el nivel 5, es el más rápido y detectable. 
@@ -390,23 +390,23 @@ Código por byAd12
                 <td class="titulo" colspan="2">EXPORTAR RESULTADOS</td>
             </tr>
             <tr>
-                <td class="opcion">-oA <span class="c1">&lt;nombre_archivo&gt;</span></td>
-                <td>Exporta el resultado en 3 formatos: nombre_archivo<span class="opcion">.nmap</span>, nombre_archivo<span class="opcion">.xml</span> y nombre_archivo<span class="opcion">.gnmap</span>.</td>
+                <td class="opcion">-oA <span class="c1">[Nombre_archivo]</span></td>
+                <td>Exporta el resultado en 3 formatos: [Nombre_archivo]<span class="opcion">.nmap</span>, [Nombre_archivo]<span class="opcion">.xml</span> y [Nombre_archivo]<span class="opcion">.gnmap</span>.</td>
             </tr>
             <tr>
-                <td class="opcion">-oN <span class="c1">&lt;nombre_archivo&gt;</span></td>
-                <td>Exporta el resultado en formato: nombre_archivo<span class="opcion">.nmap</span>. Salida normal de terminal.</td>
+                <td class="opcion">-oN <span class="c1">[Nombre_archivo]</span></td>
+                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.nmap</span>. Salida normal de terminal.</td>
             </tr>
             <tr>
-                <td class="opcion">-oG <span class="c1">&lt;nombre_archivo&gt;</span></td>
-                <td>Exporta el resultado en formato: nombre_archivo<span class="opcion">.gnmap</span>. Salida de terminal adaptado para hacer <span class="opcion">grep</span>.</td>
+                <td class="opcion">-oG <span class="c1">[Nombre_archivo]</span></td>
+                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.gnmap</span>. Salida de terminal adaptado para hacer <span class="opcion">grep</span>.</td>
             </tr>
             <tr>
-                <td class="opcion">-oX <span class="c1">&lt;nombre_archivo&gt;</span></td>
-                <td>Exporta el resultado en formato: nombre_archivo<span class="opcion">.xml</span>. Formato XML.</td>
+                <td class="opcion">-oX <span class="c1">[Nombre_archivo]</span></td>
+                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.xml</span>. Formato XML.</td>
             </tr>
             <tr>
-                <td class="opcion">xsltproc <span class="c1">&lt;nombre_archivo&gt;</span>.xml -o  <span class="c1">&lt;nombre_archivo&gt;</span>.html</td>
+                <td class="opcion">xsltproc <span class="c1">[Nombre_archivo]</span>.xml -o  <span class="c1">[Nombre_archivo]</span>.html</td>
                 <td>Una vez exportado a XML se puede convertir a HTML mediante un comando externo.</td>
             </tr>
 
@@ -452,7 +452,7 @@ Código por byAd12
                 <td>Se utilizarán los scripts predeterminados (<span class="opcion">default</span>).</td>
             </tr>
             <tr>
-                <td class="opcion">--script <span class="c1">&lt;script/categoria&gt;</span></td>
+                <td class="opcion">--script <span class="c1">[Nombre_script/Nombre_categoría]</span></td>
                 <td>Con este parámetro se puede utilizar uno o varios script identificados por su nombre.</td>
             </tr>
             <tr>
@@ -483,7 +483,7 @@ Código por byAd12
                 </td>
             </tr>
             <tr>
-                <td class="opcion">-D RND:<span class="c1">&lt;cantidad_IPs&gt;</span></td>
+                <td class="opcion">-D RND:<span class="c1">[Cantidad_IPs]</span></td>
                 <td>
                     Esta opción permite enviar el mismo paquete x cantidad de veces desde diferentes IPs pero siempre añadiendo nuestra IP real en la lista (<span class="opcion">IP spoofing</span>).
                     <br><br>
@@ -491,19 +491,19 @@ Código por byAd12
                 </td>
             </tr>
             <tr>
-                <td class="opcion">-S <span class="c1">&lt;IP_origen&gt;</span></td>
+                <td class="opcion">-S <span class="c1">[IP_origen]</span></td>
                 <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo <span class="c1">IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
             </tr>
             <tr>
-                <td class="opcion">-e <span class="c1">&lt;interfaz&gt;</span></td>
+                <td class="opcion">-e <span class="c1">[Interfaz_de_red]</span></td>
                 <td>Esta opción permite enviar el paquete por diferentes interfaces a la predeterminada del sistema.</td>
             </tr>
             <tr>
-                <td class="opcion">--dns-server <span class="c1">&lt;server1(,server2)&gt;</span></td>
+                <td class="opcion">--dns-server <span class="c1">[Servidor1](,Servidor2)</span></td>
                 <td>Esta opción permite cambiar el servidor DNS que responderá a las consultas durante el escaneo.</td>
             </tr>
             <tr>
-                <td class="opcion">--source-port <span class="c1">&lt;puerto&gt;</span></td>
+                <td class="opcion">--source-port <span class="c1">[Puerto]</span></td>
                 <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero descubrimos que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
             </tr>
         </table>
@@ -591,28 +591,28 @@ Código por byAd12
                 <td class="titulo" colspan="2">RECOGER INFORMACIÓN</td>
             </tr>
             <tr>
-                <td class="opcion">curl <span class="c1">&lt;objetivo&gt;</span>:<span class="c2">&lt;puerto&gt;</span></td>
+                <td class="opcion">curl <span class="c1">[Objetivo]</span>:<span class="c2">[Puerto]</span></td>
                 <td>Muchos servidores al hacer esta solicitud devuelven un banner que puede contener información del sistema.
                     <br>Los servidores web se encuentran entre los servicios más atacados porque se hacen accesibles y presentan un alto potencial de ataque.
                 </td>
             </tr>
             <tr>
-                <td class="opcion">smbclient -L //<span class="c1">&lt;objetivo&gt;</span>/ -N</td>
+                <td class="opcion">smbclient -L //<span class="c1">[Objetivo]</span>/ -N</td>
                 <td>Al realizar esta conexión al puerto <span class="opcion">445</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
                     <br>Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
                     <br><br>(<span class="opcion">-N</span>: Modo sin credenciales; <span class="opcion">-L</span>: Listar recursos compartidos)
                 </td>
             </tr>
             <tr>
-                <td class="opcion">ftp <span class="c1">&lt;objetivo&gt;</span> <span class="c2">&lt;puerto&gt;</span></td>
+                <td class="opcion">ftp <span class="c1">[Objetivo]</span> <span class="c2">[Puerto]</span></td>
                 <td>Con una conexión ftp podemos probar a autentificarnos con <span class="opcion">anonymous</span> y ver información.</td>
             </tr>
             <tr>
-                <td class="opcion">telnet <span class="c1">&lt;objetivo&gt;</span> <span class="c2">&lt;puerto&gt;</span></td>
+                <td class="opcion">telnet <span class="c1">[Objetivo]</span> <span class="c2">[Puerto]</span></td>
                 <td>Con una conexión telnet podemos intentar conectarnos en remoto al puerto <span class="opcion">23</span> y probar si el servidor deja autentificarse como root sin contraseña.</td>
             </tr>
             <tr>
-                <td class="opcion">netcat -nv -p <span class="c1">&lt;puerto_origen&gt;</span> <span class="c2">&lt;objetivo&gt;</span> <span class="c3">&lt;puerto_objetivo&gt;</span></td>
+                <td class="opcion">netcat -nv -p <span class="c1">[Puerto_origen]</span> <span class="c2">[Objetivo]</span> <span class="c3">[Puerto_objetivo]</span></td>
                 <td>Si vemos que el destino acepta conexiones si las enviamos desde un puerto determinado, podemos manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: <span class="opcion">El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
             </tr>
         </table>
