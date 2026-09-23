@@ -138,7 +138,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
 INTERFACESv6=""</code></pre>
                 <p class="Expl">Y lo modificaremos al siguiente contenido:</p>
-                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[NOMBRE_INTERFAZ_RED]"
+                <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[Nombre_interfaz_red]"
 #INTERFACESv6=""</code></pre>
                 <p class="Expl">
                     <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
@@ -159,53 +159,150 @@ INTERFACESv6=""</code></pre>
 
                 <p>Esta configuración permite configurar el tiempo de concesión de una configuración IP a un equipo:</p>
 
-                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [SEGUNDOS];
-max-lease-time [SEGUNDOS];
-min-lease-time [SEGUNDOS];</code></pre>
-                <p class="Expl">
-                    <b>default-lease-time</b>: Tiempo base en segundos de la concesión de una configuración IP dada.
-                    <br><b>max-lease-time</b>: Tiempo máximo en segundos de la concesión.
-                    <br><b>min-lease-time</b>: Tiempo mínimo en segundos de la concesión.
-                </p>
+                <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [Segundos];
+max-lease-time [Segundos];
+min-lease-time [Segundos];</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración de <b>tiempos de concesión</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">default-lease-time [Segundos];</code></pre></td>
+                            <td>Tiempo base en segundos de la concesión IP.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">max-lease-time [Segundos];</code></pre></td>
+                            <td>Tiempo máximo en segundos de la concesión IP.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">min-lease-time [Segundos];</code></pre></td>
+                            <td>Tiempo mínimo en segundos de la concesión IP.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Esta configuración crea una subnet donde se define la configuración IP a conceder y los rangos de IPs a asignar:</p>
+<pre class="codigo" translate="no"><code class="language-ini">subnet [Dirección_de_red] netmask [Máscara_punteada] {
+    # Configuración básica
+    option routers [IP_default_gateway];
 
-                <pre class="codigo" translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {
-    option routers [VALOR];
+    # Configuración DNS
+    option domain-name "[Nombre_dominio]";
+    option domain-name-servers [IP_servidor_DNS];
 
-    option domain-name "[VALOR]";
-    option domain-name-servers [VALOR];
-
-    range [IP_INICIAL] [IP_FINAL];
-    range [IP_INICIAL_2] [IP_FINAL_2];
+    # Configuración de rangos DHCP
+    range [IP_inicial_1] [IP_final_2];
+    range [IP_inicial_2] [IP_final_2];
     # ...
+
+    # Configuración de un servicio TFTP para el arranque en red de Debian:
+    ## > https://byad12.pages.dev/g/debian_pxe
 }</code></pre>
-                <p class="Expl">
-                    <b>subnet</b>: La dirección de red IPv4.
-                    <br><b>netmask</b>: Máscara punteada de la red.
-                </p>
-                <p class="Expl">
-                    <b>routers</b>: La dirección IPv4 del enrutador.
-                </p>
-                <p class="Expl">
-                    <b>domain-name</b>: El nombre del dominio de la red entre comillas.
-                    <br><b>domain-name-servers</b>: La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
-                </p>
-                <p class="Expl">
-                    <b>range</b>: Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.
-                </p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                <b>Inicio</b> de la configuración básica
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">subnet [DIRECCIÓN_RED] netmask [MÁSCARA] {</code></pre></td>
+                            <td>La dirección de red IPv4 y su máscara en formato punteado.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración <b>básica</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option routers [...];</code></pre></td>
+                            <td>La dirección IPv4 del enrutador.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración <b>DNS</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option domain-name "[...]";</code></pre></td>
+                            <td>El nombre del dominio de la red entre comillas.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">option domain-name-servers [...];</code></pre></td>
+                            <td>
+                                La(s) dirección(es) IPv4 de lo(s) servidor(es) DNS separados por comas.
+                                Estos servidores deben poder resolver el mirror para instalar Debian.
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Configuración de <b>rangos</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">range [IP_inicial] [IP_final];</code></pre></td>
+                            <td>Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Opcional - también se puede definir una IP estática mediante la dirección MAC del dispositivo:</p>
 
-                <pre class="codigo" translate="no"><code class="language-ini">host [NOMBRE] {
-    hardware ethernet [MAC];
-    fixed-address [IP_ESTÁTICA];
+                <pre class="codigo" translate="no"><code class="language-ini">host [Nombre_dispositivo] {
+    hardware ethernet [MAC_dispositivo];
+    fixed-address [IP_estática];
 }</code></pre>
-                <p class="Expl">
-                    <b>host</b>: Se le asigna un nombre específico para identificar el dispositivo.
-                    <br><b>hardware</b>: La MAC del dispositivo para identificarlo. <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
-                    <br><b>fixed-address</b>: IPv4 estática que se desea conceder al dispositivo.
-                </p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Parámetros
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">host [...] {</code></pre></td>
+                            <td>Se le asigna un nombre específico para identificar el dispositivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">hardware ethernet [...];</code></pre></td>
+                            <td>
+                                Es la dirección MAC del dispositivo.
+                                <span class="span_contenido" translate="no">ethernet</span> puede ser cambiado.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="language-ini">fixed-address [...];</code></pre></td>
+                            <td>Es la dirección IPv4 estática que se desea conceder al dispositivo.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
             </div>
 

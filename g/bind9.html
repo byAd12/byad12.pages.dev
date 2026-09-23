@@ -55,7 +55,7 @@ Código por byAd12
 
                 <p>En el servidor hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install bind9</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y bind9</code></pre>
 
                 <p>En el firewall permitiremos el paso del puerto 53 - UDP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
@@ -82,19 +82,19 @@ Código por byAd12
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf</code></pre></td>
-                            <td>archivo de Configuración del servidor</td>
+                            <td>Archivo de configuración del servidor.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.local</code></pre></td>
-                            <td>archivo de zonas</td>
+                            <td>Archivo de zonas.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.default-zones</code></pre></td>
-                            <td>archivo de zonas por defecto - root</td>
+                            <td>Archivo de zonas por defecto - root.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/bind/named.conf.options</code></pre></td>
-                            <td>archivo de Configuración del DNS</td>
+                            <td>Archivo de configuración del DNS.</td>
                         </tr>
                     </table>
                 </div>
@@ -103,7 +103,7 @@ Código por byAd12
             <div>
                 <h2>Si hay problemas en el DNS</h2>
 
-                <p>Verificaremos que los siguientes archivos  no contengan registros inválidos:</p>
+                <p>Verificaremos que los siguientes archivos no contengan registros DNS inválidos:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/resolv.conf</code></pre>
 
@@ -118,27 +118,30 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Nslookup: <span>Windows y Linux</span><img class="SoporteComandoRemoto" alt="Logo Windows" src="../img/windows.png"><img class="SoporteComandoRemoto" alt="Logo Linux" src="../img/linux.png"></h2>
-                <p>Sirve para comprobar la configuración DNS de un dominio o IP según un registro específico.</p>
-                <p>Servidores DNS del dominio:</p>
-                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+                <p>El comando <span class="span_contenido" translate="no">nslookup</span> sirve para comprobar la configuración DNS de un dominio o IP según un registro específico.</p>
+                <p>Buscar los servidores DNS que gestionan un dominio específico:</p>
+                <pre class="codigo" translate="no"><code class="console"># nslookup
+> [IP_servidor_DNS] # El servidor que realizará la consulta
 > set type=NS
-> adr.es</code></pre>
-                <p>Servidores de correo:</p>
-                <pre class="codigo" translate="no"><code class="console">> 192.168.1.100
+> [Nombre_dominio].[TLD]</code></pre>
+                <p>Buscar los servidores de correo para un dominio:</p>
+                <pre class="codigo" translate="no"><code class="console"># nslookup
+> [IP_servidor_DNS] # El servidor que realizará la consulta
 > set type=MX
-> ibm.com</code></pre>
-                <p>Nombres asociados a una IPv4:</p>
-                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+> [Nombre_dominio].[TLD]</code></pre>
+                <p>Buscar los nombres asociados a una dirección IPv4:</p>
+                <pre class="codigo" translate="no"><code class="console"># nslookup
+> [IP_servidor_DNS] # El servidor que realizará la consulta
 > set type=A
-> asml.com</code></pre>
+> [Nombre_dominio].[TLD]</code></pre>
             </div>
             <div>
-                <h2>Configurar DNS como Reenviador: <span translate="no">/etc/bind/named.conf.options</span></h2>
+                <h2>Configurar el DNS como Reenviador: <span translate="no">/etc/bind/named.conf.options</span></h2>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
 
 forwarders {
-192.168.8.1;
+[IP_del_reenviador];
 };
 
 dnssec-validation no;
@@ -148,7 +151,7 @@ listen-on { any; };
 // listen-on-v6 { any; };
 };</code></pre>
                 <p class="Expl">
-                    <b>192.168.8.1</b>: IPv4 del dispositivo al que reenviar las peticiones.
+                    <b>[IP_del_reenviador]</b>: Es la dirección IPv4 del dispositivo al que reenviarán las peticiones DNS.
                     <br>
                     <b>// listen-on-v6 { any; }</b>: Es una línea comentada que se ignorará.
                 </p>
@@ -159,16 +162,11 @@ listen-on { any; };
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2><span>Ejemplo 1:</span> Crear una zona</h2>
-                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
-type master;
-file "/etc/bind/db.adr.es";
-};</code></pre>
-                <p><span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
+                <h2>Crear una zona</h2>
+                <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> crearemos un archivo (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Un ejemplo es el siguiente, que define los registros DNS de un dominio "adr.es":</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
 adr.es. IN      SOA     dns1.adr.es.    administrador.adr.es    (
-    1               ; N* de serie
+    1               ; Número de serie
     604800          ; Intervalo de actualización
     86400           ; Intervalo de reintento
     2419200         ; Expiración
@@ -180,20 +178,26 @@ www     IN      A       192.168.0.153
 correo  IN      A       192.168.0.4
 adr.es. IN      MX      1       correo
 otra    IN      CNAME   iesjorgeguillen.es</code></pre>
-                <p>Comprobar con nslookup:</p>
-                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
+
+
+                <p>En el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> añadiremos una nueva zona indicando el archivo creado en el paso anterior:</p>
+                <pre class="codigo" translate="no"><code class="bash">zone "[Nombre_dominio].[TLD]"{
+type master;
+file "/etc/bind/[Nombre_archivo_DB_dominio]";
+};</code></pre>
+
+                <p>Una vez configurado hay que comprobar con nslookup que los registros se han creado correctamente:</p>
+                <pre class="codigo" translate="no"><code class="console"># nslookup
+> 127.0.0.1
 > set type=NS
-> adr.es</code></pre>
+> [Nombre_dominio].[TLD]</code></pre>
+
             </div>
             <!-- ......................................................... -->
             <div>
-                <h2><span>Ejemplo 2:</span> Crear una zona inversa</h2>
-                <p><span class="span_url" translate="no">/etc/bind/named.conf.local</span>:</p>
-                <pre class="codigo" translate="no"><code class="nginx">zone "0.168.192.in-addr.arpa"{
-type master;
-file "/etc/bind/db.192.168.0";
-};</code></pre>
-                <p><span class="span_url" translate="no">/etc/bind/db.192.168.0</span>:</p>
+                <h2>Crear una zona inversa</h2>
+
+                <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> crearemos un archivo (formato típico - <span class="span_url" translate="no">db.Dirección_red</span>) que contenga todos los registros DNS de la zona inversa. Un ejemplo es el siguiente, que define los registros DNS de la zona <span class="span_url" translate="no">0.168.192.in-addr.arpa</span> (192.168.0.0/24):</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
 0.168.192.in-addr.arpa. IN      SOA     dns1.adr.es.    administrador.adr.es.   (
         1
@@ -206,33 +210,36 @@ file "/etc/bind/db.192.168.0";
 
 230     IN      PTR     dns1.adr.es.
 153     IN      PTR     www.adr.es.</code></pre>
-                <p>Comprobar con nslookup:</p>
-                <pre class="codigo" translate="no"><code class="console">> 127.0.0.1
-> set type=PTR
-> 230.0.168.192.in-addr.arpa.</code></pre>
+
+                <p>En el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> añadiremos una nueva zona inversa indicando el archivo creado en el paso anterior:</p>
+                <pre class="codigo" translate="no"><code class="nginx">zone "[Zona_inversa].in-addr.arpa"{
+type master;
+file "/etc/bind/db.192.168.0";
+};</code></pre>
+
+                <p>Una vez configurado hay que comprobar con nslookup que los registros se han creado correctamente:</p>
+                <pre class="codigo" translate="no"><code class="console"># nslookup
+> 127.0.0.1
+> set type=NS
+> [Zona_inversa].in-addr.arpa</code></pre>
             </div>
             <!-- ......................................................... -->
-        </div>
-        <hr>
-        <!-- ......................................................... -->
-        <div class="parte1">
-            <!-- ......................................................... -->
             <div>
-                <h2><span>Ejemplo 3:</span> Crear DNS secundario</h2>
+                <h2>Crear un servidor DNS secundario</h2>
                 
-                <p>En el servidor <b>DNS1</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
-                <pre class="codigo" translate="no"><code class="bash">listen-on {192.168.0.226;}; // La IP de dns2
-allow-transfer {192.168.0.226;}; // La IP de DNS2
-allow-query {192.168.0.226;}; // La IP de DNS2</code></pre>
+                <p>En el servidor <b>DNS1</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos la siguiente configuración:</p>
+                <pre class="codigo" translate="no"><code class="nginx">listen-on { [IP_servidor_secundario]; };
+allow-transfer { [IP_servidor_secundario]; };
+allow-query { [IP_servidor_secundario]; };</code></pre>
                 
-                <p>Ahora añadiremos lo siguiente en el archivo <span class="span_url" translate="no">/etc/bind/db.adr.es</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">dns2	IN	A	192.168.0.226</code></pre>
+                <p>En el servidor <b>DNS1</b> hay que añadir un nuevo registro DNS para el servidor secundario desde el archivo DB de la zona:</p>
+                <pre class="codigo" translate="no"><code class="nginx">dns2	IN	A	[IP_servidor_secundario]</code></pre>
                 
-                <p>En el servidor <b>DNS2</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos el siguiente bloque:</p>
-                <pre class="codigo" translate="no"><code class="bash">zone "adr.es"{
+                <p>En el servidor <b>DNS2</b> editaremos el archivo <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadiremos la siguiente configuración:</p>
+                <pre class="codigo" translate="no"><code class="nginx">zone "[Nombre_dominio].[TLD]"{
 type slave;
-masters{192.168.0.225;}; // IP de DNS1
-file "/etc/bind/db.adr.net";
+masters{ [IP_servidor_principal]; };
+file "/etc/bind/[Nombre_archivo_DB_dominio]";
 };</code></pre>
             </div>
             <!-- ......................................................... -->
@@ -251,17 +258,17 @@ file "/etc/bind/db.adr.net";
                 <p>Pasos:</p>
                 <br>
                 <ol>
-                    <li>Poner IP Estática</li>
-                    <li>Administrador del Servidor > Agregar rol servidor DNS > Instalar</li>
-                    <li>Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Reenviadores > Editar > Añadir IP del servidor DNS que actuará como reenviador (ej: <span class="span_url" translate="no">192.168.8.1</span>)</li>
+                    <li>Configurar una IP estática</li>
+                    <li>Administrador del Servidor > Agregar rol llamado "Servidor DNS" > Instalar</li>
+                    <li>Administrador del Servidor > Herramientas > DNS > [Nombre_Servidor] > Reenviadores > Editar > Añadir la IP del servidor DNS que actuará como reenviador</li>
                 </ol>
                 <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro <b>NS</b>.</p>
                 
-                <p>Para configurar registros <b>A</b>:</p>
-                <p class="Expl">Administrador del Servidor > Herramientas > DNS > Nombre_Servidor > Zonas de Búsqueda directa > Click derecho > Registro <b>A</b></p>
+                <p>Para configurar registros de tipo <b>A</b>:</p>
+                <p class="Expl">Administrador del Servidor > Herramientas > DNS > [Nombre_Servidor] > Zonas de Búsqueda directa > Click derecho > Registro <b>A</b>.</p>
 
-                <p>Para configurar registros <b>MX</b>:</p>
-                <p class="Expl">Lo mismo que al crear registros <b>A</b> pero no se debe poner nombre al registro.</p>
+                <p>Para configurar registros de tipo <b>MX</b>:</p>
+                <p class="Expl">Lo mismo que al crear registros de tipo <b>A</b> pero no se debe de asignar un nombre al registro.</p>
 
             </div>
         </div>
