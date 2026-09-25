@@ -91,7 +91,7 @@ function datos_guias() {
         const fechaTxt = primeraGuiaVisible.querySelector('div p.fecha');
         contenedorFecha.innerText = fechaTxt ? fechaTxt.innerText : "--";
     } else {
-        contenedorFecha.innerText = "No hay guías visibles";
+        contenedorFecha.innerText = "Todas las guías están ocultas";
     }
 }
 
@@ -198,17 +198,20 @@ function editar_personal() {
 
 function editar_boton_filtros_avanzados() {
     const links = document.querySelectorAll('.filtro_boton');
-    const ocultarExpandido = document.querySelectorAll('.filtro_boton_ocultar_expandido');
     const boton = document.getElementById("editar_boton_filtros_avanzados");
 
     const filtrosYaVisibles = Array.from(links).some(link => !link.classList.contains('oculto'));
 
     if (!filtrosYaVisibles) {
+        document.getElementById("editar_ASIR").disabled = false;
+        document.getElementById("editar_SMR").disabled = false;
         resetearFiltrosYEstilos();
         links.forEach(link => link.classList.remove('oculto'));
         ocultarExpandido.forEach(link => link.classList.add('oculto'));
         boton.style.color = "#7cfb2d";
     } else {
+        document.getElementById("editar_ASIR").disabled = true;
+        document.getElementById("editar_SMR").disabled = true;
         links.forEach(link => link.classList.add('oculto'));
         ocultarExpandido.forEach(link => link.classList.remove('oculto'));
         boton.style.color = "white";
