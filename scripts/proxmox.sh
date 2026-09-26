@@ -114,9 +114,12 @@ while true; do
         echo -e "\n${Az}Configuración actual de timedatectl...${Bl}"
         timedatectl
 
-        echo -e "\n${Az}Ajustando la hora de la BIOS a '${Am_}RTC + 1${Az}'...${Bl}"
-        timedatectl set-local-rtc 1 --adjust-system-clock
-
+        echo -e "\n${Az}Sincronizando reloj (NTP) y fijando BIOS en UTC...${Bl}"
+        timedatectl set-timezone Europe/Madrid
+        timedatectl set-local-rtc 0
+        chronyc makestep
+        hwclock -w
+        
         echo -e "\n${Az}Verificando los cambios de timedatectl...${Bl}"
         timedatectl
 
