@@ -1246,7 +1246,7 @@ EOF
             echo -e "\n${Am}Cambie ahora la IPv4 del nodo desde el panel de administración de Netbird, luego puse ENTER.${Bl}"
             read -p '' _
 
-            echo -e "\n${Az}Reiniciando la conexión con Netbird...${Bl}"
+            echo -e "${Az}Reiniciando la conexión con Netbird...${Bl}"
             netbird down
             systemctl restart netbird # Aquí se debería hacer el netbird up automáticamente
             sleep 2
