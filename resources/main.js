@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', anadir_texto_gpg);
 // ==========================================================
 // Enseñar información sobre las guías
 
-function datos_guias() {
+async function datos_guias() {
     const guias = document.querySelectorAll('.BlogEntradas > a');
     let contador_activos = 0;
     let primeraGuiaVisible = null;
@@ -84,14 +84,30 @@ function datos_guias() {
         }
     });
 
-    document.getElementById("InformacionGuiasTotal").innerText = contador_activos;
+    document.getElementById("InformacionGuiasVisibles").innerText = contador_activos;
     const contenedorFecha = document.getElementById("InformacionGuiasUltimaFecha");
     
     if (primeraGuiaVisible) {
         const fechaTxt = primeraGuiaVisible.querySelector('div p.fecha');
         contenedorFecha.innerText = fechaTxt ? fechaTxt.innerText : "--";
     } else {
-        contenedorFecha.innerText = "Todas las guías están ocultas";
+        contenedorFecha.innerText = "(sin datos)";
+    }
+
+    try {
+        const res = await fetch(`https://api.github.com/repos/byAd12/byad12.pages.dev/contents/g`);
+        if (!res.ok) throw new Error("Error al consultar la API de GitHub");
+        
+        const items = await res.json();
+        const InformacionGuiasTotal = items.filter(item => item.type === "file").length;
+
+        // Ahora ambos valores están disponibles y definidos
+        document.getElementById("InformacionGuiasTotal").innerText = InformacionGuiasTotal;
+        document.getElementById("InformacionGuiasOcultas").innerText = InformacionGuiasTotal - contador_activos;
+
+    } catch (err) {
+        console.error("No se pudo obtener el total:", err);
+        document.getElementById("InformacionGuiasOcultas").innerText = "--";
     }
 }
 

@@ -74,15 +74,15 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p>Lo que haremos a continuación será meter al usuario en una base de datos independiente a /etc/shadow para que este usuario sea roconocido en sistemas Windows.</p>
                 
                 <p class="Expl">Antes de nada hay que crear el usuario en el sistema local:</p>
-                <pre class="codigo" translate="no"><code class="bash">useradd (Opciones) [Nombre_usuario]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">passwd [Nombre_usuario]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">useradd (Opciones) [Nombre_usuario]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">passwd [Nombre_usuario]</code></pre>
 
                 <p class="Expl">Configuraremos a ese usuario para que sea reconocible como un usuario para Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">smbpasswd -a [Nombre_usuario]</code></pre>
-                <p class="Expl">La contraseña que se asigna con <span class="span_contenido" translate="no">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">smbpasswd -a [Nombre_usuario]</code></pre>
+                <p class="Expl2">La contraseña que se asigna con <span class="span_contenido" translate="no">smbpasswd</span> debe coincidir con la que se usará para iniciar sesión desde Windows, pero no tiene que coincidir con la contraseña del usuario Linux.</p>
                 
                 <p class="Expl">Una vez se reconozca al usuario se puede confirmar con el siguiente comando que enseña el UID, GID y nombre de los usuarios compatibles con Windows:</p>
-                <pre class="codigo" translate="no"><code class="bash">pdbedit -L</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">pdbedit -L</code></pre>
                 
                 <!-- ......................................................... -->
                 <br>
@@ -98,10 +98,10 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
                 <p class="Expl">Al final del archivo creamos un bloque con la siguiente estructura obligatoria:</p>
-                <pre class="codigo" translate="no"><code class="ini">[Nombre_recurso]
+                <pre class="codigo Expl2" translate="no"><code class="ini">[Nombre_recurso]
     path = /[Carpeta_a_compartir]
     read only = no</code></pre>
-                <p class="Expl">
+                <p class="Expl2">
                     <b>[Nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
                     <br>
                     <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
@@ -287,8 +287,8 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <br>
                 <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
                 <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    [Opciones]   0   0</code></pre>
-                <p class="Expl">
+                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    [Opciones]   0   0</code></pre>
+                <p class="Expl2">
                     <b>//[IP_servidor]/[Nombre_recurso]</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
                     <br>
                     <b>/[Directorio_local]</b>: Carpeta local donde se montará el recurso compartido.
@@ -323,15 +323,15 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este archivo.</p>
                 
                 <p class="Expl">Primero crearemos en cualquier ruta un archivo oculto de credenciales con el siguiente formato:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_archivo_credenciales]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">nano /[Ruta_archivo_credenciales]</code></pre>
                 <p class="Expl">Dentro de este archivo indicaremos el usuario y contraseña:</p>
-                <pre class="codigo" translate="no"><code class="bash">username=[Nombre_usuario]
+                <pre class="codigo Expl2" translate="no"><code class="bash">username=[Nombre_usuario]
 password=[Contraseña]</code></pre>
                 <p class="Expl">Luego guardamos el archivo y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el archivo:</p>
-                <pre class="codigo" translate="no"><code class="bash">chown root:root /[Ruta_archivo_credenciales]
+                <pre class="codigo Expl2" translate="no"><code class="bash">chown root:root /[Ruta_archivo_credenciales]
 chmod 700 /[Ruta_archivo_credenciales]</code></pre>
                 <p class="Expl">Y por último añadiremos en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
-                <pre class="codigo" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    credentials=/[Ruta_archivo_credenciales]   0   0</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    credentials=/[Ruta_archivo_credenciales]   0   0</code></pre>
 
                 <!-- ......................................................... -->
                 <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración</b>:</p>

@@ -233,7 +233,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .BlogEntradas{display: flex; flex-wrap: wrap; justify-content: center; list-style: none; padding: 0; margin-left: 50px;}
 
 .BlogEntradas a{margin: 10px; position: relative; display: inline-block; overflow: hidden;}
-.BlogEntradas a .Entrada{background-color: #222523; color: white; min-height: 150px; width: 320px; transition: all .5s; border: 1px solid rgba(128, 128, 128, 0.5); border-top: none; position: relative; overflow: hidden;}
+.BlogEntradas a .Entrada{background-color: #222523; color: white; width: 320px; transition: all .5s; border: 1px solid rgba(128, 128, 128, 0.5); border-top: none; position: relative; overflow: hidden;}
 
 .BlogEntradas a .Entrada.Color0{border-top: 3px solid rgba(128, 128, 128, 0.5);}
 .BlogEntradas a .Entrada.Color1{border-top: 3px solid rgb(120, 120, 200);}
@@ -337,7 +337,8 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 
   /* GUÍAS */
   .BlogEntradas *{transition: all .5s ease-in-out;}
-  .BlogEntradas a .Entrada{width: 100%; min-height: 100% !important;}
+  .BlogEntradas a {display: block; width: calc(100% - 20px); box-sizing: border-box;}
+  .BlogEntradas a .Entrada{width: 100% !important; box-sizing: border-box;}
 
   /* ... */
   .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos{flex-direction: column; flex-wrap: nowrap; gap: 10px;}

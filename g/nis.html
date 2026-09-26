@@ -75,30 +75,30 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/defaultdomain</code></pre>
 
                 <p class="Expl">Ahora, el dominio que hayamos configurado debe enseñarse con el comando:</p>
-                <pre class="codigo" translate="no"><code class="bash">nisdomainname</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">nisdomainname</code></pre>
 
                 <p class="Expl">Además le asignaremos a este servidor su dominio DNS correspondiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
 
                 <p>2. A continuación editaremos la configuración de NIS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/default/nis</code></pre>
                 <p class="Expl">Dentro de este archivo definiremos la función del servidor con las siguientes líneas:</p>
-                <pre class="codigo" translate="no"><code class="bash">NISSERVER=master
+                <pre class="codigo Expl2" translate="no"><code class="bash">NISSERVER=master
 NISCLIENT=false</code></pre>
                 <p class="Expl">Si este servidor va a actuar como esclavo, debe reemplazarse "master" por "slave".</p>
 
                 <p>3. Por seguridad definiremos la subred de IPs que podrán entrar a interactuar con el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/ypserv.securenets</code></pre>
                 <p class="Expl">Ya que por defecto se permite el acceso a todas las subredes comentaremos las siguientes líneas con un <span class="span_contenido" translate="no">#</span> al principio de cada línea:</p>
-                <pre class="codigo" translate="no"><code class="bash"># 0.0.0.0    0.0.0.0
+                <pre class="codigo Expl2" translate="no"><code class="bash"># 0.0.0.0    0.0.0.0
 # ::/0</code></pre>
                 <p class="Expl">Y añadiremos una línea nueva donde definiremos la dirección de red y máscara, como por ejemplo:</p>
-                <pre class="codigo" translate="no"><code class="bash">255.255.255.0    192.168.1.0</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">255.255.255.0    192.168.1.0</code></pre>
 
                 <p>4. Ahora estableceremos un registro DNS interno por cada cliente y servidor del dominio mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Definiremos con nuevas líneas lo siguiente, con una separación entre elementos con tabuladores:</p>
-                <pre class="codigo" translate="no"><code class="bash">[IP_servidor]    [Hostname_servidor].[Nombre_dominio].[TLD]    [Hostname_servidor]
+                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_servidor]    [Hostname_servidor].[Nombre_dominio].[TLD]    [Hostname_servidor]
 [IP_cliente]     [Hostname_cliente].[Nombre_dominio].[TLD]     [Hostname_cliente]
 ...</code></pre>
                 <p class="Expl">Este paso no es obligatorio si ya hay un servicio DNS real ejecutándose para resolver los nombres de dominio.</p>
@@ -106,15 +106,15 @@ NISCLIENT=false</code></pre>
                 <p>5. Si el servidor va a actuar como <u>esclavo</u> y además como <u>cliente</u> hay que modificar el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/yp.conf</code></pre>
                 <p class="Expl">Hay que añadir una nueva línea al final del archivo para definir cuál va a ser el servidor maestro:</p>
-                <pre class="codigo" translate="no"><code class="bash">ypserver [Hostname_servidor_Master].[Nombre_dominio].[TLD]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">ypserver [Hostname_servidor_Master].[Nombre_dominio].[TLD]</code></pre>
 
                 <p>6. Ahora generaremos la base de datos de todos los archivos del servidor como passwd, group, shadow, etc. para que los clientes lo añadan a su sistema:</p>
                 <p class="Expl">Si el servidor actuará como <u>master</u>:</p>
-                <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -m</code></pre>
-                <p class="Expl">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido" translate="no">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido" translate="no">y</span>.</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">/usr/lib/yp/ypinit -m</code></pre>
+                <p class="Expl2">Por defecto añadirá el hostname del servidor y, si no hay más servidores que definir, cerraremos el programa pulsando <span class="span_contenido" translate="no">CTRL + D</span>. Luego pedirá una confirmación en la que simplemente pondremos <span class="span_contenido" translate="no">y</span>.</p>
 
                 <p class="Expl">Si el servidor actuará como esclavo / <u>slave</u>:</p>
-                <pre class="codigo" translate="no"><code class="bash">/usr/lib/yp/ypinit -s [Hostname_servidor_Master].[Nombre_dominio].[TLD]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">/usr/lib/yp/ypinit -s [Hostname_servidor_Master].[Nombre_dominio].[TLD]</code></pre>
 
                 <p>7. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypserv ypbind yppasswdd ypxfrd</code></pre>
@@ -168,7 +168,7 @@ NISCLIENT=false</code></pre>
                 <p>2. Ahora editaremos el archivo de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
                 <p class="Expl">Dentro de este archivo añadiremos la siguiente línea donde compartiremos la carpeta <span class="span_url" translate="no">/home</span> con permisos de lectura y escritura a los equipos dentro de la subred <span class="span_url" translate="no">192.168.1.0/24</span> (hay que ajustar esto a tu dirección de red) - cada segmento se separa con tabuladores:</p>
-                <pre class="codigo" translate="no"><code class="bash">/home    192.168.1.0/24(rw,sync,no_subtree_check)</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">/home    192.168.1.0/24(rw,sync,no_subtree_check)</code></pre>
 
                 <p>3. Por último exportaremos la configuración NFS para que sea efectiva:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -ra</code></pre>
@@ -193,25 +193,25 @@ NISCLIENT=false</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/defaultdomain</code></pre>
 
                 <p class="Expl">Además le asignaremos a este cliente su dominio DNS correspondiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_cliente].[Nombre_dominio].[TLD]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_cliente].[Nombre_dominio].[TLD]</code></pre>
 
                 <p>2. A continuación editaremos la configuración de NIS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/default/nis</code></pre>
                 <p class="Expl">Dentro de este archivo definiremos la función del cliente con las siguientes líneas:</p>
-                <pre class="codigo" translate="no"><code class="bash">NISSERVER=false
+                <pre class="codigo Expl2" translate="no"><code class="bash">NISSERVER=false
 NISCLIENT=true</code></pre>
 
                 <p>3. Ahora estableceremos un registro DNS interno por cada cliente y servidor del dominio con el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Definiremos con nuevas líneas lo siguiente, con una separación entre elementos con tabuladores:</p>
-                <pre class="codigo" translate="no"><code class="bash">[IP_servidor]    [Hostname_servidor].[Nombre_dominio].[TLD]    [Hostname_servidor]
+                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_servidor]    [Hostname_servidor].[Nombre_dominio].[TLD]    [Hostname_servidor]
 [IP_cliente]     [Hostname_cliente].[Nombre_dominio].[TLD]     [Hostname_cliente]
 ...</code></pre>
 
                 <p>4. Ahora tenemos que definir qué servidor NIS utilizará el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/yp.conf</code></pre>
                 <p class="Expl">En la última línea hay que añadir lo siguiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">ypserver [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">ypserver [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
 
                 <p>5. Ahora reiniciaremos todos los servicios y si hay fallos habrá que resolverlos:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart rpcbind ypbind nscd</code></pre>
@@ -221,13 +221,13 @@ NISCLIENT=true</code></pre>
 
                 <p>7. Es importante configurar que el cliente sea capaz de adoptar esos usuarios y grupos desde el servicio nis con el archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">Dentro de este archivo cambiaremos esto:</p>
-                <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd
+                <p class="Expl">Dentro de este archivo cambiaremos este bloque de configuración ...</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">passwd:         files systemd
 group:          files systemd
 shadow:         files systemd
 gshadow:        files systemd</code></pre>
-                <p class="Expl">A esto, añadiendo al final de cada línea la palabra <span class="span_contenido" translate="no">nis</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">passwd:         files systemd nis
+                <p class="Expl">... por esto, añadiendo al final de cada línea la palabra <span class="span_contenido" translate="no">nis</span>:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">passwd:         files systemd nis
 group:          files systemd nis
 shadow:         files systemd nis
 gshadow:        files systemd nis</code></pre>
@@ -235,7 +235,7 @@ gshadow:        files systemd nis</code></pre>
                 <p>8. Si todo funciona deberíamos ser capaces de ver los usuarios y grupos creados en el servidor con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">ypcat passwd</code></pre>
                 <p class="Expl">Como prueba podemos ejecutar lo siguiente definiendo un nombre de un usario que se haya creado en el servidor y no en el cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">id [Usuario_del_servidor]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">id [Usuario_del_servidor]</code></pre>
 
             </div>
 
@@ -250,7 +250,7 @@ gshadow:        files systemd nis</code></pre>
                 <p>2. Añadiremos un montaje persistente y automático en /etc/fstab:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
                 <p class="Expl">Dentro de este archivo añadiremos la siguiente línea para poder montar la carpeta del servidor en el sistema local:</p>
-                <pre class="codigo" translate="no"><code class="bash">[IP_servidor]:/home    /home    nfs    defaults    0    0</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_servidor]:/home    /home    nfs    defaults    0    0</code></pre>
 
                 <p>3. Por último, reiniciaremos el sistema para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">reboot -r now</code></pre>

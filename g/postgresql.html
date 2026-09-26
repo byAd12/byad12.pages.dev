@@ -74,13 +74,13 @@ Código por byAd12
             <div>
                 <h2>Asignar una IP estática en el servidor</h2>
 
-                <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
+                <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el fichero de configuración de Netplan.</p>
 
-                <p class="Expl">1. Primero se debe realizar una copia de seguridad:</p>
+                <p>1. Antes de editar el fichero se debe realizar una copia de seguridad:</p>
                 <pre class="codigo" translate="no"><code class="bash">cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.backup</code></pre>
 
-                <p class="Expl">2. Luego se debe asignar la siguiente configuración, modificando los valores con la configuración de la red en la que se aloja el servidor:</p>
+                <p>2. Tras la copia de seguridad abriremos el fichero y asignaremos la siguiente configuración, modificando los valores con una configuración de red válida:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">network:
     version: 2
     ethernets:
@@ -96,13 +96,13 @@ Código por byAd12
                 - 1.1.1.1
                 - 1.0.0.1</code></pre>
 
-                <p class="Expl">3. Probaremos que la configuración sea válida con el siguiente comando:</p>
+                <p>3. Al guardar el fichero hay que probar que la configuración sea válida:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
 
-                <p class="Expl">4. Por último hay que aplicar la configuración si el paso 3 no dio ningún error:</p>
+                <p>4. Si el comando anterior no dió ningún error, podemos aplicar la nueva configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
 
-                <p class="Expl">Para comprobar que la IP estática se configuró correctamente se puede usar el siguiente comando:</p>
+                <p>5. Para comprobar que la IP estática se configuró correctamente hay que ver la IP actual del equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
 
             </div>
@@ -240,7 +240,7 @@ SHOW hba_file;
 
                 <p>Para crear un nuevo usuario en la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE USER [Nombre_usuario] WITH PASSWORD '[Contraseña_usuario]';</code></pre>
-                <p class="Expl">Una vez creado, se puede comprobar que el usuario nuevo aparece en el listado:</p>
+                <p>Una vez se haya creado el usuario, se puede comprobar que aparece en el siguiente listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\du</code></pre>
 
             </div>
@@ -250,8 +250,8 @@ SHOW hba_file;
                 <h2>Creación de bases de datos</h2>
 
                 <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
-                <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
-                <p class="Expl">Una vez creado, se puede comprobar que la base de datos aparece en el listado:</p>
+                <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [Nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
+                <p>Una vez se haya creado la base de datos, se puede comprobar que aparece en el siguiente listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\l</code></pre>
 
             </div>
