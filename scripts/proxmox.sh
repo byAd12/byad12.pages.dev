@@ -131,8 +131,6 @@ while true; do
             echo "fastfetch" >> ~/.bashrc
             echo "echo ''" >> ~/.bashrc
         fi
-
-        echo -e "\n${Ve}¡Se ha aplicado la configuración inicial correctamente!${Bl}"
         ;;
 
     ##############################################################
@@ -165,8 +163,6 @@ while true; do
         echo -e "\n${Az}Añadiendo la regla de apagado con Crontab...${Bl}"
         tarea="$minuto $hora * * * /sbin/shutdown -h now"
         (crontab -l 2>/dev/null; echo "$tarea") | crontab -
-
-        echo -e "\n${Ve}¡Se configuró el apagado automático correctamente!${Bl}"
         ;;
 
     ##############################################################
@@ -178,18 +174,15 @@ while true; do
         echo -e "\n${Az}Descargando '${Am_}PVEThemes${Az}' desde GitHub...${Bl}"
         git clone https://github.com/Happyrobot33/PVEThemes
 
-        echo -e "\n${Az}Navegando dentro de la carpeta mediante el comando '${Am_}cd${Az}'...${Bl}"
+        echo -e "\n${Az}Asignando permisos de ejecución al script '${Am_}install.sh${Az}'...${Bl}"
         cd PVEThemes
-
-        echo -e "\n${Az}Dando permisos de ejecución al script '${Am_}install.sh${Az}'...${Bl}"
         chmod +x install.sh
         
         echo -e "\n${Az}Ejecutando el script '${Am_}install.sh${Az}'...${Bl}"
         echo -e "\n${Am}  ->  Porfavor, ejecute la opción 'instalar'.${Bl}"
         ./install.sh
 
-        echo -e "\n${Az}¡Se han instalado los temas de Proxmo UI correctamente!${Bl}"
-        echo -e "\n${Am}  ->  Borre la caché de la página web y luego vaya al apartado de 'temas'.${Bl}"
+        echo -e "\n${Am}Elimina la caché de la página web y luego vaya al apartado de 'temas'.${Bl}"
         ;;
 
     ##############################################################
@@ -225,8 +218,6 @@ while true; do
 
             echo -e "\n${Az}Forzando la actualización de los certificados...${Bl}"
             pvecm updatecerts --force
-
-            echo -e "\n${Ve}¡Se ha creado el clúster correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -259,8 +250,6 @@ while true; do
 
             echo -e "\n${Az}Intentando unirse al clúster de '${Am_}${nodo_nombre}${Az}'...${Bl}"
             pvecm add "$nodo_nombre"
-
-            echo -e "\n${Ve}¡Se unió al clúster correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -288,10 +277,8 @@ while true; do
 
                 echo -e "\n${Az}Intentando quitar del clúster a $nodo_nombre...${Bl}"
                 pvecm del "$nodo_nombre"
-
-                echo -e "\n${Ve}¡Se eliminó el nodo del clúster correctamente!${Bl}"
             else
-                echo -e "${Ro_}Contraseña incorrecta${Bl}"
+                echo -e "${Ro_}La contraseña es incorrecta.${Bl}"
             fi
             ;;
 
@@ -343,8 +330,7 @@ while true; do
                 echo -e "${Az}Deshabilitando el servicio '${Am_}corosync${Az}'...${Bl}"
                 systemctl disable corosync
 
-                echo -e "\n${Ve}¡Se ha salido del clúster correctamente!${Bl}"
-                echo -e "${Ve} -> La copia de seguridad de '${Am_}/etc/pve${Ve}' se encuentra en '${Am_}/root/pve_backup${Ve}'.${Bl}"
+                echo -e "${Ve}La copia de seguridad de '${Am_}/etc/pve${Ve}' se encuentra en '${Am_}/root/pve_backup${Ve}'.${Bl}"
             else
                 echo -e "${Ro_}Contraseña incorrecta${Bl}"
             fi
@@ -405,8 +391,6 @@ while true; do
 
             echo -e "${Az}Iniciando los servicios '${Am_}pve-cluster${Az}', '${Am_}pvedaemon${Az}' y '${Am_}pvestatd${Az}'...${Bl}"
             systemctl start pve-cluster pvedaemon pvestatd
-
-            echo -e "\n${Ve}¡Se configuró corosync correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -450,8 +434,6 @@ while true; do
 
             echo -e "\n${Az}Creando el backup del contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
             vzdump $id_ct --mode stop --compress lzo --storage $almacenamiento
-
-            echo -e "\n${Ve}¡Backup creado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -466,8 +448,6 @@ while true; do
 
             echo -e "\n${Az}Restaurando el backup del contenedor con ID '${Am_}${id_ct}${Az}'...${Bl}"
             pct restore $id_ct $ruta --storage $almacenamiento
-
-            echo -e "\n${Az}¡Backup restaurado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -541,8 +521,6 @@ while true; do
 
             echo -e "\n${Az}Restaurando local-lvm...${Bl}"
             pvesm add lvmthin local-lvm-$valor --thinpool data --vgname pve --nodes "$host"
-
-            echo -e "\n${Az}¡local-lvm restaurado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -604,8 +582,6 @@ while true; do
 
             echo -e "\n${Az}Porfavor, inicie sesión con la siguiente URL...${Bl}"
             cloudflared login
-
-            echo -e "\n${Ve}¡Cloudflared fue instalado y configurado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -672,8 +648,6 @@ EOF
 
             echo -e "\n${Az}Verificando la sintaxis de '${Am_}/etc/cloudflared/config.yml${Az}'...${Bl}"
             cloudflared tunnel ingress validate
-
-            echo -e "\n${Ve}¡Túnel creado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -750,8 +724,6 @@ EOF
 
             echo -e "\n${Az}Verificando la sintaxis...${Bl}"
             cloudflared --config /etc/cloudflared/config-$nombre_tunel.yml tunnel ingress validate
-
-            echo -e "\n${Ve}¡Segundo túnel '$nombre_tunel' creado y corriendo en paralelo!${Bl}"
             ;;
 
         ##############################################################
@@ -815,8 +787,6 @@ EOF
 
             echo -e "\n${Az}Reiniciando el servicio de Cloudflared...${Bl}"
             systemctl restart cloudflared
-
-            echo -e "\n${Ve}¡Túnel creado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -827,6 +797,7 @@ EOF
 
             echo -e "${Am}Aviso:${Bl}"
             echo -e "${Am}  Los túneles creados se eliminarán localmente, pero no en Cloudflare.${Bl}"
+            echo -e "${Am}  Los registros DNS deben eliminarse manualmente.${Bl}"
             echo -e ""
 
             echo -e "\n${Az}Parando el servicio de Cloudflared...${Bl}"
@@ -844,9 +815,6 @@ EOF
             echo -e "\n${Az}Eliminando las configuraciones...${Bl}"
             rm -rf /etc/cloudflared/*
             rm -rf /root/.cloudflared/*
-
-            echo -e "\n${Ve}¡Cloudflared ha sido purgado correctamente!${Bl}"
-            echo -e "\n${Am}(Los registros DNS deben eliminarse manualmente)${Bl}"
             ;;
 
         ##############################################################
@@ -884,7 +852,7 @@ EOF
             clear
 
             echo -e "${Am}Aviso:${Bl}"
-            echo -e "${Am}  Esta instalación se basa en Debian.${Bl}"
+            echo -e "${Am}  Esta instalación se basa en un sistema Debian.${Bl}"
             echo -e ""
 
             echo -e "${Az}Instalando...${Bl}"
@@ -907,8 +875,6 @@ EOF
 
             echo -e "\n${Az}Verificando...${Bl}"
             systemctl status docker
-
-            echo -e "\n${Ve}¡Docker ha sido instalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -939,8 +905,6 @@ EOF
 
             echo -e "\n${Az}Verificando...${Bl}"
             docker ps -a | grep favonia/cloudflare-ddns
-
-            echo -e "${Ve}¡El docker ha sido creado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -994,8 +958,6 @@ EOF
             echo -e "\n${Az}Reiniciando el servicio '${Am_}uptime-kuma${Az}'...${Bl}"
             pm2 restart uptime-kuma
             pm2 save
-
-            echo -e "\n${Ve}¡Uptime-kuma ha sido actualizado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1051,8 +1013,6 @@ EOF
 
             echo -e "\n${Az}Reiniciando el servicio '${Am_}nfs-kernel-server${Az}'...${Bl}"
             systemctl restart nfs-kernel-server
-
-            echo -e "\n${Ve}¡El recurso ha sido compartido correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1145,9 +1105,10 @@ EOF
             systemctl enable script-python.service
             systemctl restart script-python.service
 
-            echo -e "\n${Ve}¡El servicio ha sido configurado correctamente!${Bl}"
-            echo -e "${Az}Para ver por qué falla, usa: ${Ve}tail -f /var/log/script-python.log${Bl}"
-            echo -e "${Az}O revisa el estado: ${Ve}systemctl status script-python.service${Bl}"
+            echo -e "\n${Az}Verificando el estado del servicio '${Am_}script-python${Az}'...${Bl}"
+            systemctl status script-python.service
+
+            echo -e "${Az}En caso de error utilice el siguiente comando: ${Ve}tail -f /var/log/script-python.log${Bl}"
             ;;
 
         ##############################################################
@@ -1204,7 +1165,7 @@ EOF
                 echo -e "${Ro}El hook ya existe en '${Am_}/etc/bash.bashrc${Az}', omitiendo...${Bl}"
             fi
 
-            echo -e "\n${Ve}¡Configurado! REINICIA LA SESIÓN para activar las alertas.${Bl}"
+            echo -e "\n${Am}REINICIA LA SESIÓN para activar las alertas.${Bl}"
             ;;
 
         ##############################################################
@@ -1292,8 +1253,6 @@ EOF
 
             echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
             netbird status --ipv4
-
-            echo -e "\n${Ve}¡Netbird ha sido instalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1327,8 +1286,6 @@ EOF
             rm -rf /var/log/netbird
             rm -rf ~/.config/netbird
             rm -rf ~/.netbird
-
-            echo -e "\n${Ve}¡Netbird ha sido desinstalado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1420,13 +1377,11 @@ EOF
             pct enter $id_ct
 
             clear
-            echo -e "\n${Az}Verificando el servicio de openvpn...${Bl}"
+            echo -e "\n${Az}Verificando el servicio de OpenVPN...${Bl}"
             pct exec "$id_ct" -- systemctl | grep openvpn
 
-            echo -e "\n${Az}Verificando el puerto de openvpn...${Bl}"
+            echo -e "\n${Az}Verificando el puerto de OpenVPN...${Bl}"
             pct exec "$id_ct" -- ps aux | grep vpn
-
-            echo -e "\n${Ve}¡Contenedor creado y configurado correctamente!${Bl}"
             ;;
 
         ##############################################################
@@ -1447,8 +1402,6 @@ EOF
             echo -e "\n${Bl}  Al acabar de configurarlo, copie el perfil .ovpn creado."
             cd /root/openvpn-install
             bash openvpn-install.sh
-
-            echo -e "\n${Ve}¡Openvpn-install ejecutado correctamente!${Bl}"
             ;;
 
         ##############################################################
