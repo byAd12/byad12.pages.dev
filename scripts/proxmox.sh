@@ -1162,7 +1162,7 @@ EOF
 172.16.0.100 coruna1
 172.16.0.101 coruna2
 172.16.0.102 malaga1
-172.16.0.103 malaga2
+172.16.0.103 almeria1
 EOF
 
             echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
