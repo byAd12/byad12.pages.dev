@@ -132,9 +132,23 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll table.TablaComandos{color: #c0c0c0; margin: 10px 0 10px 0; border-collapse: collapse; width: 100%; table-layout: fixed;}
 .TablaDivScroll table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
 .TablaDivScroll table.TablaComandos tr.Titulo{background-color: rgba(123, 146, 222, 0.2);}
+.TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
 .TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .TablaDivScroll table.TablaComandos td{width: auto;}
 .TablaDivScroll table.TablaComandos td pre{width: 100%; white-space: pre-wrap; word-break: break-all; overflow-wrap: break-word; overflow-x: hidden;}
+
+/* =================================================== */
+/* Tablas - Nmap */
+
+.TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
+.TablaDivScroll table.TablaNmap tr.Titulo td{cursor: pointer; font-family: "Doto"; font-size: 20px; color: white !important;}
+.TablaDivScroll table.TablaNmap td.efecto_ocultar::before{content: "►"; vertical-align: middle; font-size: 10px; display: inline-block; width: 1em; margin-right: 5px; transition: transform 0.2s; transform: translateY(-4%);}
+.TablaDivScroll table.TablaNmap td.efecto_ocultar.expanded::before{content: "▼";}
+
+.TablaDivScroll table.TablaNmap .opcion{color: rgb(25, 124, 144);}
+.TablaDivScroll table.TablaNmap td span.positivo{color: #2ecc71;}
+.TablaDivScroll table.TablaNmap td span.negativo{color: #e74c3c;}
+.TablaDivScroll table.TablaNmap td span.intermedio{color: #f1c40f;}
 
 /* =================================================== */
 /* Div principales para separar el contenido */
@@ -275,52 +289,5 @@ ul.ULFTPCamb1:not(.menu_bar ul) li{margin-left: 40px;}
 
 .carrusel_nota_print{display: none;}
 .FTP_Botones_Externos{flex-direction: row !important;}
-
-/* =================================================== */
-/* NMAP */
-
-.tabla_cmd{background-color: rgb(29, 30, 30); margin: 0 auto; width: 80%; margin-bottom: 50px; max-width: 1500px; margin: 0 auto;}
-
-.tabla_cmd th, .tabla_cmd td{padding: 10px !important; background-color: #2a2c2e;}
-.tabla_cmd .opcion{width: 30%;}
-
-.tabla_cmd th{color: gray;}
-.tabla_cmd td{color: white; line-height: 23px; padding: 10px !important; background-color: #2a2c2e;}
-.tabla_cmd td u{color: rgb(228, 219, 219); text-underline-offset: 3px;}
-.tabla_cmd td.titulo{text-align: left; font-family: "Doto"; font-size: 20px; background-color: rgb(29, 30, 30); top: 0; position: sticky;}
-.tabla_cmd td.opcion{color: #2ecc71; text-align: center;}
-.tabla_cmd span.opcion{color: rgba(46, 204, 113, 0.8);}
-
-.tabla_cmd td.opcion span.c1{color: #f39c12;}
-.tabla_cmd td.opcion span.c2{color: #7b92de;}
-.tabla_cmd td.opcion span.c3{color: #9b59b6;}
-
-.tabla_cmd td span.positivo{color: #2ecc71;}
-.tabla_cmd td span.negativo{color: #e74c3c;}
-.tabla_cmd td span.intermedio{color: #f1c40f;}
-
-.tabla_cmd td ul{margin-left: 20px;}
-.tabla_cmd td li{margin-top: 10px;}
-
-.tabla_cmd td a{color: #7b92de; text-decoration: none; transition: color 0.2s;}
-.tabla_cmd td a:hover{text-decoration: underline;}
-
-.tabla_cmd tr:hover td:not(.titulo){background-color: rgb(49, 52, 52);}
-
-.hidden-row{display: none;}
-.titulo{cursor: pointer;}
-.titulo::before{content: "►"; vertical-align: middle; font-size: 10px; display: inline-block; width: 1em; margin-right: 5px; transition: transform 0.2s; transform: translateY(-15%);}
-.titulo.expanded::before{content: "▼";}
-
-@media screen and (max-width: 500px){
-    .tabla_cmd tr{display: block;}
-    .tabla_cmd td{width: 100% !important; margin: 0; display: block; text-align: center; box-sizing: border-box;}
-    .tabla_cmd tr td:first-child{border-top: 3px solid rgb(56, 56, 56);}
-    .tabla_cmd td ul{text-align: left; margin: 10px 0 10px 10px;}
-}
-
-@media screen and (max-width: 1040px){
-    .tabla_cmd{width: 100%;}
-}
 
 /* =================================================== */

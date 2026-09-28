@@ -43,7 +43,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1 class="TituloPrincipal">PostgreSQL</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">xxx</h2>
+        <h2 class="TituloSecundario" id="TituloSecundario">Sistema gestor de base de datos SQL</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <hr>
         <!-- ......................................................... -->
@@ -53,26 +53,39 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h2>Instalación en el servidor</h2>
+                <h2>(1) Instalación en el servidor</h2>
 
                 <p>1. Instalaremos el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql postgresql-contrib sudo</code></pre>
 
-                <p>2. Para verificar que se ha instalado correctamente se debe poder ejecutar el siguiente comando y también ver el estado del servicio:</p>
+                <p>2. Para verificar que se ha instalado correctamente se debe poder ejecutar el siguiente comando y también ver el estado del servicio de PostgreSQL:</p>
                 <pre class="codigo" translate="no"><code class="bash">psql --version</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status postgresql</code></pre>
+
+                <p class="Expl">En caso de que el servicio de un fallo al iniciar se debe realizar la siguiente comprobación:</p>
+                <p class="Expl2">1. Ver los detalles exactos del fallo:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">journalctl -u postgresql -n 50 --no-pager</code></pre>
+                <p class="Expl2">2. Consultar los logs de PostgreSQL:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">tail -f /var/log/postgresql/postgresql-*.log</code></pre>
+                <p class="Expl2">3. Verificar que el puerto <span class="span_contenido" translate="no">5432</span> no esté en uso por otro programa:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">ss -tulpn | grep 5432</code></pre>
+                <p class="Expl2">4. Verificar que el disco tiene espacio suficiente:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">df -h</code></pre>
 
                 <p>3. Para que el servicio de PostgreSQL se inicie automáticamente al iniciar el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now postgresql</code></pre>
 
-                <p>4. Por último reiniciaremos el servicio:</p>
+                <p>4. Reiniciaremos el servicio:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
+
+                <p>5. Por último verificaremos si el servidor está preparado para aceptar conexiones:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_isready -h [IP_servidor] -p [Puerto_servidor]</code></pre>
                 
             </div>
 
             <div>
-                <h2>Asignar una IP estática en el servidor</h2>
+                <h2>(2) Asignar una IP estática en el servidor</h2>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el fichero de configuración de Netplan.</p>
 
@@ -103,13 +116,13 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
 
                 <p>5. Para comprobar que la IP estática se configuró correctamente hay que ver la IP actual del equipo:</p>
-                <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">hostname -I</code></pre>
 
             </div>
 
             <div>
 
-                <h2>Instalación en el cliente</h2>
+                <h2>(3) Instalación en el cliente</h2>
 
                 <p>1. Instalaremos el servicio de PostgreSQL para clientes:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -122,14 +135,9 @@ Código por byAd12
 
             <div>
 
-                <h2>Gestionar la base de datos</h2>
+                <h2>(4) Gestionar los clústers</h2>
 
-                <p>Para entrar a la base de datos debemos ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario <span class="span_contenido" translate="no">postgres</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
-                <p class="Expl">Otra manera de ejecutar comandos SQL directamente es:</p>
-                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
-
-                <p>Para ver según el sistema la versión, nombre del clúster puerto, estado, propietario, ruta de datos y registros se debe usar el comando:</p>
+                <p>Para ver según el sistema la versión, <b>nombre</b> puerto, <b>estado</b>, propietario, ruta de datos y registros de cada clúster:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
                 <p class="Expl">
                     En sistemas Debian y Ubuntu se permite gestionar varias versiones y clústers.
@@ -137,75 +145,16 @@ Código por byAd12
                     El clúster por defecto se llama <span class="span_contenido" translate="no">main</span>.
                 </p>
 
-                <p>Comandos básicos de SQL:</p>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-                        
-                        <tr>
-                            <td><pre translate="no"><code class="sql">SELECT version();</code></pre></td>
-                            <td>Indica la versión del servicio de PostgreSQL instalado en el sistema.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">\l</code></pre></td>
-                            <td>Lista todas las bases de datos existentes en el clúster.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">\du</code></pre></td>
-                            <td>Lista los roles y usuarios, junto con sus atributos y permisos globales.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">\conninfo</code></pre></td>
-                            <td>Muestra la información de la conexión actual con la base de datos.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">\q</code></pre></td>
-                            <td>Cierra la sesión y finaliza el comando <span class="span_contenido" translate="no">psql</span>.</td>
-                        </tr>
-
-                    </table>
-                </div>
-
-                <p>Configuraciones del sistema:</p>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-                        
-                        <tr>
-                            <td><pre translate="no"><code class="sql">SHOW config_file;</code></pre></td>
-                            <td>Devuelve la ruta absoluta del archivo principal de configuración.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">SHOW hba_file;</code></pre></td>
-                            <td>Devuelve la ruta absoluta del archivo de autenticación de clientes.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">SHOW data_directory;</code></pre></td>
-                            <td>Muestra la ruta del directorio de datos del clúster.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="sql">SHOW port;</code></pre></td>
-                            <td>Muestra el puerto TCP/IP en el que el servidor está escuchando conexiones entrantes (por defecto suele ser <span class="span_contenido" translate="no">5432</span>).</td>
-                        </tr>
-
-                    </table>
-                </div>
-
-                <p>Para verificar por cual puerto está escuchando el servicio de PostgreSQL (es lo mismo que la consulta SQL <span class="span_contenido" translate="no">SHOW port;</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep postgres</code></pre>
+                <p>Para detener un cluster primero debemos saber que nombre tiene con el comando anterior:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] stop</code></pre>
+                <p>Para iniciar un clúster que se encuentra detenido:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] start</code></pre>
 
             </div>
 
             <div>
 
-                <h2>Permitir conexiones remotas</h2>
+                <h2>(5) Permitir conexiones remotas</h2>
 
                 <p>1. Primero debes copiar la ruta local que indique el comando <span class="span_contenido" translate="no">SHOW hba_file;</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql
@@ -220,7 +169,175 @@ SHOW hba_file;
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
 
                 <p>5. Si el firewall está activado, se debe crear una regla para permitir las conexiones de IPs que estén en el rango de la dirección de red hacia el puerto de PostgreSQL:</p>
-                <pre class="codigo" translate="no"><code class="bash">ufw allow from [Dirección_red/Máscara] to any port [puerto_postgresql] proto tcp</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow from [Dirección_red/Máscara] to any port [puerto_postgresql] proto tcp
+ufw reload</code></pre>
+
+            </div>
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+
+                <h2>Gestionar la base de datos</h2>
+
+                <p>Para entrar a la base de datos debemos ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
+                <p class="Expl">Otra manera de ejecutar comandos SQL directamente es:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
+
+                <p>Comandos básicos de SQL:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                Con <span class="span_contenido" translate="no">\?</span> se muestra una ayuda de los comandos.
+                                Con <span class="span_contenido" translate="no">\h</span> se muestra una ayuda de la sintaxis de SQL.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\l</code></pre></td>
+                            <td>Lista todas las bases de datos existentes en el clúster.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre></td>
+                            <td>Se conecta a la base de datos indicada mediante su nombre.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\du</code></pre></td>
+                            <td>Lista los roles y usuarios, junto con sus atributos y permisos globales.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\dt</code></pre></td>
+                            <td>Lista las tablas visibles en una base de datos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\d [Nombre_tabla]</code></pre></td>
+                            <td>Muestra la estructura de la tabla con sus valores por defecto.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\conninfo</code></pre></td>
+                            <td>Muestra la información de la conexión actual con la base de datos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SELECT current_database(), current_user;</code></pre></td>
+                            <td>Muestra a que base de datos se está conectado y con que usuario.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SELECT current_timestamp;</code></pre></td>
+                            <td>Muestra la fecha y hora en la que se ejeucta esa consulta.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">\q</code></pre></td>
+                            <td>Cierra la sesión y finaliza el comando <span class="span_contenido" translate="no">psql</span>.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>Configuraciones del sistema:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SELECT version();</code></pre></td>
+                            <td>Indica la versión del servicio de PostgreSQL en formato largo.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW server_version;</code></pre></td>
+                            <td>Indica la versión del servicio de PostgreSQL en formato numérico.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW data_directory;</code></pre></td>
+                            <td>Muestra la ruta del directorio de datos del clúster.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW config_file;</code></pre></td>
+                            <td>Devuelve la ruta absoluta del archivo principal de configuración.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW hba_file;</code></pre></td>
+                            <td>Devuelve la ruta absoluta del archivo de autenticación de clientes.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW ident_file;</code></pre></td>
+                            <td>Devuelve la ruta absoluta del archivo donde se mapean los usuarios del S.O. a roles internos de la base de datos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW port;</code></pre></td>
+                            <td>Muestra el puerto TCP/IP en el que el servidor está escuchando conexiones entrantes (por defecto suele ser <span class="span_contenido" translate="no">5432</span>).</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>Registros del sistema:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW log_destination;</code></pre></td>
+                            <td>Muestra la ruta del directorio donde se guardan los registros.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW logging_collector;</code></pre></td>
+                            <td>Indica si PostgreSQL está recopilando los mensajes de stderr y escribiéndolos en archivos (on/off).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW log_directory;</code></pre></td>
+                            <td>Muestra la ruta del directorio donde se guardan los archivos de log.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">SHOW log_filename;</code></pre></td>
+                            <td>Muestra el patrón utilizado para nombrar los archivos de log.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">pg_current_logfile</code></pre></td>
+                            <td>
+                                Comando de Linux. Muestra la ruta del fichero de log que está utilizando actualmente logging_collector.
+                                Si no devuelve nada entonces logging_collector está desactivado.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="sql">sudo grep -i 'error\|fatal\|panic' [Ruta_archivo_log]</code></pre></td>
+                            <td>Comando de Linux. Del archivo log filtra solo se muestran los errores.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+                <p>Para verificar por cual puerto está escuchando el servicio de PostgreSQL (es lo mismo que la consulta SQL <span class="span_contenido" translate="no">SHOW port;</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep postgres</code></pre>
 
             </div>
 
@@ -240,6 +357,7 @@ SHOW hba_file;
 
                 <p>Para crear un nuevo usuario en la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE USER [Nombre_usuario] WITH PASSWORD '[Contraseña_usuario]';</code></pre>
+                
                 <p>Una vez se haya creado el usuario, se puede comprobar que aparece en el siguiente listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\du</code></pre>
 
@@ -251,6 +369,7 @@ SHOW hba_file;
 
                 <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [Nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
+                
                 <p>Una vez se haya creado la base de datos, se puede comprobar que aparece en el siguiente listado:</p>
                 <pre class="codigo" translate="no"><code class="sql">\l</code></pre>
 
@@ -258,10 +377,31 @@ SHOW hba_file;
 
             <div>
 
-                <h2>xxx</h2>
+                <h2>Creación de una tabla</h2>
 
-                <p>xxx:</p>
-                <pre class="codigo" translate="no"><code class="bash">xxx</code></pre>
+                <p>Para crear una nueva tabla primero se debe especificar en que base de datos se creará:</p>
+                <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">CREATE TABLE [Nombre_tabla] (
+    [Nombre_columna] [Tipo_Valor] [Otras_opciones],
+    (...)
+ );</code></pre>
+
+                <p>Una vez se haya creado la tabla, se puede comprobar que aparece en el siguiente listado:</p>
+                <pre class="codigo" translate="no"><code class="sql">\dt</code></pre>
+
+            </div>
+
+            <div>
+
+                <h2>Insertar valores en una columna de una tabla</h2>
+
+                <p>Para insertar datos en una tabla existente se debe usar los siguientes comandos:</p>
+                <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>
+                <pre class="codigo" translate="no"><code class="sql">INSERT INTO [Nombre_tabla] ([Nombre_columna])
+VALUES ('Valor_a_insertar');</code></pre>
+
+                <p>Una vez se haya insertado la columna, se puede comprobar una consulta SQL:</p>
+                <pre class="codigo" translate="no"><code class="sql">SELECT * FROM [Nombre_tabla];</code></pre>
 
             </div>
 

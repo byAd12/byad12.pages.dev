@@ -15,6 +15,7 @@ Código por byAd12
         <title>Nmap</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
         <!-- ......................................................... -->
@@ -35,109 +36,169 @@ Código por byAd12
         <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <h1 class="TituloPrincipal">NMAP</h1>
         <h2 class="TituloSecundario" id="TituloSecundario">The Network Mapper</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+
+        <div class="parte1">
+
+            <div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Comandos básicos
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">nmap [Tipo] [Opciones] [Objetivo]</code></pre></td>
+                            <td>Sintaxis básica.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">nmap --help</code></pre></td>
+                            <td>Ayuda sobre el uso del comando. <a href="https://nmap.org/book/man.html" target="_blank">Guía completa</a>.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Estados de una conexión TCP
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SYN → SYN/ACK → ACK</code></pre></td>
+                            <td>La conexión TCP se estableció exitosamente.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SYN → RA</code></pre></td>
+                            <td>RA: Indica que se rechaza la conexión (<span class="negativo">RST</span>) y que se confirma la recepción del SYN enviado (<span class="positivo">ACK</span>).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SYN → (No responde)</code></pre></td>
+                            <td>El objetivo no responde porque puede estar apagado, el firewall filtra los paquetes o se perdió el paquete.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SYN → SYN/ACK → (No recibe ACK)</code></pre></td>
+                            <td>Nuestro host no responde a la conexión (método <span class="opcion">TCP-SYN</span>).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SYN → SYN</code></pre></td>
+                            <td>Se produjo un error en el objetivo ya que responde con la flag <span class="negativo">SYN</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">FIN → FIN/ACK → ACK</code></pre></td>
+                            <td>La conexión TCP se finalizó exitosamente.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Seleccionar el objetivo
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">10.200.0.0/16</code></pre></td>
+                            <td>Se escanearán todas las IPs de la dirección de red especificada.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">10.200.0.1</code></pre></td>
+                            <td>Se escaneará solo la IP especificada.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">10.200.0.1 10.200.0.2</code></pre></td>
+                            <td>Se escanearán varias IPs separadas por espacios.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">10.200.0.0-20</code></pre></td>
+                            <td>Se escanearán todas las IPs de un rango.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-iL [Ruta_archivo]</code></pre></td>
+                            <td>También se pueden almacenar las IPs en un archivo del sistema separando cada IP/FQDN mediante saltos de línea.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Puertos a escanear
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p-</code></pre></td>
+                            <td>Todos los 65.535 puertos.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p 22</code></pre></td>
+                            <td>Un puerto específico.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p 22,80,443</code></pre></td>
+                            <td>Un conjunto de puertos separados por comas.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-p 22-443</code></pre></td>
+                            <td>Un rango de puertos.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-F</code></pre></td>
+                            <td>Los 100 primeros puertos más importantes clasificados por Nmap.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-top-ports=10</code></pre></td>
+                            <td>Los 10 puertos más importantes clasificados por Nmap.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+            
+        </div>
+
+
         <table class="tabla_cmd">
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">COMANDOS BÁSICOS</td>
-            </tr>
-            <tr>
-                <td class="opcion">nmap <span class="c1">[Tipo]</span> <span class="c2">[Opciones]</span> <span class="c3">[Objetivo]</span></td>
-                <td>Sintaxis básica.</td>
-            </tr>
-            <tr>
-                <td class="opcion">nmap <span class="c1">--help</span></td>
-                <td>Ayuda sobre el uso del comando. <a href="https://nmap.org/book/man.html" target="_blank">Guía completa</a>.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">ESTADOS DE UNA CONEXIÓN TCP</td>
-            </tr>
-            <tr>
-                <td class="opcion">SYN → SYN/ACK → ACK</td>
-                <td>La conexión TCP se estableció exitosamente.</td>
-            </tr>
-            <tr>
-                <td class="opcion">SYN → RA</td>
-                <td>RA: Indica que se rechaza la conexión (<span class="negativo">RST</span>) y que se confirma la recepción del SYN enviado (<span class="positivo">ACK</span>).</td>
-            </tr>
-            <tr>
-                <td class="opcion">SYN → (No responde)</td>
-                <td>El objetivo no responde porque puede estar apagado, el firewall filtra los paquetes o se perdió el paquete.</td>
-            </tr>
-            <tr>
-                <td class="opcion">SYN → SYN/ACK → (No recibe ACK)</td>
-                <td>Nuestro host no responde a la conexión (método <span class="opcion">TCP-SYN</span>).</td>
-            </tr>
-            <tr>
-                <td class="opcion">SYN → SYN</td>
-                <td>Se produjo un error en el objetivo ya que responde con la flag <span class="negativo">SYN</span>.</td>
-            </tr>
-            <tr>
-                <td class="opcion">FIN → FIN/ACK → ACK</td>
-                <td>La conexión TCP se finalizó exitosamente.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">SELECCIONAR EL OBJETIVO</td>
-            </tr>
-            <tr>
-                <td class="opcion">10.200.0.0<span class="c1">/16</span></td>
-                <td>Todas las IPs de la dirección de red especificada.</td>
-            </tr>
-            <tr>
-                <td class="opcion">10.200.0.1</td>
-                <td>Un única IP.</td>
-            </tr>
-            <tr>
-                <td class="opcion">10.200.0.1 10.200.0.2</td>
-                <td>Varias IPs separadas por espacios.</td>
-            </tr>
-            <tr>
-                <td class="opcion">10.200.0.<span class="c1">0-20</span></td>
-                <td>Un rango de ciertas IPs.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-iL <span class="c1">[Ruta_archivo]</span></td>
-                <td>Las IPs se pueden almacenar en un archivo siendo separadas mediante con saltos de línea.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">PUERTOS A ESCANEAR</td>
-            </tr>
-            <tr>
-                <td class="opcion">-p<span class="c1">-</span></td>
-                <td>Todos los 65.535 puertos.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-p <span class="c1">22</span></td>
-                <td>Un puerto específico.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-p <span class="c1">22,80,443</span></td>
-                <td>Un conjunto de puertos separados por comas.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-p <span class="c1">22-443</span></td>
-                <td>Un rango de puertos.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-F</td>
-                <td>Los 100 primeros puertos más importantes clasificados por Nmap.</td>
-            </tr>
-            <tr>
-                <td class="opcion">--top-ports=<span class="c1">10</span></td>
-                <td>Los 10 puertos más importantes clasificados por Nmap.</td>
-            </tr>
+
             <!-- ================== -->
             <!-- ================== -->
             <tr>
@@ -618,36 +679,32 @@ Código por byAd12
         </table>
 
         <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll(".titulo").forEach((titulo, index) => {
-                let fila = titulo.parentElement.nextElementSibling;
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll(".efecto_ocultar").forEach((efecto_ocultar, index) => {
+                    let tabla = efecto_ocultar.closest("table");
+                    let filas = Array.from(tabla.querySelectorAll("tr")).slice(1);
 
-                let estadoGuardado = localStorage.getItem("titulo-" + index);
-                let colapsado = (estadoGuardado === "colapsado") || titulo.classList.contains("colapsar");
+                    let estadoGuardado = localStorage.getItem("efecto_ocultar-" + index);
+                    let colapsado = (estadoGuardado === "colapsado") || efecto_ocultar.classList.contains("colapsar");
 
-                if (colapsado) {
-                    while (fila && !fila.querySelector(".titulo")) {
-                        fila.classList.add("hidden-row");
-                        fila = fila.nextElementSibling;
+                    if (colapsado) {
+                        filas.forEach(fila => fila.classList.add("hidden-row"));
+                    } else {
+                        efecto_ocultar.classList.add("expanded");
                     }
-                } else {
-                    titulo.classList.add("expanded");
-                }
 
-                titulo.addEventListener("click", () => {
-                    titulo.classList.toggle("expanded");
-                    let fila2 = titulo.parentElement.nextElementSibling;
-                    let estaColapsado = !titulo.classList.contains("expanded");
+                    efecto_ocultar.addEventListener("click", () => {
+                        efecto_ocultar.classList.toggle("expanded");
+                        let estaColapsado = !efecto_ocultar.classList.contains("expanded");
 
-                    localStorage.setItem("titulo-" + index, estaColapsado ? "colapsado" : "expandido");
+                        localStorage.setItem("efecto_ocultar-" + index, estaColapsado ? "colapsado" : "expandido");
 
-                    while (fila2 && !fila2.querySelector(".titulo")) {
-                        fila2.classList.toggle("hidden-row");
-                        fila2 = fila2.nextElementSibling;
-                    }
+                        filas.forEach(fila => {
+                            fila.classList.toggle("hidden-row");
+                        });
+                    });
                 });
             });
-        });
         </script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
