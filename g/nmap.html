@@ -192,515 +192,614 @@ Código por byAd12
                     </table>
                 </div>
 
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Escaneos TCP
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sS</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">TCP-SYN</span>:
+
+                                <ul>
+                                    <li>Se envía al objetivo un paquete con la flag SYN
+                                        <ul>
+                                            <li>Si responde con la flag SYN/ACK, se clasifica como '<span class="positivo">open</span>'</li>
+                                            <li>Si responde con RA (RST + ACK), se clasifica como '<span class="negativo">closed</span>'</li>
+                                            <li>Si no se recibe una respuesta, se clasifica como '<span class="intermedio">filtered</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                Es el tipo de escaneo predefinido si no se especifica otro.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sT</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">TCP-CONNECT</span>:
+
+                                <ul>
+                                    <li>Se envía al objetivo un paquete con la flag SYN
+                                        <ul>
+                                            <li>Si responde con SYN/ACK, nuestro host le enviará la flag ACK para completar la conexión, clasificando así el puerto como '<span class="positivo">open</span>'</li>
+                                            <li>Si responde con RA (RST y ACK), se clasifica como '<span class="negativo">closed</span>'</li>
+                                            <li>Si no se recibe una respuesta, se clasifica como '<span class="intermedio">filtered</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sA</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">TCP-ACK</span>:
+
+                                <ul>
+                                    <li>Se envía al objetivo un paquete con la flag ACK
+                                        <ul>
+                                            <li>Si se recibe la flag RST entonces el puerto permite una conexión. Posibles estados: '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'</li>
+                                            <li>Si no se recibe una respuesta, el puerto puede estar bloqueado asi que se clasificará como '<span class="intermedio">filtered</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sN</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">TCP-NULL</span>:
+
+                                <ul>
+                                    <li>Se envía al objetivo un paquete sin ninguna flag TCP activada
+                                        <ul>
+                                            <li>Si el puerto está cerrado, el objetivo responderá con un paquete con la flag RST. Estado: '<span class="negativo">closed</span>'</li>
+                                            <li>Si no se recibe ninguna respuesta, se clasifica como '<span class="intermedio">open|filtered</span>'</li>
+                                            <li>Si se recibe un error ICMP inalcanzable, se clasifica como '<span class="intermedio">filtered</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Escaneos UDP
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sU</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">UDP</span>:
+
+                                <ul>
+                                    <li>Se envía un paquete UDP al host
+                                        <ul>
+                                            <li>Si se recibe una respuesta, se clasifica como '<span class="positivo">active</span>'</li>
+                                            <li>Si se recibe un error 3 (inalcanzable), se clasifica como '<span class="negativo">closed</span>'</li>
+                                            <li>Si se recibe otro error diferente, se clasifica como '<span class="intermedio">open|filtered</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Escaneos ICMP / Descubrimiento
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-PE</code></pre></td>
+                            <td>
+                                Funcionamiento del escaneo <span class="opcion">ICMP Echo Request</span>:
+
+                                <ul>
+                                    <li>Antes de enviar el paquete ICMP y, si nuestro host está en la misma red que el objetivo, se enviará un paquete ARP Request aunque se puede omitir usando el parámetro "--disable-arp-ping"
+                                        <ul>
+                                            <li>Si recibe un ARP reply, el host está '<span class="positivo">active</span>'</li>
+                                            <li>Si no se recibe un ARP reply, se enviará un ICMP Echo Request
+                                                <ul>
+                                                    <li>Si se recibe un ICMP reply, el host está '<span class="positivo">active</span>'</li>
+                                                    <li>Si no se recibe respuesta o es inalcanzable, el host está '<span class="negativo">inactive</span>'</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sn</code></pre></td>
+                            <td>
+                                Funcionamiento del <span class="opcion">Ping Scan</span>:
+
+                                <ul>
+                                    <li>Deshabilita por completo el escaneo de puertos y únicamente sondea qué equipos están conectados en la red
+                                        <ul>
+                                            <li><u>En red local</u>: Se envían solicitudes ARP; si el objetivo responde, se clasifica como '<span class="positivo">up</span>'</li>
+                                            <li><u>Hacia hosts remotos</u>: Se envían sondeos ICMP Echo, TCP SYN (:443), TCP ACK (:80) e ICMP Timestamp; con cualquier respuesta se clasifica como '<span class="positivo">up</span>'</li>
+                                            <li>Si no hay respuesta tras los reintentos, se clasifica como '<span class="negativo">down</span>'</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Deshabilitar opciones
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--disable-arp-ping</code></pre></td>
+                            <td>Deshabilita la resolución de direcciones MAC mediante solicitudes ARP que se realiza por defecto para poder enviar un paquete, como por ejemplo en el escaneo <span class="opcion">ICMP Echo Request</span> (<span class="opcion">-PE</span>).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-Pn</code></pre></td>
+                            <td>Deshabilita el uso de paquetes <span class="opcion">ICMP Echo Request</span> para averiguar si el host está activo. Una vez deshabilitado se presupone que el host está activo.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Información adicional
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                En cualquier momento se puede ver el tiempo estimado que queda hasta finalizar el escaneo pulsando la tecla "<span class="opcion">TABULADOR</span>".
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sV</code></pre></td>
+                            <td>
+                                Determina el servicio que se ejecuta en cada puerto abierto, su versión y detalles adicionales.
+                                En algunos casos, la información del banner del servicio puede desvelar el S.O.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-n</code></pre></td>
+                            <td>Deshabilita la resolución DNS.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--packet-trace</code></pre></td>
+                            <td>
+                                Nos da la información detallada de cada paquete enviado y recibido incluyendo las flags.
+                                Se indica que paquetes han sido enviados por nuestro host (<span class="opcion">SENT</span>) y cuales se recibieron (<span class="opcion">RCVD</span>).
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--reason</code></pre></td>
+                            <td>Identifica la razón de porqué está activo un host.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-vvv</code></pre></td>
+                            <td>
+                                Con verbose se puede visualizar en tiempo real la información del escaneo. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--stats-every=(Segundos)/s[o](Minutos)/m</code></pre></td>
+                            <td>
+                                Se puede modificar el tiempo en minutos o segundos para que Nmap envie información.
+                                <u>NO</u> se puede indicar los minutos y segundos a la vez.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Optimizar tiempos de respuestas
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--initial-RTT-timeout [min]:[initial]:[max]</code></pre></td>
+                            <td>
+                                <span class="opcion">min</span>: Tiempo mínimo de espera permitido (por defecto es 100 ms).
+                                <br>
+                                <span class="opcion">initial</span>: Tiempo máximo en el que se espera un paquete. 
+                                Cuando reciba paquetes cambiará este valor para futuros paquetes según en el tiempo que tardó,
+                                pero nunca será menos que <span class="opcion">min</span> y no más que <span class="opcion">max</span>.
+                                <br>
+                                <span class="opcion">max</span>: Tiempo máximo de espera permitido.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--max-retries [Número_intentos]</code></pre></td>
+                            <td>Intenta enviar un paquete si no lo recibe hasta x veces (por defecto son 10).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--min-rate [Número_intentos]</code></pre></td>
+                            <td>Nmap intentará igualar la tasa de paquetes que envía cada segundo con el número asignado en este parámetro.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-T [0-5]</code></pre></td>
+                            <td>
+                                El parámetro <span class="opcion">--min-rate</span> se configura manualmente, por ello existen 6 plantillas predefinidas según niveles.
+                                El nivel 0 es el más lento y sigiloso y, el nivel 5, es el más rápido y detectable. 
+                                El valor ideal es el nivel 3.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Exportar resultados
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-oA [Nombre_archivo]</code></pre></td>
+                            <td>Exporta el resultado en 3 archivos con formatos: <span class="opcion">.nmap</span>, <span class="opcion">.xml</span> y <span class="opcion">.gnmap</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-oN [Nombre_archivo]</code></pre></td>
+                            <td>
+                                Exporta el resultado en un archivo con formato: <span class="opcion">.nmap</span>.
+                                <br>
+                                ~ Salida normal de terminal.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-oG [Nombre_archivo]</code></pre></td>
+                            <td>
+                                Exporta el resultado en un archivo con formato: <span class="opcion">.gnmap</span>.
+                                <br>
+                                ~ Salida de terminal adaptado para hacer <span class="opcion">grep</span>.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-oX [Nombre_archivo]</code></pre></td>
+                            <td>
+                                Exporta el resultado en un archivo con formato: <span class="opcion">.xml</span>.
+                                <br>
+                                ~ Formato XML.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">xsltproc [Nombre_archivo].xml -o  [Nombre_archivo].html</code></pre></td>
+                            <td>Una vez exportado a XML se puede convertir a formato .HTML mediante un comando externo de Linux.</td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Scripts
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">Los scripts están hecho en LUA y están agrupados en varias categorías, ofreciendo funcionalidades diferentes.</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                Tipos de cateogrías (<a href="https://nmap.org/nsedoc/index.html" target="_blank">ver más</a>):
+                            
+                                <ul>
+                                    <li><span class="opcion">auth</span>: Determina credenciales de acceso.</li>
+                                    <li><span class="opcion">broadcast</span>: Descubrimiento de hosts.</li>
+                                    <li><span class="opcion">brute</span>: Intenta iniciar sesión en el servicio.</li>
+                                    <li><span class="opcion">default</span>: Predeterminados.</li>
+                                    <li><span class="opcion">discovery</span>: Evaluación de servicios accesibles.</li>
+                                    <li><span class="opcion">dos</span>: Buscar vulnerabilidades con DoS.</li>
+                                    <li><span class="opcion">exploit</span>: Explota vulnerabilidades conocidas.</li>
+                                    <li><span class="opcion">external</span>: Se utilizan servicios externos.</li>
+                                    <li><span class="opcion">fuzzer</span>: Identificar vulnerabilidades con paquetes.</li>
+                                    <li><span class="opcion">intrusive</span>: Scripts intrusivos en el sistema.</li>
+                                    <li><span class="opcion">malware</span>: Se comprueba si está infectado.</li>
+                                    <li><span class="opcion">safe</span>: No se realizan accesos intrusivos.</li>
+                                    <li><span class="opcion">version</span>: Detección de versiones de servicios.</li>
+                                    <li><span class="opcion">vuln</span>: Buscar vulnerabilidades específicas.</li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sC</code></pre></td>
+                            <td>Se utilizarán los scripts predeterminados (<span class="opcion">default</span>).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--script [Nombre_script/Nombre_categoría]</code></pre></td>
+                            <td>Con este parámetro se puede utilizar uno o varios script identificados por su nombre.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--A</code></pre></td>
+                            <td>Es un parámetro comodín que combina la detección del S.O. (<span class="opcion">-O</span>), la detección de versiones y servicios (<span class="opcion">-sV</span>), utiliza los scripts predeterminados (<span class="opcion">-sC</span>) e identifica cada "salto" que da el paquete (<span class="opcion">--traceroute</span>).</td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Evasión de IPs
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                El sistema de detección de intrusiones (<span class="opcion">IDS</span>) y sistema de prevención de intrusiones (<span class="opcion">IPS</span>) son componentes basados en software.
+                                <br>
+                                <span class="opcion">IDS</span> escanea la red en busca de posibles ataques, los analiza (coincidencia de patrones y firmas) e informa cualquier ataque detectado.
+                                <br>
+                                <span class="opcion">IPS</span> complementa el <span class="opcion">IDS</span> tomando medidas defensivas específicas si se hubiera detectado un posible ataque.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                Recomendación:
+                                <br>
+                                Con una <span class="opcion">VPS</span> se permite dividir la carga de los escaneos que se realicen y también se puede saltar los bloqueos que haya impuesto el sistema objetivo hacia nuestro host.
+                                También, si el objetivo detecta un ataque desde nuestra red doméstica, puede contactar con el ISP para detener el ataque bloqueando la IP pública.
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-D RND:[Cantidad_IPs]</code></pre></td>
+                            <td>
+                                Esta opción permite enviar el mismo paquete x cantidad de veces desde diferentes IPs pero siempre añadiendo nuestra IP real en la lista (<span class="opcion">IP spoofing</span>).
+                                <br>
+                                <u>Problema</u>: Los routers e ISP si ven una IP de origen fuera de su rango de IPs pueden descartar el paquete para que no llegue al destino.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-S [IP_origen]</code></pre></td>
+                            <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-e [Interfaz_de_red]</code></pre></td>
+                            <td>Esta opción permite enviar el paquete por diferentes interfaces a la predeterminada del sistema.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--dns-server [Servidor1](,Servidor2)</code></pre></td>
+                            <td>Esta opción permite cambiar el servidor DNS que responderá a las consultas durante el escaneo.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--source-port [Puerto]</code></pre></td>
+                            <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero descubrimos que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Interpretación del S.O. según el TTL
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                El TTL (Time To Live) es un valor que se puede cambiar manualmente así que no es un método completamente fiable.
+                                <br>
+                                Se puede identificar el S.O. mediante firmas con el parámetro <span class="opcion">-O</span>.
+                                <br><br>
+                                Posibles S.O. con el TTL <span class="opcion">64</span>: Linux, MacOS, Android, FreeBSD.
+                                <br>
+                                Posibles S.O. con el TTL <span class="opcion">128</span>: Windows.
+                                <br>
+                                Posibles S.O. con el TTL <span class="opcion">255</span>: Cisco IOS, Solaris.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Interpretación de tiempos de respuesta
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SENT (0.0381s) TCP host > destino S ...
+SENT (1.0411s) TCP host > destino S ...
+… Nmap done: ... scanned in 2.06 seconds</code></pre></td>
+
+                            <td>
+                                En este caso llamado <span class="opcion">dropped</span> se puede ver que se envia 2 paquetes SYN y en ninguno responde, dando un mayor tiempo de espera para intentar recibir una respuesta.
+                                <br><u>Posible causa</u>: Un firewall descarta la conexión y no envía un paquete de vuelta haciéndonos esperar más tiempo.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">SENT (0.0381s) TCP host > destino S ...
+RCVD (0.0487s) ICMP [Destino] Port unreachable (type=3/code=3)
+… Nmap done: ... scanned in 0.05 seconds</code></pre></td>
+
+                            <td>En este caso llamado <span class="opcion">rejected</span> se puede ver que se envía 1 paquete SYN y el firewall rechaza la conexión con una paquete ICMP. Gracias a esto se espera mucho menos tiempo al recibir una respuesta.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Interpretación del estado de un puerto
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <span class="opcion">open</span>: Se estableció la conexión al puerto con TCP, UDP o SCTP.
+                                <br>
+                                <span class="opcion">closed</span>: Se rechaza la conexión con la bandera RST.
+                                <br>
+                                <span class="opcion">filtered</span>: No se puede saber su estado. El firewall puede hacer: <span class="negativo">reject</span> o <span class="intermedio">drop</span>.
+                                <br>
+                                <span class="opcion">unfiltered</span>: Solo pasa en el scan <span class="opcion">TCP-ACK</span> donde se puede acceder al puerto pero no se puede determinar su estado.
+                                <br>
+                                <span class="opcion">open|filtered</span>: Cuando un firewall o filtro de paquetes protege un puerto y no se obtiene una respuesta.
+                                <br>
+                                <span class="opcion">closed|filtered</span>: En un IP ID idle scan, indica que no se pudo saber si el puerto está cerrado o bloqueado por un firewall.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+<div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Recoger información
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">curl [Objetivo]:[Puerto]</code></pre></td>
+                            <td>
+                                Muchos servidores al hacer esta solicitud devuelven un banner que puede contener información del sistema.
+                                <br>
+                                Los servidores web se encuentran entre los servicios más atacados porque se hacen accesibles y presentan un alto potencial de ataque.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">smbclient -L //[Objetivo]/ -N</code></pre></td>
+                            <td>
+                                Al realizar esta conexión al puerto <span class="opcion">445</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
+                                <br>
+                                Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
+                                <br><br>
+                                (<span class="opcion">-N</span>: Modo sin credenciales; <span class="opcion">-L</span>: Listar recursos compartidos)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ftp [Objetivo] [Puerto]</code></pre></td>
+                            <td>Con una conexión ftp podemos probar a autentificarnos con <span class="opcion">anonymous</span> y ver información.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">telnet [Objetivo] [Puerto]</code></pre></td>
+                            <td>Con una conexión telnet podemos intentar conectarnos en remoto al puerto <span class="opcion">23</span> y probar si el servidor deja autentificarse como root sin contraseña.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">netcat -nv -p [Puerto_origen] [Objetivo] [Puerto_objetivo]</code></pre></td>
+                            <td>Si vemos que el destino acepta conexiones si las enviamos desde un puerto determinado, podemos manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
+                        </tr>
+
+                    </table>
+                </div>
+
             </div>
             
         </div>
 
 
-        <table class="tabla_cmd">
-
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - TCP</td>
-            </tr>
-            <tr>
-                <td class="opcion">-sS</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">TCP-SYN</span>:
-
-                    <ul>
-                        <li>Se envía al objetivo un paquete con la flag SYN
-                            <ul>
-                                <li>Si responde con la flag SYN/ACK, el puerto se clasifica como '<span class="positivo">open</span>'</li>
-                                <li>Si responde con RA (RST + ACK), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
-                                <li>Si no se recibe una respuesta, el puerto se clasifica como '<span class="intermedio">filtered</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                    <br>Es el tipo de escaneo predefinido si no se especifica otro.
-                    <br>
-                    <br><u>Ventaja</u>: Es rápido.
-                    <br><u>Problemas</u>: Se necesita permisos de administrador para poder modificar los paquetes.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-sT</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">TCP-CONNECT</span>:
-
-                    <ul>
-                        <li>Se envía al objetivo un paquete con la flag SYN
-                            <ul>
-                                <li>Si responde con SYN/ACK, nuestro host le enviará la flag ACK para completar la conexión, clasificando así el puerto como '<span class="positivo">open</span>'</li>
-                                <li>Si responde con RA (RST y ACK), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
-                                <li>Si no se recibe una respuesta, el puerto se clasifica como '<span class="intermedio">filtered</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                    <br>La diferencia con el escaneo <span class="opcion">TCP-SYN</span> es que en <span class="opcion">TCP-CONNECT</span> se llega a completar la conexión TCP.
-                    <br>
-                    <br><u>Ventajas</u>: No provoca fallos en el servidor. Es más fiable en la detección. Menos detectable por sistemas IPS.
-                    <br><u>Problema</u>: Más posibilidades de registrar la conexión en un log. Es más lento que escaneo <span class="opcion">TCP-SYN</span>.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-sA</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">TCP-ACK</span>:
-
-                    <ul>
-                        <li>Se envía al objetivo un paquete con la flag ACK
-                            <ul>
-                                <li>Si se recibe la flag RST entonces el puerto permite una conexión. Posibles estados: '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'</li>
-                                <li>Si no se recibe una respuesta, el puerto puede estar bloqueado asi que se clasificará como '<span class="intermedio">filtered</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <br><u>Ventajas</u>: Es mucho más difícil de filtrar para firewalls y sistemas IDS/IPS ya que no se puede averiguar si el ACK forma parte de una conexión establecida. Permite descubrir información sobre el estado del firewall o del sistema sin iniciar una conexión.
-                    <br><u>Problema</u>: No se puede averiguar si el puerto está en estado '<span class="positivo">open</span>' o '<span class="negativo">closed</span>'.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-sN</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">TCP-Null</span>:
-
-                    <ul>
-                        <li>Se envía al objetivo un paquete sin ninguna flag TCP activada (todos los bits en 0)
-                            <ul>
-                                <li>Si el puerto está cerrado, el objetivo responderá con un paquete con la flag RST. Estado: '<span class="negativo">closed</span>'</li>
-                                <li>Si no se recibe ninguna respuesta, el puerto se clasificará como '<span class="intermedio">open|filtered</span>'</li>
-                                <li>Si se recibe un error ICMP inalcanzable (tipo 3), se clasificará como '<span class="intermedio">filtered</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <br><u>Ventajas</u>: Muy sigiloso. Permite eludir firewalls sin estado (stateless) o filtros que bloquean paquetes SYN convencionales, sin iniciar una conexión TCP completa.
-                    <br><u>Problema</u>: Sistemas como Windows, Cisco y BSD no cumplen estrictamente la RFC 793 y devuelven RST en todos los puertos, mostrando erróneamente todos los puertos como '<span class="negativo">closed</span>'.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - UDP</td>
-            </tr>
-            <tr>
-                <td class="opcion">-sU</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">UDP</span>:
-
-                    <ul>
-                        <li>Se envía un paquete UDP al host
-                            <ul>
-                                <li>Si se recibe una respuesta, el puerto se clasifica como '<span class="positivo">active</span>'</li>
-                                <li>Si se recibe un error 3 (inalcanzable), el puerto se clasifica como '<span class="negativo">closed</span>'</li>
-                                <li>Si se recibe otro error diferente, el puerto se clasifica como '<span class="intermedio">open|filtered</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <br><u>Ventaja</u>: Podemos hacer conexiones a servicios UDP, por ejemplo DNS que utiliza el puerto 53 TCP y UDP.
-                    <br><u>Problemas</u>: Es más lento que un escaneo TCP. No sabemos si recibió el paquete al ser un protocolo sin estado.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">TIPOS DE ESCANEOS - ICMP / DESCUBRIMIENTO</td>
-            </tr>
-            <tr>
-                <td class="opcion">-PE</td>
-                <td>
-                    Funcionamiento del escaneo <span class="opcion">ICMP Echo Request</span>:
-
-                    <ul>
-                        <li>Antes de enviar el paquete ICMP y, si nuestro host está en la misma red que el objetivo, se enviará un paquete ARP Request aunque se puede omitir usando el parámetro "<span class="opcion">--disable-arp-ping</span>".
-                            <ul>
-                                <li>Si recibe un ARP reply, el host está '<span class="positivo">active</span>'</li>
-                                <li>Si no se recibe un ARP reply, se enviará un ICMP Echo Request
-                                    <ul>
-                                        <li>Si se recibe un ICMP reply, el host está '<span class="positivo">active</span>'</li>
-                                        <li>Si no se recibe respuesta o es inalcanzable, el host está '<span class="negativo">inactive</span>'</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <br><u>Problemas</u>: Es muy detectable por sistemas IPS o firewalls.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-sn</td>
-                <td>
-                    Funcionamiento del <span class="opcion">Ping Scan</span>:
-
-                    <ul>
-                        <li>Deshabilita por completo el escaneo de puertos y únicamente sondea qué equipos están encendidos y conectados a la red
-                            <ul>
-                                <li>En red local (LAN con root): Se envían solicitudes ARP/NDP; si el objetivo responde, el host se clasifica como '<span class="positivo">up</span>'</li>
-                                <li>Hacia hosts remotos: Se envían sondeos ICMP Echo, TCP SYN (puerto 443), TCP ACK (puerto 80) e ICMP Timestamp; con cualquier respuesta el host se clasifica como '<span class="positivo">up</span>'</li>
-                                <li>Si no hay respuesta tras los reintentos, el objetivo se clasifica como '<span class="negativo">down</span>'</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <br><u>Ventajas</u>: Es extremadamente rápido al omitir el análisis de los 1000 puertos por defecto.
-                    <br><u>Problema</u>: Los hosts remotos protegidos por firewalls que bloquean ICMP y los puertos 80/443 pueden aparecer falsamente como '<span class="negativo">down</span>'.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">DESHABILITAR OPCIONES</td>
-            </tr>
-            <tr>
-                <td class="opcion">--disable-arp-ping</td>
-                <td>Deshabilita la <u>resolución de direcciones MAC mediante solicitudes ARP</u> que se realiza por defecto para poder enviar un paquete, como por ejemplo en el escaneo <span class="opcion">ICMP Echo Request</span> (<span class="opcion">-PE</span>).</td>
-            </tr>
-            <tr>
-                <td class="opcion">-Pn</td>
-                <td>Deshabilita el uso de paquetes <u>ICMP Echo Request</u> para averiguar si el host está activo. Una vez deshabilitado se presupone que el host está activo.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">INFORMACIÓN ADICIONAL</td>
-            </tr>
-            <tr>
-                <td class="opcion">-sV</td>
-                <td>
-                    Determina el servicio que se ejecuta en cada puerto abierto, su versión y detalles adicionales.
-                    <br>
-                    En algunos casos, la información del banner del servicio puede desvelar el S.O.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-n</td>
-                <td>Deshabilita la resolución DNS.</td>
-            </tr>
-            <tr>
-                <td class="opcion">--packet-trace</td>
-                <td>
-                    Nos da la información detallada de cada paquete enviado y recibido incluyendo las flags.
-                    <br>
-                    Se indica que paquetes han sido enviados por nuestro host (<span class="opcion">SENT</span>) y cuales se recibieron (<span class="opcion">RCVD</span>).
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">--traceroute</td>
-                <td>Identifica cada "salto" que da el paquete hasta que llega a su destino.</td>
-            </tr>
-            <tr>
-                <td class="opcion">--reason</td>
-                <td>Identifica la razón de porqué está activo un host.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-v<span class="c2">v</span><span class="c3">v</span></td>
-                <td>
-                    Con verbose se puede visualizar en tiempo real la información del escaneo. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
-                    En cualquier momento se puede ver el tiempo estimado que queda hasta finalizar el escaneo pulsando la tecla "<span class="opcion">ESPACIO</span>".
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">--stats-every=<span class="c1">(Segundos)/s</span>[o]<span class="c2">(Minutos)/m</span></td>
-                <td>
-                    Se puede modificar el tiempo en minutos o segundos para que Nmap envie información.
-                    <br>
-                    NO se puede indicar los minutos y segundos a la vez.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">OPTIMIZAR TIEMPOS DE RESPUESTA</td>
-            </tr>
-            <tr>
-                <td class="opcion">--initial-RTT-timeout <span class="c1">min</span>:<span class="c2">initial</span>:<span class="c3">max</span></td>
-                <td>
-                    <span class="opcion">min</span>: Tiempo mínimo de espera permitido (el tiempo por defecto es de 100 ms).
-                    <br>
-                    <span class="opcion">initial</span>: Tiempo máximo en el que se espera un paquete. Cuando lo reciba cambiará este valor para futuros paquetes en el tiempo que tardó pero nunca debe ser menos que <span class="opcion">min</span> y no más que <span class="opcion">max</span>.
-                    <br>
-                    <span class="opcion">max</span>: Tiempo máximo de espera permitido.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">--max-retries <span class="c1">[Número_intentos]</span></td>
-                <td>Intenta enviar un paquete si no lo recibe hasta x veces (por defecto son 10).</td>
-            </tr>
-            <tr>
-                <td class="opcion">--min-rate <span class="c1">[Número_paquetes]</span></td>
-                <td>Nmap intentará igualar la tasa de paquetes que envía cada segundo con el número asignado en este parámetro.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-T <span class="c1">[0-5]</span></td>
-                <td>
-                    El parámetro <span class="opcion">--min-rate</span> se configura manualmente, por ello existen 6 plantillas predefinidas según niveles.
-                    El nivel 0 es el más lento y sigiloso y, el nivel 5, es el más rápido y detectable. 
-                    El valor ideal es el nivel 3.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">EXPORTAR RESULTADOS</td>
-            </tr>
-            <tr>
-                <td class="opcion">-oA <span class="c1">[Nombre_archivo]</span></td>
-                <td>Exporta el resultado en 3 formatos: [Nombre_archivo]<span class="opcion">.nmap</span>, [Nombre_archivo]<span class="opcion">.xml</span> y [Nombre_archivo]<span class="opcion">.gnmap</span>.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-oN <span class="c1">[Nombre_archivo]</span></td>
-                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.nmap</span>. Salida normal de terminal.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-oG <span class="c1">[Nombre_archivo]</span></td>
-                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.gnmap</span>. Salida de terminal adaptado para hacer <span class="opcion">grep</span>.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-oX <span class="c1">[Nombre_archivo]</span></td>
-                <td>Exporta el resultado en formato: [Nombre_archivo]<span class="opcion">.xml</span>. Formato XML.</td>
-            </tr>
-            <tr>
-                <td class="opcion">xsltproc <span class="c1">[Nombre_archivo]</span>.xml -o  <span class="c1">[Nombre_archivo]</span>.html</td>
-                <td>Una vez exportado a XML se puede convertir a HTML mediante un comando externo.</td>
-            </tr>
-
-            <!-- ================== -->
-            <!-- ================== -->
-        </table>
-
-        <table class="tabla_cmd">
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">SCRIPTS</td>
-            </tr>
-            <tr>
-                <td class="opcion">[EXPLICACIÓN]</td>
-                <td>Los scripts están hecho en LUA y están agrupados en varias categorías, ofreciendo funcionalidades diferentes.</td>
-            </tr>
-            <tr>
-                <td class="opcion">[CATEGORÍAS]</td>
-                <td>
-                    <ul>
-                        <li><span class="opcion">auth</span>: Determina credenciales de acceso.</li>
-                        <li><span class="opcion">broadcast</span>: Descubrimiento de hosts.</li>
-                        <li><span class="opcion">brute</span>: Intenta iniciar sesión en el servicio.</li>
-                        <li><span class="opcion">default</span>: Predeterminados.</li>
-                        <li><span class="opcion">discovery</span>: Evaluación de servicios accesibles.</li>
-                        <li><span class="opcion">dos</span>: Buscar vulnerabilidades con DoS.</li>
-                        <li><span class="opcion">exploit</span>: Explota vulnerabilidades conocidas.</li>
-                        <li><span class="opcion">external</span>: Se utilizan servicios externos.</li>
-                        <li><span class="opcion">fuzzer</span>: Identificar vulnerabilidades con paquetes.</li>
-                        <li><span class="opcion">intrusive</span>: Scripts intrusivos en el sistema.</li>
-                        <li><span class="opcion">malware</span>: Se comprueba si está infectado.</li>
-                        <li><span class="opcion">safe</span>: No se realizan accesos intrusivos.</li>
-                        <li><span class="opcion">version</span>: Detección de versiones de servicios.</li>
-                        <li><span class="opcion">vuln</span>: Buscar vulnerabilidades específicas.</li>
-                    </ul>
-                    
-                    <br>Esto se puede aplicar a todos los puertos o solo a algunos con <span class="opcion">-p</span>. <a href="https://nmap.org/nsedoc/index.html" target="_blank">Ver más scripts o categorías</a>.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-sC</td>
-                <td>Se utilizarán los scripts predeterminados (<span class="opcion">default</span>).</td>
-            </tr>
-            <tr>
-                <td class="opcion">--script <span class="c1">[Nombre_script/Nombre_categoría]</span></td>
-                <td>Con este parámetro se puede utilizar uno o varios script identificados por su nombre.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-A</td>
-                <td>Es un parámetro comodín que combina la detección del S.O. (<span class="opcion">-O</span>), la detección de versiones y servicios (<span class="opcion">-sV</span>), utiliza los scripts predeterminados (<span class="opcion">-sC</span>) e identifica cada "salto" que da el paquete (<span class="opcion">--traceroute</span>).</td>
-            </tr>
-        </table>
-
-        <table class="tabla_cmd">
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">EVASIÓN DE IDS E IPS</td>
-            </tr>
-            <tr>
-                <td class="opcion">[EXPLICACIÓN]</td>
-                <td>El sistema de detección de intrusiones (<span class="opcion">IDS</span>) y sistema de prevención de intrusiones (<span class="opcion">IPS</span>) son componentes basados en software.
-                    
-                    <br><br><span class="opcion">IDS</span> escanea la red en busca de posibles ataques, los analiza e informa cualquier ataque detectado. El análisis de los ataques se basa en la coincidencia de patrones y firmas.
-                    <br><br><span class="opcion">IPS</span> complementa el <span class="opcion">IDS</span> tomando medidas defensivas específicas si se hubiera detectado un posible ataque. Si se detectan patrones se puede por ejemplo impedir los intentos de conexión pendientes.</td>
-            </tr>
-            <tr>
-                <td class="opcion">[RECOMENDACIÓN]</td>
-                <td>
-                    Con una <span class="opcion">VPS</span> se permite dividir la carga de los escaneos que se realicen y también se puede saltar los bloqueos que haya impuesto el sistema objetivo hacia nuestro host.
-                    <br><br>
-                    También, si el objetivo detecta un ataque desde nuestra red doméstica, se puede contactar con el ISP para detener el ataque bloqueando el uso de la IP pública.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-D RND:<span class="c1">[Cantidad_IPs]</span></td>
-                <td>
-                    Esta opción permite enviar el mismo paquete x cantidad de veces desde diferentes IPs pero siempre añadiendo nuestra IP real en la lista (<span class="opcion">IP spoofing</span>).
-                    <br><br>
-                    <u>Problema</u>: Los routers e ISP si ven una IP de origen fuera de su rango de IPs pueden descartar el paquete para que no llegue al destino.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">-S <span class="c1">[IP_origen]</span></td>
-                <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo <span class="c1">IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
-            </tr>
-            <tr>
-                <td class="opcion">-e <span class="c1">[Interfaz_de_red]</span></td>
-                <td>Esta opción permite enviar el paquete por diferentes interfaces a la predeterminada del sistema.</td>
-            </tr>
-            <tr>
-                <td class="opcion">--dns-server <span class="c1">[Servidor1](,Servidor2)</span></td>
-                <td>Esta opción permite cambiar el servidor DNS que responderá a las consultas durante el escaneo.</td>
-            </tr>
-            <tr>
-                <td class="opcion">--source-port <span class="c1">[Puerto]</span></td>
-                <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero descubrimos que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
-            </tr>
-        </table>
-
-        <table class="tabla_cmd">
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">INTERPRETACIÓN DE S.O. SEGÚN TTL</td>
-            </tr>
-            <tr>
-                <td class="opcion">ttl <span class="c1">64</span></td>
-                <td>Posibles S.O.: Linux, MacOS, Android, FreeBSD.</td>
-            </tr>
-            <tr>
-                <td class="opcion">ttl <span class="c1">128</span></td>
-                <td>Posibles S.O.: Windows.</td>
-            </tr>
-            <tr>
-                <td class="opcion">ttl <span class="c1">255</span></td>
-                <td>Posibles S.O.: Cisco IOS, Solaris.</td>
-            </tr>
-            <tr>
-                <td class="opcion"><span class="c1">(Otros resultados)</span></td>
-                <td>
-                    El TTL (Time To Live) es un valor que se puede cambiar manualmente así que no es un método completamente fiable.
-                    Se puede identificar el S.O. mediante firmas con el parámetro <span class="opcion">-O</span>.
-                </td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">INTERPRETACIÓN DE TIEMPOS DE RESPUESTA</td>
-            </tr>
-            <tr>
-                <td class="opcion">
-                    SENT (0.0381s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
-                    <br>SENT (1.0411s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
-                    <br>… Nmap done: ... scanned in <span class="c3">2.06</span> seconds
-                </td>
-                <td>Este caso llamado <span class="opcion">dropped</span> se puede ver que se envia 2 paquetes SYN y en ninguno responde, dando un mayor tiempo de espera para intentar recibir una respuesta.
-                    <br><u>Posible causa</u>: Un firewall descarta la conexión y no envía un paquete de vuelta haciéndonos esperar más tiempo.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">
-                    SENT (0.0381s) TCP <span class="c1">host</span> > <span class="c2">destino</span> S ...
-                    <br>RCVD (0.0487s) ICMP [<span class="c2">destino</span> Port unreachable (type=3/code=3)
-                    <br>… Nmap done: ... scanned in <span class="c3">0.05</span> seconds
-                </td>
-                <td>Este caso llamado <span class="opcion">rejected</span> se puede ver que se envia 1 paquete SYN y el firewall rechaza la conexión con una paquete ICMP. Gracias a esto se espera mucho menos tiempo al recibir una respuesta.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">INTERPRETACIÓN DEL ESTADO DE UN PUERTO</td>
-            </tr>
-            <tr>
-                <td class="opcion">'open'</td>
-                <td>Se estableció la conexión al puerto con TCP, UDP o SCTP.</td>
-            </tr>
-            <tr>
-                <td class="opcion">'closed'</td>
-                <td>Se rechaza la conexión con la bandera RST.</td>
-            </tr>
-            <tr>
-                <td class="opcion">'filtered'</td>
-                <td>No se puede saber su estado. El firewall puede hacer: <span class="negativo">reject</span> o <span class="intermedio">drop</span>.</td>
-            </tr>
-            <tr>
-                <td class="opcion">'unfiltered'</td>
-                <td>Solo pasa en el scan <span class="opcion">TCP-ACK</span> donde se puede acceder al puerto pero no se puede determinar su estado.</td>
-            </tr>
-            <tr>
-                <td class="opcion">'open|filtered'</td>
-                <td>Cuando un firewall o filtro de paquetes protege un puerto y no se obtiene una respuesta.</td>
-            </tr>
-            <tr>
-                <td class="opcion">'closed|filtered'</td>
-                <td>En un IP ID idle scan, indica que no se pudo saber si el puerto está cerrado o bloqueado por un firewall.</td>
-            </tr>
-            <!-- ================== -->
-            <!-- ================== -->
-            <tr>
-                <td class="titulo" colspan="2">RECOGER INFORMACIÓN</td>
-            </tr>
-            <tr>
-                <td class="opcion">curl <span class="c1">[Objetivo]</span>:<span class="c2">[Puerto]</span></td>
-                <td>Muchos servidores al hacer esta solicitud devuelven un banner que puede contener información del sistema.
-                    <br>Los servidores web se encuentran entre los servicios más atacados porque se hacen accesibles y presentan un alto potencial de ataque.
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">smbclient -L //<span class="c1">[Objetivo]</span>/ -N</td>
-                <td>Al realizar esta conexión al puerto <span class="opcion">445</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
-                    <br>Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
-                    <br><br>(<span class="opcion">-N</span>: Modo sin credenciales; <span class="opcion">-L</span>: Listar recursos compartidos)
-                </td>
-            </tr>
-            <tr>
-                <td class="opcion">ftp <span class="c1">[Objetivo]</span> <span class="c2">[Puerto]</span></td>
-                <td>Con una conexión ftp podemos probar a autentificarnos con <span class="opcion">anonymous</span> y ver información.</td>
-            </tr>
-            <tr>
-                <td class="opcion">telnet <span class="c1">[Objetivo]</span> <span class="c2">[Puerto]</span></td>
-                <td>Con una conexión telnet podemos intentar conectarnos en remoto al puerto <span class="opcion">23</span> y probar si el servidor deja autentificarse como root sin contraseña.</td>
-            </tr>
-            <tr>
-                <td class="opcion">netcat -nv -p <span class="c1">[Puerto_origen]</span> <span class="c2">[Objetivo]</span> <span class="c3">[Puerto_objetivo]</span></td>
-                <td>Si vemos que el destino acepta conexiones si las enviamos desde un puerto determinado, podemos manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: <span class="opcion">El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
-            </tr>
-        </table>
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                document.querySelectorAll(".efecto_ocultar").forEach((efecto_ocultar, index) => {
-                    let tabla = efecto_ocultar.closest("table");
+                document.querySelectorAll(".efecto_ocultar").forEach((titulo, index) => {
+                    let tabla = titulo.closest("table");
                     let filas = Array.from(tabla.querySelectorAll("tr")).slice(1);
 
                     let estadoGuardado = localStorage.getItem("efecto_ocultar-" + index);
-                    let colapsado = (estadoGuardado === "colapsado") || efecto_ocultar.classList.contains("colapsar");
+                    let colapsado = (estadoGuardado === "colapsado");
 
                     if (colapsado) {
-                        filas.forEach(fila => fila.classList.add("hidden-row"));
+                        filas.forEach(fila => fila.style.display = "none");
+                        titulo.classList.remove("expanded");
                     } else {
-                        efecto_ocultar.classList.add("expanded");
+                        filas.forEach(fila => fila.style.display = "");
+                        titulo.classList.add("expanded");
                     }
 
-                    efecto_ocultar.addEventListener("click", () => {
-                        efecto_ocultar.classList.toggle("expanded");
-                        let estaColapsado = !efecto_ocultar.classList.contains("expanded");
+                    titulo.addEventListener("click", () => {
+                        titulo.classList.toggle("expanded");
+                        let estaColapsado = !titulo.classList.contains("expanded");
 
                         localStorage.setItem("efecto_ocultar-" + index, estaColapsado ? "colapsado" : "expandido");
 
                         filas.forEach(fila => {
-                            fila.classList.toggle("hidden-row");
+                            fila.style.display = estaColapsado ? "none" : "";
                         });
                     });
                 });
