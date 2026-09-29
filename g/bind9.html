@@ -53,9 +53,9 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>En el servidor hay que instalar el servicio correspondiente:</p>
+                <p>En el servidor hay que instalar el servicio correspondiente y sus dependencias:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install -y bind9</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y bind9 dnsutils</code></pre>
 
                 <p>En el firewall permitiremos el paso del puerto 53 - UDP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
@@ -115,26 +115,33 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Nslookup: <span>Windows y Linux</span><img class="SoporteComandoRemoto" alt="Logo Windows" src="../img/windows.png"><img class="SoporteComandoRemoto" alt="Logo Linux" src="../img/linux.png"></h2>
-                <p>El comando <span class="span_contenido" translate="no">nslookup</span> sirve para comprobar la configuración DNS de un dominio o IP según un registro específico.</p>
-                <p>Buscar los servidores DNS que gestionan un dominio específico:</p>
+                <h2>Comando "nslookup": <span>Windows y Linux</span><img class="SoporteComandoRemoto" alt="Logo Windows" src="../img/windows.png"><img class="SoporteComandoRemoto" alt="Logo Linux" src="../img/linux.png"></h2>
+                
+                <p>El comando <span class="span_contenido" translate="no">nslookup</span> sirve para comprobar la configuración DNS de un dominio o IP según un registro específico. </p>
+                <p>Sintaxis del comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">nslookup (-type=[Tipo_registro_DNS]) (-port=[Puerto_servidor_DNS]) [Nombre_dominio].[TLD] ([IP_servidor_DNS])</code></pre>
+                
+                <p>También se puede ejecutar el comando en varias líneas:</p>
                 <pre class="codigo" translate="no"><code class="console"># nslookup
-> [IP_servidor_DNS] # El servidor que realizará la consulta
-> set type=NS
-> [Nombre_dominio].[TLD]</code></pre>
-                <p>Buscar los servidores de correo para un dominio:</p>
-                <pre class="codigo" translate="no"><code class="console"># nslookup
-> [IP_servidor_DNS] # El servidor que realizará la consulta
-> set type=MX
-> [Nombre_dominio].[TLD]</code></pre>
-                <p>Buscar los nombres asociados a una dirección IPv4:</p>
-                <pre class="codigo" translate="no"><code class="console"># nslookup
-> [IP_servidor_DNS] # El servidor que realizará la consulta
-> set type=A
+> server [IP_servidor_DNS]
+> set type=[Tipo_registro_DNS]
 > [Nombre_dominio].[TLD]</code></pre>
             </div>
+
+            <div>
+                <h2>Comando "whois": <span>Windows y Linux</span><img class="SoporteComandoRemoto" alt="Logo Windows" src="../img/windows.png"><img class="SoporteComandoRemoto" alt="Logo Linux" src="../img/linux.png"></h2>
+                
+                <p>El comando <span class="span_contenido" translate="no">whois</span> permite ver información sobre un dominio, quién registró el dominio, información de contacto, servidores NS, fecha de creación y expiración, ...</p>
+                <p>Para usarlo primero se debe instalar mediante APT:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt install -y whois</code></pre>
+                <p>Sintaxis del comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">whois [IP/Registro_DNS]</code></pre>
+            </div>
+            
             <div>
                 <h2>Configurar el DNS como Reenviador: <span translate="no">/etc/bind/named.conf.options</span></h2>
                 <pre class="codigo" translate="no"><code class="nginx">options {
@@ -157,6 +164,8 @@ listen-on { any; };
                 </p>
             </div>
         </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
