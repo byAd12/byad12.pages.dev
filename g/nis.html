@@ -163,7 +163,7 @@ NISCLIENT=false</code></pre>
                 <p>Los siguientes pasos se explican mejor en la guía detallada sobre <a href="nfs.html">NFS</a>.</p>
 
                 <p>1. Primero instalaremos el servicio de NFS:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt install -y nfs-kernel-server</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-kernel-server</code></pre>
 
                 <p>2. Ahora editaremos el archivo de configuración de NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
@@ -245,7 +245,7 @@ gshadow:        files systemd nis</code></pre>
                 <p>A continuación están los pasos guiados para montar la carpeta <span class="span_url" translate="no">/home</span> del servidor en cada cliente NIS:</p>
 
                 <p>1. Primero instalaremos el servicio de NFS:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt install -y nfs-common</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-common</code></pre>
 
                 <p>2. Añadiremos un montaje persistente y automático en /etc/fstab:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>

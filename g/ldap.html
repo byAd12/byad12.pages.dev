@@ -43,7 +43,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1 class="TituloPrincipal">LDAP - Servidor</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Servicio de Directorio</h2>
+        <h2 class="TituloSecundario" id="TituloSecundario">Lightweight Directory Access Protocol</h2>
         <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
         <hr>
         <!-- ......................................................... -->
@@ -51,16 +51,24 @@ Código por byAd12
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h2>Importante</h2>
 
-                <p>Primero instalaremos el servidor LDAP (<span class="span_contenido" translate="no">slapd</span>) y las utilidades (<span class="span_contenido" translate="no">ldap-utils</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt install slapd ldap-utils -y</code></pre>
-                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio del servidor (<span class="span_contenido" translate="no">slapd</span>).</p>
+                <p>Un dominio se divide en 2 partes: el <u>nombre de dominio</u> (antes del punto) y el <u>TLD</u> (después del punto):</p>
+                <pre class="codigo" translate="no"><code class="bash">[NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
+
             </div>
 
             <div>
-                <h2>Comprobación</h2>
+                <h2>(1) Instalación</h2>
+
+                <p>Primero instalaremos el servidor LDAP - <span class="span_contenido" translate="no">slapd</span> junto a las utilidades necesarias - <span class="span_contenido" translate="no">ldap-utils</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y slapd ldap-utils</code></pre>
+                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio del servidor.</p>
+            </div>
+
+            <div>
+                <h2>(2) Comprobación</h2>
 
                 <p>El servicio debe estar en modo <span class="span_contenido" translate="no">active</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status slapd</code></pre>
@@ -71,43 +79,25 @@ Código por byAd12
                 <p>Al no haber configurado nada, deberá devolver <span class="span_contenido" translate="no">NODOMAIN</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
 
-                <p>La conexión al servicio la haremos con el usuario <span class="span_contenido" translate="no">anonymous</span> si no definimos nada:</p>
+                <p>Debemos poder ejecutar el siguiente comando para ver con que usuario estamos autentificados:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x</code></pre>
-            </div>
-
-
-            <div>
-                <h2>Formato de archivo</h2>
-
-                <p>Los archivos <span class="span_url" translate="no">.ldif</span> sirven para crear varios elementos a la vez para luego añadirlos a la BB.DD. con el comando <span class="span_contenido" translate="no">ldapadd</span>:</p>
-                <pre class="codigo" translate="no"><code class="yaml"># Elemento 1
-dn: &lt;URI&gt;
-    &lt;atributos&gt;: &lt;valor&gt;
-    ...
-
-[Salto de línea obligatorio antes de añadir otro elemento]
-# Elemento 2
-dn: &lt;URI&gt;
-    &lt;atributos&gt;: &lt;valor&gt;
-    ...</code></pre>
-                <p class="Expl"><b>dn</b> (Distingushed Name): Diferencia a todos los objetos de la BB.DD.</p>
+                <p class="Expl">La conexión al servicio la haremos con el usuario <span class="span_contenido" translate="no">anonymous</span> si no definimos nada.</p>
             </div>
 
             <div>
-                <h2>Configuración del Servicio</h2>
+                <h2>(3) Configuración</h2>
 
-                <p>Una vez instalemos los servicios lo configuraremos con el siguiente comando:</p>
+                <p>Una vez se hayan instalado los paquetes con APT hay que configurar mediante el servicio LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
-                <p class="Expl"><b>Respuestas</b> que va a pedir: No; [DOMINIO]; [NOMBRE_EMPRESA]; Meter la contraseña; No; Si.</p>
+                <p class="Expl"><u>Respuestas que va a pedir en orden</u>: No; [NOMBRE_DOMINIO]; [NOMBRE_EMPRESA]; (Ingresar la contraseña); No; Si.</p>
 
-                <p>Podemos comprobar el estado del servidor:</p>
+                <p>Tras realizar el comando anterior comprobaremos el estado del servicio LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
 
                 <p>Ahora comprobaremos que podemos entrar al servicio con el usuario <span class="span_contenido" translate="no">admin</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W</code></pre>
                 <p class="Expl">Luego ponemos la contraseña y si devuelve lo que escribimos está bien configurado.</p>
             </div>
-
 
         </div>
         <!-- ......................................................... -->
@@ -116,31 +106,65 @@ dn: &lt;URI&gt;
 
         <div class="parte1">
             <div>
-                <h2>Crear una <span>Unidad Organizativa</span></h2>
-                <p>1. Hay que crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
-                <p>2. En su interior pondremos el siguiente contenido:</p>
+                <h2>Formato de archivo de configuración</h2>
+
+                <p>Los archivos con extensión <span class="span_url" translate="no">.ldif</span> se utilizan para definir varios objetos a la vez para luego añadirlos a la BD con el comando <span class="span_contenido" translate="no">ldapadd</span>:</p>
+                <pre class="codigo" translate="no"><code class="yaml"># Objeto 1
+dn: [URI]
+    [Atributo]: [Valor_atributo]
+    ...
+
+# [Se debe poner obligatoriamente una línea vacía antes de añadir otro objeto]
+# Objeto 2
+dn: [URI]
+    [Atributo]: [Valor_atributo]
+    ...</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">dn: [URI]</code></pre></td>
+                            <td>
+                                "dn" significa "Distingushed Name".
+                                <br>
+                                Es una URI que diferencia individualmente a todos los objetos de la BD.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- ================== -->
+            
+            <div>
+                <h2>Crear una <span>unidad organizativa</span></h2>
+
+                <p>1. Dentro de un archivo con formato <span class="span_url" translate="no">.ldif</span> definiremos el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]
 objectClass: top
 objectClass: organizationalUnit
 ou: [UO]</code></pre>
                 <p class="Expl"><b>UO</b>: Nombre personalizado que tendrá la unidad organizativa.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
                 </p>
-                <p>3. Añadiremos el archivo a la base de datos:</p>
-                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [ARCHIVO].ldif</code></pre>
-                <p class="Expl"><b>ARCHIVO</b>: Nombre del archivo creado en el paso 1.</p>
 
-                <p>4. Hay que comprobar si en la base de datos está la nueva unidad organizativa:</p>
+                <p>2. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [RUTA_ARCHIVO].ldif</code></pre>
+
+                <p>3. Hay que comprobar si en la base de datos está la nueva unidad organizativa:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
             </div>
 
             <!-- ================== -->
 
             <div>
-                <h2>Crear un <span>Grupo</span></h2>
-                <p>1. Hay que crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
-                <p>2. En su interior pondremos el siguiente contenido:</p>
+                <h2>Crear un <span>grupo</span></h2>
+
+                <p>1. Dentro de un archivo con formato <span class="span_url" translate="no">.ldif</span> definiremos el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: cn=[NOMBRE_GRUPO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]
 objectClass: top
 objectClass: posixGroup
@@ -148,30 +172,29 @@ gidNumber: [N_GID]
 cn: [NOMBRE_GRUPO]</code></pre>
                 <p class="Expl"><b>NOMBRE_GRUPO</b>: Nombre personalizado que tendrá el grupo.
                     <BR><b>UO</b>: Unidad organizativa a la que pertenecerá.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
                 </p>
                 <p class="Expl"><b>N_GID</b>: Número entero identificador del grupo.</p>
 
-                <p>3. Añadiremos el archivo a la base de datos:</p>
-                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [ARCHIVO].ldif</code></pre>
+                <p>2. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [RUTA_ARCHIVO].ldif</code></pre>
 
-                <p>4. Hay que comprobar si en la base de datos está el nuevo grupo:</p>
+                <p>3. Hay que comprobar si en la base de datos está el nuevo grupo:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
             </div>
 
             <!-- ================== -->
 
             <div>
-                <h2>Crear un <span>Usuario</span></h2>
+                <h2>Crear un <span>usuario</span></h2>
 
-                <p>1. Crearemos el hash de la contraseña con el siguiente comando:</p>
+                <p>1. Hay que calcular el hash de la contraseña con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">slappasswd</code></pre>
-                <p class="Expl">Solo hay que ingresar la contraseña y nos devolverá un hash como por ejemplo: <span class="span_contenido" translate="no">{SSHA}jJ/Sl2m---5HeZJP</span>.</p>
+                <p class="Expl">Pedirá que se ingrese una contraseña para poder devolver su hash, como por ejemplo:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">{SSHA}jJ/Sl2m---5HeZJP</code></pre>
 
-                <p>2. Hay que crear un archivo <span class="span_url" translate="no">.ldif</span> y abrirlo.</p>
-
-                <p>3. En su interior pondremos el siguiente contenido:</p>
+                <p>2. Dentro de un archivo con formato <span class="span_url" translate="no">.ldif</span> definiremos el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: uid=[NOMBRE_USUARIO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]
 objectClass: top
 objectClass: account
@@ -186,14 +209,14 @@ homeDirectory: /home/[NOMBRE_USUARIO]
 loginShell: [SHELL]</code></pre>
                 <p class="Expl">
                     <b>UO</b>: Unidad organizativa a la que pertenecerá.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el (.es, .com ..).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (es, com ..) sin el punto.
+                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
                 </p>
                 <p class="Expl">
                     <b>NOMBRE_USUARIO</b>: Nombre personalizado que tendrá el usuario.
                     <br><b>NOMBRE_COMÚN</b>: Nombre común personalizado que tendrá el usuario.
                     <br><b>NOMBRE_COMPLETO</b>: Nombre completo personalizado que tendrá el usuario.
-                    <br><b>CONTRASEÑA</b>: La contraseña en <b>hash</b> del usuario - el resultado del paso 1.
+                    <br><b>CONTRASEÑA</b>: El <u>hash</u> de la contraseña - calculado en el paso 1.
                 </p>
                 <p class="Expl">
                     <b>N_UID</b>: Número entero identificador del usuario. Los siguientes usuarios creados, recibirán un valor +1 alto que este.
@@ -201,19 +224,19 @@ loginShell: [SHELL]</code></pre>
                 </p>
                 <p class="Expl"><b>SHELL</b>: <span class="span_url" translate="no">/bin/bash</span>, <span class="span_url" translate="no">/bin/sh</span>.</p>
 
-                <p>4. Añadiremos el archivo a la base de datos:</p>
-                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [ARCHIVO].ldif</code></pre>
+                <p>3. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [RUTA_ARCHIVO].ldif</code></pre>
 
-                <p>5. Hay que comprobar si en la base de datos está el nuevo usuario:</p>
+                <p>4. Hay que comprobar si en la base de datos está el nuevo usuario:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
             </div>
 
             <!-- ================== -->
 
             <div>
-                <h2>Crear un <span>Usuario</span> - <span>Perfil Móvil</span></h2>
+                <h2>Crear un usuario con un <span>perfil móvil</span></h2>
 
-                <p>Hay que hacer lo mismo que en el apartado "Crear un Usuario" pero cambiando la ruta de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenarán estos perfiles:</p>
+                <p>Hay que hacer lo mismo que en el apartado "Crear un usuario" pero cambiando la ruta de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenarán estos perfiles:</p>
                 <pre class="codigo" translate="no"><code class="yaml">homeDirectory: /[CARPETA_MÓVIL]/[NOMBRE_USUARIO]</code></pre>
             </div>
 
@@ -228,22 +251,22 @@ loginShell: [SHELL]</code></pre>
             <div>
                 <h2>Modificar un <span>objeto</span></h2>
 
-                <p>1. Crear un archivo <span class="span_url" translate="no">.ldif</span>:</p>
-                <p>2. Poner en su interior:</p>
+                <p>1. Dentro de un archivo con formato <span class="span_url" translate="no">.ldif</span> definiremos el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
 changetype: modify
 replace: [PROPIEDAD_CAMBIAR]
 [PROPIEDAD_CAMBIAR]: [VALOR_CAMBIAR]</code></pre>
-                <p class="Expl"><u>Nota</u>: Para hacer 2 cambios se pone uno debajo del otro separado por una línea en blanco.</p>
-                <p class="Expl"><b>DN_COMPLETO</b>: Identificador del objeto dentro de la base de datos.</p>
-                <p class="Expl"><b>PROPIEDAD_CAMBIAR</b>: Nombre de la propiedad. Por ejemplo el "uid", "gid", etc.
-                    <br><b>VALOR_CAMBIAR</b>: El valor que se le va a dar a esa propiedad.
+                <p class="Expl">
+                    <b>DN_COMPLETO</b>: URI que identifique al objeto dentro de la base de datos.
+                    <br><b>PROPIEDAD_CAMBIAR</b>: Nombre de la propiedad a modificar.
+                    <br><b>VALOR_CAMBIAR</b>: El nuevo valor que se le va a asignar a esa propiedad.
                 </p>
+                <p class="Expl"><u>Recuerda</u>: Para hacer 2 cambios a la vez se pone ambos objetos separados por una línea en blanco.</p>
 
-                <p>3. Modificar el registro de la base de datos:</p>
-                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W -f [ARCHIVO].ldif</code></pre>
+                <p>2. Una vez se haya definido el objeto se debe aplicar en la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W -f [RUTA_ARCHIVO].ldif</code></pre>
 
-                <p>4. Hay que comprobar si se hizo el cambio en la base de datos:</p>
+                <p>3. Hay que comprobar si se hizo el cambio en la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
 
 
@@ -254,16 +277,15 @@ replace: [PROPIEDAD_CAMBIAR]
             <div>
                 <h2>Eliminar un <span>objeto</span></h2>
 
-                <p>Hay 2 formas:</p>
-
-                <p>1. Con el comando <span class="span_contenido" translate="no">ldapdelete</span>:</p>
+                <p>Primera forma - con el comando <span class="span_contenido" translate="no">ldapdelete</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapdelete -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W "[DN_COMPLETO]"</code></pre>
-                <p class="Expl"><b>DN_COMPLETO</b>: Identificador del objeto dentro de la base de datos.</p>
+                <p class="Expl"><b>DN_COMPLETO</b>: URI que identifique al objeto dentro de la base de datos.</p>
 
-                <p>2. Creando un archivo <span class="span_url" translate="no">.ldif</span> y agregando dentro el siguiente contenido:</p>
+                <p>Segunda forma - crear un archivo <span class="span_url" translate="no">.ldif</span> con el siguiente contenido:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
 changetype: delete</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W -f [ARCHIVO].ldif</code></pre>
+                <p class="Expl">Y luego aplicar ese objeto en la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapmodify -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W -f [RUTA_ARCHIVO].ldif</code></pre>
 
 
             </div>
@@ -273,10 +295,12 @@ changetype: delete</code></pre>
             <div>
                 <h2>Buscar un <span>objeto</span></h2>
 
-                <p>1. Con el comando <span class="span_contenido" translate="no">ldapsearch</span> podemos buscar objetos identificados por su URI:</p>
-                <pre class="codigo" translate="no"><code class="bash">ldapsearch -xLLL -b "dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" [BÚSQUEDA] [ENSEÑAR]</code></pre>
-                <p class="Expl"><b>BÚSQUEDA</b>: El objeto que vamos a buscar según un valor. Por ejemplo: "uid=xx", "gid=xx".</p>
-                <p class="Expl"><b>ENSEÑAR</b>: Es opcional. Son los valores del objeto a buscar que se quieren enseñar. Por ejemplo: "cn", "uid", "gid".</p>
+                <p>Con el comando <span class="span_contenido" translate="no">ldapsearch</span> podemos buscar objetos identificados por su URI:</p>
+                <pre class="codigo" translate="no"><code class="bash">ldapsearch -xLLL -b "dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" [BÚSQUEDA] (ENSEÑAR)</code></pre>
+                <p class="Expl">
+                    <b>BÚSQUEDA</b>: El objeto que vamos a buscar según un valor. Por ejemplo: "uid=xx", "gid=xx".
+                    <br><b>ENSEÑAR</b>: Es opcional. Son los valores del objeto a buscar que se quieren enseñar. Por ejemplo: "cn", "uid", "gid".
+                </p>
 
             </div>
 
@@ -295,47 +319,50 @@ changetype: delete</code></pre>
                 <p>1. Primero añadiremos un registro DNS interno que apunte al dominio LDAP mediante el siguiente archivo:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
                 <p class="Expl">Añadiremos una línea en el archivo con el siguiente formato:</p>
-                <pre class="codigo" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO_SIN_PUNTO]</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
 
                 <p>2. Primero instalaremos los servicios necesarios:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt install -y libpam-ldap libnss-ldap nss-updatedb libnss-db nfs-common nslcd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y libpam-ldap libnss-ldap nss-updatedb libnss-db nfs-common nslcd</code></pre>
                 
                 <p class="Expl">Va a pedir una serie de preguntas, a las cuales tendremos que responder de la siguiente manera:</p>
-                <p class="Expl">1. Cual es la URL del servidor - <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></p>
-                <p class="Expl">2. Cual es el dominio de LDAP - <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
-                <p class="Expl">3. Seleccionar "Version3"</p>
-                <p class="Expl">4. Seleccionar "Sí"</p>
-                <p class="Expl">5. Seleccionar "No"</p>
-                <p class="Expl">6. Cual es la URI del usuario administrador - <span class="span_contenido" translate="no">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></p>
-                <p class="Expl">7. Va a pedir la contraseña del usuario administrador por protección antes de unirte al dominio</p>
-                <p class="Expl">8. Seleccionar "msd"</p>
+                <ol class="Expl2">
+                    <li>Cual es la URL del servidor - <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></li>
+                    <li>Cual es el dominio de LDAP - <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
+                    <li>Seleccionar "Version3"</li>
+                    <li>Seleccionar "Sí"</li>
+                    <li>Seleccionar "No"</li>
+                    <li>Cual es la URI del usuario administrador - <span class="span_contenido" translate="no">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
+                    <li>Va a pedir la contraseña del usuario administrador por protección antes de unirte al dominio</li>
+                    <li>Seleccionar "msd"</li>
+                </ol>
 
-                <p>Si el proceso de instalación falla o no pregunta el paso 8, hay que reconfigurarlo:</p>
-                <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure ldap-auth-config</code></pre>
+                <p class="Expl">Si el proceso de instalación falla o no pregunta el paso 8, hay que reconfigurar el siguiente servicio:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">dpkg-reconfigure ldap-auth-config</code></pre>
 
-                <p>3. Una vez configurado hay que editar el siguiente archivo para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
+                <p>3. Una vez se haya instalado y configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
                 <p class="Expl">De las 3 primeras líneas reemplazaremos la palabra <span class="span_contenido" translate="no">compact</span> a <span class="span_contenido" translate="no">files ldap</span>.</p>
 
-                <p>4. Ahora configuraremos PAM. Primero haremos lo siguiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">update /upgrade</code></pre>
-                <p class="Expl">Y a continuación habilitaremos todo:</p>
+                <p>4. Hay que actualizar los paquetes del sistema con APT:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt update && apt upgrade -y</code></pre>
+
+                <p>5. Ejecutaremos el siguiente comando y habilitaremos todas las opciones que enseñe:</p>
                 <pre class="codigo" translate="no"><code class="bash">pam-auth-update</code></pre>
 
-                <p>5. Comprobaremos que podemos ver los usuarios del servidor en el cliente:</p>
+                <p>6. Comprobaremos que podemos ver los usuarios del servidor en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
-                <p>6. Del siguiente archivo tendremos que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
+                <p>7. Del siguiente archivo tendremos que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-password</code></pre>
 
-                <p>7. Reiniciaremos el equipo para que se apliquen los cambios:</p>
+                <p>8. Reiniciaremos el equipo para que se apliquen los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">reboot -r now</code></pre>
 
-                <p>8. Reiniciaremos el servicio de LDAP:</p>
+                <p>9. Reiniciaremos el servicio de LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">service libnss-ldap restart</code></pre>
 
-                <p>9. Y por último intentaremos iniciar sesión con un usuario del servidor en el equipo cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">login [USUARIO_SERVIDOR]</code></pre>
+                <p>10. Y por último intentaremos iniciar sesión con un usuario del servidor en el equipo cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">login [USUARIO_LDAP]</code></pre>
     
             </div>
         </div>

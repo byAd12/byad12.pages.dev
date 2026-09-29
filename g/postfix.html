@@ -53,7 +53,7 @@ Código por byAd12
                 <h2>Instalación y configuración</h2>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 25</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt install postfix</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y postfix</code></pre>
                 <p class="Expl"><u>Respuestas</u> que va a pedir: "Sitio de Internet"; Poner un dominio (real o ficticio).</p>
             </div>
 
@@ -149,7 +149,7 @@ Código por byAd12
                 <h2>Envío de email con el comando <span translate="no">mail</span></h2>
 
                 <p>Instalar el paquete:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt install mailutils</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y mailutils</code></pre>
                 <p>Usar el comando [Solo funciona con cuentas reales del sistema]:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [ARCHIVO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
                 <p class="Expl"><span class="span_contenido" translate="no">>CTRL + D</span>: Enviar el mensaje.</p>

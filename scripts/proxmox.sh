@@ -128,7 +128,7 @@ while true; do
         timedatectl
 
         echo -e "\n${Az}Instalando el paquete '${Bl}fastfetch${Az}' mediante APT...${Bl}"
-        apt install -y fastfetch
+        apt-get install -y fastfetch
 
         echo -e "\n${Az}Aplicando modificaciones en '${Bl}~/.bashrc${Az}'...${Bl}"
         if ! grep -q "clear" ~/.bashrc; then
@@ -522,7 +522,7 @@ while true; do
 
             echo -e "${Az}Instalando Cloudflared AMD64 desde GitHub...${Bl}"
             curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
-            apt install -y ./cloudflared.deb
+            apt-get install -y ./cloudflared.deb
 
             echo -e "${Az}Eliminando el archivo temporal...${Bl}"
             rm -f ./cloudflared.deb
@@ -931,7 +931,7 @@ EOF
             read -p 'A quien dar permiso: ' permitido; [[ -z "${permitido// /}" || "${permitido}" == "exit" ]] && continue
 
             echo -e "\n${Az}Instalando las dependencias '${Bl}nfs-kernel-server${Az}' y '${Bl}nfs-common${Az}'...${Bl}"
-            apt install -y nfs-kernel-server nfs-common
+            apt-get install -y nfs-kernel-server nfs-common
 
             echo -e "\n${Az}Configurando el fichero '${Am_}/etc/exports${Az}'...${Bl}"
             echo "${carpeta_local} ${permitido}(${permisos},sync,no_subtree_check,no_root_squash)" >> /etc/exports
@@ -1047,7 +1047,7 @@ EOF
             read -p 'Webhook de Discord: ' webhook; [[ -z "${webhook// /}" || "${webhook}" == "exit" ]] && continue
 
             echo -e "\n${Az}Instalando la dependencia '${Bl}curl${Az}'...${Bl}"
-            apt install -y curl
+            apt-get install -y curl
 
             echo -e "\n${Az}Creando el script '${Bl}/usr/local/bin/discord-alerta.sh${Az}'...${Bl}"
             cat <<EOF > /usr/local/bin/discord-alerta.sh
@@ -1146,7 +1146,7 @@ EOF
             read -p 'Nombre que se le asignará en NetBird: ' nombre_equipo; [[ -z "${nombre_equipo// /}" || "${nombre_equipo}" == "exit" ]] && continue
 
             echo -e "\n${Az}Instalando la dependencia '${Bl}curl${Az}'...${Bl}"
-            apt install -y curl
+            apt-get install -y curl
 
             echo -e "\n${Az}Instalando Netbird mediante un script oficial...${Bl}"
             curl -fsSL https://pkgs.netbird.io/install.sh | bash

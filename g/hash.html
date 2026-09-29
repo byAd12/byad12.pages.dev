@@ -1,0 +1,141 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Miguel Mourón Regueira
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>Hash - Linux</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 class="TituloPrincipal">Hash</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Calcular sumas de comprobación</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>Hash MD5</h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">md5sum [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash MD5 de un archivo.</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2>Hash SHA</h2>
+    
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">sha1sum [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA1 de un archivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">sha256sum [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA256 de un archivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">sha384sum [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA384 de un archivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">sha512sum [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA512 de un archivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-256 [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA3 de 256 bits de un archivo.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-512 [Ruta_archivo]</code></pre></td>
+                            <td>Calcula el hash SHA3 de 512 bits de un archivo.</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2>Salted Hashing</h2>
+
+                <p>
+                    El salted hashing es un método para almacenar contraseñas de forma segura 
+                    añadiendo un valor llamado salt (un texto aleatorio único).
+
+                    Su objetivo es evitar ataques por tablas precalculadas (rainbow tables) y 
+                    asegurar que dos contraseñas idénticas generen hashes completamente diferentes.
+                </p>
+                <p>Proceso:</p>
+
+                <p>1. Se genera un valor aleatorio y se guarda en el archivo de salt:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo "texto_aleatorio" > salt.txt</code></pre>
+
+                <p>2. Se inicializa el archivo final copiando en él la sal generada:</p>
+                <pre class="codigo" translate="no"><code class="bash">cp salt.txt contraseña-codificada.txt</code></pre>
+
+                <p>3. Se concatena el hash original de la contraseña con la salt, se genera el nuevo hash SHA512 y se añade al final del archivo:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat hash.txt salt.txt | sha512sum >> contraseña-codificada.txt</code></pre>
+
+                <p>Al final se obtiene un archivo con la salt en la primera línea y el hash resultante en la segunda:</p>
+                <pre class="codigo" translate="no"><code class="bash">texto_aleatorio
+[SHA512 generado en e paso 3]</code></pre>
+
+            </div>
+
+        </div>
+        
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>
