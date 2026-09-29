@@ -150,6 +150,14 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll table.TablaNmap td span.negativo{color: #e74c3c;}
 .TablaDivScroll table.TablaNmap td span.intermedio{color: #f1c40f;}
 
+.TablaDivScroll table.TablaNmap.UnicaColumna tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
+.TablaDivScroll table.TablaNmap.UnicaColumna tr td{height: 100%; border: none !important;}
+
+@media screen and (max-width: 650px){
+    .TablaDivScroll table.TablaNmap tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
+    .TablaDivScroll table.TablaNmap tr td{height: 100%; border: none !important;}
+}
+
 /* =================================================== */
 /* Div principales para separar el contenido */
 

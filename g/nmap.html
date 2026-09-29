@@ -193,7 +193,7 @@ Código por byAd12
                 </div>
 
                 <div class="TablaDivScroll">
-                    <table class="TablaComandos TablaNmap">
+                    <table class="TablaComandos TablaNmap UnicaColumna">
 
                         <tr class="Titulo">
                             <td colspan="2" class="efecto_ocultar">
@@ -273,7 +273,7 @@ Código por byAd12
                 </div>
 
                 <div class="TablaDivScroll">
-                    <table class="TablaComandos TablaNmap">
+                    <table class="TablaComandos TablaNmap UnicaColumna">
 
                         <tr class="Titulo">
                             <td colspan="2" class="efecto_ocultar">
@@ -302,7 +302,7 @@ Código por byAd12
                 </div>
 
                 <div class="TablaDivScroll">
-                    <table class="TablaComandos TablaNmap">
+                    <table class="TablaComandos TablaNmap UnicaColumna">
 
                         <tr class="Titulo">
                             <td colspan="2" class="efecto_ocultar">
@@ -392,7 +392,15 @@ Código por byAd12
                             <td><pre translate="no"><code class="bash">-sV</code></pre></td>
                             <td>
                                 Determina el servicio que se ejecuta en cada puerto abierto, su versión y detalles adicionales.
-                                En algunos casos, la información del banner del servicio puede desvelar el S.O.
+                                En algunos casos, la información del banner del servicio puede desvelar el sistema operativo.
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-O</code></pre></td>
+                            <td>
+                                Envía paquetes modificados para que el sistema operativo responda y así poder averiguar mediante una base de datos interna qué tipo de sistema operativo puede ser.
                             </td>
                         </tr>
 
@@ -493,18 +501,16 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">-oN [Nombre_archivo]</code></pre></td>
                             <td>
-                                Exporta el resultado en un archivo con formato: <span class="opcion">.nmap</span>.
-                                <br>
-                                ~ Salida normal de terminal.
+                                Exporta el resultado en un archivo con formato: <span class="opcion">.nmap</span>
+                                ~ salida normal de terminal.
                             </td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-oG [Nombre_archivo]</code></pre></td>
                             <td>
-                                Exporta el resultado en un archivo con formato: <span class="opcion">.gnmap</span>.
-                                <br>
-                                ~ Salida de terminal adaptado para hacer <span class="opcion">grep</span>.
+                                Exporta el resultado en un archivo con formato: <span class="opcion">.gnmap</span>
+                                ~ salida de terminal adaptado para hacer <span class="opcion">grep</span>.
                             </td>
                         </tr>
 
@@ -512,14 +518,12 @@ Código por byAd12
                             <td><pre translate="no"><code class="bash">-oX [Nombre_archivo]</code></pre></td>
                             <td>
                                 Exporta el resultado en un archivo con formato: <span class="opcion">.xml</span>.
-                                <br>
-                                ~ Formato XML.
                             </td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">xsltproc [Nombre_archivo].xml -o  [Nombre_archivo].html</code></pre></td>
-                            <td>Una vez exportado a XML se puede convertir a formato .HTML mediante un comando externo de Linux.</td>
+                            <td>Una vez exportado a <span class="opcion">.xml</span> se puede convertir a formato <span class="opcion">.html</span> mediante un comando externo de Linux.</td>
                         </tr>
 
 
@@ -541,7 +545,7 @@ Código por byAd12
 
                         <tr>
                             <td colspan="2">
-                                Tipos de cateogrías (<a href="https://nmap.org/nsedoc/index.html" target="_blank">ver más</a>):
+                                Tipos de categorías (<a href="https://nmap.org/nsedoc/index.html" target="_blank">ver más</a>):
                             
                                 <ul>
                                     <li><span class="opcion">auth</span>: Determina credenciales de acceso.</li>
@@ -573,7 +577,7 @@ Código por byAd12
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">--A</code></pre></td>
+                            <td><pre translate="no"><code class="bash">-A</code></pre></td>
                             <td>Es un parámetro comodín que combina la detección del S.O. (<span class="opcion">-O</span>), la detección de versiones y servicios (<span class="opcion">-sV</span>), utiliza los scripts predeterminados (<span class="opcion">-sC</span>) e identifica cada "salto" que da el paquete (<span class="opcion">--traceroute</span>).</td>
                         </tr>
 
