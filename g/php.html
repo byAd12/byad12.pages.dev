@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: XXX
+~ Dedicatoria a: Julio García Abeledo
 
 -->
 
@@ -54,7 +54,7 @@ Código por byAd12
             <div>
                 <h2>1. Instalación</h2>
 
-                <p>En el servidor Apache2 instalaremos el servicio correspondiente para PHP:</p>
+                <p>En el servidor <a href="apache2.html">Apache2</a> instalaremos el servicio correspondiente para PHP:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y php libapache2-mod-php</code></pre>
 
@@ -80,7 +80,12 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">php --ini</code></pre></td>
-                            <td>Muestra la ruta de los archivos de configuración .ini del servicio PHP.</td>
+                            <td>Muestra la ruta de los archivos de configuración (.ini) del servicio PHP.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">php -i | grep 'Loaded Configuration File'</code></pre></td>
+                            <td>Muestra la ruta del archivo de configuración (.ini) del servicio PHP que está actualmente cargado.</td>
                         </tr>
 
                     </table>
@@ -120,17 +125,18 @@ Código por byAd12
 
                 <p>La primera etiqueta de un archivo <span class="span_contenido" translate="no">.php</span> tiene la siguiente sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="php">&lt;?php (Comando/Variables) ?&gt;</code></pre>
+                <p class="Expl">Esta etiqueta tiene un inicio (&lt;?) y un cierre (?&gt;) y entre ellos puede haber saltos de líneas y espacios.</p>
 
-                <p>Cómo ejecutar un comando (<a href="#comandos">ver comandos</a>):</p>
-                <pre class="codigo" translate="no"><code class="php">&lt;?php
-[Comando];
-?&gt;</code></pre>
+                <p>Dentro de esta etiqueta se pueden ejecutar uno o varios comandos (<a href="#comandos">ver comandos</a>):</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php [Comando]; ... ?&gt;</code></pre>
 
-                <p>Cómo definir una variable:</p>
-                <pre class="codigo" translate="no"><code class="php">&lt;?php
-$[Nombre_variable] = [Valor_variable];
-?&gt;</code></pre>
-                <p class="Expl">El valor de la variable puede ser un valor estático entre comillas, una operación matemática (<a href="#operaciones-matematicas">ver operaciones matemáticas</a>) o una función que devuelva un valor (<a href="#funciones">ver funciones PHP</a>).</p>
+                <p>También se pueden definir una o varias variables con el siguiente formato:</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php $[Nombre_variable] = [Valor_variable]; ... ?&gt;</code></pre>
+                <p class="Expl">El valor de la variable puede ser un valor estático (string, number, decimal, bool), una operación matemática (<a href="#operaciones-matematicas">ver operaciones matemáticas</a>) o una función que devuelva un valor (<a href="#funciones">ver funciones PHP</a>).</p>
+                
+                <p>Para definir los metados de un archivo se utiliza la siguiente función:</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php header("Content-Type: [Tipo]; charset=utf-8"); ?&gt;</code></pre>
+                <p class="Expl">El tipo de contenido puede ser "text/plain" para archivos de texto plano o "text/html" para archivos HTML.</p>
 
             </div>
 
@@ -174,22 +180,12 @@ print "Hola " . $nombre . "!";</code></pre></td>
             <div>
                 <h2 id="operaciones-matematicas">Operaciones matemáticas</h2>
 
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos UnicaColumna">
+                <p>Sintaxis de una operación matemática:</p>
+                <pre class="codigo" translate="no"><code class="php">[Valor1] [Tipo_operación] [Valor2]</code></pre>
+                <p class="Expl">"Tipo_operación" puede ser una suma <span class="span_contenido" translate="no">+</span>, resta <span class="span_contenido" translate="no">-</span>, división <span class="span_contenido" translate="no">/</span>, multiplicación <span class="span_contenido" translate="no">*</span>, obtener el resto de una división <span class="span_contenido" translate="no">%</span> o elevar un número al exponente <span class="span_contenido" translate="no">**</span>.</p>
 
-                        <tr>
-                            <td><pre translate="no"><code class="php">[Valor1] [Tipo_operación] [Valor2]</code></pre></td>
-                            <td>
-                                En "Tipo_operación" puede ser una suma <span class="span_contenido" translate="no">+</span>, resta <span class="span_contenido" translate="no">-</span>, división <span class="span_contenido" translate="no">/</span>, multiplicación <span class="span_contenido" translate="no">*</span>, obtener el resto de una división <span class="span_contenido" translate="no">%</span> o elevar un número al exponente <span class="span_contenido" translate="no">**</span>.
-                            </td>
-                            <td>
-                                Para aplicar la operación directamente sobre una variable y sobreescribir su valor se debe poner el símbolo igual tras el "Tipo_operación":
-                            </td>
-                            <td><pre translate="no"><code class="php">[Nombre_variable] [Tipo_operación]= [Valor_a_sumar]</code></pre></td>
-                        </tr>
-
-                    </table>
-                </div>
+                <p>Para aplicar la operación directamente sobre una variable y sobreescribir su valor se debe poner el símbolo igual tras el símbolo de la operación:</p>
+                <pre class="codigo" translate="no"><code class="php">[Nombre_variable] [Tipo_operación]= [Valor_a_sumar]</code></pre>
 
             </div>
 
@@ -217,17 +213,65 @@ print "Hola " . $nombre . "!";</code></pre></td>
             <div>
                 <h2 id="operadores">Operadores PHP</h2>
 
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos UnicaColumna">
+                <p>Operador <b>if</b> - si se cumple la condición ejecutará el código entre corchetes:</p>
+                <pre class="codigo" translate="no"><code class="php">if (Condición) {
+    # Código a ejecutar si la condición se cumple
+}</code></pre>
 
-                        <tr>
-                            <td><pre translate="no"><code class="php"></code></pre></td>
-                            <td></td>
-                        </tr>
+                <p>Operador <b>else</b> - ejecutará su código entre corchetes si la condición <b>if</b> no se cumple:</p>
+                <pre class="codigo" translate="no"><code class="php">if (Condición) {
+    # Código a ejecutar si la condición se cumple
+} else {
+    # Código a ejecutar si la condición NO se cumple
+}</code></pre>
 
-                    </table>
-                </div>
+                <p>Operador <b>for</b> - ejecutará su código entre corchetes un número determinado de veces:</p>
+                <pre class="codigo" translate="no"><code class="php">for (Inicio; Contador; Incremento) {
+    # Código a ejecutar
+}</code></pre>
+                <p class="Expl">Un ejemplo es el siguiente, donde se define una variable "i" que incremente cada vez que se finaliza de ejecutar el código (un máximo de 5 veces):</p>
+                <pre class="codigo" translate="no"><code class="php">for ($i = 1; $i <= 5; $i++) {
+    # Código a ejecutar
+}</code></pre>
 
+            </div>
+
+            <div>
+                <h2 id="funciones">Funciones PHP</h2>
+
+                <p>Las funciones permiten ejecutar un código que se ejecutará cada vez que se llame a la función. Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="php">function Nombre_función(Parámetro1, ...) {
+    # Código a ejecutar
+}</code></pre>
+
+                <p>Para llamar a una función se debe usar su nombre y también se le pueden pasar los valores que se necesiten:</p>
+                <pre class="codigo" translate="no"><code class="php">Nombre_función(Valores);</code></pre>
+
+                <p>Ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="php">function saludar($nombre, $edad) {
+    echo "Hola, " . $nombre . "! Tienes " . $edad . " años.";
+}
+saludar("byAd12", 33);</code></pre>
+                
+            </div>
+
+            <div>
+                <h2 id="arrays">Arrays</h2>
+
+                <p>Los arrays permiten almacenar un conjunto de valores en una sola variable. Sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="php">Nombre_variable = array(Valor1, ...);</code></pre>
+
+                <p>Para obtener un valor específico de un array se debe indicar su posición empezando desde el número 0:</p>
+                <pre class="codigo" translate="no"><code class="php">$Nombre_variable[Posición]</code></pre>
+                
+            </div>
+
+            <div>
+                <h2 id="arrays">...</h2>
+
+                <p>...:</p>
+                <pre class="codigo" translate="no"><code class="php">...</code></pre>
+                
             </div>
 
         </div>
