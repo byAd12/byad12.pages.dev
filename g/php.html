@@ -1,0 +1,243 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: XXX
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <title>PHP</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="menu_bar" id="menu_bar">
+            <!-- BARRA DE MENÚ -->
+            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <ul>
+                <li><a href="../guides.html">~/Guías</a></li>
+                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
+            </ul>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="gtranslate_wrapper" id="gtranslate_wrapper"></div>
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","en","de","gl","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"horizontal_position":"left","vertical_position":"top","globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/php.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 class="TituloPrincipal">PHP + Apache2</h1>
+        <h2 class="TituloSecundario" id="TituloSecundario">Hypertext Preprocessor</h2>
+        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>1. Instalación</h2>
+
+                <p>En el servidor Apache2 instalaremos el servicio correspondiente para PHP:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y php libapache2-mod-php</code></pre>
+
+            </div>
+
+            <div>
+                <h2>2. Comprobación</h2>
+
+                <p>1. Ejecutaremos los siguientes comandos de verificación del servicio PHP:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">php -v</code></pre></td>
+                            <td>Muestra la versión del servicio PHP instalado en el sistema.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">php -m</code></pre></td>
+                            <td>Muestra los módulos PHP instalados en el sistema.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">php --ini</code></pre></td>
+                            <td>Muestra la ruta de los archivos de configuración .ini del servicio PHP.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <p>2. Verificaremos que en Apache2 no hay ningún error de configuración:</p>
+                <pre class="codigo" translate="no"><code class="bash">apache2ctl configtest</code></pre>
+
+                <p>3. Por último reiniciaremos el servicio de Apache2:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart apache2</code></pre>
+
+            </div>
+
+            <div>
+                <h2>3. Creación de archivos PHP</h2>
+
+                <p>Dentro del <a href="apache2.html#directorio">directorio</a> del <a href="apache2.html#sitio-virtual">sitio virtual</a> crearemos un archivo con extensión <span class="span_contenido" translate="no">.php</span> y dentro pondremos el código PHP correspondiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_directorio]/[Nombre_archivo].php</code></pre>
+
+                <p>Para acceder al código PHP desde el cliente tendremos que ir a la siguiente URL:</p>
+                <pre class="codigo" translate="no"><code class="bash">http(s)://[IP_servidor_Apache2](:Puerto)/[Nombre_archivo].php</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1 class="TituloPrincipal">Sintaxis archivo PHP</h1>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <div class="parte1">
+
+            <div>
+                <h2>Etiqueta principal</h2>
+
+                <p>La primera etiqueta de un archivo <span class="span_contenido" translate="no">.php</span> tiene la siguiente sintaxis:</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php (Comando/Variables) ?&gt;</code></pre>
+
+                <p>Cómo ejecutar un comando (<a href="#comandos">ver comandos</a>):</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php
+[Comando];
+?&gt;</code></pre>
+
+                <p>Cómo definir una variable:</p>
+                <pre class="codigo" translate="no"><code class="php">&lt;?php
+$[Nombre_variable] = [Valor_variable];
+?&gt;</code></pre>
+                <p class="Expl">El valor de la variable puede ser un valor estático entre comillas, una operación matemática (<a href="#operaciones-matematicas">ver operaciones matemáticas</a>) o una función que devuelva un valor (<a href="#funciones">ver funciones PHP</a>).</p>
+
+            </div>
+
+            <div>
+                <h2 id="comandos">Comandos PHP</h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos UnicaColumna">
+
+                        <tr>
+                            <td><pre translate="no"><code class="php">echo "[Valor]"(,"Valor",...);</code></pre></td>
+                            <td>
+                                Muestra en el archivo .html resultante el texto que se indique.
+                                <br>
+                                Puede haber uno o varios argumentos separados por comas, como por ejemplo:
+                            </td>
+                            <td><pre translate="no"><code class="php">$nombre = "byAd12";
+echo "Hola ", $nombre, "!";</code></pre></td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="php">print "[Valor]";</code></pre></td>
+                            <td>
+                                Muestra en el archivo .html resultante los valores que se indiquen.
+                                <br>
+                                Solo puede haber un valor pero este se puede contatenar con variables mediante puntos, como por ejemplo:
+                            </td>
+                            <td><pre translate="no"><code class="php">$nombre = "byAd12";
+print "Hola " . $nombre . "!";</code></pre></td>
+                            <td>
+                                También se puede utilizar el comando print con paréntesis:
+                            </td>
+                            <td><pre translate="no"><code class="php">print (...);</code></pre></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="operaciones-matematicas">Operaciones matemáticas</h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos UnicaColumna">
+
+                        <tr>
+                            <td><pre translate="no"><code class="php">[Valor1] [Tipo_operación] [Valor2]</code></pre></td>
+                            <td>
+                                En "Tipo_operación" puede ser una suma <span class="span_contenido" translate="no">+</span>, resta <span class="span_contenido" translate="no">-</span>, división <span class="span_contenido" translate="no">/</span>, multiplicación <span class="span_contenido" translate="no">*</span>, obtener el resto de una división <span class="span_contenido" translate="no">%</span> o elevar un número al exponente <span class="span_contenido" translate="no">**</span>.
+                            </td>
+                            <td>
+                                Para aplicar la operación directamente sobre una variable y sobreescribir su valor se debe poner el símbolo igual tras el "Tipo_operación":
+                            </td>
+                            <td><pre translate="no"><code class="php">[Nombre_variable] [Tipo_operación]= [Valor_a_sumar]</code></pre></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="funciones">Funciones PHP</h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="php">gethostname()</code></pre></td>
+                            <td>Devuelve el hostname del servidor PHP.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="php">date("H:i:s")</code></pre></td>
+                            <td>Devuelve la fecha actual en formato "Hora:Minuto:Segundo".</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <div>
+                <h2 id="operadores">Operadores PHP</h2>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos UnicaColumna">
+
+                        <tr>
+                            <td><pre translate="no"><code class="php"></code></pre></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/blog.js"></script>
+    </body>
+</html>

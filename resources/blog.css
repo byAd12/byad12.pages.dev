@@ -150,8 +150,8 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll table.TablaNmap td span.negativo{color: #e74c3c;}
 .TablaDivScroll table.TablaNmap td span.intermedio{color: #f1c40f;}
 
-.TablaDivScroll table.TablaNmap.UnicaColumna tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
-.TablaDivScroll table.TablaNmap.UnicaColumna tr td{height: 100%; border: none !important;}
+.TablaDivScroll table.UnicaColumna tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
+.TablaDivScroll table.UnicaColumna tr td{height: 100%; border: none !important;}
 
 @media screen and (max-width: 650px){
     .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
@@ -262,7 +262,7 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     *{user-select: text !important;}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
-   .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 95% !important;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 95% !important;}
     table{width: 100% !important; max-width: 100% !important; table-layout: fixed; word-wrap: break-word; page-break-inside: auto;}
     .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
     .BotonPersonalizadoDIV .BotonFlecha{border: 2px solid #8b9dc3 !important;}
@@ -273,6 +273,7 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     div.Expl table{margin-left: 0 !important; width: 100% !important;}
 
     h1:not(.TituloPrincipal){font-size: 30px;}
+    table td:not(table.UnicaColumna td), table.UnicaColumna tr{border: 1px solid #333 !important;}
 }
 
 /* =================================================== */
