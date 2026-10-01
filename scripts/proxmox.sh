@@ -9,7 +9,7 @@
 dominio="chemahosting.eu"
 
 ##############################################################
-# CODIFICACIÓN DEL ARCHIVO
+# CODIFICACIÓN DEL SCRIPT
 ##############################################################
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
@@ -320,7 +320,7 @@ while true; do
                 cp -r /etc/pve/corosync.conf /root/pve_backup/ 2>/dev/null
                 echo -e "${Ve}La copia de seguridad de '${Bl}/etc/pve${Ve}' se encuentra en '${Bl}/root/pve_backup${Ve}'.${Bl}"
 
-                echo -e "\n${Az}Limpiando los archivos de configuración de Corosync...${Bl}"
+                echo -e "\n${Az}Limpiando los ficheros de configuración de Corosync...${Bl}"
                 rm -f /etc/pve/corosync.conf
                 rm -rf /etc/corosync/*
                 
@@ -388,7 +388,7 @@ while true; do
             echo -e "\n${Az}Iniciando '${Bl}pmxcfs${Az}' en modo local...${Bl}"
             pmxcfs -l
 
-            echo -e "\n${Az}Iniciando el editor de texto con el archivo '${Bl}/etc/pve/corosync.conf${Az}'...${Bl}"
+            echo -e "\n${Az}Iniciando el editor de texto con el fichero '${Bl}/etc/pve/corosync.conf${Az}'...${Bl}"
             /usr/bin/nano /etc/pve/corosync.conf
 
             clear
@@ -524,7 +524,7 @@ while true; do
             curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
             apt-get install -y ./cloudflared.deb
 
-            echo -e "${Az}Eliminando el archivo temporal...${Bl}"
+            echo -e "${Az}Eliminando el fichero temporal...${Bl}"
             rm -f ./cloudflared.deb
 
             echo -e "\n${Az}Instalando el servicio '${Bl}cloudflared${Az}'...${Bl}"
@@ -569,7 +569,7 @@ while true; do
             echo -e "\n${Az}Creando la carpeta '${Bl}/etc/cloudflared/${Az}'...${Bl}"
             mkdir -p /etc/cloudflared
 
-            echo -e "\n${Az}Creando y configurando el archivo '${Bl}/etc/cloudflared/config.yml${Az}'...${Bl}"
+            echo -e "\n${Az}Creando y configurando el fichero '${Bl}/etc/cloudflared/config.yml${Az}'...${Bl}"
             cat <<EOF > /etc/cloudflared/config.yml
 tunnel: $uuid
 credentials-file: /etc/cloudflared/${uuid}.json
@@ -632,7 +632,7 @@ EOF
             echo -e "\n${Az}Verificando que la carpeta '${Bl}/etc/cloudflared/${Az}' existe...${Bl}"
             mkdir -p /etc/cloudflared
 
-            echo -e "\n${Az}Creando y configurando el archivo '${Bl}/etc/cloudflared/config-${nombre_tunel}.yml${Az}'...${Bl}"
+            echo -e "\n${Az}Creando y configurando el fichero '${Bl}/etc/cloudflared/config-${nombre_tunel}.yml${Az}'...${Bl}"
             cat <<EOF > "/etc/cloudflared/config-${nombre_tunel}.yml"
 tunnel: ${uuid}
 credentials-file: /etc/cloudflared/${uuid}.json
@@ -962,7 +962,7 @@ EOF
         printf "%b\n" \
             " | ${Az}PYTHON - OPCIONES ${Bl}" \
             " | =====================================" \
-                "${Ne}1${Bl} | Ejecutar un archivo .py como servicio" \
+                "${Ne}1${Bl} | Ejecutar un fichero .py como servicio" \
                 "${Ne}2${Bl} | Configurar alertas de Discord" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
@@ -972,30 +972,30 @@ EOF
         case $var_sec in
 
         ##############################################################
-        # SERVICIOS - PYTHON - EJECUTAR UN ARCHIVO .PY COMO SERVICIO 
+        # SERVICIOS - PYTHON - EJECUTAR UN FICHERO .PY COMO SERVICIO 
         ##############################################################
         1)
             clear
 
             echo -e "${Am}Requisitos:${Bl}"
             echo -e "${Am_}  1.  Hay que tener python previamente instalado.${Bl}"
-            echo -e "${Am_}  2.  Al principio del archivo .py debe haber esta línea: '${Bl}#!/usr/bin/env python3${Am_}'.${Bl}"
+            echo -e "${Am_}  2.  Al principio del fichero .py debe haber esta línea: '${Bl}#!/usr/bin/env python3${Am_}'.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
             echo -e ""
 
-            read -p 'Ruta absoluta al archivo: ' ruta_archivo; [[ -z "${ruta_archivo// /}" || "${ruta_archivo}" == "exit" ]] && continue
+            read -p 'Ruta absoluta al fichero: ' ruta_fichero; [[ -z "${ruta_fichero// /}" || "${ruta_fichero}" == "exit" ]] && continue
 
             echo -e "\n${Az}Realizando las verificaciones necesarias...${Bl}"
-            if [[ ! -f "${ruta_archivo}" ]]; then
-                echo -e "${Ro}Error: ${Ro_}El archivo no existe.${Bl}\n"
+            if [[ ! -f "${ruta_fichero}" ]]; then
+                echo -e "${Ro}Error: ${Ro_}El fichero no existe.${Bl}\n"
                 read -p "Pulse ENTER para reiniciar el programa:"
                 continue
             fi
 
             echo -e "\n${Az}Definiendo las variables necesarias...${Bl}"
-            nombre_script=$(basename "${ruta_archivo}")
-            directorio_trabajo=$(dirname "${ruta_archivo}")
+            nombre_script=$(basename "${ruta_fichero}")
+            directorio_trabajo=$(dirname "${ruta_fichero}")
 
             echo -e "\n${Az}Detectando el entorno de Python...${Bl}"
             python_path=$(which python3)
@@ -1010,7 +1010,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=${directorio_trabajo}
-ExecStart=${python_path} -u ${ruta_archivo}
+ExecStart=${python_path} -u ${ruta_fichero}
 Restart=on-failure
 RestartSec=5
 StandardOutput=append:/var/log/script-python.log
@@ -1021,7 +1021,7 @@ WantedBy=multi-user.target
 EOF
 
             echo -e "\n${Az}Configurando los permisos y registros...${Bl}"
-            chmod +x "${ruta_archivo}"
+            chmod +x "${ruta_fichero}"
             touch /var/log/script-python.log
 
             echo -e "\n${Az}Recargando systemd...${Bl}"
@@ -1137,7 +1137,7 @@ EOF
             echo -e "${Am_}  1.  Debes tener el Set-up key de Netbird.${Bl}"
             echo -e "${Am_}  2.  Un administrador debe cambiar la IPv4 desde el panel de administración.${Bl}"
             echo -e "${Am_}  3.  La IPv4 que se vaya a configurar debe estar libre.${Bl}"
-            echo -e "${Am_}  4.  Se debe eliminar del archivo '${Bl}/etc/hosts${Am_}' cualquier registro antiguo.${Bl}"
+            echo -e "${Am_}  4.  Se debe eliminar del fichero '${Bl}/etc/hosts${Am_}' cualquier registro antiguo.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
             echo -e ""
@@ -1208,7 +1208,7 @@ EOF
             rm -f /etc/apt/sources.list.d/netbird.list
             rm -f /usr/share/keyrings/netbird-archive-keyring.gpg
 
-            echo -e "\n${Az}Borrando los archivos y carpetas de configuración...${Bl}"
+            echo -e "\n${Az}Borrando los ficheros y carpetas de configuración...${Bl}"
             rm -rf /etc/netbird
             rm -rf /var/lib/netbird
             rm -rf /var/log/netbird

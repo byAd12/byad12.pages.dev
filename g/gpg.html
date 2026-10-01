@@ -52,29 +52,29 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>En el equipo donde crearemos la clave GPG instalaremos el servicio necesario:</p>
+                <p>En el equipo donde se creará la clave GPG hay que instalar el servicio necesario:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y gnupg</code></pre>
             </div>
 
             <div>
-                <h2>Cifrar archivo con clave <span>simétrica</span></h2>
+                <h2>Cifrar fichero con clave <span>simétrica</span></h2>
 
                 <p>En formato <span class="span_url" translate="no">.gpg</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg -c [ARCHIVO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_url" translate="no">[NOMBRE].gpg</span>.</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -c [FICHERO_A_CIFRAR]</code></pre>
+                <p class="Expl">Pide una clave simétrica y luego genera un fichero <span class="span_url" translate="no">[NOMBRE].gpg</span>.</p>
 
                 <p>En formato <span class="span_url" translate="no">.asc</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg -c -a [ARCHIVO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un archivo <span class="span_url" translate="no">[NOMBRE].asc</span>.</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -c -a [FICHERO_A_CIFRAR]</code></pre>
+                <p class="Expl">Pide una clave simétrica y luego genera un fichero <span class="span_url" translate="no">[NOMBRE].asc</span>.</p>
             </div>
 
             <div>
-                <h2>Descifrar archivo con clave <span>[a]simétrica</span></h2>
+                <h2>Descifrar fichero con clave <span>[a]simétrica</span></h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg -d [ARCHIVO_A_DESCIFRAR]</code></pre>
-                <p class="Expl">Si el archivo tiene una <b>clave simétrica</b> va a pedir la clave simétrica y descifra el archivo.</p>
-                <p class="Expl">Si el archivo tiene una <b>clave asimétrica</b> y si fue cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -d [FICHERO_A_DESCIFRAR]</code></pre>
+                <p class="Expl">Si el fichero tiene una <b>clave simétrica</b> va a pedir la clave simétrica y descifra el fichero.</p>
+                <p class="Expl">Si el fichero tiene una <b>clave asimétrica</b> y si fue cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
             </div>
 
             <div>
@@ -110,21 +110,21 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Cifrar archivo con clave <span>asimétrica</span></h2>
+                <h2>Cifrar un fichero con una clave <span>asimétrica</span></h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg -a -r [NOMBRE_OTRA_CLAVE] -e [ARCHIVO_A_CIFRAR]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">gpg -a -r [NOMBRE_OTRA_CLAVE] -e [FICHERO_A_CIFRAR]</code></pre>
                 <p class="Expl"><b>-r</b>: Puede usarse más de 1 vez.</p>
                 <p class="Expl"><b>NOMBRE_OTRA_CLAVE</b>: El nombre o email del creador de la clave pública que se va a usar para cifrar.</p>
             </div>
 
             <div>
-                <h2>Firmar un archivo</h2>
+                <h2>Firmar un fichero</h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [ARCHIVO_A_FIRMAR]</code></pre>
-                <p class="Expl">Generará un archivo <span class="span_url" translate="no">.gpg</span> que servirá como firma.</p>
-                <p class="Expl">Este se enviará junto al archivo original para verificar si se ha modificado o no. Para verificarlo:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg [ARCHIVO_FIRMADO]</code></pre>
-                <p class="Expl">EL comando te pedirá la ruta del archivo original y comparará la firma.</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [FICHERO_A_FIRMAR]</code></pre>
+                <p class="Expl">Generará un fichero <span class="span_url" translate="no">.gpg</span> que servirá como firma.</p>
+                <p class="Expl">Este se enviará junto al fichero original para verificar si se ha modificado o no. Para verificarlo:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg [FICHERO_FIRMADO]</code></pre>
+                <p class="Expl">EL comando te pedirá la ruta del fichero original y comparará la firma.</p>
             </div>
 
         </div>

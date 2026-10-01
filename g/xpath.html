@@ -115,7 +115,7 @@ Código por byAd12
             
                 <p>
                     XPath trata los documentos XML como un árbol de nodos.
-                    Dentro de este árbol, podemos diferenciar diferentes tipos de nodos según su localización en el documento:
+                    Dentro de este árbol, se puede diferenciar diferentes tipos de nodos según su localización en el documento:
                 </p>
 
                 <ul>
@@ -143,7 +143,7 @@ Código por byAd12
             
                 <p>Un path se define separando el nombre de los nodos con barras - <span class="span_url" translate="no">/</span>, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/tienda/productos/producto/nombre/text()</code></pre>
-                <p class="Expl">En el ejemplo podemos identificar el nodo raíz - <span class="span_url" translate="no">/</span>, seguido de una serie de nodos de elementos hasta el nodo <span class="span_url" translate="no">nombre</span>, a la cual se le aplica una función para obtener un nodo de texto.</p>
+                <p class="Expl">En el ejemplo se puede identificar el nodo raíz - <span class="span_url" translate="no">/</span>, seguido de una serie de nodos de elementos hasta el nodo <span class="span_url" translate="no">nombre</span>, a la cual se le aplica una función para obtener un nodo de texto.</p>
                 <p class="Expl">El documento XML se podría ver por ejemplo así:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;tienda&gt;
@@ -192,7 +192,7 @@ Código por byAd12
                     En XPath, los nodos hijo son los elementos que están directamente dentro de otro. 
                     Por defecto, cualquier ruta que escribas usa el eje child.
                 </p>
-                <p class="Expl">Si queremos usar la sintaxis explícita para el mismo documento del servidor:</p>
+                <p class="Expl">Si se quiere usar la sintaxis explícita para el mismo documento del servidor:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/child::servicios/child::servicio</code></pre>
                 <p class="Expl">
                     Esto es equivalente a escribir <span class="span_url" translate="no">/servidor/servicios/servicio</span>. 
@@ -226,7 +226,7 @@ Código por byAd12
             <div>
                 <h2 id="seleccion-elemento">Selección de un nodo elemento</h2>
                 
-                <p>Primero llegaremos a la ruta donde se situe el nodo elemento <span class="span_url" translate="no">tiempo_ejecucion</span> del siguiente documento XML:</p>
+                <p>Primero hay que llegar a la ruta donde se situe el nodo elemento <span class="span_url" translate="no">tiempo_ejecucion</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -235,10 +235,10 @@ Código por byAd12
         &lt;/servicio&gt;
     &lt;/servicios&gt;
 &lt;/servidor&gt;</code></pre>
-                <p class="Expl">Si queremos obtener la etiqueta completa con todo su contenido simplemente lo dejaremos así:</p>
+                <p class="Expl">Si se quiere obtener la etiqueta completa con todo su contenido simplemente se deja así:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion</code></pre>
 
-                <p class="Expl">En cambio, si solo queremos obtener el nodo texto dentro de ese nodo elemento, que en este caso es "135", tenedremos que hacer:</p>
+                <p class="Expl">En cambio, si solo se quiere obtener el nodo texto dentro de ese nodo elemento, que en este caso es "135", se tiene que hacer:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/text()</code></pre>
 
                 <p>La función <span class="span_contenido" translate="no">parent()</span> devolverá el nombre del nodo que contiene el nodo elemento seleccionado:</p>
@@ -250,7 +250,7 @@ Código por byAd12
             <div>
                 <h2 id="seleccion-atributo">Selección de un nodo atributo</h2>
                 
-                <p>Primero llegaremos a la ruta donde se situe el nodo atributo <span class="span_url" translate="no">unidad</span> del siguiente documento XML:</p>
+                <p>Primero hay que llegar a la ruta donde se situe el nodo atributo <span class="span_url" translate="no">unidad</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -259,8 +259,8 @@ Código por byAd12
         &lt;/servicio&gt;
     &lt;/servicios&gt;
 &lt;/servidor&gt;</code></pre>
-                <p class="Expl">Para seleccionar el nodo atributo pondremos el símbolo <span class="span_contenido" translate="no">@</span> antes del nombre del atributo.</p>
-                <p class="Expl">Según versiones modernas de XPATH tendremos que definir que vamos a coger el contenido dentro del atributo con <span class="span_contenido" translate="no">string()</span>, lo que nos devolverá "segundos":</p>
+                <p class="Expl">Para seleccionar el nodo atributo se debe poner el símbolo <span class="span_contenido" translate="no">@</span> antes del nombre del atributo.</p>
+                <p class="Expl">En versiones modernas de XPATH hay que definir que se va a coger el contenido dentro del atributo con <span class="span_contenido" translate="no">string()</span>, lo que devolverá "segundos":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio/tiempo_ejecucion/@unidad/string()</code></pre>
 
                 <p>La función <span class="span_contenido" translate="no">node()</span> devolverá el nombre del atributo seleccionado:</p>
@@ -289,7 +289,7 @@ Código por byAd12
             <div>
                 <h2 id="filtro-coincidencias">Filtro por coincidencias</h2>
                 
-                <p>Podemos filtrar los servicios del siguiente XML que cumplan una condición:</p>
+                <p>Se puede filtrar los servicios del siguiente XML que cumplan una condición:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -304,7 +304,7 @@ Código por byAd12
     &lt;/servicios&gt;
 &lt;/servidor&gt;</code></pre>
 
-                <p>Podemos filtrar los servicios cuyo programa sea exactamente "bind9":</p>
+                <p>Se puede filtrar los servicios cuyo programa sea exactamente "bind9":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa = "bind9"]</code></pre>
                 <p class="Expl">Según el ejemplo devolverá:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;servicio programa="bind9"&gt;
@@ -312,7 +312,7 @@ Código por byAd12
     &lt;tiempo_ejecucion unidad="segundos"&gt;135&lt;/tiempo_ejecucion&gt;
 &lt;/servicio&gt;</code></pre>
 
-                <p>Podemos filtrar los servicios cuyo contenido de texto no sea exactamente "bind9":</p>
+                <p>Se puede filtrar los servicios cuyo contenido de texto no sea exactamente "bind9":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa != "bind9"]</code></pre>
                 <p class="Expl">Según el ejemplo devolverá:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;servicio programa="apache"&gt;
@@ -322,7 +322,7 @@ Código por byAd12
 
                 <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url" translate="no">servicio</span> incluido todo los nodos que contenga.</p>
                 
-                <p>También podemos definir que nos devuelva solo un nodo específico de los servicios que cumplan la condición, como por ejemplo el nodo <span class="span_url" translate="no">tipo_proceso</span>:</p>
+                <p>También se puede definir que nos devuelva solo un nodo específico de los servicios que cumplan la condición, como por ejemplo el nodo <span class="span_url" translate="no">tipo_proceso</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/servicios/servicio[@programa != "bind9"]/tipo_proceso/text()</code></pre>
                 <p class="Expl">Según el ejemplo devolverá "Hijo".</p>
 
@@ -331,7 +331,7 @@ Código por byAd12
             <div>
                 <h2 id="filtro-numeros">Filtro de números</h2>
                 
-                <p>Podemos filtrar los servicios del siguiente XML que cumplan una condición sobre un número:</p>
+                <p>Se puede filtrar los servicios del siguiente XML que cumplan una condición sobre un número:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
 &lt;servidor&gt;
     &lt;servicios&gt;
@@ -465,8 +465,8 @@ Código por byAd12
             <div>
                 <h2 id="acceso-doc">Acceso a datos de otro documento XML</h2>
 
-                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de archivos externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
-                <p class="Expl">Si por ejemplo queremos acceder al nodo raíz de un archivo llamado "config.xml" que está en la misma carpeta:</p>
+                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de ficheros externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
+                <p class="Expl">Si por ejemplo se quiere acceder al nodo raíz de un fichero llamado "config.xml" que está en la misma carpeta:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">doc("config.xml")/servidor</code></pre>
             </div>
 
@@ -479,7 +479,7 @@ Código por byAd12
 
             <div>
                 <h2 id="union-secuencias">Unión de Nodos y Secuencias</h2>
-                <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, tenemos dos operadores clave que no debemos confundir:</p>
+                <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, hay dos operadores clave que no se deben confundir:</p>
                 
                 <p>1. Operador de Unión ( | )</p>
                 <p class="Expl">

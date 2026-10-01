@@ -180,7 +180,7 @@ Código por byAd12
             <div>
                 <h2 id="para-que-sirve-xsd">¿Para qué sirve XSD?</h2>
 
-                <p>XSD es un archivo de texto plano con extensión <span class="span_url" translate="no">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
+                <p>XSD es un fichero de texto plano con extensión <span class="span_url" translate="no">.xsd</span> que se utiliza para validar documentos XML, verificando que cumplen con unos requisitos concretos y para asegurar que el documento es válido y lo seguirá siendo en el futuro.</p>
 
                 <p>
                     <b>XSD <span style="color: rgb(147, 147, 206) !important;">permite validar</span></b>:
@@ -194,7 +194,7 @@ Código por byAd12
                     <b><span style="color: rgb(147, 147, 206) !important;">Ventajas</span> sobre DTD</b>:
                     <br>- La sintaxis es más avanzada y proporciona un mayor nivel de detalle.
                     <br>- Permite restringir con mucha precisión los valores que puede tener un elemento o atributo.
-                    <br>- Los mismos procesadores que permiten interpretar archivos XML permitirían procesar archivos XSD ya que este está escrito sobre XML.
+                    <br>- Los mismos procesadores que permiten interpretar ficheros XML permitirían procesar ficheros XSD ya que este está escrito sobre XML.
                     <br>- Permite la definición de namespaces.
                 </p>
 
@@ -300,7 +300,7 @@ Código por byAd12
                 <p>Cada valor puede ser de 2 formas:</p>
                 <p>
                     <b>Valor <span style="color: rgb(147, 147, 206) !important;">predefinido</span></b>: Valores ya creados por el estándar XML.
-                    <br><b>Valor <span style="color: rgb(147, 147, 206) !important;">personalizado</span></b>: Valores que podemos crear a partir de uno predefinido.
+                    <br><b>Valor <span style="color: rgb(147, 147, 206) !important;">personalizado</span></b>: Valores que se pueden crear a partir de un valor predefinido.
                 </p>
 
                 <p>Imagen con todos los valores existentes en: <a href="https://axis.apache.org/axis/cpp/images/c/XSD_Objects_Heirarchy.JPG" target="_blank">apache.org</a></p>
@@ -613,7 +613,7 @@ Código por byAd12
             <div>
                 <h2 id="elemento-simple-restricciones">Elemento simple &gt; <span>Restricciones</span></h2>
                 <p>
-                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que podemos aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
+                    Las restricciones se denominan <b>facetas</b> y se refieren a restricciones que se pueden aplicar sobre los valores de los datos de un <b>elemento o atributo</b>.
                     Se debe meter la etiqueta &lt;xs:restriction&gt; dentro de un &lt;simpleType&gt; o dentro de &lt;xs:attribute&gt;.
                     <u>Estructura</u>:
                 </p>
@@ -622,7 +622,7 @@ Código por byAd12
         &lt;!-- Restricciones --&gt;
     &lt;/xs:restriction&gt;
 &lt;/xs:simpleType/attribute&gt;</code></pre>
-                <p class="Expl"><b>base</b>: El tipo de valor al que aplicaremos esas restricciones.</p>
+                <p class="Expl"><b>base</b>: El tipo de valor al que hay que aplicar esas restricciones.</p>
                 <p>ℹ️ Las restricciones se explican en apartados posteriores.</p>
 
             </div>
@@ -695,7 +695,7 @@ Código por byAd12
             <div>
                 <h2 id="elemento-complejo-secuencia-cualquier-orden">Elemento complejo &gt; <span>Secuencia de sub-elementos en cualquier orden</span></h2>
 
-                <p>Podemos definir una secuencia de sub-elementos en la que deban aparecer en <u>cualquier orden</u>:</p>
+                <p>Se puede definir una secuencia de sub-elementos en la que deban aparecer en <u>cualquier orden</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="nombre_elemento"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:all&gt;
@@ -724,8 +724,10 @@ Código por byAd12
             <div>
                 <h2 id="elemento-complejo-contenido-simple">Elemento complejo &gt; <span>Contenido simple (Texto + Atributos + Restricciones)</span></h2>
 
-                <p>Se utiliza cuando un elemento es complejo porque tiene atributos, pero su contenido es solo texto (sin sub-elementos).
-                Para validar el valor del texto (ej: que sea un número positivo) y añadir atributos, debemos extender un <b>tipo simple personalizado</b>.</p>
+                <p>
+                    Se utiliza cuando un elemento es complejo porque tiene atributos, pero su contenido es solo texto (sin sub-elementos).
+                    Para validar el valor del texto (ej: que sea un número positivo) y añadir atributos, hay que extender un <b>tipo simple personalizado</b>.
+                </p>
                 
                 <p><u>Ejemplo</u>: Un precio que debe ser mayor o igual a 0 y tener un atributo de divisa.</p>
 
@@ -734,7 +736,7 @@ Código por byAd12
 &lt;xs:element name="precio"&gt;
     &lt;xs:complexType&gt;
         &lt;xs:simpleContent&gt;
-            &lt;!-- 2. Extendemos la base personalizada para añadirle atributos --&gt;
+            &lt;!-- 2. Extender la base personalizada para añadirle atributos --&gt;
             &lt;xs:extension base="tipo-precio"&gt;
                 &lt;xs:attribute name="divisa" type="xs:string" use="required"/&gt;
             &lt;/xs:extension&gt;
@@ -790,9 +792,9 @@ Código por byAd12
             <div>
                 <h2 id="elemento-complejo-extension">Elemento complejo &gt; <span>Extensión de tipos complejos</span></h2>
 
-                <p>Se utiliza cuando queremos <u>reutilizar un tipo complejo existente</u> y agregar nuevos elementos o atributos:</p>
+                <p>Se utiliza cuando se quiere <u>reutilizar un tipo complejo existente</u> y agregar nuevos elementos o atributos:</p>
 
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="archivo" type="tipoInformacion" /&gt;
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:element name="fichero" type="tipoInformacion" /&gt;
 
 &lt;xs:complexType name="tipoInformacion"&gt;
     &lt;xs:sequence&gt;
@@ -801,7 +803,7 @@ Código por byAd12
     &lt;xs:attribute name="formato" type="xs:string" /&gt;
 &lt;/xs:complexType&gt;
 
-&lt;xs:element name="archivo" type="tipoMasdatos" /&gt;
+&lt;xs:element name="fichero" type="tipoMasdatos" /&gt;
 
 &lt;xs:complexType name="tipoMasdatos"&gt;
     &lt;xs:complexContent&gt;
@@ -817,7 +819,7 @@ Código por byAd12
                 <p class="Expl">
                     Aquí se crea un nuevo tipo complejo <span class="span_contenido" translate="no">tipoMasdatos</span> que extiende <span class="span_contenido" translate="no">tipoInformacion</span>.
                     <br>
-                    Esto significa que <span class="span_contenido" translate="no">archivo</span> hereda todo lo definido en <span class="span_contenido" translate="no">tipoInformacion</span> (<span class="span_contenido" translate="no">nombre</span> y <span class="span_contenido" translate="no">formato</span>) y añade dos nuevos elementos: <span class="span_contenido" translate="no">creacion</span> y <span class="span_contenido" translate="no">edicion</span>.
+                    Esto significa que <span class="span_contenido" translate="no">fichero</span> hereda todo lo definido en <span class="span_contenido" translate="no">tipoInformacion</span> (<span class="span_contenido" translate="no">nombre</span> y <span class="span_contenido" translate="no">formato</span>) y añade dos nuevos elementos: <span class="span_contenido" translate="no">creacion</span> y <span class="span_contenido" translate="no">edicion</span>.
                 </p>
 
                 <p>
@@ -945,14 +947,14 @@ Código por byAd12
                 </p>
 
                 <p><b>1. Definición del grupo</b>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attributeGroup name="info-archivo"&gt;
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:attributeGroup name="info-fichero"&gt;
     &lt;xs:attribute name="formato" type="xs:string"/&gt;
     &lt;xs:attribute name="codificacion" type="xs:string"/&gt;
 &lt;/xs:attributeGroup&gt;</code></pre>
 
                 <p><b>2. Uso del grupo</b>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xs:complexType name="tipo-documento"&gt;
-    &lt;xs:attributeGroup ref="info-archivo"/&gt;
+    &lt;xs:attributeGroup ref="info-fichero"/&gt;
 &lt;/xs:complexType&gt;</code></pre>
             </div>
 

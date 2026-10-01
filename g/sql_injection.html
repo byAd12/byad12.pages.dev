@@ -51,23 +51,28 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>IMPORTANTE</h2>
-                <p>En SQL hay 2 tipos de comentarios según distintas versiones como MySQL. Podemos probar cada consulta intercambiando uno por otro:</p>
+
+                <p>
+                    En SQL hay 2 tipos de comentarios según distintas versiones, como en MySQL. 
+                    En cada consulta se puede probar los distintos tipos de comentarios:
+                </p>
 
                 <pre class="codigo" translate="no"><code class="sql"># </code></pre>
                 <pre class="codigo" translate="no"><code class="sql">-- </code></pre>
-                <p class="Expl">Después de los símbolos hay que añadir un espacio.</p>
+                <p class="Expl">Después de los símbolos hay que dejar un espacio en blanco.</p>
 
             </div>
 
             <div>
                 <h2>Formulario Log-in</h2>
-                <p>En una página web que utilice SQL como BB.DD. podemos probar a entrar como administrador (root, admin, ...) añadiendo un comentario de una de estas 2 maneras:</p>
+
+                <p>En una página web que utilice SQL como BB.DD. se puede probar a entrar como administrador (root, admin, ...) añadiendo un comentario de una de estas 2 maneras:</p>
 
                 <pre class="codigo" translate="no"><code class="sql">admin'#</code></pre>
                 
-                <p class="Expl">Y como contraseña podremos poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe caracteres en los formularios o si no usa Prepared Statements.</p>
+                <p class="Expl">Y como contraseña se puede poner cualquiera ya que se omitirá el campo en la consulta SQL. Puede funcionar si el administrador no limita privilegios, no restringe caracteres en los formularios o si no usa Prepared Statements.</p>
 
-                <p>Además se podría añadir a la consulta como usuario y contraseña (podemos probar con las comillas dobles: <span class="span_url" translate="no">"</span>). Opciones:</p>
+                <p>Además se podría añadir a la consulta como usuario y contraseña (se puede probar con las comillas dobles: <span class="span_url" translate="no">"</span>). Opciones:</p>
 
                 <pre class="codigo" translate="no"><code class="sql">' OR ''='</code></pre>
                 <pre class="codigo" translate="no"><code class="sql">' OR 1=1#</code></pre>
@@ -82,7 +87,11 @@ Código por byAd12
 
             <div>
                 <h2>URLs</h2>
-                <p>Con las URLs podemos ver a veces parámetros como <span class="span_url" translate="no">?id=1</span>. Podemos probar a añadir:</p>
+
+                <p>
+                    Con las URLs se puede ver a veces parámetros como <span class="span_url" translate="no">?id=1</span>.
+                    Se puede probar a añadir en el valor del parámetro valores como:
+                </p>
 
                 <pre class="codigo" translate="no"><code class="sql">1' OR '1'='1</code></pre>
                 <pre class="codigo" translate="no"><code class="sql">1' OR 1=1#</code></pre>

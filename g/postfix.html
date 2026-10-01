@@ -66,36 +66,36 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Archivos importantes</h2>
+                <h2>Ficheros importantes</h2>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/postfix/main.cf</code></pre></td>
-                            <td>Archivo de configuración principal</td>
+                            <td>Fichero de configuración principal</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/postfix/master.cf</code></pre></td>
                             <td>
-                                Archivo de configuración del demonio maestro de postfix.
+                                Fichero de configuración del demonio maestro de postfix.
                                 <br>Se encarga de interactuar con los procesos para enviar correos
                             </td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/aliases</code></pre></td>
-                            <td>Archivo para definir alias de correos</td>
+                            <td>Fichero para definir alias de correos</td>
                         </tr>
                     </table>
                 </div>
 
-                <p><u>Formato</u> del archivo <span class="span_url" translate="no">/etc/postfix/main.cf</span>:</p>
+                <p><u>Formato</u> del fichero <span class="span_url" translate="no">/etc/postfix/main.cf</span>:</p>
                 <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continúa a la línea anterior.</p>
                 <p class="Expl"><b>$parámetro</b>: Asignar un valor de un parámetro a otro.</p>
 
             </div>
 
             <div>
-                <h2>Archivos de registros</h2>
+                <h2>Ficheros de registros</h2>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -151,7 +151,7 @@ Código por byAd12
                 <p>Instalar el paquete:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y mailutils</code></pre>
                 <p>Usar el comando [Solo funciona con cuentas reales del sistema]:</p>
-                <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [ARCHIVO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [FICHERO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
                 <p class="Expl"><span class="span_contenido" translate="no">>CTRL + D</span>: Enviar el mensaje.</p>
                 <p>Si se envió a otro usuario del sistema se puede ver su correo en:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /var/mail/[NOMBRE_USUARIO]</code></pre>

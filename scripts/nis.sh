@@ -3,7 +3,7 @@
 # -- byad12.pages.dev/nis.sh
 
 ##############################################################
-# CODIFICACIÓN DEL ARCHIVO
+# CODIFICACIÓN DEL SCRIPT
 ##############################################################
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8

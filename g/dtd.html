@@ -156,7 +156,7 @@ Código por byAd12
 
                 <h2 id="elementos-opciones">Elementos &gt; Opciones</h2>
 
-                <p>1. Podemos decir que el contenido de una etiqueta puede no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido" translate="no">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
+                <p>1. Se puede decir que el contenido de una etiqueta puede no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido" translate="no">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA)&gt;</code></pre>
                 <p class="Expl">Solo daría error si se ponen sub-etiquetas dentro.</p>
 
@@ -182,7 +182,7 @@ Código por byAd12
             <div>
                 <h2 id="elementos-eleccion-secuencia">Elementos &gt; Elección en una secuencia de elementos</h2>
 
-                <p>Podemos definir que se pueda elegir entre una &lt;etiqueta1&gt; o una &lt;etiqueta2&gt; y que luego se ponga la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
+                <p>Se puede elegir entre una &lt;etiqueta1&gt; o una &lt;etiqueta2&gt; y que luego obligatoriamente la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2), etiqueta3, ...)&gt;</code></pre>
 
                 <!-- ......................................................... -->
@@ -191,7 +191,7 @@ Código por byAd12
             <div>
                 <h2 id="elementos-eleccion-entre-secuencias">Elementos &gt; Elección entre una secuencia de elementos</h2>
 
-                <p>Podemos definir que se pueda elegir una &lt;etiqueta1&gt; seguido de la &lt;etiqueta2&gt; o solo la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
+                <p>Se puede elegir una &lt;etiqueta1&gt; seguido de la &lt;etiqueta2&gt; o solo la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2) | etiqueta3, ...)&gt;</code></pre>
 
                 <!-- ......................................................... -->
@@ -200,15 +200,15 @@ Código por byAd12
             <div>
                 <h2 id="elementos-cardinalidades">Elementos &gt; Cardinalidades</h2>
 
-                <p>Con el símbolo <span class="span_contenido" translate="no">?</span> podemos definir una cardinalidad de <span class="span_url" translate="no">0-1</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">?</span> se puede definir una cardinalidad de <span class="span_url" translate="no">0-1</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1?)&gt;</code></pre>
                 <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o solo una.</p>
 
-                <p>Con el símbolo <span class="span_contenido" translate="no">+</span> podemos definir una cardinalidad de <span class="span_url" translate="no">1-n</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">+</span> se puede definir una cardinalidad de <span class="span_url" translate="no">1-n</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1+)&gt;</code></pre>
                 <p class="Expl">Sería válido poner mínimo una etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
 
-                <p>Con el símbolo <span class="span_contenido" translate="no">*</span> podemos definir una cardinalidad de <span class="span_url" translate="no">0-n</span>.</p>
+                <p>Con el símbolo <span class="span_contenido" translate="no">*</span> se puede definir una cardinalidad de <span class="span_url" translate="no">0-n</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1*)&gt;</code></pre>
                 <p class="Expl">Sería válido poner ninguna etiqueta &lt;etiqueta1&gt; o muchas (sin límite).</p>
 
@@ -365,7 +365,7 @@ Código por byAd12
 
                 <p>
                     Una entidad puede almacenar cualquier tipo de contenido e insertarlo en el documento XML. 
-                    Se almacena en el documento DTD o en un archivo externo.
+                    Se almacena en el documento DTD o en un fichero externo.
                     Es útil ya que el valor asociado a un nombre puede ser fácilmente editado desde un solo lugar en vez de en todos los lugares a los que se le quiera asignar ese valor.
                 </p>
 
@@ -412,10 +412,10 @@ Código por byAd12
                 <br>
                 <p><b>Entidades <span style="color: rgb(147, 147, 206) !important;">generales internas</span></b>:</p>
 
-                <p>Podemos crear nuestras propias entidades con la siguiente sintaxis:</p>
+                <p>Se puede crear nuestras propias entidades con la siguiente sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre "valor"&gt;</code></pre>
                 <p class="Expl">
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>valor</b>: Contenido que se insertará en el documento XML cuando se llame.
                 </p>
@@ -429,7 +429,7 @@ Código por byAd12
             <div>
                 <h2 id="entidades-generales-externas">Entidades generales externas</h2>
 
-                <p>Una entidad <b>general externa</b> es aquella que define el valor de la entidad en otro archivo.</p>
+                <p>Una entidad <b>general externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -438,16 +438,16 @@ Código por byAd12
                 <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre SYSTEM "URI"&gt;</code></pre>
                 <p class="Expl">
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>SYSTEM</b>: Se indica que es un recurso privado.
                     <br>
-                    <b>"URI"</b>: Enlace/ruta al archivo cuyo contenido es el valor a asignar como entidad.
+                    <b>"URI"</b>: Enlace/ruta al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd SYSTEM "descripcion.txt"&gt;</code></pre>
-                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo <span class="span_url" translate="no">descripcion.txt</span>.</p>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del fichero <span class="span_url" translate="no">descripcion.txt</span>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -456,18 +456,18 @@ Código por byAd12
                 <p><u>Sintaxis</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY nombre PUBLIC "ID" "URI"&gt;</code></pre>
                 <p class="Expl">
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>PUBLIC</b>: Se indica que es un recurso público.
                     <br>
                     <b>"ID"</b>: Identificador público que permiten localizar recursos DTD. Normalmente tiene formato <u>FPI</u> (Formal Public Identifier).
                     <br>
-                    <b>"URI"</b>: span_contenido al archivo cuyo contenido es el valor a asignar como entidad.
+                    <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY dtd PUBLIC "-//W3C//TEXT dtd//EN" "https://byad12.pages.dev/robots.txt"&gt;</code></pre>
-                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del archivo alojado en la URI asignada.</p>
+                <p class="Expl">Ahora se podrá llamar a la entidad mediante <span class="span_url" translate="no"><span>&<b></b>dtd;</span></span> y este devolverá el contenido del fichero alojado en la URI asignada.</p>
 
             </div>
 
@@ -484,16 +484,16 @@ Código por byAd12
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
                     <br>
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>"valor"</b>: Contenido que se insertará en el documento XML cuando se llame.
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
-                <p class="Expl">Podemos llamar a una entidad mediante <span class="span_url" translate="no"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
+                <p class="Expl">Se puede llamar a una entidad mediante <span class="span_url" translate="no"><span>%<span></span>str;</span></span> para indicar que se espera una cadena de caracteres:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % str "(#PCDATA)"&gt;
 &lt;!ELEMENT nombre_elemento %str;&gt;</code></pre>
-                <p class="Expl">También podemos evitar escribir nombres de elementos largos y reemplazarlos por una entidad:</p>
+                <p class="Expl">También se puede evitar escribir nombres de elementos largos y reemplazarlos por una entidad:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % uk "reino-unido-de-gran-bretana-e-irlanda-del-norte"&gt;
 &lt;!ELEMENT %uk; EMPTY&gt;
 &lt;!ATTLIST %uk; capital CDATA #REQUIRED&gt;</code></pre>
@@ -530,7 +530,7 @@ Código por byAd12
             <div>
                 <h2 id="entidades-parametricas-externas">Entidades paramétricas externas</h2>
 
-                <p>Una entidad <b>paramétrica externa</b> es aquella que define el valor de la entidad en otro archivo.</p>
+                <p>Una entidad <b>paramétrica externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -541,19 +541,19 @@ Código por byAd12
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
                     <br>
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>SYSTEM</b>: Se indica que es un recurso privado.
                     <br>
-                    <b>"URI"</b>: span_contenido al archivo cuyo contenido es el valor a asignar como entidad.
+                    <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
                 <p><u>Ejemplo</u>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
 %entidad_nueva;</code></pre>
-                <p class="Expl">El archivo <span class="span_contenido" translate="no">descripcion.dtd</span> contiene:</p>
+                <p class="Expl">El fichero <span class="span_contenido" translate="no">descripcion.dtd</span> contiene:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
-                <p class="Expl">Así que en el DTD se reemplazará <span class="span_contenido" translate="no">%etiqueta_nueva;</span> por el contenido del archivo, quedando el siguiente resultado:</p>
+                <p class="Expl">Así que en el DTD se reemplazará <span class="span_contenido" translate="no">%etiqueta_nueva;</span> por el contenido del fichero, quedando el siguiente resultado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ENTITY % entidad_nueva SYSTEM "descripcion.dtd"&gt;
 &lt;!ELEMENT etiqueta_nueva (#PCDATA)&gt;</code></pre>
 
@@ -566,13 +566,13 @@ Código por byAd12
                 <p class="Expl">
                     <b>%</b>: Se indica que es una entidad paramétrica.
                     <br>
-                    <b>nombre</b>: Nombre que asignaremos a la entidad.
+                    <b>nombre</b>: Nombre que se le asignará a la entidad.
                     <br>
                     <b>PUBLIC</b>: Se indica que es un recurso público.
                     <br>
                     <b>"ID"</b>: Identificador público que permiten localizar recursos DTD. Normalmente tiene formato <u>FPI</u> (Formal Public Identifier).
                     <br>
-                    <b>"URI"</b>: span_contenido al archivo cuyo contenido es el valor a asignar como entidad.
+                    <b>"URI"</b>: span_contenido al fichero cuyo contenido es el valor a asignar como entidad.
                 </p>
 
                 <p><u>Ejemplo</u> (El funcionamiento es igual que la entidad paramétrica externa privada):</p>

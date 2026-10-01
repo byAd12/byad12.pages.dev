@@ -125,7 +125,7 @@ Código por byAd12
             <div>
                 <h2>Conectarse a otro equipo con claves desde un cliente <span>Linux</span></h2>
 
-                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente tendremos que generar una clave SSH ED25519:</p>
+                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave SSH ED25519:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t ed25519 -C "[Descripción de la clave]"</code></pre>
                 <p class="Expl">
                     Pedirá una ruta donde se guardará la clave privada. Por defecto se guarda en la carpeta <span class="span_contenido" translate="no">~/.ssh</span>.
@@ -141,12 +141,12 @@ Código por byAd12
                     La clave privada <span class="span_contenido" translate="no">~/.ssh/id_XXX</span> tiene permisos de lectura y escritura (rw) solo para el usuario propietario.
                 </p>
 
-                <p>3. Ahora hay que copiar la clave pública en el archivo <span class="span_contenido" translate="no">~/.ssh/authorized_keys</span> del usuario del equipo remoto al que nos conectaremos:</p>
+                <p>3. Ahora hay que copiar la clave pública en el fichero <span class="span_contenido" translate="no">~/.ssh/authorized_keys</span> del usuario del equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-copy-id -i ~/.ssh/id_[XXX].pub [Nombre_usuario]@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">
-                    Tendremos que escribir "yes" para permitir conectarse con el equipo remoto.
+                    Hay que escribir "yes" para permitir conectarse con el equipo remoto.
                     <br>
-                    Una vez copiado podremos comprobar en el equipo remoto que aparece el mismo contenido que la clave pública en su archivo de claves autorizadas:
+                    Una vez copiado se puede comprobar en el equipo remoto que aparece el mismo contenido que la clave pública en su fichero de claves autorizadas:
                 </p>
                 <pre class="codigo Expl" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
 
@@ -160,7 +160,7 @@ Código por byAd12
 
                 <p>En el siguiente fichero de configuración del usuario se permite definir equipos y asignarles un nombre para ahorrar tiempo al iniciar sesiones remotas con SSH:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano ~/.ssh/config</code></pre>
-                <p class="Expl">Dentro podremos tener varios bloques con el siguiente formato:</p>
+                <p class="Expl">Dentro del fichero se puede tener varios bloques con el siguiente formato:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">Host [Nombre_alias]
     Hostname [IP/FQDN del equipo remoto]
     User [Nombre_usuario]</code></pre>
@@ -178,7 +178,7 @@ Código por byAd12
             <div>
                 <h2>Redireccionar HTTP por un socket al servidor<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
 
-                <p>1. Editar el archivo <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar los siguientes parámetros:</p>
+                <p>1. Editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar los siguientes parámetros:</p>
                 <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
 GatewayPorts yes</code></pre>
 
@@ -195,7 +195,7 @@ GatewayPorts yes</code></pre>
             <div>
                 <h2>Abrir la GUI de un programa del servidor en el cliente<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
 
-                <p>1. Editar el archivo <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
+                <p>1. Editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
                 <pre class="codigo" translate="no"><code class="bash">X11Forwarding yes</code></pre>
                 
                 <p>2. En el servidor reiniciar el servicio SSH:</p>

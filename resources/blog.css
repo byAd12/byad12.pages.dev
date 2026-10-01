@@ -77,6 +77,8 @@ h2.TituloCreditosInferior a:hover{color: #2ecc71; text-decoration: underline;}
 .parte1 div h2 span.span_url_espaciado{margin-left: 10px; text-decoration: none; display: inline-block;}
 .parte1 div h2.IndiceH2{color: #d0d0d0; text-decoration: none; margin-left: 0 !important;}
 
+.parte1 div h3{color: #7b92de; line-height: 40px; font-weight: 500; margin-top: 30px;}
+
 /* Imágen del logo de Linux / Windows en el título */
 
 img.SoporteComandoRemoto{height: 1em; padding: 0; vertical-align: middle; margin: 0 10px 0 10px;}
@@ -131,7 +133,7 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll{width: 100% !important; margin: none; padding: none !important; position: inherit !important; border-radius: none !important; border: none !important; overflow-x: auto; -webkit-overflow-scrolling: touch;}
 .TablaDivScroll table.TablaComandos{color: #c0c0c0; margin: 10px 0 10px 0; border-collapse: collapse; width: 100%; table-layout: fixed;}
 .TablaDivScroll table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
-.TablaDivScroll table.TablaComandos tr.Titulo{background-color: rgba(123, 146, 222, 0.2);}
+.TablaDivScroll table tr.Titulo{background-color: rgb(29, 30, 30);}
 .TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
 .TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
 .TablaDivScroll table.TablaComandos td{width: auto;}
@@ -140,7 +142,6 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 /* =================================================== */
 /* Tablas - Nmap */
 
-.TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
 .TablaDivScroll table.TablaNmap tr.Titulo td{cursor: pointer; font-family: "Doto"; font-size: 20px; color: white !important;}
 .TablaDivScroll table.TablaNmap td.efecto_ocultar::before{content: "►"; vertical-align: middle; font-size: 10px; display: inline-block; width: 1em; margin-right: 5px; transition: transform 0.2s; transform: translateY(-4%);}
 .TablaDivScroll table.TablaNmap td.efecto_ocultar.expanded::before{content: "▼";}
@@ -184,12 +185,12 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 /* =================================================== */
 /* Span para resaltar contenido */
 
-span.span_contenido, span.span_url, span.span_error, span.span_url_espaciado{border: 0.5px solid; border-radius: 4px; user-select: all; cursor: copy; padding: 3px 6px 3px 6px; background-color: rgba(255, 255, 255, 0.03); transition: all 0.2s;}
+span.span_contenido, span.span_url, span.span_error, span.span_url_espaciado{border-radius: 4px; user-select: all; cursor: copy; padding: 3px 6px 3px 6px; background-color: rgba(255, 255, 255, 0.03); transition: all 0.2s;}
 
-span.span_contenido{border-color: #7b92de; color: #7b92de;}
-span.span_url{border-color: #2ecc71; color: #2ecc71;}
-span.span_url_espaciado{border-color: #2ecc71; color: #2ecc71; padding: 3px 12px 3px 12px !important;}
-span.span_error{border-color: #e74c3c; color: #e74c3c;}
+span.span_contenido{color: #7b92de;}
+span.span_url{color: #2ecc71;}
+span.span_url_espaciado{color: #2ecc71; padding: 3px 12px 3px 12px !important;}
+span.span_error{color: #e74c3c;}
 
 span.span_contenido::selection, span.span_url::selection, span.span_url_espaciado::selection, span.span_error::selection{color: #d0d0d0; background-color: transparent;}
 
@@ -284,8 +285,6 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
 
 /* =================================================== */
 /* FTP */
-
-ul.ULFTPCamb1:not(.menu_bar ul) li{margin-left: 40px;}
 
 .carrusel{width: 80% !important; margin: auto; position: relative; overflow: hidden; padding: 10px 5px; transition: all .5s;} 
 .carrusel_imagenes{display: flex; transition: transform 0.5s ease; height: 100%; align-items: center; flex-wrap: nowrap; user-select: none;} 

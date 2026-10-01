@@ -52,7 +52,7 @@ Código por byAd12
             <div>
                 <h2>Instalación</h2>
 
-                <p>Instalaremos el servicio correspondiente en el servidor:</p>
+                <p>Hay que instalar el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y vsftpd</code></pre>
 
@@ -62,7 +62,8 @@ Código por byAd12
 
             <div>
                 <h2>Comprobación</h2>
-                <p>Comprobar que tenemos el usuario y grupo <span class="span_contenido" translate="no">ftp</span> y que su directorio home es <span class="span_url" translate="no">/srv/ftp</span>:</p>
+
+                <p>Hay que comprobar que el usuario y grupo llamados <span class="span_contenido" translate="no">ftp</span> existen y que el directorio home del usuario es <span class="span_url" translate="no">/srv/ftp</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep ftp</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/group | grep ftp</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ls /srv/ftp</code></pre>
@@ -70,15 +71,15 @@ Código por byAd12
 
 
             <div>
-                <h2>Archivos importantes</h2>
+                <h2>Ficheros importantes</h2>
 
-                <p>Algunos de los siguientes archivos pueden no estar creados por defecto, en ese caso deberían crearse si se necesitan:</p>
+                <p>Algunos de los siguientes ficheros pueden no estar creados por defecto, en ese caso deberían crearse si se necesitan:</p>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/vsftpd.conf</code></pre></td>
-                            <td>archivo de configuración</td>
+                            <td>Fichero de configuración</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/ftpusers</code></pre></td>
@@ -87,8 +88,8 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/vsftpd.user_list</code></pre></td>
                             <td>
-                                Como el anterior pero también se puede permitir si en la configuración hay:
-                                <br><span class="span_contenido" translate="no">userlist_deny=NO</span>
+                                Lista de usuarios del sistema <b>excluidos</b> paras iniciar sesión, pero también se puede <b>permitir</b> si en la configuración está:
+                                <span class="span_contenido" translate="no">userlist_deny=NO</span>
                             </td>
                         </tr>
                         <tr>
@@ -119,10 +120,13 @@ Código por byAd12
             <div>
                 <h2>Directivas de: <span translate="no">/etc/vsftpd.conf</span></h2>
 
-                <p>Activar los <b>usuario anónimos</b>: "ftp" o "anonymous". Su carpeta home será <span class="span_url" translate="no">/srv/ftp</span>, de solo lectura:</p>
+                <p>Activar los usuario anónimos ("ftp" o "anonymous"). Su carpeta home será <span class="span_url" translate="no">/srv/ftp</span>, de solo lectura:</p>
                 <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
 
-                <p>Permite la <b>conexión con usuarios del sistema</b>. SU directorio será el que tenga como home en el sistema operativo. Pero por defecto no está enjaulado:</p>
+                <p>
+                    Permite la <b>conexión con usuarios del sistema</b>. Su directorio personal será el mismo directorio que tenga en el sistema operativo.
+                    Por defecto no están enjaulados:
+                </p>
                 <pre class="codigo" translate="no"><code class="bash">local_enable=YES</code></pre>
 
                 <p>Permitir <b>escritura</b>:</p>
@@ -144,10 +148,10 @@ Código por byAd12
 allow_writeable_chroot=YES
 chroot_list_enable=YES
 chroot_list_file=/etc/vsftpd.chroot_list</code></pre>
-                <p class="Expl"><span class="span_url" translate="no">/etc/vsftpd.chroot_list</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">NombreUsuario1
-NombreUsuario2
-..</code></pre>
+                <p class="Expl">Lista de usuarios a enjaular - <span class="span_url" translate="no">/etc/vsftpd.chroot_list</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">Nombre_usuario_1
+Nombre_usuario_2
+...</code></pre>
 
             </div>
 
@@ -158,51 +162,30 @@ NombreUsuario2
 
         <div class="parte1">
             <div>
-                <h2><span>Ejemplo:</span> Práctica 1</h2>
-                <p>Meter 3 archivos en "/srv/ftp".</p>
-                
-                <p>1. Conectar con el usuario "ftp" y descargar un archivo al <b>escritorio</b>.</p>
-                <pre class="codigo" translate="no"><code class="bash">ftp [ip]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">get [nombre_archivo] /home/[usuario]/Escritorio</code></pre>
-                
-                <p>2. Conectarme con un usuario creado "mortadelo" (<span class="span_contenido" translate="no">adduser (user)</span>) y comprobar:</p>
-                <ul class="ULFTPCamb1">
-                    <li>Que me está dejando.</li>
-                </ul>
+                <h2>Práctica de ejemplo</h2>
 
-                <br>
+                <p>1. Meter 3 ficheros en <span class="span_url" translate="no">/srv/ftp</span>.</p>
+                
+                <p>2. Crear una conexión al servidor con el usuario "ftp" y descargar un fichero al <b>escritorio</b> local.</p>
+                <pre class="codigo" translate="no"><code class="bash">ftp [IP]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">get [Nombre_fichero] /home/[Nombre_usuario]/Escritorio</code></pre>
+                
+                <p>3. Crear una conexión al servidor con un nuevo usuario del sistema y comprobar:</p>
 
                 <ul>
-                    <li>Subir un archivo a /home/mortadelo.
-                        <pre class="codigo" translate="no"><code class="bash">put [nombre_archivo]</code></pre>
+                    <li>Que me deja iniciar sesión.</li>
+
+                    <li>
+                        Que puedo subir un fichero al servidor con el siguiente comando:
+                        <pre class="codigo" translate="no"><code class="bash">put [Nombre_fichero]</code></pre>
+                    </li>
+
+                    <li>
+                        Que puedo subir un fichero al escritorio del compañero:
+                        <pre class="codigo" translate="no"><code class="bash">put [Nombre_fichero] /home/[Usuario_compañero]/Escritorio</code></pre>
+                        <p class="Expl">El usuario debe tener permisos en la carpeta de destino.</p>
                     </li>
                 </ul>
-                
-                <br>
-
-                <ul>
-                    <li>Subir un archivo al escritorio del compañero.
-                        <pre class="codigo" translate="no"><code class="bash">put [nombre_archivo] /home/[usuario_compañero]/Escritorio</code></pre>
-                        <p class="Expl">El usuario <span class="span_contenido" translate="no">mortadelo</span> debe tener permisos en la carpeta de destino.</p>
-                    </li>
-                </ul>
-                
-            </div>
-
-            <!-- ================== -->
-
-            <div>
-                <h2><span>Ejemplo:</span> Práctica 2</h2>
-                <p>Hacer un servidor con:</p>
-
-                <p>1. El mensaje de bienvenida sea "<b>Bienvenido chema</b>" - <span class="span_url" translate="no">/etc/vsftpd.conf</span>.</p>
-                <pre class="codigo" translate="no"><code class="bash">ftpd_banner=Bienvenido chema</code></pre>
-
-                <p>2. Posibilidad de acceso con el usuario anónimo - <span class="span_url" translate="no">/etc/vsftpd.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
-
-                <p>3. Permiso de lectura y escritura para 3 usuarios de Sistema:</p>
-                <pre class="codigo" translate="no"><code class="bash">chmod -R 777 /home/[USUARIO]</code></pre>
                 
             </div>
 
@@ -217,8 +200,9 @@ NombreUsuario2
             <div>
                 <h2>Como conectarse con FTP</h2>
 
-                <p>Una vez se ejecute el siguiente comando, el sistema pedirá un usuario y contraseña:</p>
+                <p>Con el siguiente comando se puede crear una conexión FTP al sistema remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ftp [IP_servidor] (Puerto)</code></pre>
+                <p class="Expl">Para autentificarse, el sistema pedirá un usuario y contraseña.</p>
                 
             </div>
 
@@ -241,11 +225,11 @@ NombreUsuario2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">get</code></pre></td>
-                            <td>Descargar un archivo del servidor.</td>
+                            <td>Descargar un fichero del servidor.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">put</code></pre></td>
-                            <td>Enviar un archivo al servidor.</td>
+                            <td>Enviar un fichero al servidor.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">pwd</code></pre></td>
@@ -253,11 +237,11 @@ NombreUsuario2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">rm</code></pre></td>
-                            <td>Eliminar un archivo.</td>
+                            <td>Eliminar un fichero.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">!ls</code></pre></td>
-                            <td>Listar archivos del sistema local (no el servidor).</td>
+                            <td>Listar ficheros del sistema local (no el servidor).</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">mkdir</code></pre></td>

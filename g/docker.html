@@ -133,7 +133,7 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-v [Ruta_en_sistema_local]:[Ruta_en_docker]</code></pre></td>
-                            <td><b>Persistencia de archivos</b> - Sirve para eenlazar una carpeta del docker con una carpeta local para que los archivos no se eliminen al detener el docker.</td>
+                            <td><b>Persistencia de ficheros</b> - Sirve para eenlazar una carpeta del docker con una carpeta local para que los ficheros no se eliminen al detener el docker.</td>
                         </tr>
 
                         <tr>
@@ -269,7 +269,7 @@ Código por byAd12
                     </table>
                 </div>
                 
-                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde mediante el siguiente comando:</p>
+                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker update [Parámetros] [Docker]</code></pre>
                 
             </div>
@@ -314,33 +314,42 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Copiar archivos entre el host y el docker</h2>
+                <h2>Copiar ficheros entre el host y el docker</h2>
                 
-                <p>Cómo copiar archivos internos del docker al host:</p>
+                <p>Cómo copiar ficheros internos del docker al host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [Docker]:[Ruta_en_docker] [Ruta_en_sistema_local]</code></pre>
-                <p class="Expl"><b>[Docker]:____</b>: Nombre del docker específico que contiene los archivos a copiar.</p>
-                <p class="Expl"><b>____:[Ruta_en_docker]</b>: Ruta local del docker que contiene los archivo/s a copiar.</p>
-                <p class="Expl"><b>[Ruta_en_sistema_local]</b>: Ruta local del host donde se copiarán los archivos.</p>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">[Docker]</span>: Nombre del docker específico que contiene los ficheros a copiar.
+                    <br>
+                    <span class="span_contenido" translate="no">[Ruta_en_docker]</span>: Ruta local del docker que contiene los fichero/s a copiar.
+                    <br>
+                    <span class="span_contenido" translate="no">[Ruta_en_sistema_local]</span>: Ruta local del host donde se copiarán los ficheros.
+                </p>
 
-                <p>Copiar archivos del host al interior del docker:</p>
+                <p>Copiar ficheros del host al interior del docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [Ruta_en_sistema_local] [Docker]:[Ruta_en_docker]</code></pre>
-                <p class="Expl"><b>[Ruta_en_sistema_local]</b>: Ruta local del host que contiene los archivo/s a copiar.</p>
-                <p class="Expl"><b>[Docker]:____</b>: Nombre del docker específico al que se copiarán los archivos.</p>
-                <p class="Expl"><b>____:[Ruta_en_docker]</b>: Ruta local del docker donde se copiarán los archivos.</p>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">[Ruta_en_sistema_local]</span>: Ruta local del host que contiene los fichero/s a copiar.
+                    <br>
+                    <span class="span_contenido" translate="no">[Docker]</span>: Nombre del docker específico al que se copiarán los ficheros.
+                    <br>
+                    <span class="span_contenido" translate="no">[Ruta_en_docker]</span>: Ruta local del docker donde se copiarán los ficheros.
+                </p>
             </div>
 
             <div>
                 <h2>Abrir una terminal en un docker iniciado</h2>
 
+                <p>En una terminal se dene ejecutar el siguiente comando para iniciar una sesión de terminal en un docker existente e iniciado:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker exec -it [Docker] [bash/sh]</code></pre>
                 <p class="Expl">
-                    <b>-i</b>: Modo interactivo.
+                    <span class="span_contenido" translate="no">-i</span>: Modo interactivo.
                     <br>
-                    <b>-t</b>: Proporciona una interfaz de línea de comandos.
+                    <span class="span_contenido" translate="no">-t</span>: Proporciona una interfaz de línea de comandos.
                     <br>
-                    <b>[Docker]</b>: El identificador de docker al que se quiere acceder.
+                    <span class="span_contenido" translate="no">[Docker]</span>: El identificador de docker al que se quiere acceder.
                     <br>
-                    <b>[bash/sh]</b>: Abre una sesión de <span class="span_contenido" translate="no">bash</span> o <span class="span_contenido" translate="no">shell</span>.</p>
+                    <span class="span_contenido" translate="no">[bash/sh]</span>: Abre una sesión de <span class="span_contenido" translate="no">bash</span> o <span class="span_contenido" translate="no">shell</span>.</p>
             </div>
             
             <div>
@@ -407,7 +416,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker exec -it [Docker] [bash/sh]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nano</code></pre>
-                <p class="Expl"><b>./htdocs/index.html</b>: Editar el archivo para cambiar la página default.</p>
+                <p class="Expl"><b>./htdocs/index.html</b>: Editar el fichero para cambiar la página default.</p>
                 
                 <p>Hay que acceder a la siguiente URL <span class="span_url" translate="no">http://{Tu_IP}:{puerto}</span>, siendo el puerto el que redirige al docker (especificado al hacer <span class="span_contenido" translate="no">docker run</span>).</p>
             </div>

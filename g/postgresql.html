@@ -55,7 +55,7 @@ Código por byAd12
 
                 <h2>(1) Instalación en el servidor</h2>
 
-                <p>1. Instalaremos el servicio de PostgreSQL y otras dependencias en el servidor:</p>
+                <p>1. Hay que instalar el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql postgresql-contrib sudo</code></pre>
 
@@ -76,10 +76,10 @@ Código por byAd12
                 <p>3. Para que el servicio de PostgreSQL se inicie automáticamente al iniciar el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now postgresql</code></pre>
 
-                <p>4. Reiniciaremos el servicio:</p>
+                <p>4. Hay que reiniciar el servicio:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
 
-                <p>5. Por último verificaremos si el servidor está preparado para aceptar conexiones:</p>
+                <p>5. Por último hay que verificar si el servidor está preparado para aceptar conexiones:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_isready -h [IP_servidor] -p [Puerto_servidor]</code></pre>
                 
             </div>
@@ -92,7 +92,7 @@ Código por byAd12
                 <p>1. Antes de editar el fichero se debe realizar una copia de seguridad:</p>
                 <pre class="codigo" translate="no"><code class="bash">cp /etc/netplan/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml.backup</code></pre>
 
-                <p>2. Tras la copia de seguridad abriremos el fichero y asignaremos la siguiente configuración, modificando los valores con una configuración de red válida:</p>
+                <p>2. Tras la copia de seguridad hay que editar el fichero y asignar la siguiente configuración, modificando los valores con una configuración de red válida:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">network:
     version: 2
@@ -112,7 +112,7 @@ Código por byAd12
                 <p>3. Al guardar el fichero hay que probar que la configuración sea válida:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
 
-                <p>4. Si el comando anterior no dió ningún error, podemos aplicar la nueva configuración:</p>
+                <p>4. Si el comando anterior no dió ningún error, se puede aplicar la nueva configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
 
                 <p>5. Para comprobar que la IP estática se configuró correctamente hay que ver la IP actual del equipo:</p>
@@ -124,7 +124,7 @@ Código por byAd12
 
                 <h2>(3) Instalación en el cliente</h2>
 
-                <p>1. Instalaremos el servicio de PostgreSQL para clientes:</p>
+                <p>1. Hay que instalar el servicio de PostgreSQL para clientes:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql-client</code></pre>
 
@@ -145,7 +145,7 @@ Código por byAd12
                     El clúster por defecto se llama <span class="span_contenido" translate="no">main</span>.
                 </p>
 
-                <p>Para detener un cluster primero debemos saber que nombre tiene con el comando anterior:</p>
+                <p>Para detener un cluster primero se debe saber que nombre tiene con el comando anterior:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] stop</code></pre>
                 <p>Para iniciar un clúster que se encuentra detenido:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] start</code></pre>
@@ -160,9 +160,9 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql
 SHOW hba_file;
 \q</code></pre>
-                <p>2. Debes editar el archivo que se encuentra en la ruta del paso 1 con <span class="span_contenido" translate="no">nano</span>.</p>
+                <p>2. Debes editar el fichero que se encuentra en la ruta del paso 1 con <span class="span_contenido" translate="no">nano</span>.</p>
                 
-                <p>3. Dentro del archivo del paso 2 hay que añadir una nueva línea indicando la dirección de red cuyos equipos tendrán permisos de hacer conexiones remotas:</p>
+                <p>3. Dentro del fichero del paso 2 hay que añadir una nueva línea indicando la dirección de red cuyos equipos tendrán permisos de hacer conexiones remotas:</p>
                 <pre class="codigo" translate="no"><code class="bash">host all all [Dirección_red/Máscara] scram-sha-256</code></pre>
                 
                 <p>4. Se debe reiniciar el servicio de PostgreSQL para aplicar los cambios:</p>
@@ -186,7 +186,7 @@ ufw reload</code></pre>
 
                 <h2>Gestionar la base de datos</h2>
 
-                <p>Para entrar a la base de datos debemos ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
+                <p>Para entrar a la base de datos hay que ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
                 <p class="Expl">Otra manera de ejecutar comandos SQL directamente es:</p>
                 <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
@@ -273,17 +273,17 @@ ufw reload</code></pre>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW config_file;</code></pre></td>
-                            <td>Devuelve la ruta absoluta del archivo principal de configuración.</td>
+                            <td>Devuelve la ruta absoluta del fichero principal de configuración.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW hba_file;</code></pre></td>
-                            <td>Devuelve la ruta absoluta del archivo de autenticación de clientes.</td>
+                            <td>Devuelve la ruta absoluta del fichero de autenticación de clientes.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW ident_file;</code></pre></td>
-                            <td>Devuelve la ruta absoluta del archivo donde se mapean los usuarios del S.O. a roles internos de la base de datos.</td>
+                            <td>Devuelve la ruta absoluta del fichero donde se mapean los usuarios del S.O. a roles internos de la base de datos.</td>
                         </tr>
 
                         <tr>
@@ -306,17 +306,17 @@ ufw reload</code></pre>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW logging_collector;</code></pre></td>
-                            <td>Indica si PostgreSQL está recopilando los mensajes de stderr y escribiéndolos en archivos (on/off).</td>
+                            <td>Indica si PostgreSQL está recopilando los mensajes de stderr y escribiéndolos en ficheros (on/off).</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW log_directory;</code></pre></td>
-                            <td>Muestra la ruta del directorio donde se guardan los archivos de log.</td>
+                            <td>Muestra la ruta del directorio donde se guardan los ficheros de log.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">SHOW log_filename;</code></pre></td>
-                            <td>Muestra el patrón utilizado para nombrar los archivos de log.</td>
+                            <td>Muestra el patrón utilizado para nombrar los ficheros de log.</td>
                         </tr>
 
                         <tr>
@@ -328,8 +328,8 @@ ufw reload</code></pre>
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="sql">sudo grep -i 'error\|fatal\|panic' [Ruta_archivo_log]</code></pre></td>
-                            <td>Comando de Linux. Del archivo log filtra solo se muestran los errores.</td>
+                            <td><pre translate="no"><code class="sql">sudo grep -i 'error\|fatal\|panic' [Ruta_fichero_log]</code></pre></td>
+                            <td>Comando de Linux. Del fichero log filtra solo se muestran los errores.</td>
                         </tr>
 
                     </table>

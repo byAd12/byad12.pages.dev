@@ -54,7 +54,7 @@ Código por byAd12
             <div>
                 <h2>1. Instalación</h2>
 
-                <p>En el servidor <a href="apache2.html">Apache2</a> instalaremos el servicio correspondiente para PHP:</p>
+                <p>En el servidor <a href="apache2.html">Apache2</a> hay que instalar el servicio correspondiente para PHP:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y php libapache2-mod-php</code></pre>
 
@@ -63,7 +63,7 @@ Código por byAd12
             <div>
                 <h2>2. Comprobación</h2>
 
-                <p>1. Ejecutaremos los siguientes comandos de verificación del servicio PHP:</p>
+                <p>1. Hay que ejecutar los siguientes comandos de verificación del servicio PHP:</p>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
@@ -80,40 +80,40 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">php --ini</code></pre></td>
-                            <td>Muestra la ruta de los archivos de configuración (.ini) del servicio PHP.</td>
+                            <td>Muestra la ruta de los ficheros de configuración (.ini) del servicio PHP.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">php -i | grep 'Loaded Configuration File'</code></pre></td>
-                            <td>Muestra la ruta del archivo de configuración (.ini) del servicio PHP que está actualmente cargado.</td>
+                            <td>Muestra la ruta del fichero de configuración (.ini) del servicio PHP que está actualmente cargado.</td>
                         </tr>
 
                     </table>
                 </div>
 
-                <p>2. Verificaremos que en Apache2 no hay ningún error de configuración:</p>
+                <p>2. Hay que verificar que en Apache2 no hay ningún error de configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">apache2ctl configtest</code></pre>
 
-                <p>3. Por último reiniciaremos el servicio de Apache2:</p>
+                <p>3. Por último hay que reiniciar el servicio de Apache2:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart apache2</code></pre>
 
             </div>
 
             <div>
-                <h2>3. Creación de archivos PHP</h2>
+                <h2>3. Creación de ficheros PHP</h2>
 
-                <p>Dentro del <a href="apache2.html#directorio">directorio</a> del <a href="apache2.html#sitio-virtual">sitio virtual</a> crearemos un archivo con extensión <span class="span_contenido" translate="no">.php</span> y dentro pondremos el código PHP correspondiente:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_directorio]/[Nombre_archivo].php</code></pre>
+                <p>Dentro del <a href="apache2.html#directorio">directorio</a> del <a href="apache2.html#sitio-virtual">sitio virtual</a> hay que crear un fichero con extensión <span class="span_contenido" translate="no">.php</span> y dentro hay que poner el código PHP correspondiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_directorio]/[Nombre_fichero].php</code></pre>
 
-                <p>Para acceder al código PHP desde el cliente tendremos que ir a la siguiente URL:</p>
-                <pre class="codigo" translate="no"><code class="bash">http(s)://[IP_servidor_Apache2](:Puerto)/[Nombre_archivo].php</code></pre>
+                <p>Para acceder al código PHP desde el cliente se debe visitar la siguiente URL en el navegador:</p>
+                <pre class="codigo" translate="no"><code class="bash">http(s)://[IP_servidor_Apache2](:Puerto)/[Nombre_fichero].php</code></pre>
 
             </div>
 
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">Sintaxis archivo PHP</h1>
+        <h1 class="TituloPrincipal">Sintaxis fichero PHP</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -123,7 +123,7 @@ Código por byAd12
             <div>
                 <h2>Etiqueta principal</h2>
 
-                <p>La primera etiqueta de un archivo <span class="span_contenido" translate="no">.php</span> tiene la siguiente sintaxis:</p>
+                <p>La primera etiqueta de un fichero <span class="span_contenido" translate="no">.php</span> tiene la siguiente sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="php">&lt;?php (Comando/Variables) ?&gt;</code></pre>
                 <p class="Expl">Esta etiqueta tiene un inicio (&lt;?) y un cierre (?&gt;) y entre ellos puede haber saltos de líneas y espacios.</p>
 
@@ -134,9 +134,9 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="php">&lt;?php $[Nombre_variable] = [Valor_variable]; ... ?&gt;</code></pre>
                 <p class="Expl">El valor de la variable puede ser un valor estático (string, number, decimal, bool), una operación matemática (<a href="#operaciones-matematicas">ver operaciones matemáticas</a>) o una función que devuelva un valor (<a href="#funciones">ver funciones PHP</a>).</p>
                 
-                <p>Para definir los metados de un archivo se utiliza la siguiente función:</p>
+                <p>Para definir los metados de un fichero se utiliza la siguiente función:</p>
                 <pre class="codigo" translate="no"><code class="php">&lt;?php header("Content-Type: [Tipo]; charset=utf-8"); ?&gt;</code></pre>
-                <p class="Expl">El tipo de contenido puede ser "text/plain" para archivos de texto plano o "text/html" para archivos HTML.</p>
+                <p class="Expl">El tipo de contenido puede ser "text/plain" para ficheros de texto plano o "text/html" para ficheros HTML.</p>
 
             </div>
 
@@ -149,7 +149,7 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="php">echo "[Valor]"(,"Valor",...);</code></pre></td>
                             <td>
-                                Muestra en el archivo .html resultante el texto que se indique.
+                                Muestra en el fichero .HTML resultante el texto que se indique.
                                 <br>
                                 Puede haber uno o varios argumentos separados por comas, como por ejemplo:
                             </td>
@@ -160,7 +160,7 @@ echo "Hola ", $nombre, "!";</code></pre></td>
                         <tr>
                             <td><pre translate="no"><code class="php">print "[Valor]";</code></pre></td>
                             <td>
-                                Muestra en el archivo .html resultante los valores que se indiquen.
+                                Muestra en el fichero .HTML resultante los valores que se indiquen.
                                 <br>
                                 Solo puede haber un valor pero este se puede contatenar con variables mediante puntos, como por ejemplo:
                             </td>

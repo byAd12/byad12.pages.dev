@@ -57,7 +57,7 @@ Código por byAd12
                 <ul>
                     <li><b>Comandos:</b> <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a> • <a href="#Basico">Ayuda y Reloj</a></li>
                     <li><b>Historial:</b> <a href="#Verificacion_Historial_Comandos">Ver historial</a> • <a href="#Cambiar_Historial_Comandos">Cambiar límite</a></li>
-                    <li><b>Gestión de Archivos:</b> <a href="#Memoria">Guardar/Borrar Config (NVRAM)</a> • <a href="#PurgarConfiguracion">Restablecer de fábrica</a></li>
+                    <li><b>Gestión de ficheros:</b> <a href="#Memoria">Guardar/Borrar Config (NVRAM)</a> • <a href="#PurgarConfiguracion">Restablecer de fábrica</a></li>
                     <li><b>Sistema IOS:</b> <a href="#SistemaOperativo">Boot System</a> • <a href="#RecuperacionSistema">Modo recuperación (ROMMON)</a></li>
                 </ul>
 
@@ -89,7 +89,7 @@ Código por byAd12
 
                 <h2 style="margin: 20px;" class="IndiceH2">5. VLANs y Troncales (Switching)</h2>
                 <ul>
-                    <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Archivo">Borrar vlan.dat</a></li>
+                    <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Fichero">Borrar vlan.dat</a></li>
                     <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Restablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
                     <li><b>Modo Troncal:</b> <a href="#VLAN_Modo_Troncal">Configurar (Nativa/Allowed)</a> • <a href="#VLAN_Restablecer_Modo_Troncal">Restablecer</a> • <a href="#VLAN_Ver_Interfaces_Modo_Troncal">Verificar</a></li>
                     <li><b>Inter-VLAN Routing:</b> <a href="#Router_Stick_Configuracion">Router-on-a-Stick</a> • <a href="#Inter_VLAN_Configuracion">Switch Capa 3</a> • <a href="#Inter_VLAN_Solucionar_Problemas">Troubleshooting</a> • <a href="#Enrutado_IPv6">Enrutado con IPv6</a></li>
@@ -291,7 +291,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="Memoria">Gestión de Archivos de Configuración</h2>
+                <h2 id="Memoria">Gestión de Ficheros de Configuración</h2>
 
                 <p>Para ver las configuraciones del dispositivo debemos estar en la raíz del dispositivo y en modo EXEC privilegiado.</p>
                 <p>El siguiente comando nos permite ver configuraciones (interfaces, login y contraseñas) que están guardadas temporalmente y se eliminan al reiniciar el equipo:</p>
@@ -322,20 +322,20 @@ Código por byAd12
             <div>
                 <h2 id="SistemaOperativo">Sistema Operativo IOS</h2>
 
-                <p>Para cambiar de la variable de entorno BOOT la ruta al archivo de imagen se utiliza el siguiente comando:</p>
-                <pre class="codigo" translate="no"><code class="cisco">(config)# boot system flash:/&lt;SistemaArchivos&gt;/&lt;NombreArchivoIOS&gt;.bin</code></pre>
+                <p>Para cambiar de la variable de entorno BOOT la ruta al fichero de imagen se utiliza el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="cisco">(config)# boot system flash:/&lt;SistemaFicheros&gt;/&lt;NombreFicheroIOS&gt;.bin</code></pre>
             
             </div>
             
             <div id="RecuperacionSistema">
                 <h2>Recuperarse de un bloqueo del sistema</h2>
 
-                <p>El cargador de arranque proporciona acceso al switch si no se puede usar el sistema operativo debido a la falta de archivos de sistema o al daño de estos. Permite acceso a los archivos almacenados en la memoria flash.
+                <p>El cargador de arranque proporciona acceso al switch si no se puede usar el sistema operativo debido a la falta de ficheros de sistema o al daño de estos. Permite acceso a los ficheros almacenados en la memoria flash.
                     Dentro de este aparecerá el prompt <span class="span_contenido" translate="no">switch:</span>.</p>
 
                 <p>Puede escribir <span class="span_contenido" translate="no">help</span> o <span class="span_contenido" translate="no">?</span> para ver los comandos disponibles.</p>
                 
-                <p>Para ver la ruta actual de arranque use <span class="span_contenido" translate="no">set</span> y para inicializar el sistema de archivos flash use <span class="span_contenido" translate="no">flash_init</span>:</p>
+                <p>Para ver la ruta actual de arranque use <span class="span_contenido" translate="no">set</span> y para inicializar el sistema de ficheros flash use <span class="span_contenido" translate="no">flash_init</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">switch: set
 BOOT=flash:/c2960-lanbasek9-mz.122-55.SE7/c2960-lanbasek9-mz.122-55.SE7.bin
 (output omitted)
@@ -350,7 +350,7 @@ flashfs[0]: Bytes available: 20675584
 flashfs[0]: flashfs fsck took 10 seconds.
 ...done Initializing Flash.</code></pre>
 
-                <p>Después de inicializar, puede ver los archivos disponibles con <span class="span_contenido" translate="no">dir flash:</span>:</p>
+                <p>Después de inicializar, puede ver los ficheros disponibles con <span class="span_contenido" translate="no">dir flash:</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">switch: dir flash:
 Directory of flash:/
     2  -rwx  11834846  &lt;date&gt;               c2960-lanbasek9-mz.150-2.SE8.bin
@@ -369,7 +369,7 @@ switch: boot</code></pre>
             <div>
                 <h2 id="PurgarConfiguracion">Eliminar toda la configuración del sistema</h2>
 
-                <p>Eliminaremos la configuración de arranque y el archivo de la configuración de VLANs:</p>
+                <p>Eliminaremos la configuración de arranque y el fichero de la configuración de VLANs:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco"># delete vlan.dat</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco"># write erase</code></pre>
@@ -566,7 +566,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Verificacion_Archivos">Comandos de verificación &gt; <span>Archivos</span></h2>
+                <h2 id="Verificacion_Ficheros">Comandos de verificación &gt; <span>Ficheros</span></h2>
 
                 <p>Para ver el contenido de la memoria flash <span class="span_url" translate="no">flash:</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show flash:</code></pre>
@@ -864,9 +864,9 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="VLAN_Eliminar_Archivo">VLAN &gt; Eliminar la configuración de todas las VLANs</h2>
+                <h2 id="VLAN_Eliminar_Fichero">VLAN &gt; Eliminar la configuración de todas las VLANs</h2>
 
-                <p>Con el comando <span class="span_contenido" translate="no">delete</span> se eliminará el archivo de configuración de las VLANs:</p>
+                <p>Con el comando <span class="span_contenido" translate="no">delete</span> se eliminará el fichero de configuración de las VLANs:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# delete flash:vlan.dat</code></pre>
                 <p>Otra forma abreviada es quitando el dispositivo flash de la ruta:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# delete vlan.dat</code></pre>

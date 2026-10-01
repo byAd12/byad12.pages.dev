@@ -144,8 +144,8 @@ Código por byAd12
                             <td>Se escanearán todas las IPs de un rango.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">-iL [Ruta_archivo]</code></pre></td>
-                            <td>También se pueden almacenar las IPs en un archivo del sistema separando cada IP/FQDN mediante saltos de línea.</td>
+                            <td><pre translate="no"><code class="bash">-iL [Ruta_fichero]</code></pre></td>
+                            <td>También se pueden almacenar las IPs en un fichero del sistema separando cada IP/FQDN mediante saltos de línea.</td>
                         </tr>
 
                     </table>
@@ -425,7 +425,7 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">-vvv</code></pre></td>
                             <td>
-                                Con verbose se puede visualizar en tiempo real la información del escaneo. Cuantos más <span class="opcion">v</span> haya, más información recibiremos.
+                                Con verbose se puede visualizar en tiempo real la información del escaneo. Cuantos más <span class="opcion">v</span> haya, más información se recibirá.
                             </td>
                         </tr>
 
@@ -494,35 +494,35 @@ Código por byAd12
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">-oA [Nombre_archivo]</code></pre></td>
-                            <td>Exporta el resultado en 3 archivos con formatos: <span class="opcion">.nmap</span>, <span class="opcion">.xml</span> y <span class="opcion">.gnmap</span>.</td>
+                            <td><pre translate="no"><code class="bash">-oA [Nombre_fichero]</code></pre></td>
+                            <td>Exporta el resultado en 3 ficheros con formatos: <span class="opcion">.nmap</span>, <span class="opcion">.xml</span> y <span class="opcion">.gnmap</span>.</td>
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">-oN [Nombre_archivo]</code></pre></td>
+                            <td><pre translate="no"><code class="bash">-oN [Nombre_fichero]</code></pre></td>
                             <td>
-                                Exporta el resultado en un archivo con formato: <span class="opcion">.nmap</span>
+                                Exporta el resultado en un fichero con formato: <span class="opcion">.nmap</span>
                                 ~ salida normal de terminal.
                             </td>
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">-oG [Nombre_archivo]</code></pre></td>
+                            <td><pre translate="no"><code class="bash">-oG [Nombre_fichero]</code></pre></td>
                             <td>
-                                Exporta el resultado en un archivo con formato: <span class="opcion">.gnmap</span>
+                                Exporta el resultado en un fichero con formato: <span class="opcion">.gnmap</span>
                                 ~ salida de terminal adaptado para hacer <span class="opcion">grep</span>.
                             </td>
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">-oX [Nombre_archivo]</code></pre></td>
+                            <td><pre translate="no"><code class="bash">-oX [Nombre_fichero]</code></pre></td>
                             <td>
-                                Exporta el resultado en un archivo con formato: <span class="opcion">.xml</span>.
+                                Exporta el resultado en un fichero con formato: <span class="opcion">.xml</span>.
                             </td>
                         </tr>
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">xsltproc [Nombre_archivo].xml -o  [Nombre_archivo].html</code></pre></td>
+                            <td><pre translate="no"><code class="bash">xsltproc [Nombre_fichero].xml -o  [Nombre_fichero].html</code></pre></td>
                             <td>Una vez exportado a <span class="opcion">.xml</span> se puede convertir a formato <span class="opcion">.html</span> mediante un comando externo de Linux.</td>
                         </tr>
 
@@ -639,7 +639,7 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">--source-port [Puerto]</code></pre></td>
-                            <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero descubrimos que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, podemos enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
+                            <td>Si un sistema, ya sea de origen o destino, bloquea las solicitudes pero se descubre que tiene puertos que pueden estar libres, como el puerto <span class="opcion">53</span> en la mayoría de los casos, se puede enviar la solicitud por ese puerto para evadir el filtro del sistema.</td>
                         </tr>
 
 
@@ -753,22 +753,22 @@ RCVD (0.0487s) ICMP [Destino] Port unreachable (type=3/code=3)
                             <td>
                                 Al realizar esta conexión al puerto <span class="opcion">445</span> (<span class="opcion">SMB</span>) nos permitirá ver recursos compartidos accesibles, permisos e información del host.
                                 <br>
-                                Podemos probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
+                                Se puede probar a acceder a cada recurso compartido (<span class="opcion">share</span>) sin contraseña y, una vez dentro aparecerá un prompt con "<span class="opcion">smb: \&gt;</span>". Comando: <span class="opcion">smbclient //&lt;IP&gt;/&lt;share&gt; -N</span>
                                 <br><br>
                                 (<span class="opcion">-N</span>: Modo sin credenciales; <span class="opcion">-L</span>: Listar recursos compartidos)
                             </td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">ftp [Objetivo] [Puerto]</code></pre></td>
-                            <td>Con una conexión ftp podemos probar a autentificarnos con <span class="opcion">anonymous</span> y ver información.</td>
+                            <td>Con una conexión ftp se puede probar a autentificarnos con <span class="opcion">anonymous</span> y ver información.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">telnet [Objetivo] [Puerto]</code></pre></td>
-                            <td>Con una conexión telnet podemos intentar conectarnos en remoto al puerto <span class="opcion">23</span> y probar si el servidor deja autentificarse como root sin contraseña.</td>
+                            <td>Con una conexión telnet se puede intentar conectarnos en remoto al puerto <span class="opcion">23</span> y probar si el servidor deja autentificarse como root sin contraseña.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">netcat -nv -p [Puerto_origen] [Objetivo] [Puerto_objetivo]</code></pre></td>
-                            <td>Si vemos que el destino acepta conexiones si las enviamos desde un puerto determinado, podemos manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
+                            <td>Si el destino acepta conexiones si las enviamos desde un puerto determinado, se puede manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
                         </tr>
 
                     </table>

@@ -162,7 +162,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;texto      atr="hello      world"&gt;Hello      World&lt;/texto&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;texto atr="hello world"&gt;Hello World&lt;/texto&gt;</code></pre>
 
-                <p>También si no ponemos ningún salto de línea en este caso se interpretará como en el segundo cuadro de código:</p>
+                <p>También si no se pone ningún salto de línea en este caso se interpretará como en el segundo cuadro de código:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt;&lt;idioma&gt;Español&lt;/idioma&gt;&lt;idioma&gt;Gallego&lt;/idioma&gt;&lt;/idiomas&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;idiomas&gt; 
     &lt;idioma&gt;Español&lt;/idioma&gt;
@@ -373,7 +373,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
                 <h2>Espacio de nombres &gt; Problema</h2>
 
                 <p>
-                    Si por ejemplo queremos juntar 2 documentos XML en uno solo y hay 2 etiquetas raíz que tienen el mismo nombre 
+                    Si por ejemplo se quiere juntar 2 documentos XML en uno solo y hay 2 etiquetas raíz que tienen el mismo nombre 
                     se puede usar un espacio de nombres (namespace) para diferenciar elementos que tengan el mismo nombre, asociándolos a un URI único. 
                     Ejemplo:
                 </p>
@@ -406,7 +406,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
             <div>
                 <h2>Espacio de nombres &gt; Solución</h2>
 
-                <p>Para solucionar lo anterior seguiremos los siguientes pasos:</p>
+                <p>Para solucionar lo anterior hay que seguir los siguientes pasos:</p>
 
                 <p>1. Declaramos en el elemento raíz o en la propia etiqueta "usuarios" un nombre personalizado (prefijo) para cada documento usando <span class="span_contenido" translate="no">xmlns</span>:</p>
 
@@ -414,7 +414,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
     xmlns:visitantes="https://byad12.pages.dev/visitantes.xml" 
     xmlns:clientes="https://byad12.pages.dev/clientes.xml"
 &gt;</code></pre>
-                <p class="Expl">La URL identifica de forma única el vocabulario de cada documento; no necesariamente apunta al archivo real.</p>
+                <p class="Expl">La URL identifica de forma única el vocabulario de cada documento; no necesariamente apunta al fichero real.</p>
 
                 <p>2. Modificamos los elementos para incluir el prefijo del namespace: <span class="span_contenido">(Prefijo_xmlns):(Nombre_tag)</span> formando así un <b>nombre cualificado</b>. También aplicamos el prefijo a los sub-elementos:</p>
 
@@ -461,7 +461,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
                 </p>
 
                 <p>Si las declaraciones DTD están guardadas en un documento distinto al documento XML se puede enlazar mediante <span class="span_contenido" translate="no">SYSTEM</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd"&gt;</code></pre>
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "fichero.dtd"&gt;</code></pre>
 
             </div>
 
@@ -471,7 +471,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
                 <p>El documento DTD también puede estar alojado y ser accesible desde internet, para ello se enlaza al documento XML mediante <span class="span_contenido" translate="no">PUBLIC</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
 
-                <p class="Expl">La primera parte en comillas es el identificador único público para saber que versión usar.<br>La segunda parte es la URL al archivo.</p>
+                <p class="Expl">La primera parte en comillas es el identificador único público para saber que versión usar.<br>La segunda parte es la URL al fichero.</p>
 
             </div>
 
@@ -491,7 +491,7 @@ CONTENIDO CON &lt; &gt; &amp; &apos; &quot;
                 <h2>DTD &gt; Declaración mixta</h2>
 
                 <p>Se puede usar declaraciones internas y externas en el mismo <span class="span_contenido" translate="no">DOCTYPE</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "archivo.dtd" [
+                <pre class="codigo" translate="no"><code class="language-xml">&lt;!DOCTYPE elemento_raiz SYSTEM "fichero.dtd" [
     declaración1
     declaración2
     ...

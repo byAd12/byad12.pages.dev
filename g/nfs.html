@@ -58,9 +58,9 @@ Código por byAd12
                 <p>En el <b>servidor</b> hay que instalar el siguiente paquete para poder compartir una carpeta por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-kernel-server</code></pre>
-                <p class="Expl">Al instalarlo informará que se creó el archivo <span class="span_contenido" translate="no">/etc/exports</span>.</p>
+                <p class="Expl">Al instalarlo informará que se creó el fichero <span class="span_contenido" translate="no">/etc/exports</span>.</p>
 
-                <p>Tanto en el cliente como en el servidor podemos adicionalmente permitir en el firewall el tráfico del servicio NFS:</p>
+                <p>Tanto en el cliente como en el servidor se puede permitir adicionalmente en el firewall el tráfico del servicio NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow nfs</code></pre>
             </div>
 
@@ -72,7 +72,7 @@ Código por byAd12
             <div>
                 <h2>Configuración en el <span>servidor</span></h2>
 
-                <p>1. Editar el archivo de configuración:</p>
+                <p>1. Editar el fichero de configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
 
                 <p>2. Añadir una línea para compartir la carpeta:</p>
@@ -100,7 +100,7 @@ Código por byAd12
                                 <span class="span_contenido" translate="no">*</span> - Se permite a cualquier equipo.</li>
                                 <br>
                                 <span class="span_contenido" translate="no">Hostname</span> - Se permite a un equipo específico mediante su hostname.
-                                    Es necesario crear un registro DNS interno en el archivo <span class="span_url" translate="no">/etc/hosts</span>.
+                                    Es necesario crear un registro DNS interno en el fichero <span class="span_url" translate="no">/etc/hosts</span>.
                                 <br>
                                 <span class="span_contenido" translate="no">IP</span> - Se permite a un equipo específico mediante su IP.
                                 <br>
@@ -174,7 +174,7 @@ Código por byAd12
                     Si es al revés (remota - <span class="span_contenido" translate="no">rw</span>, local - <span class="span_contenido" translate="no">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido" translate="no">w</span>.
                 </p>
                 <p><b>IMPORTANTE</b>:</p>
-                <p class="Expl">Los permisos efectivos son los más restrictivos entre los permisos del sistema de archivos y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
+                <p class="Expl">Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
             
                 <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
                 <p class="Expl">Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
@@ -189,7 +189,7 @@ Código por byAd12
             <div>
                 <h2>Montaje <span>automático</span> en los clientes</h2>
 
-                <p>1. Hay que editar el siguiente archivo:</p>
+                <p>1. Hay que editar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
                 <p>2. Añadimos la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[IP_servidor]:/[Carpeta_remota]    /mnt/[Carpeta_local]    nfs    defaults,nfsvers=3    0    0</code></pre>
@@ -214,7 +214,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">nfs</code></pre></td>
-                            <td>Tipo de sistema de archivos.</td>
+                            <td>Tipo de sistema de ficheros.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">defaults,</code></pre></td>
@@ -230,7 +230,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">0</code></pre></td>
-                            <td>No realizar una comprobación del sistema de archivos con los programas <span class="span_contenido" translate="no">dump</span> y <span class="span_contenido" translate="no">fsck</span>.</td>
+                            <td>No realizar una comprobación del sistema de ficheros con los programas <span class="span_contenido" translate="no">dump</span> y <span class="span_contenido" translate="no">fsck</span>.</td>
                         </tr>
                     </table>
                 </div>

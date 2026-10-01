@@ -57,8 +57,8 @@ Código por byAd12
                     <table class="TablaComandos">
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">md5sum [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash MD5 de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">md5sum [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash MD5 de un fichero.</td>
                         </tr>
 
                     </table>
@@ -73,28 +73,28 @@ Código por byAd12
                     <table class="TablaComandos">
 
                         <tr>
-                            <td><pre translate="no"><code class="bash">sha1sum [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA1 de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">sha1sum [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA1 de un fichero.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">sha256sum [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA256 de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">sha256sum [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA256 de un fichero.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">sha384sum [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA384 de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">sha384sum [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA384 de un fichero.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">sha512sum [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA512 de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">sha512sum [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA512 de un fichero.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-256 [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA3 de 256 bits de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-256 [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA3 de 256 bits de un fichero.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-512 [Ruta_archivo]</code></pre></td>
-                            <td>Calcula el hash SHA3 de 512 bits de un archivo.</td>
+                            <td><pre translate="no"><code class="bash">openssl dgst -sha3-512 [Ruta_fichero]</code></pre></td>
+                            <td>Calcula el hash SHA3 de 512 bits de un fichero.</td>
                         </tr>
 
                     </table>
@@ -113,16 +113,16 @@ Código por byAd12
                 </p>
                 <p>Proceso:</p>
 
-                <p>1. Se genera un valor aleatorio y se guarda en el archivo de salt:</p>
+                <p>1. Se genera un valor aleatorio y se guarda en el fichero de salt:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "texto_aleatorio" > salt.txt</code></pre>
 
-                <p>2. Se inicializa el archivo final copiando en él la sal generada:</p>
+                <p>2. Se inicializa el fichero final copiando en él la sal generada:</p>
                 <pre class="codigo" translate="no"><code class="bash">cp salt.txt contraseña-codificada.txt</code></pre>
 
-                <p>3. Se concatena el hash original de la contraseña con la salt, se genera el nuevo hash SHA512 y se añade al final del archivo:</p>
+                <p>3. Se concatena el hash original de la contraseña con la salt, se genera el nuevo hash SHA512 y se añade al final del fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat hash.txt salt.txt | sha512sum >> contraseña-codificada.txt</code></pre>
 
-                <p>Al final se obtiene un archivo con la salt en la primera línea y el hash resultante en la segunda:</p>
+                <p>Al final se obtiene un fichero con la salt en la primera línea y el hash resultante en la segunda:</p>
                 <pre class="codigo" translate="no"><code class="bash">texto_aleatorio
 [SHA512 generado en e paso 3]</code></pre>
 

@@ -52,7 +52,7 @@ Código por byAd12
             <div>
                 <h2>1. Instalación</h2>
 
-                <p>1. Instalaremos el servicio correspondiente en el servidor:</p>
+                <p>1. Hay que instalar el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y apache2 apache2-utils</code></pre>
 
@@ -77,7 +77,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">network:
     version: 2
     ethernets:
-        [Interfaz_de_red/enp0s3]
+        [Interfaz_de_red/enp0s3]:
             dhcp4: false
             addresses:
               - [IP_estática/Máscara_CIDR]
@@ -85,17 +85,17 @@ Código por byAd12
               - to: default
                 via: [IP_default_gateway]
             nameservers:
-              addresses:
-                - 1.1.1.1
-                - 1.0.0.1</code></pre>
+            addresses:
+              - 1.1.1.1
+              - 1.0.0.1</code></pre>
 
-                <p class="Expl">3. Probaremos que la configuración sea válida con el siguiente comando:</p>
+                <p class="Expl">3. Hay que que la configuración sea válida:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
 
                 <p class="Expl">4. Por último hay que aplicar la configuración si el paso 3 no dio ningún error:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
 
-                <p class="Expl">Para comprobar que la IP estática se configuró correctamente se puede usar el siguiente comando:</p>
+                <p class="Expl">Para comprobar que la IP estática se configuró correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
 
             </div>
@@ -103,13 +103,13 @@ Código por byAd12
             <div>
                 <h2>3. Permitir el acceso remoto</h2>
 
-                <p>1. Instalaremos el servicio de SSH en el servidor:</p>
+                <p>1. Hay que instalar el servicio de SSH en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y openssh-server</code></pre>
 
                 <p>2. Para que el servicio de SSH se inicie automáticamente al iniciar el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now ssh</code></pre>
 
-                <p>3. Verificaremos el estado del servicio y que escucha por el puerto 22/tcp:</p>
+                <p>3. Hay que verificar el estado del servicio y que escucha por el puerto 22 - TCP:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status ssh</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep ':22'</code></pre>
 
@@ -129,11 +129,11 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/apache2.conf</code></pre></td>
-                            <td>Archivo con todas las zonas del servidor</td>
+                            <td>Fichero con todas las zonas del servidor</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/ports.conf</code></pre></td>
-                            <td>Archivo con los puertos a usar</td>
+                            <td>Fichero con los puertos a usar</td>
                         </tr>
                         <tr>
                             <td>
@@ -161,7 +161,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/sites-available/000-default.conf</code></pre></td>
-                            <td>Archivo de configuración por defecto</td>
+                            <td>Fichero de configuración por defecto</td>
                         </tr>
                     </table>
                 </div>
@@ -169,10 +169,10 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="sitio-virtual">2. Configurar un sitio virtual</h2>
+                <h2 id="sitio-virtual">4. Configurar un sitio virtual</h2>
 
                 <p>
-                    Normalmente los archivos de configuración de sitios virtuales se almacenan en la carpeta <span class="span_url" translate="no">/etc/apache2/sites-available/</span>.
+                    Normalmente los ficheros de configuración de sitios virtuales se almacenan en la carpeta <span class="span_url" translate="no">/etc/apache2/sites-available/</span>.
                     <br>
                     Su sintaxis completa es la siguiente:
                 </p>
@@ -207,7 +207,7 @@ Código por byAd12
                             <td>Directorio raíz del sitio web, donde deben colocarse las páginas webs que servirá nuestro servidor (pej. <span class="span_url" translate="no">/var/www/html</span>).</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="apache">ErrorDocument [Código_error] /[Nombre_archivo_error].html</code></pre></td>
+                            <td><pre translate="no"><code class="apache">ErrorDocument [Código_error] /[Nombre_fichero_error].html</code></pre></td>
                             <td>Página que aparecerá en caso de error según su código (pej. <span class="span_contenido" translate="no">404</span>).</td>
                         </tr>
                         <tr>
@@ -228,39 +228,39 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="apache">ErrorLog ${APACHE_LOG_DIR}/error.log</code></pre></td>
-                            <td>Archivo donde se definen los registros del servicio.</td>
+                            <td>Fichero donde se definen los registros del servicio.</td>
                         </tr>
                         
                     </table>
                 </div>
 
                 <p>Para activar un sitio virtual se puede hacer de 2 maneras que hacen el mismo proceso:</p>
-                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/[Nombre_archivo_sitio_virtual].conf /etc/apache2/sites-enabled</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_archivo_sitio_virtual]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ln -s /etc/apache2/sites-available/[Nombre_fichero_sitio_virtual].conf /etc/apache2/sites-enabled</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_fichero_sitio_virtual]</code></pre>
 
 
-                <p>Para que Apache2 esuche por el puerto deseado se debe modificar el archivo <span class="span_url" translate="no">/etc/ports.conf</span> y añadir esta línea por cada puerto a escuchar:</p>
+                <p>Para que Apache2 esuche por el puerto deseado se debe modificar el fichero <span class="span_url" translate="no">/etc/ports.conf</span> y añadir esta línea por cada puerto a escuchar:</p>
                 <pre class="codigo" translate="no"><code class="apache">Listen [Puerto_a_escuchar]</code></pre>
 
                 <p>
-                    En caso de que <span class="span_contenido" translate="no">ServerName</span> un dominio "ficticio" que no tenga resolución DNS pública, en los clientes Linux se puede configurar una resolución de nombres local para que apunte a la IP del servidor Apache.
-                    Para ello, se edita el siguiente fichero añadiendo una línea con el formato "ip dominio":
+                    En caso de que <span class="span_contenido" translate="no">ServerName</span> sea un dominio <i>ficticio</i>, en los clientes Linux se puede configurar una resolución de nombres local para que apunte a la IP del servidor Apache.
+                    Para ello, se edita el siguiente fichero añadiendo una línea con el formato <span class="span_contenido" translate="no">[IP] [Nombre_dominio]</span> (separados por un tabulador):
                 </p>
                 <pre class="codigo" translate="no"><code class="apache">nano /etc/hosts</code></pre>
 
-                <p>Para probar que se puede acceder al sitio web se puede ejecutar el siguiente comando:</p>
+                <p>Para probar que se puede acceder al sitio web:</p>
                 <pre class="codigo" translate="no"><code class="apache">curl http(s)://[IP/DNS](:Puerto)</code></pre>
 
             </div>
 
             <div>
-                <h2 id="directorio">3. Configuración de directorios</h2>
+                <h2 id="directorio">5. Configuración de directorios</h2>
 
                 <p>
-                    En el archivo <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> se pueden definir los permisos a un directorio específico del disco duro del servidor.
+                    En el fichero <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> se pueden definir los permisos a un directorio específico del disco duro del servidor.
                 </p>
                 <p>
-                    Esta configuración también se puede poner directamente dentro de la etiqueta <span class="span_contenido" translate="no">VirtualHost</span>, teniendo mayor prioridad que ponerla en el archivo <span class="span_url" translate="no">apache2.conf</span>.
+                    Esta configuración también se puede poner directamente dentro de la etiqueta <span class="span_contenido" translate="no">VirtualHost</span>, teniendo mayor prioridad que ponerla en el fichero <span class="span_url" translate="no">apache2.conf</span>.
                 </p>
                 
                 <p>La sintaxis completa de un directorio es la siguiente (no importan los tabuladores ni espacios, solo importan las mayúsculas):</p>
@@ -279,7 +279,7 @@ Código por byAd12
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2">La etiqueta <span class="span_contenido" translate="no">Directory</span> crea un nuevo directorio indicando la ruta local absoluta donde se almacenarán sus archivos.</td>
+                            <td colspan="2">La etiqueta <span class="span_contenido" translate="no">Directory</span> crea un nuevo directorio indicando la ruta local absoluta donde se almacenarán sus ficheros.</td>
                         </tr>
 
                         <tr>
@@ -289,9 +289,9 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="apache">AllowOverride None</code></pre></td>
                             <td>
-                                Permite el uso de archivos <b>.htaccess</b>: <span class="span_contenido" translate="no">all</span>.
+                                Permite el uso de ficheros <b>.htaccess</b>: <span class="span_contenido" translate="no">all</span>.
                                 <br>
-                                NO permite el uso de archivos <b>.htaccess</b>: <span class="span_contenido" translate="no">None</span>.
+                                NO permite el uso de ficheros <b>.htaccess</b>: <span class="span_contenido" translate="no">None</span>.
                             </td>
                         </tr>
 
@@ -300,14 +300,14 @@ Código por byAd12
                             <td>Otorga permisos para mostrar el contenido de la carpeta en caso de no haber localizado el recurso solicitado. Si no tiene permiso dará un error si no llega a localizar el recurso.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="apache">DirectoryIndex [Nombre_archivo].html ([Nombre_archivo].htm ...)</code></pre></td>
-                            <td>Se definen los archivos por defecto que abrirá el servidor en caso de no haberse especificado en la URL. Se intentarán abrir en el orden en que aparecen. Si no se puede abrir ninguno y si la opción Indexes está definida mostrará el directorio principal, si no enseñará un error.</td>
+                            <td><pre translate="no"><code class="apache">DirectoryIndex [Nombre_fichero].html ([Nombre_fichero].htm ...)</code></pre></td>
+                            <td>Se definen los ficheros por defecto que abrirá el servidor en caso de no haberse especificado en la URL. Se intentarán abrir en el orden en que aparecen. Si no se puede abrir ninguno y si la opción Indexes está definida mostrará el directorio principal, si no enseñará un error.</td>
                         </tr>
                         
                     </table>
                 </div>
 
-                <p>En caso de no definir el parámetro <span class="span_contenido" translate="no">DirectoryIndex</span>, los archivos por defecto se configuran en: <span class="span_url" translate="no">/etc/apache2/mods-enabled/dir.conf</span>.</p>
+                <p>En caso de no definir el parámetro <span class="span_contenido" translate="no">DirectoryIndex</span>, los ficheros por defecto se configuran en: <span class="span_url" translate="no">/etc/apache2/mods-enabled/dir.conf</span>.</p>
 
             </div>
 
@@ -325,20 +325,20 @@ Código por byAd12
             <div>
                 <h2>Como configurar un directorio privado</h2>
 
-                <p>1. En el archivo <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> definiremos un nuevo directorio con los siguientes parámetros:</p>
+                <p>1. En el fichero <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> hay que definir un nuevo directorio con los siguientes parámetros:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;Directory [Ruta_al_directorio]&gt;
 
     AuthName "Mensaje - Acceso Privado"
     AuthType Basic
-    AuthUserFile [Ruta_archivo_credenciales]
+    AuthUserFile [Ruta_fichero_credenciales]
     Require user [Nombre_usuario_requerido]
 
 &lt;/Directory&gt;</code></pre>
 
-                <p>2. Crearemos mediante <span class="span_contenido" translate="no">htpasswd</span> un archivo con la contraseña relacionada al usuario:</p>
-                <pre class="codigo" translate="no"><code class="bash">htpasswd -c [Ruta_archivo_credenciales] [Nombre_usuario]</code></pre>
+                <p>2. Hay que crear un fichero con la contraseña relacionada al usuario:</p>
+                <pre class="codigo" translate="no"><code class="bash">htpasswd -c [Ruta_fichero_credenciales] [Nombre_usuario]</code></pre>
 
-                <p class="Expl">Solo se debe poner el parámetro <span class="span_contenido" translate="no">-c</span> para crear el archivo. Se debe quitar para añadir más usuarios en el archivo.</p>
+                <p class="Expl">Solo se debe poner el parámetro <span class="span_contenido" translate="no">-c</span> para crear el fichero. Se debe quitar para añadir más usuarios en el fichero.</p>
 
                 <p>3. Se debe crear la carpeta definida en <span class="span_contenido" translate="no">&lt;Directory&gt;</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mkdir [Ruta_al_directorio]</code></pre>
@@ -348,34 +348,34 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Archivos <span translate="no">.htaccess</span></h2>
+                <h2>Fichero <span translate="no">.htaccess</span></h2>
 
-                <p>Sirve para poder dar directivas desde un archivo ubicado en el directorio donde se de permisos.</p>
+                <p>Sirve para poder dar directivas desde un fichero ubicado en el directorio donde se de permisos.</p>
 
-                <p>En <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> indicaremos en el directorio deseado que permita el uso de archivos <span class="span_url" translate="no">.htaccess</span>:</p>
+                <p>En <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> se debe indicar en el directorio deseado que permita el uso de ficheros <span class="span_url" translate="no">.htaccess</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;Directory [Ruta_al_directorio]&gt;
     AllowOverride all
 &lt;/Directory&gt;</code></pre>
 
-                <p>En la ruta donde está el directorio crearemos un archivo <span class="span_url" translate="no">.htaccess</span>, siendo el archivo por defecto en el que se van a buscar las directivas.</p>
-                <p>Dentro de este archivo <span class="span_url" translate="no">.htaccess</span> se pueden poner todas las directivas que se añadirian normalmente dentro de la etiqueta de <span class="span_contenido" translate="no">&lt;Directory&gt;</span>.</p>
+                <p>En la ruta donde está el directorio hay que crear un fichero <span class="span_url" translate="no">.htaccess</span>, siendo el fichero por defecto en el que se van a buscar las directivas.</p>
+                <p>Dentro de este fichero <span class="span_url" translate="no">.htaccess</span> se pueden poner todas las directivas que se añadirian normalmente dentro de la etiqueta de <span class="span_contenido" translate="no">&lt;Directory&gt;</span>.</p>
 
             </div>
 
             <div>
                 <h2>Usar HTTPS con SSL</h2>
 
-                <p>1. Hay que crear un certificado SSL autofirmado con el siguiente comando:</p>
+                <p>1. Hay que crear un certificado SSL autofirmado:</p>
                 <pre class="codigo" translate="no"><code class="apache">cd /var/www/html
 openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certificate.crt -days 1024 -nodes</code></pre>
                 
                 <p>2. En <span class="span_url" translate="no">/etc/apache2/ports.conf</span> se debe configurar que el servidor escuche el puerto 443 (https):</p>
                 <pre class="codigo" translate="no"><code class="apache">Listen 443</code></pre>
                 
-                <p>3. Hay que activar el módulo <span class="span_contenido" translate="no">SSLEngine</span> (solo una vez):</p>
+                <p>3. Hay que activar el módulo SSLEngine una sola vez:</p>
                 <pre class="codigo" translate="no"><code class="apache">a2enmod ssl</code></pre>
 
-                <p>4. En <span class="span_url" translate="no">/etc/apache2/sites-available/</span> crearemos un archivo <span class="span_url" translate="no">.conf</span> con el siguiente contenido:</p>
+                <p>4. En <span class="span_url" translate="no">/etc/apache2/sites-available/</span> hay que crear un fichero <span class="span_url" translate="no">.conf</span> con el siguiente contenido:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:443&gt;
         ServerName (FQDN_o_IP)
         DocumentRoot /var/www/html
@@ -385,91 +385,22 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
         SSLCertificateKeyFile /var/www/html/certificate.key
 &lt;/VirtualHost&gt;</code></pre>
 
-                <p>5. Por último habilitaremos el archivo de configuración:</p>
-                <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_archivo_sitio_virtual]</code></pre>
+                <p>5. Por último hay que habilitar el fichero de configuración:</p>
+                <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_fichero_sitio_virtual]</code></pre>
             </div>
 
         </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Ejemplos</h1>
+        <h1>Ejemplo completo</h1>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
-            <div>
-                <h2>Ejemplo: <span>Práctica 1</span></h2>
-                <p>~ Crear varias carpetas con archivos, restringir una con acceso. Crear un VirtualHost para asignarles subdominios.</p>
-
-                <p>Hay que crear la siguiente estructura de archivos:</p>
-                <pre class="codigo" translate="no"><code>.
-├── elfran
-│   └── index.html
-├── index.html
-├── luis
-│   └── indice.html
-├── marcos
-│   ├── hola2.txt
-│   ├── hola3.txt
-│   ├── hola4.txt
-│   ├── hola5.txt
-│   └── hola.txt
-├── privado
-│   └── indice.html
-└── sebas
-    ├── index.html
-    └── indice.html</code></pre>
-                <p class="Expl"><b>./index.html</b>: Documento .html con enlaces a todos los directorios → <span class="span_url" translate="no">http://localhost/sebas</span>.</p>
-
-                <p><span class="span_url" translate="no">/etc/apache2/apache2.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www/html/luis&gt;
-    DirectoryIndex indice.html
-&lt;/Directory&gt;
-
-&lt;Directory /var/www/html/marcos&gt;
-    Options Indexes
-&lt;/Directory&gt;</code></pre>
-                <p class="Expl">Hay que quitar <span class="span_contenido" translate="no">Indexes</span> de <span class="span_contenido" translate="no">Options</span> en <span class="span_url" translate="no">/var/www/html</span>.</p>
-
-                <p>Añadir en <span class="span_url" translate="no">/etc/hosts</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">127.0.0.1       luis.aili-ss.xyz
-127.0.0.1       elfran.aili-ss.xyz
-127.0.0.1       marcos.aili-ss.xyz
-127.0.0.1       sebas.aili-ss.xyz</code></pre>
-
-                <p><span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
-    ServerName luis.aili-ss.xyz
-    DocumentRoot /var/www/html/luis
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:80&gt;
-    ServerName elfran.aili-ss.xyz
-    DocumentRoot /var/www/html/elfran
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:80&gt;
-    ServerName sebas.aili-ss.xyz
-    DocumentRoot /var/www/html/sebas
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:80&gt;
-    ServerName marcos.aili-ss.xyz
-    DocumentRoot /var/www/html/marcos
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:80&gt;
-    ServerName privado.aili-ss.xyz
-    DocumentRoot /var/www/html/privado
-&lt;/VirtualHost&gt;</code></pre>
-            </div>
-
-            <!-- ================== -->
 
             <div>
-                <h2>Ejemplo: <span>Práctica 2</span></h2>
 
                 <p><span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
@@ -517,14 +448,13 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
 127.0.0.1       privado.aili-ss.abc</code></pre>
 
                 <p><span class="span_url" translate="no">/etc/apache2/apache2.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">
-&lt;Directory /var/www/&gt;
+                <pre class="codigo" translate="no"><code class="apache">&lt;Directory /var/www&gt;
     Options FollowSymLinks
     AllowOverride None
     Require all granted
 &lt;/Directory&gt;
 
-&lt;Directory /var/www/html/privado/&gt;
+&lt;Directory /var/www/html/privado&gt;
     Options Indexes
     Directoryindex index.html
     AuthName "Acceso Privado"
@@ -541,52 +471,9 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
 
 &lt;Directory /var/www/html/marcos&gt;
     Options Indexes
-&lt;/Directory&gt;</code></pre> 
+&lt;/Directory&gt;</code></pre>
 
-            </div>
-
-            <!-- ================== -->
-
-            <div>
-                <h2>Ejemplo: <span>Práctica 3</span></h2>
-
-                <p>~ Bloquear solicitudes por el :8080 en todos los dominios menos en luis.</p>
-                <p><span class="span_url" translate="no">/etc/apache2/sites-available/000-default.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
-        ServerName aili-ss.abc
-        ServerAdmin webmaster@aili-ss.abc
-        DocumentRoot /var/www/html
-
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-        ErrorDocument 404 /404.html
-        ErrorDocument 403 /403.html
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:8080&gt;
-        DocumentRoot /var/www/html
-        ServerName aili-ss.abc
-        &lt;Directory /var/www/html&gt;
-                Require all denied
-        &lt;/Directory&gt;
-&lt;/VirtualHost&gt;</code></pre>
-                
-                <p>Hay que dejar el puerto :8080 en luis <span class="span_url" translate="no">/etc/apache2/sites-available/001-default.conf</span>:</p>
-                <pre class="codigo" translate="no"><code class="apache">&lt;VirtualHost *:80&gt;
-        ServerName luis.aili-ss.abc
-        DocumentRoot /var/www/html/luis
-        ErrorDocument 403 "No puedes acceder a Luis"
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:8080&gt;
-        ServerName luis.aili-ss.abc
-        DocumentRoot /var/www/html/luis
-        ErrorDocument 403 "No puedes acceder a Luis"
-        &lt;Directory /var/www/html/luis&gt;
-                Require all granted
-        &lt;/Directory&gt;
-&lt;/VirtualHost&gt;</code></pre>
-
+                <p>(Ejemplo hecho como práctica del CFGM de SMR)</p>
 
             </div>
 
