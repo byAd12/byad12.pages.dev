@@ -86,16 +86,16 @@ Código por byAd12
             <div>
                 <h2 id="isc-dhcp-server">2. Fichero de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
-                <p>A continuación hay que modificar las siguientes líneas del fichero:</p>
+                <p>A continuación hay que modificar las siguientes líneas del fichero...</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
 INTERFACESv6=""</code></pre>
-                <p class="Expl">con el siguiente contenido:</p>
+                <p class="Expl">... con el siguiente contenido:</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4="[Nombre_interfaz_red]"
 #INTERFACESv6=""</code></pre>
                 <p class="Expl">
-                    <b>INTERFACESv4</b>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
+                    <span class="span_contenido" translate="no">INTERFACESv4</span>: Se definen las interfaces de red IPv4 en la que funcionará el servidor.
                     <br>
-                    <b>INTERFACESv6</b>: Si IPv6 no está configurado se debe comentar esta línea.
+                    <span class="span_contenido" translate="no">INTERFACESv6</span>: Si IPv6 no está configurado se debe comentar esta línea.
                 </p>
                 <p>Con el siguiente comando se puede ver las interfaces del equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
@@ -106,7 +106,7 @@ INTERFACESv6=""</code></pre>
                 <h2 id="dhcpd.conf">3. Fichero de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>
-                    Las líneas que se presentan a continuación pueden definirse dentro o fuera de una "subnet".
+                    Las líneas que se presentan a continuación pueden definirse dentro o fuera de una <span class="span_contenido" translate="no">subnet</span>.
                     Si se definen fuera se aplicarán a todas las subredes que se creen.
                 </p>
 

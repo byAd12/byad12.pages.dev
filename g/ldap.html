@@ -322,7 +322,7 @@ changetype: delete</code></pre>
                 <pre class="codigo Expl2" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
 
                 <p>2. Primero hay que instalar los servicios necesarios:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install -y libpam-ldap libnss-ldap nss-updatedb libnss-db nfs-common nslcd</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y libnss-ldapd libpam-ldapd nslcd</code></pre>
                 
                 <p class="Expl">Va a pedir una serie de preguntas, a las cuales hay que responder de la siguiente manera:</p>
                 <ol class="Expl2">
@@ -341,7 +341,10 @@ changetype: delete</code></pre>
 
                 <p>3. Una vez se haya instalado y configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">De las 3 primeras líneas se debe reemplazar la palabra <span class="span_contenido" translate="no">compact</span> a <span class="span_contenido" translate="no">files ldap</span>.</p>
+                <p class="Expl">Las 3 primeras líneas deben quedar como:</p>
+                <pre class="codigo" translate="no"><code class="bash">passwd:         files ldap
+group:          files ldap
+shadow:         files ldap</code></pre>
 
                 <p>4. Hay que actualizar los paquetes del sistema con APT:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt update && apt upgrade -y</code></pre>
@@ -352,14 +355,16 @@ changetype: delete</code></pre>
                 <p>6. Hay que comprobar que los usuarios del servidor aparecen en el cliente:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
-                <p>7. Del siguiente fichero hay que quitar de una línea la palabra <span class="span_contenido" translate="no">use_authtok</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-password</code></pre>
+                <p>7. Hay que entrar en el siguiente fichero:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-session</code></pre>
+                <p class="Expl">Y añadir la siguiente línea</p>
+                <pre class="codigo" translate="no"><code class="bash">session required pam_mkhomedir.so skel=/etc/skel umask=077</code></pre>
 
                 <p>8. Se debe reiniciar el equipo para que se apliquen los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">reboot now</code></pre>
 
                 <p>9. Hay que reiniciar el servicio LDAP:</p>
-                <pre class="codigo" translate="no"><code class="bash">service libnss-ldap restart</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart nslcd</code></pre>
 
                 <p>10. Por último hay que iniciar sesión con un usuario del servidor en el equipo cliente para comprobar que funcione:</p>
                 <pre class="codigo" translate="no"><code class="bash">login [USUARIO_LDAP]</code></pre>

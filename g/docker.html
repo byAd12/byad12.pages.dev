@@ -391,7 +391,7 @@ Código por byAd12
                 <p>Crear una red:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network create --driver (Tipo_de_red) --subnet (Dirección_red)/(Máscara_CIDR) --gateway (IP_default_gateway) [Nombre_red]</code></pre>
                 <p class="Expl"><span class="span_contenido" translate="no">--driver</span>, <span class="span_contenido" translate="no">--subnet</span> y <span class="span_contenido" translate="no">--gateway</span> son opcionales. Creará una interfaz en el host.</p>
-                <p class="Expl"><b>--driver</b>: Es el modo de red a seleccionar como <span class="span_contenido" translate="no">bridge</span>, <span class="span_contenido" translate="no">none</span>, <span class="span_contenido" translate="no">host</span>, ..</p>
+                <p class="Expl"><span class="span_contenido" translate="no">--driver</span>: Es el modo de red a seleccionar como <span class="span_contenido" translate="no">bridge</span>, <span class="span_contenido" translate="no">none</span>, <span class="span_contenido" translate="no">host</span>, ...</p>
                 
                 <p>Eliminar una red tipo <span class="span_contenido" translate="no">bridge</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network rm [Nombre_red]</code></pre>
@@ -411,20 +411,21 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Docker "<span>httpd</span>"</h2>
-                <p>Añadir una página .html:</p>
+                <p>Añadir una página .HTML:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 80:80 -p 443:443 -d httpd</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">docker exec -it [Docker] [bash/sh]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nano</code></pre>
-                <p class="Expl"><b>./htdocs/index.html</b>: Editar el fichero para cambiar la página default.</p>
+                <p class="Expl"><span class="span_contenido" translate="no">./htdocs/index.html</span>: Editar el fichero para cambiar la página default.</p>
                 
-                <p>Hay que acceder a la siguiente URL <span class="span_url" translate="no">http://{Tu_IP}:{puerto}</span>, siendo el puerto el que redirige al docker (especificado al hacer <span class="span_contenido" translate="no">docker run</span>).</p>
+                <p>Hay que acceder a la siguiente URL <span class="span_url" translate="no">http://[IP]:[Puerto]</span>, siendo el puerto el que redirige todo el tráfico hacia el docker (especificado en el parámetro <span class="span_contenido" translate="no">-p</span>).</p>
             </div>
             
             <div>
                 <h2>Docker "<span>heimdall</span>"</h2>
-                <p>Sirve para organizar aplicaciones web en un solo lugar. Se accede mediante la URL <span class="span_url" translate="no">http://localhost:[puerto]</span>:</p>
+                <p>Sirve para organizar aplicaciones web en un solo lugar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name heimdall -e PUID=1000 -e PGID=1000 -e TZ=america/new_york -p 9998:80 -p 9997:443 -v /home/usuario/Descargas/docker_adr:/config --restart unless-stopped linuxserver/heimdall</code></pre>
+                <p class="Expl">Una vez se haya creado el docker se puede acceder a mediante la URL <span class="span_url" translate="no">http://localhost:[Puerto]</span></span>
             </div>
         </div>
         <!-- ......................................................... -->
