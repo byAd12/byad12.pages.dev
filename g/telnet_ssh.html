@@ -176,35 +176,43 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Redireccionar HTTP por un socket al servidor<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Redireccionar HTTP por un socket a un servidor SSH de <span>Linux</span></h2>
 
-                <p>1. Editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar los siguientes parámetros:</p>
+                <p>1. En el servidor SSH hay que editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> y añadir/cambiar los siguientes parámetros:</p>
                 <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
 GatewayPorts yes</code></pre>
 
-                <p>2. En el servidor hay que reiniciar el servicio SSHD:</p>
+                <p>2. Luego, en el servidor SSH hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
-                <p>3. Hay que crear un socket para poder transmitir la información por el:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (USER)@[IP]</code></pre>
+                <p>3. En el cliente SSH hay que crear un nuevo socket hacia el servidor para poder transmitir la información del navegador:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
                 
-                <p>4. En el navegador del cliente hay que configurar la red a "Configuración manual de proxy", configurando un socket con la ip <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y elegir "SOCKS Host".</p>
+                <p>4. En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
 
             </div>
 
             <div>
-                <h2>Abrir la GUI de un programa del servidor en el cliente<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Crear una sesión SSH X11 en un cliente <span>Linux</span></h2>
 
-                <p>1. Editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> en el servidor SSH y añadir/cambiar:</p>
-                <pre class="codigo" translate="no"><code class="bash">X11Forwarding yes</code></pre>
+                <p>Pasos a ejecutar en el servidor SSH:</p>
+
+                <p class="Expl">1. Primero  hay que instalar el paquete <span class="span_contenido" translate="no">xauth</span>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">apt-get install -y xauth</code></pre>
+
+                <p class="Expl">2. Luego hay que editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> y añadir/cambiar el siguiente parámetro:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">X11Forwarding yes</code></pre>
+
+                <p class="Expl">3. Para aplicar los cambios del paso anterior hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">systemctl restart sshd</code></pre>
                 
-                <p>2. En el servidor reiniciar el servicio SSH:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
+                <p>En el cliente SSH con interfaz gráfica hay que crear una conexión hacia el servidor de tipo X11 con el parámetro <span class="span_contenido" translate="no">-X</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -X (Nombre_usuario)@[IP_servidor]</code></pre>
                 
-                <p>3. Conectarse con X11 al servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -X (USER)@[IP]</code></pre>
-                
-                <p>4. Abrir un programa mediante comandos.</p>
+                <p class="Expl">
+                    Desde la sesión SSH con X11 se puede ejecutar cualquier programa con interfaz gráfica.
+                    El programa se ejecutará en el servidor, pero la interfaz gráfica se verá desde el escritorio del cliente.
+                </p>
 
             </div>
 

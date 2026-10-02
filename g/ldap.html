@@ -64,7 +64,7 @@ Código por byAd12
                 <p>Primero hay que instalar el servidor LDAP - <span class="span_contenido" translate="no">slapd</span> junto a las utilidades necesarias - <span class="span_contenido" translate="no">ldap-utils</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y slapd ldap-utils</code></pre>
-                <p class="Expl">Al instalarlo nos pedirá una contraseña para la gestión del servicio del servidor.</p>
+                <p class="Expl">Al ejecutar el comando de instalación, el sistema pedirá una contraseña para la gestión del servicio del servidor LDAP.</p>
             </div>
 
             <div>
@@ -89,14 +89,23 @@ Código por byAd12
 
                 <p>Una vez se hayan instalado los paquetes con APT hay que configurar mediante el servicio LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
-                <p class="Expl"><u>Respuestas que va a pedir en orden</u>: No; [NOMBRE_DOMINIO]; [NOMBRE_EMPRESA]; (Ingresar la contraseña); No; Si.</p>
+                <p class="Expl">Respuestas que va a solicitar el asistente en orden:</p>
+                <ol class="Expl2">
+                    <li>Omit OpenLDAP server configuration? -> <span class="span_contenido" translate="no">no</span>.</li>
+                    <li>DNS domain name -> (el nombre de dominio + TLD que se utilizará para crear objetos en el servicio LDAP).</li>
+                    <li>Organization name -> (el nombre de la organización).</li>
+                    <li>Administrator password -> (definir una contraseña para el administrador del servicio LDAP).</li>
+                    <li>Confirm password -> (repetir la contraseña del administrador del servicio LDAP).</li>
+                    <li>Do you want the database to be removed when slapd is purged? -> <span class="span_contenido" translate="no">no</span>.</li>
+                    <li>Move old database? -> <span class="span_contenido" translate="no">yes</span>.</li>
+                </ol>
 
-                <p>Tras realizar el comando anterior hay que comprobar el estado del servicio LDAP:</p>
+                <p>Tras realizar el comando anterior hay que comprobar que el siguiente comando devuelve un objeto con toda la configuración del dominio LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">slapcat</code></pre>
 
                 <p>Ahora hay que comprobar que se puede entrar al servicio con el usuario <span class="span_contenido" translate="no">admin</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapwhoami -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W</code></pre>
-                <p class="Expl">Luego hay que poner la contraseña y si devuelve lo que escribimos está bien configurado.</p>
+                <p class="Expl">Solicitará la contraseña que se configuró en el asistente. Si devuelve el contenido entre comillas, entonces el servicio está bien configurado.</p>
             </div>
 
         </div>
@@ -147,9 +156,12 @@ dn: [URI]
 objectClass: top
 objectClass: organizationalUnit
 ou: [UO]</code></pre>
-                <p class="Expl"><b>UO</b>: Nombre personalizado que tendrá la unidad organizativa.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">UO</span>: Nombre personalizado que tendrá la unidad organizativa.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_DOMINIO</span>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br>
+                    <span class="span_contenido" translate="no">TLD_DOMINIO</span>: TLD del dominio (.es, .com. .net, ...) sin el punto.
                 </p>
 
                 <p>2. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
@@ -170,12 +182,17 @@ objectClass: top
 objectClass: posixGroup
 gidNumber: [N_GID]
 cn: [NOMBRE_GRUPO]</code></pre>
-                <p class="Expl"><b>NOMBRE_GRUPO</b>: Nombre personalizado que tendrá el grupo.
-                    <BR><b>UO</b>: Unidad organizativa a la que pertenecerá.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">NOMBRE_GRUPO</span>: Nombre personalizado que tendrá el grupo.
+                    <br>
+                    <span class="span_contenido" translate="no">UO</span>: Unidad organizativa a la que pertenecerá.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_DOMINIO</span>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br>
+                    <span class="span_contenido" translate="no">TLD_DOMINIO</span>: TLD del dominio (.es, .com. .net, ...) sin el punto.
+                    <br>
+                    <span class="span_contenido" translate="no">N_GID</span>: Número identificador entero y único del grupo.
                 </p>
-                <p class="Expl"><b>N_GID</b>: Número entero identificador del grupo.</p>
 
                 <p>2. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [RUTA_FICHERO].ldif</code></pre>
@@ -208,21 +225,26 @@ gidNumber: [N_GID]
 homeDirectory: /home/[NOMBRE_USUARIO]
 loginShell: [SHELL]</code></pre>
                 <p class="Expl">
-                    <b>UO</b>: Unidad organizativa a la que pertenecerá.
-                    <br><b>NOMBRE_DOMINIO</b>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
-                    <br><b>TLD_DOMINIO</b>: TLD del dominio (.es, .com. .net, ...) sin el punto.
+                    <span class="span_contenido" translate="no">UO</span>: Unidad organizativa a la que pertenecerá.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_DOMINIO</span>: Nombre del dominio sin el TLD (.es, .com. .net, ...).
+                    <br>
+                    <span class="span_contenido" translate="no">TLD_DOMINIO</span>: TLD del dominio (.es, .com. .net, ...) sin el punto.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_USUARIO</span>: Nombre personalizado que tendrá el usuario.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_COMÚN</span>: Nombre común personalizado que tendrá el usuario.
+                    <br>
+                    <span class="span_contenido" translate="no">NOMBRE_COMPLETO</span>: Nombre completo personalizado que tendrá el usuario.
+                    <br>
+                    <span class="span_contenido" translate="no">CONTRASEÑA</span>: El <u>hash</u> de la contraseña (calculado en el paso 1).
+                    <br>
+                    <span class="span_contenido" translate="no">N_UID</span>: Número identificador entero y único del usuario.
+                    <br>
+                    <span class="span_contenido" translate="no">N_GID</span>: Número identificador entero del grupo. <span class="span_contenido" translate="no">0</span> = Ninguno.
+                    <br>
+                    <span class="span_contenido" translate="no">SHELL</span>: <span class="span_url" translate="no">/bin/bash</span>, <span class="span_url" translate="no">/bin/sh</span>.
                 </p>
-                <p class="Expl">
-                    <b>NOMBRE_USUARIO</b>: Nombre personalizado que tendrá el usuario.
-                    <br><b>NOMBRE_COMÚN</b>: Nombre común personalizado que tendrá el usuario.
-                    <br><b>NOMBRE_COMPLETO</b>: Nombre completo personalizado que tendrá el usuario.
-                    <br><b>CONTRASEÑA</b>: El <u>hash</u> de la contraseña - calculado en el paso 1.
-                </p>
-                <p class="Expl">
-                    <b>N_UID</b>: Número entero identificador del usuario. Los siguientes usuarios creados, recibirán un valor +1 alto que este.
-                    <br><b>N_GID</b>: Número entero identificador del grupo. 0 = Ninguno.
-                </p>
-                <p class="Expl"><b>SHELL</b>: <span class="span_url" translate="no">/bin/bash</span>, <span class="span_url" translate="no">/bin/sh</span>.</p>
 
                 <p>3. Una vez se haya definido el objeto se debe añadir a la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapadd -x -D cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO] -W -f [RUTA_FICHERO].ldif</code></pre>
@@ -257,9 +279,11 @@ changetype: modify
 replace: [PROPIEDAD_CAMBIAR]
 [PROPIEDAD_CAMBIAR]: [VALOR_CAMBIAR]</code></pre>
                 <p class="Expl">
-                    <b>DN_COMPLETO</b>: URI que identifique al objeto dentro de la base de datos.
-                    <br><b>PROPIEDAD_CAMBIAR</b>: Nombre de la propiedad a modificar.
-                    <br><b>VALOR_CAMBIAR</b>: El nuevo valor que se le va a asignar a esa propiedad.
+                    <span class="span_contenido" translate="no">DN_COMPLETO</span>: URI que identifique al objeto dentro de la base de datos.
+                    <br>
+                    <span class="span_contenido" translate="no">PROPIEDAD_CAMBIAR</span>: Nombre de la propiedad a modificar.
+                    <br>
+                    <span class="span_contenido" translate="no">VALOR_CAMBIAR</span>: El nuevo valor que se le va a asignar a esa propiedad.
                 </p>
                 <p class="Expl"><u>Recuerda</u>: Para hacer 2 cambios a la vez se pone ambos objetos separados por una línea en blanco.</p>
 
@@ -279,7 +303,9 @@ replace: [PROPIEDAD_CAMBIAR]
 
                 <p>Primera forma - con el comando <span class="span_contenido" translate="no">ldapdelete</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapdelete -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W "[DN_COMPLETO]"</code></pre>
-                <p class="Expl"><b>DN_COMPLETO</b>: URI que identifique al objeto dentro de la base de datos.</p>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">DN_COMPLETO</span>: URI que identifique al objeto dentro de la base de datos.
+                </p>
 
                 <p>Segunda forma - crear un fichero <span class="span_url" translate="no">.ldif</span> con el siguiente contenido:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
@@ -298,8 +324,9 @@ changetype: delete</code></pre>
                 <p>Con el comando <span class="span_contenido" translate="no">ldapsearch</span> se puede buscar objetos identificados por su URI:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapsearch -xLLL -b "dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" [BÚSQUEDA] (ENSEÑAR)</code></pre>
                 <p class="Expl">
-                    <b>BÚSQUEDA</b>: El objeto que vamos a buscar según un valor. Por ejemplo: "uid=xx", "gid=xx".
-                    <br><b>ENSEÑAR</b>: Es opcional. Son los valores del objeto a buscar que se quieren enseñar. Por ejemplo: "cn", "uid", "gid".
+                    <span class="span_contenido" translate="no">BÚSQUEDA</span>: El objeto que vamos a buscar según un valor. Por ejemplo: "uid=xx", "gid=xx".
+                    <br>
+                    <span class="span_contenido" translate="no">ENSEÑAR</span>: Es opcional. Son los valores del objeto a buscar que se quieren enseñar. Por ejemplo: "cn", "uid", "gid".
                 </p>
 
             </div>
@@ -322,52 +349,37 @@ changetype: delete</code></pre>
                 <pre class="codigo Expl2" translate="no"><code class="bash">[IP_SERVIDOR]    [NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
 
                 <p>2. Primero hay que instalar los servicios necesarios:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y libnss-ldapd libpam-ldapd nslcd</code></pre>
                 
                 <p class="Expl">Va a pedir una serie de preguntas, a las cuales hay que responder de la siguiente manera:</p>
                 <ol class="Expl2">
-                    <li>Cual es la URL del servidor - <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></li>
-                    <li>Cual es el dominio de LDAP - <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
-                    <li>Seleccionar "Version3"</li>
-                    <li>Seleccionar "Sí"</li>
-                    <li>Seleccionar "No"</li>
-                    <li>Cual es la URI del usuario administrador - <span class="span_contenido" translate="no">cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
-                    <li>Va a pedir la contraseña del usuario administrador por protección antes de unirte al dominio</li>
-                    <li>Seleccionar "msd"</li>
+                    <li>LDAP server URI -> <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></li>
+                    <li>LDAP server search base -> <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
+                    <li>Name services to configure -> seleccionar: <span class="span_contenido" translate="no">passwd</span>, <span class="span_contenido" translate="no">group</span>, <span class="span_contenido" translate="no">shadow</span></li>
                 </ol>
 
-                <p class="Expl">Si el proceso de instalación falla o no pregunta el paso 8, hay que reconfigurar el siguiente servicio:</p>
+                <p class="Expl">Si el proceso de instalación falla o no realiza las preguntas anteriores, hay que reconfigurar el servicio con:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">dpkg-reconfigure ldap-auth-config</code></pre>
 
-                <p>3. Una vez se haya instalado y configurado hay que editar el siguiente fichero para definir que se pueda iniciar sesión con usuarios de LDAP:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">Las 3 primeras líneas deben quedar como:</p>
-                <pre class="codigo" translate="no"><code class="bash">passwd:         files ldap
-group:          files ldap
-shadow:         files ldap</code></pre>
+                <p>3. Hay que verificar que en el siguiente fichero se haya añadido la palabra <span class="span_contenido" translate="no">ldap</span> al final de las líneas <span class="span_contenido" translate="no">passwd</span>, <span class="span_contenido" translate="no">group</span> y <span class="span_contenido" translate="no">shadow</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/nsswitch.conf</code></pre>
 
-                <p>4. Hay que actualizar los paquetes del sistema con APT:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt update && apt upgrade -y</code></pre>
-
-                <p>5. Se debe ejecutar el siguiente comando y habilitar todas las opciones que enseñe:</p>
+                <p>4. Para que el usuario pueda crear su carpeta personal al iniciar sesión hay que ejecutar el siguiente comando y habilitar la opción <span class="span_contenido" translate="no">Create home directory on login</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">pam-auth-update</code></pre>
 
-                <p>6. Hay que comprobar que los usuarios del servidor aparecen en el cliente:</p>
+                <p class="Expl">Tras ejecutar el comando anterior, hay que verificar que en el fichero <span class="span_url" translate="no">/etc/pam.d/common-session</span> exisa la siguiente línea, que indica que se debe crear la carpeta personal del usuario:</p>
+                <pre class="codigo" translate="no"><code class="bash">session optional                        pam_mkhomedir.so</code></pre>
+
+                <p>5. Si el servidor LDAP tiene algún usuario creado, se debe verificar que el cliente pueda ver sus nombres con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
-                <p>7. Hay que entrar en el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/pam.d/common-session</code></pre>
-                <p class="Expl">Y añadir la siguiente línea</p>
-                <pre class="codigo" translate="no"><code class="bash">session required pam_mkhomedir.so skel=/etc/skel umask=077</code></pre>
-
-                <p>8. Se debe reiniciar el equipo para que se apliquen los cambios:</p>
-                <pre class="codigo" translate="no"><code class="bash">reboot now</code></pre>
-
-                <p>9. Hay que reiniciar el servicio LDAP:</p>
+                <p class="Expl">En caso de que no aparezca ningún usuario, hay que reiniciar el servicio LDAP:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart nslcd</code></pre>
 
-                <p>10. Por último hay que iniciar sesión con un usuario del servidor en el equipo cliente para comprobar que funcione:</p>
+                <p>6. Por último se puede iniciar sesión con un usuario del servidor en el equipo cliente para comprobar que funcione correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">login [USUARIO_LDAP]</code></pre>
+                <p class="Expl">Si se habilitó la opción para crear las carpetas personales, al iniciar sesión debe aparecer una línea que ponga "Creating directory [...]".</p>
     
             </div>
         </div>

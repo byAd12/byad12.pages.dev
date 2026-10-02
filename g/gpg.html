@@ -58,73 +58,104 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Cifrar fichero con clave <span>simétrica</span></h2>
-
-                <p>En formato <span class="span_url" translate="no">.gpg</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg -c [FICHERO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un fichero <span class="span_url" translate="no">[NOMBRE].gpg</span>.</p>
-
-                <p>En formato <span class="span_url" translate="no">.asc</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg -c -a [FICHERO_A_CIFRAR]</code></pre>
-                <p class="Expl">Pide una clave simétrica y luego genera un fichero <span class="span_url" translate="no">[NOMBRE].asc</span>.</p>
-            </div>
-
-            <div>
-                <h2>Descifrar fichero con clave <span>[a]simétrica</span></h2>
-
-                <pre class="codigo" translate="no"><code class="bash">gpg -d [FICHERO_A_DESCIFRAR]</code></pre>
-                <p class="Expl">Si el fichero tiene una <b>clave simétrica</b> va a pedir la clave simétrica y descifra el fichero.</p>
-                <p class="Expl">Si el fichero tiene una <b>clave asimétrica</b> y si fue cifrado con tu clave pública, lo descifrará con tu clave privada.</p>
-            </div>
-
-            <div>
                 <h2>Crear una clave pública</h2>
 
+                <p>Con el siguiente comando se inicia un asistente para crear una nueva clave en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --full-generate-key</code></pre>
-                <p class="Expl"><b>Respuestas</b> que va a pedir: 2; 2048; 0; y.</p>
+                <p class="Expl">Respuestas del asistente para crear una clave:</p>
+                <ol class="Expl2">
+                    <li>Seleccionar un tipo de llave: <span class="span_contenido" translate="no">DSA and Elgamal</span>.</li>
+                    <li>Indicar el tamaño de la clave entre <span class="span_contenido" translate="no">1024</span> y <span class="span_contenido" translate="no">3072</span>.</li>
+                    <li>Indicar la duración de la clave. Para que no caduque: <span class="span_contenido" translate="no">0</span>.</li>
+                    <li>Confirmar que los valores son válidos: <span class="span_contenido" translate="no">y</span>.</li>
+                    <li>Indicar tu nombre.</li>
+                    <li>Indicar la dirección de email asociada a la nueva clave.</li>
+                    <li>Añadir un comentario (opcional).</li>
+                    <li>Confirmar que los valores son válidos: <span class="span_contenido" translate="no">o</span>.</li>
+                </ol>
+
+                <p>Para exportar la clave pública hay que ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg --armor --export [Dirección_email] &gt; [Nombre_fichero].asc</code></pre>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">Dirección_email</span>: La dirección de email asociada a la nueva clave.
+                    <br>
+                    <span class="span_contenido" translate="no">Nombre_fichero</span>: El nombre de fichero que se usará para exportar la clave.
+                </p>
+
             </div>
 
             <div>
-                <h2>Exportar la clave pública</h2>
+                <h2 id="importar-clave-publica">Importar una clave pública</h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg --armor --export [EMAIL] &gt; MiClave.asc</code></pre>
-                <p class="Expl"><b>EMAIL</b>: La dirección de correo electrónico que se definió al crear la clave pública.</p>
-            </div>
-
-            <div>
-                <h2>Importar una clave pública</h2>
-
-                <pre class="codigo" translate="no"><code class="bash">gpg --import OtraClave.asc</code></pre>
+                <p>Con el parámetro <span class="span_contenido" translate="no">--import</span> se indica la ruta local de donde se encuentra la clave pública a importar:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg --import [Ruta_clave_pública]</code></pre>
             </div>
 
             <div>
                 <h2>Ver las claves importadas</h2>
 
+                <p>Para ver las claves importadas en modo básico:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -k</code></pre>
+                
+                <p>Para ver las claves importadas en modo detallado (<span class="span_contenido" translate="no">-v</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -kv</code></pre>
             </div>
 
             <div>
                 <h2>Eliminar una clave importada</h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg --delete-key [NOMBRE_CLAVE]</code></pre>
+                <p>Para eliminar una clave importada se debe indicar el dirección de email o el nombre del propietario de la clave pública:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg --delete-key [Nombre_clave_importada]</code></pre>
+            </div>
+
+            <div>
+                <h2>Cifrar un fichero con una clave <span>simétrica</span></h2>
+
+                <p>Con el parámetro <span class="span_contenido" translate="no">-c</span> podremos cifrar un fichero mediante una clave simétrica (passphrase) en 2 formatos de ficheros diferentes.</p>
+
+                <p>Para cifrar un fichero en formato <span class="span_url" translate="no">.gpg</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -c [Fichero_a_cifrar]</code></pre>
+
+                <p>Para cifrar un fichero en formato <span class="span_url" translate="no">.asc</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -c -a [Fichero_a_cifrar]</code></pre>
+
+                <p>Al ejecutar el comando se abrirá un cuadro de diálogo donde se tendrá que ingresar la clave simétrica 2 veces con motivos de verificación.</p>
+
             </div>
 
             <div>
                 <h2>Cifrar un fichero con una clave <span>asimétrica</span></h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg -a -r [NOMBRE_OTRA_CLAVE] -e [FICHERO_A_CIFRAR]</code></pre>
-                <p class="Expl"><b>-r</b>: Puede usarse más de 1 vez.</p>
-                <p class="Expl"><b>NOMBRE_OTRA_CLAVE</b>: El nombre o email del creador de la clave pública que se va a usar para cifrar.</p>
+                <p>Se utiliza el parámetro <span class="span_contenido" translate="no">-e</span> (<span class="span_contenido" translate="no">--encrypt</span>) para cifrar un archivo junto con el parámetro <span class="span_contenido" translate="no">-r</span> (<span class="span_contenido" translate="no">--recipient</span>) para indicar el nombre de la clave pública del destinatario, que debe estar previamente importada en el equipo:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -a -r [Nombre_clave_pública_destinatario] -e [Fichero_a_cifrar]</code></pre>
+
+                <p>Para ver el nombre de la clave pública del destinatario se puede usar el parámetro <span class="span_contenido" translate="no">-k</span> (la clave debe <a href="#importar-clave-publica">estar previamente importada</a></a>):</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -k</code></pre>
+                <p class="Expl">El nombre puede ser la dirección de email o el nombre que se indica en el apartado <span class="span_contenido" translate="no">uid</span>.</p>
+            </div>
+
+            <div>
+                <h2>Descifrar un fichero con una clave <span>a/simétrica</span></h2>
+
+                <p>El parámetro <span class="span_contenido" translate="no">-d</span> permite descifrar un fichero que haya sido cifrado por una clave simétrica o asimétrica:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -d [Fichero_a_descifrar]</code></pre>
+                <p class="Expl">
+                    Si el fichero fue cifrado con una clave <b>simétrica</b>, solo se solicitará la clave simétrica para descifrar el fichero.
+                    <br>
+                    Si el fichero fue cifrado con una clave pública (<b>asimétrica</b>), GPG buscará en el sistema la clave privada correspondiente y solicitará la contraseña para utilizarla.
+                </p>
             </div>
 
             <div>
                 <h2>Firmar un fichero</h2>
 
-                <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [FICHERO_A_FIRMAR]</code></pre>
-                <p class="Expl">Generará un fichero <span class="span_url" translate="no">.gpg</span> que servirá como firma.</p>
-                <p class="Expl">Este se enviará junto al fichero original para verificar si se ha modificado o no. Para verificarlo:</p>
-                <pre class="codigo" translate="no"><code class="bash">gpg [FICHERO_FIRMADO]</code></pre>
-                <p class="Expl">EL comando te pedirá la ruta del fichero original y comparará la firma.</p>
+                <p>Primero hay que generar un fichero <span class="span_url" translate="no">.asc</span> que sirva como firma:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [Fichero_a_firmar]</code></pre>
+                <p class="Expl">Este fichero <span class="span_url" translate="no">.asc</span> se enviará junto al fichero original para verificar si el fichero original se ha modificado o no.</p>
+                
+                <p>Para verificar si el fichero se ha modificado hay que indicar la ruta del fichero de firma <span class="span_url" translate="no">.asc</span> y la ruta del fichero original:</p>
+                <pre class="codigo" translate="no"><code class="bash">gpg --verify [Ruta_fichero_firma].asc [Ruta_fichero_original]</code></pre>
+
             </div>
 
         </div>

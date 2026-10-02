@@ -178,8 +178,7 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
 
 @media screen and (max-width: 1040px){
-    .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){padding-left: 0 !important; padding-right: 0 !important; width: 100% !important; margin: 0 !important;}
-    .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
+    .parte1 div:not(.BotonPersonalizadoDIV, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){padding-left: 0 !important; padding-right: 0 !important; width: 100% !important; margin: 0 !important;}
 }
 
 /* =================================================== */
@@ -274,7 +273,10 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     div.Expl table{margin-left: 0 !important; width: 100% !important;}
 
     h1:not(.TituloPrincipal){font-size: 30px;}
-    table td:not(table.UnicaColumna td), table.UnicaColumna tr{border: 1px solid #333 !important;}
+
+    .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
+    .TablaDivScroll table tr td{height: 100% !important; border: none !important;}
+    .TablaDivScroll table tr td:last-child{padding-top: 0;}
 }
 
 /* =================================================== */
