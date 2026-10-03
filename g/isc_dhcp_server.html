@@ -61,6 +61,14 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y isc-dhcp-server</code></pre>
 
             </div>
+
+            <div>
+                <h2>2. Configuración del firewall</h2>
+
+                <p>En el firewall hay que permitir el tráfico del puerto 67 - UDP (DHCP):</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 67/udp</code></pre>
+
+            </div>
            
             <div>
                 <h2>Ficheros importantes</h2>
@@ -84,7 +92,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="isc-dhcp-server">2. Fichero de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+                <h2 id="isc-dhcp-server">3. Fichero de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
 
                 <p>A continuación hay que modificar las siguientes líneas del fichero...</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
@@ -103,7 +111,7 @@ INTERFACESv6=""</code></pre>
             </div>
 
             <div>
-                <h2 id="dhcpd.conf">3. Fichero de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
+                <h2 id="dhcpd.conf">4. Fichero de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
 
                 <p>
                     Las líneas que se presentan a continuación pueden definirse dentro o fuera de una <span class="span_contenido" translate="no">subnet</span>.
@@ -256,14 +264,6 @@ min-lease-time [Segundos];</code></pre>
                         
                     </table>
                 </div>
-
-            </div>
-
-            <div>
-                <h2>4. Configuración del firewall</h2>
-
-                <p>En el firewall hay que permitir el tráfico del puerto 67 - UDP (DHCP):</p>
-                <pre class="codigo" translate="no"><code class="bash">ufw allow 67/udp</code></pre>
 
             </div>
 

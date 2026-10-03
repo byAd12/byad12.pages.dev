@@ -50,19 +50,32 @@ Código por byAd12
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
-                <h2>Instalación y configuración</h2>
+                <h2>1. Instalación</h2>
+
+                <p>En el servidor donde se enviarán los emails hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">ufw allow 25</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y postfix</code></pre>
                 <p class="Expl"><u>Respuestas</u> que va a pedir: "Sitio de Internet"; Poner un dominio (real o ficticio).</p>
             </div>
 
             <div>
-                <h2>Comprobación</h2>
+                <h2>2. Comprobación</h2>
+
+                <p>Primero hay que verificar que el servicio <span class="span_contenido" translate="no">postfix</span> se esté ejecutando en el puerto 25:</p>
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep postfix</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">netstat -ltn | grep 25</code></pre>
+
+                <p>También se puede iniciar una conexión mediante <span class="span_contenido" translate="no">telnet</span> desde el propio servidor a su puerto 25:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet localhost 25</code></pre>
-                <p class="Expl">Dentro usar el comando <span class="span_contenido" translate="no">>HELO</span> y debe devolver el código 250.</p>
+                <p class="Expl">Dentro de esa conexión se puede enviar el comando <span class="span_contenido" translate="no">HELO</span>, que debería devolver el código <span class="span_contenido" translate="no">250</span>.</p>
+            </div>
+
+            <div>
+                <h2>3. Configuración del firewall</h2>
+
+                <p>En el firewall hay que permitir el tráfico del puerto 25 - TCP (SMTP):</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow 25</code></pre>
+
             </div>
 
             <div>
@@ -77,8 +90,9 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/postfix/master.cf</code></pre></td>
                             <td>
-                                Fichero de configuración del demonio maestro de postfix.
-                                <br>Se encarga de interactuar con los procesos para enviar correos
+                                Fichero de configuración del demonio maestro de postfix
+                                <br>
+                                Se encarga de interactuar con los procesos para enviar correos
                             </td>
                         </tr>
                         <tr>
@@ -88,9 +102,12 @@ Código por byAd12
                     </table>
                 </div>
 
-                <p><u>Formato</u> del fichero <span class="span_url" translate="no">/etc/postfix/main.cf</span>:</p>
-                <p class="Expl"><b>parametro=valor</b>. Si una línea empieza con un espacio, continúa a la línea anterior.</p>
-                <p class="Expl"><b>$parámetro</b>: Asignar un valor de un parámetro a otro.</p>
+                <p>Formato del fichero <span class="span_url" translate="no">/etc/postfix/main.cf</span>:</p>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">parametro=valor</span>: Si una línea empieza con un espacio, continúa a la línea anterior.
+                    <br>
+                    <span class="span_contenido" translate="no">$parámetro</span>: Asignar un valor de un parámetro a otro.
+                </p>
 
             </div>
 
@@ -133,28 +150,37 @@ Código por byAd12
             <div>
                 <h2>Envío de email con <span>telnet</span></h2>
 
-                <p>Para conectarse a un servidor SMTP, como postfix:</p>
-                <pre class="codigo" translate="no"><code class="bash">telnet [IP/DNS/localhost] [PUERTO:25]</code></pre>
+                <p>Para iniciar una conexión <span class="span_contenido" translate="no">telnet</span> hacia un servidor SMTP, como puede ser <span class="span_contenido" translate="no">postfix</span>, se debe indicar la dirección del servidor y su puerto:</p>
+                <pre class="codigo" translate="no"><code class="bash">telnet [IP/DNS/localhost] [Puerto_servidor_SMTP]</code></pre>
+                <p class="Expl">El puerto por defecto de SMTP es el puerto 25 (se debe especificar).</p>
+
                 <p>Dentro de la conexión telnet hay que poner los siguientes campos separando cada uno por una línea vacía:</p>
-                <pre class="codigo" translate="no"><code class="bash">MAIL FROM:[CORREO_REMITENTE]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">RCPT TO:[CORREO_DESTINATARIO]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">MAIL FROM:[Dirección_remitente]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">RCPT TO:[Dirección_destinatario]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">DATA</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">SUBJECT:[ASUNTO]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">[MENSAJE_A_ENVIAR]</code></pre>
-                <p class="Expl">Se para de escribir al poner línea vacía con un "."</p>
+                <pre class="codigo" translate="no"><code class="bash">SUBJECT:[Asunto]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">[Mensaje a enviar]</code></pre>
+                <p class="Expl2">Para finalizar de escribir el campo del mensaje hay que dejar una línea en blanco con un punto (<span class="span_contenido" translate="no">.</span>).</p>
                 <pre class="codigo" translate="no"><code class="bash">QUIT</code></pre>
             </div>
 
             <div>
                 <h2>Envío de email con el comando <span translate="no">mail</span></h2>
 
-                <p>Instalar el paquete:</p>
+                <p>En el cliente donde se ejecutará el comando hay que instalar el siguiente paquete:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y mailutils</code></pre>
-                <p>Usar el comando [Solo funciona con cuentas reales del sistema]:</p>
-                <pre class="codigo" translate="no"><code class="bash">echo "[CUERPO_MENSAJE]" | mail -s "[ASUNTO]" -A [FICHERO_ADJUNTAR] [CORREO_DESTINATARIO]</code></pre>
-                <p class="Expl"><span class="span_contenido" translate="no">>CTRL + D</span>: Enviar el mensaje.</p>
-                <p>Si se envió a otro usuario del sistema se puede ver su correo en:</p>
-                <pre class="codigo" translate="no"><code class="bash">cat /var/mail/[NOMBRE_USUARIO]</code></pre>
+                
+                <p>Para enviar un nuevo correo a otro usuario del sistema:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo "[Cuerpo_del_mensaje]" | mail -s "[Asunto]" (-A [Ruta_del_fichero_a_adjuntar]) [Nombre_usuario_destinatario]</code></pre>
+                <p class="Expl">
+                    El destinatario puede ser cualquier usuario del sistema.
+                    <br>
+                    El parámetro <span class="span_contenido" translate="no">-A</span> (adjuntar un fichero) es opcional.
+                </p>
+                
+                <p>El destinatario puede ver los correos que ha recibido en la siguiente ruta, indicando su nombre de usuario:</p>
+                <pre class="codigo" translate="no"><code class="bash">cat /var/mail/[Nombre_usuario]</code></pre>
             </div>
         </div>
         <!-- ......................................................... -->

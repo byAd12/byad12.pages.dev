@@ -53,7 +53,7 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h2>(1) Instalación en el servidor</h2>
+                <h2>1. Instalación en el servidor</h2>
 
                 <p>1. Hay que instalar el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -85,7 +85,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>(2) Asignar una IP estática en el servidor</h2>
+                <h2>2. Asignar una IP estática en el servidor</h2>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el fichero de configuración de Netplan.</p>
 
@@ -122,7 +122,7 @@ Código por byAd12
 
             <div>
 
-                <h2>(3) Instalación en el cliente</h2>
+                <h2>3. Instalación en el cliente</h2>
 
                 <p>1. Hay que instalar el servicio de PostgreSQL para clientes:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -135,7 +135,7 @@ Código por byAd12
 
             <div>
 
-                <h2>(4) Gestionar los clústers</h2>
+                <h2>4. Gestionar los clústers</h2>
 
                 <p>Para ver según el sistema la versión, <b>nombre</b> puerto, <b>estado</b>, propietario, ruta de datos y registros de cada clúster:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
@@ -154,7 +154,7 @@ Código por byAd12
 
             <div>
 
-                <h2>(5) Permitir conexiones remotas</h2>
+                <h2>5. Permitir conexiones remotas</h2>
 
                 <p>1. Primero debes copiar la ruta local que indique el comando <span class="span_contenido" translate="no">SHOW hba_file;</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql

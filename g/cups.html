@@ -49,52 +49,65 @@ Código por byAd12
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <div class="parte1">
             <div>
-                <h2>Instalación y verificación</h2>
+                <h2>1. Instalación</h2>
                 
                 <p>En el equipo donde se podrá administrar el servicio hay que instalar los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="language-bash">apt-get install -y cups cups-pdf</code></pre>
+            </div>
+
+            <div>
+                <h2>2. Comprobación</h2>
 
                 <p>Para verificar el estado del servicio:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl status cups</code></pre>
 
-                <p>A continuación se permite el acceso a cualquier red al servicio:</p>
+                <p>
+                    También hay que verificar que el servicio esté escuchando en el puerto correspondiente
+                    (debería ser el puerto <span class="span_url" translate="no">631</span>):
+                </p>
+                <pre class="codigo" translate="no"><code class="language-bash">lsof -i -P -n | grep cups</code></pre>
+
+            </div>
+
+            <div>
+                <h2>3. Limitación de acceso</h2>
+
+                <p>Para permitir el acceso desde cualquier red al servicio hay que ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">cupsctl --remote-any</code></pre>
-                <p class="Expl">O se puede limitar el acceso a solo la red local configurando el siguiente fichero:</p>
+
+                <p>También se puede limitar el acceso para que solo la red local pueda acceder. Para ello hay que modificar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">nano /etc/cups/cupsd.conf</code></pre>
-                <p class="Expl">En la sección <span class="span_contenido" translate="no">&lt;Location /&gt;</span> hay que configurarla como en el siguiente bloque, pero definiendo el valor <span class="span_url" translate="no">Dirección_de_red_local</span>:</p>
+                <p class="Expl">Hay que configurar la sección <span class="span_contenido" translate="no">&lt;Location /&gt;</span> como en el siguiente bloque, pero definiendo el valor <span class="span_url" translate="no">Dirección_de_red_local</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">&lt;Location /&gt;
   Order allow,deny
   Allow localhost
   Allow [Dirección_de_red_local]
 &lt;/Location&gt;</code></pre>
 
-                <p>Luego hay que aplicar los cambios reiniciando el servicio:</p>
+                <p>Para aplicar los cambios hay que reiniciar el servicio:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl restart cups</code></pre>
-
-                <p>Ahora se debe verificar que el servicio cups esté escuchando en los puertos correspondientes. Debería ser el puerto <span class="span_url" translate="no">631</span>:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">lsof -i -P -n | grep cups</code></pre>
 
             </div>
 
             <div>
-                <h2>Administración de la interfaz gráfica</h2>
+                <h2>4. Añadir una impresora CUPS-PDF desde la interfaz gráfica</h2>
 
-                <p>Primero hay que entrar al panel de administración web de cups. La URL debería ser:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_local_servidor]:631/admin</code></pre>
+                <p>Desde un navegador web hay que entrar al panel de administración del servicio:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_servidor]:631/admin</code></pre>
 
                 <p>En la sección de <span class="span_contenido" translate="no">Printers</span> se debe pulsar <span class="span_contenido" translate="no">Add Printer</span>.</p>
                 <ul>
                     <li>Seleccionar <span class="span_url" translate="no">CUPS-PDF (Virtual PDF Printer)</span> y luego <span class="span_contenido" translate="no">Continue</span>.</li>
-                    <li>Definir un nombre a la impresora, una descripción y se seleccionará <span class="span_contenido" translate="no">Share this printer</span>. Luego hay que pulsar <span class="span_contenido" translate="no">Continue</span>.</li>
+                    <li>Definir un nombre a la impresora, una descripción y luego hay que pulsar en <span class="span_contenido" translate="no">Share this printer</span> y <span class="span_contenido" translate="no">Continue</span>.</li>
                     <li>En la sección <span class="span_contenido" translate="no">Make</span> hay que seleccionar el driver <span class="span_url" translate="no">Generic</span>, en la sección <span class="span_contenido" translate="no">Model</span> el modelo <span class="span_url" translate="no">Generic CUPS-PDF Printer (w/ options) (en)</span> y por último hay que pulsar <span class="span_contenido" translate="no">Add Printer</span>.</li>
                 </ul>
 
-                <p>Ahora hay que acceder a a la sección de impresoras del panel. La URL debería ser:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_local_servidor]:631/printers</code></pre>
-                <p class="Expl">Hay que seleccionar la impresora que se ha creado en el paso anterior y ya se podrá ver la cola de impresión.</p>
+                <p>Ahora hay que acceder a a la sección de impresoras del panel:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">https://[IP_servidor]:631/printers</code></pre>
+                <p class="Expl">Al seleccionar la impresora que se ha creado en el paso anterior se podrá ver su cola de impresión.</p>
 
-                <p>Después de crear la impresora en el panel web (CUPS-PDF), hay que activarla y permitir trabajos especificando el nombre configurado de la impresora:</p>
+                <p>Después de crear la impresora en el panel web, hay que activarla y permitir trabajos especificando el nombre configurado de la impresora:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">cupsenable [Nombre_impresora]</code></pre>
                 <pre class="codigo" translate="no"><code class="language-bash">cupsaccept [Nombre_impresora]</code></pre>
 
@@ -108,12 +121,12 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Agregar la impresora al Sistema</h2>
+                <h2>5. Agregar la impresora en los equipos clientes</h2>
 
                 <p>En un equipo de la red se listarán las impresoras que se detecten:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">lpinfo -v</code></pre>
 
-                <p>Ahora se debe añadir una impresora al sistema local asignándole un nombre (-p) mediante la IP del equipo (ipp://...) que creó la impresora y el nombre que le asignó a esta (printers/...):</p>
+                <p>Ahora se debe añadir una impresora al sistema local asignándole un nombre (<span class="span_contenido" translate="no">-p</span>) mediante la IP del equipo (<span class="span_contenido" translate="no">ipp://...</span>) que creó la impresora y el nombre que le asignó a esta (<span class="span_contenido" translate="no">printers/...</span>):</p>
                 <pre class="codigo" translate="no"><code class="language-bash">lpadmin -p [Nombre_impresora_local] -E -v ipp://[IP_servidor]:631/printers/[Nombre_impresora] -m everywhere</code></pre>
 
                 <p>Una vez se añada la impresora hay que activarla y permitir los trabajos de impresión mediante el nombre configurado en el paso anterior:</p>

@@ -56,9 +56,14 @@ Código por byAd12
                 <p>En el servidor hay que instalar el servicio correspondiente y sus dependencias:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y bind9 dnsutils</code></pre>
+            </div>
+
+            <div>
+                <h2>2. Configuración del firewall</h2>
 
                 <p>En el firewall se debe permitir el tráfico del puerto 53 - UDP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
+
             </div>
            
             <div>
@@ -88,9 +93,9 @@ Código por byAd12
             
 
             <div>
-                <h2>2. Configuración del Servidor DNS</h2>
+                <h2>3. Configuración del Servidor DNS</h2>
 
-                <h3>2.1. Crear una zona de búsqueda directa</h3>
+                <h3>3.1. Crear una zona de búsqueda directa</h3>
 
                 <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Un ejemplo es el siguiente, donde se definen los registros DNS de un dominio llamado <span class="span_contenido" translate="no">adr.es</span>:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
@@ -121,7 +126,7 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
 > set type=NS
 > [Nombre_dominio].[TLD]</code></pre>
 
-                <h3>2.2. Crear una zona de búsqueda inversa</h3>
+                <h3>3.2. Crear una zona de búsqueda inversa</h3>
 
                 <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Dirección_red</span>) que contenga todos los registros DNS de la zona inversa. Un ejemplo es el siguiente, que define los registros DNS de la zona <span class="span_contenido" translate="no">0.168.192.in-addr.arpa</span> (<span class="span_contenido" translate="no">192.168.0.0/24</span>):</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
@@ -176,7 +181,7 @@ listen-on { any; };
             </div>
 
             <div>
-                <h2>3. Comprobación del funcionamiento</h2>
+                <h2>4. Comprobación del funcionamiento</h2>
 
                 <p>Primero hay que mirar si el servicio está encendido y sin errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">service bind9 start</code></pre>
@@ -190,7 +195,7 @@ listen-on { any; };
             </div>
 
             <div>
-                <h2>4. Si el cliente tiene problemas con el DNS</h2>
+                <h2>5. Si el cliente tiene problemas con el DNS</h2>
 
                 <p>Primero se verifica que los siguientes ficheros no contengan registros DNS inválidos:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>

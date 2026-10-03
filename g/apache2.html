@@ -56,16 +56,21 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y apache2 apache2-utils</code></pre>
 
-                <p>2. En el firewall hay que permitir el tráfico de los puertos que se vayan a utilizar:</p>
-                <pre class="codigo" translate="no"><code class="bash">ufw allow [Puerto]/[Protocolo]</code></pre>
-
-                <p>3. Para que el servicio de Apache se inicie automáticamente al iniciar el equipo:</p>
+                <p>2. Para que el servicio de Apache se inicie automáticamente al iniciar el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now apache2</code></pre>
 
             </div>
 
             <div>
-                <h2>2. Asignar una IP estática</h2>
+                <h2>2. Configuración del firewall</h2>
+
+                <p>2. En el firewall hay que permitir el tráfico de los puertos que se vayan a utilizar:</p>
+                <pre class="codigo" translate="no"><code class="bash">ufw allow [Puerto]/[Protocolo]</code></pre>
+
+            </div>
+
+            <div>
+                <h2>3. Asignar una IP estática</h2>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o modificando el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
@@ -101,7 +106,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>3. Permitir el acceso remoto</h2>
+                <h2>4. Permitir el acceso remoto</h2>
 
                 <p>1. Hay que instalar el servicio de SSH en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y openssh-server</code></pre>
