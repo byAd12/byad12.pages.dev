@@ -4,25 +4,23 @@
 // ==========================================================
 // CAMBIAR ESTILOS DE .menu_bar
 
-document.addEventListener("scroll", () => {
-    const stickyElement = document.getElementById("menu_bar");
-    const isAtTop = stickyElement.getBoundingClientRect().top === 0;
+const menuBar = document.getElementById("menu_bar");
+const dd = document.getElementById("dd");
 
-    if (isAtTop) {
-        stickyElement.classList.add("menu_bar_top");
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+        menuBar.classList.add("menu_bar_top");
     } else {
-        stickyElement.classList.remove("menu_bar_top");
+        menuBar.classList.remove("menu_bar_top");
     }
-});
 
-document.addEventListener("scroll", () => {
-    const stickyElement = document.getElementById("dd");
-    const isAtTop = stickyElement.getBoundingClientRect().top === 0;
-
-    if (isAtTop) {
-        document.getElementById("menu_bar").classList.add("menu_bar_top_2");
-    } else {
-        document.getElementById("menu_bar").classList.remove("menu_bar_top_2");
+    if (dd) {
+        const ddTop = dd.getBoundingClientRect().top;
+        if (ddTop <= 0) {
+            menuBar.classList.add("menu_bar_top_2");
+        } else {
+            menuBar.classList.remove("menu_bar_top_2");
+        }
     }
 });
 
