@@ -25,9 +25,8 @@
 /* =================================================== */
 /* Fuentes */
 
-@font-face{font-family: "Doto"; src: url("../fonts/Doto-Regular.ttf");}
-@font-face{font-family: "RobotoMono"; src: url("../fonts/RobotoMono.ttf");}
-@font-face{font-family: "Smoch"; src: url("../fonts/SmoochSans-VariableFont_wght.ttf");}
+@font-face{font-family: "Doto"; src: url("../resources/fonts/Doto-Regular.ttf");}
+@font-face{font-family: "Smoch"; src: url("../resources/fonts/SmoochSans-VariableFont_wght.ttf");}
 
 /* =================================================== */
 /* Scrollbar */
@@ -135,7 +134,7 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 .TablaDivScroll table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
 .TablaDivScroll table tr.Titulo{background-color: rgb(29, 30, 30);}
 .TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
-.TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0 !important;}
+.TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0;}
 .TablaDivScroll table.TablaComandos td{width: auto;}
 .TablaDivScroll table.TablaComandos td pre{width: 100%; word-break: break-all; overflow-wrap: break-word; overflow-x: hidden;}
 
@@ -283,6 +282,8 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
     .TablaDivScroll table tr td{height: 100% !important; border: none !important;}
     .TablaDivScroll table tr td:last-child{padding-top: 0;}
+
+    .TablaNmap .Titulo, .TablaNmap .Titulo td, .TablaNmap .Titulo td *{font-weight: bolder;}
 }
 
 /* =================================================== */

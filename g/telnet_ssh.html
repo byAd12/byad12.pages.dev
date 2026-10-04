@@ -12,6 +12,7 @@ Código por byAd12
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="noindex,nofollow">
+        <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>Servicios Remotos - Linux</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
@@ -63,7 +64,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Conectarse a otro equipo <img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2>Conectarse a otro equipo con credenciales desde un cliente <span>Linux</span> y <span>Windows</span></h2>
 
                 <p>El siguiente comando permite crear una sesión TELNET hacia un equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP/FQDN del equipo remoto] (Puerto_servidor)</code></pre>
@@ -126,7 +127,7 @@ Código por byAd12
             <div>
                 <h2>Conectarse a otro equipo con claves desde un cliente <span>Linux</span></h2>
 
-                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave SSH ED25519:</p>
+                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal SSH ED25519:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t ed25519 -C "[Descripción de la clave]"</code></pre>
                 <p class="Expl">
                     Pedirá una ruta donde se guardará la clave privada. Por defecto se guarda en la carpeta <span class="span_contenido" translate="no">~/.ssh</span>.
@@ -150,6 +151,7 @@ Código por byAd12
                     Una vez copiado se puede comprobar en el equipo remoto que aparece el mismo contenido que la clave pública en su fichero de claves autorizadas:
                 </p>
                 <pre class="codigo Expl" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
+                <p class="Expl2">Para copiar la clave al usuario <span class="span_contenido" translate="no">root</span> se debe permitir la directiva <span class="span_contenido" translate="no">PermitRootLogin</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> o se puede hacer manualmente copiando la clave pública directamente en su fichero <span class="span_url" translate="no">~/.ssh/authorized_keys</span>.</p>
 
                 <p>4. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
@@ -170,6 +172,28 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">ssh [Nombre_alias]</code></pre>
                 <p class="Expl">El comando anterior sería lo mismo que ejecutar lo siguiente:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+
+                <p>
+                    <u>Nota</u>: El equipo remoto solo se aplica a un solo usuario. 
+                    Para aplicar los bloques <span class="span_contenido" translate="no">Host</span> a todos los usuarios del equipo, se deben definir directamente en el siguiente fichero de configuración:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/ssh/sshd_config</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Cargar una clave en memoria en un cliente <span>Linux</span></h2>
+
+                <p>Estos pasos guardan temporalmente la clave SSH en memoria para no tener que introducir la passphrase cada vez que se utiliza durante la sesión:</p>
+
+                <p>1. Primero hay que iniciar el programa <span class="span_contenido" translate="no">ssh-agent</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">eval $(ssh-agent -s)</code></pre>
+
+                <p>2. Luego, se debe añadir la clave privada al <span class="span_contenido" translate="no">ssh-agent</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh-add ~/.ssh/id_[XXX]</code></pre>
+
+                <p>3. Por último, hay que listar las claves que actualmente tiene cargadas el agente para comprobar que la clave del paso 2 se ha cargado correctamente:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh-add -l</code></pre>
 
             </div>
 

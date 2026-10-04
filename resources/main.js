@@ -99,7 +99,7 @@ async function datos_guias() {
         if (!res.ok) throw new Error("Error al consultar la API de GitHub");
         
         const items = await res.json();
-        const InformacionGuiasTotal = items.filter(item => item.type === "file").length;
+        const InformacionGuiasTotal = (items.filter(item => item.type === "file").length - 1);
 
         // Ahora ambos valores están disponibles y definidos
         document.getElementById("InformacionGuiasTotal").innerText = InformacionGuiasTotal;

@@ -17,9 +17,7 @@ br{user-select: none;}
 /* ========================================================= */
 /* FUENTES */
 
-@font-face{font-family: "Oswald"; src: url("../fonts/Oswald.ttf");}
-@font-face{font-family: "Smoch"; src: url("../fonts/SmoochSans-VariableFont_wght.ttf");}
-@font-face{font-family: "FiraCode"; src: url('../fonts/FiraCode-VariableFont_wght.ttf');}
+@font-face{font-family: "Smoch"; src: url("../resources/fonts/SmoochSans-VariableFont_wght.ttf");}
 
 /* ========================================================= */
 /* MENÚ NAVEGACIÓN */
@@ -232,27 +230,26 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 
 .BlogEntradas{display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 20px; padding: 0; margin: 20px 0; margin-left: 50px;}
 
-.BlogEntradas a{position: relative; display: inline-block; overflow: hidden;}
-.BlogEntradas a .Entrada{background-color: #222523; color: white; transition: all .5s; border: 1px solid rgba(128, 128, 128, 0.5); border-top: none; position: relative; overflow: hidden;}
+.BlogEntradas .LinkEntrada{position: relative; display: inline-block; overflow: hidden;}
+.BlogEntradas .LinkEntrada .Entrada{background-color: #222523; color: white; transition: all .5s; border: 1px solid rgba(128, 128, 128, 0.5); border-top: none; position: relative; overflow: hidden;}
 
-.BlogEntradas a .Entrada.Color0{border-top: 3px solid rgba(128, 128, 128, 0.5);}
-.BlogEntradas a .Entrada.Color1{border-top: 3px solid rgb(120, 120, 200);}
-.BlogEntradas a .Entrada.Color2{border-top: 3px solid rgba(167, 255, 112, 0.5);}
-.BlogEntradas a .Entrada.Color3::after{content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; pointer-events: none; background: linear-gradient(to right, rgb(120, 120, 200) 50%, rgba(167, 255, 112, 0.5) 50%);}
+.BlogEntradas .LinkEntrada .Entrada.Color0{border-top: 3px solid rgba(128, 128, 128, 0.5);}
+.BlogEntradas .LinkEntrada .Entrada.Color1{border-top: 3px solid rgb(101, 101, 174);}
+.BlogEntradas .LinkEntrada .Entrada.Color2{border-top: 3px solid rgba(167, 255, 112, 0.5);}
+.BlogEntradas .LinkEntrada .Entrada.Color3::after{content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px; pointer-events: none; background: linear-gradient(to right, rgb(101, 101, 174) 50%, rgba(167, 255, 112, 0.5) 50%);}
 
-.BlogEntradas a .Entrada div{display: flex; background-color: #222523; padding: 20px; border-bottom: 1px solid rgba(128, 128, 128, 0.5); justify-content: space-between; align-items: center;}
-.BlogEntradas a .Entrada div h3{text-align: left;}
-.BlogEntradas a .Entrada div p{text-align: right;}
-.BlogEntradas a .Entrada img.SOBlog{max-width: 14px; transform: translateY(3px); transition: all .5s;}
-.BlogEntradas a .Entrada p:not(.Entrada div p){text-align: left; padding: 20px; color: rgb(228, 196, 196);}
+.BlogEntradas .LinkEntrada .Entrada div{display: flex; background-color: #222523; padding: 20px; border-bottom: 1px solid rgba(128, 128, 128, 0.5); justify-content: space-between; align-items: center;}
+.BlogEntradas .LinkEntrada .Entrada div h3{text-align: left;}
+.BlogEntradas .LinkEntrada .Entrada div p{text-align: right;}
+.BlogEntradas .LinkEntrada .Entrada img.SOBlog{max-width: 14px; transform: translateY(3px); transition: all .5s;}
 .BlogEntradas .Color0 div p, .BlogEntradas .Color1 div p, .BlogEntradas .Color2 div p{transition: none !important;}
 
-.BlogEntradas a:hover div div p{color: transparent !important; position: relative;}
+.BlogEntradas .LinkEntrada:hover div div p{color: transparent !important; position: relative;}
 
-.BlogEntradas a .Color0:hover div p::after{content: "Otros"; position: absolute; right: 0; top: 0; color: gray !important;}
-.BlogEntradas a .Color1:hover div p::after{content: "S.M.R."; position: absolute; right: 0; top: 0; color: rgb(120, 120, 200) !important;}
-.BlogEntradas a .Color2:hover div p::after{content: "A.S.I.R."; position: absolute; right: 0; top: 0; color: rgba(167, 255, 112, 0.5) !important;}
-.BlogEntradas a .Color3:hover div p::after{content: "S.M.R. / A.S.I.R."; position: absolute; right: 0; top: 0; color: gray !important; white-space: nowrap;}
+.BlogEntradas .LinkEntrada .Color0:hover div p::after{content: "Otros"; position: absolute; right: 0; top: 0; color: gray !important;}
+.BlogEntradas .LinkEntrada .Color1:hover div p::after{content: "S.M.R."; position: absolute; right: 0; top: 0; color: rgb(101, 101, 174) !important;}
+.BlogEntradas .LinkEntrada .Color2:hover div p::after{content: "A.S.I.R."; position: absolute; right: 0; top: 0; color: rgba(167, 255, 112, 0.5) !important;}
+.BlogEntradas .LinkEntrada .Color3:hover div p::after{content: "S.M.R. / A.S.I.R."; position: absolute; right: 0; top: 0; color: gray !important; white-space: nowrap;}
 
 .GuiasBordeColores .Espaciador{margin-left: 20px;}
 .GuiasBordeColores button{color: white; background-color: #222523; border: none; border-bottom: 1px solid #222523 !important; cursor: pointer; margin-right: 10px; font-size: 22px;}
@@ -378,9 +375,9 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 
   /* GUÍAS */
   .BlogEntradas{margin-left: 35px !important;}
-  .BlogEntradas a .Entrada{width: 100%;}
-  .BlogEntradas a .Entrada div{flex-direction: column; justify-content: center; gap: 10px;}
-  .BlogEntradas a .Entrada p{text-align: center !important;}
+  .BlogEntradas .LinkEntrada .Entrada{width: 100%;}
+  .BlogEntradas .LinkEntrada .Entrada div{flex-direction: column; justify-content: center; gap: 10px;}
+  .BlogEntradas .LinkEntrada .Entrada p{text-align: center !important;}
   .Guias_titulo{gap: 15px;}
   .Div_arbol_guias .Linea_vertical_arbol{width: 25px;}
   .Div_arbol_guias .Nivel2{margin-left: 35px;}
@@ -389,8 +386,8 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 
 @media screen and (max-width: 200px){
   /* GUÍAS */
-  .BlogEntradas a .Entrada div h3, .BlogEntradas a .Entrada div p, .BlogEntradas a .Entrada p{font-size: 10vw;}
-  .BlogEntradas a .Entrada p{word-break: break-all;}
+  .BlogEntradas .LinkEntrada .Entrada div h3, .BlogEntradas .LinkEntrada .Entrada div p, .BlogEntradas .LinkEntrada .Entrada p{font-size: 10vw;}
+  .BlogEntradas .LinkEntrada .Entrada p{word-break: break-all;}
   .ocultarMOVIL{display: none;}
 }
 

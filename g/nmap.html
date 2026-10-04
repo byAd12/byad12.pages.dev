@@ -12,6 +12,7 @@ Código por byAd12
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="noindex,nofollow">
+        <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>Nmap</title>
 
         <link rel="stylesheet" type="text/css" href="../resources/blog.css">
@@ -182,11 +183,16 @@ Código por byAd12
                         </tr>
                         
                         <tr>
+                            <td><pre translate="no"><code class="bash">-p U:53,67,68,T:22,80,443,445,389</code></pre></td>
+                            <td>Los puertos UDP 53, 67, 68 (<span class="span_contenido" translate="no">U:</span>) y los puertos TCP 22, 80, 443, 445, 389 (<span class="span_contenido" translate="no">T:</span>).</td>
+                        </tr>
+
+                        <tr>
                             <td><pre translate="no"><code class="bash">-F</code></pre></td>
                             <td>Los 100 primeros puertos más importantes clasificados por Nmap.</td>
                         </tr>
                         <tr>
-                            <td><pre translate="no"><code class="bash">-top-ports=10</code></pre></td>
+                            <td><pre translate="no"><code class="bash">--top-ports=10</code></pre></td>
                             <td>Los 10 puertos más importantes clasificados por Nmap.</td>
                         </tr>
 
@@ -317,7 +323,7 @@ Código por byAd12
                                 Funcionamiento del escaneo <span class="opcion">ICMP Echo Request</span>:
 
                                 <ul>
-                                    <li>Antes de enviar el paquete ICMP y, si nuestro host está en la misma red que el objetivo, se enviará un paquete ARP Request aunque se puede omitir usando el parámetro "--disable-arp-ping"
+                                    <li>Antes de enviar el paquete ICMP y, si nuestro host está en la misma red que el objetivo, se enviará un paquete ARP Request
                                         <ul>
                                             <li>Si recibe un ARP reply, el host está '<span class="positivo">active</span>'</li>
                                             <li>Si no se recibe un ARP reply, se enviará un ICMP Echo Request
@@ -353,7 +359,7 @@ Código por byAd12
                 </div>
 
                 <div class="TablaDivScroll">
-                    <table class="TablaComandos TablaNmap">
+                    <table class="TablaComandos TablaNmap UnicaColumna">
 
                         <tr class="Titulo">
                             <td colspan="2" class="efecto_ocultar">
@@ -363,7 +369,11 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">--disable-arp-ping</code></pre></td>
-                            <td>Deshabilita la resolución de direcciones MAC mediante solicitudes ARP que se realiza por defecto para poder enviar un paquete, como por ejemplo en el escaneo <span class="opcion">ICMP Echo Request</span> (<span class="opcion">-PE</span>).</td>
+                            <td>
+                                Deshabilita la resolución de direcciones MAC mediante solicitudes ARP que se realiza por defecto para poder enviar un paquete para averiguar si el host está activo, como por ejemplo en el escaneo <span class="opcion">ICMP Echo Request</span> (<span class="opcion">-PE</span>).
+                                <br>
+                                Ten en cuenta que el escaneo por ARP en redes locales es más fiable que averiguar el estado de un host mediante paquetes ICMP.
+                            </td>
                         </tr>
 
                         <tr>
@@ -386,6 +396,15 @@ Código por byAd12
                         <tr>
                             <td colspan="2">
                                 En cualquier momento se puede ver el tiempo estimado que queda hasta finalizar el escaneo pulsando la tecla "<span class="opcion">TABULADOR</span>".
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">-sL</code></pre></td>
+                            <td>
+                                Esta opción no detecta el estado ni escanea los puertos de los hosts, solo lista los equipos que se escanearán antes de un escaneo real.
+                                <br>
+                                Realizará una consulta DNS inversa para averiguar el registro DNS pertenece a cada IP (se puede deshabilitar con el parámetro <span class="span_contenido" translate="no">-n</span>).
                             </td>
                         </tr>
 
@@ -476,9 +495,9 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">-T [0-5]</code></pre></td>
                             <td>
-                                El parámetro <span class="opcion">--min-rate</span> se configura manualmente, por ello existen 6 plantillas predefinidas según niveles.
-                                El nivel 0 es el más lento y sigiloso y, el nivel 5, es el más rápido y detectable. 
-                                El valor ideal es el nivel 3.
+                                El parámetro <span class="opcion">--min-rate</span> se configura manualmente. 
+                                Existen 6 plantillas predefinidas según niveles, siendo el nivel <span class="span_contenido" translate="no">0</span> el más lento y sigiloso y, el nivel <span class="span_contenido" translate="no">5</span>, es el más rápido (tiene menos tiempo para averiguar el estado de un puerto) y detectable. 
+                                El valor ideal es el nivel <span class="span_contenido" translate="no">3</span>.
                             </td>
                         </tr>
 
@@ -770,6 +789,53 @@ RCVD (0.0487s) ICMP [Destino] Port unreachable (type=3/code=3)
                         <tr>
                             <td><pre translate="no"><code class="bash">netcat -nv -p [Puerto_origen] [Objetivo] [Puerto_objetivo]</code></pre></td>
                             <td>Si el destino acepta conexiones si las enviamos desde un puerto determinado, se puede manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos TablaNmap">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Filtros de WireShark
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">arp && eth.src == [Dirección_MAC]</code></pre></td>
+                            <td>Se enseñan solo los paquetes ARP cuya MAC de origen sea la indicada.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">arp && eth.dst == [Dirección_MAC]</code></pre></td>
+                            <td>Se enseñan solo los paquetes ARP cuya MAC de destino sea la indicada.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">arp && eth.src == [Dirección_MAC] || arp && eth.dst == [Dirección_MAC]</code></pre></td>
+                            <td>Se enseñan solo los paquetes ARP cuya MAC de origen o destino sea la indicada.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ip.addr == [Dirección_IP]</code></pre></td>
+                            <td>Se enseñan solo los paquetes cuya IP de origen sea la indicada.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ip.dst == [Dirección_IP]</code></pre></td>
+                            <td>Se enseñan solo los paquetes cuya IP de destino sea la indicada.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ip.addr == [Dirección_IP] || ip.addr == [Dirección_IP] || ...</code></pre></td>
+                            <td>Se enseñan solo los paquetes cuya IP de origen sea una de las indicadas.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">dns.qry.name == [Nombre_dominio]</code></pre></td>
+                            <td>Se enseñan solo los paquetes cuya consulta DNS esté relacionada con el nombre de dominio asignado.</td>
                         </tr>
 
                     </table>
