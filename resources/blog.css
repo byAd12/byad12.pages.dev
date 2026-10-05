@@ -110,7 +110,7 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 .codigo, p.Expl, p.Expl2, p{margin: 15px 0 15px 0;}
 .codigo, .codigo code, td pre{font-size: 14px;}
 p.Expl, .codigo, ul{margin-left: 30px;}
-p.Expl2, .codigo.Expl2, ol.Expl2, ul.Expl2{margin-left: 60px !important;}
+p.Expl2, .codigo.Expl2, ol.Expl2, ul.Expl2{margin-left: 60px;}
 .parte1 div p u, .TituloCreditosInferior, .TablaDivScroll td u{text-underline-offset: 5px;}
 
 .codigo{transition: all .5s; font-size: 14px; color: #e0e0e0; padding: 0; overflow-x: auto; border: 1px solid #333;}
@@ -197,7 +197,6 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 
 @media (max-width: 1040px){
     .parte1{display: block; width: 100%; margin: 0;}
-    .parte1 .codigo{margin: 5px 0;}
 }
 
 @media screen and (max-width: 768px){
@@ -214,7 +213,7 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 
 @media (max-width: 500px){
     /* MÁRGENES */
-    .Expl, .Expl2{margin-left: 0 !important;}
+    .Expl, .Expl2, .codigo{margin-left: 0 !important;}
     div.Expl table{width: 100% !important; margin-left: 0 !important;}
 }
 

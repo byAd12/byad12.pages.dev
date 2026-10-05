@@ -143,16 +143,13 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Seccion_Scripts p.Descripcion_General_Scripts{user-select: text; margin-bottom: 50px;}
 
 .Contenedor_Scripts{display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(128, 128, 128, 0.5); border-right: 1px solid rgba(128, 128, 128, 0.5);}
-.Contenedor_Scripts .Script_Individual{min-width: 0; width: 100%; min-height: 200px; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column; gap: 20px;}
-.Contenedor_Scripts .Script_Individual .Titulo_Script{color: rgba(167, 255, 112, 0.5); font-weight: bold; font-size: 20px;}
+.Contenedor_Scripts .Script_Individual{gap: 20px; min-width: 0; width: 100%; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column;}
+.Contenedor_Scripts .Script_Individual .Titulo_Script{color: rgba(167, 255, 112, 0.5); font-weight: bold; font-size: 20px; display: flex; justify-content: space-between; align-items: center;}
 
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode{display: flex; width: calc(100% - 6px); gap: 0;}
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode pre.MuestraDeCodigo{width: 100%; overflow-x: auto; user-select: text; min-width: 0; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border: 3px solid rgba(167, 255, 112, 0.5); border-right: none;}
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode pre.MuestraDeCodigo code{white-space: nowrap; display: block; height: 100%;}
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha{flex-shrink: 0; display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-top-right-radius: 5px; border-bottom-right-radius: 5px;}
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha span{margin: 0 auto; transition: all .3s;}
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha:hover{background-color: #22272e; border: 3px solid rgba(167, 255, 112, 0.5); }
-.Contenedor_Scripts .Script_Individual .BotonPersonalizadoCode a.BotonFlecha:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+.Contenedor_Scripts .Script_Individual .Titulo_Script a{font-size: 15px; border: 2px solid transparent; flex-shrink: 0; display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-radius: 5px;}
+.Contenedor_Scripts .Script_Individual .Titulo_Script a span{margin: 0 auto; transition: all .3s;}
+.Contenedor_Scripts .Script_Individual .Titulo_Script a:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
+.Contenedor_Scripts .Script_Individual .Titulo_Script a:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
 
 .Contenedor_Scripts .Script_Individual_Esconder{display: none;}
 

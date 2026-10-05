@@ -681,7 +681,7 @@ EOF
             systemctl enable --now "cloudflared-${nombre_tunel}"
 
             echo -e "\n${Az}Verificando el estado del servicio '${Bl}cloudflared-${nombre_tunel}${Az}'...${Bl}"
-            systemctl status "cloudflared-${nombre_tunel}"
+            systemctl status --no-pager "cloudflared-${nombre_tunel}"
 
             echo -e "\n${Az}Verificando la sintaxis de '${Bl}/etc/cloudflared/config-${nombre_tunel}.yml${Az}'...${Bl}"
             cloudflared --config "/etc/cloudflared/config-${nombre_tunel}.yml" tunnel ingress validate
@@ -708,7 +708,7 @@ EOF
             cloudflared service uninstall
 
             echo -e "\n${Az}Purgando con APT el paquete '${Bl}cloudflared${Az}'...${Bl}"
-            apt purge cloudflared -y
+            apt-get purge cloudflared -y
 
             echo -e "\n${Az}Eliminando las configuraciones de '${Bl}/etc/cloudflared/${Az}' y '${Bl}/root/.cloudflared/${Az}'...${Bl}"
             rm -rf /etc/cloudflared/*
@@ -754,7 +754,7 @@ EOF
             echo -e ""
 
             echo -e "${Az}Desinstalando paquetes conflictivos...${Bl}"
-            apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
+            apt-get remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
 
             echo -e "\n${Az}Instalando las dependencias '${Bl}ca-certificates${Az}' y '${Bl}curl${Az}'...${Bl}"
             apt-get update
@@ -780,7 +780,7 @@ EOF
             systemctl enable --now docker
 
             echo -e "\n${Az}Verificando el estado del servicio '${Bl}docker${Az}'...${Bl}"
-            systemctl status docker
+            systemctl status --no-pager docker
             ;;
 
         ##############################################################
@@ -1031,7 +1031,7 @@ EOF
             systemctl enable --now script-python.service
 
             echo -e "\n${Az}Verificando el estado del servicio '${Bl}script-python${Az}'...${Bl}"
-            systemctl status script-python.service
+            systemctl status --no-pager script-python.service
 
             echo -e "${Am}Nota:${Bl}"
             echo -e "${Am_}  En caso de error utilice el siguiente comando: '${Bl}tail -f /var/log/script-python.log${Am_}'.${Bl}"
@@ -1202,7 +1202,7 @@ EOF
             systemctl disable netbird
 
             echo -e "\n${Az}Desinstalando mediante APT el paquete '${Bl}netbird${Az}'...${Bl}"
-            apt remove --purge netbird -y
+            apt-get remove --purge netbird -y
 
             echo -e "\n${Az}Eliminando el repositorio y la clave GPG...${Bl}"
             rm -f /etc/apt/sources.list.d/netbird.list
@@ -1291,7 +1291,7 @@ EOF
 
             echo -e "\n${Az}Instalando las dependencias en el CT...${Bl}"
             pct exec "${id_ct}" -- apt-get update
-            pct exec "${id_ct}" -- apt dist-upgrade -y
+            pct exec "${id_ct}" -- apt-get dist-upgrade -y
             pct exec "${id_ct}" -- apt-get install -y openvpn git
             pct exec "${id_ct}" -- git clone https://github.com/Nyr/openvpn-install /root/openvpn-install
 

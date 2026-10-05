@@ -6,7 +6,7 @@
 # ACTUALIZAR E INSTALAR PAQUETES
 ##############################################################
 apt-get update
-apt-get install -y bat openvpn neofetch htop micro cowsay
+apt-get install -y bat openvpn neofetch htop micro
 clear
 
 ##############################################################
@@ -43,8 +43,3 @@ anadir_comando() {
 }
 
 anadir_comando "neofetch"
-
-##############################################################
-# DIBUJO
-##############################################################
-/usr/games/cowsay -f tux byAd12

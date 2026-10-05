@@ -40,7 +40,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/sql.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/mongodb.min.js"></script>
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -70,6 +70,53 @@ Código por byAd12
 
             </div>
 
+        </div>
+
+<!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+
+                <h2>Gestionar la base de datos</h2>
+
+                <p>Para entrar a la base de datos hay que ejecutar el comando <span class="span_contenido" translate="no">mongosh</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mongosh</code></pre>
+                <p class="Expl">Otra manera de ejecutar comandos de MongoDB directamente mediante CLI:</p>
+                <pre class="codigo" translate="no"><code class="bash">mongosh --quiet --eval '[Comando_a_ejecutar]'</code></pre>
+
+                <p>Comandos básicos de MongoDB:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td colspan="2" style="text-align: center;">
+                                Con el comando <span class="span_contenido" translate="no">help</span> se muestra una ayuda de los comandos.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="mongodb">show dbs</code></pre></td>
+                            <td>Lista todas las bases de datos existentes en el clúster.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="mongodb">use [Nombre_base_datos]</code></pre></td>
+                            <td>Se conecta a la base de datos indicada mediante su nombre.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="mongodb">show collections</code></pre></td>
+                            <td>Lista todas las colecciones existentes en la base de datos.</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->

@@ -55,7 +55,7 @@ Código por byAd12
             <div>
                 <h2>Importante</h2>
 
-                <p>Un dominio se divide en 2 partes: el <u>nombre de dominio</u> (antes del punto) y el <u>TLD</u> (después del punto):</p>
+                <p>Un dominio LDAP se divide en 2 partes: el <u>nombre de dominio</u> (antes del punto) y el <u>TLD</u> (después del punto):</p>
                 <pre class="codigo" translate="no"><code class="bash">[NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
 
             </div>
@@ -89,7 +89,7 @@ Código por byAd12
             <div>
                 <h2>3. Configuración</h2>
 
-                <p>Una vez se hayan instalado los paquetes con APT hay que configurar mediante el servicio LDAP:</p>
+                <p>Una vez se hayan instalado los paquetes con APT, hay que configurar el servicio <span class="span_contenido" translate="no">slapd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
                 <p class="Expl">Respuestas que va a solicitar el asistente en orden:</p>
                 <ol class="Expl2">
@@ -131,20 +131,10 @@ dn: [URI]
     [Atributo]: [Valor_atributo]
     ...</code></pre>
 
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-
-                        <tr>
-                            <td><pre translate="no"><code class="bash">dn: [URI]</code></pre></td>
-                            <td>
-                                "dn" significa "Distingushed Name".
-                                <br>
-                                Es una URI que diferencia individualmente a todos los objetos de la BD.
-                            </td>
-                        </tr>
-
-                    </table>
-                </div>
+                <p class="Expl">
+                    <span class="span_contenido" translate="no">dn</span> (Distingushed Name):
+                    Es una URI que diferencia individualmente a todos los objetos de la base de datos.
+                </p>
 
             </div>
 
