@@ -115,7 +115,7 @@ while true; do
     1)
         clear
 
-        echo -e "\n${Az}Configuración actual de timedatectl...${Bl}"
+        echo -e "\n${Az}Configuración actual de '${Bl}timedatectl${Az}'...${Bl}"
         timedatectl
 
         echo -e "\n${Az}Sincronizando reloj (NTP) y fijando BIOS en UTC...${Bl}"
@@ -124,7 +124,7 @@ while true; do
         chronyc makestep
         hwclock -w
         
-        echo -e "\n${Az}Verificando los cambios de timedatectl...${Bl}"
+        echo -e "\n${Az}Verificando los cambios de '${Bl}timedatectl${Az}'...${Bl}"
         timedatectl
 
         echo -e "\n${Az}Instalando el paquete '${Bl}fastfetch${Az}' mediante APT...${Bl}"
@@ -1119,7 +1119,8 @@ EOF
             " | ${Az}NETBIRD - OPCIONES ${Bl}" \
             " | =====================================" \
                 "${Ne}1${Bl} | Instalar y entrar en la red" \
-                "${Ne}2${Bl} | Desinstalar y purgar la configuración" \
+                "${Ne}2${Bl} | Cambiar la IP de este peer en la red" \
+                "${Ne}3${Bl} | Desinstalar y purgar la configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -1184,9 +1185,39 @@ EOF
             ;;
 
         ##############################################################
-        # VPN - NETBIRD - DESINSTALAR Y PURGAR LA CONFIGURACIÓN
+        # VPN - NETBIRD - CAMBIAR LA IP DE ESTE PEER EN LA RED
         ##############################################################
         2)
+            clear
+
+            echo -e "${Am}Requisitos:${Bl}"
+            echo -e "${Am_}  1.  Debes tener el Set-up key de Netbird.${Bl}"
+            echo -e "${Am_}  2.  Un administrador debe cambiar la IPv4 desde el panel de administración.${Bl}"
+            echo -e "${Am_}  3.  La IPv4 que se vaya a configurar debe estar libre.${Bl}"
+            echo -e "${Am_}  4.  Se debe eliminar del fichero '${Bl}/etc/hosts${Am_}' cualquier registro antiguo.${Bl}"
+            echo -e ""
+            read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
+            echo -e ""
+
+            echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
+            netbird status --ipv4
+
+            echo -e "\n${Am}Cambie ahora la IPv4 de este peer en '${Bl}https://app.netbird.io/peers${Am}', luego puse ENTER:${Bl}"
+            read -p '' respuesta_enter
+
+            echo -e "${Az}Reiniciando la conexión con Netbird...${Bl}"
+            netbird down
+            systemctl restart netbird # Aquí se debería hacer el netbird up automáticamente
+            sleep 2
+
+            echo -e "\n${Az}Tu IPv4 actual en NetBird es:${Bl}"
+            netbird status --ipv4
+            ;;
+
+        ##############################################################
+        # VPN - NETBIRD - DESINSTALAR Y PURGAR LA CONFIGURACIÓN
+        ##############################################################
+        3)
             clear
 
             read -p "${Ro_}¿Estás seguro de querer desinstalar Netbird? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
