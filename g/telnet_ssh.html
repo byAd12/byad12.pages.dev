@@ -138,9 +138,9 @@ Código por byAd12
                 <p>2. Se puede comprobar en la ruta por defecto que se crearon las claves pública y privada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls -l ~/.ssh/</code></pre>
                 <p class="Expl">
-                    La clave pública <span class="span_contenido" translate="no">~/.ssh/id_XXX.pub</span> tiene permisos de lectura (r) para todos los usuarios.
+                    La clave pública <span class="span_contenido" translate="no">~/.ssh/id_ed25519.pub</span> tiene permisos de lectura (r) para todos los usuarios.
                     <br>
-                    La clave privada <span class="span_contenido" translate="no">~/.ssh/id_XXX</span> tiene permisos de lectura y escritura (rw) solo para el usuario propietario.
+                    La clave privada <span class="span_contenido" translate="no">~/.ssh/id_ed25519</span> tiene permisos de lectura y escritura (rw) solo para el usuario propietario.
                 </p>
 
                 <p>3. Ahora hay que copiar la clave pública en el fichero <span class="span_contenido" translate="no">~/.ssh/authorized_keys</span> del usuario del equipo remoto:</p>
@@ -155,7 +155,9 @@ Código por byAd12
 
                 <p>4. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
-
+                <p class="Expl">Si el nombre del fichero de la clave SSH es distinto a <span class="span_url" translate="no">id_ed25519</span> hay que especificar con el parámetro <span class="span_contenido" translate="no">-i</span> la ruta a la clave:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+                
             </div>
 
             <div>
@@ -190,7 +192,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">eval $(ssh-agent -s)</code></pre>
 
                 <p>2. Luego, se debe añadir la clave privada al <span class="span_contenido" translate="no">ssh-agent</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh-add ~/.ssh/id_[XXX]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh-add ~/.ssh/id_ed25519</code></pre>
 
                 <p>3. Por último, hay que listar las claves que actualmente tiene cargadas el agente para comprobar que la clave del paso 2 se ha cargado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-add -l</code></pre>
