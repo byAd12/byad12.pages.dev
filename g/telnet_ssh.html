@@ -153,7 +153,11 @@ Código por byAd12
                 <pre class="codigo Expl" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
                 <p class="Expl2">Para copiar la clave al usuario <span class="span_contenido" translate="no">root</span> se debe permitir la directiva <span class="span_contenido" translate="no">PermitRootLogin</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> o se puede hacer manualmente copiando la clave pública directamente en su fichero <span class="span_url" translate="no">~/.ssh/authorized_keys</span>.</p>
 
-                <p>4. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
+                <p>4. Para no tener que descifrar la clave en cada sesión SSH se puede añadir la clave al SSH-AGENT para que la mantenga descifrada en RAM:</p>
+                <pre class="codigo" translate="no"><code class="bash">eval "$(ssh-agent -s)"</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh-add ~/.ssh/[Fichero_clave_privada]</code></pre>
+
+                <p>5. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">Si el nombre del fichero de la clave SSH es distinto a <span class="span_url" translate="no">id_ed25519</span> hay que especificar con el parámetro <span class="span_contenido" translate="no">-i</span> la ruta a la clave:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
