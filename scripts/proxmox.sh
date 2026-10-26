@@ -19,7 +19,7 @@ export LC_ALL=C.UTF-8
 ##############################################################
 PAQUETES=()
 
-command -v /usr/games/cowsay >/dev/null 2>&1 || PAQUETES+=("cowsay")
+#command -v /usr/games/cowsay >/dev/null 2>&1 || PAQUETES+=("cowsay")
 command -v cmatrix >/dev/null 2>&1 || PAQUETES+=("cmatrix")
 command -v curl >/dev/null 2>&1 || PAQUETES+=("curl")
 
@@ -46,7 +46,6 @@ clear
 ##############################################################
 while true; do
     clear
-    /usr/games/cowsay -f tux CHEMA HOSTING
 
     Ne=$'\033[1m' # Texto en negrita
     Bl=$'\033[0m' # Resetear formato
@@ -63,7 +62,7 @@ while true; do
     Az=$'\033[34;1m'    # Texto en negrita y en azul
     Az_=$'\033[22;34m'  # Quita negrita (22) y pone azul (34)
 
-    echo -e "Script hecho por ${Az}byAd12.pages.dev${Bl}\n   ${Ne}2025${Bl} - ${Az}www.${dominio}\n${Bl}"
+    echo -e "\nScript hecho por ${Az}byAd12.pages.dev${Bl} para ${Az}www.${dominio}${Bl} en 2025\n${Bl}"
 
     printf "%b\n" \
         " | ${Az}CONFIGURACIÓN BÁSICA ${Bl}" \
@@ -82,14 +81,13 @@ while true; do
         " | ===========" \
             "${Ne}7${Bl} | Cloudflared" \
             "${Ne}8${Bl} | Docker" \
-            "${Ne}9${Bl} | Uptime-Kuma" \
-            "${Ne}10${Bl} | NFS" \
-            "${Ne}11${Bl} | Python" \
+            "${Ne}9${Bl} | NFS" \
+            "${Ne}10${Bl} | Python" \
             " | " \
         " | ${Az}VPN ${Bl}" \
         " | =======" \
-            "${Ne}12${Bl} | Netbird" \
-            "${Ne}13${Bl} | OpenVPN" \
+            "${Ne}11${Bl} | Netbird" \
+            "${Ne}12${Bl} | OpenVPN" \
             " | " \
         " | ${Az}MENÚ ${Bl}" \
         " | ======" \
@@ -196,7 +194,7 @@ while true; do
         ./install.sh
 
         echo -e "\n${Am}Importante:${Bl}"
-        echo -e "${Am_}  Elimina la caché de la página web y luego vaya al apartado de '${Bl}temas${Am_}'.${Bl}"
+        echo -e "${Am_}  -  Elimina la caché de la página web y luego vaya al apartado de '${Bl}temas${Am_}'.${Bl}"
         ;;
 
     ##############################################################
@@ -498,7 +496,7 @@ while true; do
             " | ===================================" \
                 "${Ne}1${Bl} | Instalar e iniciar sesión" \
                 "${Ne}2${Bl} | Crear un túnel - HTTP(S)" \
-                "${Ne}3${Bl} | Crear un túnel secundario - HTTP(S)" \
+                "${Ne}3${Bl} | Actualizar la versión del servicio" \
                 "${Ne}4${Bl} | Desinstalar y purgar configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
@@ -515,7 +513,7 @@ while true; do
 
             echo -e "${Am_}Requisitos:${Bl}"
             echo -e "${Am_}  1.  El administrador debe estar activo para permitir el inicio de sesión.${Bl}"
-            echo -e "${Am_}  2.  Tener un sistema AMD64.${Bl}"
+            echo -e "${Am_}  2.  Tener un sistema Debian/Ubuntu con AMD64.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
             echo -e ""
@@ -527,17 +525,16 @@ while true; do
             echo -e "${Az}Eliminando el fichero temporal...${Bl}"
             rm -f ./cloudflared.deb
 
-            echo -e "\n${Az}Instalando el servicio '${Bl}cloudflared${Az}'...${Bl}"
-            cloudflared service install
-
-            echo -e "\n${Az}Verificando la versión del servicio '${Bl}cloudflared${Az}'...${Bl}"
-            cloudflared --version
-
-            echo -e "\n${Az}Habilitando el servicio de '${Bl}cloudflared${Az}'...${Bl}"
-            systemctl enable --now cloudflared
+            echo -e "\n${Az}Configurando el repositorio de paquetes...${Bl}"
+            mkdir -p /etc/apt/keyrings
+            curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | tee /etc/apt/keyrings/cloudflare-main.gpg >/dev/null
+            echo "deb [signed-by=/etc/apt/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared bookworm main" | tee /etc/apt/sources.list.d/cloudflare-main.list
 
             echo -e "\n${Az}Porfavor, inicie sesión con la siguiente URL:${Bl}"
             cloudflared login
+
+            echo -e "\n${Az}Verificando la versión del servicio '${Bl}cloudflared${Az}'...${Bl}"
+            cloudflared --version
             ;;
 
         ##############################################################
@@ -605,86 +602,30 @@ EOF
             ;;
 
         ##############################################################
-        # SERVICIOS - CLOUDFLARED - CREAR UN TÚNEL SECUNDARIO HTTP(S)
+        # SERVICIOS - CLOUDFLARED - ACTUALIZAR LA VERSIÓN DEL SERVICIO
         ##############################################################
         3)
             clear
 
-            echo -e "${Am}Requisitos:${Bl}"
-            echo -e "${Am_}  1.  Ejecutar la opción '${Bl}Instalar e iniciar sesión${Am_}' del apartado de '${Bl}Cloudflared${Am_}'.${Bl}"
-            echo -e "${Am_}  2.  El administrador debe eliminar el registro DNS si existe.${Bl}"
-            echo -e ""
-            read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
-            echo -e ""
+            echo -e "${Az}Versión del servicio '${Bl}cloudflared${Az}' antes de la actualización:${Bl}"
+            cloudflared --version
 
-            read -p 'Nombre del túnel a crear (sin espacios): ' nombre_tunel; [[ -z "${nombre_tunel// /}" || "${nombre_tunel}" == "exit" ]] && continue
-            read -p 'Nombre del subdominio (solo subdominio): ' nombre_dominio; [[ -z "${nombre_dominio// /}" || "${nombre_dominio}" == "exit" ]] && continue
-            read -p 'Puerto del servicio web: ' puerto_web; [[ -z "${puerto_web// /}" || "${puerto_web}" == "exit" ]] && continue
-            read -p 'http/https: ' tipo_conexion; [[ -z "${tipo_conexion// /}" || "${tipo_conexion}" == "exit" ]] && continue
+            echo -e "\n${Az}Configurando el repositorio de paquetes...${Bl}"
+            mkdir -p /etc/apt/keyrings
+            curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | tee /etc/apt/keyrings/cloudflare-main.gpg >/dev/null
+            echo "deb [signed-by=/etc/apt/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared bookworm main" | tee /etc/apt/sources.list.d/cloudflare-main.list
 
-            echo -e "\n${Az}Creando un nuevo túnel...${Bl}"
-            info=$(cloudflared tunnel create "${nombre_tunel}")
+            echo -e "\n${Az}Actualizando los paquetes con APT...${Bl}"
+            apt-get update
 
-            echo -e "\n${Az}Extrayendo el UUID del túnel...${Bl}"
-            uuid=$(echo "${info}" | grep -oE '[0-9a-fA-F-]{36}' | head -n 1)
-            echo -e "UUID del túnel: ${Am}${uuid}${Bl}"
+            echo -e "\n${Az}Actualizando el paquete '${Bl}cloudflared${Az}'...${Bl}"
+            apt-get install --only-upgrade -y cloudflared
 
-            echo -e "\n${Az}Verificando que la carpeta '${Bl}/etc/cloudflared/${Az}' existe...${Bl}"
-            mkdir -p /etc/cloudflared
+            echo -e "\n${Az}Reiniciando el servicio '${Bl}cloudflared${Az}'...${Bl}"
+            systemctl restart cloudflared
 
-            echo -e "\n${Az}Creando y configurando el fichero '${Bl}/etc/cloudflared/config-${nombre_tunel}.yml${Az}'...${Bl}"
-            cat <<EOF > "/etc/cloudflared/config-${nombre_tunel}.yml"
-tunnel: ${uuid}
-credentials-file: /etc/cloudflared/${uuid}.json
-loglevel: debug
-
-originRequest:
-  noTLSVerify: true
-
-ingress:
-  - hostname: ${nombre_dominio}.${dominio}
-    service: ${tipo_conexion}://127.0.0.1:${puerto_web}
-  - service: http_status:404
-EOF
-
-            echo -e "\n${Az}Copiando las credenciales del túnel en '${Bl}/etc/cloudflared/${Az}'...${Bl}"
-            cp ~/.cloudflared/"${uuid}".json /etc/cloudflared/
-
-            echo -e "\n${Az}Asignando permisos a las credenciales...${Bl}"
-            chmod 600 /etc/cloudflared/"${uuid}".json
-            chown root:root /etc/cloudflared/"${uuid}".json
-
-            echo -e "\n${Az}Creando un nuevo registro DNS de tipo CNAME...${Bl}"
-            cloudflared tunnel route dns "${nombre_tunel}" "${nombre_dominio}"
-
-            echo -e "\n${Az}Creando un nuevo servicio systemd llamado '${Bl}cloudflared-${nombre_tunel}${Az}'...${Bl}"
-            cat <<EOF > "/etc/systemd/system/cloudflared-${nombre_tunel}.service"
-[Unit]
-Description=Cloudflare Tunnel (${nombre_tunel})
-After=network.target
-
-[Service]
-Type=simple
-User=root
-ExecStart=/usr/local/bin/cloudflared --config /etc/cloudflared/config-${nombre_tunel}.yml tunnel run
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-            echo -e "\n${Az}Recargando systemd...${Bl}"
-            systemctl daemon-reload
-            
-            echo -e "\n${Az}Habilitando el servicio '${Bl}cloudflared-${nombre_tunel}${Az}'...${Bl}"
-            systemctl enable --now "cloudflared-${nombre_tunel}"
-
-            echo -e "\n${Az}Verificando el estado del servicio '${Bl}cloudflared-${nombre_tunel}${Az}'...${Bl}"
-            systemctl status --no-pager "cloudflared-${nombre_tunel}"
-
-            echo -e "\n${Az}Verificando la sintaxis de '${Bl}/etc/cloudflared/config-${nombre_tunel}.yml${Az}'...${Bl}"
-            cloudflared --config "/etc/cloudflared/config-${nombre_tunel}.yml" tunnel ingress validate
+            echo -e "\n${Az}Verificando la versión del servicio '${Bl}cloudflared${Az}'...${Bl}"
+            cloudflared --version
             ;;
 
         ##############################################################
@@ -694,8 +635,8 @@ EOF
             clear
 
             echo -e "${Am}Aviso:${Bl}"
-            echo -e "${Am}  Los túneles creados se eliminarán localmente, pero no en Cloudflare.${Bl}"
-            echo -e "${Am}  Los registros DNS deben eliminarse manualmente.${Bl}"
+            echo -e "${Am_}  -  Los túneles creados se eliminarán localmente, pero no en Cloudflare.${Bl}"
+            echo -e "${Am_}  -  Los registros DNS deben eliminarse manualmente.${Bl}"
             echo -e ""
 
             echo -e "\n${Az}Deteniendo el servicio '${Bl}cloudflared${Az}'...${Bl}"
@@ -750,7 +691,7 @@ EOF
             clear
 
             echo -e "${Am}Aviso:${Bl}"
-            echo -e "${Am_}  Esta instalación se basa en un sistema Debian.${Bl}"
+            echo -e "${Am_}  -  Esta instalación se basa en un sistema Debian.${Bl}"
             echo -e ""
 
             echo -e "${Az}Desinstalando paquetes conflictivos...${Bl}"
@@ -798,7 +739,7 @@ EOF
             echo -e ""
 
             echo -e "${Am}Importante:${Bl}"
-            echo -e "${Am_}  Tras crear el docker debes proteger tu red mediante reglas en el Firewall del router y/o host.${Bl}"
+            echo -e "${Am_}  -  Tras crear el docker debes proteger tu red mediante reglas en el Firewall del router y/o host.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " respuesta_enter_2; [[ "${respuesta_enter_2}" == "exit" ]] && continue
             echo -e ""
@@ -824,67 +765,9 @@ EOF
         ;;
 
     ##############################################################
-    # SERVICIOS - UPTIME-KUMA
-    ##############################################################
-    9)
-        clear
-
-        printf "%b\n" \
-            " | ${Az}UPTIME-KUMA - OPCIONES ${Bl}" \
-            " | ======================" \
-                "${Ne}1${Bl} | Cambiar de versión" \
-                | column --table --separator '|' --keep-empty-lines
-        echo ""
-        read -p "Opción: ${Am}" var_sec
-        echo -e "${Bl}"
-
-        case $var_sec in
-
-        ##############################################################
-        # SERVICIOS - UPTIME-KUMA - CAMBIAR DE VERSIÓN 
-        ##############################################################
-        1)
-            clear
-
-            echo -e "${Az}Nota:${Bl}"
-            echo -e "${Az_}  Para ver la última versión disponible visite: ${Bl}https://github.com/louislam/uptime-kuma/releases${Bl}"
-            echo -e ""
-            read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
-            echo -e ""
-
-            read -p 'Versión de GitHub a actualizar: ' version_github; [[ -z "${version_github// /}" || "${version_github}" == "exit" ]] && continue
-
-            echo -e "\n${Az}Deteniendo el servicio '${Bl}uptime-kuma${Az}'...${Bl}"
-            pm2 stop uptime-kuma
-
-            echo -e "\n${Az}Obteniendo las versiones disponibles en GitHub...${Bl}"
-            cd /opt/uptime-kuma
-            git fetch --all
-            git checkout "${version_github}"
-
-            echo -e "\n${Az}Instalando las actualizaciones...${Bl}"
-            npm install --omit=dev --no-audit
-            npm run download-dist
-
-            echo -e "\n${Az}Reiniciando el servicio '${Bl}uptime-kuma${Az}'...${Bl}"
-            pm2 restart uptime-kuma
-            pm2 save
-            ;;
-
-        ##############################################################
-        # SERVICIOS - UPTIME-KUMA - MENÚ
-        ##############################################################
-        *)
-            echo -e "${Ro}Valor inválido${Bl}"
-            ;;
-        
-        esac
-        ;;
-
-    ##############################################################
     # SERVICIOS - NFS
     ##############################################################
-    10)
+    9)
         clear
 
         printf "%b\n" \
@@ -956,7 +839,7 @@ EOF
     ##############################################################
     # SERVICIOS - PYTHON
     ##############################################################
-    11)
+    10)
         clear
 
         printf "%b\n" \
@@ -1096,7 +979,7 @@ EOF
             fi
 
             echo -e "\n${Am}Importante:${Bl}"
-            echo -e "${Am_}  REINICIA LA SESIÓN para activar las alertas.${Bl}"
+            echo -e "${Am_}  -  REINICIA LA SESIÓN para activar las alertas.${Bl}"
             ;;
 
         ##############################################################
@@ -1112,7 +995,7 @@ EOF
     ##############################################################
     # VPN - NETBIRD
     ##############################################################
-    12)
+    11)
         clear
 
         printf "%b\n" \
@@ -1120,7 +1003,8 @@ EOF
             " | =====================================" \
                 "${Ne}1${Bl} | Instalar y entrar en la red" \
                 "${Ne}2${Bl} | Cambiar la IP de este peer en la red" \
-                "${Ne}3${Bl} | Desinstalar y purgar la configuración" \
+                "${Ne}3${Bl} | Actualizar la versión del servicio" \
+                "${Ne}4${Bl} | Desinstalar y purgar la configuración" \
                 | column --table --separator '|' --keep-empty-lines
         echo ""
         read -p "Opción: ${Am}" var_sec
@@ -1215,9 +1099,31 @@ EOF
             ;;
 
         ##############################################################
-        # VPN - NETBIRD - DESINSTALAR Y PURGAR LA CONFIGURACIÓN
+        # VPN - NETBIRD - ACTUALIZAR LA VERSIÓN DEL SERVICIO
         ##############################################################
         3)
+            clear
+
+            echo -e "${Am}Aviso:${Bl}"
+            echo -e "${Am_}  -  La conexión a la red de NetBird será interrumpida si hay una nueva versión disponible.${Bl}"
+            echo -e "${Am_}  -  Si se requiere, se deberá autentificar manualmente a la red.${Bl}"
+            echo -e ""
+
+            echo -e "${Az}Versión del servicio '${Bl}netbird${Az}' antes de la actualización:${Bl}"
+            netbird version
+
+            echo -e "\n${Az}Actualizando el paquete '${Bl}netbird${Az}'...${Bl}"
+            apt-get install --only-upgrade -y netbird
+
+            echo -e "\n${Az}Verificando la versión del servicio '${Bl}netbird${Az}'...${Bl}"
+            netbird version
+
+            ;;
+
+        ##############################################################
+        # VPN - NETBIRD - DESINSTALAR Y PURGAR LA CONFIGURACIÓN
+        ##############################################################
+        4)
             clear
 
             read -p "${Ro_}¿Estás seguro de querer desinstalar Netbird? (s/${Ro}n${Ro_}): ${Bl}" verificacion1; [[ "$verificacion1" != "s" && "$verificacion1" != "S" ]] && continue
@@ -1260,7 +1166,7 @@ EOF
     ##############################################################
     # VPN - OPENVPN
     ##############################################################
-    13)
+    12)
         clear
 
         printf "%b\n" \
@@ -1357,7 +1263,7 @@ EOF
             chmod +x /root/openvpn-install/openvpn-install.sh
 
             echo -e "\n${Am}Importante:${Bl}"
-            echo -e "${Am_}  Al acabar de configurar el script, copie el perfil '${Bl}.ovpn${Am_}' creado.${Bl}"
+            echo -e "${Am_}  -  Al acabar de configurar el script, copie el perfil '${Bl}.ovpn${Am_}' creado.${Bl}"
             echo -e ""
             read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
             echo -e ""
