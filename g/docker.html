@@ -54,7 +54,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h2>Imágenes</h2>
+                <h2>Gestionar imágenes</h2>
 
                 <p>Descargar una imagen desde el repositorio <a href="https://hub.docker.com/" target="_blank">hub.docker.com</a> sin necesidad de autenticarse:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker pull [Imagen]:(Versión)</code></pre>
@@ -63,18 +63,43 @@ Código por byAd12
                 <p>Crear un docker sin iniciarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker create [Imagen]:(Versión)</code></pre>
 
-                <p>Ver todas las imágenes descargadas:</p>
+                <p>Ver todas las imágenes descargadas o creadas en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
 
                 <p>Ver solo una imagen descargada específica:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image (Imagen)</code></pre>
                 
                 <p>Eliminar una imagen:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker image rm (Imagen)</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker image rm [Imagen]</code></pre>
                 <p class="Expl"><u>Nota</u>: no debe haber ninún docker creado que esté asociado con la imagen a eliminar.</p>
                 
                 <p>Inspeccionar una imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image inspect (Imagen)</code></pre>
+
+            </div>
+
+            <div>
+                <h2>Crear una imagen</h2>
+
+                <p>Primero hay que crearse una cuenta gratuita en <a href="https://app.docker.com/signup" target="_blank">hub.docker.com</a> para poder subir publicamente las imagenes que se vayan a crear.</p>
+                
+                <p>Ahora hay que iniciar sesión en la terminal con las credenciales que hayamos definido al crear la cuenta:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker login -u [Nombre_usuario]</code></pre>
+
+                <p>Con el docker ya preparado para crear una imagen de el hay que crear un nuevo <b>commit</b> indicando el nombre del docker y el nombre con el que se almacenará:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker commit [Nombre/ID_Docker] [Nombre_usuario]/[Nombre_nueva_imagen]</code></pre>
+                
+                <p>Se puede verificar con el siguiente comando que la imagen aparece en el sistema local:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
+
+                <p>Para subir la nueva imagen al repositorio hay que ejecutar un <b>push</b>:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker push [Nombre_usuario]/[Nombre_nueva_imagen]</code></pre>
+
+                <p>
+                    <u>Nota</u>: Hay que tener en cuenta que los datos deberian almacenarse en <a href="#volumenes">volúmenes</a> y no en el propio docker →
+                    el docker debería ser lo mas ligero posible, permitiendo así migrar la versión de un docker sin necesidad de copiar los datos de nuevo.
+                </p>
+
             </div>
 
             <div>
@@ -331,6 +356,14 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker pause [Nombre/ID_Docker]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">docker unpause [Nombre/ID_Docker]</code></pre>
 
+                <p>También se puede realizar cualquier acción a todos los dockers del sistema con el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker [Acción] $(docker ps -a -q)</code></pre>
+                <p class="Expl">
+                    La acción puede ser <span class="span_contenido">start</span>, <span class="span_contenido">stop</span>, <span class="span_contenido">rm</span>, <span class="span_contenido">pause</span>, <span class="span_contenido">unpause</span>, etc.
+                    <br>
+                    Para aplicarlo a todos los docker que solo estén en ejecución hay que quitar el parámetro <span class="span_contenido">-a</span>.
+                </p>
+
             </div>
 
             <div>
@@ -373,7 +406,7 @@ Código por byAd12
                 <h2 id="terminal-docker-iniciado">Abrir una terminal en un docker iniciado</h2>
 
                 <p>En una terminal se debe ejecutar el siguiente comando para iniciar una sesión de terminal en un docker existente e iniciado:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker exec -it [Nombre/ID_Docker] [bash|sh]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker exec -it [Nombre/ID_Docker] /bin/[bash|sh]</code></pre>
                 <p class="Expl">
                     <span class="span_contenido" translate="no">-i</span>: Modo interactivo.
                     <br>
@@ -385,7 +418,7 @@ Código por byAd12
             </div>
             
             <div>
-                <h2>Volúmenes</h2>
+                <h2 id="volumenes">Volúmenes</h2>
 
                 <p>Un volumen permite que los datos de una ruta en el docker permanezcan almacenados en el host incluso despues de que el docker haya sido eliminado.</p>
 
@@ -456,21 +489,19 @@ Código por byAd12
         <div class="parte1">
             <div>
                 <h2>Docker "<span>httpd</span>"</h2>
-                <p>Añadir una página .HTML:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -p 80:80 -p 443:443 -d httpd</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">docker exec -it [Nombre/ID_Docker] [bash|sh]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install -y nano</code></pre>
-                <p class="Expl"><span class="span_contenido" translate="no">./htdocs/index.html</span>: Editar el fichero para cambiar la página default.</p>
-                
-                <p>Hay que acceder a la siguiente URL <span class="span_url" translate="no">http://[IP]:[Puerto]</span>, siendo el puerto el que redirige todo el tráfico hacia el docker (especificado en el parámetro <span class="span_contenido" translate="no">-p</span>).</p>
+                <p>Añadir un volumen a un docker con httpd y crear una página HTML:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker volume create volumen_httpd_prueba</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker run -p 8080:80 --name httpd_prueba -v volumen_httpd_prueba:/usr/local/apache2/htdocs -d httpd</code></pre>
+                <p class="Expl">Ahora en la máquina en la que se ejecute el docker (anfitrión) hay que acceder al volumen y añadir un nuevo fichero HTML:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /var/lib/docker/volumes/volumen_httpd_prueba/_data/index.html</code></pre>
+                <p class="Expl">Para visuaizar la página web hay que acceder a la siguiente URL: <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:8080</span>.</p>
             </div>
             
             <div>
                 <h2>Docker "<span>heimdall</span>"</h2>
                 <p>Sirve para organizar aplicaciones web en un solo lugar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name heimdall -e PUID=1000 -e PGID=1000 -e TZ=america/new_york -p 9998:80 -p 9997:443 -v /home/usuario/Descargas/docker_adr:/config --restart unless-stopped linuxserver/heimdall</code></pre>
-                <p class="Expl">Una vez se haya creado el docker se puede acceder a mediante la URL <span class="span_url" translate="no">http://localhost:[Puerto]</span></span>
+                <p class="Expl">Para visuaizar la página web hay que acceder a la siguiente URL: <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:9998</span>.</span>
             </div>
         </div>
         <!-- ......................................................... -->

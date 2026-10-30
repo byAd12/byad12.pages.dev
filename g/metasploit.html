@@ -54,11 +54,23 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h2>Comandos básicos</h2>
+                <h2>1. Escaneo de Nmap</h2>
 
                 <p>Antes de ejecutar Metasploit se puede saber con Nmap los servicios y sus versiones de la máquina a atacar:</p>
                 <pre class="codigo" translate="no"><code class="bash">nmap -sV --top-ports 1000 [Máquina_a_atacar]</code></pre>
                 <p class="Expl">Con esta información se puede buscar en la web de <a href="https://www.cve.org/" target="_blank">cve.org</a> cada servicio y versión para poder averiguar si hay alguna versión vulnerable.</p>
+            
+                <p>Si no se sabe que máquina se va a atacar, se puede buscar las IPs activas de una dirección de red para luego buscar la version de servicios que ejecutan:</p>
+                <pre class="codigo" translate="no"><code class="bash">nmap -sn -oG - [Dirección_red] | grep "Status: Up" | awk '{print $2}' > hosts_activos.txt</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">nmap -sV -iL hosts_activos.txt</code></pre>
+
+                <p>Para más escaneos puedes consultar la <a href="nmap.html">guía de Nmap</a>.</p>
+
+            </div>
+
+            <div>
+
+                <h2>2. Comandos básicos de Metasploit</h2>
                 
                 <p>Para iniciar una consola interactiva de Metasploit hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">msfconsole</code></pre>
@@ -66,14 +78,47 @@ Código por byAd12
                 <p>Dentro de la consola se pueden buscar scripts como escaneos de puerto, servicios específicos, etc:</p>
                 <pre class="codigo" translate="no"><code class="bash">search [Búsqueda]</code></pre>
 
-                <p>Para usar un script que se haya encontrado con el comando <span class="span_contenido">search</span> solo hay que indicar el número que tiene asignado en la lista de búsqueda o también se puede indicar directamente el nombre del script como por ejemplo <span class="span_contenido">auxiliary(scanner/portscan/tcp)</span>, que es un escaneo de puertos TCP:</p>
+                <p>Para usar un script que se haya encontrado con el comando <span class="span_contenido">search</span> solo hay que indicar el número que tiene asignado en la lista de búsqueda o también se puede indicar directamente el nombre del script:</p>
                 <pre class="codigo" translate="no"><code class="bash">use [Número_search/Nombre_script]</code></pre>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <td colspan="2">Algunos escaneos importantes</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">auxiliary/scanner/portscan/tcp</code></pre></td>
+                            <td>Escaneo de puertos TCP abiertos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">auxiliary/scanner/portscan/xmas</code></pre></td>
+                            <td>Escaneo de puertos abiertos y la versión del servicio que se ejecuta en el.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">auxiliary/scanner/smb/smb_version</code></pre></td>
+                            <td>Verifica la versión del SO y de SAMBA.</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="bash">auxiliary/scanner/smb/smb_ms17_010</code></pre></td>
+                            <td>Verifica si es vulnerable a EternalBlue (MS17-010).</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Una vez se tenga el script seleccionado se pueden ver los parámetros disponibles. Se dividen en "Module options" (parámetros de la máquina remota) y "Payload" (código a ejecutar si se puede contactar con la máquina remota):</p>
                 <pre class="codigo" translate="no"><code class="bash">show options</code></pre>
-                <p class="Expl">Algunos parámetros importantes pueden ser:</p>
+
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <td colspan="2">Algunos parámetros importantes</td>
+                        </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">RHOSTS</code></pre></td>
