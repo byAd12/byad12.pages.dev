@@ -190,8 +190,14 @@ PermitRootLogin no</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">nano ~/.ssh/config</code></pre>
                 <p class="Expl">Dentro del fichero se puede tener varios bloques con el siguiente formato:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">Host [Nombre_alias]
+    # Obligatorio. Indicar a que equipo remoto con el que conectarse:
     Hostname [IP/FQDN del equipo remoto]
-    User [Nombre_usuario]</code></pre>
+
+    # Opcional. Indicar el nombre del usuario del equipo remoto con el que conectarse:
+    User [Nombre_usuario]
+    
+    # Opcional. Indicar la ruta de la clave privada a utilizar:
+    IdentityFile ~/.ssh/id_XXX</code></pre>
 
                 <p>Gracias a ese bloque de configuración ahora se puede crear sesiones SSH directamente con el nombre del alias que asignamos en el fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh [Nombre_alias]</code></pre>
@@ -226,19 +232,30 @@ PermitRootLogin no</code></pre>
 
         <div class="parte1">
             <div>
-                <h2>Redireccionar HTTP por un socket a un servidor SSH de <span>Linux</span></h2>
+                <h2 id="tuneles_ssh">Túneles SSH en <span>Linux</span></h2>
 
-                <p>1. En el servidor SSH hay que editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> y añadir/cambiar los siguientes parámetros:</p>
+                <p>Con la opción <span class="span_contenido">-l</span> se crea un túnel que redirige todo el tráfico del puerto del servidor hacia un puerto local:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Esto permite acceder a un servicio protegido en un puerto de forma cifrada.</p>
+
+                <br>
+                <p>Con la opción <span class="span_contenido">-R</span> se crea un túnel que redirige todo el tráfico del puerto local hacia un puerto del servidor remoto:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Esto permite que cualquier usuario que acceda al puerto del servidor remoto redirija el tráfico hacia el puerto local sin necesidad de exponer directamente este puerto a Internet.</p>
+
+                <br>
+                <p>Con la opción <span class="span_contenido">-D</span> se redirecciona el tráfico HTTP por un socket a un servidor SSH. Pasos de configuración:</p>
+                <p class="Expl">1. En el servidor SSH hay que editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> y añadir/cambiar los siguientes parámetros:</p>
                 <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
 GatewayPorts yes</code></pre>
 
-                <p>2. Luego, en el servidor SSH hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
+                <p class="Expl">2. Luego, en el servidor SSH hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
-                <p>3. En el cliente SSH hay que crear un nuevo socket hacia el servidor para poder transmitir la información del navegador:</p>
+                <p class="Expl">3. En el cliente SSH hay que crear un nuevo socket hacia el servidor para poder transmitir la información del navegador:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
                 
-                <p>4. En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
+                <p class="Expl">4. En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
 
             </div>
 
