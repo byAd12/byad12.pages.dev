@@ -125,22 +125,29 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Conectarse a otro equipo con claves desde un cliente <span>Linux</span></h2>
+                <h2 id="claves_ssh">Conectarse a otro equipo con claves desde un cliente <span>Linux</span></h2>
 
                 <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal SSH ED25519:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t ed25519 -C "[Descripción de la clave]"</code></pre>
                 <p class="Expl">
                     Pedirá una ruta donde se guardará la clave privada. Por defecto se guarda en la carpeta <span class="span_contenido" translate="no">~/.ssh</span>.
-                    <br>
-                    También pedirá una "passphrase" que se utilizará para poder descifrar la clave y guardarla en memoria RAM.
                 </p>
+                <p class="Expl">
+                    También pedirá una "passphrase" que se utilizará para poder descifrar la clave y guardarla en memoria RAM.
+                    <br>
+                    Se suele dejar la "passphrase" vacía para automatizar un proceso, aunque configurar una "passphrase" da mayor seguridad.
+                </p>
+                <p class="Expl">
+                    En vez de generar una clave SSH ED25519, también se puede generar una clave de tipo RSA de 4096 bits:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t rsa -b 4096 -C "[Descripción de la clave]"</code></pre>
 
                 <p>2. Se puede comprobar en la ruta por defecto que se crearon las claves pública y privada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls -l ~/.ssh/</code></pre>
                 <p class="Expl">
-                    La clave pública <span class="span_contenido" translate="no">~/.ssh/id_ed25519.pub</span> tiene permisos de lectura (r) para todos los usuarios.
+                    La clave pública <span class="span_contenido" translate="no">~/.ssh/id_XXX.pub</span> tiene permisos locales de lectura (r) para todos los usuarios.
                     <br>
-                    La clave privada <span class="span_contenido" translate="no">~/.ssh/id_ed25519</span> tiene permisos de lectura y escritura (rw) solo para el usuario propietario.
+                    La clave privada <span class="span_contenido" translate="no">~/.ssh/id_XXX</span> tiene permisos locales de lectura y escritura (rw) solo para el usuario propietario.
                 </p>
 
                 <p>3. Ahora hay que copiar la clave pública en el fichero <span class="span_contenido" translate="no">~/.ssh/authorized_keys</span> del usuario del equipo remoto:</p>
@@ -162,6 +169,18 @@ Código por byAd12
                 <p class="Expl">Si el nombre del fichero de la clave SSH es distinto a <span class="span_url" translate="no">id_ed25519</span> hay que especificar con el parámetro <span class="span_contenido" translate="no">-i</span> la ruta a la clave:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 
+                <br>
+
+                <p>
+                    Opcional. Se debería de configurar en cada equipo políticas donde solo se permitan las conexiones SSH que utilicen claves. 
+                    Para ello, Dentro del fichero <span class="span_url">/etc/ssh/sshd_config</span> hay que configurar las siguientes políticas:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">PubkeyAuthentication yes
+PasswordAuthentication no
+PermitRootLogin no</code></pre>
+                <p class="Expl">Tras aplicar las políticas hay que reiniciar el servicio <span class="span_contenido">ssh</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart ssh</code></pre>
+
             </div>
 
             <div>
