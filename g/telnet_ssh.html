@@ -234,13 +234,15 @@ PermitRootLogin no</code></pre>
             <div>
                 <h2 id="tuneles_ssh">Túneles SSH en <span>Linux</span></h2>
 
+                <p>En los siguientes comandos se utiliza la opción <span class="span_contenido">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.</p>
+
                 <p>Con la opción <span class="span_contenido">-L</span> se crea un túnel que redirige todo el tráfico del puerto del servidor hacia un puerto local:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <p class="Expl">Esto permite acceder a un servicio protegido en un puerto de forma cifrada.</p>
 
                 <br>
                 <p>Con la opción <span class="span_contenido">-R</span> se crea un túnel que redirige todo el tráfico del puerto local hacia un puerto del servidor remoto:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <p class="Expl">Esto permite que cualquier usuario que acceda al puerto del servidor remoto redirija el tráfico hacia el puerto local sin necesidad de exponer directamente este puerto a Internet.</p>
 
                 <br>
@@ -253,9 +255,20 @@ GatewayPorts yes</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
                 <p class="Expl">3. En el cliente SSH hay que crear un nuevo socket hacia el servidor para poder transmitir la información del navegador:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
                 
                 <p class="Expl">4. En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
+
+                <br>
+                <p>
+                    Con <span class="span_contenido">autossh</span> se permite reconectar la conexión del túnel en caso de que caiga. 
+                    <br>
+                    Para utilizarlo solo hay que cambiar el comando <span class="span_contenido">ssh</span> por <span class="span_contenido">autossh -M 20000</span> (<span class="span_contenido">-M</span> indica el puerto de monitorización):
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Para arrancar el túnel automáticamente al iniciar el sistema hay que crear un nuevo servicio de systemctl - <a href="https://atareao.es/tutorial/trabajando-con-systemd/como-crear-un-servicio-con-systemd/" target="_blank">guía</a>.</p>
 
             </div>
 
