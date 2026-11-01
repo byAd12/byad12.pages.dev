@@ -236,12 +236,12 @@ PermitRootLogin no</code></pre>
 
                 <p>En los siguientes comandos se utiliza la opción <span class="span_contenido">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.</p>
 
-                <p>Con la opción <span class="span_contenido">-L</span> se crea un túnel que redirige todo el tráfico del puerto del servidor hacia un puerto local:</p>
+                <p>Con la opción <span class="span_contenido">-L</span> (<b>Local Forwarding</b>) se crea un túnel que redirige todo el tráfico del puerto del servidor hacia un puerto local:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <p class="Expl">Esto permite acceder a un servicio protegido en un puerto de forma cifrada.</p>
 
                 <br>
-                <p>Con la opción <span class="span_contenido">-R</span> se crea un túnel que redirige todo el tráfico del puerto local hacia un puerto del servidor remoto:</p>
+                <p>Con la opción <span class="span_contenido">-R</span> (<b>Remote Forwarding</b>) se crea un túnel que redirige todo el tráfico del puerto local hacia un puerto del servidor remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <p class="Expl">Esto permite que cualquier usuario que acceda al puerto del servidor remoto redirija el tráfico hacia el puerto local sin necesidad de exponer directamente este puerto a Internet.</p>
 
