@@ -122,8 +122,8 @@ p.Expl2, .codigo.Expl2, ol.Expl2, ul.Expl2{margin-left: 60px;}
 ul li, ol li{color: #d0d0d0; font-weight: 400;}
 ol{margin-left: 3%;}
 .LiSinPunto{list-style: none;}
-ul.Expl{margin-left: 60px; width: calc(100% - 60px);}
-ul.Expl2{margin-left: 100px; width: calc(100% - 100px);}
+ul.Expl, ol.Expl{margin-left: 60px; width: calc(100% - 60px);}
+ul.Expl2, ol.Expl2{margin-left: 100px; width: calc(100% - 100px);}
 
 /* =================================================== */
 /* Tablas */
