@@ -48,7 +48,7 @@ body{display: flex; flex-direction: column; align-items: center; height: max-con
 
 section, footer{width: 100%; text-align: center; display: flex; justify-content: center;}
 section .Div_Contenido, footer .Div_Contenido{max-width: 1250px; width: 100%; height: 100%; padding: 50px;}
-section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: center; margin-bottom: 50px; font-size: 36px; user-select: text; color: white; scroll-margin-top: 50px;}
+section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left; margin-bottom: 50px; font-size: 36px; user-select: text; color: white; scroll-margin-top: 50px;}
 
 @media screen and (max-width: 768px){
   section .Div_Contenido, footer .Div_Contenido{padding: 25px;}
@@ -64,6 +64,9 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Seccion_Inicial h2 span{color: #7cfb2d; font-family: "Smoch";}
 
 .Seccion_Inicial .Div_Contenido{display: flex; flex-direction: column; gap: 20px;}
+
+.Div_flex_titulo{display: flex; flex-direction: column; text-align: left;}
+.Div_flex_titulo p{color: rgb(228, 196, 196); white-space: nowrap; margin-bottom: 7px; font-family: 'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, monospace; font-size: 12px; user-select: text;}
 
 .fondo-img{text-align: center;}
 .fondo-img img{height: 250px; width: 250px; border-radius: 19px; user-select: none;}
@@ -99,7 +102,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Seccion_Proyectos .Contenedor_Proyectos *{color: white; text-align: left; user-select: text;}
 
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos{width: 25%; border-right: .5px solid rgba(128, 128, 128, 0.5);}
-.Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .TituloIndice{padding: 10px; font-size: 12px; border-bottom: .5px solid rgba(128, 128, 128, 0.5);}
+.Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .TituloIndice{background-color: #1c1e1d; display: flex; justify-content: space-between; padding: 10px; font-size: 12px; border-bottom: .5px solid rgba(128, 128, 128, 0.5);}
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button{transition: .2s all; cursor: pointer; width: 100%; padding: 10px; border: none; border-bottom: .5px solid rgba(128, 128, 128, 0.5); background-color: transparent; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: stretch;}
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button.Proyecto_Actual{border-left: 5px solid rgba(167, 255, 112, 0.5);}
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button *{user-select: none;}
@@ -107,17 +110,17 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button .Izquierda span.Nombre_Proyecto{font-size: 17px; font-weight: bold;}
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button .Izquierda span.Etiquetas_Proyecto{color: rgb(228, 196, 196);}
 .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button .Derecha{display: flex; width: 10%; justify-content: center; align-items: center;}
-.Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button:hover:not(button.Proyecto_Actual:hover){border-left: 5px solid rgb(196, 196, 255);}
+.Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button:not(button.Proyecto_Actual){border-left: 0px solid rgba(128, 128, 128, 0.5);}
+.Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button:hover:not(button.Proyecto_Actual:hover){border-left: 5px solid rgba(128, 128, 128, 0.5);}
 
 .Seccion_Proyectos .Contenedor_Proyectos .Lista_Paginas{width: 75%; padding: 10px;}
 
 .Proyecto_Individual{display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: space-between; min-height: 400px;}
 
 .Proyecto_Individual .Arriba .Etiquetas_Proyecto{padding-bottom: 10px; font-size: 12px; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: stretch;}
-.Proyecto_Individual .Arriba .Etiquetas_Proyecto *{user-select: none;}
-.Proyecto_Individual .Arriba .Etiquetas_Proyecto .Derecha span{color: black; padding: 0 20px 0 20px; user-select: none;}
-.Proyecto_Individual .Arriba .Etiquetas_Proyecto .Derecha span.Tipo_Proyecto{background-color: #828282;}
-.Proyecto_Individual .Arriba .Etiquetas_Proyecto .Derecha span.Fecha_Proyecto{background-color: rgba(167, 255, 112, 0.5);}
+.Proyecto_Individual .Arriba .Etiquetas_Proyecto *:not(span.Lista_Proyecto_Indice){user-select: none;}
+.Proyecto_Individual .Arriba .Etiquetas_Proyecto .Derecha span{color: black; padding: 0 20px 0 20px; user-select: text; border: 1px solid rgba(128, 128, 128, 0.5) !important; color: white;}
+.Proyecto_Individual .Arriba .Etiquetas_Proyecto .Derecha span.Fecha_Proyecto{background-color: rgb(34, 39, 46);}
 
 .Proyecto_Individual .Arriba .Datos_Proyecto, .Proyecto_Individual .Abajo{padding: 20px;}
 .Proyecto_Individual .Arriba .Datos_Proyecto .Titulo_Proyecto{font-size: 30px; font-weight: bold; padding: 10px 0 10px 0; color: rgba(167, 255, 112, 0.5);}
@@ -142,7 +145,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* INDEX - SECCIÓN DE SCRIPTS */
 
 .Seccion_Scripts p:not(.Titulo_Script){color: rgb(228, 196, 196);}
-.Seccion_Scripts p.Descripcion_General_Scripts{user-select: text; margin-bottom: 50px;}
+.Seccion_Scripts p.Descripcion_General_Scripts{user-select: text; margin-bottom: 50px; text-align: left;}
 
 .Contenedor_Scripts{display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(128, 128, 128, 0.5); border-right: 1px solid rgba(128, 128, 128, 0.5);}
 .Contenedor_Scripts .Script_Individual{gap: 20px; min-width: 0; width: 100%; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column;}
@@ -180,7 +183,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* ========================================================= */
 /* Estilos conjuntos */
 
-.ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin-bottom: 50px; margin-top: 0;}
+.ParrafoCompartido{user-select: text; color: rgb(228, 196, 196); margin-bottom: 50px; margin-top: 0; text-align: left;}
 .ParrafoCompartido span{color: #7cfb2d; user-select: all;}
 .ParrafoCompartido a{color: #7cfb2d; text-decoration: none; transition: all .4s; user-select: text;}
 .ParrafoCompartido a:hover{border-bottom: 1px solid #7cfb2d;}
@@ -188,7 +191,10 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: cent
 /* ========================================================= */
 /* CONTACTO */
 
-.Seccion_Contacto object{display: block; justify-content: center !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 100%; max-width: 500px; height: 400px; margin: 0 auto;}
+.Seccion_Contacto .Div_Contenido{display: flex; flex-direction: row; justify-content: space-between; gap: 50px;}
+.Seccion_Contacto .Div_Texto_Contacto{width: 50%;}
+.Seccion_Contacto .objectDIV{width: 50%;}
+.Seccion_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 100%; max-width: 500px; height: 400px; }
 
 /* ========================================================= */
 /* MODELOS */
@@ -317,6 +323,10 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 @media screen and (max-width: 1155px){
   /* GUÍAS */
   .BlogEntradas{grid-template-columns: repeat(2, 1fr);}
+
+  /* CONTACTO */
+  .Seccion_Contacto .Div_Contenido{display: flex; flex-direction: column; gap: 20px;}
+  .Seccion_Contacto .Div_Texto_Contacto{width: 100%;}
 }
 
 @media screen and (max-width: 1120px){
