@@ -353,9 +353,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const decoder = new TextDecoder();
     
-    if (document.getElementById("EmailBoton")){
-        document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);
-    }
+    if (document.getElementById("EmailBoton")){document.getElementById("EmailBoton").href = 'mailto:' + decoder.decode(bytes);}
+    if (document.getElementById("EmailBoton2")){document.getElementById("EmailBoton2").href = 'mailto:' + decoder.decode(bytes);}
 });
 
 // ==========================================================
