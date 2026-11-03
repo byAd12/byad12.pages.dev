@@ -113,6 +113,7 @@ Código por byAd12
                     Su objetivo es evitar ataques por tablas precalculadas (rainbow tables) y 
                     asegurar que dos contraseñas idénticas generen hashes completamente diferentes.
                 </p>
+
                 <p>Proceso:</p>
 
                 <p>1. Se genera un valor aleatorio y se guarda en el fichero de salt:</p>
@@ -129,6 +130,65 @@ Código por byAd12
 [SHA512 generado en e paso 3]</code></pre>
 
             </div>
+
+            <div>
+                <h2>Calcular el hash de una contraseña con salt</h2>
+                
+                <p>Con el comando <span class="span_contenido">openssh passwd</span> se pueden generar distintos tipos de HASH para contraseñas:</p>
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">openssh passwd -1 [Contraseña]</code></pre></td>
+                            <td>
+                                Calcula el hash MD5 de la contraseña.
+                                No se debe utilizar al ser poco seguro.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">openssh passwd -5 [Contraseña]</code></pre></td>
+                            <td>
+                                Calcula el hash SHA256 de la contraseña.
+                                Es el método que se recomienda utilizar como mínimo.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">openssh passwd -6 [Contraseña]</code></pre></td>
+                            <td>
+                                Calcula el hash SHA512 de la contraseña.
+                                Es muy seguro, pero requiere un mayor tiempo de computación.
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                
+                <p>Cada comando devolverá un hash en el siguiente formato:</p>
+                <pre class="codigo" translate="no"><code class="bash">$[Número_método]$[Salt_utilizado]$[Hash_resultado]</code></pre>
+                <p class="Expl">
+                    "Número_método" indica el tipo de hash a utilizar como, por ejemplo: <span class="span_contenido">$1</span> - MD5; <span class="span_contenido">$5</span> - SHA256; <span class="span_contenido">$6</span> - SHA512.
+                    <br>
+                    Ya que "Salt_utilizado" es aleatorio, si se calcula el hash de la misma contraseña dos veces no se conseguirá el mismo resultado.
+                </p>
+
+                <p>Para configurar manualmente el Salt hay que usar el parámetro <span class="span_contenido">-salt</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">openssh passwd -[Número_método] -salt [Salt_a_utilizar] [Contraseña]</code></pre>
+                <p class="Expl">
+                    En este caso si se ejecuta el mismo comando 2 veces si se obtendrá el mismo hash ya que el Salt será el mismo.
+                    <br>
+                    Es conveniente no utilizar este parámetro ya que es conveniente que sea aleatorio por seguridad.
+                </p>
+
+            </div>
+
+            <!--<div>
+                <h2>Averiguar contraseñas mediante un hash</h2>
+                
+                <p>Gracias al comando <span class="span_contenido">john</span> (John the Ripper) :</p>
+                
+
+
+            </div>-->
 
         </div>
         
