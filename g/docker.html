@@ -2,7 +2,7 @@
 
 Código por byAd12
 
-~ Dedicatoria a: María José / Youtube
+~ Dedicatoria a: María José / Diego Terrón del Valle / Youtube
 
 -->
 
@@ -58,7 +58,7 @@ Código por byAd12
 
                 <p>Descargar una imagen desde el repositorio <a href="https://hub.docker.com/" target="_blank">hub.docker.com</a> sin necesidad de autenticarse:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker pull [Imagen]:(Versión)</code></pre>
-                <p class="Expl">La versión del docker a ejecutar, si no se especifica será la última versión disponible - <span class="span_contenido" translate="no">latest</span>.</p>
+                <p class="Expl">La versión de la imagen a ejecutar; si no se especifica, será la última disponible (<span class="span_contenido" translate="no">latest</span>).</p>
                 
                 <p>Crear un docker sin iniciarlo:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker create [Imagen]:(Versión)</code></pre>
@@ -66,29 +66,27 @@ Código por byAd12
                 <p>Ver todas las imágenes descargadas o creadas en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
 
-                <p>Ver solo una imagen descargada específica:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker image (Imagen)</code></pre>
+                <p>Inspeccionar una imagen descargada específica:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker image inspect [Imagen]</code></pre>
                 
                 <p>Eliminar una imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image rm [Imagen]</code></pre>
-                <p class="Expl"><u>Nota</u>: no debe haber ninún docker creado que esté asociado con la imagen a eliminar.</p>
+                <p class="Expl"><u>Nota</u>: no debe haber ningún docker creado que esté asociado con la imagen a eliminar.</p>
                 
-                <p>Inspeccionar una imagen:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker image inspect (Imagen)</code></pre>
-
             </div>
 
             <div>
                 <h2>Crear una imagen</h2>
 
-                <p>Primero hay que crearse una cuenta gratuita en <a href="https://app.docker.com/signup" target="_blank">hub.docker.com</a> para poder subir publicamente las imagenes que se vayan a crear.</p>
+                <p>Primero hay que crear una cuenta gratuita en <a href="https://app.docker.com/signup" target="_blank">hub.docker.com</a> para poder subir públicamente las imágenes que se vayan a crear.</p>
                 
                 <p>Ahora hay que iniciar sesión en la terminal con las credenciales que hayamos definido al crear la cuenta:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker login -u [Nombre_usuario]</code></pre>
 
-                <p>Con el docker ya preparado para crear una imagen de el hay que crear un nuevo <b>commit</b> indicando el nombre del docker y el nombre con el que se almacenará:</p>
+                <p>Con el contenedor listo, se debe crear un <b>commit</b> indicando el nombre del contenedor y el nombre con el que se guardará:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker commit [Nombre/ID_Docker] [Nombre_usuario]/[Nombre_nueva_imagen]</code></pre>
-                
+                <p class="Expl">Para evitar corromper los datos se recomienda detener el docker previamente.</p>
+
                 <p>Se puede verificar con el siguiente comando que la imagen aparece en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
 
@@ -96,8 +94,8 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker push [Nombre_usuario]/[Nombre_nueva_imagen]</code></pre>
 
                 <p>
-                    <u>Nota</u>: Hay que tener en cuenta que los datos deberian almacenarse en <a href="#volumenes">volúmenes</a> y no en el propio docker →
-                    el docker debería ser lo mas ligero posible, permitiendo así migrar la versión de un docker sin necesidad de copiar los datos de nuevo.
+                    <u>Nota</u>: Hay que tener en cuenta que los datos deberían almacenarse en <a href="#volumenes">volúmenes</a> y no en el propio docker →
+                    el docker debería ser lo más ligero posible, permitiendo así actualizar o migrar la versión de un contenedor sin necesidad de copiar los datos de nuevo.
                 </p>
 
             </div>
@@ -122,12 +120,12 @@ Código por byAd12
                 <p>Ver todos los eventos de los dockers:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker events</code></pre>
 
-                <p>Ver los registros de ub docker en tiempo real:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker logs -f [Nombre_docker]</code></pre>
+                <p>Ver los registros de un docker en tiempo real:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker logs -f [Nombre/ID_Docker]</code></pre>
 
-                <p>Inspeccionar el contenido de un docker:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker inspect --format=(Formato) [Imagen]</code></pre>
-                <p class="Expl"><b>--format=(formato)</b>: Es opcional. Este es un ejemplo de formato: <span class="span_contenido" translate="no">{{.Id}}</span>.</p>
+                <p>Inspeccionar la configuración o estado de un contenedor o imagen:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker inspect --format=(Formato) [Nombre/ID_Docker]</code></pre>
+                <p class="Expl">El parámetro <span class="span_contenido">--format</span> es opcional. Sirve para extraer un dato específico de una imagen o un docker, como puede ser el <span class="span_contenido" translate="no">{{.Id}}</span>, <span class="span_contenido" translate="no">{{.State.Status}}</span>, ...</p>
 
             </div>
         </div>
@@ -135,17 +133,15 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Crear e iniciar un docker</h2>
+                <h2>Crear un docker a partir de una imagen</h2>
 
                 <p>
-                    El comando <span class="span_contenido" translate="no">docker run</span> permite ejecutar un docker existente o crear uno nuevo a partir de una imagen.
+                    El comando <span class="span_contenido" translate="no">docker run</span> siempre crea un contenedor nuevo a partir de una imagen.
                     Una vez creado se iniciará automáticamente:
                 </p>
                 <pre class="codigo" translate="no"><code class="bash">docker run (Parámetros) [Imagen] (Comando)</code></pre>
                 <p class="Expl">
-                    <b>Docker</b>: Puede ser el ID de un docker existente o el nombre de una imagen con la que se creará el docker.
-                    <br>
-                    Si esta imagen no se descargó previamente, el sistema descargará la versión <span class="span_contenido" translate="no">latest</span> a no ser que se especifique otra versión.
+                    Si la imagen especificada no se descargó previamente, el sistema descargará la versión <span class="span_contenido" translate="no">latest</span> a no ser que se especifique otra versión en formato <span class="span_contenido" translate="no">Imagen:Versión</span>.
                 </p>
 
                 <p>Parámetros de <span class="span_contenido" translate="no">docker run</span>:</p>
@@ -160,12 +156,12 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-v [Ruta_en_sistema_local]:[Ruta_en_docker]</code></pre></td>
-                            <td><b>Persistencia de ficheros</b> - Sirve para eenlazar una carpeta del docker con una carpeta local para que los ficheros no se eliminen al detener el docker.</td>
+                            <td><b>Persistencia de ficheros</b> - Sirve para enlazar una carpeta del docker con una carpeta local para que los ficheros permanezcan incluso si se elimina el docker.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-e [Variable_entorno]=[Valor]</code></pre></td>
-                            <td>Modifica una variable de entorno (pej. <span class="span_contenido" translate="no">PUID</span>).</td>
+                            <td>Modifica una variable de entorno (ej. <span class="span_contenido" translate="no">PUID</span>).</td>
                         </tr>
 
                         <tr>
@@ -207,7 +203,7 @@ Código por byAd12
                             <td>
                                 Ambos parámetros realizan la misma función:
                                 <br>
-                                Limita la cantidad de RAM que el docker puede utilizar como máximo.
+                                Limitan la cantidad de RAM que el docker puede utilizar como máximo.
                                 Ejemplos: "512M" (MiB), "1G" (GiB).
                             </td>
                         </tr>
@@ -222,12 +218,12 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-P</code></pre></td>
-                            <td>Se redirecciona automáticamente todos los puertos abiertos que tenga el docker en ejecución y le asigna un puerto libre del host.</td>
+                            <td>Se redireccionan automáticamente todos los puertos abiertos que tenga el docker en ejecución y le asigna un puerto libre del host.</td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-p [Puerto_local]:[Puerto_docker]</code></pre></td>
-                            <td>Se redirecciona el puerto <span class="span_contenido" translate="no">[Puerto_local]</span> del host hacia el puerto <span class="span_contenido" translate="no">[Puerto_docker]</span> del docker.</td>
+                            <td>Redirecciona el puerto <span class="span_contenido" translate="no">[Puerto_local]</span> del host hacia el puerto <span class="span_contenido" translate="no">[Puerto_docker]</span> del docker.</td>
                         </tr>
                         
                         <tr>
@@ -237,7 +233,7 @@ Código por byAd12
 
                         <tr>
                             <td colspan="2">
-                                Se puede redireccionar varios puertos a la vez, para ello hay que repetir el parámetro <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar.
+                                Se pueden redireccionar varios puertos a la vez; para ello, hay que repetir el parámetro <span class="span_contenido" translate="no">-p</span> por cada puerto a redireccionar.
                             </td>
                         </tr>
                         
@@ -260,7 +256,7 @@ Código por byAd12
                         
                         <tr>
                             <td><pre translate="no"><code class="bash">--network host</code></pre></td>
-                            <td><b>Modo host</b>: Con este parámetro el docker no tendrá IP ni mapeo de puertos, solo será un proceso del host.</td>
+                            <td><b>Modo host</b>: Con este parámetro el docker tendrá la misma IP del host y los puertos se exponen sin necesidad de utilizar el parámetro <span class="span_contenido">-p</span>.</td>
                         </tr>
 
                     </table>
@@ -282,7 +278,7 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">--add-host=[Nombre_dominio]:[IP]</code></pre></td>
                             <td>
-                                Con este parámetro se indica una nuevo registro DNS interno en el fichero <span class="span_url" translate="no">/etc/hosts</span>.
+                                Con este parámetro se indica un nuevo registro DNS interno en el fichero <span class="span_url" translate="no">/etc/hosts</span>.
                                 Para añadir otro registro se debe duplicar este parámetro.
                             </td>
                         </tr>
@@ -298,7 +294,7 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">docker run [Imagen] [Comando]</code></pre></td>
                             <td>
-                                Si por ejemplo se va a ejecutar un docker nginx, se puede definir que se ejecute otro proceso diferente y cuando finalize, se detendrá el docker.
+                                Si por ejemplo se va a ejecutar un docker nginx, se puede definir que se ejecute otro proceso diferente y cuando finalice, se detendrá el docker.
                             </td>
                         </tr>
 
@@ -326,7 +322,7 @@ Código por byAd12
                     </table>
                 </div>
                 
-                <p><u>Nota</u> - cualquiera de estas opciones se puede modificar más tarde con el siguiente comando:</p>
+                <p>El siguiente comando permite modificar los límites de recursos y políticas de reinicio de un docker ya creado:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker update [Parámetros] [Nombre/ID_Docker]</code></pre>
                 
             </div>
@@ -356,12 +352,12 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker pause [Nombre/ID_Docker]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">docker unpause [Nombre/ID_Docker]</code></pre>
 
-                <p>También se puede realizar cualquier acción a todos los dockers del sistema con el siguiente comando:</p>
+                <p>También se puede realizar cualquier acción sobre todos los dockers del sistema con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker [Acción] $(docker ps -a -q)</code></pre>
                 <p class="Expl">
                     La acción puede ser <span class="span_contenido">start</span>, <span class="span_contenido">stop</span>, <span class="span_contenido">rm</span>, <span class="span_contenido">pause</span>, <span class="span_contenido">unpause</span>, etc.
                     <br>
-                    Para aplicarlo a todos los docker que solo estén en ejecución hay que quitar el parámetro <span class="span_contenido">-a</span>.
+                    Para aplicarlo solo a los contenedores en ejecución hay que quitar el parámetro <span class="span_contenido">-a</span>.
                 </p>
 
             </div>
@@ -386,7 +382,7 @@ Código por byAd12
                 <p class="Expl">
                     <span class="span_contenido" translate="no">[Nombre/ID_Docker]</span>: Nombre del docker específico que contiene los ficheros a copiar.
                     <br>
-                    <span class="span_contenido" translate="no">[Ruta_en_docker]</span>: Ruta local del docker que contiene los fichero/s a copiar.
+                    <span class="span_contenido" translate="no">[Ruta_en_docker]</span>: Ruta interna del contenedor que contiene el fichero o los ficheros a copiar.
                     <br>
                     <span class="span_contenido" translate="no">[Ruta_en_sistema_local]</span>: Ruta local del host donde se copiarán los ficheros.
                 </p>
@@ -394,7 +390,7 @@ Código por byAd12
                 <p>Copiar ficheros del host al interior del docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [Ruta_en_sistema_local] [Nombre/ID_Docker]:[Ruta_en_docker]</code></pre>
                 <p class="Expl">
-                    <span class="span_contenido" translate="no">[Ruta_en_sistema_local]</span>: Ruta local del host que contiene los fichero/s a copiar.
+                    <span class="span_contenido" translate="no">[Ruta_en_sistema_local]</span>: Ruta local del host que contiene los fichero(s) a copiar.
                     <br>
                     <span class="span_contenido" translate="no">[Nombre/ID_Docker]</span>: Nombre o ID del docker al que se copiarán los ficheros.
                     <br>
@@ -420,7 +416,7 @@ Código por byAd12
             <div>
                 <h2 id="volumenes">Volúmenes</h2>
 
-                <p>Un volumen permite que los datos de una ruta en el docker permanezcan almacenados en el host incluso despues de que el docker haya sido eliminado.</p>
+                <p>Un volumen permite que los datos de una ruta en el docker permanezcan almacenados en el host incluso después de que el docker haya sido eliminado.</p>
 
                 <p>Ver todos los volúmenes del sistema:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker volume ls</code></pre>
@@ -432,11 +428,11 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker volume rm [Nombre_volumen]</code></pre>
 
                 <p>Para montar un volumen existente en un docker se puede hacer de 2 maneras:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run -v [Nombre_volumen]:[Ruta_en_docker] [Imagen]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">docker run --mount type=volume,src=[Nombre_volumen],dst=[Ruta_en_docker] [Imagen]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker run -d -v [Nombre_volumen]:[Ruta_en_docker] [Imagen]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">docker run -d --mount type=volume,source=[Nombre_volumen],target=[Ruta_en_docker] [Imagen]</code></pre>
                 <p class="Expl">
-                    Todos lo datos que hayan en <span class="span_contenido" translate="no">src</span> se cargarán automáticamente en <span class="span_contenido" translate="no">dst</span>
-                    aunque si el volumen está vacío y <span class="span_contenido" translate="no">dst</span> tiene datos, todos los datos de <span class="span_contenido" translate="no">dst</span> se copiarán en <span class="span_contenido" translate="no">src</span>.
+                    Todos los datos que haya en <span class="span_contenido" translate="no">source</span> se cargarán automáticamente en <span class="span_contenido" translate="no">target</span>.
+                    Sin embargo, si el volumen está vacío y <span class="span_contenido" translate="no">target</span> contiene datos, estos se copiarán automáticamente a <span class="span_contenido" translate="no">source</span>.
                     Se permite crear datos en el volumen desde el host y el docker a la vez.
                     <br>
                     Si el volumen no existe, se creará automáticamente.
@@ -459,7 +455,7 @@ Código por byAd12
             <div>
                 <h2>Configuración de una red</h2>
                 
-                <p>Ver las redes y de que tipos son para cada docker:</p>
+                <p>Ver las redes y de qué tipos son para cada docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network ls</code></pre>
             </div>
 
@@ -474,8 +470,9 @@ Código por byAd12
                 <p>Eliminar una red tipo <span class="span_contenido" translate="no">bridge</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network rm [Nombre_red]</code></pre>
 
-                <p>Cambiar un docker existente a la nueva red:</p>
-                <pre class="codigo" translate="no"><code class="bash">docker run --network [Nombre_red] [Imagen]</code></pre>
+                <p>Conectar un docker que ya existe a una red:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker network connect [Nombre_red] [Nombre/ID_Docker]</code></pre>
+                <p class="Expl">Para quitarlo de la red solo hay que cambiar <span class="span_contenido">connect</span> por <span class="span_contenido">disconnect</span>.</p>
             </div>
 
         </div>
@@ -494,14 +491,14 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 8080:80 --name httpd_prueba -v volumen_httpd_prueba:/usr/local/apache2/htdocs -d httpd</code></pre>
                 <p class="Expl">Ahora en la máquina en la que se ejecute el docker (anfitrión) hay que acceder al volumen y añadir un nuevo fichero HTML:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /var/lib/docker/volumes/volumen_httpd_prueba/_data/index.html</code></pre>
-                <p class="Expl">Para visuaizar la página web hay que acceder a la siguiente URL: <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:8080</span>.</p>
+                <p class="Expl">Para visualizar la página web hay que acceder a la URL <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:8080</span>.</p>
             </div>
             
             <div>
                 <h2>Docker "<span>heimdall</span>"</h2>
                 <p>Sirve para organizar aplicaciones web en un solo lugar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name heimdall -e PUID=1000 -e PGID=1000 -e TZ=america/new_york -p 9998:80 -p 9997:443 -v /home/usuario/Descargas/docker_adr:/config --restart unless-stopped linuxserver/heimdall</code></pre>
-                <p class="Expl">Para visuaizar la página web hay que acceder a la siguiente URL: <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:9998</span>.</span>
+                <p class="Expl">Para visualizar la página web hay que acceder a la URL <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:9998</span>.</p>
             </div>
         </div>
         <!-- ......................................................... -->

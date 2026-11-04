@@ -166,7 +166,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Seccion_Contacto .Flex_Contacto{display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 20px;}
 .Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido, .Seccion_Contacto .Flex_Contacto div.objectDIV{width: 50%;}
 .Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido{margin-bottom: 0 !important;}
-.Seccion_Contacto .Flex_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; background-color: #222523; width: 100%; max-width: 490px; height: 325px;}
+.Seccion_Contacto .Flex_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; width: 100%; max-width: 490px; height: 325px;}
 
 /* ========================================================= */
 /* TRADUCTOR */
