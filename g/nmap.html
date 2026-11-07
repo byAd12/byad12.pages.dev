@@ -644,7 +644,7 @@ Código por byAd12
 
                         <tr>
                             <td><pre translate="no"><code class="bash">-S [IP_origen]</code></pre></td>
-                            <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
+                            <td>Esta opción permite manipular la IP de origen de los paquetes mediante el campo <span class="opcion">IP ID</span>. Es importante que la IP exista para poder recibir las respuestas. Se puede usar la IP de una VPS diferente.</td>
                         </tr>
 
                         <tr>
@@ -670,13 +670,13 @@ Código por byAd12
                     <table class="TablaComandos TablaNmap">
 
                         <tr class="Titulo">
-                            <td colspan="2" class="efecto_ocultar">
+                            <td class="efecto_ocultar">
                                 Interpretación del S.O. según el TTL
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 El TTL (Time To Live) es un valor que se puede cambiar manualmente así que no es un método completamente fiable.
                                 <br>
                                 Se puede identificar el S.O. mediante firmas con el parámetro <span class="opcion">-O</span>.
@@ -727,13 +727,13 @@ RCVD (0.0487s) ICMP [Destino] Port unreachable (type=3/code=3)
                     <table class="TablaComandos TablaNmap">
 
                         <tr class="Titulo">
-                            <td colspan="2" class="efecto_ocultar">
+                            <td class="efecto_ocultar">
                                 Interpretación del estado de un puerto
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 <span class="opcion">open</span>: Se estableció la conexión al puerto con TCP, UDP o SCTP.
                                 <br>
                                 <span class="opcion">closed</span>: Se rechaza la conexión con la bandera RST.
@@ -788,7 +788,7 @@ RCVD (0.0487s) ICMP [Destino] Port unreachable (type=3/code=3)
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">netcat -nv -p [Puerto_origen] [Objetivo] [Puerto_objetivo]</code></pre></td>
-                            <td>Si el destino acepta conexiones si las enviamos desde un puerto determinado, se puede manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</span></td>
+                            <td>Si el destino acepta conexiones si las enviamos desde un puerto determinado, se puede manipular ese campo y conectarnos para así obtener más información.<br><u>IMPORTANTE</u>: El puerto <b style="color: orange;">53</b> junto a otros es un servicio esencial y, en algunos casos, nos permite conectarnos si lo configuramos como puerto de origen.</td>
                         </tr>
 
                     </table>

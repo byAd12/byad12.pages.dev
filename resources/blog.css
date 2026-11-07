@@ -170,12 +170,12 @@ div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important
 /* Página de enlaces a sub-guías */
 
 .PaginaIndice{flex-direction: row; justify-content: center; gap: 10px;}
-.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 30%; margin: 0; display: flex; flex-direction: column;}
-.PaginaIndice div.BotonPersonalizadoDIV{display: flex; flex-direction: row; flex-wrap: wrap; width: 100% !important; justify-content: center; gap: 20px;}
-.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto{font-size: 12px; margin: 0;}
-.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto .TextoRelacionado{min-width: 50px;}
-.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto .BotonFlecha{width: 30px;}
 .PaginaIndice h2{color: rgb(228, 196, 196) !important;}
+.PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 100%; margin: 0; display: flex; flex-direction: column;}
+.PaginaIndice div.BotonPersonalizadoDIV{display: flex; flex-direction: row; flex-wrap: wrap; width: 100% !important; justify-content: center; gap: 20px;}
+.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto{font-size: 15px; margin: 0;}
+.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto .TextoRelacionado{min-width: 75px;}
+.PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto .BotonFlecha{width: 50px;}
 
 @media screen and (max-width: 1040px){
     .parte1 div:not(.BotonPersonalizadoDIV, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){padding-left: 0 !important; padding-right: 0 !important; width: 100% !important; margin: 0 !important;}
@@ -268,7 +268,6 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     hr{height: 0px; margin: 0; padding: 0; display: none;}
     .codigo{overflow-wrap: break-word; white-space: pre-wrap; word-break: break-word;}
     .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 95% !important;}
-    .PaginaIndice div:not(.BotonPersonalizadoDIV){width: 100%;}
     .BotonPersonalizadoDIV .BotonFlecha{border: 2px solid #8b9dc3 !important;}
 
     .carrusel_nota_print{display: block !important;}

@@ -1,7 +1,7 @@
 <div align="center">
 
 <p>
-  <a href="https://byad12.pages.dev/"><img style="width: 150px;" src="https://byad12.pages.dev/img/logo.ico" alt="byAd12 Logo"></a>
+  <a href="https://byad12.pages.dev/"><img style="width: 150px;" src="https://byad12.pages.dev/img/logo.ico" alt="Logo de byAd12"></a>
 </p>
 
 <h1>
