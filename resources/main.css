@@ -136,7 +136,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos .Columna span.Dato{order: 2;}
 
 .Proyecto_Individual .Abajo{display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between;}
-.Proyecto_Individual .Abajo .Izquierda{display: flex; flex-direction: row; flex-wrap: nowrap; gap: 10px; align-items: center;}
+.Proyecto_Individual .Abajo .Izquierda{display: flex; flex-direction: row; flex-wrap: nowrap; gap: 10px; align-items: center; justify-content: center;}
 .Proyecto_Individual .Abajo .Izquierda *, .Proyecto_Individual .Abajo .Derecha *{user-select: none;}
 .Proyecto_Individual .Abajo .Derecha a .BotonFlecha span{color: black;}
 
@@ -148,13 +148,16 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Seccion_Scripts p:not(.Titulo_Script){color: rgb(228, 196, 196);}
 
 .Contenedor_Scripts{display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(128, 128, 128, 0.5); border-right: 1px solid rgba(128, 128, 128, 0.5);}
-.Contenedor_Scripts .Script_Individual{gap: 20px; min-width: 0; width: 100%; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column;}
+.Contenedor_Scripts .Script_Individual{gap: 20px; min-width: 0; width: 100%; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column; transition: all 0.2s;}
+.Contenedor_Scripts .Script_Individual:hover{background-color: #1c1e1d; border-top-color: rgba(167, 255, 112, 0.5) !important; box-shadow: inset 0 2px 0 0 rgba(167, 255, 112, 0.5);}
 .Contenedor_Scripts .Script_Individual .Titulo_Script{color: rgba(167, 255, 112, 0.5); font-weight: bold; font-size: 20px; display: flex; justify-content: space-between; align-items: center;}
 
 .Contenedor_Scripts .Script_Individual .Titulo_Script a{font-size: 15px; border: 2px solid transparent; flex-shrink: 0; display: flex; justify-content: center; align-items: center; user-select: none; background-color: rgba(167, 255, 112, 0.5); color: black !important; width: 55px; align-self: stretch; transform: none; border-radius: 5px;}
 .Contenedor_Scripts .Script_Individual .Titulo_Script a span{margin: 0 auto; transition: all .3s;}
-.Contenedor_Scripts .Script_Individual .Titulo_Script a:hover{background-color: #22272e; border-color: rgba(167, 255, 112, 0.5);}
+.Contenedor_Scripts .Script_Individual .Titulo_Script a:hover{background-color: transparent; border-color: rgba(167, 255, 112, 0.5);}
 .Contenedor_Scripts .Script_Individual .Titulo_Script a:hover span{transform: rotate(45deg); color: rgba(167, 255, 112, 0.5);}
+
+.Contenedor_Scripts .Script_Individual .Etiquetas_Script{font-family: 'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, monospace; font-size: 12px;}
 
 .Contenedor_Scripts .Script_Individual_Esconder{display: none;}
 
@@ -166,7 +169,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Seccion_Contacto .Flex_Contacto{display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 20px;}
 .Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido, .Seccion_Contacto .Flex_Contacto div.objectDIV{width: 50%;}
 .Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido{margin-bottom: 0 !important;}
-.Seccion_Contacto .Flex_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid #7cfb2d !important; width: 100%; max-width: 490px; height: 325px;}
+.Seccion_Contacto .Flex_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid rgba(167, 255, 112, 0.5) !important; width: 100%; max-width: 490px; height: 325px;}
 
 /* ========================================================= */
 /* TRADUCTOR */
@@ -181,7 +184,7 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 /* PRIVACIDAD */
 
 .Seccion_Privacidad *{text-align: left;}
-.Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto{display: flex; flex-direction: column; gap: 20px;}
+.Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto{display: flex; flex-direction: column; gap: 25px;}
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto h1{color: rgba(167, 255, 112, 0.5); user-select: text;}
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto p.Subtitulo{font-weight: bold; font-size: 20px; color: white;}
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto p{font-size: 16px; line-height: 1.5; color: rgb(228, 196, 196); text-align: justify; user-select: text;}
@@ -189,6 +192,9 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto a:hover{border-bottom: 1px solid #7cfb2d;}
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto br{user-select: none;}
 .Seccion_Privacidad .Div_Contenido .La_Chapa_De_Texto span.fecha{color: #7cfb2d;}
+
+.Seccion_Privacidad .Div_Contenido .Subtitulo_Div p.Numeración_secciones{color: rgb(228, 196, 196); white-space: nowrap; font-family: 'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, monospace; font-size: 12px; user-select: text;}
+
 
 /* ========================================================= */
 /* Estilos conjuntos */

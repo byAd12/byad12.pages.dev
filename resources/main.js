@@ -55,7 +55,7 @@ function anadir_texto_gpg() {
             obj.addEventListener('load', () => {
                 const doc = obj.contentDocument || obj.contentWindow.document;
                 doc.open();
-                doc.write(`<html><head>${estilos}</head><body style="background:black; color:white; font-family:monospace; white-space:pre; padding: 10px 5px;">${texto.replace(/</g, "&lt;")}</body></html>`);
+                doc.write(`<html><head>${estilos}</head><body style="background: black; color: white; font-family: monospace; white-space: pre; padding: 10px 5px;">${texto.replace(/</g, "&lt;")}</body></html>`);
                 doc.close();
             });
 
