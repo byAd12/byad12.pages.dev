@@ -408,7 +408,7 @@
                 <p class="Parrafo_Compartido">
                     A continuación podrás ver mis scripts de gestión cuyo código fuente es público.
                     <br>
-                    Ejecute los scripts con privilegios para evitar problemas de permisos.
+                    Los scripts con la etiqueta "<span class="Etiqueta_Codigo">PRIVILEGIOS</span>" deben ejecutarse con privilegios elevados.
                 </p>
 
                 <div class="Contenedor_Scripts">
@@ -426,7 +426,7 @@
                     <div class="Script_Individual">
                         <p class="Titulo_Script"><span>proxmox.sh</span> <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/scripts/proxmox.sh" target="_blank"><span>↗</span></a></p>
                         <p class="Descripcion_Script">Script de gestión automatizada mediante menú interactivo para nodos de Proxmox VE.</p>
-                        <p class="Etiquetas_Script">ADMINISTRACIÓN • PROXMOX VE</p>
+                        <p class="Etiquetas_Script">ADMINISTRACIÓN • PROXMOX VE • PRIVILEGIOS</p>
                     </div>
 
                     <!-- ========================= -->
@@ -434,7 +434,7 @@
                     <div class="Script_Individual">
                         <p class="Titulo_Script"><span>nis.sh</span> <a href="https://github.com/byAd12/byad12.pages.dev/blob/main/scripts/nis.sh" target="_blank"><span>↗</span></a></p>
                         <p class="Descripcion_Script">Script de automatización para configurar servidores y clientes del servicio NIS.</p>
-                        <p class="Etiquetas_Script">REDES • NIS</p>
+                        <p class="Etiquetas_Script">REDES • NIS • PRIVILEGIOS</p>
                     </div>
 
                     <!-- ========================= -->
@@ -461,18 +461,38 @@
                 </div>
 
                 <div class="Flex_Contacto">
-                    <div class="objectDIV">
+                    <div class="Izquierda">
                         <object type="text/plain" id="visor-clave-gpg"></object>
                     </div>
 
-                    <p class="Parrafo_Compartido">
-                        Puedes contactarme mediante <a href="" id="EmailBoton2" target="_blank">correo electrónico</a> por cualquier tema.
-                        <br><br>
-                        Si es importante, puedes cifrar el mensaje usando mi clave pública (<a href="key.txt">key.txt</a>) con <a href="g/gpg.html">GPG</a>.
-                        Recuerda incluir tu clave pública para recibir una respuesta cifrada.
-                        <br><br>
-                        Puedes comprobar la integridad del fichero de la clave pública con los distintos hashes disponibles en el fichero <a href="key-hash.txt">key-hash.txt</a>.
-                    </p>
+                    <div class="Derecha">
+                        <div class="Informacion_Contacto">
+                            <div class="Titulo">
+                                <p>Dirección de correo</p>
+                            </div>
+
+                            <p class="Parrafo_Compartido">
+                                Puedes contactarme mediante <a href="" id="EmailBoton2" target="_blank">correo electrónico</a> por cualquier tema.
+                            </p>
+                        </div>
+                        <div class="Informacion_Contacto">
+                            <div class="Titulo">
+                                <p>Cifrado de la información</p>
+                            </div>
+                            <p class="Parrafo_Compartido">
+                                Si es importante, puedes cifrar el mensaje usando mi clave pública (<a href="key.txt">key.txt</a>) con <a href="g/gpg.html">GPG</a>.
+                                Recuerda incluir tu clave pública para recibir una respuesta cifrada.
+                            </p>
+                        </div>
+                        <div class="Informacion_Contacto">
+                            <div class="Titulo">
+                                <p>Integridad y verificación</p>
+                            </div>
+                            <p class="Parrafo_Compartido">
+                                Puedes comprobar la integridad del fichero de la clave pública con los distintos hashes disponibles en el fichero <a href="key-hash.txt">key-hash.txt</a>.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -147,6 +147,8 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 
 .Seccion_Scripts p:not(.Titulo_Script){color: rgb(228, 196, 196);}
 
+.Seccion_Scripts p.Parrafo_Compartido span.Etiqueta_Codigo{font-family: 'IBM Plex Mono', 'IBM Plex Mono Fallback', ui-monospace, monospace; user-select: text; color: white; font-size: 15px;}
+
 .Contenedor_Scripts{display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid rgba(128, 128, 128, 0.5); border-right: 1px solid rgba(128, 128, 128, 0.5);}
 .Contenedor_Scripts .Script_Individual{gap: 20px; min-width: 0; width: 100%; border-left: 1px solid rgba(128, 128, 128, 0.5); border-top: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; text-align: left; color: white; user-select: text; display: flex; flex-direction: column; transition: all 0.2s;}
 .Contenedor_Scripts .Script_Individual:hover{background-color: #1c1e1d; border-top-color: rgba(167, 255, 112, 0.5) !important; box-shadow: inset 0 2px 0 0 rgba(167, 255, 112, 0.5);}
@@ -166,10 +168,20 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 
 .Seccion_Contacto p:not(.Titulo_Script){color: rgb(228, 196, 196);}
 
-.Seccion_Contacto .Flex_Contacto{display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 20px;}
-.Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido, .Seccion_Contacto .Flex_Contacto div.objectDIV{width: 50%;}
-.Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido{margin-bottom: 0 !important;}
-.Seccion_Contacto .Flex_Contacto .objectDIV object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid rgba(167, 255, 112, 0.5) !important; width: 100%; max-width: 490px; height: 325px;}
+.Seccion_Contacto .Flex_Contacto{display: flex; flex-direction: row; justify-content: space-between; align-items: center; gap: 20px; align-items: stretch;}
+
+.Seccion_Contacto .Flex_Contacto div.Izquierda{width: min-content; flex: 1;}
+.Seccion_Contacto .Flex_Contacto .Izquierda object{display: block; justify-content: left !important; color: white !important; border: .5px solid rgba(128, 128, 128, 0.5); border-top: 3px solid rgba(167, 255, 112, 0.5) !important; width: 490px; height: 100%;}
+
+.Seccion_Contacto .Flex_Contacto div.Derecha{width: max-content; height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 20px;}
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto{border: 1px solid rgba(128, 128, 128, 0.5); padding: 20px; transition: all .2s;}
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto:hover{background-color: #1c1e1d; border-top-color: rgba(167, 255, 112, 0.5) !important; box-shadow: inset 0 2px 0 0 rgba(167, 255, 112, 0.5);}
+
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto div.Titulo{display: flex; flex-direction: row; align-items: center; gap: 10px; margin-bottom: 20px;}
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto div.Titulo img{height: 18px;}
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto div.Titulo p{color: white !important; font-weight: bold; user-select: text;}
+
+.Seccion_Contacto .Flex_Contacto div.Derecha div.Informacion_Contacto p.Parrafo_Compartido{margin-bottom: 0 !important;}
 
 /* ========================================================= */
 /* TRADUCTOR */
@@ -210,12 +222,13 @@ section .Div_Contenido h2:not(.Seccion_Inicial h2){width: 100%; text-align: left
 .Seccion_Modelos .Div_Contenido .Contenido_Modelos{display: flex; flex-direction: column; gap: 20px;}
 
 /* ========================================================= */
-/* ERROR */
+/* PÁGINA DE ERROR (404) */
 
 .Seccion_Error .Div_Contenido{display: flex; flex-direction: column; justify-content: center;}
-.Seccion_Error .Div_Contenido .Codigo_Error{font-size: 100px !important;}
-.Seccion_Error .Div_Contenido .Codigo_Error span{color: #7cfb2d !important;}
-.Seccion_Error .Div_Contenido .Div_Boton_Volver{width: 100%;}
+.Seccion_Error .Div_Contenido h2.Codigo_Error{font-size: 100px !important; text-align: center !important;}
+.Seccion_Error .Div_Contenido h2.Codigo_Error span{color: #7cfb2d;}
+.Seccion_Error .Div_Contenido p.Parrafo_Compartido{text-align: center !important;}
+.Seccion_Error .Div_Contenido .Div_Boton_Volver a.Boton_Personalizado_Texto{width: max-content;}
 
 /* ========================================================= */
 /* GUÍA */
@@ -331,10 +344,6 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 @media screen and (max-width: 1155px){
   /* GUÍAS */
   .BlogEntradas{grid-template-columns: repeat(2, 1fr);}
-
-  /* CONTACTO */
-  .Seccion_Contacto .Div_Contenido{display: flex; flex-direction: column; gap: 20px;}
-  .Seccion_Contacto .Div_Texto_Contacto{width: 100%;}
 }
 
 @media screen and (max-width: 1120px){
@@ -357,8 +366,9 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
   .BlogEntradas{grid-template-columns: repeat(1, 1fr);}
 
   /* CONTACTO */
-  .Seccion_Contacto .Flex_Contacto{flex-direction: column; gap: 50px;}
-  .Seccion_Contacto .Flex_Contacto div.objectDIV object{margin: 0 auto;}
+  .Seccion_Contacto .Flex_Contacto{flex-direction: column; gap: 20px;}
+  .Seccion_Contacto .Flex_Contacto div.Izquierda, .Seccion_Contacto .Flex_Contacto div.Derecha{width: 100%;}
+  .Seccion_Contacto .Flex_Contacto div.Izquierda object{margin: 0 auto; height: 300px;}
   .Seccion_Contacto .Flex_Contacto p.Parrafo_Compartido, .Seccion_Contacto .Flex_Contacto div.objectDIV{width: 100%;}
 }
 
@@ -382,6 +392,9 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
   .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button{width: 100%;}
   .Proyecto_Individual .Arriba .Etiquetas_Proyecto{flex-direction: column; gap: 10px; align-items: center;}
   .Proyecto_Individual .Arriba .Datos_Proyecto .Descripcion_Proyecto{margin-bottom: 30px;}
+
+  /* CONTACTO */
+  .Seccion_Contacto .Flex_Contacto div.Izquierda object{width: 100%;}
 }
 
 @media screen and (max-width: 500px){
