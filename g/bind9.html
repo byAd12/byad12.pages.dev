@@ -2,7 +2,9 @@
 
 Código por byAd12
 
-~ Dedicatoria a: María José
+~ Dedicatoria a: María José (CFGM)
+
+~ Dedicatoria a: Antonio María García Soto (CFGS)
 
 -->
 
@@ -99,30 +101,42 @@ Código por byAd12
 
                 <h3>3.1. Crear una zona de búsqueda directa</h3>
 
-                <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Un ejemplo es el siguiente, donde se definen los registros DNS de un dominio llamado <span class="span_contenido" translate="no">adr.es</span>:</p>
+                <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Sintaxis básica:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
-adr.es. IN      SOA     dns1.adr.es.    administrador.adr.es    (
+FQDN_DOMINIO. IN      SOA     FQDN_SERVIDOR_NS.    DIRECCION_EMAIL.DOMINIO    (
     1               ; Número de serie
-    604800          ; Intervalo de actualización
-    86400           ; Intervalo de reintento
+    604800          ; Intervalo de actualización (1 semana)
+    86400           ; Intervalo de reintento     (1 dia)
     2419200         ; Expiración
     604800  )       ; TTL
 
-adr.es. IN      NS      dns1.adr.es.
-dns1    IN      A       192.168.0.230
-www     IN      A       192.168.0.153
-correo  IN      A       192.168.0.4
-adr.es. IN      MX      1       correo
-otra    IN      CNAME   iesjorgeguillen.es</code></pre>
+; REGISTROS DNS BÁSICOS:
+FQDN_DOMINIO.   IN      NS      FQDN_SERVIDOR_NS.
+SERVIDOR_NS     IN      A       IP_SERVIDOR_NS
+
+; OTROS REGISTROS DNS:
+; ...</code></pre>
+                
+                <p class="Expl">Es importante subir de valor el número de serie (primer valor en el registro <b>SOA</b>) cada vez que se modifique este fichero.</p>
+
+                <p class="Expl">Como definir registros DNS de tipo <b>A</b>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">NOMBRE_SUBDOMINIO    IN      A       IP_DESTINO</code></pre>
+
+                <p class="Expl">Como definir registros DNS de tipo <b>CNAME</b>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">NOMBRE_SUBDOMINIO    IN      CNAME   NOMBRE_SUBDOMINIO / O / FQDN.</code></pre>
+
+                <p class="Expl">Como definir registros DNS de tipo <b>MX</b>:</p>
+                <pre class="codigo" translate="no"><code class="nginx">SUBDOMINIO_SERVIDOR_MAIL    IN      A       IP_SERVIDOR_MAIL
+FQDN_DOMINIO.               IN      MX      NUM_PRIORIDAD       SUBDOMINIO_SERVIDOR_MAIL</code></pre>
 
 
-                <p>En el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona indicando el fichero creado en el paso anterior:</p>
+                <p>Luego, en el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona indicando el fichero creado en el paso anterior:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "[Nombre_dominio].[TLD]"{
 type master;
 file "/etc/bind/[Nombre_fichero_DB_dominio]";
 };</code></pre>
 
-                <p>Una vez configurado hay que comprobar con nslookup que los registros se han creado correctamente:</p>
+                <p>Por último, hay que comprobar con nslookup que los registros se han creado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="console"># nslookup
 > server 127.0.0.1
 > set type=NS
@@ -130,7 +144,10 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
 
                 <h3>3.2. Crear una zona de búsqueda inversa</h3>
 
-                <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Dirección_red</span>) que contenga todos los registros DNS de la zona inversa. Un ejemplo es el siguiente, que define los registros DNS de la zona <span class="span_contenido" translate="no">0.168.192.in-addr.arpa</span> (<span class="span_contenido" translate="no">192.168.0.0/24</span>):</p>
+                <p>
+                    En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Dirección_red</span>) que contenga todos los registros DNS de la zona inversa.
+                    Un ejemplo es el siguiente, que define los registros DNS de la zona <span class="span_contenido" translate="no">0.168.192.in-addr.arpa</span> (<span class="span_contenido" translate="no">192.168.0.0/24</span>):
+                </p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
 0.168.192.in-addr.arpa. IN      SOA     dns1.adr.es.    administrador.adr.es.   (
         1
@@ -139,29 +156,37 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
         2419200
         10800   )
 
+; REGISTROS DNS BÁSICOS:
 0.168.192.in-addr.arpa. IN      NS      dns1.adr.es.
 
-230     IN      PTR     dns1.adr.es.
-153     IN      PTR     www.adr.es.</code></pre>
+; REGISTROS DNS INVERSOS (PTR):
+; ...</code></pre>
 
-                <p>En el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona inversa indicando el fichero creado en el paso anterior:</p>
+                <p class="Expl">Es importante subir de valor el número de serie (primer valor en el registro <b>SOA</b>) cada vez que se modifique este fichero.</p>
+
+                <p class="Expl">Como definir registros DNS de tipo <b>PTR</b> (inversos):</p>
+                <pre class="codigo" translate="no"><code class="nginx">NÚMERO_IP    IN      PTR       FQDN_SUBDOMINIO.</code></pre>
+                <p class="Expl2">El número de la IP debe ser solo el grupo restante sin contar la dirección de red como, por ejemplo, <span class="span_contenido">192.168.0.200/24</span> > <span class="span_contenido">200</span>.</p>
+
+
+                <p>Luego, en el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona inversa indicando el fichero creado en el paso anterior:</p>
                 <pre class="codigo" translate="no"><code class="nginx">zone "[Zona_inversa].in-addr.arpa"{
 type master;
 file "/etc/bind/db.192.168.0";
 };</code></pre>
 
-                <p>Una vez configurado hay que comprobar con nslookup que los registros se han creado correctamente:</p>
+                <p>Por último, hay que comprobar con nslookup que los registros se han creado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="console"># nslookup
 > server 127.0.0.1
 > set type=NS
 > [Zona_inversa].in-addr.arpa</code></pre>
 
-                <h3>2.3. Configurarlo como servidor de reenvío</h3>
+                <h3>2.3. Configurar el servidor como reenviador</h3>
                 
-                <p>Primero hay que editar el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="nginx">nano /etc/bind/named.conf.options</code></pre>
-                <p class="Expl">Dentro del fichero se debe configurar lo siguiente:</p>
-                
+                <p>
+                    En el fichero <span class="span_url">/etc/bind/named.conf.options</span> hay que configurar la sección de <span class="span_contenido">forwarders</span> indicando la dirección IPv4 de la máquina a la que reenviarán las peticiones DNS.
+                    Se puede configurar más de un reenviador separándolos en diferentes líneas que acaban con el símbolo "<span class="span_contenido">;</span>":
+                </p>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
 
@@ -176,10 +201,14 @@ listen-on { any; };
 // listen-on-v6 { any; };
 };</code></pre>
                 <p class="Expl">
-                    <span class="span_contenido" translate="no">IP_del_reenviador</span>: Es la dirección IPv4 del dispositivo al que reenviarán las peticiones DNS.
-                    <br>
-                    <span class="span_contenido" translate="no">listen-on-v6</span>: Es una línea comentada que se ignorará.
+                    Ten en cuenta que el contenido tras el símbolo <span class="span_contenido" translate="no">//</span> o <span class="span_contenido" translate="no">#</span> son comentarios y no se tendrán en cuenta en la configuración.
                 </p>
+                <p class="Expl">
+                    Por defecto, Bind9 intentará resolver la consulta con los reenviadores y, si no lo consigue, el servicio intetará resolverlo con los servidores raíz.
+                    Se puede configurar que solo se resuelvan las solicitudes con los reenviadores añadiendo la siguiente línea en el fichero:
+                </p>
+                <pre class="codigo" translate="no"><code class="nginx">forward only;</code></pre>
+
             </div>
 
             <div>
@@ -189,19 +218,21 @@ listen-on { any; };
                 <pre class="codigo" translate="no"><code class="bash">service bind9 start</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">service bind9 status</code></pre>
 
-                <p>Con el siguiente comando se puede verificar si hay algún error de sintaxis:</p>
-                <pre class="codigo" translate="no"><code class="bash">named-checkconf</code></pre>
+                <p>Con el siguiente comando se puede verificar si hay algún error de sintaxis en una zona definida:</p>
+                <pre class="codigo" translate="no"><code class="bash">named-checkzone [Nombre_dominio].[TLD] /etc/bind/[Nombre_fichero_zona]
+named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</code></pre>
 
-                <p>Una vez configurado el servicio, se puede verificar si una zona está configurada en un fichero en específico:</p>
-                <pre class="codigo" translate="no"><code class="bash">named-checkzone [Nombre_dominio].[TLD] /etc/bind/[Nombre_fichero_zona]</code></pre>
+                <p>Si se arregla algo o se cambia algún valor de cualquier fichero, hay que reiniciar el servcio <span class="span_contenido">named</span> para aplicar los cambios:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart named</code></pre>
+
             </div>
 
             <div>
                 <h2>5. Si el cliente tiene problemas con el DNS</h2>
 
                 <p>Primero se verifica que los siguientes ficheros no contengan registros DNS inválidos:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/resolv.conf</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/hosts</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
 
                 <p>Se puede probar a reiniciar los siguientes servicios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart networking</code></pre>
@@ -231,7 +262,9 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <hr>
+        <h1>Comandos</h1>
+        <h2 class="TituloSecundario">Comandos de consultas DNS para Linux</h2>
+        <hr class="SeparadorConTitulo">
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
@@ -314,8 +347,8 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>DNS</h1>
-        <h2 class="TituloSecundario">Configuración en <b>Windows</b></h2>
+        <h1>Rol DNS</h1>
+        <h2 class="TituloSecundario">Configuración del rol DNS en <b>Windows Server</b></h2>
         <hr class="SeparadorConTitulo">
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -327,8 +360,8 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
                 <br>
                 <ol>
                     <li>Configurar una IP estática</li>
-                    <li>Administrador del Servidor > Agregar un rol llamado "Servidor DNS" > Instalar</li>
-                    <li>Administrador del Servidor > Herramientas > DNS > [Nombre_servidor] > Reenviadores > Editar > Añadir la IP del servidor DNS que actuará como reenviador</li>
+                    <li>Administrador del Servidor > Agregar un rol llamado "Servidor DNS" > Instalar.</li>
+                    <li>Administrador del Servidor > Herramientas > DNS > [Nombre_servidor] > Reenviadores > Editar > Añadir la IP del servidor DNS que actuará como reenviador.</li>
                 </ol>
                 <p>Es necesario especificar con un registro A donde está el servidor DNS primario y crearle un registro <b>NS</b>.</p>
                 
