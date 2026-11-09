@@ -81,7 +81,7 @@ Código por byAd12
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>SSH</h1>
+        <h1>SSH (Linux)</h1>
         <h2 class="TituloSecundario">Secure Shell</h2>
         <br>
 
@@ -90,9 +90,9 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Configuración en un equipo <span>Linux</span></h2>
+                <h2>Configuración en un equipo</h2>
 
-                <p>Tanto en el cliente como en el servidor hay que instalar el paquete de SSH, que incluye los paquetes <span class="span_contenido">openssh-client</span> y <span class="span_contenido">openssh-server</span>:</p>
+                <p>Tanto en el cliente como en el servidor se puede instalar el paquete <span class="span_contenido">ssh</span> , que incluye los paquetes <span class="span_contenido">openssh-client</span> y <span class="span_contenido">openssh-server</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y ssh</code></pre>
 
@@ -105,87 +105,93 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Configuración en un equipo <span>Windows</span></h2>
-
-                <p>Primero se debe iniciar el servicio de SSH:</p>
-                <pre class="codigo" translate="no"><code class="powershell">Start-Service sshd</code></pre>
-
-                <p>Luego hay que configurar el servicio de SSH para que se inicie automáticamente:</p>
-                <pre class="codigo" translate="no"><code class="powershell">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
-
-                <p>Por último hay que habilitar el puerto 22 en el firewall desde las reglas de entrada y salida.</p>
-
-            </div>
-
-            <div>
-                <h2>Conectarse a otro equipo con credenciales desde un cliente <span>Linux</span> y <span>Windows</span></h2>
+                <h2>Como conectarse a otro equipo con credenciales desde un cliente</h2>
 
                 <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+                <p class="Expl">El parámetro <span class="span_contenido">-p</span> permite indicar el puerto del servicio SSH del equipo remoto. Por defecto intenta conectarse al puerto <b>22</b>.</p>
 
             </div>
 
             <div>
-                <h2 id="claves_ssh">Conectarse a otro equipo con claves desde un cliente <span>Linux</span></h2>
+                <h2 id="claves_ssh">Como conectarse a otro equipo con claves desde un cliente</h2>
 
-                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal, que puede ser de tipo SSH ED25519:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t ed25519 -C "[Descripción de la clave]"</code></pre>
+                <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                            <td><pre translate="no"><code class="bash">ssh-keygen -t ed25519 -C "[Descripción de la clave]"</code></pre></td>
+                            <td>Crea una clave de tipo ED25519.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ssh-keygen -t rsa -b 4096 -C "[Descripción de la clave]"</code></pre></td>
+                            <td>Crea una clave de tipo RSA de 4096 bits.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p class="Expl">Se solicitará la ruta donde se guardará la clave privada. Por defecto se guarda en la carpeta <span class="span_contenido" translate="no">~/.ssh</span>.</p>
                 <p class="Expl">
-                    O también puede ser de tipo RSA de 4096 bits:
+                    También solicitará una "passphrase", que se utilizará para poder descifrar la clave y guardarla en memoria RAM.
+                    Se suele dejar vacía para automatizar un proceso, aunque configurarla da mayor seguridad.
                 </p>
-                <pre class="codigo" translate="no"><code class="bash">ssh-keygen -t rsa -b 4096 -C "[Descripción de la clave]"</code></pre>
-                <ol class="Expl">
-                    <li>Se solicitará la ruta donde se guardará la clave privada. Por defecto se guarda en la carpeta <span class="span_contenido" translate="no">~/.ssh</span>.<br><br></li>
-                    <li>
-                        También solicitará una "passphrase", que se utilizará para poder descifrar la clave y guardarla en memoria RAM.
-                        <br>
-                        Se suele dejar la "passphrase" vacía para automatizar un proceso, aunque configurar una "passphrase" da mayor seguridad.
-                    </li>
-                </ol>
 
                 <p>2. Se puede comprobar en la ruta por defecto que se crearon las claves pública y privada:</p>
                 <pre class="codigo" translate="no"><code class="bash">ls -l ~/.ssh/</code></pre>
                 <p class="Expl">
-                    La clave pública tiene permisos locales de lectura (r) para todos los usuarios.
+                    La clave pública tiene permisos locales de lectura (<b>r</b>) para todos los usuarios.
                     <br>
-                    La clave privada tiene permisos locales de lectura y escritura (rw) solo para el usuario propietario.
+                    La clave privada tiene permisos locales de lectura y escritura (<b>rw</b>) solo para el usuario propietario.
                 </p>
 
-                <p>3. Ahora hay que copiar la clave pública en eel usuario del equipo remoto:</p>
+                <p>3. Ahora hay que copiar la clave pública en el usuario del equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-copy-id -i ~/.ssh/id_[XXX].pub [Nombre_usuario]@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">
                     Hay que escribir "yes" para permitir conectarse con el equipo remoto.
                     <br>
-                    Una vez copiado se puede comprobar en el equipo remoto que aparece el mismo contenido que la clave pública en su fichero de claves autorizadas:
+                    Una vez copiado se puede comprobar en el equipo remoto que aparece la clave pública en su fichero de claves autorizadas:
                 </p>
-                <pre class="codigo Expl" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
-                <p>Nota: Para copiar la clave al usuario <span class="span_contenido" translate="no">root</span> se debe permitir la directiva <span class="span_contenido" translate="no">PermitRootLogin</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> temporalmente o se puede hacer directamente copiando el contenido del fichero de la clave pública en el fichero <span class="span_url" translate="no">/root/.ssh/authorized_keys</span>.</p>
+                <pre class="codigo" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
+                <p class="Expl">Nota: Para copiar la clave al usuario <span class="span_contenido" translate="no">root</span> se debe permitir la directiva <span class="span_contenido" translate="no">PermitRootLogin</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> temporalmente o se puede hacer directamente copiando el contenido del fichero de la clave pública en el fichero <span class="span_url" translate="no">/root/.ssh/authorized_keys</span>.</p>
 
-                <p>4. Para no tener que descifrar la clave en cada sesión SSH se puede añadir la clave al SSH-AGENT para que la mantenga descifrada en RAM:</p>
-                <pre class="codigo" translate="no"><code class="bash">eval "$(ssh-agent -s)"</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">ssh-add ~/.ssh/[Fichero_clave_privada]</code></pre>
-
-                <p>5. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+                <p>4. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">Si el nombre del fichero de la clave SSH es distinto al nombre por defecto, hay que especificar con el parámetro <span class="span_contenido" translate="no">-i</span> la ruta donde se sitúa la clave:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 
-                <br>
+            </div>
+            <div>
+                <h2>Políticas de seguridad del servicio <span>sshd</span></h2>
 
-                <p>
-                    Opcional. Por seguridad se debería de configurar en cada equipo políticas donde solo se permitan las conexiones SSH que utilicen claves. 
-                    Para ello, Dentro del fichero <span class="span_url">/etc/ssh/sshd_config</span> habría que configurar las siguientes políticas:
-                </p>
-                <pre class="codigo" translate="no"><code class="bash">PubkeyAuthentication yes
-PasswordAuthentication no
-PermitRootLogin no</code></pre>
-                <p class="Expl">Tras aplicar las políticas hay que reiniciar el servicio <span class="span_contenido">ssh</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl restart ssh</code></pre>
+                <p>Dentro del fichero <span class="span_url">/etc/ssh/sshd_config</span> se pueden configurar las siguientes políticas individualmente:</p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                            <td><pre translate="no"><code class="bash">PubkeyAuthentication yes</code></pre></td>
+                            <td>Permite el inicio de sesión con claves públicas.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">PasswordAuthentication no</code></pre></td>
+                            <td>Prohibe el inicio de sesión con contraseña.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">PermitRootLogin no</code></pre></td>
+                            <td>Prohibe el inicio de sesión con el usuario <span class="span_contenido">root</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">PermitRootLogin prohibit-password</code></pre></td>
+                            <td>Prohibe el inicio de sesión con contraseña para el usuario <span class="span_contenido">root</span>.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>Tras modificar alguna política hay que reiniciar el servicio <span class="span_contenido">sshd</span> para aplicar los cambios:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
             </div>
 
             <div>
-                <h2>Definir equipos remotos en un cliente de <span>Linux</span></h2>
+                <h2>Definir Aliases en un cliente</h2>
 
                 <p>En el siguiente fichero de configuración del usuario se permite definir equipos y asignarles un nombre para ahorrar tiempo al iniciar sesiones remotas con SSH:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano ~/.ssh/config</code></pre>
@@ -207,7 +213,7 @@ PermitRootLogin no</code></pre>
             </div>
 
             <div>
-                <h2>Cargar una clave en memoria en un cliente <span>Linux</span></h2>
+                <h2>Cargar una clave privada en memoria en un cliente</h2>
 
                 <p>Estos pasos guardan temporalmente la clave SSH en memoria para no tener que introducir la passphrase cada vez que se utiliza durante la sesión:</p>
 
@@ -222,11 +228,8 @@ PermitRootLogin no</code></pre>
 
             </div>
 
-        </div>
-
-        <div class="parte1">
             <div>
-                <h2 id="tuneles_ssh">Túneles SSH en <span>Linux</span></h2>
+                <h2 id="tuneles_ssh">Crear túneles SSH</h2>
 
                 <p>En los siguientes comandos se utiliza la opción <span class="span_contenido">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.</p>
 
@@ -267,7 +270,7 @@ GatewayPorts yes</code></pre>
             </div>
 
             <div>
-                <h2>Crear una sesión SSH X11 en un cliente <span>Linux</span></h2>
+                <h2>Crear una sesión SSH X11 en un cliente</h2>
 
                 <p>Pasos a ejecutar en el servidor SSH:</p>
 
@@ -291,6 +294,39 @@ GatewayPorts yes</code></pre>
             </div>
 
         </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>SSH (Windows)</h1>
+        <h2 class="TituloSecundario">Secure Shell</h2>
+        <br>
+
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+            <div>
+                <h2>Configuración en un equipo <span>Windows</span></h2>
+
+                <p>Primero se debe iniciar el servicio de SSH:</p>
+                <pre class="codigo" translate="no"><code class="powershell">Start-Service sshd</code></pre>
+
+                <p>Luego hay que configurar el servicio de SSH para que se inicie automáticamente:</p>
+                <pre class="codigo" translate="no"><code class="powershell">Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
+
+                <p>Por último hay que habilitar el puerto 22 en el firewall desde las reglas de entrada y salida.</p>
+
+            </div>
+
+            <div>
+                <h2>Como conectarse a otro equipo con credenciales desde un cliente</h2>
+
+                <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
+
+            </div>
+
+        </div>
+
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
