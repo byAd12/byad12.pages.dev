@@ -275,70 +275,13 @@ gshadow:        files systemd nis</code></pre>
                 </p>
 
                 <p>
-                    <u>Soluciones</u>:
+                    <u>Solucion</u>: Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url" translate="no">/home-nis</span> y dejar <span class="span_url" translate="no">/home</span> para usuarios locales.
                 </p>
 
                 <ul>
-                    <li>Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url" translate="no">/home-nis</span> y dejar <span class="span_url" translate="no">/home</span> para usuarios locales.</li>
-                    <li class="LiSinPunto">
-                        <ul>
-                            <li><b>Ventajas</b>: Es automático del lado del cliente ya que solo se monta una carpeta.</li>
-                            <li><b>Desventajas</b>: En cada usuario se debe cambiar la ruta de su carpeta personal.</li>
-                        </ul>
-                    </li>
+                    <li><b>Ventaja</b>: Es automático del lado del cliente ya que solo se monta una carpeta.</li>
+                    <li><b>Desventaja</b>: En cada usuario se debe cambiar la ruta de su carpeta personal.</li>
                 </ul>
-
-                <br>
-
-                <ul>
-                    <li>Crear un script que se ejecutará cuando se vaya a montar un nuevo usuario en los clientes - <a href="#script-nis">explicación</a>.</li>
-                    <li class="LiSinPunto">
-                        <ul>
-                            <li><b>Ventajas</b>: Interactivo y fácil de usar. En el servidor solo hay que compartir la carpeta <span class="span_url" translate="no">/home</span>.</li>
-                            <li><b>Desventajas</b>: Debe ejecutarse el script por cada nuevo usuario en los equipos clientes (o automatizarlo por SSH).</li>
-                        </ul>
-                    </li>
-                </ul>
-
-
-            </div>
-
-            <div id="script-nis">
-                <h2>Solución - Script para <span>/etc/fstab</span></h2>
-
-                <p>
-                    El siguiente script funciona de la siguiente manera:
-                </p>
-
-                <ol>
-                    <li>Crea un bucle.</li>
-                    <li>Al principio del bucle pide que le pases un nombre de usuario de NIS.</li>
-                    <li>Crea la carpeta personal si no existe.</li>
-                    <li>Automáticamente crea una nueva línea en <span class="span_url" translate="no">/etc/fstab</span> para montar la carpeta individual de ese usuario en el sistema.</li>
-                    <li>Monta las carpetas y verifica si hay errores.</li>
-                    <li>Repite el bucle - se puede detener con <span class="span_contenido" translate="no">CTRL + C</span>.</li>
-                </ol>
-
-                <p>Pasos para crear el script:</p>
-
-                <p>1. Primero hay que crear el fichero con extensión <span class="span_url" translate="no">.sh</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
-
-                <p>2. Ahora hay que añadir el siguiente contenido:</p>
-                <pre class="codigo" translate="no"><code class="bash">#!/usr/bin/bash
-echo "CTRL + C para parar el bucle\n"
-while true; do
-	read -p "Usuario: " usuario
-	mkdir -p /home/$usuario
-	echo "192.168.1.2:/home/$usuario	/home/$usuario	nfs	defaults	0	0" >> /etc/fstab
-	mount -a
-done</code></pre>
-
-                <p>3. Hay que asignar al fichero permisos de ejecución:</p>
-                <pre class="codigo" translate="no"><code class="bash">chmod +x script.sh</code></pre>
-
-                <p>4. Para ejecutar el script simplemente se debe usar su ruta relativa o absoluta:</p>
-                <pre class="codigo" translate="no"><code class="bash">./script.sh</code></pre>
 
             </div>
 
