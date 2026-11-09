@@ -119,16 +119,29 @@ SERVIDOR_NS     IN      A       IP_SERVIDOR_NS
                 
                 <p class="Expl">Es importante subir de valor el número de serie (primer valor en el registro <b>SOA</b>) cada vez que se modifique este fichero.</p>
 
-                <p class="Expl">Como definir registros DNS de tipo <b>A</b>:</p>
-                <pre class="codigo" translate="no"><code class="nginx">NOMBRE_SUBDOMINIO    IN      A       IP_DESTINO</code></pre>
-
-                <p class="Expl">Como definir registros DNS de tipo <b>CNAME</b>:</p>
-                <pre class="codigo" translate="no"><code class="nginx">NOMBRE_SUBDOMINIO    IN      CNAME   NOMBRE_SUBDOMINIO / O / FQDN.</code></pre>
-
-                <p class="Expl">Como definir registros DNS de tipo <b>MX</b>:</p>
-                <pre class="codigo" translate="no"><code class="nginx">SUBDOMINIO_SERVIDOR_MAIL    IN      A       IP_SERVIDOR_MAIL
-FQDN_DOMINIO.               IN      MX      NUM_PRIORIDAD       SUBDOMINIO_SERVIDOR_MAIL</code></pre>
-
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos UnicaColumna">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Como definir distintos tipos de registros DNS
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Registros DNS tipo <b>A</b>:</td>
+                            <td><pre translate="no"><code class="language-ini">NOMBRE_SUBDOMINIO    IN    A    IP_DESTINO</code></pre></td>
+                        </tr>
+                        <tr>
+                            <td>Registros DNS tipo <b>CNAME</b>:</td>
+                            <td><pre translate="no"><code class="language-ini">NOMBRE_SUBDOMINIO    IN    CNAME    NOMBRE_SUBDOMINIO / O / FQDN</code></pre></td>
+                        </tr>
+                        <tr>
+                            <td>Registros DNS tipo <b>MX</b>:</td>
+                            <td><pre translate="no"><code class="language-ini">SUBDOMINIO_SERVIDOR_MAIL    IN    A    IP_SERVIDOR_MAIL
+FQDN_DOMINIO.    IN    MX    NUM_PRIORIDAD    SUBDOMINIO_SERVIDOR_MAIL</code></pre></td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Luego, en el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona indicando el fichero creado en el paso anterior:</p>
                 <pre class="codigo" translate="no"><code class="bash">zone "[Nombre_dominio].[TLD]"{
@@ -164,10 +177,21 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
 
                 <p class="Expl">Es importante subir de valor el número de serie (primer valor en el registro <b>SOA</b>) cada vez que se modifique este fichero.</p>
 
-                <p class="Expl">Como definir registros DNS de tipo <b>PTR</b> (inversos):</p>
-                <pre class="codigo" translate="no"><code class="nginx">NÚMERO_IP    IN      PTR       FQDN_SUBDOMINIO.</code></pre>
-                <p class="Expl2">El número de la IP debe ser solo el grupo restante sin contar la dirección de red como, por ejemplo, <span class="span_contenido">192.168.0.200/24</span> > <span class="span_contenido">200</span>.</p>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos UnicaColumna">
+                        <tr class="Titulo">
+                            <td colspan="2">
+                                Como definir registros DNS inversos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Registros DNS tipo <b>PTR</b> (inversos):</td>
+                            <td><pre translate="no"><code class="language-ini">NÚMERO_IP    IN      PTR       FQDN_SUBDOMINIO.</code></pre></td>
+                            <td>El número de la IP debe ser solo el grupo restante sin contar la dirección de red como, por ejemplo, <span class="span_contenido">192.168.0.200/24</span> > <span class="span_contenido">200</span>.</td>
+                        </tr>
 
+                    </table>
+                </div>
 
                 <p>Luego, en el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> se debe añadir una nueva zona inversa indicando el fichero creado en el paso anterior:</p>
                 <pre class="codigo" translate="no"><code class="nginx">zone "[Zona_inversa].in-addr.arpa"{
@@ -215,12 +239,14 @@ listen-on { any; };
                 <h2>4. Comprobación del funcionamiento</h2>
 
                 <p>Primero hay que mirar si el servicio está encendido y sin errores:</p>
-                <pre class="codigo" translate="no"><code class="bash">service bind9 start</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">service bind9 status</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">service bind9 start
+service bind9 status</code></pre>
 
                 <p>Con el siguiente comando se puede verificar si hay algún error de sintaxis en una zona definida:</p>
                 <pre class="codigo" translate="no"><code class="bash">named-checkzone [Nombre_dominio].[TLD] /etc/bind/[Nombre_fichero_zona]
 named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</code></pre>
+                <p class="Expl">También se puede ejecutar el siguiente comando para verificar la sintaxis de todas las zonas masestras:</p>
+                <pre class="codigo" translate="no"><code class="bash">named-checkzone -z</code></pre>
 
                 <p>Si se arregla algo o se cambia algún valor de cualquier fichero, hay que reiniciar el servcio <span class="span_contenido">named</span> para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart named</code></pre>
