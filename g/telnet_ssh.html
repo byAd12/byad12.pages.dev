@@ -136,32 +136,49 @@ Código por byAd12
                     Se suele dejar vacía para automatizar un proceso, aunque configurarla da mayor seguridad.
                 </p>
 
-                <p>2. Se puede comprobar en la ruta por defecto que se crearon las claves pública y privada:</p>
-                <pre class="codigo" translate="no"><code class="bash">ls -l ~/.ssh/</code></pre>
-                <p class="Expl">
-                    La clave pública tiene permisos locales de lectura (<b>r</b>) para todos los usuarios.
-                    <br>
-                    La clave privada tiene permisos locales de lectura y escritura (<b>rw</b>) solo para el usuario propietario.
-                </p>
+                <p>2. Ahora hay que asignar permisos locales restrictivos para la carpeta <span class="span_url">~/.ssh</span> y a las claves privadas y públicas (ejecuta los comandos en el mismo orden):</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod 700 ~/.ssh
+(shopt -s extglob 2>/dev/null; chmod 600 ~/.ssh/id_!(*.pub))
+chmod 644 ~/.ssh/*.pub</code></pre>
 
                 <p>3. Ahora hay que copiar la clave pública en el usuario del equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-copy-id -i ~/.ssh/id_[XXX].pub [Nombre_usuario]@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">
-                    Hay que escribir "yes" para permitir conectarse con el equipo remoto.
+                    Hay que escribir "yes" para aceptar que la huella digital (fingerprint) es legítima.
                     <br>
                     Una vez copiado se puede comprobar en el equipo remoto que aparece la clave pública en su fichero de claves autorizadas:
                 </p>
                 <pre class="codigo" translate="no"><code class="bash">cat ~/.ssh/authorized_keys</code></pre>
-                <p class="Expl">Nota: Para copiar la clave al usuario <span class="span_contenido" translate="no">root</span> se debe permitir la directiva <span class="span_contenido" translate="no">PermitRootLogin</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> temporalmente o se puede hacer directamente copiando el contenido del fichero de la clave pública en el fichero <span class="span_url" translate="no">/root/.ssh/authorized_keys</span>.</p>
+                <p class="Expl">Opciones para copiar la clave al usuario <span class="span_contenido" translate="no">root</span>:</p>
 
-                <p>4. Por último hay que comprobar que al crear una sesión SSH no pide la contraseña del usuario ya que este usuario del equipo remoto tiene la clave pública copiada:</p>
+                <ol class="Expl">
+
+                    <li>
+                        Se puede permitir las directivas <span class="span_contenido" translate="no">PermitRootLogin</span> y <span class="span_contenido" translate="no">PasswordAuthentication</span> en el fichero de configuración <span class="span_url" translate="no">/etc/ssh/sshd_config</span> temporalmente.
+                        <ul>
+                            <li>Recuerda reiniciar el servicio <span class="span_contenido">sshd</span> para aplicar los cambios.<br><br></li>
+                        </ul>
+                    </li>
+                    <li>
+                        O se puede hacer manualmente copiando el contenido del fichero de la clave pública (.pub) en el fichero <span class="span_url" translate="no">/root/.ssh/authorized_keys</span> del equipo remoto.
+                        <ul>
+                            <li>Se puede realizar para cualquier usuario del sistema usando sus ficheros <span class="span_url">~/.ssh/authorized_keys</span>.</li>
+                        </ul>
+                    </li>
+
+                </ol>
+
+                <p>
+                    4. Para comprobar que la clave pública SSH se copió correctamente se puede crear una sesión SSH hacia el equipo remoto.
+                    Si se configuró una "passphrase", antes de iniciar la sesión pedirá que se ingrese:
+                </p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">Si el nombre del fichero de la clave SSH es distinto al nombre por defecto, hay que especificar con el parámetro <span class="span_contenido" translate="no">-i</span> la ruta donde se sitúa la clave:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 
             </div>
             <div>
-                <h2>Políticas de seguridad del servicio <span>sshd</span></h2>
+                <h2 id="politicas_seguridad">Políticas de seguridad del servicio <span>sshd</span></h2>
 
                 <p>Dentro del fichero <span class="span_url">/etc/ssh/sshd_config</span> se pueden configurar las siguientes políticas individualmente:</p>
 
@@ -173,6 +190,10 @@ Código por byAd12
                         <tr>
                             <td><pre translate="no"><code class="bash">PasswordAuthentication no</code></pre></td>
                             <td>Prohibe el inicio de sesión con contraseña.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">PermitEmptyPasswords no</code></pre></td>
+                            <td>Prohibe el inicio de sesión a cualquier usuario que no tenga una contraseña.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">PermitRootLogin no</code></pre></td>
@@ -231,32 +252,43 @@ Código por byAd12
             <div>
                 <h2 id="tuneles_ssh">Crear túneles SSH</h2>
 
-                <p>En los siguientes comandos se utiliza la opción <span class="span_contenido">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.</p>
+                <h3>Configuración inicial:</h3>
 
-                <p>Con la opción <span class="span_contenido">-L</span> (<b>Local Forwarding</b>) se crea un túnel que redirige todo el tráfico del puerto del servidor hacia un puerto local:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
-                <p class="Expl">Esto permite acceder a un servicio protegido en un puerto de forma cifrada.</p>
+                <p>1. Para permitir los túneles hay que configurar las siguientes políticas del fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes # Permite la creación de túneles
+GatewayPorts yes       # Permite que el túnel remoto escuche en todas las interfaces</code></pre>
 
-                <br>
-                <p>Con la opción <span class="span_contenido">-R</span> (<b>Remote Forwarding</b>) se crea un túnel que redirige todo el tráfico del puerto local hacia un puerto del servidor remoto:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
-                <p class="Expl">Esto permite que cualquier usuario que acceda al puerto del servidor remoto redirija el tráfico hacia el puerto local sin necesidad de exponer directamente este puerto a Internet.</p>
-
-                <br>
-                <p>Con la opción <span class="span_contenido">-D</span> se redirecciona el tráfico HTTP por un socket a un servidor SSH. Pasos de configuración:</p>
-                <p class="Expl">1. En el servidor SSH hay que editar el fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span> y añadir/cambiar los siguientes parámetros:</p>
-                <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes
-GatewayPorts yes</code></pre>
-
-                <p class="Expl">2. Luego, en el servidor SSH hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
+                <p>2. Para aplicar los cambios hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
-                <p class="Expl">3. En el cliente SSH hay que crear un nuevo socket hacia el servidor para poder transmitir la información del navegador:</p>
-                <pre class="codigo" translate="no"><code class="bash">ssh -N -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
-                
-                <p class="Expl">4. En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">2021</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
+                <h3>Tipos de túneles:</h3>
+
+                <p class="Expl">
+                    Nota: En los siguientes comandos se utiliza la opción <span class="span_contenido">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.
+                    <br>
+                    También se puede usar la opción <span class="span_contenido">-f</span> para que el túnel se ejecute en segundo plano.
+                </p>
+
+                <p>Túnel <b>Local Forwarding</b> (<span class="span_contenido">-L</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Todo el tráfico que se envíe a <span class="span_contenido">Puerto_local</span> se enviará de forma cifrada al puerto <span class="span_contenido">Puerto_remoto</span> de la máquina <span class="span_contenido">localhost</span> (el propio servidor remoto).</p>
+                <p class="Expl">Si el servicio al que quieres acceder no está en el propio servidor SSH, sino en otra máquina de su red local, reemplaza <span class="span_contenido">localhost</span> por esa IP o FQDN.</p>
 
                 <br>
+                <p>Túnel <b>Remote Forwarding</b> (<span class="span_contenido">-R</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Todo el tráfico que se envíe al puerto <span class="span_contenido">Puerto_remoto</span> del servidor remoto se reenviará al puerto <span class="span_contenido">Puerto_local</span> de la máquina <span class="span_contenido">localhost</span> (el propio host que ejecuta el comando).</p>
+                <p class="Expl">Si el servicio que se quiere exponer no se encuentra en la propia máquina donde se ejecuta el comando, reemplaza <span class="span_contenido">localhost</span> por la IP o FQDN del equipo de la red local que aloje ese servicio.</p>
+
+                <br>
+                <p>Túnel <b>SOCKS</b> / <b>Dynamic Port Forwarding</b> (<span class="span_contenido">-D</span>):</p>
+                <pre class="codigo" translate="no"><code class="bash">ssh -N -C -D [Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
+                <p class="Expl">Se redirecciona el tráfico HTTP por un socket a un servidor SSH para poder transmitir la información del navegador.</p>
+
+                <p class="Expl">En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">Puerto_local</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
+
+                <h3>Como crear túneles con capacidad de reconexión:</h3>
+
                 <p>
                     Con <span class="span_contenido">autossh</span> se permite reconectar la conexión del túnel en caso de que caiga. 
                     <br>
@@ -265,7 +297,42 @@ GatewayPorts yes</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -R [Puerto_remoto]:localhost:[Puerto_local] (Nombre_usuario)@[IP_servidor]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">autossh -M 20000 -N -C -D 2021 (Nombre_usuario)@[IP_servidor]</code></pre>
-                <p class="Expl">Para arrancar el túnel automáticamente al iniciar el sistema hay que crear un nuevo servicio de systemctl - <a href="https://atareao.es/tutorial/trabajando-con-systemd/como-crear-un-servicio-con-systemd/" target="_blank">guía</a>.</p>
+                
+                <p>Para arrancar el túnel automáticamente al iniciar el sistema hay que crear un nuevo servicio de systemctl:</p>
+                <p class="Expl">1. Primero hay que definir la configuración del servicio en un fichero <span class="span_url">/etc/systemd/system/nuevo-tunel.service</span>:</p>
+                <pre class="codigo" translate="no"><code class="toml">[Unit]
+Description=Túnel SSH
+After=network-online.target
+[Service]
+User=tu_usuario_local
+ExecStart=/usr/bin/autossh [OPCIONES PARA CREAR EL TÚNEL]
+Restart=always
+RestartSec=5s
+[Install]
+WantedBy=multi-user.target</code></pre>
+                <p class="Expl">2. Luego hay que habilitar e iniciar el nuevo servicio:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable nuevo-tunel
+systemctl start nuevo-tunel</code></pre>
+
+                <h3>Como crear un alias para un túnel:</h3>
+                <p>En el fichero <span class="span_url">~/.ssh/config</span> se puede añadir un alias para un túnel SSH:</p>
+                <p class="Expl">Para crear un alias de un túnel <b>Local Forwarding</b>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">Host [Nombre_alias]
+    Hostname [IP/FQDN del equipo remoto] # Obligatorio
+    User [Nombre_usuario]                # Opcional
+    LocalForward [Puerto_local] localhost:[Puerto_remoto]</code></pre>
+
+                <p class="Expl">Para crear un alias de un túnel <b>Remote Forwarding</b>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">Host [Nombre_alias]
+    Hostname [IP/FQDN del equipo remoto] # Obligatorio
+    User [Nombre_usuario]                # Opcional
+    RemoteForward [Puerto_remoto] localhost:[Puerto_local]</code></pre>
+
+                <p class="Expl">Para crear un alias de un túnel <b>SOCKS</b> / <b>Dynamic Port Forwarding</b>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">Host [Nombre_alias]
+    Hostname [IP/FQDN del equipo remoto] # Obligatorio
+    User [Nombre_usuario]                # Opcional
+    DynamicForward [Puerto_local]</code></pre>
 
             </div>
 
