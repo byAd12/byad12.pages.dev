@@ -187,7 +187,7 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
                         <tr>
                             <td>Registros DNS tipo <b>PTR</b> (inversos):</td>
                             <td><pre translate="no"><code class="language-ini">NÚMERO_IP    IN      PTR       FQDN_SUBDOMINIO.</code></pre></td>
-                            <td>El número de la IP debe ser solo el grupo restante sin contar la dirección de red como, por ejemplo, <span class="span_contenido">192.168.0.200/24</span> > <span class="span_contenido">200</span>.</td>
+                            <td>El número de la IP debe ser solo el grupo restante sin contar la dirección de red como, por ejemplo, <span class="span_contenido" translate="no">192.168.0.200/24</span> > <span class="span_contenido" translate="no">200</span>.</td>
                         </tr>
 
                     </table>
@@ -208,8 +208,8 @@ file "/etc/bind/db.192.168.0";
                 <h3>2.3. Configurar el servidor como reenviador</h3>
                 
                 <p>
-                    En el fichero <span class="span_url">/etc/bind/named.conf.options</span> hay que configurar la sección de <span class="span_contenido">forwarders</span> indicando la dirección IPv4 de la máquina a la que reenviarán las peticiones DNS.
-                    Se puede configurar más de un reenviador separándolos en diferentes líneas que acaban con el símbolo "<span class="span_contenido">;</span>":
+                    En el fichero <span class="span_contenido" translate="no">/etc/bind/named.conf.options</span> hay que configurar la sección de <span class="span_contenido" translate="no">forwarders</span> indicando la dirección IPv4 de la máquina a la que reenviarán las peticiones DNS.
+                    Se puede configurar más de un reenviador separándolos en diferentes líneas que acaban con el símbolo "<span class="span_contenido" translate="no">;</span>":
                 </p>
                 <pre class="codigo" translate="no"><code class="nginx">options {
 directory "/var/cache/bind";
@@ -248,7 +248,7 @@ named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</c
                 <p class="Expl">También se puede ejecutar el siguiente comando para verificar la sintaxis de todas las zonas masestras:</p>
                 <pre class="codigo" translate="no"><code class="bash">named-checkzone -z</code></pre>
 
-                <p>Si se arregla algo o se cambia algún valor de cualquier fichero, hay que reiniciar el servcio <span class="span_contenido">named</span> para aplicar los cambios:</p>
+                <p>Si se arregla algo o se cambia algún valor de cualquier fichero, hay que reiniciar el servcio <span class="span_contenido" translate="no">named</span> para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart named</code></pre>
 
             </div>

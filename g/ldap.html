@@ -92,14 +92,14 @@ Código por byAd12
                 <p>Una vez se hayan instalado los paquetes con APT, hay que configurar el servicio <span class="span_contenido" translate="no">slapd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
                 <p class="Expl">Respuestas que va a solicitar el asistente en orden:</p>
-                <ol class="Expl2">
-                    <li>Omit OpenLDAP server configuration? -> <span class="span_contenido" translate="no">no</span>.</li>
-                    <li>DNS domain name -> (el nombre de dominio + TLD que se utilizará para crear objetos en el servicio LDAP).</li>
-                    <li>Organization name -> (el nombre de la organización).</li>
-                    <li>Administrator password -> (definir una contraseña para el administrador del servicio LDAP).</li>
-                    <li>Confirm password -> (repetir la contraseña del administrador del servicio LDAP).</li>
-                    <li>Do you want the database to be removed when slapd is purged? -> <span class="span_contenido" translate="no">no</span>.</li>
-                    <li>Move old database? -> <span class="span_contenido" translate="no">yes</span>.</li>
+                <ol class="Expl">
+                    <li>Omit OpenLDAP server configuration? → <span class="span_contenido" translate="no">no</span>.</li>
+                    <li>DNS domain name → (el nombre de dominio + TLD que se utilizará para crear objetos en el servicio LDAP).</li>
+                    <li>Organization name → (el nombre de la organización).</li>
+                    <li>Administrator password → (definir una contraseña para el administrador del servicio LDAP).</li>
+                    <li>Confirm password → (repetir la contraseña del administrador del servicio LDAP).</li>
+                    <li>Do you want the database to be removed when slapd is purged? → <span class="span_contenido" translate="no">no</span>.</li>
+                    <li>Move old database? → <span class="span_contenido" translate="no">yes</span>.</li>
                 </ol>
 
                 <p>Tras realizar el comando anterior hay que comprobar que el siguiente comando devuelve un objeto con toda la configuración del dominio LDAP:</p>
@@ -345,10 +345,10 @@ changetype: delete</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y libnss-ldapd libpam-ldapd nslcd</code></pre>
                 
                 <p class="Expl">Va a pedir una serie de preguntas, a las cuales hay que responder de la siguiente manera:</p>
-                <ol class="Expl2">
-                    <li>LDAP server URI -> <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></li>
-                    <li>LDAP server search base -> <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
-                    <li>Name services to configure -> seleccionar: <span class="span_contenido" translate="no">passwd</span>, <span class="span_contenido" translate="no">group</span>, <span class="span_contenido" translate="no">shadow</span></li>
+                <ol class="Expl">
+                    <li>LDAP server URI → <span class="span_contenido" translate="no">ldap://[IP_SERVIDOR]</span></li>
+                    <li>LDAP server search base → <span class="span_contenido" translate="no">dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]</span></li>
+                    <li>Name services to configure → seleccionar: <span class="span_contenido" translate="no">passwd</span>, <span class="span_contenido" translate="no">group</span>, <span class="span_contenido" translate="no">shadow</span></li>
                 </ol>
 
                 <p class="Expl">Si el proceso de instalación falla o no realiza las preguntas anteriores, hay que reconfigurar el servicio con:</p>

@@ -1032,10 +1032,10 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <p>El comando <span class="span_contenido" translate="no">switchport mode</span> tiene opciones adicionales para negociar el modo de interfaz. <u>Sintaxis del comando</u>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">Switch(config)# switchport mode {  access | dynamic {  auto | desirable } |  trunk }</code></pre>
 
-                <div class="TablaDivScroll">
+                <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2">Modos de switchport</td>
+                            <td colspan="2">Modos de switchport:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">access</code></pre></td>
@@ -1746,11 +1746,10 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>3. Una vez ejecutemos el paso 2 entraremos en un modo donde podremos configurar las configuraciones que se darán a los clientes:</p>
 
-                <div class="TablaDivScroll">
+                <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td>Configuración <b>obligatoria</b></td>
-                            <td>Explicación</td>
+                            <td colspan="2">Configuración <b>obligatoria</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">network &lt;Dirección_Red&gt; &lt;Máscara&gt;</code></pre></td>
@@ -1765,14 +1764,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                             <td>Es la IP del servidor DNS. Se puede omitir si no se quiere configurar pero, cuando sea necesario, habrá que configurarlo manualmente.</td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td>Configuración <b>opcional</b></td>
-                            <td>Explicación</td>
+                            <td colspan="2">Configuración <b>opcional</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">domain-name &lt;Dominio&gt;</code></pre></td>
@@ -3223,7 +3216,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
                 <p>
                     Para definir a quien se le aplica la ACL se debe usar una IP con una máscara <b>WildCard</b>,
-                    que se calcula restando <span class="span_contenido">255.255.255.255</span> a la máscara punteada.
+                    que se calcula restando <span class="span_contenido" translate="no">255.255.255.255</span> a la máscara punteada.
                     Un ejemplo sería la máscara /24 (255.255.255.0) que, restada a 255.255.255.255, daría como resultado 0.0.0.255.
                 </p>
                 
@@ -3242,7 +3235,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <h2 id="ACL_Estandar_Host">ACL asignada a un host</h2>
 
                 <p>
-                    Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico de una única IP - <span class="span_contenido">IP_Host</span>:
+                    Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico de una única IP - <span class="span_contenido" translate="no">IP_Host</span>:
                 </p>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; host &lt;IP_Host&gt;</code></pre>
@@ -3769,7 +3762,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                     y las direcciones IP correspondientes a Outside local y Outside global.
                 </p>
 
-                <p class="Expl">Añadiendo la palabra <span class="span_contenido">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido desde hace cuánto tiempo se creó y usó la entrada:</p>
+                <p class="Expl">Añadiendo la palabra <span class="span_contenido" translate="no">verbose</span> al comando anterior se puede ver información adicional sobre cada traducción, incluido desde hace cuánto tiempo se creó y usó la entrada:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations verbose</code></pre>
                 
                 <p class="Expl">
@@ -3863,7 +3856,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <br>
                 <p class="Expl">
                     <u>Importante</u> - Las redes solo se anunciarán si existe previamente una ruta hacia ellas en la tabla de enrutamiento.
-                    En caso necesario, puede crearse una ruta estática hacia <span class="span_contenido">Null0</span> únicamente para que la red exista en la tabla de rutas:
+                    En caso necesario, puede crearse una ruta estática hacia <span class="span_contenido" translate="no">Null0</span> únicamente para que la red exista en la tabla de rutas:
                 </p>
                 <pre class="codigo" translate="no"><code class="cisco">(config-router)# ip route &lt;Dirección_Red&gt; &lt;Máscara_Red&gt; Null0</code></pre>
                 <p class="Expl">Esta ruta no envía tráfico a ningún destino real; simplemente permite anunciar la red mediante BGP.</p>

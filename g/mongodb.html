@@ -63,7 +63,7 @@ Código por byAd12
                 <p>2. Se debe habilitar e iniciar el servicio <span class="span_contenido" translate="no">mongodb</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable --now mongod</code></pre>
 
-                <p>3. Ahora hay que instalar el paquete <span class="span_contenido" translate="no">mongosh</span>:</p>
+                <p>3. Para poder crear conexiones a la base de datos es necesario instalar el paquete <span class="span_contenido" translate="no">mongosh</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">wget https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-mongosh_2.9.2_amd64.deb</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">dpkg -i mongodb-mongosh_2.9.2_amd64.deb</code></pre>
 
@@ -84,18 +84,22 @@ Código por byAd12
 
                 <p>Para entrar a la base de datos hay que ejecutar el comando <span class="span_contenido" translate="no">mongosh</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">mongosh</code></pre>
-                <p class="Expl">Otra manera de ejecutar comandos de MongoDB directamente mediante CLI:</p>
-                <pre class="codigo" translate="no"><code class="bash">mongosh --quiet --eval '[Comando_a_ejecutar]'</code></pre>
 
-                <p>Comandos básicos de MongoDB:</p>
+                <p>También se pueden ejecutar comandos SQL directamente mediante CLI:</p>
+                <pre class="codigo" translate="no"><code class="bash">mongosh --quiet --eval '[Comando_a_ejecutar]'</code></pre>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
 
-                        <tr>
-                            <td colspan="2" style="text-align: center;">
-                                Con el comando <span class="span_contenido" translate="no">help</span> se muestra una ayuda de los comandos.
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Comandos básicos de MongoDB:
                             </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="mongodb">help</code></pre></td>
+                            <td>Muestra una ayuda de los comandos.</td>
                         </tr>
 
                         <tr>

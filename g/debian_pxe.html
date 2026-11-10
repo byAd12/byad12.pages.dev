@@ -239,7 +239,7 @@ min-lease-time [Segundos];</code></pre>
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                <b>Inicio</b> de la configuración básica
+                                Inicio de la configuración básica:
                             </td>
                         </tr>
                         <tr>
@@ -247,14 +247,9 @@ min-lease-time [Segundos];</code></pre>
                             <td>La dirección de red IPv4 y su máscara en formato punteado.</td>
                         </tr>
                         
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Configuración <b>básica</b>
+                                Configuración básica:
                             </td>
                         </tr>
                         <tr>
@@ -266,14 +261,9 @@ min-lease-time [Segundos];</code></pre>
                             <td>La dirección IPv4 del servidor TFTP donde se aloja el fichero de arranque.</td>
                         </tr>
                         
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Configuración <b>DNS</b>
+                                Configuración <b>DNS</b>:
                             </td>
                         </tr>
                         <tr>
@@ -288,14 +278,9 @@ min-lease-time [Segundos];</code></pre>
                             </td>
                         </tr>
                         
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Configuración de <b>rangos</b>
+                                Configuración de <b>rangos</b>:
                             </td>
                         </tr>
                         <tr>
@@ -303,16 +288,9 @@ min-lease-time [Segundos];</code></pre>
                             <td>Se define la primera y última dirección IPv4 que se repartirán de ese rango. Gracias a los rangos se pueden excluir ciertas IPs reservadas.</td>
                         </tr>
                         
-                    </table>
-                </div>
-
-                <p class="Expl">Las siguientes líneas no deben modificarse:</p>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Habilitar servicios <b>rangos</b>
+                                Habilitar servicios <b>rangos</b>:
                             </td>
                         </tr>
                         <tr>
@@ -324,19 +302,14 @@ min-lease-time [Segundos];</code></pre>
                             <td>Habilita soporte para clientes que usan el protocolo BOOTP.</td>
                         </tr>
                         
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Selección del <b>fichero de arranque</b>
+                                Selección del <b>fichero de arranque</b>:
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                Gracias al condicional <span class="span_contenido">ip option ...</span> se permite detectar la arquitectura del cliente para elegir el fichero correcto.
+                                Gracias al condicional <span class="span_contenido" translate="no">ip option ...</span> se permite detectar la arquitectura del cliente para elegir el fichero correcto.
                             </td>
                         </tr>
                         <tr>
@@ -349,15 +322,14 @@ min-lease-time [Segundos];</code></pre>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                Si solo hay equipos sin UEFI en la red se puede quitar todo el bloque condicional y poner simplemente <span class="span_contenido">filename "pxelinux.0";</span>.
+                                Si solo hay equipos sin UEFI en la red se puede quitar todo el bloque condicional y poner simplemente <span class="span_contenido" translate="no">filename "pxelinux.0";</span>.
                             </td>
                         </tr>
                     </table>
                 </div>
 
                 <!-- ......................................................... -->
-                <br>
-                <p>1.4. Por último habilita y reinicia el servicio DHCP para aplicar los cambios, además de verificar si hay errores:</p>
+                <p>1.4. Por último habilita, reinicia y verifica el estado del servicio DHCP:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status isc-dhcp-server</code></pre>
@@ -385,11 +357,11 @@ min-lease-time [Segundos];</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">wget https://ftp.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
                     La URL corresponde al fichero comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
-                    Para obtener la URL se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del fichero <span class="span_url">netboot/netboot.tar.gz</span>.
+                    Para obtener la URL se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del fichero <span class="span_contenido" translate="no">netboot/netboot.tar.gz</span>.
                 </p>
                 <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 4 - Gestión de paquetes).</p>
                 
-                <p class="Expl">2.2.1. Hay que descomprimir el fichero <span class="span_url">tar.gz</span> para obtener los ficheros necesarios:</p>
+                <p class="Expl">2.2.1. Hay que descomprimir el fichero <span class="span_contenido" translate="no">tar.gz</span> para obtener los ficheros necesarios:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
                 
                 <p class="Expl">2.2.2. Y comprobar que estén los ficheros de arranque necesarios:</p>
@@ -397,7 +369,7 @@ min-lease-time [Segundos];</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>2.3. Por último hay que habilitar el servicio <span class="span_url">tftpd-hpa</span>:</p>
+                <p>2.3. Por último hay que habilitar el servicio <span class="span_contenido" translate="no">tftpd-hpa</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable tftpd-hpa</code></pre>
 
             </div>
@@ -435,7 +407,7 @@ min-lease-time [Segundos];</code></pre>
 
                 <p>
                     4.1. 
-                    Hay que crear un fichero con extensión <span class="span_url">.cfg</span> dentro de <span class="span_url">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
+                    Hay que crear un fichero con extensión <span class="span_contenido" translate="no">.cfg</span> dentro de <span class="span_contenido" translate="no">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
                     Se puede agrupar varios ficheros de respuestas en una carpeta conjunta para una mejor organización.
                     Un ejemplo completo de un fichero de respuestas es el preseed de <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">Debian</a>.
                 </p>
@@ -444,16 +416,16 @@ min-lease-time [Segundos];</code></pre>
                 <br>
                 <p>Configuración regional:</p>
 
-                <p class="Expl">País, idioma y codificación de caracteres (<span class="span_contenido">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
+                <p class="Expl">País, idioma y codificación de caracteres (<span class="span_contenido" translate="no">es_ES.UTF-8</span> - "español", "España", "UTF-8"):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i debian-installer/locale string [idioma_PAIS.Codificación]</code></pre>
 
-                <p class="Expl">Distribución del teclado (<span class="span_contenido">es</span> - "español"):</p>
+                <p class="Expl">Distribución del teclado (<span class="span_contenido" translate="no">es</span> - "español"):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i keyboard-configuration/xkb-keymap select [Distribución_del_teclado]</code></pre>
 
                 <br>
                 <p>Las siguientes 3 opciones de configuración de red deben especificarse juntas:</p>
 
-                <p class="Expl">Seleccionar la interfaz de red con conexión (<span class="span_contenido">auto</span> - se detecta automáticamente):</p>
+                <p class="Expl">Seleccionar la interfaz de red con conexión (<span class="span_contenido" translate="no">auto</span> - se detecta automáticamente):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i netcfg/choose_interface select auto</code></pre>
 
                 <p class="Expl">Definir el hostname del equipo [DHCP puede sobreescribirlo]:</p>
@@ -492,19 +464,19 @@ d-i passwd/user-password-again password [Contraseña_segura]</code></pre>
                 <p class="Expl">Establecer el reloj en UTC:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i clock-setup/utc boolean true</code></pre>
 
-                <p class="Expl">Establecer la zona horaria actual (<span class="span_contenido">Europe/Madrid</span> - se saca con la carpeta <span class="span_url">/usr/share/zoneinfo/</span>):</p>
+                <p class="Expl">Establecer la zona horaria actual (<span class="span_contenido" translate="no">Europe/Madrid</span> - se saca con la carpeta <span class="span_contenido" translate="no">/usr/share/zoneinfo/</span>):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i time/zone string [Zona_horaria]</code></pre>
 
                 <p class="Expl">Establecer la hora correcta del reloj por NTP:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp boolean true</code></pre>
                 
-                <p class="Expl">Se puede elegir que servidor NTP se quiere usar, como pej. <span class="span_contenido">ntp.roa.es</span> [opcional]:</p>
+                <p class="Expl">Se puede elegir que servidor NTP se quiere usar, como pej. <span class="span_contenido" translate="no">ntp.roa.es</span> [opcional]:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i clock-setup/ntp-server string [Servidor_NTP]</code></pre>
 
                 <br>
                 <p>Particionar el disco:</p>
 
-                <p class="Expl">Primero hay que establecer el método de particionado (<span class="span_contenido">regular</span> (principal), <span class="span_contenido">lvm</span>, <span class="span_contenido">crypto</span>):</p>
+                <p class="Expl">Primero hay que establecer el método de particionado (<span class="span_contenido" translate="no">regular</span> (principal), <span class="span_contenido" translate="no">lvm</span>, <span class="span_contenido" translate="no">crypto</span>):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/method string [Método_particionado]</code></pre>
 
                 <p class="Expl">Eliminar configuraciones LVM previas si existen [opcional]:</p>
@@ -515,9 +487,9 @@ d-i passwd/user-password-again password [Contraseña_segura]</code></pre>
 
                 <p class="Expl">Elegir el tipo de particionado:</p>
                 <ul class="Expl">
-                    <li><span class="span_contenido">atomic</span> - Todos los ficheros en una partición.</li>
-                    <li><span class="span_contenido">home</span> - La partición /home se separa del resto.</li>
-                    <li><span class="span_contenido">multi</span> - Las particiones /home, /var, /tmp se separan del resto.</li>
+                    <li><span class="span_contenido" translate="no">atomic</span> - Todos los ficheros en una partición.</li>
+                    <li><span class="span_contenido" translate="no">home</span> - La partición /home se separa del resto.</li>
+                    <li><span class="span_contenido" translate="no">multi</span> - Las particiones /home, /var, /tmp se separan del resto.</li>
                 </ul>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select [Tipo_particionado]</code></pre>
 
@@ -612,7 +584,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                             <td><pre translate="no"><code class="xml">menu label [...]</code></pre></td>
                             <td>
                                 Es la descripción de la entrada que el usuario verá. 
-                                El símbolo <span class="span_contenido">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, se seleccionará la opción (este símbolo es opcional).
+                                El símbolo <span class="span_contenido" translate="no">^</span> indica que la letra que tenga a continuación será el acceso rápido y, cuando esta letra se pulse, se seleccionará la opción (este símbolo es opcional).
                             </td>
                         </tr>
                         <tr>
@@ -674,7 +646,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 </div>
 
                 <p class="Expl">
-                    Si no se usa <span class="span_contenido">priority=critical</span>, el instalador mostrará el diálogo para configurar el hostname, aunque ya esté definido en el fichero de respuestas. 
+                    Si no se usa <span class="span_contenido" translate="no">priority=critical</span>, el instalador mostrará el diálogo para configurar el hostname, aunque ya esté definido en el fichero de respuestas. 
                     Esto evita que varios equipos se instalen con el mismo nombre en la misma red.
                 </p>
                 <p class="Expl">
@@ -688,7 +660,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p>
                     <u>Nota</u>: Se pueden añadir varias entradas en el menú de arranque separados por una línea en blanco, cada una con un fichero de respuestas distinto. 
                     Esto permite instalar diferentes sistemas con configuraciones específicas. 
-                    Para identificarlos fácilmente, cada entrada debe tener un <span class="span_contenido">label</span> diferente.
+                    Para identificarlos fácilmente, cada entrada debe tener un <span class="span_contenido" translate="no">label</span> diferente.
                 </p>
 
             </div>
@@ -735,13 +707,13 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <ul class="Expl">
                     <li><b>in-target</b> - Indica que el comando se va a ejecutar en el sistema a instalar y no en el instalador.</li>
-                    <li>El <span class="span_contenido">;</span> indica el final de cada línea de comando a ejecutar y el <span class="span_contenido">\</span> indica un salto de línea de la configuración de preseed.</li>
+                    <li>El <span class="span_contenido" translate="no">;</span> indica el final de cada línea de comando a ejecutar y el <span class="span_contenido" translate="no">\</span> indica un salto de línea de la configuración de preseed.</li>
                 </ul>
 
                 <br>
                 <p>Para definir una ruta del instalador se puede hacer de 2 formas que dan el mismo resultado:</p>
 
-                <div class="TablaDivScroll Expl">
+                <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
                             <td><pre translate="no"><code class="text">in-target echo /[Ruta_absoluta]</code></pre></td>
@@ -757,7 +729,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <br>
                 <p>
-                    Una manera útil de comprobar que realmente se está utilizando "/target" es ejecutar el instalador y, al pulsar una de las teclas <span class="span_contenido">F1</span> a <span class="span_contenido">F5</span>, se abrirá una terminal. 
+                    Una manera útil de comprobar que realmente se está utilizando "/target" es ejecutar el instalador y, al pulsar una de las teclas <span class="span_contenido" translate="no">F1</span> a <span class="span_contenido" translate="no">F5</span>, se abrirá una terminal. 
                     Desde esa terminal se puede ejecutar el siguiente comando, con el que se observará que las particiones se montan en "/target":
                 </p>
                 <pre class="codigo" translate="no"><code class="text">mount</code></pre>
@@ -791,7 +763,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     
                 <ul class="Expl">
                     <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta local absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_url">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
+                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_contenido" translate="no">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
                     <li><b>systemctl</b> - Se indica que se debe habilitar el servicio de NFS para que arranque cuando se inicie el sistema.</li>
                 </ul>
 
@@ -825,7 +797,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     
                 <ul class="Expl">
                     <li><b>mkdir</b> - Se debe crear la carpeta antes de montarla, especificando la ruta local absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_url">/etc/fstab</span>, donde se especifica la carpeta NFS a montar en el sistema local cada vez que el sistema se inicia.</li>
+                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_contenido" translate="no">/etc/fstab</span>, donde se especifica la carpeta NFS a montar en el sistema local cada vez que el sistema se inicia.</li>
                     <li>Hay que usar el tabulador para separar los elementos del comando "<b>echo</b>".</li>
                 </ul>
 
@@ -863,7 +835,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         [Partición 3]                 \
             [Opciones]                \
         .</code></pre>
-                <p class="Expl">El símbolo <span class="span_contenido">\</span> sirve para continuar la línea en otra.</p>
+                <p class="Expl">El símbolo <span class="span_contenido" translate="no">\</span> sirve para continuar la línea en otra.</p>
 
                 <br>
                 <p>Formato de cada partición:</p>
@@ -876,8 +848,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     <li>Este valor determina qué porcentaje del espacio libre recibe cada partición. La suma de todos los porcentajes debería ser 100.
                         <ul>
                             <li>Si una partición supera su tamaño máximo, solo usará el máximo permitido.</li>
-                            <li>Para que una partición use todo el espacio restante, se puede indicar <span class="span_contenido">-1</span> como tamaño máximo.</li>
-                            <li>Si ninguna partición tiene <span class="span_contenido">-1</span> y queda espacio sin asignar, la última partición ocupará el espacio restante.</li>
+                            <li>Para que una partición use todo el espacio restante, se puede indicar <span class="span_contenido" translate="no">-1</span> como tamaño máximo.</li>
+                            <li>Si ninguna partición tiene <span class="span_contenido" translate="no">-1</span> y queda espacio sin asignar, la última partición ocupará el espacio restante.</li>
                         </ul>
                     </li>
                 </ul>

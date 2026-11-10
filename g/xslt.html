@@ -215,7 +215,7 @@ Código por byAd12
                     <li><u>Instrucciones</u>: Están contenidas dentro de elementos de nivel superior.</li>
                 </ul>
 
-                <p><u>Importante</u> - En cualquier expresión <a href="xpath.html">XPATH</a> es recomendable usar entidades predefinidas como <span class="span_contenido">&amp;gt;</span> en vez de <span class="span_contenido">&gt;</span> para evitar problemas.</p>
+                <p><u>Importante</u> - En cualquier expresión <a href="xpath.html">XPATH</a> es recomendable usar entidades predefinidas como <span class="span_contenido" translate="no">&amp;gt;</span> en vez de <span class="span_contenido" translate="no">&gt;</span> para evitar problemas.</p>
 
             </div>
 
@@ -425,7 +425,7 @@ Código por byAd12
             <div>
                 <h2 id="Elemento_Template_Transformacion_HTML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en HTML</h2>
             
-                <p>Dentro de la plantilla se puede tener la siguiente estructura HTML básica, donde se modificar el contenido dentro de la etiqueta <span class="span_contenido">&lt;body&gt;</span>:</p>
+                <p>Dentro de la plantilla se puede tener la siguiente estructura HTML básica, donde se modificar el contenido dentro de la etiqueta <span class="span_contenido" translate="no">&lt;body&gt;</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
 
@@ -876,15 +876,15 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">order=""</code></pre></td>
-                            <td>Permite confiurar si el orden es ascendiente o descendiente. Por defecto es <span class="span_contenido">ascending</span> (ascendiente).</td>
+                            <td>Permite confiurar si el orden es ascendiente o descendiente. Por defecto es <span class="span_contenido" translate="no">ascending</span> (ascendiente).</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">case-order=""</code></pre></td>
-                            <td>Si hay varias coincidencias se puede configurar que las mayúsculas se ordenen primero o las minúsculas. Por defecto es <span class="span_contenido">upper-first</span> (mayúsculas primero).</td>
+                            <td>Si hay varias coincidencias se puede configurar que las mayúsculas se ordenen primero o las minúsculas. Por defecto es <span class="span_contenido" translate="no">upper-first</span> (mayúsculas primero).</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">data-type=""</code></pre></td>
-                            <td>Se define el tipo de valor que contiene el nodo para poder filtrarlo. Por defecto es <span class="span_contenido">string</span>.</td>
+                            <td>Se define el tipo de valor que contiene el nodo para poder filtrarlo. Por defecto es <span class="span_contenido" translate="no">string</span>.</td>
                         </tr>
                         
                     </table>
@@ -1018,7 +1018,7 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">nombre_atributo=""</code></pre></td>
-                            <td>Se define el nombre del atributo a crear y, entre comillas se define la consulta <a href="xpath.html">XPATH</a> que se usará como valor. Debe estar entre <span class="span_contenido">{}</span>.</td>
+                            <td>Se define el nombre del atributo a crear y, entre comillas se define la consulta <a href="xpath.html">XPATH</a> que se usará como valor. Debe estar entre <span class="span_contenido" translate="no">{}</span>.</td>
                         </tr>
                         
                     </table>
@@ -1308,7 +1308,7 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">select=""</code></pre></td>
-                            <td>Es el nombre identificativo de la variable a la que se hace referencia. Es importante poner el <span class="span_contenido">$</span> al principio.</td>
+                            <td>Es el nombre identificativo de la variable a la que se hace referencia. Es importante poner el <span class="span_contenido" translate="no">$</span> al principio.</td>
                         </tr>
                         
                     </table>
@@ -1395,19 +1395,19 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">decimal-separator=""</code></pre></td>
-                            <td>Es el carácter con el que separar decimales. Por defecto es <span class="span_contenido">.</span>.</td>
+                            <td>Es el carácter con el que separar decimales. Por defecto es <span class="span_contenido" translate="no">.</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">grouping-separator=""</code></pre></td>
-                            <td>Es el carácter con el que se separan los miles. Por defecto es <span class="span_contenido">,</span>.</td>
+                            <td>Es el carácter con el que se separan los miles. Por defecto es <span class="span_contenido" translate="no">,</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">infinity=""</code></pre></td>
-                            <td>Es lo que representará el valor infinito. Por defecto es <span class="span_contenido">Infinity</span>.</td>
+                            <td>Es lo que representará el valor infinito. Por defecto es <span class="span_contenido" translate="no">Infinity</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">minus-sign=""</code></pre></td>
-                            <td>Es el carácter con el que se define el símbolo negativo. Por defecto es <span class="span_contenido">-</span>.</td>
+                            <td>Es el carácter con el que se define el símbolo negativo. Por defecto es <span class="span_contenido" translate="no">-</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">NaN=""</code></pre></td>
@@ -1415,7 +1415,7 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">percent=""</code></pre></td>
-                            <td>Es el símbolo que representa al porcentaje. Por defecto es <span class="span_contenido">%</span>.</td>
+                            <td>Es el símbolo que representa al porcentaje. Por defecto es <span class="span_contenido" translate="no">%</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">per-mille=""</code></pre></td>
@@ -1423,15 +1423,15 @@ nombre2,apellido2
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">zero-digit=""</code></pre></td>
-                            <td>Define el valor cero. Por defecto es <span class="span_contenido">0</span>.</td>
+                            <td>Define el valor cero. Por defecto es <span class="span_contenido" translate="no">0</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">digit=""</code></pre></td>
-                            <td>Es el carácter que identifica que refleja el lugar en el que falta un dígito. Por defecto es <span class="span_contenido">#</span>.</td>
+                            <td>Es el carácter que identifica que refleja el lugar en el que falta un dígito. Por defecto es <span class="span_contenido" translate="no">#</span>.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">pattern-separator=""</code></pre></td>
-                            <td>Es el caracter utilizado para separar supatrones positivos y negativos dentro de un formato de patrones. Por defecto es <span class="span_contenido">;</span>.</td>
+                            <td>Es el caracter utilizado para separar supatrones positivos y negativos dentro de un formato de patrones. Por defecto es <span class="span_contenido" translate="no">;</span>.</td>
                         </tr>
                         
                     </table>

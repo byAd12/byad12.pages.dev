@@ -54,7 +54,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Crear un servidor <span>Linux</span> como controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Crear un servidor <span>Linux</span> como controlador de dominio</h2>
             
                 <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio sin necesidad de adquirir licencias y con las mismas funcionalidades.</p>
             
@@ -98,11 +98,11 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">samba-tool domain provision --use-rfc2307 --interactive</code></pre>
 
                 <ul class="Expl">
-                    <li>En "Realm" tiene que poner el nombre de dominio en mayúsculas.</li>
-                    <li>En "Domain" tiene que poner el nombre de dominio sin el TLD y en mayúsculas.</li>
-                    <li>En "Server Role" debe estar en <span class="span_contenido" translate="no">dc</span> (Domain Controller).</li>
-                    <li>En "DNS Backend" se dejará como <span class="span_contenido" translate="no">SAMBA_INTERNAL</span>.</li>
-                    <li>En "DNS Forwarders" tiene que definirse la IP de un servidor DNS local o de Internet, como <span class="span_url" translate="no">1.1.1.1</span>.</li>
+                    <li>"Realm" → el nombre de dominio en mayúsculas.</li>
+                    <li>"Domain" → el nombre de dominio sin el TLD y en mayúsculas.</li>
+                    <li>"Server Role" → <span class="span_contenido" translate="no">dc</span> (Domain Controller).</li>
+                    <li>"DNS Backend" → <span class="span_contenido" translate="no">SAMBA_INTERNAL</span>.</li>
+                    <li>"DNS Forwarders" → la IP de un servidor DNS local o de Internet (<span class="span_url" translate="no">1.1.1.1</span>, ...).</li>
                     <li>Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</li>
                 </ul>
 
@@ -138,16 +138,12 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="Administrar_DC_Linux">Administrar un servidor <span>Linux</span> controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2 id="Administrar_DC_Linux">Administrar un servidor <span>Linux</span> controlador de dominio</h2>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Gestión del dominio</b></td>
-                        </tr>
-                        <tr>
-                            <td>COMANDO</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Gestión del <b>dominio</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">samba-tool domain info 127.0.0.1</code></pre></td>
@@ -158,17 +154,8 @@ Código por byAd12
                             <td>Comprobar estado del Controlador de Dominio.</td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Gestión de equipos del dominio</b></td>
-                        </tr>
-                        <tr>
-                            <td>COMANDO</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Gestión de <b>equipos del dominio</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">samba-tool computer list</code></pre></td>
@@ -183,17 +170,8 @@ Código por byAd12
                             <td>Eliminar equipo del dominio.</td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Gestión de usuarios</b></td>
-                        </tr>
-                        <tr>
-                            <td>COMANDO</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Gestión de <b>usuarios</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">samba-tool user list</code></pre></td>
@@ -216,17 +194,8 @@ Código por byAd12
                             <td>Mirar información detallada de un usuario.</td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Gestión de grupos</b></td>
-                        </tr>
-                        <tr>
-                            <td>COMANDO</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Gestión de <b>grupos</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">samba-tool group list</code></pre></td>
@@ -249,17 +218,8 @@ Código por byAd12
                             <td>Añadir un usuario a un grupo.</td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <div class="TablaDivScroll">
-                    <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Gestión de unidades organizativas (OU)</b></td>
-                        </tr>
-                        <tr>
-                            <td>COMANDO</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Gestión de <b>unidades organizativas</b> (OU):</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">samba-tool ou list</code></pre></td>
@@ -293,25 +253,20 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Scripts de inicio de sesión desde un controlador de dominio (DC) <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h2>
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
-                <p>1. Para configurarlo, primero hay que editar el fichero de configuración de SAMBA:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Hay que añadir al final del fichero la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">[netlogon]
+                <p>1. Para configurarlo, primero añadir al final del fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span> la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">[netlogon]
     path = /var/lib/samba/sysvol/[Nombre_dominio].[TLD]/scripts</code></pre>
-
-                <p class="Expl2">Dentro de esa ruta se podrán guardar los scripts .bat que se ejecutarán en el cliente Windows.</p>
-
-                <p class="Expl">La ruta al recurso compartido es el siguiente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">\\[Hostname_servidor_Linux]\netlogon</code></pre>
+                <p class="Expl">Dentro de esa ruta se podrán guardar los scripts <b>.bat</b> que se ejecutarán en el cliente Windows. La ruta al recurso compartido es:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">\\[Hostname_servidor_Linux]\netlogon</code></pre>
 
                 <p>Ahora se puede asociar el script al usuario mediante un equipo Windows con RSAT o con el siguiente comando en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">samba-tool user setprofile [Nombre_usuario] --script-path [Nombre_script].bat</code></pre>
                 <p class="Expl">El script es una ruta relativa desde la ruta de sysvol configurada anteriormente.</p>
-                <p class="Expl">En el equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R &gt; <span class="span_contenido" translate="no">dsa.msc</span> &gt; Usuario &gt; Propiedades &gt; Profile &gt; Logon script.</p>
+                <p class="Expl">En un equipo Windows con <b>RSAT</b> se puede configurar desde: WIN + R → <span class="span_contenido" translate="no">dsa.msc</span> → Usuario → Propiedades → Profile → Logon script.</p>
             
             </div>
 
@@ -326,7 +281,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h2>
             
                 <p>Con los siguientes pasos en un cliente Linux se puede meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
@@ -380,58 +335,35 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
                 
                 <br>
-                <p>7. A continuación hay que actualizar SAMBA mediante el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">En la sección <span class="span_contenido" translate="no">[GLOBAL]</span> hay que seguir los siguientes pasos:</p>
+                <p>7. A continuación hay que modificar la sección <span class="span_contenido" translate="no">[GLOBAL]</span> de SAMBA, situado en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
 
-                <br>
-                <p class="Expl">7.1. Se debe reemplazar el valor "WORKGROUP" de la siguiente línea ...</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">workgroup = WORKGROUP</code></pre>
-                <p class="Expl2">... por el nombre de dominio en mayúsculas y sin el TLD, por ejemplo "CICLO" si el dominio fuese "ciclo.local":</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">workgroup = [Dominio_sin_TLD_y_en_mayúsculas]</code></pre>
+                <p class="Expl">7.1. Hay que asignar como valor de <span class="span_contenido" translate="no">workgroup</span> el nombre de dominio en mayúsculas y sin el TLD (ej. CICLO → ciclo.local):</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">workgroup = [Dominio_sin_TLD_y_en_mayúsculas]</code></pre>
 
-                <br>
-                <p class="Expl">7.2. Debajo de "workgroup" hay que añadir la siguiente línea, especificando el nombre de dominio completo:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">realm = [Nombre_dominio].[TLD]</code></pre>
+                <p class="Expl">7.2. Hay que añadir una nueva línea indicando que el valor de <span class="span_contenido" translate="no">realm</span> sea el nombre de dominio completo (ej. ciclo.local):</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">realm = [Nombre_dominio].[TLD]</code></pre>
 
-                <br>
-                <p class="Expl">7.3. Se debe reemplazar el valor de la siguiente línea ...</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">server role = standalone server</code></pre>
-                <p class="Expl2">... por este otro valor, definiendo que el equipo actuará como miembro y no servidor:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">server role = member server</code></pre>
+                <p class="Expl">7.3. Hay que configurar <span class="span_contenido" translate="no">server role</span> para definir que el equipo actuará como miembro y no como servidor:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">server role = member server</code></pre>
 
-                <br>
-                <p class="Expl">7.4. A continuación hay que localizar un bloque de configuración de <span class="span_contenido" translate="no">idmap</span> en la sección <span class="span_contenido" translate="no">[GLOBAL]</span>, que es parecido a lo siguiente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="ini">;   idmap config * :              backend = tdb
-;   idmap config * :              range   = 3000-7999
-;   idmap config YOURDOMAINHERE : backend = tdb
-;   idmap config YOURDOMAINHERE : range   = 100000-999999
-;   template shell = /bin/bash</code></pre>
-                <p class="Expl2">Se debe reemplazar con la siguiente configuración:</p>
-                <pre class="codigo Expl2" translate="no"><code class="ini">    idmap config * :              backend = tdb
+                <p class="Expl">7.4. Ahora hay que añadir el siguiente bloque de configuración para que SAMBA pueda listar los usuarios con <span class="span_contenido" translate="no">winbind</span>:</p>
+                <pre class="codigo Expl" translate="no"><code class="ini">    idmap config * :              backend = tdb
     idmap config * :              range   = 3000-7999
     template shell = /bin/bash
     template homedir = /home/%D/%u
     password server = *
     winbind use default domain = yes
     winbind enum users = yes
-    winbind enum groups = yes
-
-;   idmap config YOURDOMAINHERE : backend = tdb
-;   idmap config YOURDOMAINHERE : range   = 100000-999999</code></pre>
+    winbind enum groups = yes</code></pre>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Explicación de la configuración</b></td>
-                        </tr>
-                        <tr>
-                            <td>CONFIGURACIÓN</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Explicación de la <b>configuración</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">idmap config * : backend = tdb</code></pre></td>
-                            <td>Esto indica que tdb es la base de datos.</td>
+                            <td>Indica que "tdb" (Trivial DataBase) será la base de datos.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">idmap config * : range = 3000-7999</code></pre></td>
@@ -443,7 +375,10 @@ group:          files systemd winbind</code></pre>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">template homedir = /home/%D/%u</code></pre></td>
-                            <td>La carpeta personal que tendrá en usuario que se cree desde Windows. Se crearán las carpetas con los nombres de usuario <span class="span_contenido" translate="no">%u</span> dentro una subcarpeta de /home con el nombre del dominio <span class="span_contenido" translate="no">%D</span>.</td>
+                            <td>
+                                La ruta de la carpeta personal para los usuarios.
+                                Se crearán las carpetas con los nombres de usuario <span class="span_contenido" translate="no">%u</span> dentro una subcarpeta de <span class="span_url" translate="no">/home</span> cuyo nombre es el nombre de dominio <span class="span_contenido" translate="no">%D</span>.
+                            </td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">password server = *</code></pre></td>
@@ -465,58 +400,43 @@ group:          files systemd winbind</code></pre>
                     </table>
                 </div>
 
-
                 <br>
-                <p class="Expl">7.5. Guardamos el fichero y salimos del editor de texto.</p>
+                <p>8. Para unir el cliente al dominio sigue los siguientes pasos:</p>
 
-                <br>
-                <p>8. Ahora hay que unir el cliente al dominio:</p>
-
-                <br>
-                <p class="Expl">8.1. Hay que listar la información del dominio:</p>
+                <p class="Expl">8.1. Comprueba que el cliente sea capaz de listar la información del dominio:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">net ads info</code></pre>
-                <p class="Expl2">En caso de que de un error, hay que verificar que el paso anterior esté hecho correctamente.</p>
+                <p class="Expl2">En caso de que de un error, hay que verificar que el paso <b>7</b> se realizó correctamente.</p>
 
-                <br>
-                <p class="Expl">8.2. Hay que intentar unir el cliente al dominio mediante el usuario y contraseña del Administrador del servidor Windows:</p>
+                <p class="Expl">8.2. Hay que intentar unir el cliente al dominio usando las credenciales del usuario <span class="span_contenido">Administrador</span> de Windows Server:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
-                <ul class="Expl2">
-                    <li>Si da un error en este paso es por hacer incorrectamente el paso 5 - <span class="span_contenido" translate="no">/etc/hosts</span>.</li>
-                    <li>Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.</li>
-                    <li>Si permite unirse al dominio, se puede ver el equipo en la sección "Computers" del servidor de Windows.</li>
-                </ul>
-
-                <br>
-                <p class="Expl">8.3. Hay que listar la información del dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">net ads info</code></pre>
-
-                <br>
-                <p class="Expl">8.4. Se debe reiniciar el servicio de winbind:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
-
-                <br>
-                <p class="Expl">8.5. Hay que listar la información de winbind, que debería listar los usuarios de Windows:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">wbinfo -u</code></pre>
-
-                <br>
-                <p class="Expl">8.6. Se debería poder ver la información del usuario de Windows:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">id [Nombre_usuario_windows]</code></pre>
-
-                <br>
-                <p class="Expl">8.7. También se debería poder iniciar sesión con el usuario:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">login [Nombre_usuario_windows]</code></pre>
-                <p class="Expl2">Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span>, permitiendo comprobar las contraseñas tanto de windows como de Linux.</p>
-                
-                <br>
-                <p class="Expl"><u>Importante</u>: Al iniciar sesión con un usuario de Windows aparecerá un <b>error</b> de que no se crea la carpeta personal, se puede solucionar compartiendo la carpeta home del usuario al cliente o con el siguiente comando, que sirve para permitir a pam crear las carpetas en el cliente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">pam_auth_update</code></pre>
                 <p class="Expl2">
-                    Hay que seleccionar la opción "Create home directory on login".
-                    Después se puede probar a iniciar sesión de nuevo y verificar que la carpeta se crea localmente.
+                    Si da un error en este paso es por realizar incorrectamente el paso <b>5</b>.
+                    <br>
+                    Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.
+                    <br>
+                    Si permite unirse al dominio, se puede ver el equipo en la sección <span class="span_contenido" translate="no">Computers</span> del servidor de Windows.
                 </p>
 
-                <br>
-                <p class="Expl">8.8. Por último tendríamos que mirar si la configuración de <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) se aplicó al usuario de Windows:</p>
+                <p class="Expl">8.3. Una vez se haya unido el cliente al dominio, este debería de ver el Identificador de Seguridad (SID) único del dominio:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">net ads info</code></pre>
+
+                <p class="Expl">8.4. Ahora hay que reiniciar el servicio de <span class="span_contenido" translate="no">winbind</span> para que sea capaz de listar los usuarios de Windows:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
+                <pre class="codigo Expl2" translate="no"><code class="bash">wbinfo -u</code></pre>
+
+                <p class="Expl2">Con el comando <span class="span_contenido" translate="no">id USUARIO</span> se puede ver la información de un usuario en concreto.</p>
+                <p class="Expl2">
+                    También se debería poder iniciar sesión con cualquier usuario de Windows en el sistema local.
+                    Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que este modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span> para que poder comprobar las contraseñas de Windows.
+                </p>
+                
+                <p class="Expl">
+                    8.5. Al iniciar sesión con un usuario de Windows aparecerá un <b>error</b> de que no se puede crear la carpeta personal. 
+                    Para solucionarlo hay que marcar la opción "Create home directory on login" en el asistente que aparecerá al ejecutar el siguiente comando:
+                </p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">pam_auth_update</code></pre>
+
+                <p class="Expl">8.6. Por último, hay que comprobar que se aplicó correctamente la configuración asignada en <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) al usuario de Windows:</p>
                 <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/passwd | grep [Nombre_usuario_windows]</code></pre>
 
             </div>
@@ -531,7 +451,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h2>
             
                 <p>
                     Este proceso equivale a la <b>"Carpeta particular"</b> o <b>"Unidad de red"</b> en Windows. 
@@ -544,17 +464,15 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y libpam-mount cifs-utils</code></pre>
 
                 <br>
-                <p>2. Ahora hay que editar el fichero de configuración de pam_mount:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/security/pam_mount.conf.xml</code></pre>
+                <p>2. Ahora hay que editar el fichero de configuración de pam_mount - <span class="span_url" translate="no">/etc/security/pam_mount.conf.xml</span>:</p>
 
-                <p class="Expl">Antes de nada hay que cambiar el siguiente parámetro de <span class="span_error" translate="no">0</span> a <span class="span_contenido" translate="no">1</span> para que las carpetas de destino se creen automáticamente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">&lt;mkmountpoint enable="1" /&gt;</code></pre>
+                <p class="Expl">2.1. Primero hay que cambiar el siguiente parámetro de <span class="span_error" translate="no">0</span> a <span class="span_contenido" translate="no">1</span> para que las carpetas de destino se creen automáticamente:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">&lt;mkmountpoint enable="1" /&gt;</code></pre>
 
-                <p class="Expl">En la sección del fichero con el siguiente comentario en XML:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">&lt;!-- Volume definitions --&gt;</code></pre>
+                <p class="Expl">2.2. Justo después de un comentario "Volume definitions" hay que añadir una nueva etiqueta <span class="span_contenido" translate="no">volume</span> por cada carpeta a montar:</p>
+                <pre class="codigo Expl" translate="no"><code class="xml">&lt;!-- Volume definitions --&gt;
 
-                <p class="Expl">Justo después de esa línea hay que añadir nuevas etiquetas "volume" por cada carpeta a montar:</p>
-                <pre class="codigo Expl2" translate="no"><code class="xml">&lt;volume
+&lt;volume
     fstype="cifs"
     server="hostname_servidor.dominio.tld"
     path="nombre_recurso_compartido"
@@ -562,16 +480,10 @@ group:          files systemd winbind</code></pre>
     sgrp="nombre_grupo_permitido"
 /&gt;</code></pre>
 
-                <br>
-
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2"><b>Explicación de la configuración</b></td>
-                        </tr>
-                        <tr>
-                            <td>CONFIGURACIÓN</td>
-                            <td><b>EXPLICACIÓN</b></td>
+                            <td colspan="2">Explicación de la <b>configuración</b>:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="xml">fstype=""</code></pre></td>
@@ -598,13 +510,11 @@ group:          files systemd winbind</code></pre>
 
                 </div>
 
-                <br>
-
                 <p class="Expl">
                     Para situarse dentro de la carpeta personal del usuario se puede usar <span class="span_contenido" translate="no">~</span> o una ruta absoluta usando variables como <span class="span_contenido" translate="no">%(USER)</span> o <span class="span_contenido" translate="no">%(DOMAIN)</span>.
                     Hay más variables que se pueden ver con el siguiente comando:
                 </p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">man pam_mount.conf</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">man pam_mount.conf</code></pre>
 
             </div>
 
@@ -620,7 +530,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
             
                 <p>1. Primero hay que configurar como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
@@ -641,7 +551,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio (DC)<img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h2>
             
                 <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
 
@@ -703,7 +613,7 @@ ldap_user_gid_number = gidNumber</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h2>
             
                 <p>Primero editamos el fichero de configuración de samba:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>

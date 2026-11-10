@@ -127,7 +127,7 @@ Código por byAd12
 
                 <p>Inspeccionar la configuración o estado de un contenedor o imagen:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker inspect --format=(Formato) [Nombre/ID_Docker]</code></pre>
-                <p class="Expl">El parámetro <span class="span_contenido">--format</span> es opcional. Sirve para extraer un dato específico de una imagen o un docker, como puede ser el <span class="span_contenido" translate="no">{{.Id}}</span>, <span class="span_contenido" translate="no">{{.State.Status}}</span>, ...</p>
+                <p class="Expl">El parámetro <span class="span_contenido" translate="no">--format</span> es opcional. Sirve para extraer un dato específico de una imagen o un docker, como puede ser el <span class="span_contenido" translate="no">{{.Id}}</span>, <span class="span_contenido" translate="no">{{.State.Status}}</span>, ...</p>
 
             </div>
         </div>
@@ -258,7 +258,7 @@ Código por byAd12
                         
                         <tr>
                             <td><pre translate="no"><code class="bash">--network host</code></pre></td>
-                            <td><b>Modo host</b>: Con este parámetro el docker tendrá la misma IP del host y los puertos se exponen sin necesidad de utilizar el parámetro <span class="span_contenido">-p</span>.</td>
+                            <td><b>Modo host</b>: Con este parámetro el docker tendrá la misma IP del host y los puertos se exponen sin necesidad de utilizar el parámetro <span class="span_contenido" translate="no">-p</span>.</td>
                         </tr>
 
                     </table>
@@ -357,9 +357,9 @@ Código por byAd12
                 <p>También se puede realizar cualquier acción sobre todos los dockers del sistema con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker [Acción] $(docker ps -a -q)</code></pre>
                 <p class="Expl">
-                    La acción puede ser <span class="span_contenido">start</span>, <span class="span_contenido">stop</span>, <span class="span_contenido">rm</span>, <span class="span_contenido">pause</span>, <span class="span_contenido">unpause</span>, etc.
+                    La acción puede ser <span class="span_contenido" translate="no">start</span>, <span class="span_contenido" translate="no">stop</span>, <span class="span_contenido" translate="no">rm</span>, <span class="span_contenido" translate="no">pause</span>, <span class="span_contenido" translate="no">unpause</span>, etc.
                     <br>
-                    Para aplicarlo solo a los contenedores en ejecución hay que quitar el parámetro <span class="span_contenido">-a</span>.
+                    Para aplicarlo solo a los contenedores en ejecución hay que quitar el parámetro <span class="span_contenido" translate="no">-a</span>.
                 </p>
 
             </div>
@@ -474,7 +474,7 @@ Código por byAd12
 
                 <p>Conectar un docker que ya existe a una red:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network connect [Nombre_red] [Nombre/ID_Docker]</code></pre>
-                <p class="Expl">Para quitarlo de la red solo hay que cambiar <span class="span_contenido">connect</span> por <span class="span_contenido">disconnect</span>.</p>
+                <p class="Expl">Para quitarlo de la red solo hay que cambiar <span class="span_contenido" translate="no">connect</span> por <span class="span_contenido" translate="no">disconnect</span>.</p>
             </div>
 
         </div>

@@ -65,10 +65,14 @@ Código por byAd12
             <div>
                 <h2>2. Comprobación</h2>
 
-                <p>1. Hay que ejecutar los siguientes comandos de verificación del servicio PHP:</p>
-
-                <div class="TablaDivScroll Expl">
+                <div class="TablaDivScroll">
                     <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <td colspan="2" class="efecto_ocultar">
+                                Comandos de verificación del servicio PHP:
+                            </td>
+                        </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="bash">php -v</code></pre></td>
@@ -90,13 +94,15 @@ Código por byAd12
                             <td>Muestra la ruta del fichero de configuración (.ini) del servicio PHP que está actualmente cargado.</td>
                         </tr>
 
+                        <tr>
+                            <td><pre translate="no"><code class="bash">apache2ctl configtest</code></pre></td>
+                            <td>Verifica si hay errores de configuración.</td>
+                        </tr>
+
                     </table>
                 </div>
 
-                <p>2. Hay que verificar que en Apache2 no hay ningún error de configuración:</p>
-                <pre class="codigo" translate="no"><code class="bash">apache2ctl configtest</code></pre>
-
-                <p>3. Por último hay que reiniciar el servicio de Apache2:</p>
+                <p>Si no hay errores hay que reiniciar el servicio de Apache2 para aplicar los módulos de PHP:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart apache2</code></pre>
 
             </div>
@@ -264,14 +270,6 @@ saludar("byAd12", 33);</code></pre>
 
                 <p>Para obtener un valor específico de un array se debe indicar su posición empezando desde el número 0:</p>
                 <pre class="codigo" translate="no"><code class="php">$Nombre_variable[Posición]</code></pre>
-                
-            </div>
-
-            <div>
-                <h2 id="...">...</h2>
-
-                <p>...:</p>
-                <pre class="codigo" translate="no"><code class="php">...</code></pre>
                 
             </div>
 

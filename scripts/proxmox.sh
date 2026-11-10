@@ -145,7 +145,7 @@ while true; do
         clear
 
         echo -e "${Am}Requisitos:${Bl}"
-        echo -e "${Am_}  1.  Ejecutar la opción número '${Bl}1${Am_}' del script -> '${Bl}Configuración inicial${Am_}'.${Bl}"
+        echo -e "${Am_}  1.  Ejecutar la opción número '${Bl}1${Am_}' del script → '${Bl}Configuración inicial${Am_}'.${Bl}"
         echo -e ""
         read -p "Pulse ENTER para continuar con el programa: " respuesta_enter; [[ "${respuesta_enter}" == "exit" ]] && continue
         echo -e ""
