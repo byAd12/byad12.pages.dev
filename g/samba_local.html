@@ -67,7 +67,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl">El usuario debe tener un nombre igual que en la máquina Windows en la que se vaya a iniciar sesión.</p>
                 <p class="Expl"><u>Importante</u>: Los usuarios no pueden listar el contenido de la carpeta sin el permiso <span class="span_contenido" translate="no">x</span> (eXecute).</p>
                 <p class="Expl"><u>Riesgo de seguridad</u>: Deben configurarse los permisos locales antes de compartir la carpeta ya que, durante el tiempo que se comparte sin los permisos adecuados, se estará permitiendo accesos no deseados al recurso que se esté compartiendo.</p>
-                <p class="Expl"><u>Nota de seguridad</u>: Si se usa este usuario solo para que pueda acceder de forma remota, se puede limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_url" translate="no">-s /usr/sbin/nologin</span> en el comando "useradd".</p>
+                <p class="Expl"><u>Nota de seguridad</u>: Si se usa este usuario solo para que pueda acceder de forma remota, se puede limitar su acceso a solo remoto y evitar que pueda iniciar sesión en nuestro sistema local mediante el parámetro <span class="span_contenido" translate="no">-s /usr/sbin/nologin</span> en el comando <span class="span_contenido" translate="no">useradd</span>.</p>
 
                 <!-- ......................................................... -->
                 <br>
@@ -123,7 +123,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl">Antes de asignar permisos, hay que crear los usuarios y grupos que sean necesarios.</p>
 
                 <p class="Expl">
-                    Administrador de equipos &gt; Usuarios y grupos locales &gt; [Usuarios y Grupos] &gt; Click derecho &gt; Nuevo.
+                    Administrador de equipos → Usuarios y grupos locales → [Usuarios y Grupos] → Click derecho → Nuevo.
                     <br>
                     Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido" translate="no">smbpasswd</span>.
 
@@ -131,7 +131,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl">
                     Desde la misma pestaña de Grupos hay que asignar a los usuarios creados dentro de su grupo correspondiente:
                     <br>
-                    Grupo &gt; Click derecho &gt; Propiedades &gt; Miembros &gt; Agregar.
+                    Grupo → Click derecho → Propiedades → Miembros → Agregar.
                 </p>
 
                 <!-- ......................................................... -->
@@ -140,13 +140,13 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 <p class="Expl">
                     Se puede asignar de forma que los permisos en red también se apliquen en los permisos locales (esto además quita la herencia de la carpeta):
                     <br>
-                    Carpeta &gt; Click derecho &gt; Propiedades &gt; Compartir &gt; <b>Botón "Compartir"</b> &gt; Añadir usuario/grupo &gt; Asignar permisos.
+                    Carpeta → Click derecho → Propiedades → Compartir → <b>Botón "Compartir"</b> → Añadir usuario/grupo → Asignar permisos.
                 </p>
                 
                 <p class="Expl">
                     También hay otra forma para asignar solo permisos de red:
                     <br>
-                    Carpeta &gt; Click derecho &gt; Propiedades &gt; <b>Uso compartido avanzado</b> &gt; Botón "Permisos" &gt; Agregar &gt; Definir el usuario/grupo y asignar permisos.
+                    Carpeta → Click derecho → Propiedades → <b>Uso compartido avanzado</b> → Botón "Permisos" → Agregar → Definir el usuario/grupo y asignar permisos.
                 </p>
 
             </div>
@@ -184,7 +184,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                     <table class="TablaComandos">
 
                         <tr class="Titulo">
-                            <td colspan="2">Parámetros:</td>
+                            <td colspan="2">Explicación de los parámetros del comando:</td>
                         </tr>
                         
                         <tr>
@@ -356,7 +356,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
                 <p class="Expl">
                     Para que se persistente hay que crear un punto de montaje en la siguiente ventana:
                     <br>
-                    Explorador de ficheros &gt; Este equipo &gt; Pestaña "Equipo" &gt; Conectar a unidad de red
+                    Explorador de ficheros → Este equipo → Pestaña "Equipo" → Conectar a unidad de red
                 </p>
                 <p class="Expl">En la ventana se debe asignar la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\[IP_servidor]\Recurso</span>.</p>
 
@@ -398,73 +398,153 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
     hosts deny = [PC2]
 </code></pre>
 
-                <p>Parámetros básicos:</p>
-                <p class="Expl">
-                    <b>[Nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
-                    <br>
-                    <b>comment</b>: Comentario opcional que no afecta en la configuración.
-                    <br>
-                    <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
-                    <br>
-                    <b>browseable</b>: No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url" translate="no">\\[IP_servidor]_Linux\Recurso</span>.
-                </p>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
 
-                <p>Lista de control de acceso:</p>
-                <p class="Expl">
-                    <b>valid users</b>: Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido" translate="no">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).
-                    <br>
-                    <b>force user</b>: Asigna la propiedad de los ficheros a un usuario para evitar conflictos de permisos.
-                    <br>
-                    <b>force group</b>: Asigna la propiedad de los ficheros a un grupo para evitar conflictos de permisos.
-                </p>
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros básicos:</td>
+                        </tr>
 
-                <p>Parámetros de permisos básicos:</p>
-                <p class="Expl">
-                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido" translate="no">no</span>, o solo-lectura: <span class="span_contenido" translate="no">yes</span>.
-                    <br>
-                    <b>read list</b>: Lista de usuarios que solo pueden leer aunque <span class="span_contenido" translate="no">read only = no</span>.
-                    <br>
-                    <b>write list</b>: Lista de usuarios que pueden escribir aunque <span class="span_contenido" translate="no">read only = yes</span>.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">[Nombre_recurso]</code></pre></td>
+                            <td>Es el nombre que aparecerá en Windows como carpeta.</td>
+                        </tr>
 
-                <p>Parámetros de permisos avanzados:</p>
-                <p class="Expl">
-                    <b>create mask</b>: Define los permisos por defecto para los ficheros nuevos que se creen en el recurso compartido.
-                    <br>
-                    <b>directory mask</b>: Define los permisos por defecto para los directorios nuevos que se creen dentro del recurso compartido.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">comment = ...</code></pre></td>
+                            <td>Comentario opcional que no afecta en la configuración.</td>
+                        </tr>
 
-                <p>Parámetros del usuario anónimo:</p>
-                <p class="Expl">
-                    <b>guest ok</b>: Para permisos que usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
-                    <br>
-                    <b>guest only</b>: Para permisos que <u>solo</u> usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
-                    <br>
-                    <b>guest account</b>: Se puede definir un usuario anónimo diferente al de por defecto.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">path = ...</code></pre></td>
+                            <td>Ruta completa de la carpeta a compartir en el servidor.</td>
+                        </tr>
 
-                <p>Parámetros de ficheros:</p>
-                <p class="Expl">
-                    <b>hide files</b>: No enseña ficheros por coincidencias como por ejemplo <span class="span_url" translate="no">*.tmp</span>.
-                    <br>
-                    <b>hide dot files</b>: No enseña ficheros que empiezen por un punto (ocultos).
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">browseable = yes / no</code></pre></td>
+                            <td>No permite que se vea como recurso compartido así que solo se puede entrar por ruta de red como: <span class="span_url" translate="no">\\[IP_servidor]_Linux\Recurso</span>.</td>
+                        </tr>
 
-                <p>Parámetros de enlaces simbólicos:</p>
-                <p class="Expl">
-                    <b>follow symlinks</b>: Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
-                    <br>
-                    <b>inherit permissions</b>: Permite heredar permisos de la carpeta padre en nuevos ficheros o sub-carpetas: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
-                    <br>
-                    <b>wide links</b>: Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.
-                </p>
+                        <tr class="Titulo">
+                            <td colspan="2">Lista de control de acceso:</td>
+                        </tr>
 
-                <p>Parámetros de hostnames:</p>
-                <p class="Expl">
-                    <b>hosts allow</b>: Lista de hostnames al que permitir acceder al recurso.
-                    <br>
-                    <b>hosts deny</b>: Lista de hostnames al que denegar acceder al recurso.
-                </p>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">valid users = ...</code></pre></td>
+                            <td>Permite definir usuarios que tengan acceso a la carpeta. Si se define <span class="span_contenido" translate="no">%S</span> se especifica que el nombre del recurso compartido también se incluya (solo es útil si el nombre de la carpeta es el de un usuario).</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">force user = ...</code></pre></td>
+                            <td>Asigna la propiedad de los ficheros a un usuario para evitar conflictos de permisos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">force group = ...</code></pre></td>
+                            <td>Asigna la propiedad de los ficheros a un grupo para evitar conflictos de permisos.</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros de permisos básicos:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">read only = yes / no</code></pre></td>
+                            <td>Para permisos de escribir: <span class="span_contenido" translate="no">no</span>, o solo-lectura: <span class="span_contenido" translate="no">yes</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">read list = yes / no</code></pre></td>
+                            <td>Lista de usuarios que solo pueden leer aunque <span class="span_contenido" translate="no">read only = no</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">write list = yes / no</code></pre></td>
+                            <td>Lista de usuarios que pueden escribir aunque <span class="span_contenido" translate="no">read only = yes</span>.</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros de permisos avanzados:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">create mask = 0000</code></pre></td>
+                            <td>Define los permisos por defecto para los ficheros nuevos que se creen en el recurso compartido.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">directory mask = 0000</code></pre></td>
+                            <td>Define los permisos por defecto para los directorios nuevos que se creen dentro del recurso compartido.</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros del usuario anónimo:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">guest ok = yes / no</code></pre></td>
+                            <td>Para permisos que usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">guest only = yes / no</code></pre></td>
+                            <td>Para permisos que <u>solo</u> usuarios anónimos accedan: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">guest account = ...</code></pre></td>
+                            <td>Se puede definir un usuario anónimo diferente al de por defecto.</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros de ficheros:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">hide files = ...</code></pre></td>
+                            <td>No enseña ficheros por coincidencias como por ejemplo <span class="span_url" translate="no">*.tmp</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">hide dot files = yes / no</code></pre></td>
+                            <td>No enseña ficheros que empiezen por un punto (ocultos).</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros de enlaces simbólicos:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">follow symlinks = yes / no</code></pre></td>
+                            <td>Permite seguir enlaces simbólicos dentro del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">inherit permissions = yes / no</code></pre></td>
+                            <td>Permite heredar permisos de la carpeta padre en nuevos ficheros o sub-carpetas: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">wide links = yes / no</code></pre></td>
+                            <td>Permite enlaces simbólicos que apuntan fuera del recurso: <span class="span_contenido" translate="no">yes</span>, o no: <span class="span_contenido" translate="no">no</span>.</td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros de hostnames:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">hosts allow = ...</code></pre></td>
+                            <td>Lista de hostnames a los que se le permite acceder al recurso.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">hosts deny = ...</code></pre></td>
+                            <td>Lista de hostnames a los que se le deniega acceder al recurso.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
 
                 <p>Por la mitad del fichero de configuraciones hay un bloque para las carpetas personales al cual se le pueden configurar los parámetros enseñados anteriormente:</p>
                 <pre class="codigo" translate="no"><code class="ini">[homes]</code></pre>
@@ -487,44 +567,89 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
     log file = /[Ruta_fichero_logs]
 </code></pre>
 
-                <p>Parámetros básicos:</p>
-                <p class="Expl">
-                    <b>server role</b>: Define el tipo de servidor Samba. Puede ser:
-                    <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">standalone server</span>: Servidor independiente que autentica usuarios localmente.
-                    <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">member server</span>: Servidor integrado en un dominio existente.
-                    <br>
-                    &nbsp;&nbsp;•&nbsp;&nbsp;<span class="span_contenido" translate="no">active directory domain controller</span>: Controlador de dominio.
-                    <br>
-                    <br>
-                    <b>netbios name</b>: Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.
-                    <br>
-                    <b>workgroup</b>: Nombre del grupo de trabajo o dominio al que pertenece el servidor Samba.
-                    <br>
-                    <b>security</b>: Define el modo de autenticación que utilizará Samba (<span class="span_contenido" translate="no">share</span>, <span class="span_contenido" translate="no">user</span>, <span class="span_contenido" translate="no">server</span>, <span class="span_contenido" translate="no">domain</span>). Determina cómo se validan los usuarios al acceder a los recursos.
-                    <br>
-                    <b>encrypt passwords</b>: Indica si las contraseñas se envían cifradas. Normalmente se establece en "yes" para compatibilidad con sistemas Windows modernos.
-                    <br>
-                    <b>password server</b>: Servidor o lista de servidores encargados de autenticar a los usuarios. En modo <span class="span_contenido" translate="no">domain</span>, suele especificarse el controlador o controladores de dominio.
-                    <br>
-                    <b>map to guest</b>: Determina en qué casos un intento de acceso se convierte automáticamente en acceso como usuario invitado.
-                    <br>
-                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">never</span>: Nunca se asigna acceso como invitado. Si la autenticación falla, el acceso se deniega.
-                    <br>
-                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad user</span>: El acceso se convierte en invitado solo cuando el nombre de usuario no existe en el sistema.
-                    <br>
-                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad password</span>: El acceso se convierte en invitado cuando la contraseña es incorrecta, incluso si el usuario existe.
-                    <br>
-                    &nbsp;&nbsp;• <span class="span_contenido" translate="no">bad uid</span>: El acceso se convierte en invitado cuando el usuario autenticado no puede asociarse a un UID válido en el sistema.
-                </p>
-                
-                <p>Logs:</p>
-                <p class="Expl">
-                    <b>log level</b>: Nivel de detalle de los registros de Samba. Cuanto mayor es el valor, más información se guarda en los logs.
-                    <br>
-                    <b>log file</b>: Ruta y nombre del fichero donde Samba almacena los mensajes de registro y auditoría.
-                </p>
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <td colspan="2">Parámetros básicos:</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">server role = ...</code></pre></td>
+                            <td>
+                                <span class="span_contenido" translate="no">standalone server</span>: Servidor independiente que autentica usuarios.
+                                <br>
+                                <span class="span_contenido" translate="no">member server</span>: Servidor integrado en un dominio existente.
+                                <br>
+                                <span class="span_contenido" translate="no">active directory domain controller</span>: Controlador de dominio.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">netbios name = ...</code></pre></td>
+                            <td>Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">workgroup = ...</code></pre></td>
+                            <td>Nombre del grupo de trabajo o dominio al que pertenece el servidor Samba.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">netbios name = ...</code></pre></td>
+                            <td>Nombre con el que el servidor Samba se identifica en la red mediante NetBIOS.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">security = ...</code></pre></td>
+                            <td>
+                                Define el modo de autenticación que utilizará Samba (<span class="span_contenido" translate="no">share</span>, <span class="span_contenido" translate="no">user</span>, <span class="span_contenido" translate="no">server</span>, <span class="span_contenido" translate="no">domain</span>). 
+                                Determina cómo se validan los usuarios al acceder a los recursos.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">encrypt passwords = yes / no</code></pre></td>
+                            <td>Indica si las contraseñas se envían cifradas. Normalmente se establece en <span class="span_contenido" translate="no">yes</span> para compatibilidad con sistemas Windows modernos.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">password server = ...</code></pre></td>
+                            <td>
+                                Servidor o lista de servidores encargados de autenticar a los usuarios.
+                                En modo <span class="span_contenido" translate="no">domain</span>, suele especificarse el controlador o controladores de dominio.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">map to guest = ...</code></pre></td>
+                            <td>
+                                <span class="span_contenido" translate="no">never</span>: Nunca se asigna acceso como invitado.
+                                <br>
+                                <span class="span_contenido" translate="no">bad user</span>: Se convierte en invitado cuando el usuario no existe.
+                                <br>
+                                <span class="span_contenido" translate="no">bad password</span>: Se convierte en invitado cuando la contraseña es incorrecta.
+                                <br>
+                                <span class="span_contenido" translate="no">bad uid</span>: Se convierte en invitado cuando el usuario autenticado no puede asociarse a un UID válido en el sistema.
+                            </td>
+                        </tr>
+
+                        <tr class="Titulo">
+                            <td colspan="2">Logs:</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">log level = ...</code></pre></td>
+                            <td>Nivel de detalle de los registros de Samba. Cuanto mayor es el valor, más información se guarda en los logs.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">log file = ...</code></pre></td>
+                            <td>Ruta y nombre del fichero donde Samba almacena los mensajes de registro y auditoría.</td>
+                        </tr>
+
+                    </table>
+                </div>
                 <!-- ......................................................... -->
             </div>
 

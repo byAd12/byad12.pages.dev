@@ -15,13 +15,6 @@
 /* Color párrafos y texto - #d0d0d0 */
 
 /* =================================================== */
-/*                       Márgenes                      */
-/* =================================================== */
-
-/* Expl, .codigo - 30px */
-/* Expl2 - 60px */
-
-/* =================================================== */
 /* =================================================== */
 /* Fuentes */
 
@@ -295,8 +288,8 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
 
     .TablaNmap .Titulo, .TablaNmap .Titulo td, .TablaNmap .Titulo td *{font-weight: bolder;}
 
-    .Expl, .codigo, ul, ol{margin-left: 15px !important;}
-    .Expl2{margin-left: 30px !important;}
+    .Expl:not(.TablaDivScroll, ul, ol), .codigo, ul, ol{margin-left: 15px !important;}
+    .Expl2:not(.TablaDivScroll, ul, ol){margin-left: 30px !important;}
 
     span.span_contenido, span.span_url, span.span_error, span.span_url_espaciado{border: .3px solid rgba(192, 192, 192, 0.5);}
 }

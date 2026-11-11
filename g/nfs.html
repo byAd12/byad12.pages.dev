@@ -60,7 +60,7 @@ Código por byAd12
                 <p>En el <b>servidor</b> hay que instalar el siguiente paquete para poder compartir una carpeta por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-kernel-server</code></pre>
-                <p class="Expl">Al instalarlo informará que se creó el fichero <span class="span_contenido" translate="no">/etc/exports</span>.</p>
+                <p class="Expl">Al instalarlo informará que se creó el fichero <span class="span_url" translate="no">/etc/exports</span>.</p>
 
             </div>
 
@@ -80,17 +80,14 @@ Código por byAd12
             <div>
                 <h2>Configuración en el <span>servidor</span></h2>
 
-                <p>1. Editar el fichero de configuración:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/exports</code></pre>
-
-                <p>2. Añadir una línea para compartir la carpeta:</p>
+                <p>1. Hay que editar el fichero <span class="span_url" translate="no">/etc/exports</span> para definir como compartir la carpeta:</p>
                 <pre class="codigo" translate="no"><code class="bash">/[Carpeta_a_compartir]  [Hostname_1]([Permisos])  [Hostname_2]([Permisos])  ...</code></pre>
                 <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos UnicaColumna">
                         <tr class="Titulo">
-                            <td colspan="2">Parámetros:</td>
+                            <td colspan="2">Sintaxis:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/[Carpeta_a_compartir]</code></pre></td>
@@ -124,7 +121,7 @@ Código por byAd12
                     </table>
                 </div>
 
-                <p>3. Guardar y salirse del editor y aplicar los cambios con el comando:</p>
+                <p>2. Para aplicar los cambios del paso 1 hay que ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -rav</code></pre>
 
             </div>
@@ -132,19 +129,13 @@ Código por byAd12
             <div>
                 <h2>Configuración en el <span>cliente</span></h2>
 
-                <p>1. En el cliente se puede mirar qué carpetas se puede montar del servidor:</p>
+                <p>1. En el cliente se puede mirar qué recursos compartidos se pueden montar de un servidor específico:</p>
                 <pre class="codigo" translate="no"><code class="bash">showmount -e [IP_servidor]</code></pre>
-                <p class="Expl"><b>IP_servidor</b>: La IPv4 del servidor que aloja el recurso compartido.</p>
                 <p class="Expl">Dará error si no se instaló el paquete <span class="span_contenido" translate="no">nfs-common</span>.</p>
 
-                <p>2. Una vez podamos ver el recurso hay que montar la carpeta del servidor en una carpeta del cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">mkdir /mnt/carpeta_local</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">mount -t nfs [IP_servidor]:/[Carpeta_remota] /mnt/[Carpeta_local]</code></pre>
-                <p class="Expl2">
-                    <b>/mnt/Carpeta_local</b>: Una ruta local del cliente en la que montar el recurso compartido.
-                    <br>
-                    <b>/IP_servidor/Carpeta_remota</b>: La ruta en el servidor del recurso compartido.
-                </p>
+                <p>2. Una vez podamos ver el recurso hay que montar la carpeta del servidor en una carpeta local del cliente:</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir -p /mnt/[Carpeta_local]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">mount -t nfs [IP_servidor]:/[Recurso_compartido] /mnt/[Carpeta_local]</code></pre>
 
                 <p>3. Al montarse no se puede acceder a la carpeta por permisos. En el servidor hay que darle permisos a <u>otros</u>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod 755 /[Carpeta_remota]</code></pre>
@@ -197,16 +188,14 @@ Código por byAd12
             <div>
                 <h2>Montaje <span>automático</span> en los clientes</h2>
 
-                <p>1. Hay que editar el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
-                <p>2. Añadimos la siguiente línea:</p>
+                <p>Hay que editar el fichero <span class="span_url" translate="no">/etc/fstab</span> para añadir la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[IP_servidor]:/[Carpeta_remota]    /mnt/[Carpeta_local]    nfs    defaults,nfsvers=3    0    0</code></pre>
-                <p class="Expl">Hay que usar el tabulador para separar los elementos de la línea.</p>
+                <p class="Expl">Hay que usar el tabulador para separar cada elemento de la línea.</p>
                 
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2">Parámetros:</td>
+                            <td colspan="2">Sintaxis:</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">[IP_servidor]</code></pre></td>
