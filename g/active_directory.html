@@ -1,4 +1,4 @@
-<!--
+li<!--
 
 Código por byAd12
 
@@ -54,9 +54,9 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Crear un servidor <span>Linux</span> como controlador de dominio</h2>
+                <h2>Configurar un sistema <span>Linux</span> como controlador de dominio</h2>
             
-                <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio sin necesidad de adquirir licencias y con las mismas funcionalidades.</p>
+                <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio con las mismas funcionalidades pero sin la necesidad de adquirir licencias.</p>
             
                 <br>
                 <p>1. Primero hay que asignar al servidor una dirección IPv4 estática. Se puede mirar la dirección IP del sistema con:</p>
@@ -66,17 +66,16 @@ Código por byAd12
                 <p>2. Hay que asignar un hostname al cliente definiendo su dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_servidor_Linux].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">Para verificar los cambios se podría mirar que el siguiente fichero contenga el hostname actualizado:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/hostname</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">cat /etc/hostname</code></pre>
 
                 <br>
-                <p>3. Ahora se debe configurar un registro DNS interno para cada equipo de la red:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
+                <p>3. Ahora se debe configurar un registro DNS interno para cada equipo de la red en el fichero <span class="span_url" translate="no">/etc/hosts</span>.</p>
                 
                 <p class="Expl">3.1. Primero se debe eliminar los registros que contengan el hostname antiguo del servidor:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">127.0.0.1     [Hostname_servidor_antiguo_Linux]</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">127.0.0.1     [Hostname_servidor_antiguo_Linux]</code></pre>
                 
                 <p class="Expl">3.2. Luego se debe añadir un registro que apunte a cada IP de los equipos de la red mediante su hostname y dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_servidor_Linux]     [Hostname_servidor_Linux].[Nombre_dominio].[TLD]     [Hostname_servidor_Linux]
+                <pre class="codigo Expl" translate="no"><code class="bash">[IP_servidor_Linux]     [Hostname_servidor_Linux].[Nombre_dominio].[TLD]     [Hostname_servidor_Linux]
 &lt;IP_Cliente_1&gt;     [Hostname_cliente1].[Nombre_dominio].[TLD]     [Hostname_cliente1]
 ...</code></pre>
 
@@ -103,7 +102,7 @@ Código por byAd12
                     <li>"Server Role" → <span class="span_contenido" translate="no">dc</span> (Domain Controller).</li>
                     <li>"DNS Backend" → <span class="span_contenido" translate="no">SAMBA_INTERNAL</span>.</li>
                     <li>"DNS Forwarders" → la IP de un servidor DNS local o de Internet (<span class="span_url" translate="no">1.1.1.1</span>, ...).</li>
-                    <li>Luego pedirá la contraseña de Administrador y empezará con el proceso de configuración.</li>
+                    <li>Luego pedirá la contraseña del usuario <span class="span_contenido" translate="no">Administrador</span> y empezará con el proceso de configuración.</li>
                 </ul>
 
                 <br>
@@ -111,13 +110,14 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/samba/smb.conf</code></pre>
 
                 <br>
-                <p>9. Es necesario editar el siguiente fichero para poder resolver correctamente consultas DNS:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">Dentro del fichero hay que eliminar la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
+                <p>
+                    9. Para poder resolver correctamente consultas DNS hay que eliminar del fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span> la sección <span class="span_error" translate="no">mdns4_minimal [NOTFOUND=return]</span> de una línea llamada <span class="span_contenido" translate="no">hosts</span>. 
+                    Esa línea debería quedar con este contenido:
+                </p>
+                <pre class="codigo Expl" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
 
                 <br>
-                <p>10. Por último hay que iniciar el servicio <span class="span_contenido" translate="no">winbind</span>:</p>
+                <p>10. Por último hay que habilitar e iniciar todos los servicios deshabilitados en el paso 5:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl start samba-ad-dc smbd nmbd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable samba-ad-dc smbd nmbd winbind</code></pre>
                 <p class="Expl">Es importante que todos esos servicios estén activos para poder unirse al dominio. Si algo falla, se debe mirar el estado de cada servicio.</p>
@@ -138,7 +138,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="Administrar_DC_Linux">Administrar un servidor <span>Linux</span> controlador de dominio</h2>
+                <h2 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h2>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -257,6 +257,7 @@ Código por byAd12
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
+                <br>
                 <p>1. Para configurarlo, primero añadir al final del fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span> la siguiente sección, pero definiendo el nombre del dominio correctamente:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">[netlogon]
     path = /var/lib/samba/sysvol/[Nombre_dominio].[TLD]/scripts</code></pre>
@@ -286,67 +287,70 @@ Código por byAd12
                 <p>Con los siguientes pasos en un cliente Linux se puede meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
                 <br>
-                <p>1. Si el dominio de la red de Active Directory tiene como TLD <span class="span_url" translate="no">.local</span>, es necesario editar el siguiente fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/nsswitch.conf</code></pre>
-                <p class="Expl">Dentro del fichero hay que eliminar la sección <span class="span_error">mdns4_minimal [NOTFOUND=return]</span>, dejando la línea que lo tenía tal que así:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
-                <p class="Expl2">Esto se debe realizar porque los dominios <span class="span_url" translate="no">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
-                <p class="Expl">Además, se debe añadir al final de las siguientes líneas la palabra <span class="span_contenido" translate="no">winbind</span> para permitir el inicio de sesión con usuarios del dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">passwd:         files systemd winbind
+                <p>
+                    1. Primero hay que eliminar del fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span> la sección <span class="span_error" translate="no">mdns4_minimal [NOTFOUND=return]</span> de una línea llamada <span class="span_contenido" translate="no">hosts</span>. 
+                    Esa línea debería quedar con este contenido:
+                </p>
+                <pre class="codigo Expl" translate="no"><code class="bash">hosts: files dns myhostname</code></pre>
+                <p class="Expl">Esto se debe realizar porque los dominios <span class="span_url" translate="no">.local</span> se intentan resolver por mDNS, y eso impide que Linux consulte al DNS de Active Directory.</p>
+                
+                <br>
+                <p>2. Para permitir el inicio de sesión con usuarios del dominio se debe añadir en el fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span> la palabra <span class="span_contenido" translate="no">winbind</span> al final de las líneas <span class="span_contenido" translate="no">passwd</span> y <span class="span_contenido" translate="no">group</span>:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">passwd:         files systemd winbind
 group:          files systemd winbind</code></pre>
 
                 <br>
-                <p>2. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
+                <p>3. Hay que poner como DNS la IP del servidor de Active Directory. Verificación:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/resolv.conf</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ping [Hostname_servidor].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">Si no se especifica el dominio completo no funcionará ya que no hay un dominio de búsqueda configurado para añadir ese dominio automáticamente.</p>
 
                 <br>
-                <p>3. Ahora hay que configurar el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comandom pero usando <u>un usuario diferente a root</u> ya que este no tiene permisos de modificar la interfaz gráfica:</p>
+                <p>4. Ahora hay que configurar el dominio de búsqueda, que permite contactar a un subdominio sin especificar el dominio completo, mediante el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">nm-connection-editor</code></pre>
-                <p class="Expl2">
-                    Esto abrirá un gestor avanzado para configurar la red.
-                    Hay que ir a "Ajustes de IPv4" y añadir <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en la sección de "Dominios de búsqueda".
-                </p>
-                <p class="Expl">Para verificarlo hay que realizar una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">ping [Subdominio_servidor]</code></pre>
-                <p class="Expl">También se podría hacer añadiendo la línea <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en el fichero <span class="span_url" translate="no">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio "Networking" regenera su configuración en cada inicio del sistema.</p>
+                <p class="Expl"><u>Importante</u> → Hay que ejecutar este comando con un usuario diferente a <span class="span_contenido" translate="no">root</span> ya que este no tiene permisos de modificar la interfaz gráfica.</p>
+                
+                <p class="Expl">4.1. Hay que ir a "Ajustes de IPv4" y añadir <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en la sección de "Dominios de búsqueda".</p>
+
+                <p class="Expl">4.2. Para verificar que funciona, hay que realizar una consulta ICMP a un subdominio sin especificar el dominio completo:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">ping [Subdominio_servidor]</code></pre>
+                
+                <p class="Expl"><u>Alternativa</u> → También se podría hacer añadiendo la línea <span class="span_contenido" translate="no">search [Nombre_dominio].[TLD]</span> en el fichero <span class="span_url" translate="no">/etc/resolv.conf</span>, pero al reiniciar el sistema no se aplicaría el cambio ya que el servicio <span class="span_contenido" translate="no">Networking</span> regenera su configuración en cada inicio del sistema.</p>
 
                 <br>
-                <p>4. Hay que asignar un hostname al cliente definiendo su dominio completo:</p>
+                <p>5. Hay que asignar un hostname al cliente definiendo su dominio completo:</p>
                 <pre class="codigo" translate="no"><code class="bash">hostnamectl set-hostname [Hostname_cliente_Linux].[Nombre_dominio].[TLD]</code></pre>
                 <p class="Expl">Para verificar los cambios se podría mirar que el siguiente fichero contenga el hostname actualizado:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/hostname</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">cat /etc/hostname</code></pre>
 
                 <br>
-                <p>5. Ahora se debe configurar un registro DNS interno para el propio cliente:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
-                <p class="Expl">Primero hay que eliminar los registros que contengan el hostname antiguo del cliente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">127.0.0.1     [Hostname_cliente_antiguo]</code></pre>
-                <p class="Expl">Luego hay que añadir un registro que apunte al propio cliente mediante su hostname y dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">[IP_cliente]     [Hostname_cliente].[Nombre_dominio].[TLD]     [Hostname_cliente]</code></pre>
+                <p>6. Ahora se debe configurar un registro DNS interno para el propio cliente en el fichero <span class="span_url" translate="no">/etc/hosts</span>:</p>
+                <p class="Expl">6.1. Primero hay que eliminar los registros que contengan el hostname antiguo del cliente:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">127.0.0.1     [Hostname_cliente_antiguo]</code></pre>
+                <p class="Expl">6.2. Luego hay que añadir un registro que apunte al propio cliente mediante su hostname y dominio:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">[IP_cliente]     [Hostname_cliente].[Nombre_dominio].[TLD]     [Hostname_cliente]</code></pre>
 
                 <br>
-                <p>6. Ahora hay que instalar los paquetes necesarios:</p>
+                <p>7. Ahora hay que instalar los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y samba winbind krb5-user libnss-winbind libpam-winbind</code></pre>
-                <p class="Expl2">En caso de que pida el nombre del reino de KRB5 hay que poner el nombre del dominio completo.</p>
+                <p class="Expl">En caso de que pida el nombre del reino de KRB5 hay que poner el nombre del dominio completo.</p>
                 <p class="Expl">Para verificar que se instalaron con éxito se puede consultar el siguiente fichero y verificar que <span class="span_contenido" translate="no">default_realm</span> es el nombre de dominio en mayúsculas:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">cat /etc/krb5.conf</code></pre>
                 
                 <br>
-                <p>7. A continuación hay que modificar la sección <span class="span_contenido" translate="no">[GLOBAL]</span> de SAMBA, situado en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
+                <p>8. A continuación hay que modificar la sección <span class="span_contenido" translate="no">[GLOBAL]</span> de SAMBA, situado en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
 
-                <p class="Expl">7.1. Hay que asignar como valor de <span class="span_contenido" translate="no">workgroup</span> el nombre de dominio en mayúsculas y sin el TLD (ej. CICLO → ciclo.local):</p>
+                <p class="Expl">8.1. Hay que asignar como valor de <span class="span_contenido" translate="no">workgroup</span> el nombre de dominio en mayúsculas y sin el TLD (ej. CICLO → ciclo.local):</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">workgroup = [Dominio_sin_TLD_y_en_mayúsculas]</code></pre>
 
-                <p class="Expl">7.2. Hay que añadir una nueva línea indicando que el valor de <span class="span_contenido" translate="no">realm</span> sea el nombre de dominio completo (ej. ciclo.local):</p>
+                <p class="Expl">8.2. Hay que añadir una nueva línea indicando que el valor de <span class="span_contenido" translate="no">realm</span> sea el nombre de dominio completo (ej. ciclo.local):</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">realm = [Nombre_dominio].[TLD]</code></pre>
 
-                <p class="Expl">7.3. Hay que configurar <span class="span_contenido" translate="no">server role</span> para definir que el equipo actuará como miembro y no como servidor:</p>
+                <p class="Expl">8.3. Hay que configurar <span class="span_contenido" translate="no">server role</span> para definir que el equipo actuará como miembro y no como servidor:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">server role = member server</code></pre>
 
-                <p class="Expl">7.4. Ahora hay que añadir el siguiente bloque de configuración para que SAMBA pueda listar los usuarios con <span class="span_contenido" translate="no">winbind</span>:</p>
+                <p class="Expl">8.4. Ahora hay que añadir el siguiente bloque de configuración para que SAMBA pueda listar los usuarios con <span class="span_contenido" translate="no">winbind</span>:</p>
                 <pre class="codigo Expl" translate="no"><code class="ini">    idmap config * :              backend = tdb
     idmap config * :              range   = 3000-7999
     template shell = /bin/bash
@@ -401,43 +405,43 @@ group:          files systemd winbind</code></pre>
                 </div>
 
                 <br>
-                <p>8. Para unir el cliente al dominio sigue los siguientes pasos:</p>
+                <p>9. Para unir el cliente al dominio sigue los siguientes pasos:</p>
 
-                <p class="Expl">8.1. Comprueba que el cliente sea capaz de listar la información del dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">net ads info</code></pre>
-                <p class="Expl2">En caso de que de un error, hay que verificar que el paso <b>7</b> se realizó correctamente.</p>
+                <p class="Expl">9.1. Comprueba que el cliente sea capaz de listar la información del dominio:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">net ads info</code></pre>
+                <ul class="Expl">
+                    <li>En caso de que de un error, hay que verificar que el paso <b>7</b> se realizó correctamente.</li>
+                </ul>
 
-                <p class="Expl">8.2. Hay que intentar unir el cliente al dominio usando las credenciales del usuario <span class="span_contenido">Administrador</span> de Windows Server:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
-                <p class="Expl2">
-                    Si da un error en este paso es por realizar incorrectamente el paso <b>5</b>.
-                    <br>
-                    Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.
-                    <br>
-                    Si permite unirse al dominio, se puede ver el equipo en la sección <span class="span_contenido" translate="no">Computers</span> del servidor de Windows.
-                </p>
+                <p class="Expl">9.2. Hay que intentar unir el cliente al dominio usando las credenciales del usuario <span class="span_contenido">Administrador</span> de Windows Server:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">net ads join -U Administrador</code></pre>
+                <ul class="Expl">
+                    <li>Si da un error en este paso es por realizar incorrectamente el paso <b>5</b>.</li>
+                    <li>Si hay un error de DNS, es porque ya hubo otro cliente con el mismo nombre y dominio en el servidor o que no se configuró el paso <b>4</b> correctamente.</li>
+                    <li>Si permite unirse al dominio, se puede ver el equipo en la sección <span class="span_contenido" translate="no">Computers</span> del servidor de Windows.</li>
+                </ul>
 
-                <p class="Expl">8.3. Una vez se haya unido el cliente al dominio, este debería de ver el Identificador de Seguridad (SID) único del dominio:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">net ads info</code></pre>
+                <p class="Expl">9.3. Una vez se haya unido el cliente al dominio, este debería de ver el Identificador de Seguridad (SID) único del dominio:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">net ads info</code></pre>
 
-                <p class="Expl">8.4. Ahora hay que reiniciar el servicio de <span class="span_contenido" translate="no">winbind</span> para que sea capaz de listar los usuarios de Windows:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
-                <pre class="codigo Expl2" translate="no"><code class="bash">wbinfo -u</code></pre>
+                <p class="Expl">9.4. Ahora hay que reiniciar el servicio de <span class="span_contenido" translate="no">winbind</span> para que sea capaz de listar los usuarios de Windows:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">systemctl restart winbind.service</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">wbinfo -u</code></pre>
 
-                <p class="Expl2">Con el comando <span class="span_contenido" translate="no">id USUARIO</span> se puede ver la información de un usuario en concreto.</p>
-                <p class="Expl2">
-                    También se debería poder iniciar sesión con cualquier usuario de Windows en el sistema local.
-                    Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que este modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span> para que poder comprobar las contraseñas de Windows.
-                </p>
+                <ul class="Expl">
+                    <li>Con el comando <span class="span_contenido" translate="no">id USUARIO</span> se puede ver la información de un usuario en concreto.</li>
+                    <li>También se debería poder iniciar sesión con cualquier usuario de Windows en el sistema local.</li>
+                    <li>Gracias al servicio <span class="span_contenido" translate="no">libpam-winbind</span> se puede iniciar sesión ya que este modifica el fichero <span class="span_url" translate="no">/etc/pam.d/common-auth</span> para que poder comprobar las contraseñas de Windows.</li>
+                </ul>
                 
                 <p class="Expl">
-                    8.5. Al iniciar sesión con un usuario de Windows aparecerá un <b>error</b> de que no se puede crear la carpeta personal. 
+                    9.5. Al iniciar sesión con un usuario de Windows aparecerá un <b>error</b> de que no se puede crear la carpeta personal. 
                     Para solucionarlo hay que marcar la opción "Create home directory on login" en el asistente que aparecerá al ejecutar el siguiente comando:
                 </p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">pam_auth_update</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">pam_auth_update</code></pre>
 
-                <p class="Expl">8.6. Por último, hay que comprobar que se aplicó correctamente la configuración asignada en <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) al usuario de Windows:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">cat /etc/passwd | grep [Nombre_usuario_windows]</code></pre>
+                <p class="Expl">9.6. Por último, hay que comprobar que se aplicó correctamente la configuración asignada en <span class="span_url" translate="no">smb.conf</span> (UID, carpeta /home y shell) al usuario de Windows:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">cat /etc/passwd | grep [Nombre_usuario_windows]</code></pre>
 
             </div>
 
@@ -575,30 +579,29 @@ group:          files systemd winbind</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">id [Usuario_del_dominio]</code></pre>
 
                 <br>
-                <p>5. Es importante quitar o comentar en el siguiente fichero una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
+                <p>5. Es importante quitar o comentar en el fichero <span class="span_url" translate="no">/etc/sssd/sssd.conf</span> una línea que dice <span class="span_contenido" translate="no">services = nss, pam</span>.</p>
                 <p class="Expl">Además, en el mismo fichero hay que poner el valor de la siguiente línea en <span class="span_contenido" translate="no">false</span>:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">use_fully_qualified_names = false</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">use_fully_qualified_names = false</code></pre>
 
                 <br>
                 <p><u>Opcional</u>: Se puede indicar en SSSD que se quiere usar UIDs y GIDs personalizados del servidor. Para ello hay que editar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/sssd/sssd.conf</code></pre>
 
                 <p class="Expl">Deshabilitamos la siguiente línea poniendo como valor en <span class="span_contenido" translate="no">false</span>:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">ldap_id_mapping = false</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">ldap_id_mapping = false</code></pre>
 
                 <p class="Expl">Y se añaden las siguientes líneas en la sección <span class="span_contenido" translate="no">domain/Tu_Dominio</span>:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">ldap_user_uid_number = uidNumber
+                <pre class="codigo Expl" translate="no"><code class="bash">ldap_user_uid_number = uidNumber
 ldap_user_gid_number = gidNumber</code></pre>
 
                 <p class="Expl">Una vez configurado guardamos el fichero y eliminamos los UIDs y GIDs ya generados:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">rm -rf /var/lib/sss/db/*</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">rm -rf /var/lib/sss/db/*</code></pre>
 
                 <p class="Expl">Y por último reiniciamos el servicio de SSSD:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">systemctl restart sssd</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">systemctl restart sssd</code></pre>
 
                 <p class="Expl">Para comprobar que los usuarios cojan los UIDs correctos se puede usar el siguiente comando:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">id [Usuario_del_dominio]</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">id [Usuario_del_dominio]</code></pre>
 
             </div>
         
@@ -615,10 +618,8 @@ ldap_user_gid_number = gidNumber</code></pre>
             <div>
                 <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h2>
             
-                <p>Primero editamos el fichero de configuración de samba:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Y añadimos en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">vfs objects = acl_xattr
+                <p>En el fichero de configuración de samba <span class="span_url" translate="no">/etc/samba/smb.conf</span> hay que añadir en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">vfs objects = acl_xattr
 map acl inherit = yes
 store dos attributes = yes</code></pre>
 
@@ -645,7 +646,7 @@ store dos attributes = yes</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">net rpc rights grant [Nombre_grupo_a_otorgar] SeDiskOperatorPrivilege -U administrator</code></pre>
 
                 <p class="Expl">Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
 
                 <br>
                 <p>2. Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>

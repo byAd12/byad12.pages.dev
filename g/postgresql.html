@@ -65,23 +65,23 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">psql --version</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status postgresql</code></pre>
 
-                <p class="Expl">En caso de que el servicio de un fallo al iniciar se debe realizar la siguiente comprobación:</p>
-                <p class="Expl2">1. Ver los detalles exactos del fallo:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">journalctl -u postgresql -n 50 --no-pager</code></pre>
-                <p class="Expl2">2. Consultar los logs de PostgreSQL:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">tail -f /var/log/postgresql/postgresql-*.log</code></pre>
-                <p class="Expl2">3. Verificar que el puerto <span class="span_contenido" translate="no">5432</span> no esté en uso por otro programa:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">ss -tulpn | grep 5432</code></pre>
-                <p class="Expl2">4. Verificar que el disco tiene espacio suficiente:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">df -h</code></pre>
+                <p>En caso de que el servicio de un fallo al iniciar se debe realizar la siguiente comprobación:</p>
+                <p class="Expl">1. Ver los detalles exactos del fallo:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">journalctl -u postgresql -n 50 --no-pager</code></pre>
+                <p class="Expl">2. Consultar los logs de PostgreSQL:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">tail -f /var/log/postgresql/postgresql-*.log</code></pre>
+                <p class="Expl">3. Verificar que el puerto <span class="span_contenido" translate="no">5432</span> no esté en uso por otro programa:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">ss -tulpn | grep 5432</code></pre>
+                <p class="Expl">4. Verificar que el disco tiene espacio suficiente:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">df -h</code></pre>
 
-                <p>3. Para que el servicio de PostgreSQL se inicie automáticamente al iniciar el equipo:</p>
-                <pre class="codigo" translate="no"><code class="bash">systemctl enable --now postgresql</code></pre>
+                <p>3. Para que el servicio de PostgreSQL se inicie automáticamente al iniciar el equipo hay que ejecutar:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl enable postgresql</code></pre>
 
-                <p>4. Hay que reiniciar el servicio:</p>
+                <p>4. Luego que reiniciar el servicio:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart postgresql</code></pre>
 
-                <p>5. Por último hay que verificar si el servidor está preparado para aceptar conexiones:</p>
+                <p>5. Por último, hay que verificar si el servidor está preparado para aceptar conexiones:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_isready -h [IP_servidor] -p [Puerto_servidor]</code></pre>
                 
             </div>
@@ -117,7 +117,7 @@ Código por byAd12
                 <p>4. Si el comando anterior no dió ningún error, se puede aplicar la nueva configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan apply</code></pre>
 
-                <p>5. Para comprobar que la IP estática se configuró correctamente hay que ver la IP actual del equipo:</p>
+                <p>5. Para comprobar que la IP estática se configuró correctamente se puede ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">hostname -I</code></pre>
 
             </div>

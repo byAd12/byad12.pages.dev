@@ -173,11 +173,11 @@ INTERFACESv6=""</code></pre>
                 <p>1.3. Ahora es necesario editar el siguiente fichero para configurar el servicio DHCP:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/dhcp/dhcpd.conf</code></pre>
 
-                <p>1.3.1. Dentro de este fichero se debe añadir la siguiente línea para poder obtener la arquitectura del cliente:</p>
+                <p class="Expl">1.3.1. Dentro de este fichero se debe añadir la siguiente línea para poder obtener la arquitectura del cliente:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">option arch code 93 = unsigned integer 16;</code></pre>
 
-                <p>1.3.2. Además se debe configurar el tiempo de concesión de las IPs:</p>
+                <p class="Expl">1.3.2. Además se debe configurar el tiempo de concesión de las IPs:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">default-lease-time [Segundos];
 max-lease-time [Segundos];
@@ -206,7 +206,7 @@ min-lease-time [Segundos];</code></pre>
                     </table>
                 </div>
 
-                <p>1.3.3. La configuración de las concesiones IP se configuran con el siguiente bloque:</p>
+                <p class="Expl">1.3.3. La configuración de las concesiones IP se configuran con el siguiente bloque:</p>
 
                 <pre class="codigo" translate="no"><code class="language-ini">subnet [Dirección_de_red] netmask [Máscara_punteada] {
     # Configuración básica
@@ -352,24 +352,24 @@ min-lease-time [Segundos];</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>2.2. Ahora, como usuario "root", hay que situarse en la ruta necesaria y descargar el fichero de arranque mediante comandos:</p>
+                <p>2.2. Ahora, como usuario <span class="span_contenido" translate="no">root</span>, hay que situarse en la ruta necesaria y descargar el fichero de arranque mediante comandos:</p>
                 <pre class="codigo" translate="no"><code class="bash">cd /srv/tftp</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">wget https://ftp.debian.org/debian/dists/trixie/main/installer-amd64/current/images/netboot/gtk/netboot.tar.gz</code></pre>
                 <p class="Expl">
-                    La URL corresponde al fichero comprimido en formato tar.gz, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
+                    La URL corresponde al fichero comprimido en formato <span class="span_contenido" translate="no">tar.gz</span>, alojado en la página de <a href="https://www.debian.org/distrib/netinst" target="_blank">netinst</a> de Debian.
                     Para obtener la URL se debe seleccionar la arquitectura del cliente en la sección "Arranque por red" y, a continuación, copiar la ruta del fichero <span class="span_contenido" translate="no">netboot/netboot.tar.gz</span>.
                 </p>
                 <p class="Expl"><u>Importante</u>: El repositorio donde se saque este fichero debe ser el mismo con el que se instalará el sistema (paso 4 - Gestión de paquetes).</p>
                 
-                <p class="Expl">2.2.1. Hay que descomprimir el fichero <span class="span_contenido" translate="no">tar.gz</span> para obtener los ficheros necesarios:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
-                
-                <p class="Expl">2.2.2. Y comprobar que estén los ficheros de arranque necesarios:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">ls --color</code></pre>
+                <!-- ......................................................... -->
+                <br>
+                <p>2.3. Hay que descomprimir el fichero <span class="span_contenido" translate="no">tar.gz</span> y comprobar que estén los ficheros de arranque necesarios:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">tar -xzf netboot.tar.gz</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">ls --color</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>2.3. Por último hay que habilitar el servicio <span class="span_contenido" translate="no">tftpd-hpa</span>:</p>
+                <p>2.4. Por último hay que habilitar el servicio <span class="span_contenido" translate="no">tftpd-hpa</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable tftpd-hpa</code></pre>
 
             </div>
@@ -383,7 +383,7 @@ min-lease-time [Segundos];</code></pre>
                 <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y habilitar el arranque por red IPv4.</p>
 
                 <p class="Expl">
-                    En el caso de una máquina virtual de VirtualBox, se debe tener la MV cliente y servidor en una misma red NAT (sin DHCP activado) y, 
+                    Si se utiliza una máquina virtual de VirtualBox, se debe tener la MV del cliente y la del servidor en una misma red NAT (con DHCP desactivado) y, 
                     en la pestaña de "Sistema" de la configuración, se debe habilitar el arranque por red y subir su prioridad de arranque por encima de otros.
                 </p>
 
@@ -406,12 +406,16 @@ min-lease-time [Segundos];</code></pre>
                 <h2 id="Fichero_Respuestas">4. Crear el fichero de respuestas</h2>
 
                 <p>
-                    4.1. 
                     Hay que crear un fichero con extensión <span class="span_contenido" translate="no">.cfg</span> dentro de <span class="span_contenido" translate="no">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
                     Se puede agrupar varios ficheros de respuestas en una carpeta conjunta para una mejor organización.
                     Un ejemplo completo de un fichero de respuestas es el preseed de <a href="https://www.debian.org/releases/stable/example-preseed.txt" target="_blank">Debian</a>.
                 </p>
-                <p>Ten en cuenta que cada línea que se añada en el fichero quitará una o varias preguntas del proceso de instalación de Debian:</p>
+
+                <p>
+                    Ten en cuenta que cada línea quitará una o varias preguntas del proceso de instalación de Debian.
+                    Con todas las líneas de esta sección se puede crear una instalación completamente desatendida.
+                    Hay configuraciones adicionales que se explican al final de la guía.
+                </p>
 
                 <br>
                 <p>Configuración regional:</p>
@@ -476,7 +480,7 @@ d-i passwd/user-password-again password [Contraseña_segura]</code></pre>
                 <br>
                 <p>Particionar el disco:</p>
 
-                <p class="Expl">Primero hay que establecer el método de particionado (<span class="span_contenido" translate="no">regular</span> (principal), <span class="span_contenido" translate="no">lvm</span>, <span class="span_contenido" translate="no">crypto</span>):</p>
+                <p class="Expl">Primero hay que establecer el método de particionado (<span class="span_contenido" translate="no">regular</span> - principal, <span class="span_contenido" translate="no">lvm</span>, <span class="span_contenido" translate="no">crypto</span>):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/method string [Método_particionado]</code></pre>
 
                 <p class="Expl">Eliminar configuraciones LVM previas si existen [opcional]:</p>
@@ -486,12 +490,12 @@ d-i passwd/user-password-again password [Contraseña_segura]</code></pre>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-md/device_remove_md boolean true</code></pre>
 
                 <p class="Expl">Elegir el tipo de particionado:</p>
-                <ul class="Expl">
-                    <li><span class="span_contenido" translate="no">atomic</span> - Todos los ficheros en una partición.</li>
-                    <li><span class="span_contenido" translate="no">home</span> - La partición /home se separa del resto.</li>
-                    <li><span class="span_contenido" translate="no">multi</span> - Las particiones /home, /var, /tmp se separan del resto.</li>
-                </ul>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/choose_recipe select [Tipo_particionado]</code></pre>
+                <ul class="Expl">
+                    <li><span class="span_contenido" translate="no">atomic</span> → Todos los ficheros en una partición.</li>
+                    <li><span class="span_contenido" translate="no">home</span> → La partición <span class="span_url" translate="no">/home</span> se separa del resto.</li>
+                    <li><span class="span_contenido" translate="no">multi</span> → Las particiones <span class="span_url" translate="no">/home</span>, <span class="span_url" translate="no">/var</span>, <span class="span_url" translate="no">/tmp</span> se separan del resto.</li>
+                </ul>
 
                 <p class="Expl">Después de configurar el particionado se debe especificar que se aplique el proceso sin más preguntas:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-partitioning/confirm_write_new_label boolean true
@@ -521,11 +525,11 @@ d-i mirror/http/proxy string</code></pre>
                 <br>
                 <p>Instalar el sistema:</p>
 
-                <p class="Expl">Para instalar el sistema estándar <u>con</u> interfaz gráfica (GNOME, MATE...) y un entorno de escritorio:</p>
+                <p class="Expl">Para instalar el sistema estándar <b>con</b> interfaz gráfica (GNOME, MATE...) y un entorno de escritorio:</p>
                 <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard, desktop
 tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
-                <p class="Expl">Para instalar el sistema estándar <u>sin</u> interfaz gráfica ni entorno de escritorio:</p>
+                <p class="Expl">Para instalar el sistema estándar <b>sin</b> interfaz gráfica ni entorno de escritorio:</p>
                 <pre class="codigo" translate="no"><code class="text">tasksel tasksel/first multiselect standard</code></pre>
 
                 <br>
@@ -545,12 +549,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <p class="Expl">Para que no se abra un diálogo de información cuando la instalación acabe y que además reinicie el sistema:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i finish-install/reboot_in_progress note</code></pre>
-
-                <br>
-                <p>
-                    Todas las líneas de esta sección crea una instalación completamente desatendida.
-                    Hay configuraciones adicionales que se explican al final de la guía.
-                </p>
 
             </div>
 
@@ -573,7 +571,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Formato del bloque de configuración
+                                Explicación del bloque de configuración:
                             </td>
                         </tr>
                         <tr>
@@ -626,7 +624,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Opciones de configuración nuevas
+                                Explicación de nuevo bloque de configuración:
                             </td>
                         </tr>
                         <tr>
@@ -648,13 +646,12 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                 <p class="Expl">
                     Si no se usa <span class="span_contenido" translate="no">priority=critical</span>, el instalador mostrará el diálogo para configurar el hostname, aunque ya esté definido en el fichero de respuestas. 
                     Esto evita que varios equipos se instalen con el mismo nombre en la misma red.
-                </p>
-                <p class="Expl">
+
                     Si se usa, el diálogo se omite y todos los equipos usarán el mismo hostname definido en el fichero, por lo que después será necesario cambiarlo manualmente en cada equipo.
                 </p>
 
                 <br>
-                <p>5.3. Ahora guarda el fichero y ya estaría funcionando la nueva configuración.</p>
+                <p>5.3. Una vez se guarde la nueva configuración, esta estará disponible automáticamente.</p>
 
                 <br>
                 <p>
@@ -671,7 +668,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <!-- ......................................................... -->
         <h1>Configuración opcional</h1>
         <h2 class="TituloSecundario">Fichero de respuestas</h2>
-        <br>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -686,16 +682,6 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
                 <h2 id="Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</h2>
 
@@ -706,7 +692,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
     ...;</code></pre>
 
                 <ul class="Expl">
-                    <li><b>in-target</b> - Indica que el comando se va a ejecutar en el sistema a instalar y no en el instalador.</li>
+                    <li><span class="span_contenido" translate="no">in-target</span> indica que el comando se va a ejecutar en el sistema a instalar y no en el instalador.</li>
                     <li>El <span class="span_contenido" translate="no">;</span> indica el final de cada línea de comando a ejecutar y el <span class="span_contenido" translate="no">\</span> indica un salto de línea de la configuración de preseed.</li>
                 </ul>
 
@@ -729,29 +715,19 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
                 <br>
                 <p>
-                    Una manera útil de comprobar que realmente se está utilizando "/target" es ejecutar el instalador y, al pulsar una de las teclas <span class="span_contenido" translate="no">F1</span> a <span class="span_contenido" translate="no">F5</span>, se abrirá una terminal. 
-                    Desde esa terminal se puede ejecutar el siguiente comando, con el que se observará que las particiones se montan en "/target":
+                    Una manera útil de comprobar que realmente se está utilizando <span class="span_url" translate="no">/target</span> es ejecutar el instalador y, al pulsar una de las teclas <span class="span_contenido" translate="no">F1</span> a <span class="span_contenido" translate="no">F5</span>, se abrirá una terminal. 
+                    Desde esa terminal se puede ejecutar el siguiente comando, con el que se observará que las particiones se montan en <span class="span_url" translate="no">/target</span>:
                 </p>
                 <pre class="codigo" translate="no"><code class="text">mount</code></pre>
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
                 <h2 id="Compartir_Carpeta_NFS">Fichero de respuestas: compartir una carpeta por NFS</h2>
 
-                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-kernel-server":</p>
+                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-kernel-server</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
-                <p class="Expl">Suele ser necesario poner esta línea antes de la configuración del paso 2.</p>
+                <p class="Expl">Es necesario poner esta línea antes de la configuración del siguiente paso.</p>
 
                 <br>
 
@@ -761,30 +737,20 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
     echo "/[Ruta_absoluta]    *(ro)" >> /target/etc/exports; \
     in-target systemctl enable nfs-kernel-server;</code></pre>
                     
-                <ul class="Expl">
-                    <li><b>mkdir</b> - Se debe crear la carpeta antes de compartirla, especificando su ruta local absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_contenido" translate="no">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (ro, rw).</li>
-                    <li><b>systemctl</b> - Se indica que se debe habilitar el servicio de NFS para que arranque cuando se inicie el sistema.</li>
-                </ul>
+                <ol class="Expl">
+                    <li><span class="span_contenido" translate="no">midir</span> → Crea la carpeta en el sistema a instalar (no en el instalador) antes de compartirla.</li>
+                    <li><span class="span_contenido" translate="no">echo</span> → Añade una línea en <span class="span_url" translate="no">/etc/exports</span>, donde se especifica la ruta de la carpeta a compartir y sus permisos (<b>ro</b> | <b>rw</b>).</li>
+                    <li><span class="span_contenido" translate="no">systemctl</span> → Se indica que se debe habilitar el servicio de NFS para que arranque cuando se inicie el sistema.</li>
+                </ol>
 
                 <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">ejecución de comandos adicionales</a>" se puede ver la explicación sobre "Target".</p>
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
                 <h2 id="Montar_Carpeta_NFS">Fichero de respuestas: montar una carpeta por NFS</h2>
 
-                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio "nfs-common":</p>
+                <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-common</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-common</code></pre>
                 <p class="Expl">Suele ser necesario poner esta línea antes de la configuración del paso 2.</p>
 
@@ -795,29 +761,23 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
     mkdir -p /target/[Carpeta_local]; \
     echo "[IP_servidor]:/[Carpeta_remota]    /[Carpeta_local]    nfs    defaults,_netdev,nfsvers=3    0    0" >> /target/etc/fstab;</code></pre>
                     
-                <ul class="Expl">
-                    <li><b>mkdir</b> - Se debe crear la carpeta antes de montarla, especificando la ruta local absoluta.</li>
-                    <li><b>echo</b> - Ahora se añade una línea en <span class="span_contenido" translate="no">/etc/fstab</span>, donde se especifica la carpeta NFS a montar en el sistema local cada vez que el sistema se inicia.</li>
-                    <li>Hay que usar el tabulador para separar los elementos del comando "<b>echo</b>".</li>
-                </ul>
+                <ol class="Expl">
+                    <li><span class="span_contenido" translate="no">midir</span> → Crea la carpeta en el sistema a instalar (no en el instalador) antes de montar la carpeta remota.</li>
+                    <li><span class="span_contenido" translate="no">echo</span> → Añade una línea en <span class="span_url" translate="no">/etc/fstab</span> que especifica la carpeta NFS a montar en el sistema local cada vez que el sistema se inicia.
+                        <ul>
+                            <li>Hay que usar el tabulador para separar los elementos entre comillas.</li>
+                        </ul>
+                    </li>
+                    
+                </ol>
 
-                <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">ejecución de comandos adicionales</a>" se puede ver la explicación sobre "Target".</p>
+                <p class="Expl">En la sección de "<a href="#Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</a>" se puede ver la explicación sobre <span class="span_contenido" translate="no">Target</span>.</p>
 
                 <br>
-                <p><u>Verificación</u> - Una vez instalado el sistema se puede comprobar con el siguiente comando si se ha montado correctamente:</p>
+                <p>3. Una vez instalado el sistema se puede comprobar con el siguiente comando si se ha montado correctamente:</p>
                 <pre class="codigo" translate="no"><code class="bash">mount | grep &lt;Carpeta_Local&gt;</code></pre>
 
             </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
 
             <div>
                 <h2 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h2>
@@ -835,7 +795,10 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         [Partición 3]                 \
             [Opciones]                \
         .</code></pre>
-                <p class="Expl">El símbolo <span class="span_contenido" translate="no">\</span> sirve para continuar la línea en otra.</p>
+                <p class="Expl">
+                    El símbolo <span class="span_contenido" translate="no">\</span> sirve para continuar la línea en otra.
+                    El símbolo <span class="span_contenido" translate="no">.</span> sirve para separar cada partición.
+                </p>
 
                 <br>
                 <p>Formato de cada partición:</p>
@@ -862,7 +825,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <td colspan="2">
-                                Tipos de opciones de cada partición
+                                Tipos de opciones de cada partición:
                             </td>
                         </tr>
                         <tr>
@@ -889,7 +852,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
                     </table>
                 </div>
 
-                <p><b>Ejemplo</b> - Creación de una partición /boot, swap y otra con el resto de espacio:</p>
+                <p><b>Ejemplo</b> - Creación de una partición <span class="span_url" translate="no">/boot</span>, <span class="span_url" translate="no">swap</span> y otra con el resto de espacio (<span class="span_url" translate="no">/</span>):</p>
                 <pre class="codigo" translate="no"><code class="text">d-i partman-auto/expert_recipe string                         \
       boot-root ::                                            \
               40 50 100 ext3                                  \

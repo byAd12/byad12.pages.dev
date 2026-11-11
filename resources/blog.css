@@ -118,11 +118,11 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 
 .codigo, .Expl, .Expl2, p{margin: 15px 0 15px 0;}
 
-.Expl:not(.TablaDivScroll), .codigo:not(.Expl2), ul, ol{margin-left: 30px !important;}
+.Expl:not(.TablaDivScroll, ul, ol), .codigo:not(.Expl2), ul, ol{margin-left: 30px !important;}
 ul.Expl, ol.Expl{margin-left: 46px !important;}
 
 .Expl2{margin-left: 60px !important;}
-ul.Expl2, ol.Expl2{margin-left: 76 !important;}
+ul.Expl2, ol.Expl2{margin-left: 76px !important;}
 
 /* =================================================== */
 /* Listas */
