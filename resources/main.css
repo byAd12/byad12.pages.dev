@@ -389,9 +389,12 @@ footer .Div_Contenido .Footer_Enlaces ul li a:hover, .a13 a:hover{text-decoratio
 }
 
 @media screen and (max-width: 625px){
+  /* PROYECTOS */
   .Seccion_Proyectos .Contenedor_Proyectos .Indice_Proyectos .Lista_Botones button{width: 100%;}
   .Proyecto_Individual .Arriba .Etiquetas_Proyecto{flex-direction: column; gap: 10px; align-items: center;}
   .Proyecto_Individual .Arriba .Datos_Proyecto .Descripcion_Proyecto{margin-bottom: 30px;}
+  .Lista_Botones .Etiquetas_Proyecto{display: none !important;}
+  .Proyecto_Individual .Arriba .Datos_Proyecto .Tabla_De_Datos{gap: 0;}
 
   /* CONTACTO */
   .Seccion_Contacto .Flex_Contacto div.Izquierda object{width: 100%;}
