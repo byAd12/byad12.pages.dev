@@ -23,7 +23,8 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <!-- BARRA DE MENÚ -->
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -42,42 +43,42 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">XPATH</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">XML Path language</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
-        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <h1>XPATH</h1>
+        <h3>XML Path language</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h2>Índice de Contenidos</h2>
+                <h4>Índice</h4>
 
-                <h2 style="margin: 20px;" class="IndiceH2">1. Introducción</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">1. Introducción</h4>
                 <ul>
                     <li><b>Conceptos:</b> <a href="#que-es-xpath">¿Qué es XPATH?</a> • <a href="#definicion-de-nodos">Definición de nodos</a> • <a href="#estructura-path">Estructura de un path</a></li>
                     <li><b>Otros:</b> <a href="#mejor-editor-xpath">Mejor editor XPATH</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">2. Conceptos Básicos y Selección</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">2. Conceptos Básicos y Selección</h4>
                 <ul>
                     <li><b>Jerarquía y texto:</b> <a href="#uso-child">Uso del eje "child"</a> • <a href="#uso-string">Uso de la función "string()"</a></li>
                     <li><b>Navegación base:</b> <a href="#seleccion-elemento">Selección de nodo elemento</a> • <a href="#seleccion-atributo">Selección de nodo atributo</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">3. Filtrado (Predicados)</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">3. Filtrado (Predicados)</h4>
                 <ul>
                     <li><b>Condiciones:</b> <a href="#filtro-coincidencias">Filtro por coincidencias</a> • <a href="#filtro-numeros">Filtro de números</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">4. Navegación Avanzada</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">4. Navegación Avanzada</h4>
                 <ul>
                     <li><b>Herramientas:</b> <a href="#ejes-busqueda">Ejes de búsqueda (Axes)</a> • <a href="#uso-comodines">Uso de Comodines</a></li>
                     <li><b>Conjuntos:</b> <a href="#union-secuencias">Unión de Nodos y Secuencias</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">5. Funciones y Otros Datos</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">5. Funciones y Otros Datos</h4>
                 <ul>
                     <li><b>Ítems y Externos:</b> <a href="#items-tipos">Ítems y Tipos de Datos</a> • <a href="#acceso-doc">Acceso a otro XML</a> • <a href="#localizar-comentarios">Localizar comentarios</a></li>
                     <li><b>Operaciones:</b> <a href="#funciones-xpath">Funciones de XPath</a> • <a href="#funciones-avanzadas">Funciones avanzadas útiles</a></li>
@@ -93,7 +94,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="que-es-xpath">¿Qué es XPATH?</h2>
+                <h4 id="que-es-xpath">¿Qué es XPATH?</h4>
                 
                 <p>
                     Xpath permite navegar entre los elementos y atributos de un documento XML.
@@ -114,7 +115,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="definicion-de-nodos">Definición de <span>Nodos</span></h2>
+                <h4 id="definicion-de-nodos">Definición de <span>Nodos</span></h4>
             
                 <p>
                     XPath trata los documentos XML como un árbol de nodos.
@@ -142,7 +143,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="estructura-path">Estructura de un path</h2>
+                <h4 id="estructura-path">Estructura de un path</h4>
             
                 <p>Un path se define separando el nombre de los nodos con barras - <span class="span_url" translate="no">/</span>, como por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/tienda/productos/producto/nombre/text()</code></pre>
@@ -174,7 +175,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="mejor-editor-xpath">Mejor editor para XPATH</h2>
+                <h4 id="mejor-editor-xpath">Mejor editor para XPATH</h4>
             
                 <p>Una recomendación es usar la página web <a href="https://xpath.playground.fontoxml.com/" target="_blank">Fonto</a>, que permite ver el resultado del XPATH en tiempo real usando la versión 3.1.</p>
 
@@ -190,7 +191,8 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="uso-child">Uso del eje "child" (Hijos)</h2>
+                <h4 id="uso-child">Uso del eje "child" (Hijos)</h4>
+
                 <p>
                     En XPath, los nodos hijo son los elementos que están directamente dentro de otro. 
                     Por defecto, cualquier ruta que escribas usa el eje child.
@@ -204,7 +206,8 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="uso-string">Uso de la función "string()"</h2>
+                <h4 id="uso-string">Uso de la función "string()"</h4>
+
                 <p>
                     A diferencia de <span class="span_url" translate="no">text()</span>, que solo toma el texto de un nodo específico, 
                     la función <span class="span_url" translate="no">string()</span> devuelve la <b>concatenación</b> de todo el texto del nodo y sus descendientes.
@@ -227,7 +230,7 @@ Código por byAd12
 
 
             <div>
-                <h2 id="seleccion-elemento">Selección de un nodo elemento</h2>
+                <h4 id="seleccion-elemento">Selección de un nodo elemento</h4>
                 
                 <p>Primero hay que llegar a la ruta donde se situe el nodo elemento <span class="span_url" translate="no">tiempo_ejecucion</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
@@ -251,7 +254,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="seleccion-atributo">Selección de un nodo atributo</h2>
+                <h4 id="seleccion-atributo">Selección de un nodo atributo</h4>
                 
                 <p>Primero hay que llegar a la ruta donde se situe el nodo atributo <span class="span_url" translate="no">unidad</span> del siguiente documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
@@ -290,7 +293,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="filtro-coincidencias">Filtro por coincidencias</h2>
+                <h4 id="filtro-coincidencias">Filtro por coincidencias</h4>
                 
                 <p>Se puede filtrar los servicios del siguiente XML que cumplan una condición:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
@@ -332,7 +335,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="filtro-numeros">Filtro de números</h2>
+                <h4 id="filtro-numeros">Filtro de números</h4>
                 
                 <p>Se puede filtrar los servicios del siguiente XML que cumplan una condición sobre un número:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" standalone="no"?&gt;
@@ -365,7 +368,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="ejes-busqueda">Ejes de búsqueda (Axes)</h2>
+                <h4 id="ejes-busqueda">Ejes de búsqueda (Axes)</h4>
 
                 <p>Los ejes permiten localizar nodos en relación al nodo actual, permitiendo una navegación más compleja que las rutas simples.</p>
 
@@ -382,7 +385,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="uso-comodines">Uso de Comodines (Wildcards)</h2>
+                <h4 id="uso-comodines">Uso de Comodines (Wildcards)</h4>
 
                 <p>XPath utiliza comodines que nos permiten buscar elementos sin conocer su nombre exacto.</p>
 
@@ -401,7 +404,8 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="funciones-xpath">Funciones de XPath</h2>
+                <h4 id="funciones-xpath">Funciones de XPath</h4>
+
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr>
@@ -453,7 +457,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="items-tipos">Ítems y Tipos de Datos</h2>
+                <h4 id="items-tipos">Ítems y Tipos de Datos</h4>
 
                 <p>En XPath, la evaluación de una expresión siempre da como resultado una secuencia de <b>Ítems</b>. Un ítem puede ser de dos tipos:</p>
 
@@ -466,7 +470,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="acceso-doc">Acceso a datos de otro documento XML</h2>
+                <h4 id="acceso-doc">Acceso a datos de otro documento XML</h4>
 
                 <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de ficheros externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
                 <p class="Expl">Si por ejemplo se quiere acceder al nodo raíz de un fichero llamado "config.xml" que está en la misma carpeta:</p>
@@ -474,14 +478,16 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="localizar-comentarios">Localizar comentarios</h2>
+                <h4 id="localizar-comentarios">Localizar comentarios</h4>
+
                 <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url" translate="no">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url" translate="no">comment()</span>.</p>
                 <p class="Expl">Para localizar todos los comentarios dentro del nodo raíz:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">/servidor/comment()</code></pre>
             </div>
 
             <div>
-                <h2 id="union-secuencias">Unión de Nodos y Secuencias</h2>
+                <h4 id="union-secuencias">Unión de Nodos y Secuencias</h4>
+
                 <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, hay dos operadores clave que no se deben confundir:</p>
                 
                 <p>1. Operador de Unión ( | )</p>
@@ -502,7 +508,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="funciones-avanzadas">Funciones avanzadas útiles</h2>
+                <h4 id="funciones-avanzadas">Funciones avanzadas útiles</h4>
                 <p>Existen funciones adicionales muy potentes para tratar datos más complejos o listas largas:</p>
                 
                 <div class="TablaDivScroll">
@@ -543,7 +549,7 @@ Código por byAd12
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <script src="../resources/blog.js"></script>
     </body>
 

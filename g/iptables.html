@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,16 +43,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">Iptables</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Filtrado de paquetes</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Iptables</h1>
+        <h3>Filtrado de paquetes</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>Teoría - <span>Filtrado</span></h2>
+                <h4>Teoría - <span>Filtrado</span></h4>
                 
                 <p>El <u>filtrado de paquetes</u> es una técnica usada por seguridad y para mejorar el rendimiento que permite analizar el tráfico de red al atravesar un dispositivo y tomar decisiones acerca del mismo pudiendo permitir o denegarlo, modificar el tráfico o separarlo.</p>
 
@@ -76,7 +77,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Teoría - <span>Firewall</span></h2>
+                <h4>Teoría - <span>Firewall</span></h4>
 
                 <p><u>Firewall</u>: Sistema de seguridad que inspecciona el tráfico de red y selecciona el tráfico mediante reglas. Las apps de filtrado de paquetes se utilizan como firewalls.</p>
 
@@ -106,14 +107,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Teoría - <span>DMZ</span></h2>
+                <h4>Teoría - <span>DMZ</span></h4>
 
                 <p>La DMZ (Zona Desmilitarizada) es una red separada física o lógicamente en la que se ubican los servidores que deben ser accesibles desde otra red</p>
             
             </div>
 
             <div>
-                <h2>Teoría - <span>Iptables</span></h2>
+                <h4>Teoría - <span>Iptables</span></h4>
 
                 <p>Elementos de Iptables:</p>
 
@@ -172,7 +173,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Comando</h2>
+                <h4>Comando</h4>
                 
                 <p>Todas las reglas se aplicarán con el siguiente comando seguido de unos parámetros:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables ...</code></pre>
@@ -180,7 +181,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Establecer políticas</h2>
+                <h4>Establecer políticas</h4>
                 
                 <p>Esta es la sintaxis para establecer una política:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables &lt;-t TABLA&gt; -P &lt;CADENA&gt; ACCEPT/DROP</code></pre>
@@ -199,7 +200,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Listar políticas</h2>
+                <h4>Listar políticas</h4>
                 
                 <p>Esta es la primera opción para listar políticas aplicadas:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables [-t TABLA] -L [CADENA] [-n] [-v] [--line-numbers]</code></pre>
@@ -235,7 +236,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Añadir reglas</h2>
+                <h4>Añadir reglas</h4>
                 
                 <p>Esta es la sintaxis para crear una regla:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables (-A o -I) [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [--sport PUERTO_ORIGEN] [--dport PUERTO_DESTINO] [-j ACCEPT/DROP]</code></pre>
@@ -252,7 +253,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Comprobación si existe una regla</h2>
+                <h4>Comprobación si existe una regla</h4>
                 
                 <p>A continuación puedes comprobar que una política en específico esté creada:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -C [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
@@ -264,7 +265,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Eliminar una regla</h2>
+                <h4>Eliminar una regla</h4>
                 
                 <p>Para eliminar una regla hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -D [CADENA] [-p PROTOCOLO] [-s IP_ORIGEN] [-d IP_DESTINO] [-i INTERFAZ_ENTRADA] [-o INTERFAZ_SALIDA] [-j ACCEPT/DROP]</code></pre>
@@ -277,7 +278,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Eliminar todas las reglas</h2>
+                <h4>Eliminar todas las reglas</h4>
                 
                 <p>Para purgar todas las reglas hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -F [CADENA]</code></pre>
@@ -287,7 +288,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Reiniciar contadores</h2>
+                <h4>Reiniciar contadores</h4>
 
                 <p>Para reiniciar los contadores sin borrar las reglas:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -Z [CADENA]</code></pre>
@@ -307,7 +308,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Cadenas</h2>
+                <h4>Cadenas</h4>
 
                 <p><u>INPUT</u>: Paquete recibido por el nodo. Útil para firewall personal, no perimetral.</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables -A INPUT</code></pre>
@@ -321,7 +322,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Forward</h2>
+                <h4>Forward</h4>
 
                 <p>Paquetes que atraviesan el nodo. Utiliza la tabla filter. Deben permitirse los paquetes en ambos sentidos al ser perimetral.</p>
 
@@ -341,7 +342,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>SNAT (Source NAT)</h2>
+                <h4>SNAT (Source NAT)</h4>
 
                 <p>Cambia la IP de origen por la externa del dispositivo NAT definiéndose en las cadenas de POSTROUTING de la tabla NAT. Esto se hace si la IP es ESTÁTICA.</p>
 
@@ -358,7 +359,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>DNAT (Destination NAT)</h2>
+                <h4>DNAT (Destination NAT)</h4>
 
                 <p>Se usa para exponer el puerto de un nodo privado al exterior cambiando la IP destino de la externa del nodo a la del nodo a exponer. Se define en PREROUTING de la tabla NAT.</p>
 
@@ -378,7 +379,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Extensiones de Iptables</h2>
+                <h4>Extensiones de Iptables</h4>
 
                 <p>Las extensiones permiten ampliar las funcionalidades de <strong>iptables</strong> mediante el parámetro <span>-m MÓDULO</span>. Para instalarlas:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y iptables-extensions</code></pre>
@@ -455,7 +456,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Nuevas cadenas</h2>
+                <h4>Nuevas cadenas</h4>
 
                 <p>Se utiliza para organizar las reglas según el tipo de tráfico aumentando así el rendimiento. Pej. si hay muchas líneas de iptables y, en vez de leer todas las reglas se puede organizar y controlar.</p>
 
@@ -485,7 +486,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Creación de scripts</h2>
+                <h4>Creación de scripts</h4>
 
                 <p>Se puede crear un script de shell donde se definirán todas las reglas y cadenas como el siguiente script de ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="bash">#!/bin/bash
@@ -518,7 +519,7 @@ iptables -P FORWARD DROP
         <div class="parte1">
 
             <div>
-                <h2>Persistencia de la configuración</h2>
+                <h4>Persistencia de la configuración</h4>
 
                 <p>Para hacer que las reglas persistan, aunque se reinicie el nodo:</p>
                 <pre class="codigo" translate="no"><code class="bash">iptables-save > ./rules.v4</code></pre>
@@ -538,7 +539,7 @@ iptables -P FORWARD DROP
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

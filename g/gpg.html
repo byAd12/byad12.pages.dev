@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,16 +43,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">GPG</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Comando de cifrado</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>GPG</h1>
+        <h3>Comando de cifrado</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
 
                 <p>En el equipo donde se creará la clave GPG hay que instalar el servicio necesario:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -60,7 +61,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Crear una clave pública</h2>
+                <h4>Crear una clave pública</h4>
 
                 <p>Con el siguiente comando se inicia un asistente para crear una nueva clave en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --full-generate-key</code></pre>
@@ -87,14 +88,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="importar-clave-publica">Importar una clave pública</h2>
+                <h4 id="importar-clave-publica">Importar una clave pública</h4>
 
                 <p>Con el parámetro <span class="span_contenido" translate="no">--import</span> se indica la ruta local de donde se encuentra la clave pública a importar:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --import [Ruta_clave_pública]</code></pre>
             </div>
 
             <div>
-                <h2>Ver las claves importadas</h2>
+                <h4>Ver las claves importadas</h4>
 
                 <p>Para ver las claves importadas en modo básico:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -k</code></pre>
@@ -104,14 +105,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Eliminar una clave importada</h2>
+                <h4>Eliminar una clave importada</h4>
 
                 <p>Para eliminar una clave importada se debe indicar el dirección de email o el nombre del propietario de la clave pública:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --delete-key [Nombre_clave_importada]</code></pre>
             </div>
 
             <div>
-                <h2>Cifrar un fichero con una clave <span>simétrica</span></h2>
+                <h4>Cifrar un fichero con una clave <span>simétrica</span></h4>
 
                 <p>Con el parámetro <span class="span_contenido" translate="no">-c</span> podremos cifrar un fichero mediante una clave simétrica (passphrase) en 2 formatos de ficheros diferentes.</p>
 
@@ -126,7 +127,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Cifrar un fichero con una clave <span>asimétrica</span></h2>
+                <h4>Cifrar un fichero con una clave <span>asimétrica</span></h4>
 
                 <p>Se utiliza el parámetro <span class="span_contenido" translate="no">-e</span> (<span class="span_contenido" translate="no">--encrypt</span>) para cifrar un archivo junto con el parámetro <span class="span_contenido" translate="no">-r</span> (<span class="span_contenido" translate="no">--recipient</span>) para indicar el nombre de la clave pública del destinatario, que debe estar previamente importada en el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -a -r [Nombre_clave_pública_destinatario] -e [Fichero_a_cifrar]</code></pre>
@@ -137,7 +138,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Descifrar un fichero con una clave <span>a/simétrica</span></h2>
+                <h4>Descifrar un fichero con una clave <span>a/simétrica</span></h4>
 
                 <p>El parámetro <span class="span_contenido" translate="no">-d</span> permite descifrar un fichero que haya sido cifrado por una clave simétrica o asimétrica:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -d [Fichero_a_descifrar]</code></pre>
@@ -149,7 +150,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Firmar un fichero</h2>
+                <h4>Firmar un fichero</h4>
 
                 <p>Primero hay que generar un fichero <span class="span_url" translate="no">.asc</span> que sirva como firma:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [Fichero_a_firmar]</code></pre>
@@ -164,7 +165,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

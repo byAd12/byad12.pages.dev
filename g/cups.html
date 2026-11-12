@@ -23,7 +23,8 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <!-- BARRA DE MENÚ -->
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -42,16 +43,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">CUPS</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Common Unix Printing System</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>CUPS</h1>
+        <h3>Common Unix Printing System</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>1. Instalación</h2>
+                <h4>1. Instalación</h4>
                 
                 <p>En el equipo donde se podrá administrar el servicio hay que instalar los paquetes necesarios:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">apt-get update</code></pre>
@@ -59,7 +61,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>2. Comprobación</h2>
+                <h4>2. Comprobación</h4>
 
                 <p>Para verificar el estado del servicio:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">systemctl status cups</code></pre>
@@ -73,7 +75,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>3. Limitación de acceso</h2>
+                <h4>3. Limitación de acceso</h4>
 
                 <p>Para permitir el acceso desde cualquier red al servicio hay que ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">cupsctl --remote-any</code></pre>
@@ -93,7 +95,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>4. Añadir una impresora CUPS-PDF desde la interfaz gráfica</h2>
+                <h4>4. Añadir una impresora CUPS-PDF desde la interfaz gráfica</h4>
 
                 <p>Desde un navegador web hay que entrar al panel de administración del servicio:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">https://[IP_servidor]:631/admin</code></pre>
@@ -123,7 +125,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>5. Agregar la impresora en los equipos clientes</h2>
+                <h4>5. Agregar la impresora en los equipos clientes</h4>
 
                 <p>En un equipo de la red se listarán las impresoras que se detecten:</p>
                 <pre class="codigo" translate="no"><code class="language-bash">lpinfo -v</code></pre>
@@ -155,7 +157,7 @@ Código por byAd12
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <script src="../resources/blog.js"></script>
     </body>
 

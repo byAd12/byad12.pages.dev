@@ -183,16 +183,14 @@ window.addEventListener("beforeprint", (event) => {
     }
     const decoder = new TextDecoder();
     
-    document.getElementById("TituloSecundario").style = "padding-bottom: 0;";
-    document.getElementById("InsertarCreditos").style = "display: block;";
-    document.getElementById("InsertarCreditos").innerHTML = decoder.decode(bytes);
+    document.getElementById("Creditos_Inicio").style = "display: block;";
+    document.getElementById("Creditos_Inicio").innerHTML = decoder.decode(bytes);
     document.getElementById("SaltImagen").src = "../img/guides/hash/salt_dark.png";
 });
 
 window.addEventListener("afterprint", (event) => {
-    document.getElementById("TituloSecundario").style = "padding-bottom: 20px;";
-    document.getElementById("InsertarCreditos").style = "display: none;";
-    document.getElementById("InsertarCreditos").innerHTML = "";
+    document.getElementById("Creditos_Inicio").style = "display: none;";
+    document.getElementById("Creditos_Inicio").innerHTML = "";
     document.getElementById("SaltImagen").src = "../img/guides/hash/salt_light.png";
 });
 

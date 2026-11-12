@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -44,16 +44,19 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">SAMBA</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Compartir carpetas entre Linux y Windows</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>SAMBA</h1>
+        <h3>Compartir carpetas entre Linux y Windows</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
+
             <div>
-                <h2>Alojar una carpeta en un servidor <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+
+                <h4>Alojar una carpeta en un servidor <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span></b>:</p>
@@ -115,7 +118,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
             </div>
 
             <div>
-                <h2>Alojar una carpeta en un servidor <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h4>Alojar una carpeta en un servidor <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">usuarios</span> y <span style="color: rgb(147, 147, 206) !important;">grupos</span></b>:</p>
@@ -162,7 +165,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Acceder a una carpeta Linux o Windows desde otro <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h4>Acceder a una carpeta Linux o Windows desde otro <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Explorar los recursos compartidos del servidor que puede montar un usuario</b>:</p>
@@ -223,7 +226,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
             </div>
 
             <div>
-                <h2>Acceder a una carpeta de Windows desde otro <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h4>Acceder a una carpeta de Windows desde otro <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b>Copiar la <span style="color: rgb(147, 147, 206) !important;">ruta de acceso de red</span> en el servidor</b>.</p>
@@ -241,7 +244,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
             </div>
 
             <div>
-                <h2>Acceder a una carpeta de Linux desde <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h4>Acceder a una carpeta de Linux desde <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido" translate="no">smbpasswd</span></b>.</p>
@@ -279,7 +282,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Montar una carpeta CIFS automáticamente en <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h4>Montar una carpeta CIFS automáticamente en <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h4>
 
                 <!-- ......................................................... -->
                 <p>1. <b>Editar el fichero <span style="color: rgb(147, 147, 206) !important;">/etc/fstab</span></b>:</p>
@@ -346,7 +349,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
             </div>
 
             <div>
-                <h2>Montar una carpeta SAMBA automáticamente en <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h4>Montar una carpeta SAMBA automáticamente en <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
                 
                 <!-- ......................................................... -->
                 <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario autorizado para acceder al recurso compartido</b>.</p>
@@ -371,7 +374,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h4>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h4>
                 
                 <p>Ejemplo de un bloque completo en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[Nombre_recurso]
@@ -552,7 +555,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
             </div>
 
             <div>
-                <h2>Parámetros de la sección [global] en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h2>
+                <h4>Parámetros de la sección [global] en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h4>
                 
                 <p>Ejemplo de un bloque completo en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[global]
@@ -662,14 +665,14 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Monitorización</h2>
+                <h4>Monitorización</h4>
 
                 <p>Para monitorizar las conexiones y bloqueos a recursos compartidos de tu sistema en tiempo real se puede ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbstatus</code></pre>
             </div>
 
             <div>
-                <h2>Diagnóstico</h2>
+                <h4>Diagnóstico</h4>
 
                 <p><u>Fallo de conectividad</u> - Es importante comprobar el estado de los siguientes servicios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status samba-ad-dc</code></pre>
@@ -690,7 +693,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

@@ -1,4 +1,4 @@
-li<!--
+<!--
 
 Código por byAd12
 
@@ -23,7 +23,8 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <!-- BARRA DE MENÚ -->
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,9 +44,9 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">Active Directory</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Servicio de directorio en una red distribuida</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Active Directory</h1>
+        <h3>Servicio de directorio en una red distribuida</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -54,7 +55,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Configurar un sistema <span>Linux</span> como controlador de dominio</h2>
+                <h4>Configurar un sistema <span>Linux</span> como controlador de dominio</h4>
             
                 <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio con las mismas funcionalidades pero sin la necesidad de adquirir licencias.</p>
             
@@ -138,7 +139,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h2>
+                <h4 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h4>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -253,7 +254,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h2>
+                <h4>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h4>
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
@@ -282,7 +283,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h2>
+                <h4 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h4>
             
                 <p>Con los siguientes pasos en un cliente Linux se puede meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
@@ -455,7 +456,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h2>
+                <h4>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h4>
             
                 <p>
                     Este proceso equivale a la <b>"Carpeta particular"</b> o <b>"Unidad de red"</b> en Windows. 
@@ -534,7 +535,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h2>
+                <h4>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
             
                 <p>1. Primero hay que configurar como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
@@ -555,7 +556,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h2>
+                <h4>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h4>
             
                 <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
 
@@ -616,7 +617,7 @@ ldap_user_gid_number = gidNumber</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h2>
+                <h4>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h4>
             
                 <p>En el fichero de configuración de samba <span class="span_url" translate="no">/etc/samba/smb.conf</span> hay que añadir en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">vfs objects = acl_xattr
@@ -637,7 +638,7 @@ store dos attributes = yes</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h2>
+                <h4>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h4>
 
                 <p>Este permiso permite modificar las ACLs de los recursos compartidos por un servidor Linux desde un equipo Windows.</p>
             
@@ -663,7 +664,7 @@ store dos attributes = yes</code></pre>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <script src="../resources/blog.js"></script>
     </body>
 

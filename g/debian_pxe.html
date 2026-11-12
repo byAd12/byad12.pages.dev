@@ -26,7 +26,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -45,18 +45,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">Debian PXE</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Automatizar la instalación de Debian</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
+        <h1>Debian PXE</h1>
+        <h3>Automatizar la instalación de Debian</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1 Parte1Indice">
             <div>
-                <h2>Índice de Contenidos</h2>
+                <h4>Índice</h4>
 
                 <ul>
                     <li>Principal: 
@@ -93,17 +92,24 @@ Código por byAd12
                 </ul>
 
             </div>
+
         </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Pasos de configuración</h2>
+        <h3>Lograr una instalación desatendida</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
+
+            <!-- ......................................................... -->
+            <!-- ......................................................... -->
+
             <div>
-                <h2 id="Requisitos_Iniciales">Requisitos iniciales</h2>
+                <h4 id="Requisitos_Iniciales">Requisitos iniciales</h4>
 
                 <p>El servidor debe tener una IPv4 estática y un hostname identificativo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
@@ -111,24 +117,11 @@ Código por byAd12
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <h1>Pasos de configuración</h1>
-        <h2 class="TituloSecundario">Lograr una instalación desatendida</h2>
-        <br>
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <!-- ......................................................... -->
             <!-- ......................................................... -->
              
             <div>
-                <h2 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h2>
+                <h4 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h4>
 
                 <!-- ......................................................... -->
                 <p>1.1. Hay que instalar el servicio correspondiente en el servidor:</p>
@@ -342,7 +335,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h2 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h2>
+                <h4 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h4>
 
                 <!-- ......................................................... -->
                 <p>2.1. Hay que instalar el servicio correspondiente en el servidor:</p>
@@ -378,7 +371,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h2 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h2>
+                <h4 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h4>
 
                 <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y habilitar el arranque por red IPv4.</p>
 
@@ -403,7 +396,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h2 id="Fichero_Respuestas">4. Crear el fichero de respuestas</h2>
+                <h4 id="Fichero_Respuestas">4. Crear el fichero de respuestas</h4>
 
                 <p>
                     Hay que crear un fichero con extensión <span class="span_contenido" translate="no">.cfg</span> dentro de <span class="span_contenido" translate="no">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
@@ -556,7 +549,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h2 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h2>
+                <h4 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h4>
 
                 <p>5.1. Primero hay que editar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /srv/tftp/debian-installer/amd64/boot-screens/txt.cfg</code></pre>
@@ -666,8 +659,8 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Configuración opcional</h1>
-        <h2 class="TituloSecundario">Fichero de respuestas</h2>
+        <h2>Configuración opcional</h2>
+        <h3>Líneas adicionales del fichero de respuestas</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -675,7 +668,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Instalar_Paquetes_Adicionales">Fichero de respuestas: instalar paquetes adicionales</h2>
+                <h4 id="Instalar_Paquetes_Adicionales">Fichero de respuestas: instalar paquetes adicionales</h4>
 
                 <p>Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string [Paquete1] (Paquete2 ...)</code></pre>
@@ -683,7 +676,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h2 id="Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</h2>
+                <h4 id="Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</h4>
 
                 <p>Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
@@ -723,7 +716,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h2 id="Compartir_Carpeta_NFS">Fichero de respuestas: compartir una carpeta por NFS</h2>
+                <h4 id="Compartir_Carpeta_NFS">Fichero de respuestas: compartir una carpeta por NFS</h4>
 
                 <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-kernel-server</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
@@ -748,7 +741,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h2 id="Montar_Carpeta_NFS">Fichero de respuestas: montar una carpeta por NFS</h2>
+                <h4 id="Montar_Carpeta_NFS">Fichero de respuestas: montar una carpeta por NFS</h4>
 
                 <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-common</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-common</code></pre>
@@ -780,7 +773,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h2 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h2>
+                <h4 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h4>
 
                 <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
 
@@ -885,7 +878,7 @@ d-i partman/confirm_nooverwrite boolean true</code></pre>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

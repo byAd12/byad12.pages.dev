@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -44,16 +44,22 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">ANSIBLE-PLAYBOOK</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Automatizar tareas mediante SSH</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Automatización en red</h1>
+        <p id="Creditos_Inicio">none</p>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Ansible Playbook</h2>
+        <h3>Automatización de tareas mediante SSH</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
+
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y software-properties-common</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">add-apt-repository --yes --update ppa:ansible/ansible</code></pre>
@@ -61,7 +67,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Ejecutar una tarea</h2>
+                <h4>Ejecutar una tarea</h4>
 
                 <pre class="codigo" translate="no"><code class="bash">ansible-playbook -i [HOST_FILE] -f [NUM] [TASK].yml</code></pre>
                 <p class="Expl"><b>TASK.yml</b>: Fichero que se crea para especificar una tarea.</p>
@@ -77,7 +83,7 @@ nodo.dominio.tld
             </div>
 
             <div>
-                <h2>Verificar la conectividad en varios equipos</h2>
+                <h4>Verificar la conectividad en varios equipos</h4>
 
                 <pre class="codigo" translate="no"><code class="bash">ansible [HOST] -i [HOST_FILE] -f -m ping</code></pre>
                 <p class="Expl">
@@ -91,7 +97,7 @@ nodo.dominio.tld
             </div>
 
             <div>
-                <h2>Creación de un fichero .yml</h2>
+                <h4>Creación de un fichero .yml</h4>
 
                 <pre class="codigo" translate="no"><code class="bash">---
 - name: Descripción de la tarea
@@ -117,22 +123,22 @@ nodo.dominio.tld
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>PSSH</h1>
-        <h2 class="TituloSecundario">Paralell-SSH</h2>
-        <br>
-
+        <h2>PSSH</h2>
+        <h3>Ejecución de SSH en paralelo</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
+
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h2>Ejecución de comandos simultáneamente</h2>
+                <h4>Ejecución de comandos simultáneamente</h4>
+
                 <p>Con esto se puede a parte verificar si una serie de equipos están disponibles ejecutando un comando como <b>"hostname; whoami"</b>.</p>
                 <pre class="codigo" translate="no"><code class="bash">parallel-ssh -h [HOST_FILE] -l [USER] [COMANDO]</code></pre>
                 <p class="Expl">
@@ -149,22 +155,22 @@ nodo.dominio.tld
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Parallel-Rsync</h1>
-        <h2 class="TituloSecundario">Automatizar la copia ficheros</h2>
-        <br>
-
+        <h2>Parallel-Rsync</h2>
+        <h3>Automatizar la copia ficheros</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
+
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h2>Enviar un fichero a varios hosts simultáneamente</h2>
+                <h4>Enviar un fichero a varios hosts simultáneamente</h4>
+
                 <pre class="codigo" translate="no"><code class="bash">parallel-scp -h [HOST_FILE] [FILE_SRC] [FILE_DST]</code></pre>
                 <p class="Expl">
                     <b>FILE_SRC</b>: Fichero local a copiar en los hosts.
@@ -180,22 +186,21 @@ nodo.dominio.tld
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>PRSYNC</h1>
-        <h2 class="TituloSecundario">Paralell-SCP</h2>
-        <br>
-
+        <h2>PRSYNC</h2>
+        <h3>Ejecución de SCP en paralelo</h3>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h2>Sincronizar ficheros a varios hosts simultáneamente</h2>
+                <h4>Sincronizar ficheros a varios hosts simultáneamente</h4>
+
                 <p>Solo se copian los ficheros nuevos o modificados, lo que hace más rápida que copiar todo cada vez.</p>
                 <pre class="codigo" translate="no"><code class="bash">parallel-rsync -r -p [NUM] -h [HOST_FILE] -l [USER] [FILE_SRC] [FILE_DST]</code></pre>
                 <p class="Expl">
@@ -220,7 +225,7 @@ nodo.dominio.tld
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

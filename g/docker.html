@@ -26,7 +26,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -45,10 +45,9 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <div id="Principio"></div>
-        <h1 class="TituloPrincipal">Docker</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Build, Ship and Run</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Docker</h1>
+        <h3>Build, Ship and Run</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -56,7 +55,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h2>Gestionar imágenes</h2>
+                <h4>Gestionar imágenes</h4>
 
                 <p>Descargar una imagen desde el repositorio <a href="https://hub.docker.com/" target="_blank">hub.docker.com</a> sin necesidad de autenticarse:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker pull [Imagen]:(Versión)</code></pre>
@@ -78,7 +77,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Crear una imagen</h2>
+                <h4>Crear una imagen</h4>
 
                 <p>Primero hay que crear una cuenta gratuita en <a href="https://app.docker.com/signup" target="_blank">hub.docker.com</a> para poder subir públicamente las imágenes que se vayan a crear.</p>
                 
@@ -103,7 +102,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Información de la aplicación</h2>
+                <h4>Información de la aplicación</h4>
                 
                 <p>Ver la versión de la aplicación Docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker --version</code></pre>
@@ -117,7 +116,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Ver registros</h2>
+                <h4>Ver registros</h4>
                 
                 <p>Ver todos los eventos de los dockers:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker events</code></pre>
@@ -135,7 +134,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Crear un docker a partir de una imagen</h2>
+                <h4>Crear un docker a partir de una imagen</h4>
 
                 <p>
                     El comando <span class="span_contenido" translate="no">docker run</span> siempre crea un contenedor nuevo a partir de una imagen.
@@ -330,7 +329,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Listar los dockers</h2>
+                <h4>Listar los dockers</h4>
 
                 <p>Para ver los dockers en ejecución:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker ps</code></pre>
@@ -342,7 +341,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Gestionar la ejecución de un docker</h2>
+                <h4>Gestionar la ejecución de un docker</h4>
 
                 <p>Iniciar un docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker start [Nombre/ID_Docker]</code></pre>
@@ -365,7 +364,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Eliminar un docker</h2>
+                <h4>Eliminar un docker</h4>
 
                 <p>Para eliminar un docker primero se debe detener manualmente:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker stop [Nombre/ID_Docker]</code></pre>
@@ -377,7 +376,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Copiar ficheros entre el host y el docker</h2>
+                <h4>Copiar ficheros entre el host y el docker</h4>
                 
                 <p>Cómo copiar ficheros internos del docker al host:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker cp [Nombre/ID_Docker]:[Ruta_en_docker] [Ruta_en_sistema_local]</code></pre>
@@ -401,7 +400,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="terminal-docker-iniciado">Abrir una terminal en un docker iniciado</h2>
+                <h4 id="terminal-docker-iniciado">Abrir una terminal en un docker iniciado</h4>
 
                 <p>En una terminal se debe ejecutar el siguiente comando para iniciar una sesión de terminal en un docker existente e iniciado:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker exec -it [Nombre/ID_Docker] /bin/[bash|sh]</code></pre>
@@ -416,7 +415,7 @@ Código por byAd12
             </div>
             
             <div>
-                <h2 id="volumenes">Volúmenes</h2>
+                <h4 id="volumenes">Volúmenes</h4>
 
                 <p>Un volumen permite que los datos de una ruta en el docker permanezcan almacenados en el host incluso después de que el docker haya sido eliminado.</p>
 
@@ -448,21 +447,21 @@ Código por byAd12
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Redes</h1>
-        <hr class="SeparadorConTitulo">
+        <h2>Redes</h2>
+        <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2>Configuración de una red</h2>
+                <h4>Configuración de una red</h4>
                 
                 <p>Ver las redes y de qué tipos son para cada docker:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network ls</code></pre>
             </div>
 
             <div>
-                <h2>Modificar redes</h2>
+                <h4>Modificar redes</h4>
 
                 <p>Crear una red:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker network create --driver (Tipo_de_red) --subnet (Dirección_red)/(Máscara_CIDR) --gateway (IP_default_gateway) [Nombre_red]</code></pre>
@@ -480,14 +479,14 @@ Código por byAd12
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Ejemplos</h1>
-        <hr class="SeparadorConTitulo">
+        <h2>Ejemplos</h2>
+        <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2>Docker "<span>httpd</span>"</h2>
+                <h4>Docker "<span>httpd</span>"</h4>
                 <p>Añadir un volumen a un docker con httpd y crear una página HTML:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker volume create volumen_httpd_prueba</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">docker run -p 8080:80 --name httpd_prueba -v volumen_httpd_prueba:/usr/local/apache2/htdocs -d httpd</code></pre>
@@ -497,7 +496,7 @@ Código por byAd12
             </div>
             
             <div>
-                <h2>Docker "<span>heimdall</span>"</h2>
+                <h4>Docker "<span>heimdall</span>"</h4>
                 <p>Sirve para organizar aplicaciones web en un solo lugar:</p>
                 <pre class="codigo" translate="no"><code class="bash">docker run --name heimdall -e PUID=1000 -e PGID=1000 -e TZ=america/new_york -p 9998:80 -p 9997:443 -v /home/usuario/Descargas/docker_adr:/config --restart unless-stopped linuxserver/heimdall</code></pre>
                 <p class="Expl">Para visualizar la página web hay que acceder a la URL <span class="span_url" translate="no">http://[IP_máquina_anfitrión]:9998</span>.</p>
@@ -506,7 +505,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a> - <a href="https://youtu.be/Wgo3Q5sIxi4?si=LV1GvOg8Uhu-HHIw" target="_blank">Fuente</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a> - <a href="https://youtu.be/Wgo3Q5sIxi4?si=LV1GvOg8Uhu-HHIw" target="_blank">Fuente</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

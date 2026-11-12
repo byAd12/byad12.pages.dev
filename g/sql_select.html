@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,16 +43,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">SQL</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Structured Query Language</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>SQL</h1>
+        <h3>Structured Query Language</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>Consulta<span class="span_url_espaciado">SELECT</span></h2>
+                <h4>Consulta<span class="span_url_espaciado">SELECT</span></h4>
                 <p>Primero hay que entrar en la BB.DD. para realizar todas las consultas.</p>
 
                 <p>Seleccionar todas las columnas:</p>
@@ -64,21 +65,21 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Modificador<span class="span_url_espaciado">DISTINCT</span></h2>
+                <h4>Modificador<span class="span_url_espaciado">DISTINCT</span></h4>
 
                 <p>Solo devuelve las filas que sean no repetidas según todas las columnas dadas:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT DISTINCT col1 FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h2>Modificador<span class="span_url_espaciado">AS</span></h2>
+                <h4>Modificador<span class="span_url_espaciado">AS</span></h4>
 
                 <p><b>Alias de Columna</b>: Muestra el título de la columna pero con otro nombre. Necesita comillas si hay espacios en blanco:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 AS "alias1", col2 AS "alias2" FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h2>Cláusula<span class="span_url_espaciado">ORDER BY</span></h2>
+                <h4>Cláusula<span class="span_url_espaciado">ORDER BY</span></h4>
 
                 <p>Para cambiar el orden en el que se enseña la tabla según una columna.<br>Si no se va a enseñar una columna se puede ordenar por ella igualmente:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla ORDER BY col1 &lt;ASC o DESC&gt;;</code></pre>
@@ -87,7 +88,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Filtro<span class="span_url_espaciado">WHERE</span></h2>
+                <h4>Filtro<span class="span_url_espaciado">WHERE</span></h4>
 
                 <p><b>Operadores</b>:</p>
                 <p><span class="span_contenido" translate="no">=</span> - Igual a<br>
@@ -103,7 +104,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Operadores Lógicos</h2>
+                <h4>Operadores Lógicos</h4>
 
                 <p><span class="span_contenido" translate="no">AND</span>: Si se cumplen 2 o más condiciones.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla WHERE col1="valor" AND col2="valor";</code></pre>
@@ -134,7 +135,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Consultas de<span class="span_url_espaciado">UNION</span></h2>
+                <h4>Consultas de<span class="span_url_espaciado">UNION</span></h4>
 
                 <p>Solo funciona si se recogen campos compatibles entre ambas tablas. No hace falta que tengan el mismo nombre. Si se cogen 2 o más columas y hay 2 con los mismos valores en todas, no los muestra. Para ello se usa <span class="span_contenido" translate="no">UNION ALL</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 FROM tabla UNION SELECT col1 FROM tabla2;</code></pre>
@@ -142,14 +143,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Sub-Consultas</h2>
+                <h4>Sub-Consultas</h4>
 
                 <p>Puede haber subconsultras dentro de otras:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla1 WHERE col1 IN (SELECT col2 FROM tabla2 WHERE col3="valor");</code></pre>
             </div>
 
             <div>
-                <h2>Funciones escalares</h2>
+                <h4>Funciones escalares</h4>
 
                 <p>Se puede usar funciones dentro de otras funciones:</p>
 
@@ -162,7 +163,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Funciones agregadas</h2>
+                <h4>Funciones agregadas</h4>
 
                 <p>Operan sobre un conjunto de filas:</p>
 
@@ -185,7 +186,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2><span class="span_url_espaciado">GROUP BY</span></h2>
+                <h4><span class="span_url_espaciado">GROUP BY</span></h4>
 
                 <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla GROUP BY columna2;</code></pre>
                 <p class="Expl">En función de columna2 nos enseñará el total de columna1 por el COUNT</p>
@@ -193,14 +194,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Filtro<span class="span_url_espaciado">HAVING</span></h2>
+                <h4>Filtro<span class="span_url_espaciado">HAVING</span></h4>
 
                 <p>Permite filtrar con funciones de agrupación:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla WHERE columna3="valor" GROUP BY columna2 HAVING COUNT(columna1)>=10;</code></pre>
             </div>
 
             <div>
-                <h2>Consulta Multi-Tabla</h2>
+                <h4>Consulta Multi-Tabla</h4>
 
                 <p>Para hacer consultas en más de una tabla a la vez:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT columna1, columna2 FROM tabla1 x, tabla2 y WHERE x.columna1 = y.columna1;</code></pre>
@@ -210,7 +211,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Consulta<span class="span_url_espaciado">JOIN</span></h2>
+                <h4>Consulta<span class="span_url_espaciado">JOIN</span></h4>
 
                 <div class="SingleImagenGlobal">
                     <a href="../img/guides/sql/sql_join.png"><img alt="Esquema de SQL Join" src="../img/guides/sql/sql_join.png"></a>
@@ -221,7 +222,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

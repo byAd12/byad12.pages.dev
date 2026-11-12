@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,17 +43,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">NIS</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Network Information Service</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>NIS</h1>
+        <h3>Network Information Service</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+
         <div class="parte1">
             <div>
-                <h2>Instalación</h2>
+                <h4>Instalación</h4>
                 
                 <p>Tanto en el cliente como en el servidor hay que instalar el servicio NIS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -71,7 +71,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Configuración en el servidor</h2>
+                <h4>Configuración en el servidor</h4>
                 
                 <p>1. Primero hay que editar el fichero <span class="span_url" translate="no">/etc/defaultdomain</span> para definir un nombre de dominio como, por ejemplo, <span class="span_contenido" translate="no">iso.asir</span>.</p>
 
@@ -120,7 +120,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h2>Actualización de la base de datos</h2>
+                <h4>Actualización de la base de datos</h4>
                 
                 <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">make -C /var/yp</code></pre>
@@ -129,7 +129,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h2 id="Problema-Cliente-Pamd">Problema - El cliente no tiene carpeta <span>/home</span></h2>
+                <h4 id="Problema-Cliente-Pamd">Problema - El cliente no tiene carpeta <span>/home</span></h4>
 
                 <p>
                     La carpeta home del usuario no existe en el cliente ya que es una carpeta local del servidor,
@@ -153,7 +153,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h2>Solución - Compartir la carpeta <span>/home</span> por NFS</h2>
+                <h4>Solución - Compartir la carpeta <span>/home</span> por NFS</h4>
 
                 <p>Los siguientes pasos se explican mejor en la guía detallada sobre <a href="nfs.html">NFS</a>.</p>
 
@@ -180,7 +180,7 @@ NISCLIENT=false</code></pre>
 
         <div class="parte1">
             <div>
-                <h2>Configuración en el cliente</h2>
+                <h4>Configuración en el cliente</h4>
                 
                 <p>1. Primero hay que editar el fichero <span class="span_url" translate="no">/etc/defaultdomain</span> para definir un nombre de dominio como, por ejemplo, <span class="span_contenido" translate="no">iso.asir</span>.</p>
 
@@ -227,7 +227,7 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
-                <h2 id="Montar_Home_NIS">Montar la carpeta <span>/home</span> con NFS</h2>
+                <h4 id="Montar_Home_NIS">Montar la carpeta <span>/home</span> con NFS</h4>
                 
                 <p>A continuación están los pasos guiados para montar la carpeta <span class="span_url" translate="no">/home</span> del servidor en cada cliente NIS.</p>
 
@@ -250,7 +250,7 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
-                <h2>Problema - NFS sobreescribe el contenido de <span>/home</span></h2>
+                <h4>Problema - NFS sobreescribe el contenido de <span>/home</span></h4>
 
                 <p>
                     Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url" translate="no">/home</span>),
@@ -279,7 +279,7 @@ gshadow:        files systemd nis</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Comando "<span>getent passwd</span>"</h2>
+                <h4>Comando "<span>getent passwd</span>"</h4>
                 
                 <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el fichero <span class="span_url" translate="no">/etc/passwd</span> y al comando <span class="span_contenido" translate="no">ypcat passwd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
@@ -287,7 +287,7 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <!-- <div>
-                <h2>Script de automatización</h2>
+                <h4>Script de automatización</h4>
 
                 <div class="BotonPersonalizadoDIV BotonPersonalizadoDIV_Izquierda">
                     <a class="Boton_Personalizado_Texto" href="" target="_blank">
@@ -303,11 +303,11 @@ gshadow:        files systemd nis</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior">
+        <p id="Creditos_Final">
             <a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a>
-            <br><br>
+            <br>
             Basado en material de Miguel Mourón Regueira, usado bajo licencia CC BY-NC-SA.
-        </h2>
+        </p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

@@ -23,7 +23,8 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <!-- BARRA DE MENÚ -->
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -44,18 +45,19 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div id="Principio"></div>
-        <h1 class="TituloPrincipal">Packet Tracer</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Command Line Interface</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Packet Tracer</h1>
+        <h3>Command Line Interface</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
+        
         <div class="parte1 Parte1Indice">
             <div>
-                <h2>Índice de Contenidos</h2>
+                <h4>Índice</h4>
 
-                <h2 style="margin: 20px;" class="IndiceH2">1. Básico</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">1. Básico</h4>
                 <ul>
                     <li><b>Comandos:</b> <a href="#Sintaxis">Sintaxis</a> • <a href="#Filtrar_Salida_Comando">Filtrar salidas</a> • <a href="#Basico">Ayuda y Reloj</a></li>
                     <li><b>Historial:</b> <a href="#Verificacion_Historial_Comandos">Ver historial</a> • <a href="#Cambiar_Historial_Comandos">Cambiar límite</a></li>
@@ -63,7 +65,7 @@ Código por byAd12
                     <li><b>Sistema IOS:</b> <a href="#SistemaOperativo">Boot System</a> • <a href="#RecuperacionSistema">Modo recuperación (ROMMON)</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">2. Diagnóstico y Verificación</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">2. Diagnóstico y Verificación</h4>
                 <ul class="margin-left: 15px;">
                     <li><b>Herramientas:</b> <a href="#Conectividad">Conectividad</a> • <a href="#Acceso_Remoto">Acceso remoto</a></li>
                     <li><b>Comandos Show:</b> <a href="#Comando_Show_Do">Uso de 'Do'</a> • <a href="#Verificacion_Sistema">Versión y Hardware</a></li>
@@ -73,7 +75,7 @@ Código por byAd12
                     </li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">3. Configuración de Red e Interfaces</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">3. Configuración de Red e Interfaces</h4>
                 <ul>
                     <li><b>General:</b> <a href="#Nomenclatura">Hostnames</a> • <a href="#DNS">Dominio y DNS</a> • <a href="#Gateway">Default Gateway</a></li>
                     <li><b>Direccionamiento:</b> <a href="#Direccionamiento">IPv4 e IPv6</a> • <a href="#Enrutamiento">Rutas Estáticas</a></li>
@@ -81,7 +83,7 @@ Código por byAd12
                     <li><b>Lógicas:</b> <a href="#Interfaz_Loopback">Interfaz Loopback</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">4. Seguridad de acceso</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">4. Seguridad de acceso</h4>
                 <ul>
                     <li><b>Usuarios:</b> <a href="#Usuarios">Crear usuarios y privilegios</a> • <a href="#PassRules">Reglas de contraseñas</a></li>
                     <li><b>Protección:</b> <a href="#SeguridadBasica">Contraseñas (Consola/Enable)</a> • <a href="#Servidor_SSH">Configurar Servidor SSH</a></li>
@@ -89,7 +91,7 @@ Código por byAd12
                     <li><b>Avisos:</b> <a href="#SeguridadBasica">Banners (MOTD)</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">5. VLANs y Troncales (Switching)</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">5. VLANs y Troncales (Switching)</h4>
                 <ul>
                     <li><b>Gestión VLAN:</b> <a href="#VLAN_Creacion">Crear/Nombrar</a> • <a href="#VLAN_Asignar_IP">Asignar IP (SVI)</a> • <a href="#VLAN_Eliminar_Fichero">Borrar vlan.dat</a></li>
                     <li><b>Modo Acceso:</b> <a href="#VLAN_Modo_Acceso">Configurar</a> • <a href="#VLAN_Restablecer_Modo_Acceso">Restablecer</a> • <a href="#VLAN_Voz">VLAN de Voz</a></li>
@@ -99,7 +101,7 @@ Código por byAd12
                     <li><b>Router:</b> <a href="#Router_Configuracion_Gateway">Configuración como gateway</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">6. Protocolos Avanzados</h4>
                 <ul>
                     <li><b>DTP (Negociación):</b> <a href="#Modos_Switchport">Modos Switchport</a> • <a href="#Negociacion_Activar">Activar/Desactivar</a> • <a href="#VerificacionDTP">Verificar</a></li>
                     <li><b>Spanning Tree (STP):</b> <a href="#STP_Switch_Raiz">Switch Raíz</a> • <a href="#STP_Switch_Secundario">Switch Secundario</a> • <a href="#STP_Conceptos">Conceptos de prioridad</a></li>
@@ -111,7 +113,7 @@ Código por byAd12
                     <li><b>Hot Standby Router Protocol (HSRP):</b> <a href="#HSRP_Configuracion_IP">Configuración de IP</a> • <a href="#HSRP_Configuracion_Prioridad">Configuración de prioridad</a> • <a href="#HSRP_Configuracion_Preempt">Configuración de preempt</a> • <a href="#HSRP_Verificacion">Verificación</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">7. DHCP</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">7. DHCP</h4>
                 <ul>
                     <li>
                         <b>DHCPv4:</b> <a href="#DHCP_Configuracion_Servidor">Configuración de un servidor</a> • <a href="#DHCP_Configuracion_Servidor_Helper">Servidor en modo reenvío</a> • <a href="#DHCP_Desactivar">(Des)activar</a> • <a href="#DHCP_Cliente_DHCP_Router">Router con DHCPv4s</a> • 
@@ -126,7 +128,7 @@ Código por byAd12
                     <li><b>DHCPv6 importante:</b> <a href="#DHCPv6_Servidor_Verificacion">Verificación</a> • <a href="#DHCPv6_Relay">Relay</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">8. Seguridad y Ataques</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">8. Seguridad y Ataques</h4>
                 <ul>
                     <li><b>Spanning-tree (STP):</b> <a href="#PortFast_Activar">PortFast</a> • <a href="#BPDUGuard_Activar">BPDUGuard</a> • <a href="#STP_Seguridad_Verificacion">Verificación</a></li>
                     <li><b>Problemas de reconocimiento:</b> <a href="#CDP_Deshabilitar">(Des)habilitar CDP</a> • <a href="#LLDP_Deshabilitar">(Des)habilitar LLDP</a></li>
@@ -140,7 +142,7 @@ Código por byAd12
                     <li><b>Ataques de ARP:</b> <a href="#DAI_Configuracion">Configuración de DAI</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">9. Enrutamiento estático</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">9. Enrutamiento estático</h4>
                 <ul>
                     <li><b>Básico:</b> <a href="#Ver_Tabla_Rutas">Ver la tabla de rutas</a> • <a href="#Ver_Tabla_Rutas_Estaticas">Ver las rutas estáticas</a></li>
                     <li><b>Rutas estáticas:</b> <a href="#Enrutamiento_Estatico_IPv4">IPv4</a> • <a href="#Enrutamiento_Estatico_IPv6">IPv6</a></li>
@@ -150,7 +152,7 @@ Código por byAd12
                     <li><b>Rutas estáticas de host:</b> <a href="#Rutas_Estaticas_Host_IPv4">IPv4</a> • <a href="#Rutas_Estaticas_Host_IPv6">IPv6</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">10. Enrutamiento dinámico</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">10. Enrutamiento dinámico</h4>
                 <ul>
                     <li>
                         <b>OSPF:</b> <a href="#OSPF_Configuracion_Basica">Configuración básica</a> • <a href="#OSPF_Router_ID">Router ID</a> • <a href="#OSPF_Recargar_Configuración">Recargar la configuración</a> • <a href="#OSPF_Definir_Redes">Definir redes</a> • 
@@ -163,7 +165,7 @@ Código por byAd12
                     </li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">11. Listas de control de acceso</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">11. Listas de control de acceso</h4>
                 <ul>
                     <li>
                         <b>Notas:</b> <a href="#ACL_Donde_Ubicar">Donde ubicar las ACL</a> • <a href="#ACL_Orden_Creación">Orden de creación</a> • <a href="#ACL_Importante">A tener en cuenta</a>
@@ -185,7 +187,7 @@ Código por byAd12
                     </li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">12. Traducción de IPs</h4>
                 <ul>
                     <li>
                         <b>NAT estático:</b> <a href="#NAT_Estatico_Configuracion_IPs">Traducción de IPs</a>
@@ -204,7 +206,7 @@ Código por byAd12
                     </li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">13. Compartir rutas</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">13. Compartir rutas</h4>
                 <ul>
                     <li>
                         <b>BGP:</b> <a href="#BGP_Configuracion">Configuración</a> • <a href="#BGP_Verificacion">Verificación</a> • <a href="#BGP_Propagar_Rutas">Propagación de rutas</a>
@@ -214,7 +216,7 @@ Código por byAd12
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Básico</h1>
+        <h2>Básico</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -222,7 +224,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="Sintaxis">Sintaxis de Comandos</h2>
+                <h4 id="Sintaxis">Sintaxis de Comandos</h4>
 
                 <pre class="codigo" translate="no"><code class="cisco">prompt&gt;comando argumentos</code></pre>
                 <p class="Expl">
@@ -236,7 +238,7 @@ Código por byAd12
             </div>
             
             <div>
-                <h2 id="Nomenclatura">Reglas de Nomenclatura (Hostnames)</h2>
+                <h4 id="Nomenclatura">Reglas de Nomenclatura (Hostnames)</h4>
 
                 <p>
                     <u>Reglas</u>: 
@@ -255,7 +257,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="PassRules">Reglas de Contraseñas</h2>
+                <h4 id="PassRules">Reglas de Contraseñas</h4>
 
                 <p><u>Reglas</u>: Tener más de 8 caracteres de longitud. Combinaciones de letras, números y símbolos. Evitar el uso de la misma en varios dispositivos. No usar palabras comunes.</p>
                 <p><u>Generador de contraseñas</u>: <a href="https://www.lastpass.com/es/features/password-generator" target="_blank">letpass.com</a></p>
@@ -266,14 +268,14 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Gestión de la configuración</h1>
+        <h2>Gestión de la configuración</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h2 id="Basico">Configuración Inicial y Ayuda</h2>
+                <h4 id="Basico">Configuración Inicial y Ayuda</h4>
 
                 <p>Si escribimos un comando no válido intentará resolver ese texto como DNS. Este proceso lleva tiempo y se puede saltar mediante las teclas:</p>
                 <pre class="codigo" translate="no"><code class="cisco">CTRL + BLOQ MAYUS + 6</code></pre>
@@ -293,7 +295,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="Memoria">Gestión de Ficheros de Configuración</h2>
+                <h4 id="Memoria">Gestión de Ficheros de Configuración</h4>
 
                 <p>Para ver las configuraciones del dispositivo debemos estar en la raíz del dispositivo y en modo EXEC privilegiado.</p>
                 <p>El siguiente comando nos permite ver configuraciones (interfaces, login y contraseñas) que están guardadas temporalmente y se eliminan al reiniciar el equipo:</p>
@@ -314,7 +316,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Sistema Operativo</h1>
+        <h2>Sistema Operativo</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -322,7 +324,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="SistemaOperativo">Sistema Operativo IOS</h2>
+                <h4 id="SistemaOperativo">Sistema Operativo IOS</h4>
 
                 <p>Para cambiar de la variable de entorno BOOT la ruta al fichero de imagen se utiliza el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# boot system flash:/&lt;SistemaFicheros&gt;/&lt;NombreFicheroIOS&gt;.bin</code></pre>
@@ -330,7 +332,7 @@ Código por byAd12
             </div>
             
             <div id="RecuperacionSistema">
-                <h2>Recuperarse de un bloqueo del sistema</h2>
+                <h2>Recuperarse de un bloqueo del sistema</h4>
 
                 <p>El cargador de arranque proporciona acceso al switch si no se puede usar el sistema operativo debido a la falta de ficheros de sistema o al daño de estos. Permite acceso a los ficheros almacenados en la memoria flash.
                     Dentro de este aparecerá el prompt <span class="span_contenido" translate="no">switch:</span>.</p>
@@ -369,7 +371,7 @@ switch: boot</code></pre>
             </div>
 
             <div>
-                <h2 id="PurgarConfiguracion">Eliminar toda la configuración del sistema</h2>
+                <h4 id="PurgarConfiguracion">Eliminar toda la configuración del sistema</h4>
 
                 <p>Eliminaremos la configuración de arranque y el fichero de la configuración de VLANs:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># erase startup-config</code></pre>
@@ -383,7 +385,7 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Herramientas</h1>
+        <h2>Herramientas</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -391,7 +393,7 @@ switch: boot</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Conectividad">Herramientas de conectividad</h2>
+                <h4 id="Conectividad">Herramientas de conectividad</h4>
 
                 <p>Se puede enviar un paquete ICMP a un host de destino para verificar si responde:</p>
                 <pre class="codigo" translate="no"><code class="cisco">ping &lt;IP_Destino&gt;</code></pre>
@@ -406,7 +408,7 @@ switch: boot</code></pre>
             </div>
 
             <div>
-                <h2 id="Acceso_Remoto">Herramientas de acceso remoto</h2>
+                <h4 id="Acceso_Remoto">Herramientas de acceso remoto</h4>
 
                 <p>Para conectarse mediante Secure Shell a un host remoto:</p>
                 <pre class="codigo" translate="no"><code class="cisco">ssh -l &lt;Usuario&gt; &lt;IP_Destino&gt;</code></pre>
@@ -431,7 +433,7 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Uso de filtros</h1>
+        <h2>Uso de filtros</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -439,7 +441,7 @@ switch: boot</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Filtrar_Salida_Comando">Filtrar la salida de un comando</h2>
+                <h4 id="Filtrar_Salida_Comando">Filtrar la salida de un comando</h4>
 
                 <p>Sintaxis para filtrar:</p>
                 <pre class="codigo" translate="no"><code class="cisco">&lt;Comando&gt; | &lt;Filtro&gt; &lt;Palabra(s) a filtrar&gt;</code></pre>
@@ -464,7 +466,7 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Historial de comandos</h1>
+        <h2>Historial de comandos</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -472,7 +474,7 @@ switch: boot</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Verificacion_Historial_Comandos">Ver el historial de comandos</h2>
+                <h4 id="Verificacion_Historial_Comandos">Ver el historial de comandos</h4>
 
                 <p>Los comandos que se ejecutaron en una sesión de terminal se puede ver con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show history</code></pre>
@@ -480,7 +482,7 @@ switch: boot</code></pre>
             </div>
 
             <div>
-                <h2 id="Cambiar_Historial_Comandos">Cambiar el límite del historial de comandos</h2>
+                <h4 id="Cambiar_Historial_Comandos">Cambiar el límite del historial de comandos</h4>
 
                 <p>Para asignar cuantos comandos se van a guardar en el historial de comandos se usa el siguiente comando definiendo su cantidad:</p>
                 <pre class="codigo" translate="no"><code class="cisco">terminal history size &lt;Cantidad&gt;</code></pre>
@@ -491,14 +493,14 @@ switch: boot</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Comandos de Verificación</h1>
+        <h2>Comandos de Verificación</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2 id="Comando_Show_Do">Comandos de verificación &gt; <span>Importante</span></h2>
+                <h4 id="Comando_Show_Do">Comandos de verificación &gt; <span>Importante</span></h4>
 
                 <p>El comando <span class="span_contenido" translate="no">show</span> solo funciona si se ejecuta fuera de (config)# como el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief</code></pre>
@@ -510,7 +512,7 @@ switch: boot</code></pre>
             </div>
 
             <div>
-                <h2 id="Verificacion_Interfaces">Comandos de verificación &gt; <span>Interfaces</span></h2>
+                <h4 id="Verificacion_Interfaces">Comandos de verificación &gt; <span>Interfaces</span></h4>
 
                 <p>Para ver todas las configuraciones de las interfaces del dispositivo en IPv4:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip interface brief</code></pre>
@@ -547,7 +549,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Verificacion_Tabla_ARP">Comandos de verificación &gt; <span>Tabla ARP y MAC</span></h2>
+                <h4 id="Verificacion_Tabla_ARP">Comandos de verificación &gt; <span>Tabla ARP y MAC</span></h4>
 
                 <p>Para ver la tabla ARP IPv4:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show ip arp</code></pre>
@@ -561,14 +563,14 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Verificacion_Sistema">Comandos de verificación &gt; <span>Sistema</span></h2>
+                <h4 id="Verificacion_Sistema">Comandos de verificación &gt; <span>Sistema</span></h4>
 
                 <p>Se puede ver el estado del hardware e información del sistema con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show version</code></pre>
             </div>
 
             <div>
-                <h2 id="Verificacion_Ficheros">Comandos de verificación &gt; <span>Ficheros</span></h2>
+                <h4 id="Verificacion_Ficheros">Comandos de verificación &gt; <span>Ficheros</span></h4>
 
                 <p>Para ver el contenido de la memoria flash <span class="span_url" translate="no">flash:</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">show flash:</code></pre>
@@ -578,14 +580,14 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Configuración básica</h1>
+        <h2>Configuración básica</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2 id="NavInterfaces">Navegación y configuración de interfaces</h2>
+                <h4 id="NavInterfaces">Navegación y configuración de interfaces</h4>
 
                 <p>Podemos entrar en modo de configuración global del dispositivo de 2 formas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># configure terminal</code></pre>
@@ -621,7 +623,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Direccionamiento">Direccionamiento IPv4 e IPv6</h2>
+                <h4 id="Direccionamiento">Direccionamiento IPv4 e IPv6</h4>
 
                 <p>Si es un <b>switch</b> hay que configurar IPs mediante VLANs se usa (la VLAN por defecto es 1):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
@@ -643,14 +645,14 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Gateway">Default Gateway (Switch)</h2>
+                <h4 id="Gateway">Default Gateway (Switch)</h4>
 
                 <p>Para poner la IP del gateway por defecto hay que ponerlo en la configuración global:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip default-gateway &lt;IpGateway&gt;</code></pre>
             </div>
             
             <div>
-                <h2 id="DNS">Servicios DNS</h2>
+                <h4 id="DNS">Servicios DNS</h4>
 
                 <p>Asignar un nombre de dominio (ej. <a href="https://pargapondal.inf" target="_blank">pargapondal.inf</a>):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip domain-name &lt;Dominio&gt;</code></pre>
@@ -666,14 +668,14 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad</h1>
+        <h2>Seguridad</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2 id="FiltroAcceso">Filtro de protocolos (Transport Input)</h2>
+                <h4 id="FiltroAcceso">Filtro de protocolos (Transport Input)</h4>
 
                 <p>Podemos permitir ciertos protocolos de acceso remoto con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line vty 0 15</code></pre>
@@ -683,7 +685,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="SeguridadBasica">Seguridad básica y banners</h2>
+                <h4 id="SeguridadBasica">Seguridad básica y banners</h4>
 
                 <p>Poner una contraseña en líneas de acceso:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# line &lt;console/vty&gt; &lt;NumPuerto/Rango&gt;</code></pre>
@@ -714,7 +716,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="Usuarios">Gestión de usuarios y privilegios</h2>
+                <h4 id="Usuarios">Gestión de usuarios y privilegios</h4>
 
                 <p>Para crear un usuario <b>sin privilegios</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# username &lt;Nombre_Usuario&gt; secret &lt;Contraseña&gt;</code></pre>
@@ -735,7 +737,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="Politicas">Políticas de seguridad (bloqueos)</h2>
+                <h4 id="Politicas">Políticas de seguridad (bloqueos)</h4>
 
                 <p>Para aplicar una longitud mínima a cada contraseña que se cree desde este momento (no se aplica a contraseñas ya creadas):</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# security passwords min-length &lt;NúmeroMínimo&gt;</code></pre>
@@ -749,7 +751,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Politica_Avisos">Política de avisos del sistema</h2>
+                <h4 id="Politica_Avisos">Política de avisos del sistema</h4>
 
                 <p>Cisco IOS suele lanzar alertas mientras el usuario escribe, cortando el comando en algunos casos. Se puede evitar con el siguiente comando, que solo lanza avisos cuando el usuario no haya escrito nada:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface console/vty &lt;Número_Interfaz&gt;</code></pre>
@@ -759,7 +761,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
             
             <div>
-                <h2 id="Servidor_SSH">Configuración de un servidor SSH</h2>
+                <h4 id="Servidor_SSH">Configuración de un servidor SSH</h4>
 
                 <p>1. 
                     Antes de nada hay que verificar si el switch soporta realizar funciones criptográficas. 
@@ -790,7 +792,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
         
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Configuración específica</h1>
+        <h2>Configuración específica</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -798,7 +800,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
         <div class="parte1">
 
             <div>
-                <h2 id="Full_Duplex_Interfaz">Configuración de full-duplex en una interfaz</h2>
+                <h4 id="Full_Duplex_Interfaz">Configuración de full-duplex en una interfaz</h4>
 
                 <p>Primero entraremos a la interfaz deseada y asignaremos el modo full-duplex:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -807,7 +809,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Velocidad_Interfaz">Configuración de velocidad en una interfaz</h2>
+                <h4 id="Velocidad_Interfaz">Configuración de velocidad en una interfaz</h4>
 
                 <p>Primero entraremos a la interfaz deseada y asignaremos la velocidad en <b>Mbps</b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -816,7 +818,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Auto_MDIX">Configuración de Auto-MDIX en una interfaz</h2>
+                <h4 id="Auto_MDIX">Configuración de Auto-MDIX en una interfaz</h4>
 
                 <p>Primero entraremos a la interfaz deseada y asignaremos que funcione como Auto-MDIX:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -830,7 +832,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="Interfaz_Loopback">Creación de una interfaz loopback</h2>
+                <h4 id="Interfaz_Loopback">Creación de una interfaz loopback</h4>
 
                 <p>
                     Una interfaz de loopback en un <u>router</u> no permite conectar otros dispositivos y sirve para que una interfaz siempre esté encendida (siempre que el router esté en funcionamiento).
@@ -847,7 +849,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>VLANs</h1>
+        <h2>VLANs</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -855,7 +857,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
         <div class="parte1">
 
             <div>
-                <h2 id="VLAN_Creacion">VLAN &gt; Creación</h2>
+                <h4 id="VLAN_Creacion">VLAN &gt; Creación</h4>
 
                 <p>Primero crearemos la VLAN con el siguiente comando, indicando su número de VLAN:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
@@ -866,7 +868,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="VLAN_Eliminar_Fichero">VLAN &gt; Eliminar la configuración de todas las VLANs</h2>
+                <h4 id="VLAN_Eliminar_Fichero">VLAN &gt; Eliminar la configuración de todas las VLANs</h4>
 
                 <p>Con el comando <span class="span_contenido" translate="no">delete</span> se eliminará el fichero de configuración de las VLANs:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# delete flash:vlan.dat</code></pre>
@@ -876,7 +878,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="VLAN_Puertos_Asignados">VLAN &gt; Visualización de puertos asignados</h2>
+                <h4 id="VLAN_Puertos_Asignados">VLAN &gt; Visualización de puertos asignados</h4>
 
                 <p>Con el siguiente comando se puede ver qué VLANs se asignaron a ciertos puertos:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vlan brief</code></pre>
@@ -888,7 +890,8 @@ Vlan1                  unassigned      YES unset  administratively down down</co
             </div>
 
             <div>
-                <h2 id="VLAN_Configuracion">VLAN &gt; Visualización de la configuración</h2>
+                <h4 id="VLAN_Configuracion">VLAN &gt; Visualización de la configuración</h4>
+
                 <p>Hay un comando muy útil que indica de una interfaz su modo de funcionamiento, VLANs asignadas, permitidas, etc.:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces &lt;Interfaz&gt; switchport</code></pre>
                 <p class="Expl">Esto devolverá algo parecido a:</p>
@@ -905,7 +908,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Asignar_IP">VLAN &gt; Asignación de una IP</h2>
+                <h4 id="VLAN_Asignar_IP">VLAN &gt; Asignación de una IP</h4>
 
                 <p>Simplemente entraremos a la interfaz con <span class="span_contenido" translate="no">interface</span> y le asignaremos la configuración necesaria:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface vlan &lt;VLAN_ID&gt;</code></pre>
@@ -924,7 +927,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Modo_Acceso">VLAN &gt; Modo acceso &gt; Configuración de una interfaz</h2>
+                <h4 id="VLAN_Modo_Acceso">VLAN &gt; Modo acceso &gt; Configuración de una interfaz</h4>
 
                 <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -937,7 +940,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Restablecer_Modo_Acceso">VLAN &gt; Modo acceso &gt; <span>Restablecer</span></h2>
+                <h4 id="VLAN_Restablecer_Modo_Acceso">VLAN &gt; Modo acceso &gt; <span>Restablecer</span></h4>
 
                 <p>Entraremos a la interfaz, y le quitaremos de switchport la vlan:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -946,7 +949,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Modo_Troncal">VLAN &gt; Modo troncal &gt; Configuración de una interfaz</h2>
+                <h4 id="VLAN_Modo_Troncal">VLAN &gt; Modo troncal &gt; Configuración de una interfaz</h4>
 
                 <p>Entraremos a la interfaz, lo configuraremos el modo acceso y le asignaremos una VLAN:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -962,7 +965,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Restablecer_Modo_Troncal">VLAN &gt; Modo troncal &gt; <span>Restablecer</span></h2>
+                <h4 id="VLAN_Restablecer_Modo_Troncal">VLAN &gt; Modo troncal &gt; <span>Restablecer</span></h4>
 
                 <p>Entraremos a la interfaz, y le quitaremos las interfaces permitidas y nativa:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -975,7 +978,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VLAN_Ver_Interfaces_Modo_Troncal">VLAN &gt; Modo troncal &gt; Ver configuración troncal</h2>
+                <h4 id="VLAN_Ver_Interfaces_Modo_Troncal">VLAN &gt; Modo troncal &gt; Ver configuración troncal</h4>
 
                 <p>El siguiente comando es muy importante y permite ver que interfaz actúa en modo troncal, la VLAN nativa y las VLANs permitidas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show interfaces trunk</code></pre>
@@ -986,7 +989,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>VLAN - Voz</h1>
+        <h2>VLAN - Voz</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -994,7 +997,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="VLAN_Voz">VLAN de Voz &gt; Redirigir el tráfico</h2>
+                <h4 id="VLAN_Voz">VLAN de Voz &gt; Redirigir el tráfico</h4>
 
                 <p>Primero crearemos las VLANs correspondientes:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;VLAN_ID&gt;</code></pre>
@@ -1019,7 +1022,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Switchport</h1>
+        <h2>Switchport</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1027,7 +1030,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Modos_Switchport">Modos de interfaz negociados (Switchport)</h2>
+                <h4 id="Modos_Switchport">Modos de interfaz negociados (Switchport)</h4>
 
                 <p>El comando <span class="span_contenido" translate="no">switchport mode</span> tiene opciones adicionales para negociar el modo de interfaz. <u>Sintaxis del comando</u>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">Switch(config)# switchport mode {  access | dynamic {  auto | desirable } |  trunk }</code></pre>
@@ -1070,7 +1073,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
 
             <div>
-                <h2 id="VerificacionDTP">Verificación del modo de DTP</h2>
+                <h4 id="VerificacionDTP">Verificación del modo de DTP</h4>
 
                 <pre class="codigo" translate="no"><code class="cisco"># show dtp interface &lt;Interfaz&gt;</code></pre>
 
@@ -1080,7 +1083,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Negociación</h1>
+        <h2>Negociación</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1088,7 +1091,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Negociacion_Activar"><span>Habilitar la negociación</span> de modos entre puertos</h2>
+                <h4 id="Negociacion_Activar"><span>Habilitar la negociación</span> de modos entre puertos</h4>
 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode trunk</code></pre>
@@ -1097,7 +1100,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Negociacion_Desactivar"><span>Desactivar la negociación</span> de modos entre puertos</h2>
+                <h4 id="Negociacion_Desactivar"><span>Desactivar la negociación</span> de modos entre puertos</h4>
 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
                 <pre class="codigo" translate="no"><code class="cisco">(config-if)# switchport mode dynamic auto</code></pre>
@@ -1108,7 +1111,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Router-on-a-Stick</h1>
+        <h2>Router-on-a-Stick</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1116,7 +1119,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Router_Stick_Configuracion">Router-on-a-Stick &gt; <span>Configuración</span></h2>
+                <h4 id="Router_Stick_Configuracion">Router-on-a-Stick &gt; <span>Configuración</span></h4>
 
                 <p>Los siguientes pasos se realizarán suponiendo que un Switch2 esté conectado a un Switch1 y este a un Router.</p>
 
@@ -1177,7 +1180,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Router_Stick_Verificacion">Router-on-a-Stick &gt; <span>Verificación de la configuración</span></h2>
+                <h4 id="Router_Stick_Verificacion">Router-on-a-Stick &gt; <span>Verificación de la configuración</span></h4>
 
                 <p>En el router ejecutaremos los siguientes comandos:</p>
 
@@ -1200,7 +1203,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Inter-VLAN</h1>
+        <h2>Inter-VLAN</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1208,7 +1211,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Inter_VLAN_Configuracion">Inter-VLAN &gt; <span>Configuración</span></h2>
+                <h4 id="Inter_VLAN_Configuracion">Inter-VLAN &gt; <span>Configuración</span></h4>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Configuración en el switch de Capa 3 / Distribución</span></b>:</p>
 
@@ -1241,7 +1244,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Inter_VLAN_Solucionar_Problemas">Inter-VLAN &gt; <span>Solucionar problemas</span></h2>
+                <h4 id="Inter_VLAN_Solucionar_Problemas">Inter-VLAN &gt; <span>Solucionar problemas</span></h4>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">1. Verificación de existencia y estado de VLANs</span></b>:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vlan brief</code></pre>
@@ -1302,7 +1305,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
 
             <div>
-                <h2 id="Enrutado_IPv6">Inter-VLAN &gt; <span>Enrutado con IPv6</span></h2>
+                <h4 id="Enrutado_IPv6">Inter-VLAN &gt; <span>Enrutado con IPv6</span></h4>
 
                 <p>Si no se activa el siguiente comando en el switch de capa 3, no se podrá enrutar entre VLANs paquetes que utilicen IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -1313,7 +1316,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Switch SVI</h1>
+        <h2>Switch SVI</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1321,7 +1324,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Switch_SVI_Configuracion">Switch SVI &gt; Configuración</h2>
+                <h4 id="Switch_SVI_Configuracion">Switch SVI &gt; Configuración</h4>
 
                 <p>Para asignarle una IP estática de una VLAN específica a un switch para que pueda comunicarse con otros switches de la misma VLAN haremos los siguientes pasos:</p>
                 
@@ -1340,7 +1343,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Router</h1>
+        <h2>Router</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1348,7 +1351,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Router_Configuracion_Gateway">Router &gt; Configuración de una interfaz como gateway</h2>
+                <h4 id="Router_Configuracion_Gateway">Router &gt; Configuración de una interfaz como gateway</h4>
 
                 <p>1. En la interfaz deseada deshabilitaremos switchport:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1365,7 +1368,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Spanning-tree</h1>
+        <h2>Spanning-tree</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1373,7 +1376,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="STP_Switch_Raiz">Spanning-tree &gt; Asignar un switch como <span>raíz</span></h2>
+                <h4 id="STP_Switch_Raiz">Spanning-tree &gt; Asignar un switch como <span>raíz</span></h4>
 
                 <p>Dentro del switch que queramos definir como raíz ejecutaremos lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree vlan &lt;VLAN_ID&gt; root primary</code></pre>
@@ -1393,7 +1396,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="STP_Switch_Secundario">Spanning-tree &gt; Asignar un switch como <span>secundario</span></h2>
+                <h4 id="STP_Switch_Secundario">Spanning-tree &gt; Asignar un switch como <span>secundario</span></h4>
 
                 <p>Dentro del switch que queramos definir como secundario ejecutaremos lo siguiente:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# spanning-tree vlan &lt;VLAN_ID&gt; root secondary</code></pre>
@@ -1413,7 +1416,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="STP_Conceptos">Spanning-tree &gt; Conceptos de prioridad</h2>
+                <h4 id="STP_Conceptos">Spanning-tree &gt; Conceptos de prioridad</h4>
                 <p>
                     La prioridad del bridge se compone de:
                     <br>
@@ -1448,7 +1451,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>EtherChannel - LACP</h1>
+        <h2>EtherChannel - LACP</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1456,7 +1459,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="EtherChannel_Configuracion">EtherChannel &gt; LACP &gt; <span>Configuración</span></h2>
+                <h4 id="EtherChannel_Configuracion">EtherChannel &gt; LACP &gt; <span>Configuración</span></h4>
 
                 <p>Antes de realizar los siguientes pasos, asegúrese de que las VLANs ya estén creadas y que las demás interfaces necesarias estén correctamente configuradas en ambos switches.</p>
 
@@ -1498,7 +1501,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="EtherChannel_Verificacion">EtherChannel &gt; LACP &gt; <span>Verificación</span></h2>
+                <h4 id="EtherChannel_Verificacion">EtherChannel &gt; LACP &gt; <span>Verificación</span></h4>
 
                 <p>Para verificar si el EtherChannel se creó correctamente hay que ejecutar el siguiente comando en ambos switches:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show etherchannel summary</code></pre>
@@ -1519,7 +1522,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="EtherChannel_Eliminar">EtherChannel &gt; LACP &gt; <span>Eliminación de un EtherChannel existente</span></h2>
+                <h4 id="EtherChannel_Eliminar">EtherChannel &gt; LACP &gt; <span>Eliminación de un EtherChannel existente</span></h4>
 
                 <p>1. Entrar a las interfaces y eliminar el channel-group:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface range &lt;Interfaz1,Interfaz2,...&gt;
@@ -1535,7 +1538,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>VLAN Trunking Protocol</h1>
+        <h2>VLAN Trunking Protocol</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1543,7 +1546,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="VTP_Configuracion_Servidor">VTP &gt; Configuración en el switch servidor</h2>
+                <h4 id="VTP_Configuracion_Servidor">VTP &gt; Configuración en el switch servidor</h4>
 
                 <p>1. Meteremos al switch en un dominio VTP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp domain &lt;Nombre_Dominio&gt;</code></pre>
@@ -1568,7 +1571,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VTP_Configuracion_Cliente">VTP &gt; Meter a un cliente en un dominio</h2>
+                <h4 id="VTP_Configuracion_Cliente">VTP &gt; Meter a un cliente en un dominio</h4>
 
                 <p>1. Meteremos al switch en el mismo dominio VTP que el servidor:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vtp domain &lt;Nombre_Dominio&gt;</code></pre>
@@ -1590,7 +1593,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VTP_Ver_Configuracion">VTP &gt; Ver la configuración</h2>
+                <h4 id="VTP_Ver_Configuracion">VTP &gt; Ver la configuración</h4>
 
                 <p>Para verificar el estado de VTP y la configuración usaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vtp status</code></pre>
@@ -1601,7 +1604,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VTP_Configuracion_Contraseña">VTP &gt; Ver la contraseña del dominio</h2>
+                <h4 id="VTP_Configuracion_Contraseña">VTP &gt; Ver la contraseña del dominio</h4>
 
                 <p>Cualquier switch de un mismo dominio debe tener la misma contraseña VTP que indique el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show vtp password</code></pre>
@@ -1610,7 +1613,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="VTP_Reiniciar_Revision">VTP &gt; Reiniciar la revisión (seguridad)</h2>
+                <h4 id="VTP_Reiniciar_Revision">VTP &gt; Reiniciar la revisión (seguridad)</h4>
 
                 <p><b>Importante</b>: Antes de conectar un switch a la red, debes asegurar que su "Configuration Revision" sea 0.</p>
                 <p class="Expl">Si conectas un switch con una revisión mayor a la del servidor, este sobrescribirá y borrará las VLANs de toda la red.</p>
@@ -1631,7 +1634,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Hot Standby Router Protocol</h1>
+        <h2>Hot Standby Router Protocol</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1639,7 +1642,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="HSRP_Configuracion_IP">HSRP &gt; Configuración de una IP</h2>
+                <h4 id="HSRP_Configuracion_IP">HSRP &gt; Configuración de una IP</h4>
 
                 <p>En cada switch de capa 3 o router en el que se vaya a compartir una IP en caso de que un dispositivo caiga, realizaremos los siguientes pasos:</p>
 
@@ -1667,7 +1670,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HSRP_Configuracion_Prioridad">HSRP &gt; Configuración de la prioridad</h2>
+                <h4 id="HSRP_Configuracion_Prioridad">HSRP &gt; Configuración de la prioridad</h4>
 
                 <p>1. Entraremos la interfaz física o lógica (vlan) a la que configuraremos la prioridad:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1686,7 +1689,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HSRP_Configuracion_Preempt">HSRP &gt; Configuración de preempt</h2>
+                <h4 id="HSRP_Configuracion_Preempt">HSRP &gt; Configuración de preempt</h4>
 
                 <p>Con preempt podemos forzar el cambio de cesión de IP de un dispositivo a otro si hay un cambio de prioridad.</p>
 
@@ -1707,7 +1710,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="HSRP_Verificacion">HSRP &gt; Verificación de la configuración</h2>
+                <h4 id="HSRP_Verificacion">HSRP &gt; Verificación de la configuración</h4>
 
                 <p>Para verificar el estado de HSRP y la configuración de cada interfaz con IP compartida usaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show standby</code></pre>
@@ -1725,7 +1728,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Dynamic Host Configuration Protocol v4</h1>
+        <h2>Dynamic Host Configuration Protocol v4</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1733,7 +1736,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="DHCP_Configuracion_Servidor">DHCPv4 &gt; Servidor &gt; Configuración</h2>
+                <h4 id="DHCP_Configuracion_Servidor">DHCPv4 &gt; Servidor &gt; Configuración</h4>
 
                 <p>1. Primero hay que excluir todas las IPs que sean reservadas/estáticas del rango de IPs que DHCP va a conceder:</p>
                 <p class="Expl">Para excluir una <b>única</b> IP:</p>
@@ -1793,7 +1796,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Configurar el modo de reenvío</h2>
+                <h4 id="DHCP_Configuracion_Servidor_Helper">DHCPv4 &gt; Servidor &gt; Configurar el modo de reenvío</h4>
 
                 <p>1. Primero entraremos a la interfaz donde se recibirán las solicitudes DHCP:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interface&gt;</code></pre>
@@ -1804,7 +1807,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Desactivar">DHCPv4 &gt; Servidor &gt; (Des)activar el servicio</h2>
+                <h4 id="DHCP_Desactivar">DHCPv4 &gt; Servidor &gt; (Des)activar el servicio</h4>
 
                 <p><u>Nota</u>: En Cisco IOS el servicio DHCPv4 está habilitado de manera predeterminada.</p>
                 <p><u>Importante</u>: Si se borra los enlaces DHCP o se detiene y reinicia el servicio DHCP, se pueden asignar temporalmente direcciones IP duplicadas en la red.</p>
@@ -1818,7 +1821,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Cliente_DHCP_Router">DHCPv4 &gt; Cliente &gt; Usar DHCPv4 en un router</h2>
+                <h4 id="DHCP_Cliente_DHCP_Router">DHCPv4 &gt; Cliente &gt; Usar DHCPv4 en un router</h4>
 
                 <p>1. Primero entraremos a la interfaz:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1833,7 +1836,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Verificacion">DHCPv4 &gt; Verificación</h2>
+                <h4 id="DHCP_Verificacion">DHCPv4 &gt; Verificación</h4>
 
                 <p><b>Servidor</b>:</p>
 
@@ -1867,7 +1870,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Dynamic Host Configuration Protocol v6</h1>
+        <h2>Dynamic Host Configuration Protocol v6</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -1875,7 +1878,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="SLAAC_Activar">SLAAC &gt; Activar</h2>
+                <h4 id="SLAAC_Activar">SLAAC &gt; Activar</h4>
 
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -1887,7 +1890,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateless_Activar">DHCPv6 stateless &gt; Habilitar</h2>
+                <h4 id="DHCPv6_Stateless_Activar">DHCPv6 stateless &gt; Habilitar</h4>
 
                 <p>1. Primero entraremos a la interfaz donde se activará:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1902,7 +1905,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateful_Activar">DHCPv6 stateful &gt; Habilitar</h2>
+                <h4 id="DHCPv6_Stateful_Activar">DHCPv6 stateful &gt; Habilitar</h4>
 
                 <p>1. Primero entraremos a la interfaz donde se activará:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1918,7 +1921,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateless_Servidor_Config">DHCPv6 stateless &gt; Servidor &gt; Configurar</h2>
+                <h4 id="DHCPv6_Stateless_Servidor_Config">DHCPv6 stateless &gt; Servidor &gt; Configurar</h4>
 
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -1940,7 +1943,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateless_Cliente_Config">DHCPv6 stateless &gt; Cliente &gt; Configurar un router</h2>
+                <h4 id="DHCPv6_Stateless_Cliente_Config">DHCPv6 stateless &gt; Cliente &gt; Configurar un router</h4>
 
                 <p>1. Habilitaremos ipv6 en la interfaz física:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -1958,7 +1961,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateful_Servidor_Config">DHCPv6 stateful &gt; Servidor &gt; Configurar</h2>
+                <h4 id="DHCPv6_Stateful_Servidor_Config">DHCPv6 stateful &gt; Servidor &gt; Configurar</h4>
 
                 <p>1. Primero habilitaremos el enrutamiento por IPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -1981,7 +1984,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Stateful_Cliente_Config">DHCPv6 stateful &gt; Cliente &gt; Configurar un router</h2>
+                <h4 id="DHCPv6_Stateful_Cliente_Config">DHCPv6 stateful &gt; Cliente &gt; Configurar un router</h4>
 
                 <p>1. El router cliente DHCPv6 debe estar ipv6 unicast-routing habilitado:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ipv6 unicast-routing</code></pre>
@@ -2002,7 +2005,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Servidor_Verificacion">DHCPv6 &gt; Servidor &gt; Verificación</h2>
+                <h4 id="DHCPv6_Servidor_Verificacion">DHCPv6 &gt; Servidor &gt; Verificación</h4>
 
                 <p>Para verificar el nombre del pool de DHCPv6 y sus parámetros:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ipv6 dhcp pool</code></pre>
@@ -2013,7 +2016,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCPv6_Relay">DHCPv6 &gt; Relay</h2>
+                <h4 id="DHCPv6_Relay">DHCPv6 &gt; Relay</h4>
 
                 <p>Para configurar un router como agente de retransmisión DHCPv6:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2028,7 +2031,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Spanning-tree</h1>
+        <h2>Seguridad - Spanning-tree</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2036,7 +2039,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="PortFast_Activar">Spanning-tree &gt; Activar <span>Port-Fast</span></h2>
+                <h4 id="PortFast_Activar">Spanning-tree &gt; Activar <span>Port-Fast</span></h4>
 
                 <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo portfast:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2050,7 +2053,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="BPDUGuard_Activar">Spanning-tree &gt; Activar <span>BPDU-Guard</span></h2>
+                <h4 id="BPDUGuard_Activar">Spanning-tree &gt; Activar <span>BPDU-Guard</span></h4>
 
                 <p>Primero entraremos en la interfaz deseada y activaremos mediante spanning-tree el modo bpduguard:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2067,7 +2070,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="STP_Seguridad_Verificacion">Spanning-tree &gt; Verificación</h2>
+                <h4 id="STP_Seguridad_Verificacion">Spanning-tree &gt; Verificación</h4>
 
                 <p>Con el siguiente comando podremos ver toda la configuración relacionada con STP:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show running-config | begin span</code></pre>
@@ -2081,7 +2084,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Problemas de reconocimiento</h1>
+        <h2>Seguridad - Problemas de reconocimiento</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2089,7 +2092,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="CDP_Deshabilitar">(Des)habilitar el protocolo CDP</h2>
+                <h4 id="CDP_Deshabilitar">(Des)habilitar el protocolo CDP</h4>
 
                 <p>
                     CDP es un protocolo habilitado por defecto en todos los switches de Cisco.
@@ -2116,7 +2119,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="LLDP_Deshabilitar">(Des)habilitar el protocolo LLDP</h2>
+                <h4 id="LLDP_Deshabilitar">(Des)habilitar el protocolo LLDP</h4>
 
                 <p>LLDP también es vulnerable a los ataques de reconocimiento como el protocolo CDP.</p>
 
@@ -2139,7 +2142,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Puertos</h1>
+        <h2>Seguridad - Puertos</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2147,7 +2150,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</h2>
+                <h4 id="Puertos_No_Usados_Deshabilitar">Deshabilitar puertos no usados</h4>
 
                 <p>
                     Una buena práctica es apagar todos los puertos que no se utilicen y así evitar que, 
@@ -2161,7 +2164,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Puertos_VLAN_BlackHole">Asignar puertos no usados a la VLAN BlackHole</h2>
+                <h4 id="Puertos_VLAN_BlackHole">Asignar puertos no usados a la VLAN BlackHole</h4>
 
                 <p>Es buena práctica crear una vlan llamada BlackHole y meter dentro todos los puertos que no se vayan a usar:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# vlan &lt;Número_VLAN_Sin_Usar&gt;
@@ -2177,7 +2180,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Port Security</h1>
+        <h2>Seguridad - Port Security</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2185,7 +2188,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</h2>
+                <h4 id="Habilitar_Seguridad_Puertos">Habilitar la seguridad de puertos</h4>
 
                 <p>La seguridad de puertos va dirigida solo a puertos en <b>modo acceso</b>, y se puede activar de la siguiente forma:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2197,7 +2200,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Seguridad_Puertos_Limitar_MACs">Seguridad de puertos &gt; Limitar MACs</h2>
+                <h4 id="Seguridad_Puertos_Limitar_MACs">Seguridad de puertos &gt; Limitar MACs</h4>
 
                 <p>Con port-security podemos limitar la <b>cantidad máxima</b> de MACs que puede haber en un puerto, siendo de 1 hasta 8192:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2214,7 +2217,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Seguridad_Puertos_Caducidad_MACs">Seguridad de puertos &gt; Caducidad de las MACs</h2>
+                <h4 id="Seguridad_Puertos_Caducidad_MACs">Seguridad de puertos &gt; Caducidad de las MACs</h4>
 
                 <p>
                     Podemos definir que las MACs que se guardan tengan un tiempo de caducidad hasta que se eliminen de la memoria.
@@ -2240,7 +2243,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Seguridad_Puertos_Modos_Violacion">Seguridad de puertos &gt; Modos de violación</h2>
+                <h4 id="Seguridad_Puertos_Modos_Violacion">Seguridad de puertos &gt; Modos de violación</h4>
 
                 <p>Podemos definir que pasará si ocurre una violación de un puerto con 3 modos diferentes:</p>
 
@@ -2260,7 +2263,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Seguridad de puertos &gt; Habilitar un puerto bloqueado</h2>
+                <h4 id="Seguridad_Puertos_Habilitar_Puerto_Bloqueado">Seguridad de puertos &gt; Habilitar un puerto bloqueado</h4>
 
                 <p>Si una interfaz fue bloqueada y no se configuró sticky, podemos habilitarla de nuevo:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2276,7 +2279,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Seguridad_Puertos_Verificacion">Seguridad de puertos &gt; Verificación</h2>
+                <h4 id="Seguridad_Puertos_Verificacion">Seguridad de puertos &gt; Verificación</h4>
 
                 <p>El siguiente comando muestra un resumen de cada interfaz con sus MACs aprendidas, el máximo y si está en modo de violación:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show port-security</code></pre>
@@ -2296,7 +2299,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Ataques de VLAN</h1>
+        <h2>Seguridad - Ataques de VLAN</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2304,7 +2307,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="VLAN_Hop_Mitigacion">VLAN &gt; Mitigar ataques de salto</h2>
+                <h4 id="VLAN_Hop_Mitigacion">VLAN &gt; Mitigar ataques de salto</h4>
 
                 <p>Un atacante puede aprovechar la negociación automática de Dynamic Trunking Protocol para simular ser un switch y conseguir que el puerto negocie un enlace trunk. De esta forma podría recibir tráfico de varias VLANs.</p>
                 <p>Esto ocurre porque normalmente un equipo está conectado a un puerto en modo acceso, que solo debería tener acceso a una VLAN.</p>
@@ -2328,7 +2331,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Ataques de DHCP</h1>
+        <h2>Seguridad - Ataques de DHCP</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2336,7 +2339,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="DHCP_Snooping_Configuracion">DHCP Snooping &gt; Configuración</h2>
+                <h4 id="DHCP_Snooping_Configuracion">DHCP Snooping &gt; Configuración</h4>
 
                 <p>Para habilitar DHCP Snooping lo haremos en la configuración global:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping</code></pre>
@@ -2355,7 +2358,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="DHCP_Snooping_Verificacion">DHCP Snooping &gt; Verificación</h2>
+                <h4 id="DHCP_Snooping_Verificacion">DHCP Snooping &gt; Verificación</h4>
 
                 <p>Con el siguiente comando podemos ver toda la configuración que se haya asignado, además de un esquema de todas las interfaces:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip dhcp snooping</code></pre>
@@ -2369,7 +2372,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Seguridad - Ataques de ARP</h1>
+        <h2>Seguridad - Ataques de ARP</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2377,7 +2380,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="DAI_Configuracion">DAI &gt; Configuración</h2>
+                <h4 id="DAI_Configuracion">DAI &gt; Configuración</h4>
 
                 <p>Para configurar DAI, se requiere que funcione la tabla de enlace de inspección DHCP. Por ello tendremos que habilitarlo:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# ip dhcp snooping</code></pre>
@@ -2405,7 +2408,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático</h1>
+        <h2>Enrutamiento estático</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2413,7 +2416,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Ver_Tabla_Rutas">Ver la tabla de rutas</h2>
+                <h4 id="Ver_Tabla_Rutas">Ver la tabla de rutas</h4>
 
                 <p>Para ver la tabla de rutas de IPv4 usaremos el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
@@ -2468,7 +2471,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Ver_Tabla_Rutas_Estaticas">Ver la tabla de rutas estáticas</h2>
+                <h4 id="Ver_Tabla_Rutas_Estaticas">Ver la tabla de rutas estáticas</h4>
 
                 <p>Para ver solo las rutas estáticas de la tabla de rutas IPv4 podemos usar:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route static</code></pre>
@@ -2482,7 +2485,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático - Rutas estáticas</h1>
+        <h2>Enrutamiento estático - Rutas estáticas</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2490,7 +2493,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Enrutamiento_Estatico_IPv4"><span>IPv4</span> - Configurar rutas estáticas</h2>
+                <h4 id="Enrutamiento_Estatico_IPv4"><span>IPv4</span> - Configurar rutas estáticas</h4>
 
                 <p>Para definir en routers o switches de capa 3 una ruta para poder llegar a una red remota, se puede realizar de 3 maneras distintas:</p>
 
@@ -2506,7 +2509,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Enrutamiento_Estatico_IPv6"><span>IPv6</span> - Configurar rutas estáticas</h2>
+                <h4 id="Enrutamiento_Estatico_IPv6"><span>IPv6</span> - Configurar rutas estáticas</h4>
 
                 <p>Para definir en routers o switches de capa 3 una ruta para poder llegar a una red remota, se puede realizar de 3 maneras distintas:</p>
 
@@ -2526,7 +2529,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático - Importante</h1>
+        <h2>Enrutamiento estático - Importante</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2534,7 +2537,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Eleccion_Ruta">Cómo se elige la ruta a utilizar</h2>
+                <h4 id="Enrutamiento_Estatico_Eleccion_Ruta">Cómo se elige la ruta a utilizar</h4>
 
                 <p>El router selecciona la ruta que más bits de prefijo coinciden con la dirección IP de destino, es decir, la ruta más específica.</p>
 
@@ -2543,7 +2546,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</h2>
+                <h4 id="Enrutamiento_Estatico_Sumarizacion">Sumarización de subredes</h4>
 
                 <p>Se puede ahorrar tiempo de configuración creando menos rutas. Para ello, podemos crear una dirección de red que englobe a varias subredes como por ejemplo las siguientes:</p>
                 <pre class="codigo" translate="no"><code class="cisco">192.168.0.0/24
@@ -2581,7 +2584,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Numero_Saltos">Rutas con el mismo número de saltos</h2>
+                <h4 id="Enrutamiento_Estatico_Numero_Saltos">Rutas con el mismo número de saltos</h4>
 
                 <p>Se puede dar el caso de que por 2 interfaces diferentes se pueda llegar al mismo destino, por ello es necesario seguir unas reglas:</p>
 
@@ -2598,7 +2601,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
     
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático - Distancia administrativa</h1>
+        <h2>Enrutamiento estático - Distancia administrativa</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2606,7 +2609,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Secundario_IPv4"><span>IPv4</span> - Configurar rutas secundarias</h2>
+                <h4 id="Enrutamiento_Estatico_Secundario_IPv4"><span>IPv4</span> - Configurar rutas secundarias</h4>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
                 <p>Estas rutas secundarias tienen que tener un número de distancia administrativa mayor a 1, ya que la ruta primaria siempre será la 1.</p>
@@ -2629,7 +2632,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Secundario_IPv6"><span>IPv6</span> - Configurar rutas secundarias</h2>
+                <h4 id="Enrutamiento_Estatico_Secundario_IPv6"><span>IPv6</span> - Configurar rutas secundarias</h4>
 
                 <p>La distancia administrativa permite configurar una ruta secundaria hacia una red mediante otra interfaz o IP.</p>
                 <p>Estas rutas secundarias deben tener un número de distancia administrativa mayor a 1, ya que la ruta primaria siempre será 1.</p>
@@ -2652,7 +2655,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Enrutamiento_Estatico_Secundario_Problema">Problemas de las rutas secundarias</h2>
+                <h4 id="Enrutamiento_Estatico_Secundario_Problema">Problemas de las rutas secundarias</h4>
 
                 <p>
                     Se suelen producir <b>bucles</b> de paquetes ya que los routers no son capaces de detectar que enlaces en otros routers están caídos, 
@@ -2666,7 +2669,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático - Rutas predeterminadas</h1>
+        <h2>Enrutamiento estático - Rutas predeterminadas</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2674,7 +2677,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Rutas_Predeterminadas_IPv4"><span>IPv4</span> - Configurar rutas predeterminadas</h2>
+                <h4 id="Rutas_Predeterminadas_IPv4"><span>IPv4</span> - Configurar rutas predeterminadas</h4>
 
                 <p>Podemos indicar a un router o switch de Capa 3 hacia donde se enviará cualquier paquete cuya IP de destino no esté en la tabla de rutas. Para ello tenemos 3 opciones:</p>
                 
@@ -2692,7 +2695,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Rutas_Predeterminadas_IPv6"><span>IPv6</span> - Configurar rutas predeterminadas</h2>
+                <h4 id="Rutas_Predeterminadas_IPv6"><span>IPv6</span> - Configurar rutas predeterminadas</h4>
 
                 <p>Podemos indicar a un router o switch de Capa 3 hacia donde se enviará cualquier paquete cuya IP de destino no esté en la tabla de rutas. Para ello tenemos 3 opciones:</p>
                 
@@ -2711,7 +2714,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento estático - Rutas de host</h1>
+        <h2>Enrutamiento estático - Rutas de host</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2719,7 +2722,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="Rutas_Estaticas_Host_IPv4"><span>IPv4</span> - Configurar rutas estáticas de host</h2>
+                <h4 id="Rutas_Estaticas_Host_IPv4"><span>IPv4</span> - Configurar rutas estáticas de host</h4>
 
                 <p>Con las rutas de host estáticas se permite definir que, para llegar a un host en concreto, hay que enviar los paquetes por cierta ruta. Se puede definir de 3 maneras:</p>
 
@@ -2737,7 +2740,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="Rutas_Estaticas_Host_IPv6"><span>IPv6</span> - Configurar rutas estáticas de host</h2>
+                <h4 id="Rutas_Estaticas_Host_IPv6"><span>IPv6</span> - Configurar rutas estáticas de host</h4>
 
                 <p>Con las rutas de host estáticas se permite definir que, para llegar a un host en concreto, hay que enviar los paquetes por cierta ruta. Para ello tenemos 3 opciones:</p>
                 
@@ -2758,7 +2761,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento dinámico - OSPF</h1>
+        <h2>Enrutamiento dinámico - OSPF</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -2766,7 +2769,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="OSPF_Configuracion_Basica">Configuración básica</h2>
+                <h4 id="OSPF_Configuracion_Basica">Configuración básica</h4>
 
                 <p>Para configurar OSPF, debemos habilitarlo explícitamente mediante el siguiente comando, especificando un número de proceso entre <span class="span_contenido" translate="no">1 - 65535</span>:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
@@ -2776,7 +2779,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="OSPF_Router_ID">Asignar un Router ID</h2>
+                <h4 id="OSPF_Router_ID">Asignar un Router ID</h4>
 
                 <p>Cada router que use OSPF debe tener un identificador único en formato de dirección IPv4. No importa si esta dirección IPv4 está en uso, ya que no se utiliza para la comunicación de datos:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;</code></pre>
@@ -2789,7 +2792,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="OSPF_Recargar_Configuración">Recargar la configuración</h2>
+                <h4 id="OSPF_Recargar_Configuración">Recargar la configuración</h4>
 
                 <p>Un router no permitirá un cambio de Router ID a no ser que se recargue su configuración previamente:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip ospf process</code></pre>
@@ -2798,7 +2801,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="OSPF_Definir_Redes">Definir redes</h2>
+                <h4 id="OSPF_Definir_Redes">Definir redes</h4>
 
                 <p>Para definir las interfaces que se compartirán por OSPF tenemos 3 maneras diferentes de configurarlo:</p>
 
@@ -2827,7 +2830,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Eliminar_Redes">Eliminar redes</h2>
+                <h4 id="OSPF_Eliminar_Redes">Eliminar redes</h4>
 
                 <p>Para eliminar una red configurada en OSPF simplemente pondremos la palabra "no" al principio del comando:</p>
 
@@ -2841,7 +2844,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Interfaz_Pasiva">Interfaz pasiva</h2>
+                <h4 id="OSPF_Interfaz_Pasiva">Interfaz pasiva</h4>
 
                 <p>Configurar una interfaz como pasiva no reenvía e ignora mensajes de tipo OSPF:</p>
 
@@ -2859,7 +2862,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Interfaz_Punto_A_Punto">Tipo de interfaz punto a punto</h2>
+                <h4 id="OSPF_Interfaz_Punto_A_Punto">Tipo de interfaz punto a punto</h4>
 
                 <p>Si el tipo de red se detecta como BROADCAST, pero en realidad se trata de un enlace <b>punto a punto</b>, se puede modificar manualmente con:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
@@ -2877,7 +2880,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Prioridad">Configuración de la prioridad de una interfaz</h2>
+                <h4 id="OSPF_Prioridad">Configuración de la prioridad de una interfaz</h4>
 
                 <p>Asignar una prioridad a una interfaz permite asignar manualmente qué routers será el DR o BDR según el que tenga una prioridad más alta.</p>
                 <p>Las prioridades van de <span class="span_contenido" translate="no">1 - 255</span>, aunque la prioridad <span class="span_contenido" translate="no">0</span> se usa para indicar que no debe ser nunca DR ni BDR:</p>
@@ -2892,7 +2895,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Ancho_Banda">Configuración del ancho de banda</h2>
+                <h4 id="OSPF_Ancho_Banda">Configuración del ancho de banda</h4>
 
                 <p>
                     En cada router del dominio OSPF se debe configurar el coste de ancho de banda si hay enlaces más rápidos que Fast Ethernet, 
@@ -2917,7 +2920,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Coste">Configuración del coste</h2>
+                <h4 id="OSPF_Coste">Configuración del coste</h4>
 
                 <p>La configuración manual del coste en un enlace permite preferir una ruta hacia un destino sobre otra ruta (cuanto más bajo sea, mejor). Configuración:</p>
 
@@ -2931,7 +2934,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Intervalo_Paquetes">Intervalo de paquetes: <span>Hello</span> y <span>Dead</span></h2>
+                <h4 id="OSPF_Intervalo_Paquetes">Intervalo de paquetes: <span>Hello</span> y <span>Dead</span></h4>
 
                 <p>Por cada interfaz hay un intervalo de envío de paquetes OSPF de tipo Hello y Dead. Estos intervalos se pueden consultar con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip ospf interface &lt;Interfaz&gt;</code></pre>
@@ -2959,7 +2962,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Propagar_Ruta_Predeterminada">Propagación de la ruta predeterminada</h2>
+                <h4 id="OSPF_Propagar_Ruta_Predeterminada">Propagación de la ruta predeterminada</h4>
 
                 <p>El router que tenga acceso a Internet tendrá que crear una ruta estática predeterminada y propagarla por OSPF. Configuración:</p>
                 <p class="Expl">1. Se debe crear una ruta predeterminada estática:</p>
@@ -2977,7 +2980,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
             <div>
 
-                <h2 id="OSPF_Verificacion">Comandos de verificación</h2>
+                <h4 id="OSPF_Verificacion">Comandos de verificación</h4>
 
                 <p>Ver proceso de adyacencias en tiempo real:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># debug ip ospf adj</code></pre>
@@ -3015,7 +3018,8 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="OSPF_Diagnostico_Fallos">Diagnóstico de fallos</h2>
+
+                <h4 id="OSPF_Diagnostico_Fallos">Diagnóstico de fallos</h4>
 
                 <p>1. <b>Configuración de OSPF</b>:</p>
                 <p class="Expl">
@@ -3091,7 +3095,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Enrutamiento dinámico - OSPF Multiárea</h1>
+        <h2>Enrutamiento dinámico - OSPF Multiárea</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3099,7 +3103,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="OSPF_Multiarea_Teoria">Teoría</h2>
+                <h4 id="OSPF_Multiarea_Teoria">Teoría</h4>
 
                 <p>OSPF usa áreas para facilitar la administración y optimizar el uso de recursos y el tráfico.</p>
 
@@ -3114,7 +3118,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="OSPF_Multiarea_Configuracion">Configuración</h2>
+                <h4 id="OSPF_Multiarea_Configuracion">Configuración</h4>
 
                 <p>1. En todos los routers de la red se debe configurar el <a href="#OSPF_Configuracion_Basica">mismo ID de proceso</a> OSPF junto con un <a href="#OSPF_Router_ID">Router ID</a> único para cada dispositivo:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# router ospf &lt;Número_Proceso&gt;
@@ -3144,7 +3148,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>ACL</h1>
+        <h2>ACL</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3152,7 +3156,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Donde_Ubicar">Donde ubicar las ACL</h2>
+                <h4 id="ACL_Donde_Ubicar">Donde ubicar las ACL</h4>
                 
                 <p>Las <a href="#ACL_Estandar_Sintaxis">ACL estándar</a> deben aplicarse lo más cerca posible del destino del tráfico.</p>
                 <p>Las <a href="#ACL_Extendida_Sintaxis">ACL extendidas</a> deben ubicarse lo más cerca posible del origen del tráfico que se desea filtrar.</p>
@@ -3160,7 +3164,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Orden_Creación">En qué orden se deben crear las ACL</h2>
+                <h4 id="ACL_Orden_Creación">En qué orden se deben crear las ACL</h4>
 
                 <p>El orden de las reglas dentro de una ACL es fundamental, ya que el router evalúa las entradas de <u>forma secuencial</u>, de arriba hacia abajo.</p>
 
@@ -3175,7 +3179,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Importante">A tener en cuenta</h2>
+                <h4 id="ACL_Importante">A tener en cuenta</h4>
                 
                 <p>Por defecto, todo el tráfico está <u>denegado implícitamente</u>. Esto significa que, si no se especifican reglas de permit, todo será bloqueado automáticamente.</p>
                 <p>Por lo tanto, una ACL que solo contenga reglas de deny no tendrá efecto práctico si no incluye también reglas de permit, ya que el comportamiento por defecto ya es denegar todo.</p>
@@ -3186,7 +3190,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>ACL Estándar</h1>
+        <h2>ACL Estándar</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3194,7 +3198,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Estandar_Sintaxis">Sintaxis</h2>
+                <h4 id="ACL_Estandar_Sintaxis">Sintaxis</h4>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny&gt; &lt;A_Quien&gt; &lt;log&gt;</code></pre>
 
@@ -3212,7 +3216,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Estandar_Dirección_Red">ACL asignada a una dirección de red</h2>
+                <h4 id="ACL_Estandar_Dirección_Red">ACL asignada a una dirección de red</h4>
 
                 <p>
                     Para definir a quien se le aplica la ACL se debe usar una IP con una máscara <b>WildCard</b>,
@@ -3232,7 +3236,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Estandar_Host">ACL asignada a un host</h2>
+                <h4 id="ACL_Estandar_Host">ACL asignada a un host</h4>
 
                 <p>
                     Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico de una única IP - <span class="span_contenido" translate="no">IP_Host</span>:
@@ -3244,7 +3248,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Estandar_Todos">ACL asignada a todas las IPs</h2>
+                <h4 id="ACL_Estandar_Todos">ACL asignada a todas las IPs</h4>
 
                 <p>
                     Las siguientes 2 formas cumplen con la función de permitir o denegar el tráfico a todas las IPs que existen:
@@ -3259,7 +3263,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>ACL Extendida</h1>
+        <h2>ACL Extendida</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3267,7 +3271,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Extendida_Sintaxis">Sintaxis</h2>
+                <h4 id="ACL_Extendida_Sintaxis">Sintaxis</h4>
                 
                 <pre class="codigo" translate="no"><code class="cisco">(config)# access-list &lt;Número_ACL&gt; &lt;permit / deny / remark [Texto]&gt; &lt;Protocolo&gt; &lt;Origen&gt; [Puerto_Origen] &lt;Destino&gt; [Puerto_Destino] [established] [log]</code></pre>
 
@@ -3303,7 +3307,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Extendida_Ejemplos">Ejemplos</h2>
+                <h4 id="ACL_Extendida_Ejemplos">Ejemplos</h4>
 
                 <p><b>Tráfico WEB</b>:</p>
 
@@ -3335,7 +3339,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Más funciones de las ACL</h1>
+        <h2>Más funciones de las ACL</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3343,7 +3347,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Nombre">Crear ACLs extendidas con un nombre</h2>
+                <h4 id="ACL_Nombre">Crear ACLs extendidas con un nombre</h4>
 
                 <p>
                     Para crear ACLs se puede hacer con un número identificativo (como se vió hasta ahora) o mediante un nombre identificativo y único.
@@ -3366,7 +3370,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Comentario">Asignar un comentario a una ACL extendida</h2>
+                <h4 id="ACL_Comentario">Asignar un comentario a una ACL extendida</h4>
 
                 <p>
                     Un comentario permite asignar una descripción breve de hasta 100 carácteres a cada ACL, permitiendo identificarlas fácilmente. 
@@ -3385,7 +3389,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Borrar_Regla">Como borrar una regla del ACL</h2>
+                <h4 id="ACL_Borrar_Regla">Como borrar una regla del ACL</h4>
 
                 <p>Primero debes que número de secuencia tiene la regla en la lista:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
@@ -3399,7 +3403,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Anadir_Regla_Intermedia">Como añadir una regla en una posición especifica de la ACL</h2>
+                <h4 id="ACL_Anadir_Regla_Intermedia">Como añadir una regla en una posición especifica de la ACL</h4>
 
                 <p>Primero debes mirar entre qué reglas se va a situar la nueva regla:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
@@ -3417,7 +3421,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Asignar una ACL</h1>
+        <h2>Asignar una ACL</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3425,7 +3429,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Aplicar_Interfaz">Asignar una ACL a una interfaz</h2>
+                <h4 id="ACL_Aplicar_Interfaz">Asignar una ACL a una interfaz</h4>
 
                 <p>Primero hay que meterse en la interfaz a la que se le vaya a aplicar la ACL:</p>
                 
@@ -3456,7 +3460,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="ACL_Aplicar_VTY">Asignar una ACL a las líneas VTY</h2>
+                <h4 id="ACL_Aplicar_VTY">Asignar una ACL a las líneas VTY</h4>
 
                 <p>Para permitir a un unos equipos específicos el acceso remoto VTY de un router tendremos que crear primero una ACL:</p>
                 
@@ -3475,7 +3479,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Verificación de ACL</h1>
+        <h2>Verificación de ACL</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3483,7 +3487,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="ACL_Verificar">Comandos de verificación</h2>
+                <h4 id="ACL_Verificar">Comandos de verificación</h4>
 
                 <p>Con el siguiente comando se pueden ver todas las ACL creadas junto a sus reglas y el número de secuencia correspondiente a cada regla:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show access-lists</code></pre>
@@ -3502,7 +3506,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>NAT estática</h1>
+        <h2>NAT estática</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3510,7 +3514,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h2>
+                <h4 id="NAT_Estatico_Configuracion_IPs">Configuración con traducción de IPs</h4>
 
                 <p>
                     La NAT estática permite establecer una traducción fija entre una IP privada y una IP pública, 
@@ -3541,7 +3545,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>NAT dinámica</h1>
+        <h2>NAT dinámica</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3549,7 +3553,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h2>
+                <h4 id="NAT_Dinamico_Configuracion">Configuración con una pool de direcciones</h4>
 
                 <p>
                     La NAT dinámica permite asignar de forma automática una dirección IP pública 
@@ -3596,7 +3600,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h2>
+                <h4 id="NAT_Dinamico_Borrar_Traducciones">Borrar traducciones dinámicas activas</h4>
 
                 <p>Para borrar las entradas dinámicas antes de que expire el tiempo de espera:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># clear ip nat translation *</code></pre>
@@ -3611,7 +3615,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>PAT</h1>
+        <h2>PAT</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3619,7 +3623,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="PAT_Configuracion_Unica_IPv4">Configuración para usar una única IPv4</h2>
+                <h4 id="PAT_Configuracion_Unica_IPv4">Configuración para usar una única IPv4</h4>
 
                 <p>
                     PAT permite que múltiples hosts internos compartan una única dirección IP 
@@ -3658,7 +3662,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h2>
+                <h4 id="PAT_Configuracion_Pool">Configuración para usar un pool de direcciones</h4>
 
                 <p>
                     También se puede configurar PAT a partir de un conjunto de direcciones disponibles (pool), 
@@ -3704,14 +3708,14 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>NAT estático con PAT</h1>
+        <h2>NAT estático con PAT</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2 id="NAT_Estatico_Configuracion_Puertos">Configuración con traducción de IPs y puertos</h2>
+                <h4 id="NAT_Estatico_Configuracion_Puertos">Configuración con traducción de IPs y puertos</h4>
 
                 <p>A continuación se muestra la sintaxis para traducir la IP local interna (privada) a la IP global interna (pública) mediante puertos:</p>
 
@@ -3743,7 +3747,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>NAT - Verificación</h1>
+        <h2>NAT - Verificación</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3751,7 +3755,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="NAT_Verificacion">Verificación de la configuración NAT</h2>
+                <h4 id="NAT_Verificacion">Verificación de la configuración NAT</h4>
 
                 <p>Este comando permite ver las traducciones NAT activas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip nat translations</code></pre>
@@ -3789,7 +3793,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="NAT_Identificar_Interfaz">Cómo identificar una interfaz interna o externa</h2>
+                <h4 id="NAT_Identificar_Interfaz">Cómo identificar una interfaz interna o externa</h4>
 
                 <p>Con el siguiente comando podremos ver todas las interfaces activas con sus IPs configuradas:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip interface brief | include up</code></pre>
@@ -3809,7 +3813,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Compartir rutas</h1>
+        <h2>Compartir rutas</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -3817,7 +3821,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <div class="parte1">
 
             <div>
-                <h2 id="BGP_Configuracion">Configuración de BGP</h2>
+                <h4 id="BGP_Configuracion">Configuración de BGP</h4>
 
                 <p>Es necesario entender que BGP se debería usar solo cuando un sistema autónomo (AS) tiene conexión con mínimo otros 2 sistemas autónomos.</p>
 
@@ -3867,7 +3871,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="BGP_Verificacion">Verificación de BGP</h2>
+                <h4 id="BGP_Verificacion">Verificación de BGP</h4>
 
                 <p>Para comprobar que BGP funciona se puede ver que las rutas a redes publicadas por los sistemas autónomos se vean desde el resto de AS:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show ip route</code></pre>
@@ -3885,7 +3889,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
             </div>
 
             <div>
-                <h2 id="BGP_Propagar_Rutas">Propagación de rutas</h2>
+                <h4 id="BGP_Propagar_Rutas">Propagación de rutas</h4>
 
                 <p><b>OSPF</b>:</p>
                 <p class="Expl">
@@ -3923,7 +3927,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <script src="../resources/blog.js"></script>
     </body>
 

@@ -28,7 +28,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -47,16 +47,17 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">Apache2</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Servidor HTTP y HTTPS en Linux</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>Apache2</h1>
+        <h3>Servidor HTTP y HTTPS en Linux</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>1. Instalación</h2>
+                <h4>1. Instalación</h4>
 
                 <p>1. Hay que instalar el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -68,7 +69,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>2. Configuración del firewall</h2>
+                <h4>2. Configuración del firewall</h4>
 
                 <p>2. En el firewall hay que permitir el tráfico de los puertos que se vayan a utilizar:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow [Puerto]/[Protocolo]</code></pre>
@@ -76,7 +77,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>3. Asignar una IP estática</h2>
+                <h4>3. Asignar una IP estática</h4>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o modificando el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/netplan/50-cloud-init.yaml</code></pre>
@@ -112,7 +113,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>4. Permitir el acceso remoto</h2>
+                <h4>4. Permitir el acceso remoto</h4>
 
                 <p>1. Hay que instalar el servicio de SSH en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y openssh-server</code></pre>
@@ -130,7 +131,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Rutas importantes</h2>            
+                <h4>Rutas importantes</h4>            
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -180,7 +181,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="sitio-virtual">5. Configurar un sitio virtual</h2>
+                <h4 id="sitio-virtual">5. Configurar un sitio virtual</h4>
 
                 <p>
                     Normalmente los ficheros de configuración de sitios virtuales se almacenan en la carpeta <span class="span_url" translate="no">/etc/apache2/sites-available/</span>.
@@ -265,7 +266,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="directorio">6. Configuración de directorios</h2>
+                <h4 id="directorio">6. Configuración de directorios</h4>
 
                 <p>
                     En el fichero <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> se pueden definir los permisos a un directorio específico del disco duro del servidor.
@@ -326,7 +327,7 @@ Código por byAd12
         
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Configuraciones adicionales</h1>
+        <h2>Configuraciones adicionales</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -334,7 +335,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2>Como configurar un directorio privado</h2>
+                <h4>Como configurar un directorio privado</h4>
 
                 <p>1. En el fichero <span class="span_url" translate="no">/etc/apache2/apache2.conf</span> hay que definir un nuevo directorio con los siguientes parámetros:</p>
                 <pre class="codigo" translate="no"><code class="apache">&lt;Directory [Ruta_al_directorio]&gt;
@@ -359,7 +360,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Fichero <span translate="no">.htaccess</span></h2>
+                <h4>Fichero <span translate="no">.htaccess</span></h4>
 
                 <p>Sirve para poder dar directivas desde un fichero ubicado en el directorio donde se de permisos.</p>
 
@@ -374,7 +375,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>Usar HTTPS con SSL</h2>
+                <h4>Usar HTTPS con SSL</h4>
 
                 <p>1. Hay que crear un certificado SSL autofirmado:</p>
                 <pre class="codigo" translate="no"><code class="apache">cd /var/www/html
@@ -404,7 +405,7 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>Ejemplo completo</h1>
+        <h2>Ejemplo completo</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -492,7 +493,7 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

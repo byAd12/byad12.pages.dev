@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -43,47 +43,49 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">DTD</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Document Type Definition</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>DTD</h1>
+        <h3>Document Type Definition</h3>
+        <p id="Creditos_Inicio">none</p>
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1 Parte1Indice">
             <div>
-                <h2>Índice de Contenidos</h2>
+                <h4>Índice</h4>
 
-                <h2 style="margin: 20px;" class="IndiceH2">1. Fundamentos</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">1. Fundamentos</h4>
                 <ul>
                     <li><b>Básico:</b> <a href="#ejemplo">Ejemplo</a> • <a href="#definicion">Definición</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">2. Elementos</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">2. Elementos</h4>
                 <ul>
                     <li><b>Declarar:</b> <a href="#elementos-declaracion">Declaración</a> • <a href="#elementos-opciones">Opciones</a></li>
                     <li><b>Elección/Orden:</b> <a href="#elementos-eleccion-secuencia">Elección en secuencia</a> • <a href="#elementos-eleccion-entre-secuencias">Elección entre secuencias</a></li>
                     <li><b>Cardinalidad:</b> <a href="#elementos-cardinalidades">Cardinalidades</a> • <a href="#elementos-cardinalidad-grupo">Cardinalidad en grupo</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">3. Atributos</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">3. Atributos</h4>
                 <ul>
                     <li><b>Definir:</b> <a href="#atributos-declaracion">Declaración</a> • <a href="#atributos-tipos">Tipos</a> • <a href="#atributos-valores-modificadores">Valores / Modificadores</a></li>
                 </ul>
 
-                <h2 style="margin: 20px;" class="IndiceH2">4. Entidades</h2>
+                <h4 style="margin: 20px;" class="IndiceH2">4. Entidades</h4>
                 <ul>
                     <li><b>Tipos:</b> <a href="#entidades-predefinidas-internas">Predefinidas internas</a> • <a href="#entidades-generales-externas">Generales externas</a></li>
                     <li><b>Paramétricas:</b> <a href="#entidades-parametricas-internas">Internas</a> • <a href="#entidades-parametricas-externas">Externas</a> • <a href="#referencias-a-entidades">Referencias</a></li>
                 </ul>
             </div>
         </div>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h2 id="ejemplo">Ejemplo</h2>
+                <h4 id="ejemplo">Ejemplo</h4>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT svg (rect*, circle*, path, line, polyline, polygon, ellipse)&gt;
 
@@ -108,7 +110,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="definicion">Definición</h2>
+                <h4 id="definicion">Definición</h4>
 
                 <p>
                     DTD (<b>Document Type Definition</b>) es un documento de texto plano que sirve para verificar la validez de la estructura del documento XML y de su contenido mediante unas reglas.
@@ -142,7 +144,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2 id="elementos-declaracion">Elementos &gt; Declaración</h2>
+                <h4 id="elementos-declaracion">Elementos &gt; Declaración</h4>
 
                 <p><b><span style="color: rgb(147, 147, 206) !important;">Sintaxis</span></b>:</p>
 
@@ -156,7 +158,7 @@ Código por byAd12
 
             <div>
 
-                <h2 id="elementos-opciones">Elementos &gt; Opciones</h2>
+                <h4 id="elementos-opciones">Elementos &gt; Opciones</h4>
 
                 <p>1. Se puede decir que el contenido de una etiqueta puede no tener nada o tener una <u>cadena de texto</u> - <span class="span_contenido" translate="no">PCDATA</span> (Parsed Character Data) pero sin contar los caracteres reservados en XML.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (#PCDATA)&gt;</code></pre>
@@ -182,7 +184,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="elementos-eleccion-secuencia">Elementos &gt; Elección en una secuencia de elementos</h2>
+                <h4 id="elementos-eleccion-secuencia">Elementos &gt; Elección en una secuencia de elementos</h4>
 
                 <p>Se puede elegir entre una &lt;etiqueta1&gt; o una &lt;etiqueta2&gt; y que luego obligatoriamente la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2), etiqueta3, ...)&gt;</code></pre>
@@ -191,7 +193,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="elementos-eleccion-entre-secuencias">Elementos &gt; Elección entre una secuencia de elementos</h2>
+                <h4 id="elementos-eleccion-entre-secuencias">Elementos &gt; Elección entre una secuencia de elementos</h4>
 
                 <p>Se puede elegir una &lt;etiqueta1&gt; seguido de la &lt;etiqueta2&gt; o solo la &lt;etiqueta3&gt; en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1, etiqueta2) | etiqueta3, ...)&gt;</code></pre>
@@ -200,7 +202,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="elementos-cardinalidades">Elementos &gt; Cardinalidades</h2>
+                <h4 id="elementos-cardinalidades">Elementos &gt; Cardinalidades</h4>
 
                 <p>Con el símbolo <span class="span_contenido" translate="no">?</span> se puede definir una cardinalidad de <span class="span_url" translate="no">0-1</span>.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento (etiqueta1?)&gt;</code></pre>
@@ -218,7 +220,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="elementos-cardinalidad-grupo">Elementos &gt; Cardinalidad en un grupo de objetos</h2>
+                <h4 id="elementos-cardinalidad-grupo">Elementos &gt; Cardinalidad en un grupo de objetos</h4>
 
                 <p>En el siguiente caso se elige entre &lt;etiqueta1&gt; o &lt;etiqueta2&gt; y de la elección se puede poner ninguna o solo una vez:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ELEMENT elemento ((etiqueta1 | etiqueta2)?, ...)&gt;</code></pre>
@@ -240,7 +242,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="atributos-declaracion">Atributos &gt; Declaración</h2>
+                <h4 id="atributos-declaracion">Atributos &gt; Declaración</h4>
 
                 <p><b style="color: rgb(147, 147, 206) !important;">Sintaxis</b>:</p>
 
@@ -268,7 +270,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="atributos-tipos">Atributos &gt; Tipos</h2>
+                <h4 id="atributos-tipos">Atributos &gt; Tipos</h4>
 
                 <p>1. Que tenga unos valores predefinidos válidos.</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo (valor1 | valor2 | ...) predefinido&gt;</code></pre>
@@ -329,7 +331,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="atributos-valores-modificadores">Atributos &gt; Valores / Modificadores</h2>
+                <h4 id="atributos-valores-modificadores">Atributos &gt; Valores / Modificadores</h4>
 
                 <p>En el apartado "predefinido" se puede definir que un atributo sea opcional - <span class="span_contenido" translate="no">#IMPLIED</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;!ATTLIST elemento atributo tipo #IMPLIED&gt;</code></pre>
@@ -363,7 +365,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h2 id="entidades-predefinidas-internas">Entidades predefinidas y generales internas</h2>
+                <h4 id="entidades-predefinidas-internas">Entidades predefinidas y generales internas</h4>
 
                 <p>
                     Una entidad puede almacenar cualquier tipo de contenido e insertarlo en el documento XML. 
@@ -429,7 +431,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="entidades-generales-externas">Entidades generales externas</h2>
+                <h4 id="entidades-generales-externas">Entidades generales externas</h4>
 
                 <p>Una entidad <b>general externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
@@ -474,7 +476,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="entidades-parametricas-internas">Entidades paramétricas internas</h2>
+                <h4 id="entidades-parametricas-internas">Entidades paramétricas internas</h4>
 
                 <p>
                     Una entidad <b>paramétrica</b> solo pueden definirse en un DTD interno pero solo se pueden usar en un documento DTD a parte del documento XML.
@@ -504,7 +506,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="referencias-a-entidades">Referencias a entidades</h2>
+                <h4 id="referencias-a-entidades">Referencias a entidades</h4>
 
                 <p>Se pueden llamar a entidades desde otras entidades como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0"?&gt;
@@ -530,7 +532,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="entidades-parametricas-externas">Entidades paramétricas externas</h2>
+                <h4 id="entidades-parametricas-externas">Entidades paramétricas externas</h4>
 
                 <p>Una entidad <b>paramétrica externa</b> es aquella que define el valor de la entidad en otro fichero.</p>
 
@@ -588,7 +590,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

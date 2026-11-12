@@ -28,7 +28,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -47,18 +47,19 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">isc-dhcp-server</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Servidor DHCP en Linux</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h2>isc-dhcp-server</h2>
+        <h3>Servidor DHCP en Linux</h3>
+        <p id="Creditos_Inicio">none</p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>1. Instalación</h2>
+                <h4>1. Instalación</h4>
 
                 <p>En el servidor hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -67,7 +68,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>2. Configuración del firewall</h2>
+                <h4>2. Configuración del firewall</h4>
 
                 <p>En el firewall hay que permitir el tráfico del puerto 67 - UDP (DHCP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 67/udp</code></pre>
@@ -75,7 +76,7 @@ Código por byAd12
             </div>
            
             <div>
-                <h2>Ficheros importantes</h2>
+                <h4>Ficheros importantes</h4>
                 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -96,7 +97,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2 id="isc-dhcp-server">3. Fichero de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h2>
+                <h4 id="isc-dhcp-server">3. Fichero de configuración: <span translate="no">/etc/default/isc-dhcp-server</span></h4>
 
                 <p>A continuación hay que modificar las siguientes líneas del fichero...</p>
                 <pre class="codigo" translate="no"><code class="language-ini">INTERFACESv4=""
@@ -115,7 +116,7 @@ INTERFACESv6=""</code></pre>
             </div>
 
             <div>
-                <h2 id="dhcpd.conf">4. Fichero de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h2>
+                <h4 id="dhcpd.conf">4. Fichero de configuración: <span translate="no">/etc/dhcp/dhcpd.conf</span></h4>
 
                 <p>
                     Las líneas que se presentan a continuación pueden definirse dentro o fuera de una <span class="span_contenido" translate="no">subnet</span>.
@@ -257,7 +258,7 @@ min-lease-time [Segundos];</code></pre>
             </div>
 
             <div>
-                <h2>5. Comprobación de funcionamiento</h2>
+                <h4>5. Comprobación de funcionamiento</h4>
 
                 <p>Tras configurar los ficheros anteriores hay que reiniciar el servicio y verificar que no presenta errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart isc-dhcp-server.service</code></pre>
@@ -284,14 +285,14 @@ min-lease-time [Segundos];</code></pre>
         <div class="parte1">
 
             <div>
-                <h2>Comandos de administración para el servidor</h2>
+                <h4>Comandos de administración para el servidor</h4>
 
                 <p>Se pueden ver todas las direcciones IPs concedidas por el servidor DHCP, además de su tiempo de expiración:</p>
                 <pre class="codigo" translate="no"><code class="bash">dhcp-lease-list</code></pre>
             </div>
 
             <div>
-                <h2>Comandos de DHCP para un cliente Linux</h2>
+                <h4>Comandos de DHCP para un cliente Linux</h4>
 
                 <p>Para realizar una petición <span class="span_contenido" translate="no">DHCP-DISCOVER</span> (<u>D</u>.O.R.A.):</p>
                 <pre class="codigo" translate="no"><code class="bash">dhclient -v</code></pre>
@@ -306,7 +307,7 @@ min-lease-time [Segundos];</code></pre>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>

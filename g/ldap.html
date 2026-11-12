@@ -24,7 +24,7 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <h1 class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></h1>
+            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
             <ul>
                 <li><a href="../guides.html">~/Guías</a></li>
                 <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
@@ -44,16 +44,18 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1 class="TituloPrincipal">LDAP - Servidor</h1>
-        <h2 class="TituloSecundario" id="TituloSecundario">Lightweight Directory Access Protocol</h2>
-        <h2 class="TituloCreditosSuperior" id="InsertarCreditos">none</h2>
+        <h1>LDAP</h1>
+        <h3>Lightweight Directory Access Protocol</h3>
+        <h2>Configuración en el servidor</h2>
+        <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        
         <div class="parte1">
             <div>
-                <h2>Importante</h2>
+                <h4>Importante</h4>
 
                 <p>Un dominio LDAP se divide en 2 partes: el <u>nombre de dominio</u> (antes del punto) y el <u>TLD</u> (después del punto):</p>
                 <pre class="codigo" translate="no"><code class="bash">[NOMBRE_DOMINIO].[TLD_DOMINIO]</code></pre>
@@ -61,7 +63,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>1. Instalación</h2>
+                <h4>1. Instalación</h4>
 
                 <p>Primero hay que instalar el servidor LDAP - <span class="span_contenido" translate="no">slapd</span> junto a las utilidades necesarias - <span class="span_contenido" translate="no">ldap-utils</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -70,7 +72,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>2. Comprobación</h2>
+                <h4>2. Comprobación</h4>
 
                 <p>El servicio debe estar en modo <span class="span_contenido" translate="no">active</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status slapd</code></pre>
@@ -87,7 +89,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h2>3. Configuración</h2>
+                <h4>3. Configuración</h4>
 
                 <p>Una vez se hayan instalado los paquetes con APT, hay que configurar el servicio <span class="span_contenido" translate="no">slapd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">dpkg-reconfigure slapd</code></pre>
@@ -117,7 +119,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h2>Formato de fichero de configuración</h2>
+                <h4>Formato de fichero de configuración</h4>
 
                 <p>Los ficheros con extensión <span class="span_url" translate="no">.ldif</span> se utilizan para definir varios objetos a la vez para luego añadirlos a la BD con el comando <span class="span_contenido" translate="no">ldapadd</span>:</p>
                 <pre class="codigo" translate="no"><code class="yaml"># Objeto 1
@@ -141,7 +143,7 @@ dn: [URI]
             <!-- ================== -->
             
             <div>
-                <h2>Crear una <span>unidad organizativa</span></h2>
+                <h4>Crear una <span>unidad organizativa</span></h4>
 
                 <p>1. Dentro de un fichero con formato <span class="span_url" translate="no">.ldif</span> hay que definir el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]
@@ -166,7 +168,7 @@ ou: [UO]</code></pre>
             <!-- ================== -->
 
             <div>
-                <h2>Crear un <span>grupo</span></h2>
+                <h4>Crear un <span>grupo</span></h4>
 
                 <p>1. Dentro de un fichero con formato <span class="span_url" translate="no">.ldif</span> hay que definir el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: cn=[NOMBRE_GRUPO],ou=[UO],dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]
@@ -196,7 +198,7 @@ cn: [NOMBRE_GRUPO]</code></pre>
             <!-- ================== -->
 
             <div>
-                <h2>Crear un <span>usuario</span></h2>
+                <h4>Crear un <span>usuario</span></h4>
 
                 <p>1. Hay que calcular el hash de la contraseña con el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">slappasswd</code></pre>
@@ -248,7 +250,7 @@ loginShell: [SHELL]</code></pre>
             <!-- ================== -->
 
             <div>
-                <h2>Crear un usuario con un <span>perfil móvil</span></h2>
+                <h4>Crear un usuario con un <span>perfil móvil</span></h4>
 
                 <p>Hay que hacer lo mismo que en el apartado "Crear un usuario" pero cambiando la ruta de <span class="span_contenido" translate="no">homeDirectory</span> a la carpeta donde se almacenarán estos perfiles:</p>
                 <pre class="codigo" translate="no"><code class="yaml">homeDirectory: /[CARPETA_MÓVIL]/[NOMBRE_USUARIO]</code></pre>
@@ -263,7 +265,7 @@ loginShell: [SHELL]</code></pre>
 
         <div class="parte1">
             <div>
-                <h2>Modificar un <span>objeto</span></h2>
+                <h4>Modificar un <span>objeto</span></h4>
 
                 <p>1. Dentro de un fichero con formato <span class="span_url" translate="no">.ldif</span> hay que definir el siguiente objeto:</p>
                 <pre class="codigo" translate="no"><code class="yaml">dn: [DN_COMPLETO]
@@ -291,7 +293,7 @@ replace: [PROPIEDAD_CAMBIAR]
             <!-- ================== -->
 
             <div>
-                <h2>Eliminar un <span>objeto</span></h2>
+                <h4>Eliminar un <span>objeto</span></h4>
 
                 <p>Primera forma - con el comando <span class="span_contenido" translate="no">ldapdelete</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapdelete -x -D "cn=admin,dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" -W "[DN_COMPLETO]"</code></pre>
@@ -311,7 +313,7 @@ changetype: delete</code></pre>
             <!-- ================== -->
 
             <div>
-                <h2>Buscar un <span>objeto</span></h2>
+                <h4>Buscar un <span>objeto</span></h4>
 
                 <p>Con el comando <span class="span_contenido" translate="no">ldapsearch</span> se puede buscar objetos identificados por su URI:</p>
                 <pre class="codigo" translate="no"><code class="bash">ldapsearch -xLLL -b "dc=[NOMBRE_DOMINIO],dc=[TLD_DOMINIO_SIN_PUNTO]" [BÚSQUEDA] (ENSEÑAR)</code></pre>
@@ -327,13 +329,13 @@ changetype: delete</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>LDAP - Cliente</h1>
+        <h2>Configuración en el cliente</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h2>Conexión de un cliente al servicio LDAP de un servidor</h2>
+                <h4>Conexión de un cliente al servicio LDAP de un servidor</h4>
 
                 <p>1. Primero hay que añadir un registro DNS interno que apunte al dominio LDAP mediante el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /etc/hosts</code></pre>
@@ -378,7 +380,7 @@ changetype: delete</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
-        <h2 class="TituloCreditosInferior"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></h2>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <script src="../resources/blog.js"></script>
