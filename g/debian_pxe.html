@@ -46,7 +46,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>Debian PXE</h1>
-        <h3>Automatizar la instalación de Debian</h3>
+        <p class="Resumen_Titulo">Automatizar la instalación de Debian</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -55,14 +55,14 @@ Código por byAd12
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h4>Índice</h4>
+                <h3>Índice</h3>
 
-                <h4 class="IndiceH2">Principal</h4>
+                <p class="Indicador_Seccion_Indice">Principal:</p>
                 <ul>
                     <li><a href="#Requisitos_Iniciales">Requisitos iniciales</a></li>
                 </ul>
 
-                <h4 class="IndiceH2">Pasos de configuración</h4>
+                <p class="Indicador_Seccion_Indice">Pasos de configuración:</p>
                 <ol>
                     <li><a href="#Configurar_Servidor_DHCP">Configuración del servidor DHCP</a></li>
                     <li><a href="#Configurar_Servidor_TFTP">Configuración del servidor TFTP</a></li>
@@ -71,7 +71,7 @@ Código por byAd12
                     <li><a href="#Modificar_Menu_Arranque">Modificar el menú de arranque en la instalación</a></li>
                 </ol>
 
-                <h4 class="IndiceH2">Configuración opcional del fichero de respuestas</h4>
+                <p class="Indicador_Seccion_Indice">Configuración opcional del fichero de respuestas:</p>
                 <ul>
                     <li><a href="#Instalar_Paquetes_Adicionales">Instalar paquetes adicionales</a></li>
                     <li><a href="#Ejecutar_Comandos_Adicionales">Ejecución de comandos adicionales</a></li>
@@ -87,7 +87,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Pasos de configuración</h2>
-        <h3>Lograr una instalación desatendida</h3>
+        <p class="Resumen_Titulo">Lograr una instalación desatendida</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -98,7 +98,7 @@ Código por byAd12
             <!-- ......................................................... -->
 
             <div>
-                <h4 id="Requisitos_Iniciales">Requisitos iniciales</h4>
+                <h3 id="Requisitos_Iniciales">Requisitos iniciales</h3>
 
                 <p>El servidor debe tener una IPv4 estática y un hostname identificativo:</p>
                 <pre class="codigo" translate="no"><code class="bash">ip a</code></pre>
@@ -110,7 +110,7 @@ Código por byAd12
             <!-- ......................................................... -->
              
             <div>
-                <h4 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h4>
+                <h3 id="Configurar_Servidor_DHCP">1. Configuración del servidor DHCP</h3>
 
                 <!-- ......................................................... -->
                 <p>1.1. Hay que instalar el servicio correspondiente en el servidor:</p>
@@ -324,7 +324,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h4 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h4>
+                <h3 id="Configurar_Servidor_TFTP">2. Configuración del servidor TFTP</h3>
 
                 <!-- ......................................................... -->
                 <p>2.1. Hay que instalar el servicio correspondiente en el servidor:</p>
@@ -360,7 +360,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h4 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h4>
+                <h3 id="Comprobación_Funcionamiento">3. Comprobación del funcionamiento</h3>
 
                 <p>En un cliente en el que se vaya a instalar Debian se debe entrar a la BIOS y habilitar el arranque por red IPv4.</p>
 
@@ -385,7 +385,7 @@ min-lease-time [Segundos];</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h4 id="Fichero_Respuestas">4. Crear el fichero de respuestas</h4>
+                <h3 id="Fichero_Respuestas">4. Crear el fichero de respuestas</h3>
 
                 <p>
                     Hay que crear un fichero con extensión <span class="span_contenido" translate="no">.cfg</span> dentro de <span class="span_contenido" translate="no">/srv/tftp</span> con las siguientes líneas de respuestas según las necesidades de la instalación.
@@ -538,7 +538,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             <!-- ......................................................... -->
 
             <div>
-                <h4 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h4>
+                <h3 id="Modificar_Menu_Arranque">5. Modificar el menú de arranque en la instalación</h3>
 
                 <p>5.1. Primero hay que editar el siguiente fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /srv/tftp/debian-installer/amd64/boot-screens/txt.cfg</code></pre>
@@ -649,7 +649,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Configuración opcional</h2>
-        <h3>Líneas adicionales del fichero de respuestas</h3>
+        <p class="Resumen_Titulo">Líneas adicionales del fichero de respuestas</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -657,7 +657,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
         <div class="parte1">
 
             <div>
-                <h4 id="Instalar_Paquetes_Adicionales">Fichero de respuestas: instalar paquetes adicionales</h4>
+                <h3 id="Instalar_Paquetes_Adicionales">Fichero de respuestas: instalar paquetes adicionales</h3>
 
                 <p>Se puede instalar paquetes específicos separado por espacios, como por ejemplo "wireshark nfs-kernel-server":</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string [Paquete1] (Paquete2 ...)</code></pre>
@@ -665,7 +665,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h4 id="Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</h4>
+                <h3 id="Ejecutar_Comandos_Adicionales">Fichero de respuestas: ejecución de comandos adicionales</h3>
 
                 <p>Con el siguiente comando se especifica qué comandos se ejecutarán al finalizar la instalación:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i preseed/late_command string \
@@ -705,7 +705,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h4 id="Compartir_Carpeta_NFS">Fichero de respuestas: compartir una carpeta por NFS</h4>
+                <h3 id="Compartir_Carpeta_NFS">Fichero de respuestas: compartir una carpeta por NFS</h3>
 
                 <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-kernel-server</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-kernel-server</code></pre>
@@ -730,7 +730,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h4 id="Montar_Carpeta_NFS">Fichero de respuestas: montar una carpeta por NFS</h4>
+                <h3 id="Montar_Carpeta_NFS">Fichero de respuestas: montar una carpeta por NFS</h3>
 
                 <p>1. Para compartir una carpeta por NFS primero se requiere instalar el servicio <span class="span_contenido" translate="no">nfs-common</span>:</p>
                 <pre class="codigo" translate="no"><code class="text">d-i pkgsel/include string nfs-common</code></pre>
@@ -762,7 +762,7 @@ tasksel tasksel/desktop multiselect &lt;gnome / mate&gt;</code></pre>
             </div>
 
             <div>
-                <h4 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h4>
+                <h3 id="Crear_Particiones_Manualmente">Fichero de respuestas: crear particiones manualmente</h3>
 
                 <p>A continuación se muestra la sintaxis básica para definir varias particiones en una misma receta:</p>
 

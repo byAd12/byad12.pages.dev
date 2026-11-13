@@ -44,7 +44,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>GPG</h1>
-        <h3>Comando de cifrado</h3>
+        <p class="Resumen_Titulo">Comando de cifrado</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -53,7 +53,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
 
                 <p>En el equipo donde se creará la clave GPG hay que instalar el servicio necesario:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -61,7 +61,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Crear una clave pública</h4>
+                <h3>Crear una clave pública</h3>
 
                 <p>Con el siguiente comando se inicia un asistente para crear una nueva clave en el sistema local:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --full-generate-key</code></pre>
@@ -88,14 +88,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="importar-clave-publica">Importar una clave pública</h4>
+                <h3 id="importar-clave-publica">Importar una clave pública</h3>
 
                 <p>Con el parámetro <span class="span_contenido" translate="no">--import</span> se indica la ruta local de donde se encuentra la clave pública a importar:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --import [Ruta_clave_pública]</code></pre>
             </div>
 
             <div>
-                <h4>Ver las claves importadas</h4>
+                <h3>Ver las claves importadas</h3>
 
                 <p>Para ver las claves importadas en modo básico:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -k</code></pre>
@@ -105,14 +105,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Eliminar una clave importada</h4>
+                <h3>Eliminar una clave importada</h3>
 
                 <p>Para eliminar una clave importada se debe indicar el dirección de email o el nombre del propietario de la clave pública:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg --delete-key [Nombre_clave_importada]</code></pre>
             </div>
 
             <div>
-                <h4>Cifrar un fichero con una clave <span>simétrica</span></h4>
+                <h3>Cifrar un fichero con una clave <span>simétrica</span></h3>
 
                 <p>Con el parámetro <span class="span_contenido" translate="no">-c</span> podremos cifrar un fichero mediante una clave simétrica (passphrase) en 2 formatos de ficheros diferentes.</p>
 
@@ -127,7 +127,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Cifrar un fichero con una clave <span>asimétrica</span></h4>
+                <h3>Cifrar un fichero con una clave <span>asimétrica</span></h3>
 
                 <p>Se utiliza el parámetro <span class="span_contenido" translate="no">-e</span> (<span class="span_contenido" translate="no">--encrypt</span>) para cifrar un archivo junto con el parámetro <span class="span_contenido" translate="no">-r</span> (<span class="span_contenido" translate="no">--recipient</span>) para indicar el nombre de la clave pública del destinatario, que debe estar previamente importada en el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -a -r [Nombre_clave_pública_destinatario] -e [Fichero_a_cifrar]</code></pre>
@@ -138,7 +138,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Descifrar un fichero con una clave <span>a/simétrica</span></h4>
+                <h3>Descifrar un fichero con una clave <span>a/simétrica</span></h3>
 
                 <p>El parámetro <span class="span_contenido" translate="no">-d</span> permite descifrar un fichero que haya sido cifrado por una clave simétrica o asimétrica:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -d [Fichero_a_descifrar]</code></pre>
@@ -150,7 +150,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Firmar un fichero</h4>
+                <h3>Firmar un fichero</h3>
 
                 <p>Primero hay que generar un fichero <span class="span_url" translate="no">.asc</span> que sirva como firma:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -sb -a [Fichero_a_firmar]</code></pre>

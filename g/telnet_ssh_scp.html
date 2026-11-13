@@ -57,15 +57,15 @@ Código por byAd12
 
         <div class="parte1 Parte1Indice">
             <div>
-                <h4>Índice</h4>
+                <h3>Índice</h3>
 
-                <h4 class="IndiceH2">Telnet</h4>
+                <p class="Indicador_Seccion_Indice">Telnet:</p>
                 <ul>
                     <li><a href="#TELNET_Configuracion">Configuración de un cliente Linux</a></li>
                     <li><a href="#TELNET_Conexion">Conectarse a otro equipo con credenciales desde un cliente Linux y Windows</a></li>
                 </ul>
 
-                <h4 class="IndiceH2">SSH (Linux)</h4>
+                <p class="Indicador_Seccion_Indice">SSH (Linux):</p>
                 <ul>
                     <li><a href="#SSH_Linux_Configuracion">Configuración en un equipo</a></li>
                     <li><a href="#SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</a></li>
@@ -77,13 +77,13 @@ Código por byAd12
                     <li><a href="#SSH_Linux_X11">Crear una sesión SSH X11 en un cliente</a></li>
                 </ul>
 
-                <h4 class="IndiceH2">SSH (Windows)</h4>
+                <p class="Indicador_Seccion_Indice">SSH (Windows):</p>
                 <ul>
                     <li><a href="#SSH_Windows_Configuracion">Configuración en un equipo Windows</a></li>
                     <li><a href="#SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</a></li>
                 </ul>
 
-                <h4 class="IndiceH2">SCP</h4>
+                <p class="Indicador_Seccion_Indice">SCP:</p>
                 <ul>
                     <li><a href="#SCP_Sintaxis">Cómo copiar ficheros desde/hasta un equipo remoto</a></li>
                 </ul>
@@ -92,13 +92,13 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>TELNET</h2>
-        <h3>Teletype Network</h3>
+        <p class="Resumen_Titulo">Teletype Network</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4 id="TELNET_Configuracion">Configuración de un cliente <span>Linux</span></h4>
+                <h3 id="TELNET_Configuracion">Configuración de un cliente <span>Linux</span></h3>
 
                 <p>En el cliente hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -109,7 +109,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="TELNET_Conexion">Conectarse a otro equipo con credenciales desde un cliente <span>Linux</span> y <span>Windows</span></h4>
+                <h3 id="TELNET_Conexion">Conectarse a otro equipo con credenciales desde un cliente <span>Linux</span> y <span>Windows</span></h3>
 
                 <p>El siguiente comando permite crear una sesión TELNET hacia un equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP/FQDN del equipo remoto] (Puerto_servidor)</code></pre>
@@ -123,13 +123,13 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>SSH (Linux)</h2>
-        <h3>Secure Shell</h3>
+        <p class="Resumen_Titulo">Secure Shell</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4 id="SSH_Linux_Configuracion">Configuración en un equipo</h4>
+                <h3 id="SSH_Linux_Configuracion">Configuración en un equipo</h3>
 
                 <p>Tanto en el cliente como en el servidor se puede instalar el paquete <span class="span_contenido" translate="no">ssh</span> , que incluye los paquetes <span class="span_contenido" translate="no">openssh-client</span> y <span class="span_contenido" translate="no">openssh-server</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -144,7 +144,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h4>
+                <h3 id="SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h3>
 
                 <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
@@ -153,7 +153,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves desde un cliente</h4>
+                <h3 id="SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves desde un cliente</h3>
 
                 <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal:</p>
 
@@ -216,8 +216,9 @@ chmod 644 ~/.ssh/*.pub</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">ssh -i [Ruta_fichero_clave] (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
                 
             </div>
+
             <div>
-                <h4 id="SSH_Linux_Politicas_Seguridad_SSHD">Políticas de seguridad del servicio <span>sshd</span></h4>
+                <h3 id="SSH_Linux_Politicas_Seguridad_SSHD">Políticas de seguridad del servicio <span>sshd</span></h3>
 
                 <p>Dentro del fichero <span class="span_contenido" translate="no">/etc/ssh/sshd_config</span> se pueden configurar las siguientes políticas individualmente:</p>
 
@@ -251,7 +252,7 @@ chmod 644 ~/.ssh/*.pub</code></pre>
             </div>
 
             <div>
-                <h4 id="SSH_Linux_Alias">Definir Aliases en un cliente</h4>
+                <h3 id="SSH_Linux_Alias">Definir Aliases en un cliente</h3>
 
                 <p>En el siguiente fichero de configuración del usuario se permite definir equipos y asignarles un nombre para ahorrar tiempo al iniciar sesiones remotas con SSH:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano ~/.ssh/config</code></pre>
@@ -273,7 +274,7 @@ chmod 644 ~/.ssh/*.pub</code></pre>
             </div>
 
             <div>
-                <h4 id="SSH_Linux_Agent">Cargar una clave privada en memoria en un cliente</h4>
+                <h3 id="SSH_Linux_Agent">Cargar una clave privada en memoria en un cliente</h3>
 
                 <p>Estos pasos guardan temporalmente la clave SSH en memoria para no tener que introducir la passphrase cada vez que se utiliza durante la sesión:</p>
 
@@ -289,7 +290,7 @@ chmod 644 ~/.ssh/*.pub</code></pre>
             </div>
 
             <div>
-                <h4 id="SSH_Linux_Tuneles">Crear túneles SSH</h4>
+                <h3 id="SSH_Linux_Tuneles">Crear túneles SSH</h3>
 
                 <h3>Configuración inicial:</h3>
 
@@ -376,7 +377,7 @@ systemctl start nuevo-tunel</code></pre>
             </div>
 
             <div>
-                <h4 id="SSH_Linux_X11">Crear una sesión SSH X11 en un cliente</h4>
+                <h3 id="SSH_Linux_X11">Crear una sesión SSH X11 en un cliente</h3>
 
                 <p>Pasos a ejecutar en el servidor SSH:</p>
 
@@ -403,13 +404,13 @@ systemctl start nuevo-tunel</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>SSH (Windows)</h2>
-        <h3>Secure Shell</h3>
+        <p class="Resumen_Titulo">Secure Shell</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4 id="SSH_Windows_Configuracion">Configuración en un equipo <span>Windows</span></h4>
+                <h3 id="SSH_Windows_Configuracion">Configuración en un equipo <span>Windows</span></h3>
 
                 <p>Primero se debe iniciar el servicio de SSH:</p>
                 <pre class="codigo" translate="no"><code class="powershell">Start-Service sshd</code></pre>
@@ -422,7 +423,7 @@ systemctl start nuevo-tunel</code></pre>
             </div>
 
             <div>
-                <h4 id="SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h4>
+                <h3 id="SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h3>
 
                 <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
@@ -433,14 +434,14 @@ systemctl start nuevo-tunel</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>SCP</h2>
-        <h3>Secure Copy Protocol</h3>
+        <p class="Resumen_Titulo">Secure Copy Protocol</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
 
             <div>
-                <h4 id="SCP_Sintaxis">Cómo copiar ficheros desde/hasta un equipo remoto</h4>
+                <h3 id="SCP_Sintaxis">Cómo copiar ficheros desde/hasta un equipo remoto</h3>
 
                 <p>Con el comando <span class="span_contenido" translate="no">scp</span> se pueden copiar ficheros desde el sistema local hacia otro sistema remoto (o al revés) utilizando SSH.</p>
                 <p class="Expl">Sistema local → Sistema remoto:</p>

@@ -47,7 +47,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>BIND9</h1>
-        <h3>Servidor DNS en Linux</h3>
+        <p class="Resumen_Titulo">Servidor DNS en Linux</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -56,7 +56,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>1. Instalación</h4>
+                <h3>1. Instalación</h3>
 
                 <p>En el servidor hay que instalar el servicio correspondiente y sus dependencias:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -64,7 +64,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>2. Configuración del firewall</h4>
+                <h3>2. Configuración del firewall</h3>
 
                 <p>En el firewall se debe permitir el tráfico del puerto 53 - UDP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
@@ -72,7 +72,7 @@ Código por byAd12
             </div>
            
             <div>
-                <h4>Ficheros importantes</h4>            
+                <h3>Ficheros importantes</h3>            
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -98,9 +98,9 @@ Código por byAd12
             
 
             <div>
-                <h4>3. Configuración del Servidor DNS</h4>
+                <h3>3. Configuración del Servidor DNS</h3>
 
-                <h3>3.1. Crear una zona de búsqueda directa</h3>
+                <h4>3.1. Crear una zona de búsqueda directa</h4>
 
                 <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Sintaxis básica:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
@@ -156,7 +156,7 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
 > set type=NS
 > [Nombre_dominio].[TLD]</code></pre>
 
-                <h3>3.2. Crear una zona de búsqueda inversa</h3>
+                <h4>3.2. Crear una zona de búsqueda inversa</h4>
 
                 <p>
                     En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Dirección_red</span>) que contenga todos los registros DNS de la zona inversa.
@@ -206,7 +206,7 @@ file "/etc/bind/db.192.168.0";
 > set type=NS
 > [Zona_inversa].in-addr.arpa</code></pre>
 
-                <h3>2.3. Configurar el servidor como reenviador</h3>
+                <h4>2.3. Configurar el servidor como reenviador</h4>
                 
                 <p>
                     En el fichero <span class="span_contenido" translate="no">/etc/bind/named.conf.options</span> hay que configurar la sección de <span class="span_contenido" translate="no">forwarders</span> indicando la dirección IPv4 de la máquina a la que reenviarán las peticiones DNS.
@@ -237,7 +237,7 @@ listen-on { any; };
             </div>
 
             <div>
-                <h4>4. Comprobación del funcionamiento</h4>
+                <h3>4. Comprobación del funcionamiento</h3>
 
                 <p>Primero hay que mirar si el servicio está encendido y sin errores:</p>
                 <pre class="codigo" translate="no"><code class="bash">service bind9 start
@@ -255,7 +255,7 @@ named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</c
             </div>
 
             <div>
-                <h4>5. Si el cliente tiene problemas con el DNS</h4>
+                <h3>5. Si el cliente tiene problemas con el DNS</h3>
 
                 <p>Primero se verifica que los siguientes ficheros no contengan registros DNS inválidos:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/hosts</code></pre>
@@ -267,7 +267,7 @@ named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</c
             </div>
 
             <div>
-                <h4>Adicional: Configurar un servidor DNS secundario</h4>
+                <h3>Adicional: Configurar un servidor DNS secundario</h3>
                 
                 <p>Servidor primario: <b>DNS1</b>; Servidor secundario: <b>DNS2</b>.</p>
 
@@ -290,14 +290,14 @@ file "/etc/bind/[Nombre_fichero_DB_dominio]";
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Comandos</h2>
-        <h3>Comandos de consultas DNS para Linux</h3>
+        <p class="Resumen_Titulo">Comandos de consultas DNS para Linux</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
 
             <div>
-                <h4>Comando: <span>dig</span></h4>
+                <h3>Comando: <span>dig</span></h3>
                 
                 <p>El comando <span class="span_contenido" translate="no">dig</span> permite realizar las mismas consultas DNS de un nombre de dominio o IP que el comando <span class="span_contenido" translate="no">nslookup</span> pero con más opciones:</p>
                 <pre class="codigo" translate="no"><code class="bash">dig (Tipo_registro_DNS) [IP/Registro_DNS] (Opciones)</code></pre>
@@ -325,7 +325,7 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
             </div>
 
             <div>
-                <h4>Comando: <span>nslookup</span></h4>
+                <h3>Comando: <span>nslookup</span></h3>
                 
                 <p>El comando <span class="span_contenido" translate="no">nslookup</span> permite comprobar la configuración DNS de un dominio:</p>
                 <pre class="codigo" translate="no"><code class="bash">nslookup (-type=[Tipo_registro_DNS]) (-port=[Puerto_servidor_DNS]) [Nombre_dominio].[TLD] ([IP_servidor_DNS])</code></pre>
@@ -349,7 +349,7 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
             </div>
 
             <div>
-                <h4>Comando: <span>whois</span></h4>
+                <h3>Comando: <span>whois</span></h3>
                 
                 <p>El comando <span class="span_contenido" translate="no">whois</span> de Linux permite ver información sobre un dominio o una IP, quién registró el dominio, información de contacto, servidores NS, fecha de creación y expiración y otra información.</p>
                 
@@ -362,7 +362,7 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
             </div>
 
             <div>
-                <h4>Como realizar búsquedas DNS inversas</h4>
+                <h3>Como realizar búsquedas DNS inversas</h3>
                 
                 <p>El servicio web <a href="https://viewdns.info/reverseip" target="_blank">viewdns.info</a> permite realizar búsquedas de nombres de dominios relacionados a una misma IP pública.</p>
 
@@ -375,13 +375,13 @@ a1-15.akam.net. sistemas.xunta.es. 2018123161 86400 7200 2592000 172800</code></
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Rol DNS</h2>
-        <h3>Configuración del rol DNS en <b>Windows Server</b></h3>
+        <p class="Resumen_Titulo">Configuración del rol DNS en <b>Windows Server</b></p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Configurar</h4>
+                <h3>Configurar</h3>
 
                 <p>Pasos:</p>
                 <br>

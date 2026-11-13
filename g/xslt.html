@@ -44,7 +44,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>XSLT</h1>
-        <h3>Extensible Stylesheet Language Transformations</h3>
+        <p class="Resumen_Titulo">Extensible Stylesheet Language Transformations</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -53,14 +53,14 @@ Código por byAd12
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h4>Índice</h4>
+                <h3>Índice</h3>
 
-                <h4 class="IndiceH2">1. Introducción</h4>
+                <p class="Indicador_Seccion_Indice">Introducción:</p>
                 <ul>
                     <li><b>Básico:</b> <a href="#Ejemplo">Ejemplo</a> • <a href="#Para-que-sirve-xslt">¿Para qué sirve XSLT?</a> • <a href="#Vincular-documento-xml">Vincular el documento XML</a> • <a href="#Estructura">Estructura XSLT</a></li>
                 </ul>
 
-                <h4 class="IndiceH2">2. Elementos</h4>
+                <p class="Indicador_Seccion_Indice">Elementos:</p>
                 <ul>
                     <li><b>Básico:</b> <a href="#Elemento_Raiz">Elemento raíz</a> • <a href="#Elemento_Output">xsl:output</a></li>
                     <br>
@@ -107,7 +107,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="Ejemplo">Ejemplo</h4>
+                <h3 id="Ejemplo">Ejemplo</h3>
             
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"&gt;
@@ -170,7 +170,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Para-que-sirve-xslt">¿Para qué sirve XSLT?</h4>
+                <h3 id="Para-que-sirve-xslt">¿Para qué sirve XSLT?</h3>
             
                 <p>XSLT es un lenguaje estandarizado por W3C para transformar documentos XML a otros formatos: HTML, PDF, CSV, etc.</p>
 
@@ -186,7 +186,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Vincular-documento-xml">Vincular el documento XML</h4>
+                <h3 id="Vincular-documento-xml">Vincular el documento XML</h3>
             
                 <p>
                     Primero se deberá vincular el documento XML a la hoja XSL. 
@@ -199,7 +199,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Estructura">Estructura XSLT</h4>
+                <h3 id="Estructura">Estructura XSLT</h3>
             
                 <p>Las reglas de transformación XSLT se denominan hojas XSL almacenadas en ficheros de texto plano con extensión <span class="span_contenido" translate="no">.xsl</span>.</p>
 
@@ -232,7 +232,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Raiz">Elemento raíz</h4>
+                <h3 id="Elemento_Raiz">Elemento raíz</h3>
             
                 <p>El elemento <span class="span_contenido" translate="no">stylesheet</span> engloba a todos los elementos de la hoja XSL:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -309,7 +309,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Output">Elemento <span>&lt;xsl:output/&gt;</span></h4>
+                <h3 id="Elemento_Output">Elemento <span>&lt;xsl:output/&gt;</span></h3>
             
                 <p>Este elemento permite definir el formato de salida de la transformación XSLT. Se suele situar al principio dentro del <a href="#Elemento_Raiz">elemento raíz</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:output
@@ -386,7 +386,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Template">Elemento <span>&lt;xsl:template&gt;</span></h4>
+                <h3 id="Elemento_Template">Elemento <span>&lt;xsl:template&gt;</span></h3>
             
                 <p>Este elemento es fundamental ya que permite definir una plantilla que se aplicará al contenido a transformar:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:template match="expresion-XPATH" name="nombre_plantilla"&gt;
@@ -425,7 +425,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Elemento_Template_Transformacion_HTML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en HTML</h4>
+                <h3 id="Elemento_Template_Transformacion_HTML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en HTML</h3>
             
                 <p>Dentro de la plantilla se puede tener la siguiente estructura HTML básica, donde se modificar el contenido dentro de la etiqueta <span class="span_contenido" translate="no">&lt;body&gt;</span>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -456,7 +456,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Elemento_Template_Transformacion_XML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en XML</h4>
+                <h3 id="Elemento_Template_Transformacion_XML">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en XML</h3>
             
                 <p>Dentro de la plantilla se puede tener la siguiente estructura XML básica, donde podremos modificar el contenido dentro de la etiqueta raíz:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -481,7 +481,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Elemento_Template_Transformacion_TEXT">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en TEXT</h4>
+                <h3 id="Elemento_Template_Transformacion_TEXT">Elemento <span>&lt;xsl:template&gt;</span> - Ejemplo de transformación en TEXT</h3>
             
                 <p>Dentro de la plantilla se puede tener la siguiente estructura, donde podremos modificar el contenido dentro del template según las necesidades:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -502,7 +502,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Procesamiento_Templates">Procesamiento de templates</h4>
+                <h3 id="Procesamiento_Templates">Procesamiento de templates</h3>
 
                 <ol>
                     <li>El procesador XSLT comienza en el nodo raíz del documento.</li>
@@ -540,7 +540,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Value_Of">Elemento <span>&lt;xsl:value-of&gt;</span></h4>
+                <h3 id="Elemento_Value_Of">Elemento <span>&lt;xsl:value-of&gt;</span></h3>
             
                 <p>Este elemento permite coger un valor mediante consultas <a href="xpath.html">XPATH</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:value-of select="expresion-xpath" /&gt;</code></pre>
@@ -569,7 +569,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Elemento_Value_Of_Ejemplo">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Value_Of_Ejemplo">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo</h3>
             
                 <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">xsl:value-of</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -589,7 +589,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4 id="Elemento_Value_Of_Ejemplo_Varios_Elementos">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo con varios elementos</h4>
+                <h3 id="Elemento_Value_Of_Ejemplo_Varios_Elementos">Elemento <span>&lt;xsl:value-of&gt;</span> - Ejemplo con varios elementos</h3>
             
                 <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Value_Of" translate="no">xsl:value-of</a> pero cogiendo valores de elementos de un elemento común repetido múltiples veces en el documento XML:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -623,7 +623,6 @@ nombre2,apellido2
 
             </div>
 
-
         </div>
 
         <!-- ......................................................... -->
@@ -635,7 +634,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Call_Template">Elemento <span>&lt;xsl:call-template&gt;</span></h4>
+                <h3 id="Elemento_Call_Template">Elemento <span>&lt;xsl:call-template&gt;</span></h3>
             
                 <p>Este elemento permite invocar a un template definido previamente mediante su nombre definido:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:call-template name="nombre-plantilla" /&gt;</code></pre>
@@ -658,7 +657,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Call_Template_Ejemplo">Elemento <span>&lt;xsl:call-template&gt;</span> - Ejemplo</h3>
             
                 <p>A continuación se muestra un ejemplo de uso del elemento <a href="#Elemento_Call_Template" translate="no">xsl:call-template</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -716,7 +715,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Apply_Templates">Elemento <span>&lt;xsl:apply-templates&gt;</span></h4>
+                <h3 id="Elemento_Apply_Templates">Elemento <span>&lt;xsl:apply-templates&gt;</span></h3>
 
                 <p>El siguiente elemento permite seleccionar a un conjunto de nodos del documento XML y aplicarle un template:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:apply-templates select="expresion-xpath" /&gt;</code></pre>
@@ -739,7 +738,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Apply_Templates_Ejemplo">Elemento <span>&lt;xsl:apply-templates&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Apply_Templates_Ejemplo">Elemento <span>&lt;xsl:apply-templates&gt;</span> - Ejemplo</h3>
 
                 <p>Partiendo del siguiente XML podemos llamar a un template por cada libro:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;biblioteca&gt;
@@ -789,7 +788,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_For_Each">Elemento <span>&lt;xsl:for-each&gt;</span></h4>
+                <h3 id="Elemento_For_Each">Elemento <span>&lt;xsl:for-each&gt;</span></h3>
             
                 <p>El siguiente elemento permite crear un bucle que aplicará su contenido por cada nodo seleccionado:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:for-each select="expresion-xpath"&gt;
@@ -815,7 +814,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_For_Each_Ejemplo">Elemento <span>&lt;xsl:for-each&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_For_Each_Ejemplo">Elemento <span>&lt;xsl:for-each&gt;</span> - Ejemplo</h3>
             
                 <p>Por cada nodo "libro" dentro del nodo "biblioteca" se le aplicará el contenido dentro de la etiqueta <a href="#Elemento_For_Each">xsl:for-each</a>:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
@@ -855,7 +854,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Sort">Elemento <span>&lt;xsl:sort&gt;</span></h4>
+                <h3 id="Elemento_Sort">Elemento <span>&lt;xsl:sort&gt;</span></h3>
             
                 <p>El siguiente elemento se sitúa dentro de un <a href="#Elemento_For_Each">xsl:for-each</a> para ordenar los nodos según unas opciones a configurar:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:sort
@@ -894,7 +893,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Sort_Ejemplo">Elemento <span>&lt;xsl:sort&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Sort_Ejemplo">Elemento <span>&lt;xsl:sort&gt;</span> - Ejemplo</h3>
             
                 <p>Dentro del <a href="#Elemento_For_Each">xsl:for-each</a> se ordenará cada nodo "libro" según su título en formato de texto en orden descendiente:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
@@ -934,7 +933,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Attribute">Elemento <span>&lt;xsl:attribute&gt;</span></h4>
+                <h3 id="Elemento_Attribute">Elemento <span>&lt;xsl:attribute&gt;</span></h3>
 
                 <p>El siguiente elemento permite crear en un XML o HTML de salida un atributo, definiendo su nombre y el valor que tendrá:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:attribute name="nombre"&gt;
@@ -974,7 +973,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Attribute_Ejemplo">Elemento <span>&lt;xsl:attribute&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Attribute_Ejemplo">Elemento <span>&lt;xsl:attribute&gt;</span> - Ejemplo</h3>
             
                 <p>Dentro de cada nodo "libro" definiré el nombre del autor como atributo "nombre_autor":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
@@ -1002,7 +1001,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Attribute_Alternativa">Alternativa al elemento <span>&lt;xsl:attribute&gt;</span></h4>
+                <h3 id="Elemento_Attribute_Alternativa">Alternativa al elemento <span>&lt;xsl:attribute&gt;</span></h3>
 
                 <p>La siguiente sintaxis permite escribir el atributo a mano seleccionando un valor con XPATH:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta_xml nombre_atributo="{expresion-xpath}" /&gt;</code></pre>
@@ -1039,7 +1038,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span></h4>
+                <h3 id="Elemento_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span></h3>
 
                 <p>Este elemento permite crear un conjunto de atributos que pueden ser aplicados a cualquier elemento de salida:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:attribute-set name="nombre"&gt;
@@ -1065,7 +1064,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Use_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span> - Uso con el atributo <span>use-attribute-sets</span></h4>
+                <h3 id="Elemento_Use_Attribute_Set">Elemento <span>&lt;xsl:attribute-set&gt;</span> - Uso con el atributo <span>use-attribute-sets</span></h3>
 
                 <p>Para poner el conjunto de atributos en un elemento XML se debe usar el siguiente atributo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;etiqueta_xml use-attribute-sets="nombre-set" /&gt;</code></pre>
@@ -1102,7 +1101,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_If">Elemento <span>&lt;xsl:if&gt;</span></h4>
+                <h3 id="Elemento_If">Elemento <span>&lt;xsl:if&gt;</span></h3>
 
                 <p>Este elemento permite crear una condicional para interpretar algo solo si una condición se cumple:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:if select="expresion-xpath"&gt;
@@ -1129,7 +1128,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_If_Ejemplo">Elemento <span>&lt;xsl:if&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_If_Ejemplo">Elemento <span>&lt;xsl:if&gt;</span> - Ejemplo</h3>
 
                 <p>En el siguiente ejemplo solo se enseñan los libros cuyo autor empieze con la letra "A":</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
@@ -1167,7 +1166,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Choose">Elemento <span>&lt;xsl:choose&gt;</span></h4>
+                <h3 id="Elemento_Choose">Elemento <span>&lt;xsl:choose&gt;</span></h3>
 
                 <p>Este elemento permite crear condicionales para interpretar algo en función de que cumple la condición:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:choose&gt;
@@ -1201,7 +1200,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Choose_Ejemplo">Elemento <span>&lt;xsl:choose&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Choose_Ejemplo">Elemento <span>&lt;xsl:choose&gt;</span> - Ejemplo</h3>
 
                 <p>El siguiente código crea una etiqueta "color" dentro de "libro" y su valor es variable según el "precio" que tenga este "libro":</p>
                 <ol>
@@ -1257,7 +1256,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Variable">Elemento <span>&lt;xsl:variable&gt;</span></h4>
+                <h3 id="Elemento_Variable">Elemento <span>&lt;xsl:variable&gt;</span></h3>
 
                 <p>Este elemento permite almacenar valores para ser usados más tarde en otras partes del documento:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:variable name="nombre" select="expresion-xpath"&gt;
@@ -1296,7 +1295,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Copy_Of">Elemento <span>&lt;xsl:variable&gt;</span> - Coger su contenido con <span>&lt;xsl:copy-of&gt;</span></h4>
+                <h3 id="Elemento_Copy_Of">Elemento <span>&lt;xsl:variable&gt;</span> - Coger su contenido con <span>&lt;xsl:copy-of&gt;</span></h3>
 
                 <p>En cualquier lugar del documento XSLT donde se quiera coge rel contenido de la variable, solo hay que poner:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:copy-of select="$nombre" /&gt;</code></pre>
@@ -1322,7 +1321,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Elemento_Variable_Ejemplo">Elemento <span>&lt;xsl:variable&gt;</span> - Ejemplo</h4>
+                <h3 id="Elemento_Variable_Ejemplo">Elemento <span>&lt;xsl:variable&gt;</span> - Ejemplo</h3>
 
                 <p>Con el siguiente código se crea una variable cuyo valor es un estilo CSS y a este se le aplicará a todas las etiquetas:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
@@ -1367,7 +1366,7 @@ nombre2,apellido2
         <div class="parte1">
 
             <div>
-                <h4 id="Elemento_Decimal_Format">Elemento <span>&lt;xsl:decimal-format&gt;</span></h4>
+                <h3 id="Elemento_Decimal_Format">Elemento <span>&lt;xsl:decimal-format&gt;</span></h3>
             
                 <p>Este elemento se sitúa directamente dentro del <a href="#Elemento_Raiz">elemento raíz</a>. Sirve para definir los caracteres y símbolos utilizados para convertir números en cadenas de texto:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;xsl:decimal-format
@@ -1442,7 +1441,7 @@ nombre2,apellido2
             </div>
 
             <div>
-                <h4 id="Función_Format_Number">Elemento <span>&lt;xsl:decimal-format&gt;</span> - Formatear valores con <span>format-number()</span></h4>
+                <h3 id="Función_Format_Number">Elemento <span>&lt;xsl:decimal-format&gt;</span> - Formatear valores con <span>format-number()</span></h3>
             
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;

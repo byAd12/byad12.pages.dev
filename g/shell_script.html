@@ -44,7 +44,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>SHELL</h1>
-        <h3>Scripts for Linux</h3>
+        <p class="Resumen_Titulo">Scripts for Linux</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -54,7 +54,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4>Estructura</h4>
+                <h3>Estructura</h3>
 
                 <p>Primero hay que crear el fichero y añadir contenido en el:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
@@ -71,7 +71,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Parámetros</h4>
+                <h3>Parámetros</h3>
 
                 <p>Al ejecutar un fichero se le puede pasar argumentos:</p>
                 <pre class="codigo" translate="no"><code class="bash">script.sh arg1 arg2 ...</code></pre>
@@ -89,7 +89,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Básico</h4>
+                <h3>Básico</h3>
 
                 <p>Imprimir un texto en pantalla:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo 'texto'</code></pre>
@@ -100,14 +100,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Llamar una variable</h4>
+                <h3>Llamar una variable</h3>
 
                 <p>Todo lo que esté dentro de <span class="span_contenido" translate="no">" "</span> se interpreta como variables y texto. En cambio en <span class="span_contenido" translate="no">' '</span> se interpreta todo como texto.</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "$nombre_var"</code></pre>
             </div>
 
             <div>
-                <h4>Comparadores</h4>
+                <h3>Comparadores</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -207,7 +207,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Condicionales</h4>
+                <h3>Condicionales</h3>
 
                 <p>Formato:</p>
                 <pre class="codigo" translate="no"><code class="bash">if [ condición1 ]; then
@@ -239,7 +239,7 @@ fi</code></pre>
             </div>
 
             <div>
-                <h4>Función <span>CASE</span></h4>
+                <h3>Función <span>CASE</span></h3>
 
                 <p>Para ejecutar varias acciones, dependiendo del valor de una variable:</p>
                 <pre class="codigo" translate="no"><code class="bash">read -p 'texto' var
@@ -258,7 +258,7 @@ esac
             </div>
 
             <div>
-                <h4>Bucle <span>FOR</span></h4>
+                <h3>Bucle <span>FOR</span></h3>
 
                 <p>Formato para recorrer un conjunto de valores hasta llegar al final:</p>
                 <pre class="codigo" translate="no"><code class="bash">for nombre_var in conjunto; do
@@ -272,7 +272,7 @@ done</code></pre>
             </div>
 
             <div>
-                <h4>Función <span>WHILE</span></h4>
+                <h3>Función <span>WHILE</span></h3>
 
                 <p>Ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
                 <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
@@ -282,7 +282,7 @@ done</code></pre>
             </div>
 
             <div>
-                <h4>Función <span>UNTIL</span></h4>
+                <h3>Función <span>UNTIL</span></h3>
 
                 <p>Ejecuta su contenido hasta que la condición sea verdadera:</p>
                 <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do

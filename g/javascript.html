@@ -45,7 +45,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <div id="Principio"></div>
         <h1>JavaScript</h1>
-        <h3>Términos básicos</h3>
+        <p class="Resumen_Titulo">Términos básicos</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -54,7 +54,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>Tipos de datos</h4>
+                <h3>Tipos de datos</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -99,7 +99,7 @@ Código por byAd12
                 
             </div>
             <div>
-                <h4>Operaciones</h4>
+                <h3>Operaciones</h3>
                 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -157,7 +157,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Básico</h4>
+                <h3>Básico</h3>
 
                 <p>Cada línea, menos las vacías y al abrir o cerrar un "{}" se debe poner un <span class="span_contenido" translate="no">;</span> al final:</p>
                 <pre class="codigo" translate="no"><code class="js">linea;</code></pre>
@@ -170,7 +170,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Variables</h4>
+                <h3>Variables</h3>
 
                 <p>Para definir una variable se sigue este formato:</p>
                 <pre class="codigo" translate="no"><code class="js">nombre_variable = valor;</code></pre>
@@ -181,7 +181,7 @@ Código por byAd12
 
 
             <div>
-                <h4>Condicionales</h4>
+                <h3>Condicionales</h3>
 
                 <p>Formato:</p>
                 <pre class="codigo" translate="no"><code class="js">if (condición1) {
@@ -197,7 +197,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Recorrer Listas</h4>
+                <h3>Recorrer Listas</h3>
 
                 <p>Ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="js">Lista.forEach((value, key) => {
@@ -211,7 +211,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Funciones</h4>
+                <h3>Funciones</h3>
 
                 <p>Formato:</p>
                 <pre class="codigo" translate="no"><code class="js">function nombre_funcion (parámetros) {
@@ -234,7 +234,7 @@ console.log(nombre_funcion('Iván'));
             </div>
             
             <div>
-                <h4>Bucle FOR</h4>
+                <h3>Bucle FOR</h3>
 
                 <p>Formato:</p>
                 <pre class="codigo" translate="no"><code class="js">function a(){
@@ -254,13 +254,13 @@ console.log(nombre_funcion('Iván'));
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>JavaScript - HTML</h2>
-        <h3>Implementación de JavaScript en HTML</h3>
+        <p class="Resumen_Titulo">Implementación de JavaScript en HTML</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Cargar un fichero JS</h4>
+                <h3>Cargar un fichero JS</h3>
 
                 <p>En un .html se puede poner de varias formas:</p>
                 <pre class="codigo" translate="no"><code class="js">&lt;script&gt;
@@ -273,7 +273,7 @@ console.log(nombre_funcion('Iván'));
             </div>
 
             <div>
-                <h4>Mensajes del navegador</h4>
+                <h3>Mensajes del navegador</h3>
 
                 <p>Poner una alerta del navegador:</p>
                 <pre class="codigo" translate="no"><code class="js">alert("Texto");</code></pre>
@@ -286,7 +286,7 @@ console.log(nombre_funcion('Iván'));
             </div>
             
             <div>
-                <h4>Seleccionar un Elemento: <span translate="no">getElementby?</span></h4>
+                <h3>Seleccionar un Elemento: <span translate="no">getElementby?</span></h3>
 
                 <p>Seleccionar un elemento por ID:</p>
                 <pre class="codigo" translate="no"><code class="js">const var1 = document.getElementById("ID");</code></pre>
@@ -302,7 +302,7 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h4>Cambiar un estilo de un objeto: <span translate="no">objeto.style.?</span></h4>
+                <h3>Cambiar un estilo de un objeto: <span translate="no">objeto.style.?</span></h3>
 
                 <p>1. Primero seleccionamos el objeto:</p>
                 <pre class="codigo" translate="no"><code class="js">const var1 = document.getElementById("ID");</code></pre>
@@ -312,14 +312,14 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h4>Coger un estilo de un bloque: <span translate="no">objeto.getComputedStyle.?</span></h4>
+                <h3>Coger un estilo de un bloque: <span translate="no">objeto.getComputedStyle.?</span></h3>
 
                 <p>1. Se cogen todos los estilos del elemento y se coge solo el valor "<span class="span_contenido" translate="no">propiedad</span>":</p>
                 <pre class="codigo" translate="no"><code class="js">var3 = window.getComputedStyle(document.getElementById("ID")).getPropertyValue("nombre-de-la-propiedad");</code></pre>
             </div>
 
             <div>
-                <h4>Insertar texto en un objeto tipo texto: <span translate="no">objeto.innerHTML.?</span></h4>
+                <h3>Insertar texto en un objeto tipo texto: <span translate="no">objeto.innerHTML.?</span></h3>
 
                 <p>1. Primero seleccionamos el objeto:</p>
                 <pre class="codigo" translate="no"><code class="js">const var1 = document.getElementById("ID");</code></pre>
@@ -329,7 +329,7 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h4>Cambiar el <span>src=""</span> de una imagen: <span translate="no">objeto.src</span></h4>
+                <h3>Cambiar el <span>src=""</span> de una imagen: <span translate="no">objeto.src</span></h3>
 
                 <p>1. Primero seleccionamos el objeto:</p>
                 <pre class="codigo" translate="no"><code class="js">const var1 = document.getElementById("ID");</code></pre>
@@ -340,7 +340,7 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h4>Cambiar el valor de un input: <span translate="no">objeto.?</span></h4>
+                <h3>Cambiar el valor de un input: <span translate="no">objeto.?</span></h3>
 
                 <p><b>Si es de tipo <u>texto</u></b>:</p>
 
@@ -362,7 +362,7 @@ var1.forEach(elemento => {
             </div>
 
             <div>
-                <h4>Reemplazar lo que coincida: <span translate="no">texto.replace()</span></h4>
+                <h3>Reemplazar lo que coincida: <span translate="no">texto.replace()</span></h3>
 
                 <p>Seleccionamos el objeto y reemplazamos todas las cadenas que coincidan por otras.:</p>
                 <pre class="codigo" translate="no"><code class="js">let texto = "palabra1__palabra2__palabra3";

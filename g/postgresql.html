@@ -45,7 +45,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>PostgreSQL</h1>
-        <h3>Sistema gestor de base de datos SQL</h3>
+        <p class="Resumen_Titulo">Sistema gestor de base de datos SQL</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -55,7 +55,7 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h4>1. Instalación en el servidor</h4>
+                <h3>1. Instalación en el servidor</h3>
 
                 <p>1. Hay que instalar el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -87,7 +87,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>2. Asignar una IP estática en el servidor</h4>
+                <h3>2. Asignar una IP estática en el servidor</h3>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el fichero de configuración de Netplan.</p>
 
@@ -124,7 +124,7 @@ Código por byAd12
 
             <div>
 
-                <h4>3. Instalación en el cliente</h4>
+                <h3>3. Instalación en el cliente</h3>
 
                 <p>1. Hay que instalar el servicio de PostgreSQL para clientes:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -137,7 +137,7 @@ Código por byAd12
 
             <div>
 
-                <h4>4. Gestionar los clústers</h4>
+                <h3>4. Gestionar los clústers</h3>
 
                 <p>Para ver según el sistema la versión, <b>nombre</b> puerto, <b>estado</b>, propietario, ruta de datos y registros de cada clúster:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
@@ -156,7 +156,7 @@ Código por byAd12
 
             <div>
 
-                <h4>5. Permitir conexiones remotas</h4>
+                <h3>5. Permitir conexiones remotas</h3>
 
                 <p>1. Primero debes copiar la ruta local que indique el comando <span class="span_contenido" translate="no">SHOW hba_file;</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql
@@ -186,7 +186,7 @@ ufw reload</code></pre>
         <div class="parte1">
             <div>
 
-                <h4>Gestionar la base de datos</h4>
+                <h3>Gestionar la base de datos</h3>
 
                 <p>Para entrar a la base de datos hay que ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
@@ -343,7 +343,6 @@ ufw reload</code></pre>
                     </table>
                 </div>
 
-
                 <p>Para verificar por cual puerto está escuchando el servicio de PostgreSQL (es lo mismo que la consulta SQL <span class="span_contenido" translate="no">SHOW port;</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep postgres</code></pre>
 
@@ -361,7 +360,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h4>Creación de usuarios</h4>
+                <h3>Creación de usuarios</h3>
 
                 <p>Para crear un nuevo usuario en la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE USER [Nombre_usuario] WITH PASSWORD '[Contraseña_usuario]';</code></pre>
@@ -373,7 +372,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h4>Creación de bases de datos</h4>
+                <h3>Creación de bases de datos</h3>
 
                 <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [Nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
@@ -385,7 +384,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h4>Creación de una tabla</h4>
+                <h3>Creación de una tabla</h3>
 
                 <p>Para crear una nueva tabla primero se debe especificar en que base de datos se creará:</p>
                 <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>
@@ -401,7 +400,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h4>Insertar valores en una columna de una tabla</h4>
+                <h3>Insertar valores en una columna de una tabla</h3>
 
                 <p>Para insertar datos en una tabla existente se debe usar los siguientes comandos:</p>
                 <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>

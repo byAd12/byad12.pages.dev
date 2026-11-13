@@ -44,7 +44,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>NFS</h1>
-        <h3>Network File System</h3>
+        <p class="Resumen_Titulo">Network File System</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -53,7 +53,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
                 <p>En los <b>clientes</b> hay que instalar el siguiente paquete para poder acceder a carpetas compartidas por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-common</code></pre>
@@ -66,7 +66,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Configuración del firewall</h4>
+                <h3>Configuración del firewall</h3>
 
                 <p>Tanto en el cliente como en el servidor se puede permitir adicionalmente en el firewall el tráfico del servicio NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow nfs</code></pre>
@@ -77,9 +77,11 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Configuración en el <span>servidor</span></h4>
+                <h3>Configuración en el <span>servidor</span></h3>
 
                 <p>1. Hay que editar el fichero <span class="span_url" translate="no">/etc/exports</span> para definir como compartir la carpeta:</p>
                 <pre class="codigo" translate="no"><code class="bash">/[Carpeta_a_compartir]  [Hostname_1]([Permisos])  [Hostname_2]([Permisos])  ...</code></pre>
@@ -128,7 +130,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Configuración en el <span>cliente</span></h4>
+                <h3>Configuración en el <span>cliente</span></h3>
 
                 <p>1. En el cliente se puede mirar qué recursos compartidos se pueden montar de un servidor específico:</p>
                 <pre class="codigo" translate="no"><code class="bash">showmount -e [IP_servidor]</code></pre>
@@ -153,9 +155,11 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4><span>Permisos</span>: "Solución" para ver los nombres correctos</h4>
+                <h3><span>Permisos</span>: "Solución" para ver los nombres correctos</h3>
 
                 <p>1. Asegurarse de que los UID y GID coincidan entre cliente y servidor. Luego crear en el cliente los mismos usuarios y grupos que en el servidor usando el mismo UID y GID:</p>
                 <pre class="codigo" translate="no"><code class="bash">groupadd -g gid_grupo [Nombre_grupo]</code></pre>
@@ -187,7 +191,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Montaje <span>automático</span> en los clientes</h4>
+                <h3>Montaje <span>automático</span> en los clientes</h3>
 
                 <p>Hay que editar el fichero <span class="span_url" translate="no">/etc/fstab</span> para añadir la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[IP_servidor]:/[Carpeta_remota]    /mnt/[Carpeta_local]    nfs    defaults,nfsvers=3    0    0</code></pre>

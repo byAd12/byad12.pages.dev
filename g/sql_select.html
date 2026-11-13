@@ -44,7 +44,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>SQL</h1>
-        <h3>Structured Query Language</h3>
+        <p class="Resumen_Titulo">Structured Query Language</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -53,7 +53,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>Consulta<span class="span_url_espaciado">SELECT</span></h4>
+                <h3>Consulta<span class="span_url_espaciado">SELECT</span></h3>
                 <p>Primero hay que entrar en la BB.DD. para realizar todas las consultas.</p>
 
                 <p>Seleccionar todas las columnas:</p>
@@ -65,21 +65,21 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Modificador<span class="span_url_espaciado">DISTINCT</span></h4>
+                <h3>Modificador<span class="span_url_espaciado">DISTINCT</span></h3>
 
                 <p>Solo devuelve las filas que sean no repetidas según todas las columnas dadas:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT DISTINCT col1 FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h4>Modificador<span class="span_url_espaciado">AS</span></h4>
+                <h3>Modificador<span class="span_url_espaciado">AS</span></h3>
 
                 <p><b>Alias de Columna</b>: Muestra el título de la columna pero con otro nombre. Necesita comillas si hay espacios en blanco:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 AS "alias1", col2 AS "alias2" FROM tabla;</code></pre>
             </div>
 
             <div>
-                <h4>Cláusula<span class="span_url_espaciado">ORDER BY</span></h4>
+                <h3>Cláusula<span class="span_url_espaciado">ORDER BY</span></h3>
 
                 <p>Para cambiar el orden en el que se enseña la tabla según una columna.<br>Si no se va a enseñar una columna se puede ordenar por ella igualmente:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla ORDER BY col1 &lt;ASC o DESC&gt;;</code></pre>
@@ -88,7 +88,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Filtro<span class="span_url_espaciado">WHERE</span></h4>
+                <h3>Filtro<span class="span_url_espaciado">WHERE</span></h3>
 
                 <p><b>Operadores</b>:</p>
                 <p><span class="span_contenido" translate="no">=</span> - Igual a<br>
@@ -104,7 +104,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Operadores Lógicos</h4>
+                <h3>Operadores Lógicos</h3>
 
                 <p><span class="span_contenido" translate="no">AND</span>: Si se cumplen 2 o más condiciones.</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla WHERE col1="valor" AND col2="valor";</code></pre>
@@ -135,7 +135,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Consultas de<span class="span_url_espaciado">UNION</span></h4>
+                <h3>Consultas de<span class="span_url_espaciado">UNION</span></h3>
 
                 <p>Solo funciona si se recogen campos compatibles entre ambas tablas. No hace falta que tengan el mismo nombre. Si se cogen 2 o más columas y hay 2 con los mismos valores en todas, no los muestra. Para ello se usa <span class="span_contenido" translate="no">UNION ALL</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT col1 FROM tabla UNION SELECT col1 FROM tabla2;</code></pre>
@@ -143,14 +143,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Sub-Consultas</h4>
+                <h3>Sub-Consultas</h3>
 
                 <p>Puede haber subconsultras dentro de otras:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT * FROM tabla1 WHERE col1 IN (SELECT col2 FROM tabla2 WHERE col3="valor");</code></pre>
             </div>
 
             <div>
-                <h4>Funciones escalares</h4>
+                <h3>Funciones escalares</h3>
 
                 <p>Se puede usar funciones dentro de otras funciones:</p>
 
@@ -163,7 +163,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Funciones agregadas</h4>
+                <h3>Funciones agregadas</h3>
 
                 <p>Operan sobre un conjunto de filas:</p>
 
@@ -186,7 +186,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4><span class="span_url_espaciado">GROUP BY</span></h4>
+                <h3><span class="span_url_espaciado">GROUP BY</span></h3>
 
                 <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla GROUP BY columna2;</code></pre>
                 <p class="Expl">En función de columna2 nos enseñará el total de columna1 por el COUNT</p>
@@ -194,14 +194,14 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Filtro<span class="span_url_espaciado">HAVING</span></h4>
+                <h3>Filtro<span class="span_url_espaciado">HAVING</span></h3>
 
                 <p>Permite filtrar con funciones de agrupación:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT COUNT(columna1), columna2 FROM tabla WHERE columna3="valor" GROUP BY columna2 HAVING COUNT(columna1)>=10;</code></pre>
             </div>
 
             <div>
-                <h4>Consulta Multi-Tabla</h4>
+                <h3>Consulta Multi-Tabla</h3>
 
                 <p>Para hacer consultas en más de una tabla a la vez:</p>
                 <pre class="codigo" translate="no"><code class="sql">SELECT columna1, columna2 FROM tabla1 x, tabla2 y WHERE x.columna1 = y.columna1;</code></pre>
@@ -211,7 +211,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Consulta<span class="span_url_espaciado">JOIN</span></h4>
+                <h3>Consulta<span class="span_url_espaciado">JOIN</span></h3>
 
                 <div class="SingleImagenGlobal">
                     <a href="../img/guides/sql/sql_join.png"><img alt="Esquema de SQL Join" src="../img/guides/sql/sql_join.png"></a>

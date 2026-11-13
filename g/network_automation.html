@@ -50,7 +50,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Ansible Playbook</h2>
-        <h3>Automatización de tareas mediante SSH</h3>
+        <p class="Resumen_Titulo">Automatización de tareas mediante SSH</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -58,7 +58,7 @@ Código por byAd12
         
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y software-properties-common</code></pre>
@@ -67,7 +67,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Ejecutar una tarea</h4>
+                <h3>Ejecutar una tarea</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">ansible-playbook -i [HOST_FILE] -f [NUM] [TASK].yml</code></pre>
                 <p class="Expl"><b>TASK.yml</b>: Fichero que se crea para especificar una tarea.</p>
@@ -83,7 +83,7 @@ nodo.dominio.tld
             </div>
 
             <div>
-                <h4>Verificar la conectividad en varios equipos</h4>
+                <h3>Verificar la conectividad en varios equipos</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">ansible [HOST] -i [HOST_FILE] -f -m ping</code></pre>
                 <p class="Expl">
@@ -97,7 +97,7 @@ nodo.dominio.tld
             </div>
 
             <div>
-                <h4>Creación de un fichero .yml</h4>
+                <h3>Creación de un fichero .yml</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">---
 - name: Descripción de la tarea
@@ -124,20 +124,20 @@ nodo.dominio.tld
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>PSSH</h2>
-        <h3>Ejecución de SSH en paralelo</h3>
+        <p class="Resumen_Titulo">Ejecución de SSH en paralelo</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h4>Ejecución de comandos simultáneamente</h4>
+                <h3>Ejecución de comandos simultáneamente</h3>
 
                 <p>Con esto se puede a parte verificar si una serie de equipos están disponibles ejecutando un comando como <b>"hostname; whoami"</b>.</p>
                 <pre class="codigo" translate="no"><code class="bash">parallel-ssh -h [HOST_FILE] -l [USER] [COMANDO]</code></pre>
@@ -156,20 +156,20 @@ nodo.dominio.tld
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>Parallel-Rsync</h2>
-        <h3>Automatizar la copia ficheros</h3>
+        <p class="Resumen_Titulo">Automatizar la copia ficheros</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h4>Enviar un fichero a varios hosts simultáneamente</h4>
+                <h3>Enviar un fichero a varios hosts simultáneamente</h3>
 
                 <pre class="codigo" translate="no"><code class="bash">parallel-scp -h [HOST_FILE] [FILE_SRC] [FILE_DST]</code></pre>
                 <p class="Expl">
@@ -187,19 +187,19 @@ nodo.dominio.tld
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>PRSYNC</h2>
-        <h3>Ejecución de SCP en paralelo</h3>
+        <p class="Resumen_Titulo">Ejecución de SCP en paralelo</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y pssh</code></pre>
             </div>
 
             <div>
-                <h4>Sincronizar ficheros a varios hosts simultáneamente</h4>
+                <h3>Sincronizar ficheros a varios hosts simultáneamente</h3>
 
                 <p>Solo se copian los ficheros nuevos o modificados, lo que hace más rápida que copiar todo cada vez.</p>
                 <pre class="codigo" translate="no"><code class="bash">parallel-rsync -r -p [NUM] -h [HOST_FILE] -l [USER] [FILE_SRC] [FILE_DST]</code></pre>

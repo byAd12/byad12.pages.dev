@@ -43,17 +43,23 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>VSFTPD</h1>
-        <h3>Servidor FTP en Linux</h3>
+        <h1>Servicios DNS</h1>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p style="color: black; position: sticky; top: 0;" id="dd"></p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>VSFTPD</h1>
+        <p class="Resumen_Titulo">Servidor FTP en Linux</p>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h4>Instalación</h4>
+                <h3>Instalación</h3>
 
                 <p>Hay que instalar el servicio correspondiente en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -64,7 +70,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Comprobación</h4>
+                <h3>Comprobación</h3>
 
                 <p>Hay que comprobar que el usuario y grupo llamados <span class="span_contenido" translate="no">ftp</span> existen y que el directorio home del usuario es <span class="span_url" translate="no">/srv/ftp</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">cat /etc/passwd | grep ftp</code></pre>
@@ -73,7 +79,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Ficheros importantes</h4>
+                <h3>Ficheros importantes</h3>
 
                 <p>Algunos de los siguientes ficheros pueden no estar creados por defecto, en ese caso deberían crearse si se necesitan:</p>
 
@@ -111,7 +117,8 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Servicio</h4>
+                <h3>Servicio</h3>
+
                 <p>Iniciar el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">service vsftpd start</code></pre>
                 
@@ -120,7 +127,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h4>Directivas de: <span translate="no">/etc/vsftpd.conf</span></h4>
+                <h3>Directivas de: <span translate="no">/etc/vsftpd.conf</span></h3>
 
                 <p>Activar los usuario anónimos ("ftp" o "anonymous"). Su carpeta home será <span class="span_url" translate="no">/srv/ftp</span>, de solo lectura:</p>
                 <pre class="codigo" translate="no"><code class="bash">anonymous_enable=YES</code></pre>
@@ -140,7 +147,7 @@ Código por byAd12
             </div>
             
             <div>
-                <h4>Enjaular Usuarios</h4>
+                <h3>Enjaular Usuarios</h3>
 
                 <p>Enjaular a todos los usuarios locales - <span class="span_url" translate="no">/etc/vsftpd.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">chroot_local_user=YES</code></pre>
@@ -164,7 +171,7 @@ Nombre_usuario_2
 
         <div class="parte1">
             <div>
-                <h4>Práctica de ejemplo</h4>
+                <h3>Práctica de ejemplo</h3>
 
                 <p>1. Meter 3 ficheros en <span class="span_url" translate="no">/srv/ftp</span>.</p>
                 
@@ -200,7 +207,7 @@ Nombre_usuario_2
         <div class="parte1">
 
             <div>
-                <h4>Como conectarse con FTP</h4>
+                <h3>Como conectarse con FTP</h3>
 
                 <p>Con el siguiente comando se puede crear una conexión FTP al sistema remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ftp [IP_servidor] (Puerto)</code></pre>
@@ -209,7 +216,7 @@ Nombre_usuario_2
             </div>
 
             <div>
-                <h4>Comandos más importantes para FTP</h4>
+                <h3>Comandos más importantes para FTP</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -270,7 +277,7 @@ Nombre_usuario_2
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h2>FILEZILLA</h2>
-        <h3>Servidor FTP en Windows</h3>
+        <p class="Resumen_Titulo">Servidor FTP en Windows</p>
         <hr>
         <!-- ......................................................... -->
         <div class="parte1">
@@ -287,7 +294,8 @@ Nombre_usuario_2
             </div>
             <!-- ......................................................... -->
             <div class="carrusel">
-                <h4>Configuración - <span>Servidor</span></h4>
+                <h3>Configuración - <span>Servidor</span></h3>
+
                 <p class="carrusel_nota_print">El carrusel de imágenes no se puede enseñar en modo PDF, por favor consúltelo directamente en la <a href="ftp.html">página web</a>.</p>
                 <div class="carrusel_imagenes" id="carrusel_imagenes-server">
                     <img class="carrusel_imagen" alt="Paso 1" src="../img/guides/filezilla_server/step1.png" onclick="agrandarImagen(this)">
@@ -301,7 +309,8 @@ Nombre_usuario_2
             </div>
             <!-- ......................................................... -->
             <div class="carrusel">
-                <h4>Configuración - <span>Cliente</span></h4>
+                <h3>Configuración - <span>Cliente</span></h3>
+                
                 <p class="carrusel_nota_print">El carrusel de imágenes no se puede enseñar en modo PDF, por favor consúltelo directamente en la <a href="ftp.html">página web</a>.</p>
                 <div class="carrusel_imagenes" id="carrusel_imagenes-cliente">
                     <img class="carrusel_imagen" alt="Paso 1" src="../img/guides/filezilla_client/step1.png" onclick="agrandarImagen(this)">

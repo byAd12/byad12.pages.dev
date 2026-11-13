@@ -51,28 +51,29 @@ p.Expl b, p.Expl2 b, span.Expl, td b, li b{color: #adbac7;}
 /* =================================================== */
 /* Títulos - Estilos generales */
 
-h1, h2, h3, h4, p#Creditos_Inicio, p#Creditos_Final{letter-spacing: 0.5px; color: #7b92de; margin-top: 15px; padding-bottom: 15px;}
-h1, h2, h3, p#Creditos_Inicio, p#Creditos_Final{font-family: "Doto";}
+h1, h2, h3, h4, p#Creditos_Inicio, p#Creditos_Final, p.Resumen_Titulo{letter-spacing: 0.5px; color: #7b92de; margin-top: 15px; padding-bottom: 15px;}
+h1, h2, p#Creditos_Inicio, p#Creditos_Final, p.Resumen_Titulo{font-family: "Doto";}
 
 /* Títulos - Estilos específicos */
 
 h1{font-weight: bold; font-size: 40px; text-align: center;}
 
 h2{font-size: 35px; text-align: center; font-weight: bold;}
-h2 span{color: white;}
 
-h3, p#Creditos_Inicio{font-size: 20px; text-align: center; margin: 0 !important; color: #d0d0d0 !important; font-weight: normal !important;}
-
-p#Creditos_Inicio{display: none;}
+p#Creditos_Inicio, p.Resumen_Titulo{text-align: center; margin: 0 !important; color: #d0d0d0 !important; font-weight: normal !important; font-size: 20px;}
+p#Creditos_Inicio{display: none; font-size: 15px;}
 
 p#Creditos_Final{text-align: center; padding: 15px 0; margin: 0;}
 p#Creditos_Final a{text-underline-offset: 10px;}
 p#Creditos_Final a:hover{color: #7b92de;}
 
-.parte1 div h4{text-align: left; text-decoration: underline; font-size: 25px; text-underline-offset: 10px; line-height: 40px; font-weight: normal;}
-.parte1 div h4{color: #7b92de; line-height: 40px; font-weight: 500; text-decoration: underline; text-underline-offset: 10px;}
-.parte1 div h4 span.span_url_espaciado{margin-left: 10px; text-decoration: none; display: inline-block;}
-.parte1 div h4.IndiceH2{text-decoration: none; margin: 15px 0 !important; color: #d0d0d0; padding: 15px 0 0 0;}
+.parte1 div h3{text-align: left; text-decoration: underline; font-size: 25px; text-underline-offset: 10px; line-height: 40px; font-weight: normal;}
+.parte1 div h3{color: #7b92de; line-height: 40px; font-weight: 500; text-decoration: underline; text-underline-offset: 10px;}
+.parte1 div h3 span.span_url_espaciado{margin-left: 10px; text-decoration: none; display: inline-block;}
+.parte1 div h3.IndiceH2{text-decoration: none; margin: 15px 0 !important; color: #d0d0d0; padding: 15px 0 0 0;}
+.parte1 div h3 span{color: white;}
+
+.PaginaIndice h3{text-align: center !important;}
 
 /* Imágen del logo de Linux / Windows en el título */
 
@@ -114,7 +115,7 @@ a.Boton_Personalizado_Texto:hover p.BotonFlecha span{transform: rotate(45deg); c
 
 .codigo, .Expl, .Expl2, p{margin: 15px 0 15px 0;}
 
-.Expl:not(.TablaDivScroll, ul, ol), .codigo:not(.Expl2), ul, ol{margin-left: 30px !important;}
+.Expl:not(.TablaDivScroll, ul, ol), .codigo:not(.Expl2), ul, ol{margin-left: 30px;}
 ul.Expl, ol.Expl{margin-left: 46px !important;}
 
 .Expl2{margin-left: 60px !important;}
@@ -161,8 +162,8 @@ div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !importan
 
 @media screen and (max-width: 650px){
     .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
+
     .TablaDivScroll table tr td{height: 100% !important; border: none !important; width: 100%;}
-    .TablaDivScroll table tr td:last-child{padding-top: 0;}
 }
 
 /* =================================================== */
@@ -267,6 +268,10 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
 /* Estilos aplicado en la impresión (CTRL - P) */
 
 @media print{
+    /* PDF */
+    @page{margin: 0.50in 0.22in !important;}
+
+    /* BÁSICO */
     .menu_bar{display: none;}
     *{user-select: text !important;}
     hr{-webkit-print-color-adjust: exact; print-color-adjust: exact;}
@@ -274,23 +279,32 @@ div.SingleImagenGlobal img:hover{filter: invert(1);}
     .parte1 div:not(.BotonPersonalizadoDIV, .TablaDivScroll, .SingleImagenGlobal, .parte1 div div, .PaginaIndice div){width: 95% !important;}
     .BotonPersonalizadoDIV .BotonFlecha{border: 2px solid #8b9dc3 !important;}
 
+    /* CARRUSEL */
     .carrusel_nota_print{display: block !important;}
     .carrusel_imagenes, .carrusel_boton{display: none !important;}
 
     pre{border: 1px solid rgba(192, 192, 192, 1) !important;}
 
+    /* TABLAS */
     .TablaDivScroll table, .TablaDivScroll table tr, .TablaDivScroll table td{border-collapse: collapse !important;}
     .TablaDivScroll table{border-collapse: collapse !important; width: 100% !important;}
-    .TablaDivScroll table tr{display: block !important; border: 1px solid rgba(192, 192, 192, 1) !important; margin-bottom: -1px !important;}
-    .TablaDivScroll table tr.Titulo{font-weight: bold; display: block !important;}
+    
+    .TablaDivScroll table tr{display: block !important; border: 1px solid rgb(192, 192, 192) !important; margin-bottom: 15px !important;}
+    .TablaDivScroll table tr.Titulo{font-weight: bold; display: block !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; background-color: rgba(170, 170, 170, 0.05);}
+    
     .TablaDivScroll table tr td{display: block !important; width: 100% !important; height: auto !important; border: none !important; box-sizing: border-box;}
-    .TablaDivScroll table tr td + td{padding-top: 0 !important; }
+    .TablaDivScroll table tr td + td{padding-top: 0 !important;}
 
     .TablaNmap .Titulo, .TablaNmap .Titulo td, .TablaNmap .Titulo td *{font-weight: bolder;}
 
+    /* MÁRGENES EXP */
     .Expl:not(.TablaDivScroll, ul, ol), .codigo, ul, ol{margin-left: 15px !important;}
     .Expl2:not(.TablaDivScroll, ul, ol){margin-left: 30px !important;}
 
+    .Expl .TablaComandos{margin-left: 0 !important; width: 100% !important;}
+    .codigo{margin-left: 0 !important; width: 100% !important;}
+
+    /* TÍTULOS */
     span.span_contenido, span.span_url, span.span_error, span.span_url_espaciado{border: .3px solid rgba(192, 192, 192, 0.5);}
 }
 

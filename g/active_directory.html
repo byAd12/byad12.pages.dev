@@ -45,7 +45,7 @@ Código por byAd12
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <h1>Active Directory</h1>
-        <h3>Servicio de directorio en una red distribuida</h3>
+        <p class="Resumen_Titulo">Servicio de directorio en una red distribuida</p>
         <p id="Creditos_Inicio">none</p>
         <hr>
         <!-- ......................................................... -->
@@ -55,7 +55,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4>Configurar un sistema <span>Linux</span> como controlador de dominio</h4>
+                <h3>Configurar un sistema <span>Linux</span> como controlador de dominio</h3>
             
                 <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio con las mismas funcionalidades pero sin la necesidad de adquirir licencias.</p>
             
@@ -139,7 +139,7 @@ Código por byAd12
 
         <div class="parte1">
             <div>
-                <h4 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h4>
+                <h3 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -239,8 +239,6 @@ Código por byAd12
                     </table>
                 </div>
 
-
-
             </div>
 
         </div>
@@ -254,7 +252,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h4>
+                <h3>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h3>
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
@@ -283,7 +281,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h4 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h4>
+                <h3 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
             
                 <p>Con los siguientes pasos en un cliente Linux se puede meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
@@ -456,7 +454,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h4>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h4>
+                <h3>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h3>
             
                 <p>
                     Este proceso equivale a la <b>"Carpeta particular"</b> o <b>"Unidad de red"</b> en Windows. 
@@ -535,7 +533,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h4>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h4>
+                <h3>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
             
                 <p>1. Primero hay que configurar como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
@@ -556,7 +554,7 @@ group:          files systemd winbind</code></pre>
         <div class="parte1">
 
             <div>
-                <h4>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h4>
+                <h3>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
             
                 <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
 
@@ -617,7 +615,7 @@ ldap_user_gid_number = gidNumber</code></pre>
         <div class="parte1">
 
             <div>
-                <h4>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h4>
+                <h3>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h3>
             
                 <p>En el fichero de configuración de samba <span class="span_url" translate="no">/etc/samba/smb.conf</span> hay que añadir en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">vfs objects = acl_xattr
@@ -638,7 +636,7 @@ store dos attributes = yes</code></pre>
         <div class="parte1">
 
             <div>
-                <h4>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h4>
+                <h3>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h3>
 
                 <p>Este permiso permite modificar las ACLs de los recursos compartidos por un servidor Linux desde un equipo Windows.</p>
             
