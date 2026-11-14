@@ -61,7 +61,8 @@ h1{font-weight: bold; font-size: 3rem; text-align: center;}
 h2{font-size: 1.9rem; text-align: center; font-weight: bold;}
 
 p#Creditos_Inicio, p.Resumen_Titulo{text-align: center; margin: 0 !important; color: #d0d0d0 !important; font-weight: normal !important; font-size: 20px;}
-p#Creditos_Inicio{display: none; font-size: 15px;}
+p#Creditos_Inicio.Oculto{font-size: 0px; color: transparent; user-select: none; padding: 0 !important;}
+p#Creditos_Inicio.Visible{font-size: 15px; user-select: text; padding-bottom: 15px !important;}
 
 p#Creditos_Final{text-align: center; padding: 15px 0; margin: 0;}
 p#Creditos_Final a{text-underline-offset: 10px;}

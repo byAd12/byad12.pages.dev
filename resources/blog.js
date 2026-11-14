@@ -5,7 +5,7 @@
 // CAMBIAR ESTILOS DE .menu_bar
 
 const menuBar = document.getElementById("menu_bar");
-const dd = document.getElementById("dd");
+const menu_bar_scroll_mark = document.getElementById("Creditos_Inicio");
 
 window.addEventListener("scroll", () => {
     if (window.scrollY > 10) {
@@ -14,9 +14,9 @@ window.addEventListener("scroll", () => {
         menuBar.classList.remove("menu_bar_top");
     }
 
-    if (dd) {
-        const ddTop = dd.getBoundingClientRect().top;
-        if (ddTop <= 0) {
+    if (menu_bar_scroll_mark) {
+        const isTop = menu_bar_scroll_mark.getBoundingClientRect().top;
+        if (isTop <= 0) {
             menuBar.classList.add("menu_bar_top_2");
         } else {
             menuBar.classList.remove("menu_bar_top_2");
@@ -183,14 +183,18 @@ window.addEventListener("beforeprint", (event) => {
     }
     const decoder = new TextDecoder();
     
-    document.getElementById("Creditos_Inicio").style = "display: block;";
+    document.getElementById("Creditos_Inicio").classList.remove("Oculto");
+    document.getElementById("Creditos_Inicio").classList.add("Visible");
     document.getElementById("Creditos_Inicio").innerHTML = decoder.decode(bytes);
+
     document.getElementById("SaltImagen").src = "../img/guides/hash/salt_dark.png";
 });
 
 window.addEventListener("afterprint", (event) => {
-    document.getElementById("Creditos_Inicio").style = "display: none;";
+    document.getElementById("Creditos_Inicio").classList.remove("Visible");
+    document.getElementById("Creditos_Inicio").classList.add("Oculto");
     document.getElementById("Creditos_Inicio").innerHTML = "";
+
     document.getElementById("SaltImagen").src = "../img/guides/hash/salt_light.png";
 });
 
