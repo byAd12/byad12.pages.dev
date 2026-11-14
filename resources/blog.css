@@ -56,7 +56,7 @@ h1, h2, p#Creditos_Inicio, p#Creditos_Final, p.Resumen_Titulo{font-family: "Doto
 
 /* Títulos - Estilos específicos */
 
-h1{font-weight: bold; font-size: 2.8rem; text-align: center;}
+h1{font-weight: bold; font-size: 3rem; text-align: center;}
 
 h2{font-size: 1.9rem; text-align: center; font-weight: bold;}
 
@@ -157,8 +157,9 @@ div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !importan
 .TablaDivScroll table.TablaNmap td span.negativo{color: #e74c3c;}
 .TablaDivScroll table.TablaNmap td span.intermedio{color: #f1c40f;}
 
-.TablaDivScroll table.UnicaColumna tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
-.TablaDivScroll table.UnicaColumna tr td{height: 100%; border: none !important;}
+.TablaDivScroll table.UnicaColumna tr{display: flex; flex-direction: column;}
+.TablaDivScroll table.UnicaColumna tr td, .TablaDivScroll table.UnicaColumna tr th{height: max-content; padding: 10px;}
+.TablaDivScroll table.UnicaColumna tr th{min-height: 30px; display: flex; align-items: center;}
 
 @media screen and (max-width: 650px){
     .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}

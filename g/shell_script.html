@@ -46,64 +46,78 @@ Código por byAd12
         <h1>SHELL</h1>
         <p class="Resumen_Titulo">Scripts for Linux</p>
         <p id="Creditos_Inicio">none</p>
+        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <p style="color: black; position: sticky; top: 0;" id="dd"></p>
         
         <div class="parte1">
 
             <div>
                 <h3>Estructura</h3>
 
-                <p>Primero hay que crear el fichero y añadir contenido en el:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano script.sh</code></pre>
-
-                <p class="Expl">Estructura del script:</p>
+                <p>
+                    Primero hay que crear un fichero con extensión <span class="span_url" translate="no">.sh</span> y añadir contenido en el.
+                    Estructura básica del script:
+                </p>
                 <pre class="codigo" translate="no"><code class="bash">#!/bin/bash
 # Aquí se añadirán todos los comandos necesarios</code></pre>
 
-                <p>Luego hay que asignarle permisos de ejecución:</p>
-                <pre class="codigo" translate="no"><code class="bash">chmod +x script.sh</code></pre>
+                <p>Para poder ejecutar el script hay que asignar permisos de ejecución:</p>
+                <pre class="codigo" translate="no"><code class="bash">chmod +x [Ruta_script].sh</code></pre>
 
-                <p>Por último se puede ejecutar el script:</p>
+                <p>Para ejecutar el script solo hay que indicar la ruta relativa o absoluta del fichero:</p>
                 <pre class="codigo" translate="no"><code class="bash">./script.sh</code></pre>
+
             </div>
 
             <div>
                 <h3>Parámetros</h3>
 
-                <p>Al ejecutar un fichero se le puede pasar argumentos:</p>
-                <pre class="codigo" translate="no"><code class="bash">script.sh arg1 arg2 ...</code></pre>
+                <p>Al ejecutar un fichero se le puede pasar varios parámetros separados por espacios como, por ejemplo:</p>
+                <pre class="codigo" translate="no"><code class="bash">[Ruta_script].sh param1 param2 ...</code></pre>
                 
-                <p>Dentro de un fichero, para hacer referencia a estos argumentos:</p>
+                <p>Dentro del script se puede hacer referencia a estos estos argumentos:</p>
                 <p class="Expl">
-                    <span class="span_contenido" translate="no">$num</span>: Llamar un argumento en "num" del orden 1 al máximo de 9.
+                    <span class="span_contenido" translate="no">$num</span>: Devuelve el valor de un parámetro según su posición - "num".
+                    Valor mínimo: <span class="span_contenido" translate="no">1</span>.
+                    Valor máximo: <span class="span_contenido" translate="no">9</span>.
                     <br>
                     <span class="span_contenido" translate="no">$0</span>: Devuelve el nombre del script / función.
                     <br>
-                    <span class="span_contenido" translate="no">$*</span>: Devuelve a todos los argumentos separados por espacio.
+                    <span class="span_contenido" translate="no">$*</span>: Devuelve todos los argumentos separados por espacios.
                     <br>
-                    <span class="span_contenido" translate="no">$#</span>: Devuelve el n. total de parámetros que se pasaron.
+                    <span class="span_contenido" translate="no">$#</span>: Devuelve el número total de parámetros que se pasaron al script.
                 </p>
+
             </div>
 
             <div>
                 <h3>Básico</h3>
 
-                <p>Imprimir un texto en pantalla:</p>
+                <p>Como enseñar un texto en pantalla:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo 'texto'</code></pre>
-                <p>Pedir un texto y guardarlo en la variable <span class="span_contenido" translate="no">nombre_var</span>:</p>
+                
+                <p>Como solicitar un valor para guardarlo en una variable <span class="span_contenido" translate="no">nombre_var</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">read -p 'texto' nombre_var</code></pre>
-                <p>Esperar cierto tiempo antes de hacer una acción:</p>
+                <p class="Expl">El texto será el prompt que solicitará el valor a ingresar.</p>
+                
+                <p>Como esperar cierto tiempo antes de hacer una acción:</p>
                 <pre class="codigo" translate="no"><code class="bash">sleep &lt;Segundos&gt;</code></pre>
+
             </div>
 
             <div>
-                <h3>Llamar una variable</h3>
+                <h3>Como llamar a una variable</h3>
 
-                <p>Todo lo que esté dentro de <span class="span_contenido" translate="no">" "</span> se interpreta como variables y texto. En cambio en <span class="span_contenido" translate="no">' '</span> se interpreta todo como texto.</p>
+                <p>Todo lo que esté dentro de <span class="span_contenido" translate="no">" "</span> se interpreta como variables y texto:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo "$nombre_var"</code></pre>
+                <p class="Expl">En este ejemplo devolverá el valor que almacene la variable llamada <span class="span_contenido" translate="no">nombre_var</span>.</p>
+                
+                <p>En cambio todo lo que se encuentre entre <span class="span_contenido" translate="no">' '</span> se interpreta solo como texto:</p>
+                <pre class="codigo" translate="no"><code class="bash">echo '$nombre_var'</code></pre>
+                <p class="Expl">En este ejemplo devolverá literalmente <span class="span_contenido" translate="no">$nombre_var</span>.</p>
+
             </div>
 
             <div>
@@ -114,10 +128,10 @@ Código por byAd12
                         <tr class="Titulo">
                             <td></td>
                             <td>
-                                Para <b>cadenas de texto</b>
+                                Para <b>cadenas de texto</b>:
                             </td>
                             <td>
-                                Para <b>números</b>
+                                Para <b>números</b>:
                             </td>
                         </tr>
                         
@@ -184,7 +198,7 @@ Código por byAd12
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <th colspan="2">
-                                Para <b>ficheros</b> y <b>carpetas</b>
+                                Para <b>ficheros</b> y <b>carpetas</b>:
                             </th>
                         <tr>
                             <td><pre translate="no"><code class="bash">-e ruta</code></pre></td>
@@ -209,7 +223,7 @@ Código por byAd12
             <div>
                 <h3>Condicionales</h3>
 
-                <p>Formato:</p>
+                <p>Estructura básica:</p>
                 <pre class="codigo" translate="no"><code class="bash">if [ condición1 ]; then
     // Qué hacer si se cumple la condición 1
 
@@ -220,52 +234,57 @@ else
     // Qué hacer si no se cumple ninguna condición
 
 fi</code></pre>
-                <p class="Expl"> Siempre acaba en <span class="span_contenido" translate="no">fi</span> para así indicar el final de la condicional.</p>
+                <p class="Expl">Para indicar el final de la condicional hay que utilizar <span class="span_contenido" translate="no">fi</span>.</p>
 
                 <p>Si se cumplen ambas condiciones:</p>
                 <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] && [ condición2 ]; then
-    // Contenido
+    // Qué hacer si se cumple la condición 1 Y la condición 2
 fi</code></pre>
 
                 <p>Una condición u la otra:</p>
                 <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] || [ condición2 ]; then
-    // Contenido
+    // Qué hacer si se cumple la condición 1 o la condición 2
 fi</code></pre>
 
                 <p>Si no se cumple la condición:</p>
                 <pre class="codigo" translate="no"><code class="bash">if ! [ condición1 ]; then
-    // Contenido
+    // Qué hacer si NO se cumple la condición 1
 fi</code></pre>
             </div>
 
             <div>
                 <h3>Función <span>CASE</span></h3>
 
-                <p>Para ejecutar varias acciones, dependiendo del valor de una variable:</p>
+                <p>Esta función permite ejecutar varias acciones dependiendo del valor asignado a una variable:</p>
                 <pre class="codigo" translate="no"><code class="bash">read -p 'texto' var
 case $var in
+
 1)
 echo 'El valor es 1'
 ;;
+
 rojo)
 echo 'El valor es rojo'
 ;;
+
 *)
 echo 'Este valor no estaba en ningún _)'
 ;;
+
 esac
 </code></pre>
+                <p class="Expl">Para indicar el final de la función hay que utilizar <span class="span_contenido" translate="no">esac</span>.</p>
             </div>
 
             <div>
                 <h3>Bucle <span>FOR</span></h3>
 
-                <p>Formato para recorrer un conjunto de valores hasta llegar al final:</p>
+                <p>Esta función recorre un conjunto de valores separados por espacios hasta llegar al final:</p>
                 <pre class="codigo" translate="no"><code class="bash">for nombre_var in conjunto; do
     // Contenido
 done</code></pre>
 
-                <p>Ejemplo:</p>
+                <p>Ejemplo donde se imprimen los números del 1 al 5:</p>
                 <pre class="codigo" translate="no"><code class="bash">for i in 1 2 3 4 5; do
     echo "$i"
 done</code></pre>
@@ -274,7 +293,7 @@ done</code></pre>
             <div>
                 <h3>Función <span>WHILE</span></h3>
 
-                <p>Ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
+                <p>Esta función ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
                 <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
     // Contenido
 done</code></pre>
@@ -284,7 +303,7 @@ done</code></pre>
             <div>
                 <h3>Función <span>UNTIL</span></h3>
 
-                <p>Ejecuta su contenido hasta que la condición sea verdadera:</p>
+                <p>Esta función ejecuta su contenido hasta que la condición sea verdadera:</p>
                 <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do
     // Contenido
 done</code></pre>
