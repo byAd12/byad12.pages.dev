@@ -143,7 +143,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">docker push [Nombre_usuario]/[Nombre_nueva_imagen]</code></pre>
 
                 <p>
-                    <u>Nota</u>: Hay que tener en cuenta que los datos deberían almacenarse en <a href="#volumenes">volúmenes</a> y no en el propio docker →
+                    <u>Nota</u>: Hay que tener en cuenta que los datos deberían almacenarse en <a href="#CONTENEDOR_Volumen">volúmenes</a> y no en el propio docker →
                     el docker debería ser lo más ligero posible, permitiendo así actualizar o migrar la versión de un contenedor sin necesidad de copiar los datos de nuevo.
                 </p>
 
@@ -152,7 +152,102 @@ Código por byAd12
             <div>
                 <h3 id="IMG_Dockerfile">Crear una imagen a partir de un Dockerfile</h3>
 
-                <p>...</p>
+                <p>Primero hay que crear un fichero llamado <span class="span_url" translate="no">Dockerfile</span> en cualquier ruta del sistema.</p>
+
+                <p>Este fichero tiene como contenido varias ordenes y configuraciones necesarias para crear y configurar la imagen final:</p>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <th colspan="2">Configuración mínima:</th>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">FROM [Imagen]:[Versión]</code></pre></td>
+                            <td>Al principio del fichero se debe indicar sobre que imagen de Docker se partirá y la versión de esa imagen que se quiera utilizar.</td>
+                        </tr>
+
+                    </table>
+                
+                </div>
+
+                <div class="TablaDivScroll">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <th colspan="2">Configuración opcional:</th>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">WORKDIR [Ruta_contenedor]</code></pre></td>
+                            <td>
+                                Define el directorio de trabajo dentro del contenedor para los comandos <span class="span_contenido" translate="no">RUN</span>, <span class="span_contenido" translate="no">CMD</span>, etc.
+                                Es opcional ya que estos comandos pueden utilizar rutas absolutas.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">RUN [Comando]</code></pre></td>
+                            <td>
+                                Ejecuta un comando específico durante el proceso de creación de la imagen final.
+                                Se puede instalar paquetes, cambiar variables, crear carpetas, etc.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">COPY [Ruta_local] [Ruta_contenedor]</code></pre></td>
+                            <td>
+                                Copia ficheros o carpetas desde el sistema local hacia el contenedor.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">CMD ["Comando", "Parámetro 1", "..."]</code></pre></td>
+                            <td>
+                                Indica el comando por defecto y sus parámetros que se ejecutará cuando se inicie el contenedor.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">ENV [Nombre_variable]=[VALOR]</code></pre></td>
+                            <td>
+                                Crea una nueva variable que estará disponible dentro del contenedor.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">EXPOSE [Puerto_interno]</code></pre></td>
+                            <td>
+                                Indica un puerto interno del contenedor que escucha peticiones relacionadas al servicio que ejecuta.
+                                No expone este puerto en la máquina anfitrión.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">VOLUME [Ruta_contenedor]</code></pre></td>
+                            <td>
+                                Crea un nuevo <a href="#CONTENEDOR_Volumen">volumen</a> en la ruta del contenedor definida.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash"># [Comentario]</code></pre></td>
+                            <td>
+                                Define un texto como comentario dentro del fichero.
+                            </td>
+                        </tr>
+
+                    </table>
+                
+                </div>
+
+                <p>Una vez se haya configurado el fichero <span class="span_url" translate="no">Dockerfile</span> hay que iniciar el proceso para crear la imagen, indicando el nombre y la versión que se le asignará:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker build --no-cache --pull -t [Nombre_imagen]:[Versión] .</code></pre>
+                <p class="Expl">El <span class="span_contenido" translate="no">.</span> final indica la carpeta donde se encuentra el fichero <span class="span_url" translate="no">Dockerfile</span>.</p>
+
+                <p>Si el proceso no tuvo ningún error, podrás ver la nueva imagen en tu sistema local y crear un nuevo contenedor que use esta misma imagen:</p>
+                <pre class="codigo" translate="no"><code class="bash">docker image ls</code></pre>
 
             </div>
 
