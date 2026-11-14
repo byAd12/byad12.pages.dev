@@ -46,6 +46,7 @@ Código por byAd12
         <h1>XPATH</h1>
         <p class="Resumen_Titulo">XML Path language</p>
         <p id="Creditos_Inicio">none</p>
+        <h2>Índice</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -53,7 +54,6 @@ Código por byAd12
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h3>Índice</h3>
 
                 <p class="Indicador_Seccion_Indice">Introducción:</p>
                 <ul>
@@ -88,6 +88,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Introducción</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -185,6 +186,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Conceptos Básicos y Selección</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -286,6 +288,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Filtrado (Predicados)</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -366,6 +369,17 @@ Código por byAd12
                 <p>Los ejemplos anteriores devolverán todo el nodo <span class="span_url" translate="no">servicio</span> incluido todo los nodos que contenga.</p>
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Navegación Avanzada</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
             <div>
                 <h3 id="ejes-busqueda">Ejes de búsqueda (Axes)</h3>
 
@@ -403,6 +417,68 @@ Código por byAd12
             </div>
 
             <div>
+                <h3 id="union-secuencias">Unión de Nodos y Secuencias</h3>
+
+                <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, hay dos operadores clave que no se deben confundir:</p>
+                
+                <p>1. Operador de Unión ( | )</p>
+                <p class="Expl">
+                    Se representa con la barra vertical <span class="span_url" translate="no">|</span>. Une dos o más conjuntos de nodos. 
+                    Elimina automáticamente los duplicados y devuelve los nodos en el mismo orden en el que aparecen en el documento XML.
+                </p>
+                <p class="Expl">Seleccionar todos los programas y todos los tiempos de ejecución a la vez:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">//servicio/@programa | //tiempo_ejecucion</code></pre>
+
+                <p>2. Operador de Secuencia ( , )</p>
+                <p class="Expl">
+                    Se representa con una coma <span class="span_url" translate="no">,</span> (disponible en XPath 2.0 y 3.1). 
+                    Permite concatenar resultados formando una lista o secuencia. A diferencia de la unión, <b>no elimina duplicados</b> y respeta el orden en el que escribes la consulta.
+                </p>
+                <p class="Expl">Crear una secuencia que devuelva primero los tiempos y luego los programas:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">(//tiempo_ejecucion , //servicio/@programa)</code></pre>
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Funciones y Otros Datos</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h3 id="items-tipos">Ítems y Tipos de Datos</h3>
+
+                <p>En XPath, la evaluación de una expresión siempre da como resultado una secuencia de <b>Ítems</b>. Un ítem puede ser de dos tipos:</p>
+
+                <ul>
+                    <li><b>Nodos:</b> Cualquier nodo del árbol XML (raíz, elemento, atributo, etc.).</li>
+                    <li><b>Valores atómicos:</b> Valores simples como cadenas de texto, números o booleanos (true/false).</li>
+                </ul>
+
+                <p>Además, XPath maneja principalmente cuatro tipos de datos básicos: Conjunto de nodos, Booleano, Cadena de caracteres (String) y Numérico.</p>
+            </div>
+
+            <div>
+                <h3 id="acceso-doc">Acceso a datos de otro documento XML</h3>
+
+                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de ficheros externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
+                <p class="Expl">Si por ejemplo se quiere acceder al nodo raíz de un fichero llamado "config.xml" que está en la misma carpeta:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">doc("config.xml")/servidor</code></pre>
+            </div>
+
+            <div>
+                <h3 id="localizar-comentarios">Localizar comentarios</h3>
+
+                <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url" translate="no">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url" translate="no">comment()</span>.</p>
+                <p class="Expl">Para localizar todos los comentarios dentro del nodo raíz:</p>
+                <pre class="codigo" translate="no"><code class="language-xml">/servidor/comment()</code></pre>
+            </div>
+
+<div>
                 <h3 id="funciones-xpath">Funciones de XPath</h3>
 
                 <div class="TablaDivScroll">
@@ -453,57 +529,6 @@ Código por byAd12
                 <p>
                     Estas funciones permiten manipular los datos obtenidos del XML. Por ejemplo, <span class="span_url" translate="no">count()</span> devuelve el número total de elementos, mientras que <span class="span_url" translate="no">sum()</span> realiza la suma aritmética de sus valores.
                 </p>
-            </div>
-
-            <div>
-                <h3 id="items-tipos">Ítems y Tipos de Datos</h3>
-
-                <p>En XPath, la evaluación de una expresión siempre da como resultado una secuencia de <b>Ítems</b>. Un ítem puede ser de dos tipos:</p>
-
-                <ul>
-                    <li><b>Nodos:</b> Cualquier nodo del árbol XML (raíz, elemento, atributo, etc.).</li>
-                    <li><b>Valores atómicos:</b> Valores simples como cadenas de texto, números o booleanos (true/false).</li>
-                </ul>
-
-                <p>Además, XPath maneja principalmente cuatro tipos de datos básicos: Conjunto de nodos, Booleano, Cadena de caracteres (String) y Numérico.</p>
-            </div>
-
-            <div>
-                <h3 id="acceso-doc">Acceso a datos de otro documento XML</h3>
-
-                <p>XPath permite hacer consultas no solo sobre el documento actual, sino también extraer información de ficheros externos utilizando la función <span class="span_url" translate="no">doc()</span>.</p>
-                <p class="Expl">Si por ejemplo se quiere acceder al nodo raíz de un fichero llamado "config.xml" que está en la misma carpeta:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">doc("config.xml")/servidor</code></pre>
-            </div>
-
-            <div>
-                <h3 id="localizar-comentarios">Localizar comentarios</h3>
-
-                <p>Si necesitamos extraer los comentarios (las etiquetas que tienen el formato <span class="span_url" translate="no">&lt;!-- ... --&gt;</span>) de un documento XML, usamos la función de prueba de nodo <span class="span_url" translate="no">comment()</span>.</p>
-                <p class="Expl">Para localizar todos los comentarios dentro del nodo raíz:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">/servidor/comment()</code></pre>
-            </div>
-
-            <div>
-                <h3 id="union-secuencias">Unión de Nodos y Secuencias</h3>
-
-                <p>En XPath, a menudo necesitamos seleccionar varios elementos distintos al mismo tiempo. Para ello, hay dos operadores clave que no se deben confundir:</p>
-                
-                <p>1. Operador de Unión ( | )</p>
-                <p class="Expl">
-                    Se representa con la barra vertical <span class="span_url" translate="no">|</span>. Une dos o más conjuntos de nodos. 
-                    Elimina automáticamente los duplicados y devuelve los nodos en el mismo orden en el que aparecen en el documento XML.
-                </p>
-                <p class="Expl">Seleccionar todos los programas y todos los tiempos de ejecución a la vez:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">//servicio/@programa | //tiempo_ejecucion</code></pre>
-
-                <p>2. Operador de Secuencia ( , )</p>
-                <p class="Expl">
-                    Se representa con una coma <span class="span_url" translate="no">,</span> (disponible en XPath 2.0 y 3.1). 
-                    Permite concatenar resultados formando una lista o secuencia. A diferencia de la unión, <b>no elimina duplicados</b> y respeta el orden en el que escribes la consulta.
-                </p>
-                <p class="Expl">Crear una secuencia que devuelva primero los tiempos y luego los programas:</p>
-                <pre class="codigo" translate="no"><code class="language-xml">(//tiempo_ejecucion , //servicio/@programa)</code></pre>
             </div>
 
             <div>

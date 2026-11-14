@@ -56,9 +56,9 @@ h1, h2, p#Creditos_Inicio, p#Creditos_Final, p.Resumen_Titulo{font-family: "Doto
 
 /* Títulos - Estilos específicos */
 
-h1{font-weight: bold; font-size: 40px; text-align: center;}
+h1{font-weight: bold; font-size: 2.8rem; text-align: center;}
 
-h2{font-size: 35px; text-align: center; font-weight: bold;}
+h2{font-size: 1.9rem; text-align: center; font-weight: bold;}
 
 p#Creditos_Inicio, p.Resumen_Titulo{text-align: center; margin: 0 !important; color: #d0d0d0 !important; font-weight: normal !important; font-size: 20px;}
 p#Creditos_Inicio{display: none; font-size: 15px;}
@@ -72,8 +72,6 @@ p#Creditos_Final a:hover{color: #7b92de;}
 .parte1 div h3 span.span_url_espaciado{margin-left: 10px; text-decoration: none; display: inline-block;}
 .parte1 div h3.IndiceH2{text-decoration: none; margin: 15px 0 !important; color: #d0d0d0; padding: 15px 0 0 0;}
 .parte1 div h3 span{color: white;}
-
-.PaginaIndice h3{text-align: center !important;}
 
 /* Imágen del logo de Linux / Windows en el título */
 
@@ -135,12 +133,12 @@ ul.Expl2, ol.Expl2{margin-left: 100px; width: calc(100% - 100px);}
 
 div.Expl table{margin-left: 30px !important; width: calc(100% - 30px) !important;}
 div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !important;}
+
 .TablaDivScroll{width: 100% !important; margin: none; padding: none !important; position: inherit !important; border-radius: none !important; border: none !important; overflow-x: auto; -webkit-overflow-scrolling: touch;}
 .TablaDivScroll table{border-collapse: collapse;}
 .TablaDivScroll table.TablaComandos{color: #c0c0c0; margin: 10px 0 10px 0; border-collapse: collapse; width: 100%; table-layout: fixed;}
-.TablaDivScroll table.TablaComandos td{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px;}
-.TablaDivScroll table tr.Titulo{background-color: rgb(29, 30, 30);}
-.TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
+.TablaDivScroll table.TablaComandos td, .TablaDivScroll table.TablaComandos th{border: 1px solid rgba(192, 192, 192, 0.2); height: 30px; padding: 10px; font-weight: normal;}
+.TablaDivScroll table tr.Titulo{background-color: rgb(29, 30, 30); text-align: left;}
 .TablaDivScroll table.TablaComandos tr.Titulo *:not(a){color: #d0d0d0;}
 .TablaDivScroll table.TablaComandos td{width: auto;}
 .TablaDivScroll table.TablaComandos td pre{width: 100%; word-break: break-all; overflow-wrap: break-word; overflow-x: hidden;}
@@ -148,9 +146,11 @@ div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !importan
 /* =================================================== */
 /* Tablas - Nmap */
 
-.TablaDivScroll table.TablaNmap tr.Titulo td{cursor: pointer; font-family: "Doto"; font-size: 20px; color: white !important;}
-.TablaDivScroll table.TablaNmap td.efecto_ocultar::before{content: "►"; vertical-align: middle; font-size: 10px; display: inline-block; width: 1em; margin-right: 5px; transition: transform 0.2s; transform: translateY(-4%);}
-.TablaDivScroll table.TablaNmap td.efecto_ocultar.expanded::before{content: "▼";}
+.TablaDivScroll table.TablaNmap tr.Titulo{background-color: rgb(29, 30, 30) !important;}
+.TablaDivScroll table.TablaNmap tr.Titulo th{cursor: pointer; font-family: "Doto"; font-size: 20px; color: white !important;}
+
+.TablaDivScroll table.TablaNmap th.efecto_ocultar::before{content: "►"; vertical-align: middle; font-size: 10px; display: inline-block; width: 1em; margin-right: 5px; transition: transform 0.2s; transform: translateY(-4%);}
+.TablaDivScroll table.TablaNmap th.efecto_ocultar.expanded::before{content: "▼";}
 
 .TablaDivScroll table.TablaNmap .opcion{color: rgb(25, 124, 144);}
 .TablaDivScroll table.TablaNmap td span.positivo{color: #2ecc71;}
@@ -176,7 +176,7 @@ div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !importan
 /* Página de enlaces a sub-guías */
 
 .PaginaIndice{flex-direction: row; justify-content: center; gap: 10px;}
-.PaginaIndice h2{color: rgb(228, 196, 196) !important;}
+.PaginaIndice h3{color: rgb(228, 196, 196) !important; text-align: center !important;}
 .PaginaIndice div:not(.BotonPersonalizadoDIV){text-align: center; width: 100%; margin: 0; display: flex; flex-direction: column;}
 .PaginaIndice div.BotonPersonalizadoDIV{display: flex; flex-direction: row; flex-wrap: wrap; width: 100% !important; justify-content: center; gap: 20px;}
 .PaginaIndice div.BotonPersonalizadoDIV .Boton_Personalizado_Texto{font-size: 15px; margin: 0;}

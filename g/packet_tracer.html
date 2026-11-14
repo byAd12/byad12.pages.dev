@@ -48,6 +48,7 @@ Código por byAd12
         <h1>Packet Tracer</h1>
         <p class="Resumen_Titulo">Command Line Interface</p>
         <p id="Creditos_Inicio">none</p>
+        <h2>Índice</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -55,7 +56,6 @@ Código por byAd12
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h3>Índice</h3>
 
                 <p class="Indicador_Seccion_Indice">Básico:</p>
                 <ul>
@@ -66,7 +66,7 @@ Código por byAd12
                 </ul>
 
                 <p class="Indicador_Seccion_Indice">Diagnóstico y Verificación:</p>
-                <ul class="margin-left: 15px;">
+                <ul>
                     <li><b>Herramientas:</b> <a href="#Conectividad">Conectividad</a> • <a href="#Acceso_Remoto">Acceso remoto</a></li>
                     <li><b>Comandos Show:</b> <a href="#Comando_Show_Do">Uso de 'Do'</a> • <a href="#Verificacion_Sistema">Versión y Hardware</a></li>
                     <li><b>Tablas y Estado:</b> 
@@ -78,7 +78,7 @@ Código por byAd12
                 <p class="Indicador_Seccion_Indice">Configuración de Red e Interfaces:</p>
                 <ul>
                     <li><b>General:</b> <a href="#Nomenclatura">Hostnames</a> • <a href="#DNS">Dominio y DNS</a> • <a href="#Gateway">Default Gateway</a></li>
-                    <li><b>Direccionamiento:</b> <a href="#Direccionamiento">IPv4 e IPv6</a> • <a href="#Enrutamiento">Rutas Estáticas</a></li>
+                    <li><b>Direccionamiento:</b> <a href="#Direccionamiento">IPv4 e IPv6</a> • <a href="#Enrutamiento_Estatico_IPv4">Rutas Estáticas</a></li>
                     <li><b>Ajustes Físicos:</b> <a href="#NavInterfaces">Navegación básica</a> • <a href="#Full_Duplex_Interfaz">Duplex</a> • <a href="#Velocidad_Interfaz">Velocidad</a> • <a href="#Auto_MDIX">Auto-MDIX</a></li>
                     <li><b>Lógicas:</b> <a href="#Interfaz_Loopback">Interfaz Loopback</a></li>
                 </ul>
@@ -260,7 +260,7 @@ Código por byAd12
                 <h3 id="PassRules">Reglas de Contraseñas</h3>
 
                 <p><u>Reglas</u>: Tener más de 8 caracteres de longitud. Combinaciones de letras, números y símbolos. Evitar el uso de la misma en varios dispositivos. No usar palabras comunes.</p>
-                <p><u>Generador de contraseñas</u>: <a href="https://www.lastpass.com/es/features/password-generator" target="_blank">letpass.com</a></p>
+                <p><u>Generador de contraseñas</u>: <a href="https://www.lastpass.com/es/features/password-generator" target="_blank">lastpass.com</a></p>
             
             </div>
 
@@ -331,8 +331,8 @@ Código por byAd12
             
             </div>
             
-            <div id="RecuperacionSistema">
-                <h2>Recuperarse de un bloqueo del sistema</h3>
+            <div>
+                <h3 id="RecuperacionSistema">Recuperarse de un bloqueo del sistema</h3>
 
                 <p>El cargador de arranque proporciona acceso al switch si no se puede usar el sistema operativo debido a la falta de ficheros de sistema o al daño de estos. Permite acceso a los ficheros almacenados en la memoria flash.
                     Dentro de este aparecerá el prompt <span class="span_contenido" translate="no">switch:</span>.</p>
@@ -822,7 +822,7 @@ Vlan1                  unassigned      YES unset  administratively down down</co
 
                 <p>Primero entraremos a la interfaz deseada y asignaremos que funcione como Auto-MDIX:</p>
                 <pre class="codigo" translate="no"><code class="cisco">(config)# interface &lt;Interfaz&gt;</code></pre>
-                <pre class="codigo" translate="no"><code class="cisco">(config-vlan)# mdix auto</code></pre>
+                <pre class="codigo" translate="no"><code class="cisco">(config-if)# mdix auto</code></pre>
 
                 <p>Podemos comprobar que se haya aplicado Auto-MDIX en la interfaz especificada con el comando:</p>
                 <pre class="codigo" translate="no"><code class="cisco"># show controllers ethernet-controller &lt;Interfaz&gt; phy | include MDIX</code></pre>
@@ -1038,7 +1038,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2">Modos de switchport:</td>
+                            <th colspan="2">Modos de switchport:</th>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">access</code></pre></td>
@@ -1751,7 +1751,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                 <div class="TablaDivScroll Expl">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="2">Configuración <b>obligatoria</b>:</td>
+                            <th colspan="2">Configuración <b>obligatoria</b>:</th>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">network &lt;Dirección_Red&gt; &lt;Máscara&gt;</code></pre></td>
@@ -1767,7 +1767,7 @@ Trunking VLANs Enabled: 10,20,30,99</code></pre>
                         </tr>
 
                         <tr class="Titulo">
-                            <td colspan="2">Configuración <b>opcional</b>:</td>
+                            <th colspan="2">Configuración <b>opcional</b>:</th>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="cisco">domain-name &lt;Dominio&gt;</code></pre></td>

@@ -47,6 +47,7 @@ Código por byAd12
         <h1>XSD</h1>
         <p class="Resumen_Titulo">XML Schema Definition</p>
         <p id="Creditos_Inicio">none</p>
+        <h2>Índice</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -54,7 +55,6 @@ Código por byAd12
         
         <div class="parte1 Parte1Indice">
             <div>
-                <h3>Índice</h3>
 
                 <p class="Indicador_Seccion_Indice">Introducción:</p>
                 <ul>
@@ -82,6 +82,21 @@ Código por byAd12
                     <li><b>Contenido:</b> <a href="#elemento-complejo-contenido-simple">Contenido simple</a> • <a href="#elemento-complejo-contenido-complejo">Contenido complejo</a> • <a href="#elemento-complejo-extension">Extensión</a></li>
                 </ul>
 
+                <p class="Indicador_Seccion_Indice">Elemento Vacío:</p>
+                <ul>
+                    <li><a href="#elemento-vacio">Estructura</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Elemento Mixto:</p>
+                <ul>
+                    <li><a href="#elemento-mixto">Cadena de caracteres con sub-elementos</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Resumen - Tipos de elementos:</p>
+                <ul>
+                    <li><a href="#guia-rapida-combinaciones">Guía Rápida &gt; Combinaciones de Estructura</a></li>
+                </ul>
+
                 <p class="Indicador_Seccion_Indice">Reutilización y Atributos:</p>
                 <ul>
                     <li><b>Reutilizar:</b> <a href="#reutilizacion-grupos-elementos">Grupos de elementos</a> • <a href="#reutilizacion-grupos-atributos">Grupos de atributos</a> • <a href="#atributo-validacion">Atributos y validación</a></li>
@@ -90,6 +105,10 @@ Código por byAd12
             </div>
         </div>
 
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Introducción</h2>
+        <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
@@ -169,7 +188,7 @@ Código por byAd12
         &lt;/xs:sequence&gt;
     &lt;/xs:complexType&gt;
 
-    &lt;!-- Se restringe las URLs a un patrón específico en base a una cadena de carácteres --&gt;
+    &lt;!-- Se restringe las URLs a un patrón específico en base a una cadena de caracteres --&gt;
     &lt;xs:simpleType name="url"&gt;
         &lt;xs:restriction base="xs:string"&gt;
             &lt;xs:pattern value="([Hh][Tt]{2}[Pp][Ss]?)://.*" /&gt;
@@ -214,16 +233,6 @@ Código por byAd12
                 </p>
 
             </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
             
             <div>
                 <h3 id="tipos-de-elementos-xml">Tipos de elementos XML</h3>
@@ -254,6 +263,17 @@ Código por byAd12
                 <p class="Expl">Se considera como elemento complejo cualquier elemento vacío pero que tenga al menos un atributo, lo mismo si solo tiene un sub-elemento dentro.</p>
 
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Estructura y Vinculación</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
 
             <div>
                 <h3 id="estructura-xsd">Estructura XSD</h3>
@@ -293,6 +313,17 @@ Código por byAd12
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Tipos y Valores</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
             <div>
                 <h3 id="tipos-de-valores-en-xsd">Tipos de valores en XSD</h3>
 
@@ -314,7 +345,7 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="3">Valores de tipo <b>texto</b></td>
+                            <th colspan="3">Valores de tipo <b>texto</b></th>
                         </tr>
                         <tr>
                             <td>TIPO</td>
@@ -323,7 +354,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><b>xs:string</b></td>
-                            <td>Representa cualquier cadena de carácteres</td>
+                            <td>Representa cualquier cadena de caracteres</td>
                             <td>hola</td>
                         </tr>
                         <tr>
@@ -331,7 +362,7 @@ Código por byAd12
                             <td>
                                 Representa un Uniform Resource Identifier (URI):
                                 <br>
-                                Cadena de carácteres que identifica un recurso sin ambigüedades
+                                Cadena de caracteres que identifica un recurso sin ambigüedades
                             </td>
                             <td>
                                 <b>URL</b>: http://by.ad/12
@@ -356,7 +387,7 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="3">Valores de tipo <b>númerico</b></td>
+                            <th colspan="3">Valores de tipo <b>númerico</b></th>
                         </tr>
                         <tr>
                             <td>TIPO</td>
@@ -401,7 +432,7 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="3">Valores de tipo <b>tiempo</b>  en formato <a href="https://es.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></td>
+                            <th colspan="3">Valores de tipo <b>tiempo</b>  en formato <a href="https://es.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></th>
                         </tr>
                         <tr>
                             <td>TIPO</td>
@@ -487,7 +518,7 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="3">Valores de tipo <b>identificador</b></td>
+                            <th colspan="3">Valores de tipo <b>identificador</b></th>
                         </tr>
                         <tr>
                             <td>TIPO</td>
@@ -532,6 +563,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Elemento Simple</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -662,6 +694,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Elemento Complejo</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -842,6 +875,7 @@ Código por byAd12
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Elemento Vacío</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -849,7 +883,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3 id="elemento-vacio">Elemento vacío</h3>
+                <h3 id="elemento-vacio">Elemento vacío &gt; <span>Estructura</span></h3>
 
                 <p>Un elemento vacío, aunque no tenga contenido, sí puede tener atributos como en el siguiente ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento atributos="" /&gt;</code></pre>
@@ -875,10 +909,21 @@ Código por byAd12
 &lt;/xs:element&gt;</code></pre>
             </div>
 
-            <div>
-                <h3 id="elemento-mixto">Elemento mixto &gt; <span>Cadena de carácteres con sub-elementos</span></h3>
+        </div>
 
-                <p>Un elemento mixto es aquel que combina carácteres con sub-elementos como en el siguiente ejemplo:</p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Elemento Mixto</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h3 id="elemento-mixto">Elemento mixto &gt; <span>Cadena de caracteres con sub-elementos</span></h3>
+
+                <p>Un elemento mixto es aquel que combina caracteres con sub-elementos como en el siguiente ejemplo:</p>
 
                 <pre class="codigo" translate="no"><code class="language-xml">&lt;nombre_elemento&gt;texto &lt;elemento2&gt;texto&lt;/elemento2&gt;&lt;/nombre_elemento&gt;</code></pre>
 
@@ -890,7 +935,19 @@ Código por byAd12
         &lt;/xs:sequence&gt;
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
+
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Resumen - Tipos de elementos</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
 
             <div>
                 <h3 id="guia-rapida-combinaciones">Guía Rápida &gt; <span>Combinaciones de Estructura</span></h3>
@@ -927,6 +984,17 @@ Código por byAd12
     &lt;/xs:complexType&gt;
 &lt;/xs:element&gt;</code></pre>
             </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Reutilización y Atributos</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
 
             <div>
                 <h3 id="reutilizacion-grupos-elementos">Reutilización &gt; <span>Grupos de Elementos</span></h3>
@@ -972,16 +1040,6 @@ Código por byAd12
 &lt;/xs:complexType&gt;</code></pre>
             </div>
 
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
             <div>
                 <h3 id="atributo-validacion">Atributo &gt; <span>Validación</span></h3>
 
@@ -1013,16 +1071,6 @@ Código por byAd12
 &lt;/xs:element&gt;
 </code></pre>
             </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
 
             <div>
                 <h3 id="restricciones-longitud">Restricciones de <span>longitud</span></h3>
@@ -1124,7 +1172,7 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td colspan="3"><b>Sintaxis</b> para crear expresiones regulares</td>
+                            <th colspan="3"><b>Sintaxis</b> para crear expresiones regulares</th>
                         </tr>
                         <tr>
                             <td>PATRÓN</td>
