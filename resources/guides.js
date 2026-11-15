@@ -48,6 +48,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 // ==========================================================
 // ==========================================================
+// IMPRIMIR LA PÁGINA SI SE INDICA "?print=true"
+
+window.addEventListener('DOMContentLoaded', () => {
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('print') === "true") {
+    window.print();
+}
+});
+
+// ==========================================================
+// ==========================================================
 // COPIAR CONTENIDO DE .codigo
 
 const elementosCodigo = document.querySelectorAll('pre');
