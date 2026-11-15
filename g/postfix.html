@@ -43,16 +43,44 @@ Código por byAd12
         <script>hljs.highlightAll();</script>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h1>POSTFIX</h1>
-        <p class="Resumen_Titulo">Servidor SMTP</p>
+        <h1>Servicio SMTP</h1>
+        <p class="Resumen_Titulo">Simple Mail Transfer Protocol</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Postfix:</p>
+                <ul>
+                    <li><a href="#POSTFIX_Instalacion">Instalación</a></li>
+                    <li><a href="#POSTFIX_Comprobacion">Comprobación</a></li>
+                    <li><a href="#POSTFIX_Firewall">Configuración del firewall</a></li>
+                    <li><a href="#POSTFIX_Ficheros_importantes">Ficheros importantes</a></li>
+                    <li><a href="#POSTFIX_Ficheros_registro">Ficheros de registro</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Envío de correos:</p>
+                <ul>
+                    <li><a href="#Enviar_mail_TELNET">Envío de email con telnet</a></li>
+                    <li><a href="#Enviar_mail_COMANDO">Envío de email con el comando mail</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Postfix</h2>
+        <p class="Resumen_Titulo">Servidor SMTP - Linux</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h3>1. Instalación</h3>
+                <h3 id="POSTFIX_Instalacion">1. Instalación</h3>
 
                 <p>En el servidor donde se enviarán los emails hay que instalar el servicio correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -61,7 +89,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>2. Comprobación</h3>
+                <h3 id="POSTFIX_Comprobacion">2. Comprobación</h3>
 
                 <p>Primero hay que verificar que el servicio <span class="span_contenido" translate="no">postfix</span> se esté ejecutando en el puerto 25:</p>
                 <pre class="codigo" translate="no"><code class="bash">ps -ef | grep postfix</code></pre>
@@ -73,7 +101,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>3. Configuración del firewall</h3>
+                <h3 id="POSTFIX_Firewall">3. Configuración del firewall</h3>
 
                 <p>En el firewall hay que permitir el tráfico del puerto 25 - TCP (SMTP):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 25</code></pre>
@@ -81,7 +109,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>Ficheros importantes</h3>
+                <h3 id="POSTFIX_Ficheros_importantes">Ficheros importantes</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -114,7 +142,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>Ficheros de registros</h3>
+                <h3 id="POSTFIX_Ficheros_registro">Ficheros de registros</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -142,15 +170,15 @@ Código por byAd12
         </div>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <h2>ENVIAR CORREOS</h2>
-        <p class="Resumen_Titulo">Uso de telnet y el comando "mail"</p>
+        <h2>Envío de correos</h2>
+        <p class="Resumen_Titulo">Uso de telnet y el comando "mail" en Linux</p>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <div class="parte1">
 
             <div>
-                <h3>Envío de email con <span>telnet</span></h3>
+                <h3 id="Enviar_mail_TELNET">Envío de email con <span>telnet</span></h3>
 
                 <p>Para iniciar una conexión <span class="span_contenido" translate="no">telnet</span> hacia un servidor SMTP, como puede ser <span class="span_contenido" translate="no">postfix</span>, se debe indicar la dirección del servidor y su puerto:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP/DNS/localhost] [Puerto_servidor_SMTP]</code></pre>
@@ -167,7 +195,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>Envío de email con el comando <span translate="no">mail</span></h3>
+                <h3 id="Enviar_mail_COMANDO">Envío de email con el comando <span translate="no">mail</span></h3>
 
                 <p>En el cliente donde se ejecutará el comando hay que instalar el siguiente paquete:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
