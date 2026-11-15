@@ -74,6 +74,8 @@ p#Creditos_Final a:hover{color: #7b92de;}
 .parte1 div h3.IndiceH2{text-decoration: none; margin: 15px 0 !important; color: #d0d0d0; padding: 15px 0 0 0;}
 .parte1 div h3 span{color: white;}
 
+.parte1 div h4{padding: 30px 0 15px 0 !important;}
+
 /* Imágen del logo de Linux / Windows en el título */
 
 img.SoporteComandoRemoto{height: 1em; padding: 0; vertical-align: middle; margin: 0 10px 0 10px;}

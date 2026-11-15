@@ -294,7 +294,7 @@ chmod 644 ~/.ssh/*.pub</code></pre>
             <div>
                 <h3 id="SSH_Linux_Tuneles">Crear túneles SSH</h3>
 
-                <h3>Configuración inicial:</h3>
+                <h4>Configuración inicial:</h4>
 
                 <p>1. Para permitir los túneles hay que configurar las siguientes políticas del fichero <span class="span_url" translate="no">/etc/ssh/sshd_config</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">AllowTcpForwarding yes # Permite la creación de túneles
@@ -303,7 +303,7 @@ GatewayPorts yes       # Permite que el túnel remoto escuche en todas las inter
                 <p>2. Para aplicar los cambios hay que reiniciar el servicio <span class="span_contenido" translate="no">sshd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart sshd</code></pre>
 
-                <h3>Tipos de túneles:</h3>
+                <h4>Tipos de túneles:</h4>
 
                 <p class="Expl">
                     Nota: En los siguientes comandos se utiliza la opción <span class="span_contenido" translate="no">-N</span> para que no se abra una terminal remota, manteniendo solo la conexión abierta para el túnel.
@@ -329,7 +329,7 @@ GatewayPorts yes       # Permite que el túnel remoto escuche en todas las inter
 
                 <p class="Expl">En el navegador del cliente hay que configurar la red a <span class="span_contenido" translate="no">Configuración manual de proxy</span>, configurando un socket con la dirección IP <span class="span_contenido" translate="no">127.0.0.1</span>, el puerto asignado <span class="span_contenido" translate="no">Puerto_local</span> y por último elegir la opción <span class="span_contenido" translate="no">SOCKS Host</span>.</p>
 
-                <h3>Como crear túneles con capacidad de reconexión:</h3>
+                <h4>Como crear túneles con capacidad de reconexión:</h4>
 
                 <p>
                     Con <span class="span_contenido" translate="no">autossh</span> se permite reconectar la conexión del túnel en caso de que caiga. 
@@ -356,7 +356,8 @@ WantedBy=multi-user.target</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">systemctl enable nuevo-tunel
 systemctl start nuevo-tunel</code></pre>
 
-                <h3>Como crear un alias para un túnel:</h3>
+                <h4>Como crear un alias para un túnel:</h4>
+
                 <p>En el fichero <span class="span_contenido" translate="no">~/.ssh/config</span> se puede añadir un alias para un túnel SSH:</p>
                 <p class="Expl">Para crear un alias de un túnel <b>Local Forwarding</b>:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">Host [Nombre_alias]
