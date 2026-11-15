@@ -64,14 +64,14 @@ Código por byAd12
                 <p class="Indicador_Seccion_Indice">Telnet:</p>
                 <ul>
                     <li><a href="#TELNET_Configuracion">Configuración de un cliente Linux</a></li>
-                    <li><a href="#TELNET_Conexion">Conectarse a otro equipo con credenciales desde un cliente Linux y Windows</a></li>
+                    <li><a href="#TELNET_Conexion">Conectarse a otro equipo con credenciales desde Linux o Windows</a></li>
                 </ul>
 
                 <p class="Indicador_Seccion_Indice">SSH (Linux):</p>
                 <ul>
                     <li><a href="#SSH_Linux_Configuracion">Configuración en un equipo</a></li>
-                    <li><a href="#SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</a></li>
-                    <li><a href="#SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves desde un cliente</a></li>
+                    <li><a href="#SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales</a></li>
+                    <li><a href="#SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves</a></li>
                     <li><a href="#SSH_Linux_Politicas_Seguridad_SSHD">Políticas de seguridad del servicio sshd</a></li>
                     <li><a href="#SSH_Linux_Alias">Definir Aliases en un cliente</a></li>
                     <li><a href="#SSH_Linux_Agent">Cargar una clave privada en memoria en un cliente</a></li>
@@ -82,7 +82,7 @@ Código por byAd12
                 <p class="Indicador_Seccion_Indice">SSH (Windows):</p>
                 <ul>
                     <li><a href="#SSH_Windows_Configuracion">Configuración en un equipo Windows</a></li>
-                    <li><a href="#SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</a></li>
+                    <li><a href="#SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales</a></li>
                 </ul>
 
                 <p class="Indicador_Seccion_Indice">SCP:</p>
@@ -111,7 +111,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3 id="TELNET_Conexion">Conectarse a otro equipo con credenciales desde un cliente <span>Linux</span> y <span>Windows</span></h3>
+                <h3 id="TELNET_Conexion">Conectarse a otro equipo con credenciales desde <span>Linux</span> o <span>Windows</span></h3>
 
                 <p>El siguiente comando permite crear una sesión TELNET hacia un equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">telnet [IP/FQDN del equipo remoto] (Puerto_servidor)</code></pre>
@@ -146,7 +146,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3 id="SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h3>
+                <h3 id="SSH_Linux_Conexion_Credenciales">Como conectarse a otro equipo con credenciales</h3>
 
                 <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (-p PUERTO) (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
@@ -155,7 +155,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3 id="SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves desde un cliente</h3>
+                <h3 id="SSH_Linux_Conexion_Claves">Como conectarse a otro equipo con claves</h3>
 
                 <p>1. Con el usuario que va a realizar la sesión SSH en el equipo cliente se debe generar una clave personal:</p>
 
@@ -426,7 +426,7 @@ systemctl start nuevo-tunel</code></pre>
             </div>
 
             <div>
-                <h3 id="SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales desde un cliente</h3>
+                <h3 id="SSH_Windows_Conexion_Credenciales">Como conectarse a otro equipo con credenciales</h3>
 
                 <p>El siguiente comando permite crear una sesión SSH con un usuario de un equipo mediante su contraseña:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh (Nombre_usuario)@[IP/FQDN del equipo remoto]</code></pre>
