@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>Scripting - Linux</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -125,13 +125,15 @@ Código por byAd12
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
                         <tr class="Titulo">
-                            <td></td>
-                            <td>
-                                Para <b>cadenas de texto</b>:
-                            </td>
-                            <td>
-                                Para <b>números</b>:
-                            </td>
+                            <th>
+                                Tipo de comparador:
+                            </th>
+                            <th>
+                                Comparadores - <b>cadenas de texto</b>:
+                            </th>
+                            <th>
+                                Comparadores - <b>números</b>:
+                            </th>
                         </tr>
                         
                         <tr>
@@ -197,7 +199,7 @@ Código por byAd12
                     <table class="TablaComandos">
                         <tr class="Titulo">
                             <th colspan="2">
-                                Para <b>ficheros</b> y <b>carpetas</b>:
+                                Comparadores - <b>ficheros</b> y <b>carpetas</b>:
                             </th>
                         <tr>
                             <td><pre translate="no"><code class="bash">-e ruta</code></pre></td>
@@ -280,7 +282,7 @@ esac
 
                 <p>Esta función recorre un conjunto de valores separados por espacios hasta llegar al final:</p>
                 <pre class="codigo" translate="no"><code class="bash">for nombre_var in conjunto; do
-    // Contenido
+    // Qué hacer por cada valor del conjunto
 done</code></pre>
 
                 <p>Ejemplo donde se imprimen los números del 1 al 5:</p>
@@ -294,7 +296,7 @@ done</code></pre>
 
                 <p>Esta función ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
                 <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
-    // Contenido
+    // Qué hacer mientras se cumpla la condición
 done</code></pre>
 
             </div>
@@ -304,7 +306,7 @@ done</code></pre>
 
                 <p>Esta función ejecuta su contenido hasta que la condición sea verdadera:</p>
                 <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do
-    // Contenido
+    // Qué hacer mientras la condición sea falsa
 done</code></pre>
 
             </div>
@@ -316,6 +318,6 @@ done</code></pre>
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>

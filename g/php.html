@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>PHP</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -47,6 +47,35 @@ Código por byAd12
         <h1>PHP + Apache2</h1>
         <p class="Resumen_Titulo">Hypertext Preprocessor</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración del servidor:</p>
+                <ol>
+                    <li><a href="#Servidor_Instalacion">Instalación</a></li>
+                    <li><a href="#Servidor_Comprobacion">Comprobación</a></li>
+                    <li><a href="#Servidor_Como_crear_ficheros">Creación de ficheros PHP</a></li>
+                </ol>
+
+                <p class="Indicador_Seccion_Indice">Sintaxis de ficheros PHP:</p>
+                <ul>
+                    <li><a href="#Sintaxis_Etiqueta_principal">Etiqueta principal</a></li>
+                    <li><a href="#Sintaxis_Comandos">Comandos PHP</a></li>
+                    <li><a href="#Sintaxis_Operaciones_matematicas">Operaciones matemáticas</a></li>
+                    <li><a href="#Sintaxis_Funciones_propias">Llamar a funciones propias de PHP</a></li>
+                    <li><a href="#Sintaxis_Operadores">Operadores PHP</a></li>
+                    <li><a href="#Sintaxis_Funciones">Funciones PHP</a></li>
+                    <li><a href="#Sintaxis_Arrays">Arrays</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del servidor</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -54,7 +83,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3>1. Instalación</h3>
+                <h3 id="Servidor_Instalacion">1. Instalación</h3>
 
                 <p>En el servidor <a href="apache2.html">Apache2</a> hay que instalar el servicio correspondiente para PHP:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -63,7 +92,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>2. Comprobación</h3>
+                <h3 id="Servidor_Comprobacion">2. Comprobación</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -108,7 +137,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>3. Creación de ficheros PHP</h3>
+                <h3 id="Servidor_Como_crear_ficheros">3. Creación de ficheros PHP</h3>
 
                 <p>Dentro del <a href="apache2.html#directorio">directorio</a> del <a href="apache2.html#sitio-virtual">sitio virtual</a> hay que crear un fichero con extensión <span class="span_contenido" translate="no">.php</span> y dentro hay que poner el código PHP correspondiente:</p>
                 <pre class="codigo" translate="no"><code class="bash">nano /[Ruta_directorio]/[Nombre_fichero].php</code></pre>
@@ -128,7 +157,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3>Etiqueta principal</h3>
+                <h3 id="Sintaxis_Etiqueta_principal">Etiqueta principal</h3>
 
                 <p>La primera etiqueta de un fichero <span class="span_contenido" translate="no">.php</span> tiene la siguiente sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="php">&lt;?php (Comando/Variables) ?&gt;</code></pre>
@@ -148,7 +177,7 @@ Código por byAd12
             </div>
 
             <div>
-                <h3 id="comandos">Comandos PHP</h3>
+                <h3 id="Sintaxis_Comandos">Comandos PHP</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos UnicaColumna">
@@ -185,7 +214,7 @@ print "Hola " . $nombre . "!";</code></pre></td>
             </div>
 
             <div>
-                <h3 id="operaciones-matematicas">Operaciones matemáticas</h3>
+                <h3 id="Sintaxis_Operaciones_matematicas">Operaciones matemáticas</h3>
 
                 <p>Sintaxis de una operación matemática:</p>
                 <pre class="codigo" translate="no"><code class="php">[Valor1] [Tipo_operación] [Valor2]</code></pre>
@@ -197,7 +226,7 @@ print "Hola " . $nombre . "!";</code></pre></td>
             </div>
 
             <div>
-                <h3 id="funciones-propias-php">Llamar a funciones propias de PHP</h3>
+                <h3 id="Sintaxis_Funciones_propias">Llamar a funciones propias de PHP</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -218,7 +247,7 @@ print "Hola " . $nombre . "!";</code></pre></td>
             </div>
 
             <div>
-                <h3 id="operadores">Operadores PHP</h3>
+                <h3 id="Sintaxis_Operadores">Operadores PHP</h3>
 
                 <p>Operador <span class="span_contenido" translate="no">if</span> - si se cumple la condición ejecutará el código entre corchetes:</p>
                 <pre class="codigo" translate="no"><code class="php">if (Condición) {
@@ -244,7 +273,7 @@ print "Hola " . $nombre . "!";</code></pre></td>
             </div>
 
             <div>
-                <h3 id="funciones-php">Funciones PHP</h3>
+                <h3 id="Sintaxis_Funciones">Funciones PHP</h3>
 
                 <p>Las funciones permiten ejecutar un código que se ejecutará cada vez que se llame a la función. Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="php">function Nombre_función(Parámetro1, ...) {
@@ -263,7 +292,7 @@ saludar("byAd12", 33);</code></pre>
             </div>
 
             <div>
-                <h3 id="arrays">Arrays</h3>
+                <h3 id="Sintaxis_Arrays">Arrays</h3>
 
                 <p>Los arrays permiten almacenar un conjunto de valores en una sola variable. Sintaxis:</p>
                 <pre class="codigo" translate="no"><code class="php">Nombre_variable = array(Valor1, ...);</code></pre>
@@ -281,6 +310,6 @@ saludar("byAd12", 33);</code></pre>
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>

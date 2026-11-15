@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>SAMBA</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -47,6 +47,41 @@ Código por byAd12
         <h1>SAMBA</h1>
         <p class="Resumen_Titulo">Compartir carpetas entre Linux y Windows</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración de un servidor Linux:</p>
+                <ul>
+                    <li><a href="#Servidor_Linux_Alojar_carpeta">Como alojar una carpeta</a></li>
+                    <li><a href="#Servidor_Linux_Mas_parametros">Más parámetros para alojar una carpeta</a></li>
+                    <li><a href="#Servidor_Linux_Parametros_Global">Parámetros de la sección [global]</a></li>
+                    <li><a href="#Servidor_Linux_Monitorizacion">Monitorización</a></li>
+                    <li><a href="#Servidor_Linux_Diagnostico">Diagnóstico</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración de un servidor Windows:</p>
+                <ul>
+                    <li><a href="#Servidor_Windows_Alojar_carpeta">Como alojar una carpeta</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración del cliente:</p>
+                <ul>
+                    <li><a href="#Cliente_Linux_Acceder_carpeta">Acceder a una carpeta Linux o Windows desde otro Linux</a></li>
+                    <li><a href="#Cliente_Windows_Acceder_carpeta_Windows">Acceder a una carpeta de Windows desde otro Windows</a></li>
+                    <li><a href="#Cliente_Windows_Acceder_carpeta_Linux">Acceder a una carpeta de Linux desde Windows</a></li>
+                    <li><a href="#Cliente_Linux_CIFS">Montar una carpeta CIFS automáticamente en Linux</a></li>
+                    <li><a href="#Cliente_Windows_SAMBA">Montar una carpeta SAMBA automáticamente en Windows</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración de un servidor Linux</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -55,10 +90,10 @@ Código por byAd12
 
             <div>
 
-                <h3>Alojar una carpeta en un servidor <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h3>
+                <h3 id="Servidor_Linux_Alojar_carpeta">Como alojar una carpeta</h3>
                 
                 <!-- ......................................................... -->
-                <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span></b>:</p>
+                <p>1. Creación de <span style="color: rgb(147, 147, 206) !important;">carpeta</span>, <span style="color: rgb(147, 147, 206) !important;">permisos</span> y <span style="color: rgb(147, 147, 206) !important;">usuarios</span>:</p>
 
                 <pre class="codigo" translate="no"><code class="bash">mkdir /[Carpeta_a_compartir]</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">groupadd [Nombre_grupo]
@@ -73,7 +108,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>2. <b>Reconocer al <span style="color: rgb(147, 147, 206) !important;">usuario</span></b>:</p>
+                <p>2. Reconocer al <span style="color: rgb(147, 147, 206) !important;">usuario</span>:</p>
 
                 <p>Hay que meter al usuario en una base de datos independiente a <span class="span_url" translate="no">/etc/shadow</span> para que este usuario sea roconocido en sistemas Windows.</p>
                 
@@ -90,7 +125,7 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
                 
                 <!-- ......................................................... -->
                 <br>
-                <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">paquetes</span></b>:</p>
+                <p>3. Instalar los <span style="color: rgb(147, 147, 206) !important;">paquetes</span> necesarios:</p>
 
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y samba</code></pre>
                 <p class="Expl">Una vez instalado se crean 3 servicios para gestionar la transferencia de datos, permisos y visibilidad del servidor: <span class="span_contenido" translate="no">samba-ad-dc</span>, <span class="span_contenido" translate="no">nmbd</span> y <span class="span_contenido" translate="no">smbd</span>.</p>
@@ -98,281 +133,20 @@ chmod permisos /[Carpeta_a_compartir]</code></pre>
 
                 <!-- ......................................................... -->
                 <br>
-                <p>4. <b>Editar la <span style="color: rgb(147, 147, 206) !important;">configuración</span></b>:</p>
+                <p>4. Al final del fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span> hay que crear un bloque con la siguiente estructura obligatoria:</p>
                 
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/samba/smb.conf</code></pre>
-                <p class="Expl">Al final del fichero creamos un bloque con la siguiente estructura obligatoria:</p>
-                <pre class="codigo Expl2" translate="no"><code class="ini">[Nombre_recurso]
+                <pre class="codigo Expl" translate="no"><code class="ini">[Nombre_recurso]
     path = /[Carpeta_a_compartir]
     read only = no</code></pre>
-                <p class="Expl2">
-                    <b>[Nombre_recurso]</b>: Es el nombre que aparecerá en Windows como carpeta.
-                    <br>
-                    <b>path</b>: Ruta completa de la carpeta a compartir en el servidor.
-                    <br>
-                    <b>read only</b>: Para permisos de escribir: <span class="span_contenido" translate="no">no</span>, o solo-lectura: <span class="span_contenido" translate="no">yes</span>.
+                <p class="Expl">
+                    En la siguiente <a href="#Servidor_Linux_Mas_parametros">sección</a> se detalla que es cada parámetro además de otros parámetros opcionales.
                 </p>
 
                 <!-- ......................................................... -->
             </div>
 
             <div>
-                <h3>Alojar una carpeta en un servidor <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
-                
-                <!-- ......................................................... -->
-                <p>1. <b>Creación de <span style="color: rgb(147, 147, 206) !important;">usuarios</span> y <span style="color: rgb(147, 147, 206) !important;">grupos</span></b>:</p>
-
-                <p class="Expl">Antes de asignar permisos, hay que crear los usuarios y grupos que sean necesarios.</p>
-
-                <p class="Expl">
-                    Administrador de equipos → Usuarios y grupos locales → [Usuarios y Grupos] → Click derecho → Nuevo.
-                    <br>
-                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido" translate="no">smbpasswd</span>.
-
-                </p>
-                <p class="Expl">
-                    Desde la misma pestaña de Grupos hay que asignar a los usuarios creados dentro de su grupo correspondiente:
-                    <br>
-                    Grupo → Click derecho → Propiedades → Miembros → Agregar.
-                </p>
-
-                <!-- ......................................................... -->
-                <br>
-                <p>2. <b>Asignar <span style="color: rgb(147, 147, 206) !important;">permisos</span></b>:</p>
-                <p class="Expl">
-                    Se puede asignar de forma que los permisos en red también se apliquen en los permisos locales (esto además quita la herencia de la carpeta):
-                    <br>
-                    Carpeta → Click derecho → Propiedades → Compartir → <b>Botón "Compartir"</b> → Añadir usuario/grupo → Asignar permisos.
-                </p>
-                
-                <p class="Expl">
-                    También hay otra forma para asignar solo permisos de red:
-                    <br>
-                    Carpeta → Click derecho → Propiedades → <b>Uso compartido avanzado</b> → Botón "Permisos" → Agregar → Definir el usuario/grupo y asignar permisos.
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
-
-            <div>
-                <h3>Acceder a una carpeta Linux o Windows desde otro <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h3>
-                
-                <!-- ......................................................... -->
-                <p>1. <b>Explorar los recursos compartidos del servidor que puede montar un usuario</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">smbclient -L //[IP_servidor] [Nombre_usuario]</code></pre>
-                
-                <!-- ......................................................... -->
-                <p>2. <b>Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mkdir /[Directorio_local_a_montar]</code></pre>
-
-                <!-- ......................................................... -->
-                <p>3. <b>Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install -y cifs-utils</code></pre>
-
-                <!-- ......................................................... -->
-                <p>4. <b>Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username="Nombre_usuario_Windows",password="Contraseña" //[IP_servidor]/[Recurso] /[Directorio_local]</code></pre>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-
-                        <tr class="Titulo">
-                            <th colspan="2">Explicación de los parámetros del comando:</th>
-                        </tr>
-                        
-                        <tr>
-                            <td><pre translate="no"><code class="language-bash">Nombre_usuario_Windows</code></pre></td>
-                            <td>Usuario de la máquina Windows con permisos para acceder al recurso compartido.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="language-bash">Contraseña</code></pre></td>
-                            <td>Contraseña del usuario de la máquina Windows.</td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="language-bash">//[IP_servidor]/[Recurso]</code></pre></td>
-                            <td>
-                                Ruta del recurso compartido en Windows.
-                                <br>
-                                <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><pre translate="no"><code class="language-bash">/[Directorio_local]</code></pre></td>
-                            <td>Carpeta local donde se montará el recurso compartido.</td>
-                        </tr>
-
-                    </table>
-                </div>
-
-                <!-- ......................................................... -->
-                <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con el usuario que montó la carpeta</b>.</p>
-
-                <!-- ......................................................... -->
-                <p>5. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que se puede acceder al recurso compartido</b>.</p>
-
-            </div>
-
-            <div>
-                <h3>Acceder a una carpeta de Windows desde otro <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
-                
-                <!-- ......................................................... -->
-                <p>1. <b>Copiar la <span style="color: rgb(147, 147, 206) !important;">ruta de acceso de red</span> en el servidor</b>.</p>
-                <pre class="codigo" translate="no"><code class="bash">\\[Hostname_servidor_Windows]\[Recurso_compartido]</code></pre>
-
-                <!-- ......................................................... -->
-                <p>2. <b>En el cliente <span style="color: rgb(147, 147, 206) !important;">iniciar sesión</span> con un usuario con permisos de acceder al recurso</b>.</p>
-
-                <!-- ......................................................... -->
-                <p>3. <b>En el explorador de ficheros <span style="color: rgb(147, 147, 206) !important;">buscar la ruta de acceso de red</span> con el buscador</b>.</p>
-
-                <!-- ......................................................... -->
-                <p>4. <b>Verificar si se puede <span style="color: rgb(147, 147, 206) !important;">acceder al contenido</span></b>.</p>
-
-            </div>
-
-            <div>
-                <h3>Acceder a una carpeta de Linux desde <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
-                
-                <!-- ......................................................... -->
-                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido" translate="no">smbpasswd</span></b>.</p>
-
-                <!-- ......................................................... -->
-                <p>2. <b>Listar los <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
-
-                <p class="Expl">En el Explorador de ficheros se tiene que buscar la barra de búsqueda:</p>
-                <pre class="codigo" translate="no"><code class="bash">\\[IP_servidor_Linux]</code></pre>
-                <p class="Expl">
-                    Aparecerá el recurso <span class="span_contenido" translate="no">[Carpeta_a_compartir]</span> y otra llamada <span class="span_contenido" translate="no">[Nombre_usuario]</span>, que es la carpeta personal del usuario de Linux.
-                </p>
-
-                <p class="Expl">
-                    <b>Nota</b>: Si en vez de poner una carpeta con el nombre del usuario hay una que pone <span class="span_contenido" translate="no">nobody</span> significa que no se puede acceder al sistema con el usuario creado y por ello usa un usuario invitado que se llama <span class="span_contenido" translate="no">nobody</span> en el sistema Linux.
-                    <br>
-                    Si no deja acceder al recurso compartido con un usuario invitado hay que habilitar el parámetro <span class="span_contenido" translate="no">guest ok = yes</span> en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>.
-                </p>
-
-                <p class="Expl">
-                    <b>Problema</b>: Los usuarios se duplican en la máquina Linux y Windows.
-                    <br>
-                    <b>Solución</b>: Tener un servicio de usuarios en red como LDAP o Active Directory.
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
-
-            <div>
-                <h3>Montar una carpeta CIFS automáticamente en <span>Linux</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h3>
-
-                <!-- ......................................................... -->
-                <p>1. <b>Editar el fichero <span style="color: rgb(147, 147, 206) !important;">/etc/fstab</span></b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
-
-                <!-- ......................................................... -->
-                <br>
-                <p>2. <b>Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span></b>:</p>
-                <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>):</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    [Opciones]   0   0</code></pre>
-                <p class="Expl2">
-                    <b>//[IP_servidor]/[Nombre_recurso]</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
-                    <br>
-                    <b>/[Directorio_local]</b>: Carpeta local donde se montará el recurso compartido.
-                </p>
-
-                <div class="TablaDivScroll Expl">
-                    <table class="TablaComandos">
-                        <tr class="Titulo">
-                            <th colspan="2">Opciones:</th>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">defaults</code></pre></td>
-                            <td>Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>).</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">user</code></pre></td>
-                            <td>Se puede permitir que un usuario, aunque no sea root, pueda montar carpetas con el comando <span class="span_contenido" translate="no">mount</span>.</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">noauto</code></pre></td>
-                            <td>Para que no se monte automáticamente la carpeta.</td>
-                        </tr>
-                        <tr>
-                            <td><pre translate="no"><code class="bash">username=[Nombre_usuario],password=[Contraseña]</code></pre></td>
-                            <td>Se puede asignar las credenciales del usuario que tendrá acceso a este recurso compartido.</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- ......................................................... -->
-                <p>2.1. 🔨 <b><span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span> y su solución</b>:</p>
-                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
-                
-                <p class="Expl">Primero hay que crear en cualquier ruta un fichero oculto de credenciales con el siguiente formato:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">nano /[Ruta_fichero_credenciales]</code></pre>
-                <p class="Expl">Dentro de este fichero se debe indicar el usuario y contraseña:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">username=[Nombre_usuario]
-password=[Contraseña]</code></pre>
-                <p class="Expl">Luego guardamos el fichero y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el fichero:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">chown root:root /[Ruta_fichero_credenciales]
-chmod 700 /[Ruta_fichero_credenciales]</code></pre>
-                <p class="Expl">Y por último hay que añadir en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
-                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    credentials=/[Ruta_fichero_credenciales]   0   0</code></pre>
-
-                <!-- ......................................................... -->
-                <p>3. <b><span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
-
-                <!-- ......................................................... -->
-                <p>4. <b><span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta</b>:</p>
-                <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
-
-            </div>
-
-            <div>
-                <h3>Montar una carpeta SAMBA automáticamente en <span>Windows</span><img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
-                
-                <!-- ......................................................... -->
-                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario autorizado para acceder al recurso compartido</b>.</p>
-
-                <!-- ......................................................... -->
-                <p>2. <b>Agregar una <span style="color: rgb(147, 147, 206) !important;">unidad de red</span></b>:</p>
-                <p class="Expl">
-                    Para que se persistente hay que crear un punto de montaje en la siguiente ventana:
-                    <br>
-                    Explorador de ficheros → Este equipo → Pestaña "Equipo" → Conectar a unidad de red
-                </p>
-                <p class="Expl">En la ventana se debe asignar la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\[IP_servidor]\Recurso</span>.</p>
-
-            </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
-            <div>
-                <h3>Más parámetros en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h3>
+                <h3 id="Servidor_Linux_Mas_parametros">Más parámetros para alojar una carpeta</h3>
                 
                 <p>Ejemplo de un bloque completo en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[Nombre_recurso]
@@ -553,7 +327,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
             </div>
 
             <div>
-                <h3>Parámetros de la sección [global] en <span>SAMBA</span><img class="SoporteComandoRemoto" alt="Logo de Linux" src="../img/linux.png"></h3>
+                <h3 id="Servidor_Linux_Parametros_Global">Parámetros de la sección [global]</h3>
                 
                 <p>Ejemplo de un bloque completo en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>:</p>
                 <pre class="codigo" translate="no"><code class="ini">[global]
@@ -651,19 +425,10 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
 
                     </table>
                 </div>
-                <!-- ......................................................... -->
             </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
+            
             <div>
-                <h3>Monitorización</h3>
+                <h3 id="Servidor_Linux_Monitorizacion">Monitorización</h3>
 
                 <p>Para monitorizar las conexiones y bloqueos a recursos compartidos de tu sistema en tiempo real se puede ejecutar el siguiente comando:</p>
                 <pre class="codigo" translate="no"><code class="bash">smbstatus</code></pre>
@@ -671,7 +436,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
             </div>
 
             <div>
-                <h3>Diagnóstico</h3>
+                <h3 id="Servidor_Linux_Diagnostico">Diagnóstico</h3>
 
                 <p><u>Fallo de conectividad</u> - Es importante comprobar el estado de los siguientes servicios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl status samba-ad-dc</code></pre>
@@ -687,7 +452,257 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
                 <p><u>Montaje de /etc/fstab</u> - Hay que comprobar que la configuración del fichero de montaje sea correcto:</p>
                 <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
             </div>
-            
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración de un servidor Windows</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                <h3 id="Servidor_Windows_Alojar_carpeta">Como alojar una carpeta</h3>
+                
+                <!-- ......................................................... -->
+                <p>1. Creación de <span style="color: rgb(147, 147, 206) !important;">usuarios</span> y <span style="color: rgb(147, 147, 206) !important;">grupos</span>:</p>
+
+                <p class="Expl">Antes de asignar permisos, hay que crear los usuarios y grupos que sean necesarios.</p>
+
+                <p class="Expl">
+                    Administrador de equipos → Usuarios y grupos locales → [Usuarios y Grupos] → Click derecho → Nuevo.
+                    <br>
+                    Asegurarse de que tenga la misma contraseña que la definida en el comando <span class="span_contenido" translate="no">smbpasswd</span>.
+
+                </p>
+                <p class="Expl">
+                    Desde la misma pestaña de Grupos hay que asignar a los usuarios creados dentro de su grupo correspondiente:
+                    <br>
+                    Grupo → Click derecho → Propiedades → Miembros → Agregar.
+                </p>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>2. Asignar <span style="color: rgb(147, 147, 206) !important;">permisos</span>:</p>
+                <p class="Expl">
+                    Se puede asignar de forma que los permisos en red también se apliquen en los permisos locales (esto además quita la herencia de la carpeta):
+                    <br>
+                    Carpeta → Click derecho → Propiedades → Compartir → <b>Botón "Compartir"</b> → Añadir usuario/grupo → Asignar permisos.
+                </p>
+                
+                <p class="Expl">
+                    También hay otra forma para asignar solo permisos de red:
+                    <br>
+                    Carpeta → Click derecho → Propiedades → <b>Uso compartido avanzado</b> → Botón "Permisos" → Agregar → Definir el usuario/grupo y asignar permisos.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del cliente</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1">
+
+            <div>
+                <h3 id="Cliente_Linux_Acceder_carpeta">Acceder a una carpeta Linux o Windows desde otro <span>Linux</span></h3>
+                
+                <!-- ......................................................... -->
+                <p>1. Explorar los recursos compartidos del servidor que puede montar un usuario:</p>
+                <pre class="codigo" translate="no"><code class="bash">smbclient -L //[IP_servidor] [Nombre_usuario]</code></pre>
+                
+                <!-- ......................................................... -->
+                <p>2. Creación de una <span style="color: rgb(147, 147, 206) !important;">carpeta local</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">mkdir /[Directorio_local_a_montar]</code></pre>
+
+                <!-- ......................................................... -->
+                <p>3. Instalar <span style="color: rgb(147, 147, 206) !important;">dependencias</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y cifs-utils</code></pre>
+
+                <!-- ......................................................... -->
+                <p>4. Montar la carpeta <span style="color: rgb(147, 147, 206) !important;">remota</span>:</p>
+                <pre class="codigo" translate="no"><code class="language-bash">mount -t cifs -o username="Nombre_usuario_Windows",password="Contraseña" //[IP_servidor]/[Recurso] /[Directorio_local]</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <th colspan="2">Explicación de los parámetros del comando:</th>
+                        </tr>
+                        
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">Nombre_usuario_Windows</code></pre></td>
+                            <td>Usuario de la máquina Windows con permisos para acceder al recurso compartido.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">Contraseña</code></pre></td>
+                            <td>Contraseña del usuario de la máquina Windows.</td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">//[IP_servidor]/[Recurso]</code></pre></td>
+                            <td>
+                                Ruta del recurso compartido en Windows.
+                                <br>
+                                <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="language-bash">/[Directorio_local]</code></pre></td>
+                            <td>Carpeta local donde se montará el recurso compartido.</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <!-- ......................................................... -->
+                <p>4. <span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con el usuario que montó la carpeta.</p>
+
+                <!-- ......................................................... -->
+                <p>5. <span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que se puede acceder al recurso compartido.</p>
+
+            </div>
+
+            <div>
+                <h3 id="Cliente_Windows_Acceder_carpeta_Windows">Acceder a una carpeta de Windows desde otro <span>Windows</span></h3>
+                
+                <!-- ......................................................... -->
+                <p>1. Copiar la <span style="color: rgb(147, 147, 206) !important;">ruta de acceso de red</span> en el servidor.</p>
+                <pre class="codigo" translate="no"><code class="bash">\\[Hostname_servidor_Windows]\[Recurso_compartido]</code></pre>
+
+                <!-- ......................................................... -->
+                <p>2. En el cliente <span style="color: rgb(147, 147, 206) !important;">iniciar sesión</span> con un usuario con permisos de acceder al recurso.</p>
+
+                <!-- ......................................................... -->
+                <p>3. En el explorador de ficheros <span style="color: rgb(147, 147, 206) !important;">buscar la ruta de acceso de red</span> con el buscador.</p>
+
+                <!-- ......................................................... -->
+                <p>4. Verificar si se puede <span style="color: rgb(147, 147, 206) !important;">acceder al contenido</span>.</p>
+
+            </div>
+
+            <div>
+                <h3 id="Cliente_Windows_Acceder_carpeta_Linux">Acceder a una carpeta de Linux desde <span>Windows</span></h3>
+                
+                <!-- ......................................................... -->
+                <p>1. <b><span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario que haya sido permitido explícitamente con el comando <span class="span_contenido" translate="no">smbpasswd</span></b>.</p>
+
+                <!-- ......................................................... -->
+                <p>2. <b>Listar los <span style="color: rgb(147, 147, 206) !important;">recursos compartidos</span></b>:</p>
+
+                <p class="Expl">En el Explorador de ficheros se tiene que buscar la barra de búsqueda:</p>
+                <pre class="codigo" translate="no"><code class="bash">\\[IP_servidor_Linux]</code></pre>
+                <p class="Expl">
+                    Aparecerá el recurso <span class="span_contenido" translate="no">[Carpeta_a_compartir]</span> y otra llamada <span class="span_contenido" translate="no">[Nombre_usuario]</span>, que es la carpeta personal del usuario de Linux.
+                </p>
+
+                <p class="Expl">
+                    <b>Nota</b>: Si en vez de poner una carpeta con el nombre del usuario hay una que pone <span class="span_contenido" translate="no">nobody</span> significa que no se puede acceder al sistema con el usuario creado y por ello usa un usuario invitado que se llama <span class="span_contenido" translate="no">nobody</span> en el sistema Linux.
+                    <br>
+                    Si no deja acceder al recurso compartido con un usuario invitado hay que habilitar el parámetro <span class="span_contenido" translate="no">guest ok = yes</span> en el fichero <span class="span_url" translate="no">/etc/samba/smb.conf</span>.
+                </p>
+
+                <p class="Expl">
+                    <b>Problema</b>: Los usuarios se duplican en la máquina Linux y Windows.
+                    <br>
+                    <b>Solución</b>: Tener un servicio de usuarios en red como LDAP o Active Directory.
+                </p>
+
+            </div>
+
+            <div>
+                <h3 id="Cliente_Linux_CIFS">Montar una carpeta CIFS automáticamente en <span>Linux</span></h3>
+
+                <!-- ......................................................... -->
+                <p>1. Editar el fichero <span style="color: rgb(147, 147, 206) !important;">/etc/fstab</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">nano /etc/fstab</code></pre>
+
+                <!-- ......................................................... -->
+                <br>
+                <p>2. Añadir la siguiente <span style="color: rgb(147, 147, 206) !important;">línea</span>:</p>
+                <p class="Expl">Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>):</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    [Opciones]   0   0</code></pre>
+                <p class="Expl2">
+                    <b>//[IP_servidor]/[Nombre_recurso]</b>: Ruta del recurso compartido del servidor. <u>Nota</u>: Linux utiliza solo las barras <span class="span_url" translate="no">/</span>.
+                    <br>
+                    <b>/[Directorio_local]</b>: Carpeta local donde se montará el recurso compartido.
+                </p>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+                        <tr class="Titulo">
+                            <th colspan="2">Opciones:</th>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">defaults</code></pre></td>
+                            <td>Si no se quiere especificar credenciales, el sistema intentará montar el recurso como un usuario invitado, siempre que el servidor lo permita (<span class="span_contenido" translate="no">guest ok = yes</span>).</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">user</code></pre></td>
+                            <td>Se puede permitir que un usuario, aunque no sea root, pueda montar carpetas con el comando <span class="span_contenido" translate="no">mount</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">noauto</code></pre></td>
+                            <td>Para que no se monte automáticamente la carpeta.</td>
+                        </tr>
+                        <tr>
+                            <td><pre translate="no"><code class="bash">username=[Nombre_usuario],password=[Contraseña]</code></pre></td>
+                            <td>Se puede asignar las credenciales del usuario que tendrá acceso a este recurso compartido.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- ......................................................... -->
+                <p>2.1. <span style="color: rgb(147, 147, 206) !important;">problema de seguridad</span> y su solución:</p>
+                <p class="Expl"><u>Problema de seguridad</u>: <span class="span_url" translate="no">/etc/fstab</span> tiene el permiso local <span class="span_contenido" translate="no">o=r--</span>, indicando que todos los usuarios del sistema podrían leer las contraseñas que se indiquen en este fichero.</p>
+                
+                <p class="Expl">Primero hay que crear en cualquier ruta un fichero oculto de credenciales con el siguiente formato:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">nano /[Ruta_fichero_credenciales]</code></pre>
+                <p class="Expl">Dentro de este fichero se debe indicar el usuario y contraseña:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">username=[Nombre_usuario]
+password=[Contraseña]</code></pre>
+                <p class="Expl">Luego guardamos el fichero y nos aseguramos que solo el usuario que monta la carpeta (root) pueda ver el fichero:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">chown root:root /[Ruta_fichero_credenciales]
+chmod 700 /[Ruta_fichero_credenciales]</code></pre>
+                <p class="Expl">Y por último hay que añadir en <span class="span_url" translate="no">/etc/fstab</span> la siguiente línea:</p>
+                <pre class="codigo Expl2" translate="no"><code class="bash">//[IP_servidor]/[Nombre_recurso]    /[Directorio_local]    cifs    credentials=/[Ruta_fichero_credenciales]   0   0</code></pre>
+
+                <!-- ......................................................... -->
+                <p>3. <span style="color: rgb(147, 147, 206) !important;">Comprobar</span> que no haya errores en la configuración:</p>
+                <pre class="codigo" translate="no"><code class="bash">testparam</code></pre>
+
+                <!-- ......................................................... -->
+                <p>4. <span style="color: rgb(147, 147, 206) !important;">Montar</span> la carpeta:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -a</code></pre>
+
+            </div>
+
+            <div>
+                <h3 id="Cliente_Windows_SAMBA">Montar una carpeta SAMBA automáticamente en <span>Windows</span></h3>
+                
+                <!-- ......................................................... -->
+                <p>1. <span style="color: rgb(147, 147, 206) !important;">Iniciar sesión</span> con un usuario autorizado para acceder al recurso compartido.</p>
+
+                <!-- ......................................................... -->
+                <p>2. Agregar una <span style="color: rgb(147, 147, 206) !important;">unidad de red</span>:</p>
+                <p class="Expl">
+                    Para que se persistente hay que crear un punto de montaje en la siguiente ventana:
+                    <br>
+                    Explorador de ficheros → Este equipo → Pestaña "Equipo" → Conectar a unidad de red
+                </p>
+                <p class="Expl">En la ventana se debe asignar la letra de unidad de red donde se montará, además de la ruta del recurso compartido como - <span class="span_url" translate="no">\\[IP_servidor]\Recurso</span>.</p>
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
@@ -696,7 +711,7 @@ chmod 700 /[Ruta_fichero_credenciales]</code></pre>
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 
 </html>

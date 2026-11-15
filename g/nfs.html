@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>NFS</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -46,13 +46,40 @@ Código por byAd12
         <h1>NFS</h1>
         <p class="Resumen_Titulo">Network File System</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración del servidor:</p>
+                <ul>
+                    <li><a href="#NFS_Instalacion">Instalación</a></li>
+                    <li><a href="#NFS_Firewall">Configuración del firewall</a></li>
+                    <li><a href="#NFS_Compartir_carpeta">Como compartir una carpeta local</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración del cliente:</p>
+                <ul>
+                    <li><a href="#NFS_Montaje_temporal">Como montar una carpeta remota de forma temporal</a></li>
+                    <li><a href="#NFS_Montaje_automatico">Como montar una carpeta remota de forma automática</a></li>
+                    <li><a href="#NFS_Solucion_nombres">"Solución" para ver los nombres correctos</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del servidor</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         
         <div class="parte1">
             <div>
-                <h3>Instalación</h3>
+                <h3 id="NFS_Instalacion">Instalación</h3>
+
                 <p>En los <b>clientes</b> hay que instalar el siguiente paquete para poder acceder a carpetas compartidas por NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-common</code></pre>
@@ -65,22 +92,15 @@ Código por byAd12
             </div>
 
             <div>
-                <h3>Configuración del firewall</h3>
+                <h3 id="NFS_Firewall">Configuración del firewall</h3>
 
                 <p>Tanto en el cliente como en el servidor se puede permitir adicionalmente en el firewall el tráfico del servicio NFS:</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow nfs</code></pre>
 
             </div>
 
-        </div>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
             <div>
-                <h3>Configuración en el <span>servidor</span></h3>
+                <h3 id="NFS_Compartir_carpeta">Como compartir una carpeta local</h3>
 
                 <p>1. Hay que editar el fichero <span class="span_url" translate="no">/etc/exports</span> para definir como compartir la carpeta:</p>
                 <pre class="codigo" translate="no"><code class="bash">/[Carpeta_a_compartir]  [Hostname_1]([Permisos])  [Hostname_2]([Permisos])  ...</code></pre>
@@ -128,8 +148,19 @@ Código por byAd12
 
             </div>
 
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del cliente</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
             <div>
-                <h3>Configuración en el <span>cliente</span></h3>
+                <h3 id="NFS_Montaje_temporal">Como montar una carpeta remota de forma <span>temporal</span></h3>
 
                 <p>1. En el cliente se puede mirar qué recursos compartidos se pueden montar de un servidor específico:</p>
                 <pre class="codigo" translate="no"><code class="bash">showmount -e [IP_servidor]</code></pre>
@@ -150,47 +181,8 @@ Código por byAd12
                 </p>
             </div>
 
-        </div>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
             <div>
-                <h3><span>Permisos</span>: "Solución" para ver los nombres correctos</h3>
-
-                <p>1. Asegurarse de que los UID y GID coincidan entre cliente y servidor. Luego crear en el cliente los mismos usuarios y grupos que en el servidor usando el mismo UID y GID:</p>
-                <pre class="codigo" translate="no"><code class="bash">groupadd -g gid_grupo [Nombre_grupo]</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">useradd -m -u uid_usuario -g [GID_grupo] [Nombre_usuario]</code></pre>
-
-                <p>2. Forzar el montaje de NFS con versión 3:</p>
-                <pre class="codigo" translate="no"><code class="bash">mount -t nfs -o nfsvers=3 [IP_servidor]:/[Carpeta_remota] /mnt/[Carpeta_local]</code></pre>
-
-                <br>
-                <p><b>A TENER EN CUENTA</b>:</p>
-
-                <p class="Expl">
-                    Si la carpeta se comparte con permisos <span class="span_contenido" translate="no">ro</span> y se entra de forma remota tendrá esos permisos aunque de forma local en el servidor tenga los permisos <span class="span_contenido" translate="no">rwx</span>.
-                    Los permisos que se aplican son <span class="span_contenido" translate="no">ro</span> al ser de forma remota. Si entra en local tendrá los permisos <span class="span_contenido" translate="no">rwx</span>.
-                    <br>
-                    Si es al revés (remota - <span class="span_contenido" translate="no">rw</span>, local - <span class="span_contenido" translate="no">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido" translate="no">w</span>.
-                </p>
-                <p><b>IMPORTANTE</b>:</p>
-                <p class="Expl">Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
-            
-                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
-                <p class="Expl">Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
-
-                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">GESTIÓN</span></b>:</p>
-                <p class="Expl">Por cada usuario y grupo del servidor se deben duplicar en todos los clientes, lo que provoca exceso de usuarios y grupos, mala escalabilidad y mayor complejidad administrativa.</p>
-
-                <p><b>MEJOR <span style="color: rgb(147, 147, 206) !important;">SOLUCIÓN</span></b>:</p>
-                <p class="Expl">Centralizar la gestión de usuarios y grupos mediante un sistema como LDAP.</p>
-            </div>
-
-            <div>
-                <h3>Montaje <span>automático</span> en los clientes</h3>
+                <h3 id="NFS_Montaje_automatico">Montaje de carpetas remotas de forma <span>automática</span></h3>
 
                 <p>Hay que editar el fichero <span class="span_url" translate="no">/etc/fstab</span> para añadir la siguiente línea:</p>
                 <pre class="codigo" translate="no"><code class="bash">[IP_servidor]:/[Carpeta_remota]    /mnt/[Carpeta_local]    nfs    defaults,nfsvers=3    0    0</code></pre>
@@ -238,6 +230,38 @@ Código por byAd12
 
             </div>
 
+            <div>
+                <h3 id="NFS_Solucion_nombres">"Solución" para ver los nombres correctos</h3>
+
+                <p>1. Asegurarse de que los UID y GID coincidan entre cliente y servidor. Luego crear en el cliente los mismos usuarios y grupos que en el servidor usando el mismo UID y GID:</p>
+                <pre class="codigo" translate="no"><code class="bash">groupadd -g gid_grupo [Nombre_grupo]</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">useradd -m -u uid_usuario -g [GID_grupo] [Nombre_usuario]</code></pre>
+
+                <p>2. Forzar el montaje de NFS con versión 3:</p>
+                <pre class="codigo" translate="no"><code class="bash">mount -t nfs -o nfsvers=3 [IP_servidor]:/[Carpeta_remota] /mnt/[Carpeta_local]</code></pre>
+
+                <br>
+                <p><b>A TENER EN CUENTA</b>:</p>
+
+                <p class="Expl">
+                    Si la carpeta se comparte con permisos <span class="span_contenido" translate="no">ro</span> y se entra de forma remota tendrá esos permisos aunque de forma local en el servidor tenga los permisos <span class="span_contenido" translate="no">rwx</span>.
+                    Los permisos que se aplican son <span class="span_contenido" translate="no">ro</span> al ser de forma remota. Si entra en local tendrá los permisos <span class="span_contenido" translate="no">rwx</span>.
+                    <br>
+                    Si es al revés (remota - <span class="span_contenido" translate="no">rw</span>, local - <span class="span_contenido" translate="no">rx</span>) dará error ya que no tiene el local el permiso <span class="span_contenido" translate="no">w</span>.
+                </p>
+                <p><b>IMPORTANTE</b>:</p>
+                <p class="Expl">Los permisos efectivos son los más restrictivos entre los permisos del sistema de ficheros y los definidos en la exportación (<span class="span_contenido" translate="no">ro</span> / <span class="span_contenido" translate="no">rw</span>).</p>
+            
+                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">SEGURIDAD</span></b>:</p>
+                <p class="Expl">Si en un cliente existen usuarios con el mismo UID que en el servidor, aunque tengan nombres diferentes, esos usuarios podrán acceder a los recursos del servidor con los permisos asociados a ese UID. Esto significa que un usuario no autorizado podría tener acceso, ya que NFSv3 solo utiliza el UID/GID para autenticar, no los nombres de usuario.</p>
+
+                <p><b>PROBLEMA DE <span style="color: rgb(147, 147, 206) !important;">GESTIÓN</span></b>:</p>
+                <p class="Expl">Por cada usuario y grupo del servidor se deben duplicar en todos los clientes, lo que provoca exceso de usuarios y grupos, mala escalabilidad y mayor complejidad administrativa.</p>
+
+                <p><b>MEJOR <span style="color: rgb(147, 147, 206) !important;">SOLUCIÓN</span></b>:</p>
+                <p class="Expl">Centralizar la gestión de usuarios y grupos mediante un sistema como LDAP.</p>
+            </div>
+
 
         </div>
         <!-- ......................................................... -->
@@ -246,7 +270,7 @@ Código por byAd12
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>
 

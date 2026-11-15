@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>Metasploit</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -46,6 +46,25 @@ Código por byAd12
         <h1>Metasploit</h1>
         <p class="Resumen_Titulo">Investigación y explotación de vulnerabilidades</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Fases de auditoría:</p>
+                <ol>
+                    <li><a href="#Escaneo_NMAP">Escaneo de Nmap</a></li>
+                    <li><a href="#Comandos_Básicos">Comandos básicos de Metasploit</a></li>
+                </ol>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Fases de auditoría</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -53,7 +72,7 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h3>1. Escaneo de Nmap</h3>
+                <h3 id="Escaneo_NMAP">1. Escaneo de Nmap</h3>
 
                 <p>Antes de ejecutar Metasploit se puede saber con Nmap los servicios y sus versiones de la máquina a atacar:</p>
                 <pre class="codigo" translate="no"><code class="bash">nmap -sV --top-ports 1000 [Máquina_a_atacar]</code></pre>
@@ -69,7 +88,7 @@ Código por byAd12
 
             <div>
 
-                <h3>2. Comandos básicos de Metasploit</h3>
+                <h3 id="Comandos_Básicos">2. Comandos básicos de Metasploit</h3>
                 
                 <p>Para iniciar una consola interactiva de Metasploit hay que ejecutar:</p>
                 <pre class="codigo" translate="no"><code class="bash">msfconsole</code></pre>
@@ -147,7 +166,7 @@ Código por byAd12
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>
 

@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>Active Directory</title>
         
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -47,6 +47,38 @@ Código por byAd12
         <h1>Active Directory</h1>
         <p class="Resumen_Titulo">Servicio de directorio en una red distribuida</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración de un Controlador de Dominio Linux:</p>
+                <ul>
+                    <li><a href="#DC_Linux_controlador_dominio_configuracion">Configurar un controlador de dominio</a></li>
+                    <li><a href="#DC_Linux_controlador_dominio_administracion">Administrar un controlador de dominio</a></li>
+                    <li><a href="#DC_Linux_Scripts_para_Windows">Configurar scripts de inicio de sesión para clientes Windows</a></li>
+                    <li><a href="#DC_Linux_SeDiskOperatorPrivilege">Asignar el permiso SeDiskOperatorPrivilege a un grupo del dominio</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración de un cliente Linux:</p>
+                <ul>
+                    <li><a href="#SAMBA_Cliente_Linux">SAMBA: Unir un cliente Linux a un controlador de dominio</a></li>
+                    <li><a href="#Montar_Carpeta_Cliente_Linux">LIBPAM: Montar en un cliente Linux una carpeta del controlador de dominio</a></li>
+                    <li><a href="#SSSD_Cliente_Linux">SSSD: Unir un cliente Linux a un controlador de dominio</a></li>
+                    <li><a href="#ACL_Cliente_Linux">SAMBA: Habilitar el soporte de ACL de Windows en un cliente Linux</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración de un cliente Windows:</p>
+                <ul>
+                    <li><a href="#Unir_Cliente_Windows">Unir un cliente Windows a un controlador de dominio</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración de un Controlador de Dominio Linux</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -54,7 +86,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3>Configurar un sistema <span>Linux</span> como controlador de dominio</h3>
+                <h3 id="DC_Linux_controlador_dominio_configuracion">Configurar un controlador de dominio</h3>
             
                 <p>Además de crear servidores Windows para que controlen Active Directory, se puede configurar un servidor Linux para que actúe como controlador de dominio con las mismas funcionalidades pero sin la necesidad de adquirir licencias.</p>
             
@@ -128,17 +160,8 @@ Código por byAd12
             
             </div>
             
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
             <div>
-                <h3 id="Administrar_DC_Linux">Administrar un sistema <span>Linux</span> como controlador de dominio</h3>
+                <h3 id="DC_Linux_controlador_dominio_administracion">Administrar un controlador de dominio</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -240,18 +263,8 @@ Código por byAd12
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
-                <h3>Scripts de inicio de sesión desde un controlador de dominio <span>Linux</span></h3>
+                <h3 id="DC_Linux_Scripts_para_Windows">Configurar scripts de inicio de sesión para clientes Windows</h3>
             
                 <p>Esta sección muestra como definir scripts de inicio de sesión para usuarios en equipos Windows. En equipos Linux es mejor usar PAM.</p>
 
@@ -269,10 +282,31 @@ Código por byAd12
             
             </div>
 
+            <div>
+                <h3 id="DC_Linux_SeDiskOperatorPrivilege">Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h3>
+
+                <p>Este permiso permite modificar las ACLs de los recursos compartidos por un servidor Linux desde un equipo Windows.</p>
+            
+                <br>
+                <p>1. Hay que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
+                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant [Nombre_grupo_a_otorgar] SeDiskOperatorPrivilege -U administrator</code></pre>
+
+                <p class="Expl">Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
+                <pre class="codigo Expl" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
+
+                <br>
+                <p>2. Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
+                <pre class="codigo" translate="no"><code class="bash">[Nombre_recurso]
+    path = /[Ruta_al_recurso]
+    read only = no</code></pre>
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Configuración de un cliente Linux</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -280,7 +314,7 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3 id="SAMBA_Unir_Cliente">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
+                <h3 id="SAMBA_Cliente_Linux">SAMBA: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
             
                 <p>Con los siguientes pasos en un cliente Linux se puede meter el equipo en un dominio creado por un controlador de dominio, tanto si es un servidor Linux o Windows:</p>
 
@@ -443,17 +477,8 @@ group:          files systemd winbind</code></pre>
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <div class="parte1">
-
             <div>
-                <h3>Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h3>
+                <h3 id="Montar_Carpeta_Cliente_Linux">LIBPAM: Montar en un cliente <span>Linux</span> una carpeta del controlador de dominio</h3>
             
                 <p>
                     Este proceso equivale a la <b>"Carpeta particular"</b> o <b>"Unidad de red"</b> en Windows. 
@@ -520,42 +545,10 @@ group:          files systemd winbind</code></pre>
 
             </div>
 
-        </div>
-
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
-                <h3>Unir un cliente <span>Windows</span> a un controlador de dominio<img class="SoporteComandoRemoto" alt="Logo de Windows" src="../img/windows.png"></h3>
+                <h3 id="SSSD_Cliente_Linux">SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
             
-                <p>1. Primero hay que configurar como DNS del cliente la IP del servidor / controlador de dominio.</p>
-
-                <p>2. En la sección "Cambios en el dominio o nombre de equipo" se asignará un nombre de equipo identificativo y se debe especificar el nombre de dominio del servidor.</p>
-                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido" translate="no">administrator</span> y su contraseña asignada.</p>
-
-                <p>3. Hay que reiniciar el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
-            </div>
-        
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
-            <div>
-                <h3>SSSD: Unir un cliente <span>Linux</span> a un controlador de dominio</h3>
-            
-                <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA: <a href="#SAMBA_Unir_Cliente">explicado aquí</a>.</p>
+                <p><u>Importante</u>: Esto es una manera alternativa más fácil pero limitada para unir un cliente al dominio. Es mejor usar SAMBA.</p>
 
                 <br>
                 <p>1. En el cliente hay que instalar los paquetes necesarios:</p>
@@ -603,18 +596,8 @@ ldap_user_gid_number = gidNumber</code></pre>
 
             </div>
         
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
             <div>
-                <h3>Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h3>
+                <h3 id="ACL_Cliente_Linux">SAMBA: Habilitar el soporte de ACL de Windows en un cliente <span>Linux</span></h3>
             
                 <p>En el fichero de configuración de samba <span class="span_url" translate="no">/etc/samba/smb.conf</span> hay que añadir en la sección <span class="span_contenido" translate="no">[global]</span> las siguientes líneas:</p>
                 <pre class="codigo Expl" translate="no"><code class="bash">vfs objects = acl_xattr
@@ -625,9 +608,9 @@ store dos attributes = yes</code></pre>
         
         </div>
 
-
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Configuración de un cliente Windows</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -635,23 +618,14 @@ store dos attributes = yes</code></pre>
         <div class="parte1">
 
             <div>
-                <h3>Asignar el permiso <span>SeDiskOperatorPrivilege</span> a un grupo del dominio</h3>
-
-                <p>Este permiso permite modificar las ACLs de los recursos compartidos por un servidor Linux desde un equipo Windows.</p>
+                <h3 id="Unir_Cliente_Windows">Unir un cliente <span>Windows</span> a un controlador de dominio</h3>
             
-                <br>
-                <p>1. Hay que ejecutar el siguiente comando desde el servidor Linux del dominio:</p>
-                <pre class="codigo" translate="no"><code class="bash">net rpc rights grant [Nombre_grupo_a_otorgar] SeDiskOperatorPrivilege -U administrator</code></pre>
+                <p>1. Primero hay que configurar como DNS del cliente la IP del servidor / controlador de dominio.</p>
 
-                <p class="Expl">Para ver los grupos del dominio con ese permiso se puede ejecutar el siguiente comando:</p>
-                <pre class="codigo Expl" translate="no"><code class="bash">net rpc rights list privileges SeDiskOperatorPrivilege -U administrator</code></pre>
+                <p>2. En la sección "Cambios en el dominio o nombre de equipo" se asignará un nombre de equipo identificativo y se debe especificar el nombre de dominio del servidor.</p>
+                <p class="Expl">Para unirse al dominio pedirá el usuario <span class="span_contenido" translate="no">administrator</span> y su contraseña asignada.</p>
 
-                <br>
-                <p>2. Finalmente se puede cambiar permisos de una compartida de la siguiente forma mediante un equipo Linux o Windows del dominio con un usuario que tenga el permiso SeDiskOperatorPrivilege:</p>
-                <pre class="codigo" translate="no"><code class="bash">[Nombre_recurso]
-    path = /[Ruta_al_recurso]
-    read only = no</code></pre>
-
+                <p>3. Hay que reiniciar el equipo y luego tendríamos que ser capaces de poder iniciar sesión con un usuario del dominio.</p>
             </div>
         
         </div>
@@ -662,7 +636,7 @@ store dos attributes = yes</code></pre>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 
 </html>

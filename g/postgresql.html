@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>PostgreSQL</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -47,6 +47,41 @@ Código por byAd12
         <h1>PostgreSQL</h1>
         <p class="Resumen_Titulo">Sistema gestor de base de datos SQL</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración del servidor:</p>
+                <ol>
+                    <li><a href="#Servidor_Instalacion">Instalación</a></li>
+                    <li><a href="#Servidor_Asignar_IP_estatica">Asignar una IP estática</a></li>
+                    <li><a href="#Servidor_Permitir_conexiones_remotas">Como permitir conexiones remotas</a></li>
+                    <li><a href="#Servidor_Conexion_base_datos_local">Como conectarse a la base de datos local</a></li>
+                </ol>
+
+                <p class="Indicador_Seccion_Indice">Configuración del cliente:</p>
+                <ol>
+                    <li><a href="#Cliente_Instalacion">Instalación</a></li>
+                    <li><a href="#Cliente_Conexion_base_datos_remota">Como conectarse a una base de datos remota</a></li>
+                </ol>
+
+                <p class="Indicador_Seccion_Indice">Gestión de la base de datos:</p>
+                <ul>
+                    <li><a href="#Gestion_Clusters">Gestionar los clústers</a></li>
+                    <li><a href="#Gestion_Comandos_BBDD">Comandos para la base de datos</a></li>
+                    <li><a href="#Gestion_SQL_Crear_usuarios">SQL - Creación de usuarios</a></li>
+                    <li><a href="#SQL - Creación de bases de datos">SQL - Creación de bases de datos</a></li>
+                    <li><a href="#Gestion_SQL_Crear_tablas">SQL - Creación de una tabla</a></li>
+                    <li><a href="#Gestion_SQL_Crear_insertar_valores">SQL - Insertar valores en una columna de una tabla</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del servidor</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
@@ -54,7 +89,7 @@ Código por byAd12
         <div class="parte1">
             <div>
 
-                <h3>1. Instalación en el servidor</h3>
+                <h3 id="Servidor_Instalacion">1. Instalación</h3>
 
                 <p>1. Hay que instalar el servicio de PostgreSQL y otras dependencias en el servidor:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -82,11 +117,11 @@ Código por byAd12
 
                 <p>5. Por último, hay que verificar si el servidor está preparado para aceptar conexiones:</p>
                 <pre class="codigo" translate="no"><code class="bash">pg_isready -h [IP_servidor] -p [Puerto_servidor]</code></pre>
-                
+
             </div>
 
             <div>
-                <h3>2. Asignar una IP estática en el servidor</h3>
+                <h3 id="Servidor_Asignar_IP_estatica">2. Asignar una IP estática</h3>
 
                 <p>En el servidor se puede asignar una IP estática desde la interfaz gráfica o, si es un sistema Ubuntu Server, modificando el fichero de configuración de Netplan.</p>
 
@@ -123,39 +158,7 @@ Código por byAd12
 
             <div>
 
-                <h3>3. Instalación en el cliente</h3>
-
-                <p>1. Hay que instalar el servicio de PostgreSQL para clientes:</p>
-                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
-                <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql-client</code></pre>
-
-                <p>2. Una vez instalado se puede ejecutar el siguiente comando para crear una conexión a una base de datos del servidor:</p>
-                <pre class="codigo" translate="no"><code class="bash">psql -h [IP_servidor] -p [Puerto_servidor/:5432] -U [Nombre_usuario] -d [Nombre_base_de_datos]</code></pre>
-
-            </div>
-
-            <div>
-
-                <h3>4. Gestionar los clústers</h3>
-
-                <p>Para ver según el sistema la versión, <b>nombre</b> puerto, <b>estado</b>, propietario, ruta de datos y registros de cada clúster:</p>
-                <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
-                <p class="Expl">
-                    En sistemas Debian y Ubuntu se permite gestionar varias versiones y clústers.
-                    <br>
-                    El clúster por defecto se llama <span class="span_contenido" translate="no">main</span>.
-                </p>
-
-                <p>Para detener un cluster primero se debe saber que nombre tiene con el comando anterior:</p>
-                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] stop</code></pre>
-                <p>Para iniciar un clúster que se encuentra detenido:</p>
-                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] start</code></pre>
-
-            </div>
-
-            <div>
-
-                <h3>5. Permitir conexiones remotas</h3>
+                <h3 id="Servidor_Permitir_conexiones_remotas">3. Como permitir conexiones remotas</h3>
 
                 <p>1. Primero debes copiar la ruta local que indique el comando <span class="span_contenido" translate="no">SHOW hba_file;</span>:</p>
                 <pre class="codigo" translate="no"><code class="sql">sudo -u postgres psql
@@ -174,23 +177,82 @@ SHOW hba_file;
 ufw reload</code></pre>
 
             </div>
+
+            <div>
+
+                <h3 id="Servidor_Conexion_base_datos_local">Como conectarse a la base de datos local</h3>
+
+                <p>Para entrar a la base de datos local desde el propio servidor hay que ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
+
+                <p>También se puede ejecutar comandos SQL directamente desde la terminal sin necesidad de entrar a la terminal de la base de datos:</p>
+                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
+
+            </div>
+
         </div>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Configuración del cliente</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
+
             <div>
 
-                <h3>Gestionar la base de datos</h3>
+                <h3 id="Cliente_Instalacion">Instalación</h3>
 
-                <p>Para entrar a la base de datos hay que ejecutar el comando <span class="span_contenido" translate="no">psql</span> con el usuario administrador <span class="span_contenido" translate="no">postgres</span>:</p>
-                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql</code></pre>
-                <p class="Expl">Otra manera de ejecutar comandos SQL directamente es:</p>
-                <pre class="codigo" translate="no"><code class="bash">sudo -u postgres psql -c '[Comando_SQL];'</code></pre>
+                <p>Hay que instalar el servicio de PostgreSQL para clientes:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y postgresql-client</code></pre>
+
+            </div>
+
+            <div>
+
+                <h3 id="Cliente_Conexion_base_datos_remota">Como conectarse a una base de datos remota</h3>
+
+                <p>Para crear una conexión a una base de datos de un servidor remoto hay que ejecutar el siguiente comando:</p>
+                <pre class="codigo" translate="no"><code class="bash">psql -h [IP_servidor] -p [Puerto_servidor/:5432] -U [Nombre_usuario] -d [Nombre_base_de_datos]</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Gestión de la base de datos</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+
+                <h3 id="Gestion_Clusters">Gestionar los clústers</h3>
+
+                <p>En el servidor se puede ver ver la versión, <b>nombre</b> puerto, <b>estado</b>, propietario, ruta de datos y registros de cada clúster:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_lsclusters</code></pre>
+                <p class="Expl">
+                    En sistemas Debian y Ubuntu se permite gestionar varias versiones y clústers.
+                    <br>
+                    El clúster por defecto se llama <span class="span_contenido" translate="no">main</span>.
+                </p>
+
+                <p>Para detener un cluster primero se debe saber que nombre tiene con el comando anterior:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] stop</code></pre>
+                <p>Para iniciar un clúster que se encuentra detenido:</p>
+                <pre class="codigo" translate="no"><code class="bash">pg_ctlcluster [Versión_PostgreSQL] [Nombre_clúster] start</code></pre>
+
+            </div>
+
+            <div>
+
+                <h3 id="Gestion_Comandos_BBDD">para la base de datos</h3>
 
                 <div class="TablaDivScroll">
                     <table class="TablaComandos">
@@ -329,37 +391,28 @@ ufw reload</code></pre>
                         <tr>
                             <td><pre translate="no"><code class="sql">pg_current_logfile</code></pre></td>
                             <td>
-                                Comando de Linux. Muestra la ruta del fichero de log que está utilizando actualmente logging_collector.
+                                Comando de Linux.
+                                Muestra la ruta del fichero de log que está utilizando actualmente logging_collector.
                                 Si no devuelve nada entonces logging_collector está desactivado.
                             </td>
                         </tr>
 
                         <tr>
                             <td><pre translate="no"><code class="sql">sudo grep -i 'error\|fatal\|panic' [Ruta_fichero_log]</code></pre></td>
-                            <td>Comando de Linux. Del fichero log filtra solo se muestran los errores.</td>
+                            <td>
+                                Comando de Linux.
+                                Del fichero log filtra solo se muestran los errores.
+                            </td>
                         </tr>
 
                     </table>
                 </div>
 
-                <p>Para verificar por cual puerto está escuchando el servicio de PostgreSQL (es lo mismo que la consulta SQL <span class="span_contenido" translate="no">SHOW port;</span>):</p>
-                <pre class="codigo" translate="no"><code class="bash">ss -ltnp | grep postgres</code></pre>
-
             </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
 
             <div>
 
-                <h3>Creación de usuarios</h3>
+                <h3 id="Gestion_SQL_Crear_usuarios">SQL - Creación de usuarios</h3>
 
                 <p>Para crear un nuevo usuario en la base de datos:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE USER [Nombre_usuario] WITH PASSWORD '[Contraseña_usuario]';</code></pre>
@@ -371,7 +424,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h3>Creación de bases de datos</h3>
+                <h3 id="Gestion_SQL_Crear_BBDD">SQL - Creación de bases de datos</h3>
 
                 <p>Para crear una nueva base de datos se debe de especificar un usuario propietario:</p>
                 <pre class="codigo" translate="no"><code class="sql">CREATE DATABASE [Nombre_base_datos] OWNER [Nombre_usuario_propietario];</code></pre>
@@ -383,7 +436,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h3>Creación de una tabla</h3>
+                <h3 id="Gestion_SQL_Crear_tablas">SQL - Creación de una tabla</h3>
 
                 <p>Para crear una nueva tabla primero se debe especificar en que base de datos se creará:</p>
                 <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>
@@ -399,7 +452,7 @@ ufw reload</code></pre>
 
             <div>
 
-                <h3>Insertar valores en una columna de una tabla</h3>
+                <h3 id="Gestion_SQL_Crear_insertar_valores">SQL - Insertar valores en una columna de una tabla</h3>
 
                 <p>Para insertar datos en una tabla existente se debe usar los siguientes comandos:</p>
                 <pre class="codigo" translate="no"><code class="sql">\c [Nombre_base_datos]</code></pre>
@@ -418,7 +471,7 @@ VALUES ('Valor_a_insertar');</code></pre>
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>
 

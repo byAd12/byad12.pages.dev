@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>GPG - Linux</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -128,7 +128,7 @@ Código por byAd12
             <div>
                 <h3>Cifrar un fichero con una clave <span>asimétrica</span></h3>
 
-                <p>Se utiliza el parámetro <span class="span_contenido" translate="no">-e</span> (<span class="span_contenido" translate="no">--encrypt</span>) para cifrar un archivo junto con el parámetro <span class="span_contenido" translate="no">-r</span> (<span class="span_contenido" translate="no">--recipient</span>) para indicar el nombre de la clave pública del destinatario, que debe estar previamente importada en el equipo:</p>
+                <p>Se utiliza el parámetro <span class="span_contenido" translate="no">-e</span> (<span class="span_contenido" translate="no">--encrypt</span>) para cifrar un fichero junto con el parámetro <span class="span_contenido" translate="no">-r</span> (<span class="span_contenido" translate="no">--recipient</span>) para indicar el nombre de la clave pública del destinatario, que debe estar previamente importada en el equipo:</p>
                 <pre class="codigo" translate="no"><code class="bash">gpg -a -r [Nombre_clave_pública_destinatario] -e [Fichero_a_cifrar]</code></pre>
 
                 <p>Para ver el nombre de la clave pública del destinatario se puede usar el parámetro <span class="span_contenido" translate="no">-k</span> (la clave debe <a href="#importar-clave-publica">estar previamente importada</a>):</p>
@@ -167,6 +167,6 @@ Código por byAd12
         <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 </html>

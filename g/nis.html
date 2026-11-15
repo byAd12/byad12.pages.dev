@@ -15,7 +15,7 @@ Código por byAd12
         <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
         <title>NIS</title>
 
-        <link rel="stylesheet" type="text/css" href="../resources/blog.css">
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
     </head>
     <body>
@@ -46,13 +46,40 @@ Código por byAd12
         <h1>NIS</h1>
         <p class="Resumen_Titulo">Network Information Service</p>
         <p id="Creditos_Inicio" class="Oculto">none</p>
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Configuración del servidor:</p>
+                <ul>
+                    <li><a href="#Servidor_Instalacion">Instalación</a></li>
+                    <li><a href="#Servidor_Configuracion">Configuración</a></li>
+                    <li><a href="#Servidor_Actualizar_BBDD">Actualización de la base de datos</a></li>
+                    <li><a href="#Servidor_Problema_home">Problema - El cliente no tiene carpeta /home</a></li>
+                    <li><a href="#Servidor_Solucion_home_NFS">Solución - Compartir la carpeta /home por NFS</a></li>
+                </ul>
+
+                <p class="Indicador_Seccion_Indice">Configuración del cliente:</p>
+                <ul>
+                    <li><a href="#Cliente_Configuracion_completa">Configuración completa</a></li>
+                    <li><a href="#Cliente_Montar_Home_NIS">Como montar la carpeta /home con NFS</a></li>
+                    <li><a href="#Cliente_Comando_getent_passwd">Comando "getent passwd"</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Configuración del servidor</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h3>Instalación</h3>
+                <h3 id="Servidor_Instalacion">Instalación</h3>
                 
                 <p>Tanto en el cliente como en el servidor hay que instalar el servicio NIS:</p>
                 <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
@@ -60,17 +87,8 @@ Código por byAd12
 
             </div>
 
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
             <div>
-                <h3>Configuración en el servidor</h3>
+                <h3 id="Servidor_Configuracion">Configuración</h3>
                 
                 <p>1. Primero hay que editar el fichero <span class="span_url" translate="no">/etc/defaultdomain</span> para definir un nombre de dominio como, por ejemplo, <span class="span_contenido" translate="no">iso.asir</span>.</p>
 
@@ -119,7 +137,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h3>Actualización de la base de datos</h3>
+                <h3 id="Servidor_Actualizar_BBDD">Actualización de la base de datos</h3>
                 
                 <p>En caso de que haya creado un nuevo usuario o grupo en el servidor maestro, habrá que aplicar estos cambios en la base de datos para que otros clientes puedan añadirlo a sus sistemas y que el resto de servidores esclavos repliquen la configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">make -C /var/yp</code></pre>
@@ -128,7 +146,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h3 id="Problema-Cliente-Pamd">Problema - El cliente no tiene carpeta <span>/home</span></h3>
+                <h3 id="Servidor_Problema_home">Problema - El cliente no tiene carpeta <span>/home</span></h3>
 
                 <p>
                     La carpeta home del usuario no existe en el cliente ya que es una carpeta local del servidor,
@@ -152,7 +170,7 @@ NISCLIENT=false</code></pre>
             </div>
 
             <div>
-                <h3>Solución - Compartir la carpeta <span>/home</span> por NFS</h3>
+                <h3 id="Servidor_Solucion_home_NFS">Solución - Compartir la carpeta <span>/home</span> por NFS</h3>
 
                 <p>Los siguientes pasos se explican mejor en la guía detallada sobre <a href="nfs.html">NFS</a>.</p>
 
@@ -165,7 +183,7 @@ NISCLIENT=false</code></pre>
                 <p>3. Por último se debe exportar la configuración NFS para que sea efectiva:</p>
                 <pre class="codigo" translate="no"><code class="bash">exportfs -ra</code></pre>
 
-                <p>Pulse <a href="#Montar_Home_NIS">aquí</a> para ver como montar la carpeta <span class="span_url" translate="no">/home</span> persistentemente en los clientes.</p>
+                <p>Pulse <a href="#Cliente_Montar_Home_NIS">aquí</a> para ver como montar la carpeta <span class="span_url" translate="no">/home</span> persistentemente en los clientes.</p>
 
             </div>
 
@@ -173,13 +191,14 @@ NISCLIENT=false</code></pre>
 
         <!-- ......................................................... -->
         <!-- ......................................................... -->
+        <h2>Configuración del cliente</h2>
         <hr>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
 
         <div class="parte1">
             <div>
-                <h3>Configuración en el cliente</h3>
+                <h3 id="Cliente_Configuracion_completa">Configuración completa</h3>
                 
                 <p>1. Primero hay que editar el fichero <span class="span_url" translate="no">/etc/defaultdomain</span> para definir un nombre de dominio como, por ejemplo, <span class="span_contenido" translate="no">iso.asir</span>.</p>
 
@@ -226,7 +245,7 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
-                <h3 id="Montar_Home_NIS">Montar la carpeta <span>/home</span> con NFS</h3>
+                <h3 id="Cliente_Montar_Home_NIS">Como montar la carpeta <span>/home</span> con NFS</h3>
                 
                 <p>A continuación están los pasos guiados para montar la carpeta <span class="span_url" translate="no">/home</span> del servidor en cada cliente NIS.</p>
 
@@ -234,7 +253,14 @@ gshadow:        files systemd nis</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">apt-get install -y nfs-common</code></pre>
 
                 <p>2. Se debe añadir un montaje persistente y automático en <span class="span_url" translate="no">/etc/fstab</span> con la siguiente línea:</p>
-                <pre class="codigo Expl" translate="no"><code class="bash">[IP_servidor]:/home    /home    nfs    defaults    0    0</code></pre>
+                <pre class="codigo Expl" translate="no"><code class="bash">[IP_servidor]:/home    /home-nis    nfs    defaults    0    0</code></pre>
+                <p class="Expl">
+                    Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url" translate="no">/home</span>),
+                    va a provocar que el contenido local se machaque y solo se enseñe el contenido de la carpeta remota que se ha montado.
+                </p>
+                <p class="Expl">
+                    <b>Solucion</b>: Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url" translate="no">/home-nis</span> y dejar <span class="span_url" translate="no">/home</span> para los usuarios locales.
+                </p>
 
                 <p>3. Para aplicar los cambios se debe reiniciar el sistema:</p>
                 <pre class="codigo" translate="no"><code class="bash">reboot now</code></pre>
@@ -249,38 +275,9 @@ gshadow:        files systemd nis</code></pre>
             </div>
 
             <div>
-                <h3>Problema - NFS sobreescribe el contenido de <span>/home</span></h3>
-
-                <p>
-                    Hay que tener en cuenta que al montar una carpeta con NFS en el cliente en una ruta que ya existe y tiene contenido dentro (<span class="span_url" translate="no">/home</span>),
-                    va a provocar que el contenido local se machaque y solo se enseñe el contenido de la carpeta remota que se ha montado.
-                </p>
-
-                <p>
-                    <u>Solucion</u>: Crear una carpeta dedicada a los usuarios de NIS como <span class="span_url" translate="no">/home-nis</span> y dejar <span class="span_url" translate="no">/home</span> para usuarios locales.
-                </p>
-
-                <ul>
-                    <li><b>Ventaja</b>: Es automático del lado del cliente ya que solo se monta una carpeta.</li>
-                    <li><b>Desventaja</b>: En cada usuario se debe cambiar la ruta de su carpeta personal.</li>
-                </ul>
-
-            </div>
-
-        </div>
-
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-        <hr>
-        <!-- ......................................................... -->
-        <!-- ......................................................... -->
-
-        <div class="parte1">
-
-            <div>
-                <h3>Comando "<span>getent passwd</span>"</h3>
+                <h3 id="Cliente_Comando_getent_passwd">Comando "<span>getent passwd</span>"</h3>
                 
-                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el fichero <span class="span_url" translate="no">/etc/passwd</span> y al comando <span class="span_contenido" translate="no">ypcat passwd</span>:</p>
+                <p>El siguiente comando permite ver todos los usuarios locales y remotos (NIS) gracias al fichero <span class="span_url" translate="no">/etc/nsswitch.conf</span>. Es un alternativa mejor a leer manualmente el fichero <span class="span_url" translate="no">/etc/passwd</span> y el comando <span class="span_contenido" translate="no">ypcat passwd</span>:</p>
                 <pre class="codigo" translate="no"><code class="bash">getent passwd</code></pre>
 
             </div>
@@ -309,7 +306,7 @@ gshadow:        files systemd nis</code></pre>
         </p>
         <!-- ......................................................... -->
         <!-- ......................................................... -->
-        <script src="../resources/blog.js"></script>
+        <script src="../resources/guides.js"></script>
     </body>
 
 </html>
