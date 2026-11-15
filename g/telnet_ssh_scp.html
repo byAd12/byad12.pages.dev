@@ -28,10 +28,12 @@ Código por byAd12
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
         <div class="menu_bar" id="menu_bar">
             <!-- BARRA DE MENÚ -->
-            <p class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a></p>
+            <ul class="Principal">
+                <li class="logo" translate="no"><a href="../index.html">by<span>Ad</span>12</a> / <a href="../guides.html">guides</a></li>
+            </ul>
             <ul>
-                <li><a href="../guides.html">~/Guías</a></li>
-                <li class="ocultarMOVIL"><a onclick="esconder()">./Ocultar</a></li>
+                <li><a onclick="esconder()">Ocultar menú</a></li>
+                <li><a href="?print=true&ocultar-menu=true">Compartir en PDF</a></li>
                 <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
             </ul>
         </div>
@@ -177,11 +179,13 @@ Código por byAd12
                     Se suele dejar vacía para automatizar un proceso, aunque configurarla da mayor seguridad.
                 </p>
 
-                <p>2. Ahora hay que asignar permisos locales restrictivos para la carpeta <span class="span_contenido" translate="no">~/.ssh</span> y a las claves privadas y públicas (ejecuta los comandos en el mismo orden):</p>
+                <br>
+                <p>2. También hay que asignar permisos locales restrictivos para la carpeta <span class="span_contenido" translate="no">~/.ssh</span> y a las claves privadas y públicas:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod 700 ~/.ssh
 (shopt -s extglob 2>/dev/null; chmod 600 ~/.ssh/id_!(*.pub))
 chmod 644 ~/.ssh/*.pub</code></pre>
 
+                <br>
                 <p>3. Ahora hay que copiar la clave pública en el usuario del equipo remoto:</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh-copy-id -i ~/.ssh/id_[XXX].pub [Nombre_usuario]@[IP/FQDN del equipo remoto]</code></pre>
                 <p class="Expl">
@@ -209,6 +213,7 @@ chmod 644 ~/.ssh/*.pub</code></pre>
 
                 </ol>
 
+                <br>
                 <p>
                     4. Para comprobar que la clave pública SSH se copió correctamente se puede crear una sesión SSH hacia el equipo remoto.
                     Si se configuró una "passphrase", antes de iniciar la sesión pedirá que se ingrese:
@@ -311,6 +316,7 @@ GatewayPorts yes       # Permite que el túnel remoto escuche en todas las inter
                     También se puede usar la opción <span class="span_contenido" translate="no">-f</span> para que el túnel se ejecute en segundo plano.
                 </p>
 
+                <br>
                 <p>Túnel <b>Local Forwarding</b> (<span class="span_contenido" translate="no">-L</span>):</p>
                 <pre class="codigo" translate="no"><code class="bash">ssh -N -L [Puerto_local]:localhost:[Puerto_remoto] (Nombre_usuario)@[IP/DNS_servidor]</code></pre>
                 <p class="Expl">Todo el tráfico que se envíe a <span class="span_contenido" translate="no">Puerto_local</span> se enviará de forma cifrada al puerto <span class="span_contenido" translate="no">Puerto_remoto</span> de la máquina <span class="span_contenido" translate="no">localhost</span> (el propio servidor remoto).</p>
