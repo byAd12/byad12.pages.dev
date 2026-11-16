@@ -15,8 +15,9 @@
                 <li class="logo" translate="no"><a href="${basePath}index.html">by<span>Ad</span>12</a> / <a href="${basePath}guides.html">guides</a></li>
             </ul>
             <ul>
-                <li><a onclick="esconder()">Ocultar menú</a></li>
-                <li><a href="?print=true&ocultar-menu=true">Compartir en PDF</a></li>
+                <li><div class="gtranslate_wrapper"></div></li>
+                <li><button onclick="ocultar()">Ocultar menú</button></li>
+                <li><button onclick="compartir()">Compartir en PDF</button></li>
                 <li><input type="color" class="NavColorCambiar" id="NavColorCambiar2" value="#222523"></li>
             </ul>
         </div>

@@ -26,9 +26,9 @@ window.addEventListener("scroll", () => {
 
 // ==========================================================
 // ==========================================================
-// OCULTAR TODOS LOS BOTONES Y MENÚS
+// OCULTAR ".menu_bar"
 
-function esconder() {
+function ocultar() {
     const menu = document.getElementById("menu_bar");
     const translate = document.getElementById("gtranslate_wrapper");
     if (menu) menu.style.display = "none";
@@ -50,11 +50,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
 // ==========================================================
 // IMPRIMIR LA PÁGINA SI SE INDICA "?print=true"
 
-window.addEventListener('DOMContentLoaded', () => {
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('print') === "true") {
-    window.print();
+function compartir() {
+    guide_url = window.location.href + "?print=true";
+    if (navigator.share) {
+    navigator.share({title: document.title, text: 'Descargar en formato PDF', url: guide_url})
+    } else {
+    navigator.clipboard.writeText(guide_url);
+    alert('Enlace copiado al portapapeles:\n' + guide_url);
+    }
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('print') === "true") {
+        window.print();
+    }
 });
 
 // ==========================================================
