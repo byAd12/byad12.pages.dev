@@ -7,7 +7,6 @@
 (function() {
     const scriptSrc = document.currentScript.getAttribute("src");
     const basePath = scriptSrc.replace("resources/menu_bar.js", "");
-    console.log("2. Prefijo calculado (basePath):", `"${basePath}"`);
     
     const menuHTML = `
         <div id="scroll-sentinel" style="height: 1px; width: 100%; pointer-events: none;"></div>
