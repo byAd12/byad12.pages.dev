@@ -1,0 +1,160 @@
+<!--
+
+Código por byAd12
+
+~ Dedicatoria a: Diego Terrón del Valle (CFGS)
+
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex,nofollow">
+        <link rel="shortcut icon" href="../img/question-mark.ico" type="image/x-icon">
+        <title>Lynis</title>
+
+        <link rel="stylesheet" type="text/css" href="../resources/guides.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css">
+    </head>
+    <body>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/menu_bar.js"></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script>window.gtranslateSettings = {"default_language":"es","native_language_names":true,"detect_browser_language":true,"languages":["es","gl","en","de","ru"],"globe_color":"#66aaff","wrapper_selector":".gtranslate_wrapper","flag_size":16,"globe_size":20}</script>
+        <script src="https://cdn.gtranslate.net/widgets/latest/globe.js" defer></script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/bash.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h1>Lynis</h1>
+        <p class="Resumen_Titulo">Auditoría y análisis de seguridad en Linux</p>
+        <p id="Creditos_Inicio" class="Oculto">none</p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Índice</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <div class="parte1 Parte1Indice">
+            <div>
+
+                <p class="Indicador_Seccion_Indice">Preparación del sistema a auditar:</p>
+                <ol>
+                    <li><a href="#LYNIS_Instalacion">Instalación</a></li>
+                    <li><a href="#LYNIS_Comprobacion">Comprobación</a></li>
+                </ol>
+
+                <p class="Indicador_Seccion_Indice">Auditorias:</p>
+                <ul>
+                    <li><a href="#LYNIS_Auditar_sistema_local">Como auditar el sistema local</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Preparación del sistema a auditar</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+            <div>
+
+                <h3 id="LYNIS_Instalacion">Instalación</h3>
+
+                <p>En el equipo donde se vaya a realizar el análisis hay que ejecutar los siguientes pasos.</p>
+
+                <p>Primero hay que descargar la clave pública del repositorio y pasarla a formato GPG:</p>
+                <pre class="codigo" translate="no"><code class="bash">curl -fsSL https://packages.cisofy.com/keys/cisofy-software-public.key | sudo gpg --dearmor -o /usr/share/keyrings/cisofy-software-public.gpg</code></pre>
+
+                <p>Luego hay que crear un nuevo fichero <span class="span_url" translate="no">/etc/apt/sources.list.d/cisofy-lynis.sources</span> y añadir el siguiente contenido en el:</p>
+                <pre class="codigo" translate="no"><code class="bash">X-Repolib-Name: CISOfy Lynis Repository
+Types: deb
+URIs: https://packages.cisofy.com/community/lynis/deb/
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/cisofy-software-public.gpg</code></pre>
+
+                <p>Por último hay que actualizar la lista de paquetes e instalar el paquete <span class="span_contenido" translate="no">lynis</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">apt-get update</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">apt-get install -y lynis</code></pre>
+
+            </div>
+
+            <div>
+                
+                <h3 id="LYNIS_Comprobacion">Comprobación</h3>
+
+                <p>Para comprobar que la instalación se realizó correctamente se puede ejecutar el siguiente comando para ver la versión del paquete <span class="span_contenido" translate="no">lynis</span>:</p>
+                <pre class="codigo" translate="no"><code class="bash">lynis --version</code></pre>
+
+            </div>
+
+        </div>
+
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <h2>Auditorias</h2>
+        <hr>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+
+        <div class="parte1">
+
+            <div>
+                
+                <h3 id="LYNIS_Auditar_sistema_local">Como auditar el sistema local</h3>
+
+                <p>El comando mínimo de auditoria es el siguiente:</p>
+                <pre class="codigo" translate="no"><code class="bash">lynis audit system (Otros_parámetros)</code></pre>
+
+                <div class="TablaDivScroll Expl">
+                    <table class="TablaComandos">
+
+                        <tr class="Titulo">
+                            <th colspan="2">Otros parámetros:</th>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash">--report-file [Ruta_reporte]</code></pre></td>
+                            <td>
+                                Al acabar la auditoría generará un fichero de reporte en la ruta indicada.
+                                No tendrá el mismo formato que la salida del propio comando.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><pre translate="no"><code class="bash"> | tee [Ruta_salida]</code></pre></td>
+                            <td>Redirige la salida exacta del comando (incluyendo los colores) a un fichero.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <p>
+                    Cada advertencia o sugerencia tiene un código de error como, por ejemplo: <span class="span_contenido" translate="no">FINT-4350</span>.
+                    Puedes ver en la página oficial de Lynis la descripción de cada código junto a una sugerencia de como arreglarlo:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">https://cisofy.com/lynis/controls/[Código_lynis]/</code></pre>
+
+            </div>
+
+        </div>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <hr>
+        <p id="Creditos_Final"><a href="https://byAd12.pages.dev/guides" target="_blank">byAd12.pages.dev/guides</a></p>
+        <!-- ......................................................... -->
+        <!-- ......................................................... -->
+        <script src="../resources/guides.js"></script>
+    </body>
+</html>
+
