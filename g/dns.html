@@ -48,6 +48,19 @@ Código por byAd12
         <!-- ......................................................... -->
         <div class="parte1">
             <div>
+                <h3>Requisitos iniciales</h3>
+
+                <ol>
+
+                    <li>Configurar un hostname identificativo para el servidor</li>
+                    <li>Hay que configurar un registro local en <span class="span_url" translate="no">/etc/hosts</span> para el propio hostname del servidor DNS.</li>
+                    <li>No hay que tener registros en <span class="span_url" translate="no">/etc/hosts</span> de zonas que se administrarán con Bind9.</li>
+
+                </ol>
+
+            </div>
+
+            <div>
                 <h3>1. Instalación</h3>
 
                 <p>En el servidor hay que instalar el servicio correspondiente y sus dependencias:</p>
@@ -58,7 +71,7 @@ Código por byAd12
             <div>
                 <h3>2. Configuración del firewall</h3>
 
-                <p>En el firewall se debe permitir el tráfico del puerto 53 - UDP (DNS):</p>
+                <p>En el firewall se debe permitir el tráfico del puerto 53 - UDP y TCP (DNS):</p>
                 <pre class="codigo" translate="no"><code class="bash">ufw allow 53</code></pre>
 
             </div>
@@ -96,7 +109,7 @@ Código por byAd12
 
                 <p>En la carpeta <span class="span_url" translate="no">/etc/bind</span> hay que crear un fichero (formato típico - <span class="span_url" translate="no">db.Nombre_dominio.TLD</span>) que contenga todos los registros DNS del dominio. Sintaxis básica:</p>
                 <pre class="codigo" translate="no"><code class="nginx">$TTL    1D
-FQDN_DOMINIO. IN      SOA     FQDN_SERVIDOR_NS.    DIRECCION_EMAIL.DOMINIO    (
+FQDN_DOMINIO. IN      SOA     FQDN_SERVIDOR_NS.    DIRECCION_EMAIL.DOMINIO.    (
     1               ; Número de serie
     604800          ; Intervalo de actualización (1 semana)
     86400           ; Intervalo de reintento     (1 dia)
@@ -239,7 +252,7 @@ service bind9 status</code></pre>
                 <pre class="codigo" translate="no"><code class="bash">named-checkzone [Nombre_dominio].[TLD] /etc/bind/[Nombre_fichero_zona]
 named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</code></pre>
                 <p class="Expl">También se puede ejecutar el siguiente comando para verificar la sintaxis de todas las zonas masestras:</p>
-                <pre class="codigo" translate="no"><code class="bash">named-checkzone -z</code></pre>
+                <pre class="codigo" translate="no"><code class="bash">named-checkconf -z</code></pre>
 
                 <p>Si se arregla algo o se cambia algún valor de cualquier fichero, hay que reiniciar el servcio <span class="span_contenido" translate="no">named</span> para aplicar los cambios:</p>
                 <pre class="codigo" translate="no"><code class="bash">systemctl restart named</code></pre>
@@ -263,19 +276,26 @@ named-checkzone [Dirección_red].in-addr.arpa /etc/bind/[Nombre_fichero_zona]</c
                 
                 <p>Servidor primario: <b>DNS1</b>; Servidor secundario: <b>DNS2</b>.</p>
 
-                <p>En el servidor <b>DNS1</b> hay que editar el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadir la siguiente configuración:</p>
-                <pre class="codigo" translate="no"><code class="nginx">listen-on { [IP_servidor_secundario]; };
-allow-transfer { [IP_servidor_secundario]; };
-allow-query { [IP_servidor_secundario]; };</code></pre>
-                
+                <p>En el servidor <b>DNS1</b> hay que editar el fichero <span class="span_url" translate="no">/etc/bind/named.conf.options</span> y añadir la siguiente configuración:</p>
+                <pre class="codigo" translate="no"><code class="nginx">listen-on { any; };
+allow-query { any; };</code></pre>
+
+                <p>En el servidor <b>DNS1</b> hay que editar el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y modificar la configuración de la zona:</p>
+                <pre class="codigo" translate="no"><code class="nginx">zone "[Nombre_dominio].[TLD]" {
+    type master;
+    file "/etc/bind/[Nombre_fichero_DB_dominio]";
+    allow-transfer { [IP_servidor_secundario]; };
+};</code></pre>
+
                 <p>En el servidor <b>DNS1</b> hay que añadir un nuevo registro DNS para el servidor secundario desde el fichero DB de la zona:</p>
-                <pre class="codigo" translate="no"><code class="nginx">dns2	IN	A	[IP_servidor_secundario]</code></pre>
+                <pre class="codigo" translate="no"><code class="nginx">@	IN	NS	dns2.[Nombre_dominio].[TLD].
+dns2	IN	A	[IP_servidor_secundario]</code></pre>
                 
                 <p>En el servidor <b>DNS2</b> hay que editar el fichero <span class="span_url" translate="no">/etc/bind/named.conf.local</span> y añadir la siguiente configuración:</p>
-                <pre class="codigo" translate="no"><code class="nginx">zone "[Nombre_dominio].[TLD]"{
-type slave;
-masters{ [IP_servidor_principal]; };
-file "/etc/bind/[Nombre_fichero_DB_dominio]";
+                <pre class="codigo" translate="no"><code class="nginx">zone "[Nombre_dominio].[TLD]" {
+    type slave;
+    masters { [IP_servidor_principal]; };
+    file "/etc/bind/[Nombre_fichero_DB_dominio]";
 };</code></pre>
             </div>
         </div>
