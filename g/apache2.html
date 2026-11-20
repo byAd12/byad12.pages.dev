@@ -86,9 +86,9 @@ Código por byAd12
               - to: default
                 via: [IP_default_gateway]
             nameservers:
-            addresses:
-              - 1.1.1.1
-              - 1.0.0.1</code></pre>
+                addresses:
+                  - 1.1.1.1
+                  - 1.0.0.1</code></pre>
 
                 <p class="Expl">3. Hay que que la configuración sea válida:</p>
                 <pre class="codigo" translate="no"><code class="bash">netplan try</code></pre>
@@ -130,7 +130,7 @@ Código por byAd12
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/apache2.conf</code></pre></td>
-                            <td>Fichero con todas las zonas del servidor.</td>
+                            <td>Fichero de configuración principal del servidor.</td>
                         </tr>
                         <tr>
                             <td><pre translate="no"><code class="bash">/etc/apache2/ports.conf</code></pre></td>
@@ -240,7 +240,7 @@ Código por byAd12
                 <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_fichero_sitio_virtual]</code></pre>
 
 
-                <p>Para que Apache2 esuche por el puerto deseado se debe modificar el fichero <span class="span_url" translate="no">/etc/ports.conf</span> y añadir esta línea por cada puerto a escuchar:</p>
+                <p>Para que Apache2 esuche por el puerto deseado se debe modificar el fichero <span class="span_url" translate="no">/etc/apache2/ports.conf</span> y añadir esta línea por cada puerto a escuchar:</p>
                 <pre class="codigo" translate="no"><code class="apache">Listen [Puerto_a_escuchar]</code></pre>
 
                 <p>
@@ -367,7 +367,7 @@ Código por byAd12
                 <h3>Usar HTTPS con SSL</h3>
 
                 <p>1. Hay que crear un certificado SSL autofirmado:</p>
-                <pre class="codigo" translate="no"><code class="apache">cd /var/www/html
+                <pre class="codigo" translate="no"><code class="apache">mkdir -p /etc/apache2/ssl && cd /etc/apache2/ssl
 openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certificate.crt -days 1024 -nodes</code></pre>
                 
                 <p>2. En <span class="span_url" translate="no">/etc/apache2/ports.conf</span> se debe configurar que el servidor escuche el puerto 443 (HTTPS):</p>
@@ -382,12 +382,17 @@ openssl req -x509 -sha256 -newkey rsa:2048 -keyout certificate.key -out certific
         DocumentRoot /var/www/html
         
         SSLEngine on
-        SSLCertificateFile /var/www/html/certificate.crt
-        SSLCertificateKeyFile /var/www/html/certificate.key
+        SSLCertificateFile /etc/apache2/ssl/certificate.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/certificate.key
 &lt;/VirtualHost&gt;</code></pre>
 
-                <p>5. Por último hay que habilitar el fichero de configuración:</p>
+                <p>5. Hay que habilitar el fichero de configuración:</p>
                 <pre class="codigo" translate="no"><code class="bash">a2ensite [Nombre_fichero_sitio_virtual]</code></pre>
+
+                <p>6. Para aplicar los cambios hay que recargar la configuración del servicio:</p>
+                <pre class="codigo" translate="no"><code class="bash">systemctl reload apache2</code></pre>
+
+
             </div>
 
         </div>
