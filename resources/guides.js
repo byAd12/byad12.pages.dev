@@ -5,22 +5,12 @@
 // CAMBIAR ESTILOS DE .menu_bar
 
 const menuBar = document.getElementById("menu_bar");
-const menu_bar_scroll_mark = document.getElementById("Creditos_Inicio");
 
 window.addEventListener("scroll", () => {
     if (window.scrollY > 10) {
         menuBar.classList.add("menu_bar_top");
     } else {
         menuBar.classList.remove("menu_bar_top");
-    }
-
-    if (menu_bar_scroll_mark) {
-        const isTop = menu_bar_scroll_mark.getBoundingClientRect().top;
-        if (isTop <= 0) {
-            menuBar.classList.add("menu_bar_top_2");
-        } else {
-            menuBar.classList.remove("menu_bar_top_2");
-        }
     }
 });
 
@@ -42,7 +32,7 @@ function ocultar() {
 window.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('ocultar-menu')) {
-        esconder();
+        ocultar();
     }
 });
 

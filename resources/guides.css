@@ -167,6 +167,8 @@ div.Expl2 table{margin-left: 30px !important; width: calc(100% - 60px) !importan
 @media screen and (max-width: 650px){
     .TablaDivScroll table tr{display: flex; flex-direction: column; border: 1px solid rgba(192, 192, 192, 0.2);}
     .TablaDivScroll table tr td, .TablaDivScroll table tr th{height: 100% !important; border: none !important;}
+
+    .menu_bar{flex-direction: column !important;}
 }
 
 /* =================================================== */
@@ -219,9 +221,10 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 
 @media (max-width: 500px){
     /* MENÚ BAR */
-    .menu_bar{gap: 5px !important;}
-    .menu_bar ul{justify-content: center; align-items: center; flex-direction: column;}
+    .menu_bar{gap: 5px !important; width: calc(100% - 20px) !important;}
+    .menu_bar ul{flex-wrap: wrap; justify-content: center;}
     .menu_bar ul li{padding: 5px 10px !important; font-size: 14px;}
+    .menu_bar_top{width: max-content !important;}
 
     /* MÁRGENES */
     .Expl, .Expl2, .codigo{margin-left: 0 !important;}
@@ -231,7 +234,7 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 /* =================================================== */
 /* Barra de navegación */
 
-.menu_bar{background-color: rgb(29, 30, 30); user-select: none; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: space-between; padding: 10px; position: sticky; top: 0; z-index: 9999; border-radius: 10px; width: fit-content; margin: 0 auto; transition: width 0.3s ease, height 0.3s ease;}
+.menu_bar{background-color: rgb(29, 30, 30); user-select: none; display: flex; flex-direction: row; gap: 10px; align-items: center; justify-content: space-between; padding: 10px; position: sticky; top: 0; z-index: 9999; border-radius: 10px; width: fit-content; margin: 0 auto; transition: width 0.3s ease, height 0.3s ease;}
 .logo a, .logo a span{font-family: "Smoch" !important; font-size: 22px;}
 .menu_bar ul{list-style: none; display: flex;}
 .menu_bar ul li{padding: 0 15px;}
@@ -242,7 +245,6 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 .menu_bar .logo a{text-decoration: none; color: #e0e0e0;}
 .menu_bar .logo span{color: #7cfb2d;}
 .menu_bar .logo a:hover{text-decoration: underline; text-decoration-color: #7cfb2d;}
-#dd{position: sticky; top: 0;}
 
 .menu_bar .NavColorCambiar{background-color: rgb(29, 30, 30); border: none !important; height: 23px; width: 23px; margin: 0 auto; border-radius: 50% !important;}
 .menu_bar li:has(.NavColorCambiar), .menu_bar li:has(.gtranslate_wrapper){display: flex; justify-content: center; align-items: center;}
@@ -250,9 +252,9 @@ span.span_contenido::selection, span.span_url::selection, span.span_url_espaciad
 /* Cunando llega al top */
 
 .menu_bar_top{border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; transition: all .3s ease; max-height: 40px; padding: 5px 10px;}
+.menu_bar_top *{font-size: 17px !important;}
 .menu_bar_top ul:not(ul.Principal){display: none !important;}
 .menu_bar_top .logo{padding: 0 !important;}
-.menu_bar_top_2 *{font-size: 17px !important;}
 
 /* =================================================== */
 /* Imágenes */
