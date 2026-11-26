@@ -43,32 +43,47 @@ Código por byAd12
         <div class="parte1">
 
             <div>
-                <h3>Estructura</h3>
+                <h3>Básico</h3>
 
                 <p>
-                    Primero hay que crear un fichero con extensión <span class="span_url" translate="no">.sh</span> y añadir contenido en el.
-                    Estructura básica del script:
+                    Un script de shell puede tener cualquier nombre.
+                    Se recomienda añadir una extensión <span class="span_url" translate="no">.sh</span> al final del nombre del script para poder reconocerlo.
                 </p>
+
+                <p>
+                    Para definir el intérprete que ejecutará el script hay que añadir en la primera línea del fichero el siguiente contenido.
+                    El intérprete puede ser <span class="span_url" translate="no">/bin/bash</span>, <span class="span_url" translate="no">/bin/sh</span> u otro:
+                </p>
+
                 <pre class="codigo" translate="no"><code class="bash">#!/bin/bash
 # Aquí se añadirán todos los comandos necesarios</code></pre>
 
                 <p>Para poder ejecutar el script hay que asignar permisos de ejecución:</p>
                 <pre class="codigo" translate="no"><code class="bash">chmod +x [Ruta_script].sh</code></pre>
 
-                <p>Para ejecutar el script solo hay que indicar la ruta relativa o absoluta del fichero:</p>
-                <pre class="codigo" translate="no"><code class="bash">./script.sh</code></pre>
+                <p>Para ejecutar el script hay que indicar la ruta relativa o absoluta de donde se encuentre:</p>
+                <pre class="codigo" translate="no"><code class="bash">./[Ruta_script].sh</code></pre>
+                <p class="Expl">
+                    Puedes evitar poner la ruta relativa o absoluta si añades la ruta de la carpeta de donde se encuentre el script en la variable <span class="span_contenido" translate="no">$PATH</span>,
+                    que contiene todas las carpetas donde se buscan los scripts si no se especifica una ruta para acceder a él:
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">PATH=$PATH:[Ruta_absoluta_carpeta]</code></pre>
+                <p class="Expl">
+                    O también puedes ejecutar el script llamando directamente al intérprete (este método no requiere asignar permisos de ejecución al script):
+                </p>
+                <pre class="codigo" translate="no"><code class="bash">bash [Ruta_al_script]</code></pre>
 
             </div>
 
             <div>
-                <h3>Parámetros</h3>
+                <h3>Argumentos</h3>
 
-                <p>Al ejecutar un fichero se le puede pasar varios parámetros separados por espacios como, por ejemplo:</p>
+                <p>Al ejecutar un fichero se le puede pasar varios argumentos separados por espacios como, por ejemplo:</p>
                 <pre class="codigo" translate="no"><code class="bash">[Ruta_script].sh param1 param2 ...</code></pre>
                 
                 <p>Dentro del script se puede hacer referencia a estos estos argumentos:</p>
                 <p class="Expl">
-                    <span class="span_contenido" translate="no">$num</span>: Devuelve el valor de un parámetro según su posición - "num".
+                    <span class="span_contenido" translate="no">$num</span>: Devuelve el valor de un argumento según su posición - "num".
                     Valor mínimo: <span class="span_contenido" translate="no">1</span>.
                     Valor máximo: <span class="span_contenido" translate="no">9</span>.
                     <br>
@@ -76,13 +91,13 @@ Código por byAd12
                     <br>
                     <span class="span_contenido" translate="no">$*</span>: Devuelve todos los argumentos separados por espacios.
                     <br>
-                    <span class="span_contenido" translate="no">$#</span>: Devuelve el número total de parámetros que se pasaron al script.
+                    <span class="span_contenido" translate="no">$#</span>: Devuelve el número total de argumentos que se pasaron al script.
                 </p>
 
             </div>
 
             <div>
-                <h3>Básico</h3>
+                <h3>Comandos útiles</h3>
 
                 <p>Como enseñar un texto en pantalla:</p>
                 <pre class="codigo" translate="no"><code class="bash">echo 'texto'</code></pre>
@@ -215,10 +230,10 @@ Código por byAd12
                 <h3>Condicionales</h3>
 
                 <p>Estructura básica:</p>
-                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ]; then
+                <pre class="codigo" translate="no"><code class="bash">if [[ condición1 ]]; then
     // Qué hacer si se cumple la condición 1
 
-elif [ condición2 ]; then
+elif [[ condición2 ]]; then
     // Qué hacer si se cumple la condición 2
 
 else
@@ -228,17 +243,17 @@ fi</code></pre>
                 <p class="Expl">Para indicar el final de la condicional hay que utilizar <span class="span_contenido" translate="no">fi</span>.</p>
 
                 <p>Si se cumplen ambas condiciones:</p>
-                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] && [ condición2 ]; then
+                <pre class="codigo" translate="no"><code class="bash">if [[ condición1 ]] && [[ condición2 ]]; then
     // Qué hacer si se cumple la condición 1 Y la condición 2
 fi</code></pre>
 
                 <p>Una condición u la otra:</p>
-                <pre class="codigo" translate="no"><code class="bash">if [ condición1 ] || [ condición2 ]; then
+                <pre class="codigo" translate="no"><code class="bash">if [[ condición1 ]] || [[ condición2 ]]; then
     // Qué hacer si se cumple la condición 1 o la condición 2
 fi</code></pre>
 
                 <p>Si no se cumple la condición:</p>
-                <pre class="codigo" translate="no"><code class="bash">if ! [ condición1 ]; then
+                <pre class="codigo" translate="no"><code class="bash">if ! [[ condición1 ]]; then
     // Qué hacer si NO se cumple la condición 1
 fi</code></pre>
             </div>
@@ -285,7 +300,7 @@ done</code></pre>
                 <h3>Función <span>WHILE</span></h3>
 
                 <p>Esta función ejecuta su contenido si la condición es verdadera indefinidamente hasta que se pare:</p>
-                <pre class="codigo" translate="no"><code class="bash">while [ condición ]; do
+                <pre class="codigo" translate="no"><code class="bash">while [[ condición ]]; do
     // Qué hacer mientras se cumpla la condición
 done</code></pre>
 
@@ -295,7 +310,7 @@ done</code></pre>
                 <h3>Función <span>UNTIL</span></h3>
 
                 <p>Esta función ejecuta su contenido hasta que la condición sea verdadera:</p>
-                <pre class="codigo" translate="no"><code class="bash">until [ condición ]; do
+                <pre class="codigo" translate="no"><code class="bash">until [[ condición ]]; do
     // Qué hacer mientras la condición sea falsa
 done</code></pre>
 
