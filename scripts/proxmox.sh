@@ -155,13 +155,13 @@ while true; do
         read -p 'Segundos a apagar (00-59): ' segundos; [[ -z "${segundos// /}" || "${segundos}" == "exit" ]] && continue
 
         echo -e "\n${Az}Verificando los valores recibidos...${Bl}"
-        if ! [[ "${hora}" =~ ^[0-9]+$ ]] || ! [[ "${minuto}" =~ ^[0-9]+$ ]] || ! [[ "${segundos}" =~ ^[0-9]+$ ]]; then
+        if [[ ! "${hora}" =~ ^[0-9]+$ || ! "${minuto}" =~ ^[0-9]+$ || ! "${segundos}" =~ ^[0-9]+$ ]]; then
             echo -e "${Ro}Error: ${Ro_}Solo se permiten números.${Bl}\n"
             read -p "Pulse ENTER para reiniciar el programa:"
             continue
         fi
 
-        if [ "${hora}" -gt 23 ] || [ "${minuto}" -gt 59 ] || [ "${segundos}" -gt 59 ]; then
+        if [[ "${hora}" -gt 23 || "${minuto}" -gt 59 || "${segundos}" -gt 59 ]]; then
             echo -e "${Ro}Error: ${Ro_}Hora, minuto o segundos fuera de rango.${Bl}\n"
             read -p "Pulse ENTER para reiniciar el programa:"
             continue
@@ -251,7 +251,7 @@ while true; do
 
             echo -e "\n${Az}Comprobando la conexión con el nodo máster con un PING...${Bl}"
             ping -c 2 "${nodo_nombre}"
-            if [ $? -ne 0 ]; then
+            if [[ $? -ne 0 ]]; then
                 echo -e "${Ro}Error: ${Ro_}No se puede contactar con '${Bl}${nodo_nombre}${Ro}'.${Bl}\n"
                 read -p "Pulse ENTER para reiniciar el programa:"
                 continue
@@ -277,7 +277,7 @@ while true; do
 
             hash_ingresado=$(echo -n "$verificacion3" | sha256sum | awk '{print $1}')
 
-            if [ "$hash_ingresado" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]; then
+            if [[ "$hash_ingresado" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]]; then
                 read -p 'Nodo que se desea quitar del clúster: ' nodo_nombre; [[ -z "${nodo_nombre// /}" || "${nodo_nombre}" == "exit" ]] && continue
 
                 echo -e "\n${Az}Intentando quitar del clúster al nodo '${Bl}${nodo_nombre}${Az}'...${Bl}"
@@ -306,7 +306,7 @@ while true; do
 
             hash_ingresado=$(echo -n "${verificacion3}" | sha256sum | awk '{print $1}')
 
-            if [ "${hash_ingresado}" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]; then
+            if [[ "${hash_ingresado}" == "f2e53c927c66fe711e8e88ef9b37a8e3187f1652216b313fc8eb2513883dd360" ]]; then
                 echo -e "${Ve_}Contraseña correcta${Bl}"
 
                 echo -e "\n${Az}Deteniendo los servicios '${Bl}pve-cluster${Az}' y '${Bl}corosync${Az}'...${Bl}"

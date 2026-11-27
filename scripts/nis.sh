@@ -86,7 +86,7 @@ while true; do
         sed -i 's/::/0/# ::\/0/g' /etc/ypserv.securenets
         
         echo -e "\n${Az}Configurando los registros DNS internos...${Bl}"
-        while [ condición ]; do
+        while [[ condición ]]; do
             echo -e "\n${Am}Nuevo registro DNS Interno ('exit' para cerrar):${Bl}"
             read -p 'IP de un equipo de la red: ' ip_dns
             if [ "$nombre_dominio" == "exit" ]; then
@@ -147,7 +147,7 @@ while true; do
         sed -i 's/::/0/# ::\/0/g' /etc/ypserv.securenets
         
         echo -e "\n${Az}Configurando los registros DNS internos...${Bl}"
-        while [ condición ]; do
+        while [[ condición ]]; do
             echo -e "\n${Am}Nuevo registro DNS Interno ('exit' para cerrar):${Bl}"
             read -p 'IP de un equipo de la red: ' ip_dns
             if [ "$nombre_dominio" == "exit" ]; then
@@ -214,7 +214,7 @@ while true; do
         echo "ypserver ${nombre_hostname}.${nombre_dominio}" >> /etc/yp.conf
         
         echo -e "\n${Az}Configurando los registros DNS internos...${Bl}"
-        while [ condición ]; do
+        while [[ condición ]]; do
             echo -e "\n${Am}Nuevo registro DNS Interno ('exit' para cerrar):${Bl}"
             read -p 'IP de un equipo de la red: ' ip_dns
             if [ "$nombre_dominio" == "exit" ]; then
